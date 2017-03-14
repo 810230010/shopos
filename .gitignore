@@ -6,7 +6,7 @@
 # idea
 /.idea
 /target
-.iml
+*.iml
 
 # Package Files #
 *.jar

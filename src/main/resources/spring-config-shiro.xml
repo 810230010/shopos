@@ -167,19 +167,19 @@
         <property name="filterChainDefinitions">
             <value>
                 <!--总后台用户-->
-                /admin/login = authc
-                /admin/logout = logout
-                /admin/** = kickout,sysUser
-                /zlt/** = kickout,sysUser
+                <!--/admin/login = authc-->
+                <!--/admin/logout = logout-->
+                <!--/admin/** = kickout,sysUser-->
+                <!--/zlt/** = kickout,sysUser-->
 
 
-                <!--/web/** = anon-->
-                /wx/testlogin = anon
-                /wx/islogin = anon
-                /wx/login = anon
-                /wx/msg/** = anon
+                <!--&lt;!&ndash;/web/** = anon&ndash;&gt;-->
+                <!--/wx/testlogin = anon-->
+                <!--/wx/islogin = anon-->
+                <!--/wx/login = anon-->
+                <!--/wx/msg/** = anon-->
 
-                /wx/** = weixin
+                <!--/wx/** = weixin-->
             </value>
         </property>
     </bean>

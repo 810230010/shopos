@@ -8,10 +8,7 @@
     <result column="ad_word" property="adWord" jdbcType="VARCHAR" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="store_name" property="storeName" jdbcType="VARCHAR" />
-    <result column="gc_id" property="gcId" jdbcType="INTEGER" />
-    <result column="gc_id_1" property="gcId1" jdbcType="INTEGER" />
-    <result column="gc_id_2" property="gcId2" jdbcType="INTEGER" />
-    <result column="gc_id_3" property="gcId3" jdbcType="INTEGER" />
+    <result column="goods_category_id" property="goodsCategoryId" jdbcType="INTEGER" />
     <result column="brand_id" property="brandId" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="commission" property="commission" jdbcType="DECIMAL" />
@@ -31,8 +28,6 @@
     <result column="verify" property="verify" jdbcType="VARCHAR" />
     <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
     <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
-    <result column="areaid_1" property="areaid1" jdbcType="INTEGER" />
-    <result column="areaid_2" property="areaid2" jdbcType="INTEGER" />
     <result column="is_new" property="isNew" jdbcType="BIT" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="second_hand" property="secondHand" jdbcType="BIT" />
@@ -53,12 +48,12 @@
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    goods_id, name, unit, ad_word, store_id, store_name, gc_id, gc_id_1, gc_id_2, gc_id_3, 
-    brand_id, price, commission, commission_percent, promotion_price, promotion_type, 
-    marketprice, storage_alarm, click, salenum, collect, spec, storage, images, title_img, 
-    state, verify, addtime, edittime, areaid_1, areaid_2, is_new, type, second_hand, 
-    activity_id, activity_type, is_virtual, virtual_invalid_refund, is_appoint, is_presell, 
-    is_own_shop, freight, vat, commend, evaluation_good_star, evaluation_count
+    goods_id, name, unit, ad_word, store_id, store_name, goods_category_id, brand_id, 
+    price, commission, commission_percent, promotion_price, promotion_type, marketprice, 
+    storage_alarm, click, salenum, collect, spec, storage, images, title_img, state, 
+    verify, addtime, edittime, is_new, type, second_hand, activity_id, activity_type, 
+    is_virtual, virtual_invalid_refund, is_appoint, is_presell, is_own_shop, freight, 
+    vat, commend, evaluation_good_star, evaluation_count
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -78,36 +73,32 @@
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Goods" >
     insert into t_goods (goods_id, name, unit, 
       ad_word, store_id, store_name, 
-      gc_id, gc_id_1, gc_id_2, 
-      gc_id_3, brand_id, price, 
+      goods_category_id, brand_id, price, 
       commission, commission_percent, promotion_price, 
       promotion_type, marketprice, storage_alarm, 
       click, salenum, collect, 
       spec, storage, images, 
       title_img, state, verify, 
-      addtime, edittime, areaid_1, 
-      areaid_2, is_new, type, second_hand, 
-      activity_id, activity_type, is_virtual, 
-      virtual_invalid_refund, is_appoint, is_presell, 
-      is_own_shop, freight, vat, commend, 
-      evaluation_good_star, evaluation_count, goods_body
-      )
+      addtime, edittime, is_new, 
+      type, second_hand, activity_id, 
+      activity_type, is_virtual, virtual_invalid_refund, 
+      is_appoint, is_presell, is_own_shop, 
+      freight, vat, commend, evaluation_good_star, 
+      evaluation_count, goods_body)
     values (#{goodsId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
       #{adWord,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
-      #{gcId,jdbcType=INTEGER}, #{gcId1,jdbcType=INTEGER}, #{gcId2,jdbcType=INTEGER}, 
-      #{gcId3,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{goodsCategoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
       #{commission,jdbcType=DECIMAL}, #{commissionPercent,jdbcType=DECIMAL}, #{promotionPrice,jdbcType=DECIMAL}, 
       #{promotionType,jdbcType=VARCHAR}, #{marketprice,jdbcType=DECIMAL}, #{storageAlarm,jdbcType=INTEGER}, 
       #{click,jdbcType=INTEGER}, #{salenum,jdbcType=INTEGER}, #{collect,jdbcType=INTEGER}, 
       #{spec,jdbcType=VARCHAR}, #{storage,jdbcType=INTEGER}, #{images,jdbcType=VARCHAR}, 
       #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{verify,jdbcType=VARCHAR}, 
-      #{addtime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, #{areaid1,jdbcType=INTEGER}, 
-      #{areaid2,jdbcType=INTEGER}, #{isNew,jdbcType=BIT}, #{type,jdbcType=VARCHAR}, #{secondHand,jdbcType=BIT}, 
-      #{activityId,jdbcType=INTEGER}, #{activityType,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, 
-      #{virtualInvalidRefund,jdbcType=BIT}, #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, 
-      #{isOwnShop,jdbcType=BIT}, #{freight,jdbcType=DECIMAL}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, 
-      #{evaluationGoodStar,jdbcType=INTEGER}, #{evaluationCount,jdbcType=INTEGER}, #{goodsBody,jdbcType=LONGVARCHAR}
-      )
+      #{addtime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, #{isNew,jdbcType=BIT}, 
+      #{type,jdbcType=VARCHAR}, #{secondHand,jdbcType=BIT}, #{activityId,jdbcType=INTEGER}, 
+      #{activityType,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, 
+      #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, 
+      #{freight,jdbcType=DECIMAL}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
+      #{evaluationCount,jdbcType=INTEGER}, #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     insert into t_goods
@@ -130,17 +121,8 @@
       <if test="storeName != null" >
         store_name,
       </if>
-      <if test="gcId != null" >
-        gc_id,
-      </if>
-      <if test="gcId1 != null" >
-        gc_id_1,
-      </if>
-      <if test="gcId2 != null" >
-        gc_id_2,
-      </if>
-      <if test="gcId3 != null" >
-        gc_id_3,
+      <if test="goodsCategoryId != null" >
+        goods_category_id,
       </if>
       <if test="brandId != null" >
         brand_id,
@@ -198,12 +180,6 @@
       </if>
       <if test="edittime != null" >
         edittime,
-      </if>
-      <if test="areaid1 != null" >
-        areaid_1,
-      </if>
-      <if test="areaid2 != null" >
-        areaid_2,
       </if>
       <if test="isNew != null" >
         is_new,
@@ -273,17 +249,8 @@
       <if test="storeName != null" >
         #{storeName,jdbcType=VARCHAR},
       </if>
-      <if test="gcId != null" >
-        #{gcId,jdbcType=INTEGER},
-      </if>
-      <if test="gcId1 != null" >
-        #{gcId1,jdbcType=INTEGER},
-      </if>
-      <if test="gcId2 != null" >
-        #{gcId2,jdbcType=INTEGER},
-      </if>
-      <if test="gcId3 != null" >
-        #{gcId3,jdbcType=INTEGER},
+      <if test="goodsCategoryId != null" >
+        #{goodsCategoryId,jdbcType=INTEGER},
       </if>
       <if test="brandId != null" >
         #{brandId,jdbcType=INTEGER},
@@ -341,12 +308,6 @@
       </if>
       <if test="edittime != null" >
         #{edittime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="areaid1 != null" >
-        #{areaid1,jdbcType=INTEGER},
-      </if>
-      <if test="areaid2 != null" >
-        #{areaid2,jdbcType=INTEGER},
       </if>
       <if test="isNew != null" >
         #{isNew,jdbcType=BIT},
@@ -416,17 +377,8 @@
       <if test="storeName != null" >
         store_name = #{storeName,jdbcType=VARCHAR},
       </if>
-      <if test="gcId != null" >
-        gc_id = #{gcId,jdbcType=INTEGER},
-      </if>
-      <if test="gcId1 != null" >
-        gc_id_1 = #{gcId1,jdbcType=INTEGER},
-      </if>
-      <if test="gcId2 != null" >
-        gc_id_2 = #{gcId2,jdbcType=INTEGER},
-      </if>
-      <if test="gcId3 != null" >
-        gc_id_3 = #{gcId3,jdbcType=INTEGER},
+      <if test="goodsCategoryId != null" >
+        goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
       </if>
       <if test="brandId != null" >
         brand_id = #{brandId,jdbcType=INTEGER},
@@ -484,12 +436,6 @@
       </if>
       <if test="edittime != null" >
         edittime = #{edittime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="areaid1 != null" >
-        areaid_1 = #{areaid1,jdbcType=INTEGER},
-      </if>
-      <if test="areaid2 != null" >
-        areaid_2 = #{areaid2,jdbcType=INTEGER},
       </if>
       <if test="isNew != null" >
         is_new = #{isNew,jdbcType=BIT},
@@ -549,10 +495,7 @@
       ad_word = #{adWord,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=INTEGER},
       store_name = #{storeName,jdbcType=VARCHAR},
-      gc_id = #{gcId,jdbcType=INTEGER},
-      gc_id_1 = #{gcId1,jdbcType=INTEGER},
-      gc_id_2 = #{gcId2,jdbcType=INTEGER},
-      gc_id_3 = #{gcId3,jdbcType=INTEGER},
+      goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
       commission = #{commission,jdbcType=DECIMAL},
@@ -572,8 +515,6 @@
       verify = #{verify,jdbcType=VARCHAR},
       addtime = #{addtime,jdbcType=TIMESTAMP},
       edittime = #{edittime,jdbcType=TIMESTAMP},
-      areaid_1 = #{areaid1,jdbcType=INTEGER},
-      areaid_2 = #{areaid2,jdbcType=INTEGER},
       is_new = #{isNew,jdbcType=BIT},
       type = #{type,jdbcType=VARCHAR},
       second_hand = #{secondHand,jdbcType=BIT},
@@ -599,10 +540,7 @@
       ad_word = #{adWord,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=INTEGER},
       store_name = #{storeName,jdbcType=VARCHAR},
-      gc_id = #{gcId,jdbcType=INTEGER},
-      gc_id_1 = #{gcId1,jdbcType=INTEGER},
-      gc_id_2 = #{gcId2,jdbcType=INTEGER},
-      gc_id_3 = #{gcId3,jdbcType=INTEGER},
+      goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
       commission = #{commission,jdbcType=DECIMAL},
@@ -622,8 +560,6 @@
       verify = #{verify,jdbcType=VARCHAR},
       addtime = #{addtime,jdbcType=TIMESTAMP},
       edittime = #{edittime,jdbcType=TIMESTAMP},
-      areaid_1 = #{areaid1,jdbcType=INTEGER},
-      areaid_2 = #{areaid2,jdbcType=INTEGER},
       is_new = #{isNew,jdbcType=BIT},
       type = #{type,jdbcType=VARCHAR},
       second_hand = #{secondHand,jdbcType=BIT},

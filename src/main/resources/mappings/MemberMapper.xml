@@ -54,24 +54,6 @@
     from t_member
     where member_id = #{memberId,jdbcType=INTEGER}
   </select>
-
-
-  <!--通过openid获取用户-->
-  <select id="getByOpenid" resultType="com.wuliangit.shopos.entity.Member">
-    select
-    <include refid="Base_Column_List" />
-    from t_member
-    where openid = #{openid}
-  </select>
-  <!--通过用户名获取用户-->
-  <select id="getByUsername" resultType="com.wuliangit.shopos.entity.Member">
-    select
-    <include refid="Base_Column_List" />
-    from t_member
-    where username = #{username}
-  </select>
-
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_member
     where member_id = #{memberId,jdbcType=INTEGER}

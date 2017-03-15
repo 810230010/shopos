@@ -7,7 +7,7 @@ public class Brand {
 
     private String initial;
 
-    private String class;
+    private String categoryName;
 
     private String pic;
 
@@ -19,7 +19,7 @@ public class Brand {
 
     private String brandApply;
 
-    private Integer classId;
+    private Integer goodsCategoryId;
 
     public Integer getBrandId() {
         return brandId;
@@ -45,12 +45,12 @@ public class Brand {
         this.initial = initial == null ? null : initial.trim();
     }
 
-    public String getClass() {
-        return class;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setClass(String class) {
-        this.class = class == null ? null : class.trim();
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName == null ? null : categoryName.trim();
     }
 
     public String getPic() {
@@ -93,11 +93,11 @@ public class Brand {
         this.brandApply = brandApply == null ? null : brandApply.trim();
     }
 
-    public Integer getClassId() {
-        return classId;
+    public Integer getGoodsCategoryId() {
+        return goodsCategoryId;
     }
 
-    public void setClassId(Integer classId) {
-        this.classId = classId;
+    public void setGoodsCategoryId(Integer goodsCategoryId) {
+        this.goodsCategoryId = goodsCategoryId;
     }
 }

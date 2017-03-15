@@ -16,13 +16,7 @@ public class Goods {
 
     private String storeName;
 
-    private Integer gcId;
-
-    private Integer gcId1;
-
-    private Integer gcId2;
-
-    private Integer gcId3;
+    private Integer goodsCategoryId;
 
     private Integer brandId;
 
@@ -61,10 +55,6 @@ public class Goods {
     private Date addtime;
 
     private Date edittime;
-
-    private Integer areaid1;
-
-    private Integer areaid2;
 
     private Boolean isNew;
 
@@ -146,36 +136,12 @@ public class Goods {
         this.storeName = storeName == null ? null : storeName.trim();
     }
 
-    public Integer getGcId() {
-        return gcId;
+    public Integer getGoodsCategoryId() {
+        return goodsCategoryId;
     }
 
-    public void setGcId(Integer gcId) {
-        this.gcId = gcId;
-    }
-
-    public Integer getGcId1() {
-        return gcId1;
-    }
-
-    public void setGcId1(Integer gcId1) {
-        this.gcId1 = gcId1;
-    }
-
-    public Integer getGcId2() {
-        return gcId2;
-    }
-
-    public void setGcId2(Integer gcId2) {
-        this.gcId2 = gcId2;
-    }
-
-    public Integer getGcId3() {
-        return gcId3;
-    }
-
-    public void setGcId3(Integer gcId3) {
-        this.gcId3 = gcId3;
+    public void setGoodsCategoryId(Integer goodsCategoryId) {
+        this.goodsCategoryId = goodsCategoryId;
     }
 
     public Integer getBrandId() {
@@ -328,22 +294,6 @@ public class Goods {
 
     public void setEdittime(Date edittime) {
         this.edittime = edittime;
-    }
-
-    public Integer getAreaid1() {
-        return areaid1;
-    }
-
-    public void setAreaid1(Integer areaid1) {
-        this.areaid1 = areaid1;
-    }
-
-    public Integer getAreaid2() {
-        return areaid2;
-    }
-
-    public void setAreaid2(Integer areaid2) {
-        this.areaid2 = areaid2;
     }
 
     public Boolean getIsNew() {

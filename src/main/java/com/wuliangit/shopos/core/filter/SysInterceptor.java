@@ -1,9 +1,5 @@
 package com.wuliangit.shopos.core.filter;
 
-import com.alaban.dto.MenuDTO;
-import com.alaban.entity.SysUser;
-import com.alaban.entity.Zhulituan;
-import com.alaban.utils.Constants;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -29,20 +25,20 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
         String pmenuId = request.getParameter("pmenuId");
         String menuId = request.getParameter("menuId");
 
-        List<MenuDTO> menus = (List<MenuDTO>) SecurityUtils.getSubject().getSession().getAttribute(Constants.SESSION_CURRENT_MENU);
-
-        if (modelAndView != null){
-            modelAndView.addObject("pmenuId",pmenuId);
-            modelAndView.addObject("menuId",menuId);
-            modelAndView.addObject("menus",menus);
-            Object u = SecurityUtils.getSubject().getSession().getAttribute(Constants.SESSION_CURRENT_USER);
-            if (u instanceof Zhulituan){
-                modelAndView.addObject("userType","zlt");
-            }else if(u instanceof SysUser){
-                modelAndView.addObject("userType","admin");
-            }
-            modelAndView.addObject("user",u);
-        }
+//        List<MenuDTO> menus = (List<MenuDTO>) SecurityUtils.getSubject().getSession().getAttribute(Constants.SESSION_CURRENT_MENU);
+//
+//        if (modelAndView != null){
+//            modelAndView.addObject("pmenuId",pmenuId);
+//            modelAndView.addObject("menuId",menuId);
+//            modelAndView.addObject("menus",menus);
+//            Object u = SecurityUtils.getSubject().getSession().getAttribute(Constants.SESSION_CURRENT_USER);
+//            if (u instanceof Zhulituan){
+//                modelAndView.addObject("userType","zlt");
+//            }else if(u instanceof SysUser){
+//                modelAndView.addObject("userType","admin");
+//            }
+//            modelAndView.addObject("user",u);
+//        }
 
     }
     @Override

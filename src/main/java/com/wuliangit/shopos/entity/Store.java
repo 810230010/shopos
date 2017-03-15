@@ -69,6 +69,8 @@ public class Store {
 
     private Integer collect;
 
+    private String slideUrl;
+
     private String stamp;
 
     private String printdesc;
@@ -371,6 +373,14 @@ public class Store {
 
     public void setCollect(Integer collect) {
         this.collect = collect;
+    }
+
+    public String getSlideUrl() {
+        return slideUrl;
+    }
+
+    public void setSlideUrl(String slideUrl) {
+        this.slideUrl = slideUrl == null ? null : slideUrl.trim();
     }
 
     public String getStamp() {

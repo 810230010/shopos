@@ -8,9 +8,31 @@ import java.util.Set;
  * Created by nilme on 2017/3/15.
  */
 public interface MemberService {
+    /**
+     * 获取角色
+     * @param username
+     * @return
+     */
     Set<String> getRoles(String username);
 
+    /**
+     * 获取权限
+     * @param username
+     * @return
+     */
     Set<String> getPermissions(String username);
 
-    Member getUserByOpenid(String username);
+    /**
+     * 通过openid获取用户
+     * @param openid
+     * @return
+     */
+    Member getByOpenid(String openid);
+
+    /**
+     * 通过用户名获取用户
+     * @param username
+     * @return
+     */
+    Member getByUsername(String username);
 }

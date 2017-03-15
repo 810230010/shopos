@@ -43,13 +43,13 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         HashMap<String, Object> user = (HashMap)principals;
         String username = (String)user.get("username");
-        UserToken.LoginType loginType = (UserToken.LoginType)user.get("loginType");
+        UserToken.UserType userType = (UserToken.UserType)user.get("userType");
         SimpleAuthorizationInfo authorizationInfo = null;
-        if (loginType == UserToken.LoginType.MEMBER) {
+        if (userType == UserToken.UserType.MEMBER) {
             authorizationInfo = new SimpleAuthorizationInfo();
             authorizationInfo.setRoles(memberService.getRoles(username));
             authorizationInfo.setStringPermissions(memberService.getPermissions(username));
-        } else if(loginType == UserToken.LoginType.ADMIN){
+        } else if(userType == UserToken.UserType.ADMIN){
             authorizationInfo = new SimpleAuthorizationInfo();
             authorizationInfo.setRoles(adminService.getRoles(username));
             authorizationInfo.setStringPermissions(adminService.getPermissions(username));
@@ -61,11 +61,9 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         SimpleAuthenticationInfo authenticationInfo = null;
-        HashMap<String, Object> hashUser = (HashMap)token.getPrincipal();
-        String username = (String)hashUser.get("username");
         UserToken userToken = (UserToken) token;
-        if (userToken.getLoginType() == UserToken.LoginType.MEMBER) {
-            Member user = memberService.getUserByOpenid(username);
+        if (userToken.getUserType() == UserToken.UserType.MEMBER) {
+            Member user = memberService.getByOpenid(userToken.getUsername());
             if(user == null){
                 throw new UnknownAccountException();
             }
@@ -76,8 +74,8 @@ public class UserRealm extends AuthorizingRealm {
                     getName()
             );
             SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, user);
-        } else if (userToken.getLoginType() == UserToken.LoginType.ADMIN) {
-            Admin user = adminService.getByUsername(username);
+        } else if (userToken.getUserType() == UserToken.UserType.ADMIN) {
+            Admin user = adminService.getByUsername(userToken.getUsername());
             authenticationInfo = new SimpleAuthenticationInfo(
                     user.getUsername(), //用户名
                     user.getPassword(), //密码

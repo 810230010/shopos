@@ -1,17 +1,21 @@
 package com.wuliangit.shopos.dao;
 
+import com.wuliangit.shopos.core.dao.BaseMapper;
 import com.wuliangit.shopos.entity.Member;
 
-public interface MemberMapper {
-    int deleteByPrimaryKey(Integer memberId);
+public interface MemberMapper extends BaseMapper<Member, Integer> {
 
-    int insert(Member record);
+    /**
+     * 通过openid获取用户
+     * @param openid
+     * @return
+     */
+    Member getByOpenid(String openid);
 
-    int insertSelective(Member record);
-
-    Member selectByPrimaryKey(Integer memberId);
-
-    int updateByPrimaryKeySelective(Member record);
-
-    int updateByPrimaryKey(Member record);
+    /**
+     * 通过用户名获取用户
+     * @param username
+     * @return
+     */
+    Member getByUsername(String username);
 }

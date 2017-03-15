@@ -35,6 +35,7 @@
     <result column="servicecredit" property="servicecredit" jdbcType="REAL" />
     <result column="deliverycredit" property="deliverycredit" jdbcType="REAL" />
     <result column="collect" property="collect" jdbcType="INTEGER" />
+    <result column="slide_url" property="slideUrl" jdbcType="VARCHAR" />
     <result column="stamp" property="stamp" jdbcType="VARCHAR" />
     <result column="printdesc" property="printdesc" jdbcType="VARCHAR" />
     <result column="sales" property="sales" jdbcType="INTEGER" />
@@ -56,27 +57,19 @@
     <result column="live_store_gps" property="liveStoreGps" jdbcType="VARCHAR" />
     <result column="live_store_bus" property="liveStoreBus" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.StoreWithBLOBs" extends="BaseResultMap" >
-    <result column="slide" property="slide" jdbcType="LONGVARCHAR" />
-    <result column="slide_url" property="slideUrl" jdbcType="LONGVARCHAR" />
-  </resultMap>
   <sql id="Base_Column_List" >
     store_id, name, grade_id, member_id, seller_nikename, sc_id, store_company_name, 
     province_id, area_info, address, zip, state, close_info, sort, create_time, end_time, 
     label, banner, logo, keywords, description, qq, ww, phone, domain, domain_times, 
     is_recommend, theme, credit, desccredit, servicecredit, deliverycredit, collect, 
-    stamp, printdesc, sales, presales, aftersales, workingtime, free_price, decoration_switch, 
-    decoration_only, seven_day_return, real_goods, sales_return, live, pay_after, store_free_time, 
-    live_store_name, live_store_address, live_store_tel, live_store_gps, live_store_bus
+    slide_url, stamp, printdesc, sales, presales, aftersales, workingtime, free_price, 
+    decoration_switch, decoration_only, seven_day_return, real_goods, sales_return, live, 
+    pay_after, store_free_time, live_store_name, live_store_address, live_store_tel, 
+    live_store_gps, live_store_bus
   </sql>
-  <sql id="Blob_Column_List" >
-    slide, slide_url
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from t_store
     where store_id = #{storeId,jdbcType=INTEGER}
   </select>
@@ -84,7 +77,7 @@
     delete from t_store
     where store_id = #{storeId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreWithBLOBs" >
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Store" >
     insert into t_store (store_id, name, grade_id, 
       member_id, seller_nikename, sc_id, 
       store_company_name, province_id, area_info, 
@@ -95,14 +88,14 @@
       qq, ww, phone, domain, 
       domain_times, is_recommend, theme, 
       credit, desccredit, servicecredit, 
-      deliverycredit, collect, stamp, 
-      printdesc, sales, presales, 
-      aftersales, workingtime, free_price, 
-      decoration_switch, decoration_only, seven_day_return, 
-      real_goods, sales_return, live, pay_after, 
-      store_free_time, live_store_name, live_store_address, 
-      live_store_tel, live_store_gps, live_store_bus, 
-      slide, slide_url)
+      deliverycredit, collect, slide_url, 
+      stamp, printdesc, sales, 
+      presales, aftersales, workingtime, 
+      free_price, decoration_switch, decoration_only, 
+      seven_day_return, real_goods, sales_return, 
+      live, pay_after, store_free_time, 
+      live_store_name, live_store_address, live_store_tel, 
+      live_store_gps, live_store_bus)
     values (#{storeId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gradeId,jdbcType=INTEGER}, 
       #{memberId,jdbcType=INTEGER}, #{sellerNikename,jdbcType=VARCHAR}, #{scId,jdbcType=INTEGER}, 
       #{storeCompanyName,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, 
@@ -113,16 +106,16 @@
       #{qq,jdbcType=VARCHAR}, #{ww,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, 
       #{domainTimes,jdbcType=INTEGER}, #{isRecommend,jdbcType=BIT}, #{theme,jdbcType=VARCHAR}, 
       #{credit,jdbcType=INTEGER}, #{desccredit,jdbcType=REAL}, #{servicecredit,jdbcType=REAL}, 
-      #{deliverycredit,jdbcType=REAL}, #{collect,jdbcType=INTEGER}, #{stamp,jdbcType=VARCHAR}, 
-      #{printdesc,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER}, #{presales,jdbcType=VARCHAR}, 
-      #{aftersales,jdbcType=VARCHAR}, #{workingtime,jdbcType=VARCHAR}, #{freePrice,jdbcType=DECIMAL}, 
-      #{decorationSwitch,jdbcType=BIT}, #{decorationOnly,jdbcType=BIT}, #{sevenDayReturn,jdbcType=BIT}, 
-      #{realGoods,jdbcType=BIT}, #{salesReturn,jdbcType=BIT}, #{live,jdbcType=BIT}, #{payAfter,jdbcType=BIT}, 
-      #{storeFreeTime,jdbcType=VARCHAR}, #{liveStoreName,jdbcType=VARCHAR}, #{liveStoreAddress,jdbcType=VARCHAR}, 
-      #{liveStoreTel,jdbcType=VARCHAR}, #{liveStoreGps,jdbcType=VARCHAR}, #{liveStoreBus,jdbcType=VARCHAR}, 
-      #{slide,jdbcType=LONGVARCHAR}, #{slideUrl,jdbcType=LONGVARCHAR})
+      #{deliverycredit,jdbcType=REAL}, #{collect,jdbcType=INTEGER}, #{slideUrl,jdbcType=VARCHAR}, 
+      #{stamp,jdbcType=VARCHAR}, #{printdesc,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER}, 
+      #{presales,jdbcType=VARCHAR}, #{aftersales,jdbcType=VARCHAR}, #{workingtime,jdbcType=VARCHAR}, 
+      #{freePrice,jdbcType=DECIMAL}, #{decorationSwitch,jdbcType=BIT}, #{decorationOnly,jdbcType=BIT}, 
+      #{sevenDayReturn,jdbcType=BIT}, #{realGoods,jdbcType=BIT}, #{salesReturn,jdbcType=BIT}, 
+      #{live,jdbcType=BIT}, #{payAfter,jdbcType=BIT}, #{storeFreeTime,jdbcType=VARCHAR}, 
+      #{liveStoreName,jdbcType=VARCHAR}, #{liveStoreAddress,jdbcType=VARCHAR}, #{liveStoreTel,jdbcType=VARCHAR}, 
+      #{liveStoreGps,jdbcType=VARCHAR}, #{liveStoreBus,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreWithBLOBs" >
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Store" >
     insert into t_store
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="storeId != null" >
@@ -224,6 +217,9 @@
       <if test="collect != null" >
         collect,
       </if>
+      <if test="slideUrl != null" >
+        slide_url,
+      </if>
       <if test="stamp != null" >
         stamp,
       </if>
@@ -283,12 +279,6 @@
       </if>
       <if test="liveStoreBus != null" >
         live_store_bus,
-      </if>
-      <if test="slide != null" >
-        slide,
-      </if>
-      <if test="slideUrl != null" >
-        slide_url,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -391,6 +381,9 @@
       <if test="collect != null" >
         #{collect,jdbcType=INTEGER},
       </if>
+      <if test="slideUrl != null" >
+        #{slideUrl,jdbcType=VARCHAR},
+      </if>
       <if test="stamp != null" >
         #{stamp,jdbcType=VARCHAR},
       </if>
@@ -451,15 +444,9 @@
       <if test="liveStoreBus != null" >
         #{liveStoreBus,jdbcType=VARCHAR},
       </if>
-      <if test="slide != null" >
-        #{slide,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="slideUrl != null" >
-        #{slideUrl,jdbcType=LONGVARCHAR},
-      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.StoreWithBLOBs" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Store" >
     update t_store
     <set >
       <if test="name != null" >
@@ -558,6 +545,9 @@
       <if test="collect != null" >
         collect = #{collect,jdbcType=INTEGER},
       </if>
+      <if test="slideUrl != null" >
+        slide_url = #{slideUrl,jdbcType=VARCHAR},
+      </if>
       <if test="stamp != null" >
         stamp = #{stamp,jdbcType=VARCHAR},
       </if>
@@ -618,71 +608,7 @@
       <if test="liveStoreBus != null" >
         live_store_bus = #{liveStoreBus,jdbcType=VARCHAR},
       </if>
-      <if test="slide != null" >
-        slide = #{slide,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="slideUrl != null" >
-        slide_url = #{slideUrl,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where store_id = #{storeId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wuliangit.shopos.entity.StoreWithBLOBs" >
-    update t_store
-    set name = #{name,jdbcType=VARCHAR},
-      grade_id = #{gradeId,jdbcType=INTEGER},
-      member_id = #{memberId,jdbcType=INTEGER},
-      seller_nikename = #{sellerNikename,jdbcType=VARCHAR},
-      sc_id = #{scId,jdbcType=INTEGER},
-      store_company_name = #{storeCompanyName,jdbcType=VARCHAR},
-      province_id = #{provinceId,jdbcType=INTEGER},
-      area_info = #{areaInfo,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      zip = #{zip,jdbcType=VARCHAR},
-      state = #{state,jdbcType=VARCHAR},
-      close_info = #{closeInfo,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=VARCHAR},
-      end_time = #{endTime,jdbcType=VARCHAR},
-      label = #{label,jdbcType=VARCHAR},
-      banner = #{banner,jdbcType=VARCHAR},
-      logo = #{logo,jdbcType=VARCHAR},
-      keywords = #{keywords,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      qq = #{qq,jdbcType=VARCHAR},
-      ww = #{ww,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      domain = #{domain,jdbcType=VARCHAR},
-      domain_times = #{domainTimes,jdbcType=INTEGER},
-      is_recommend = #{isRecommend,jdbcType=BIT},
-      theme = #{theme,jdbcType=VARCHAR},
-      credit = #{credit,jdbcType=INTEGER},
-      desccredit = #{desccredit,jdbcType=REAL},
-      servicecredit = #{servicecredit,jdbcType=REAL},
-      deliverycredit = #{deliverycredit,jdbcType=REAL},
-      collect = #{collect,jdbcType=INTEGER},
-      stamp = #{stamp,jdbcType=VARCHAR},
-      printdesc = #{printdesc,jdbcType=VARCHAR},
-      sales = #{sales,jdbcType=INTEGER},
-      presales = #{presales,jdbcType=VARCHAR},
-      aftersales = #{aftersales,jdbcType=VARCHAR},
-      workingtime = #{workingtime,jdbcType=VARCHAR},
-      free_price = #{freePrice,jdbcType=DECIMAL},
-      decoration_switch = #{decorationSwitch,jdbcType=BIT},
-      decoration_only = #{decorationOnly,jdbcType=BIT},
-      seven_day_return = #{sevenDayReturn,jdbcType=BIT},
-      real_goods = #{realGoods,jdbcType=BIT},
-      sales_return = #{salesReturn,jdbcType=BIT},
-      live = #{live,jdbcType=BIT},
-      pay_after = #{payAfter,jdbcType=BIT},
-      store_free_time = #{storeFreeTime,jdbcType=VARCHAR},
-      live_store_name = #{liveStoreName,jdbcType=VARCHAR},
-      live_store_address = #{liveStoreAddress,jdbcType=VARCHAR},
-      live_store_tel = #{liveStoreTel,jdbcType=VARCHAR},
-      live_store_gps = #{liveStoreGps,jdbcType=VARCHAR},
-      live_store_bus = #{liveStoreBus,jdbcType=VARCHAR},
-      slide = #{slide,jdbcType=LONGVARCHAR},
-      slide_url = #{slideUrl,jdbcType=LONGVARCHAR}
     where store_id = #{storeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Store" >
@@ -719,6 +645,7 @@
       servicecredit = #{servicecredit,jdbcType=REAL},
       deliverycredit = #{deliverycredit,jdbcType=REAL},
       collect = #{collect,jdbcType=INTEGER},
+      slide_url = #{slideUrl,jdbcType=VARCHAR},
       stamp = #{stamp,jdbcType=VARCHAR},
       printdesc = #{printdesc,jdbcType=VARCHAR},
       sales = #{sales,jdbcType=INTEGER},

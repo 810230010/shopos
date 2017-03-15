@@ -1,17 +1,7 @@
 package com.wuliangit.shopos.dao;
 
+import com.wuliangit.shopos.core.dao.BaseMapper;
 import com.wuliangit.shopos.entity.Cart;
 
-public interface CartMapper {
-    int deleteByPrimaryKey(Integer cartId);
-
-    int insert(Cart record);
-
-    int insertSelective(Cart record);
-
-    Cart selectByPrimaryKey(Integer cartId);
-
-    int updateByPrimaryKeySelective(Cart record);
-
-    int updateByPrimaryKey(Cart record);
+public interface CartMapper extends BaseMapper<Cart, Integer> {
 }

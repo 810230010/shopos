@@ -1,17 +1,7 @@
 package com.wuliangit.shopos.dao;
 
+import com.wuliangit.shopos.core.dao.BaseMapper;
 import com.wuliangit.shopos.entity.StoreJoinin;
 
-public interface StoreJoininMapper {
-    int deleteByPrimaryKey(Integer memberId);
-
-    int insert(StoreJoinin record);
-
-    int insertSelective(StoreJoinin record);
-
-    StoreJoinin selectByPrimaryKey(Integer memberId);
-
-    int updateByPrimaryKeySelective(StoreJoinin record);
-
-    int updateByPrimaryKey(StoreJoinin record);
+public interface StoreJoininMapper extends BaseMapper<StoreJoinin, Integer> {
 }

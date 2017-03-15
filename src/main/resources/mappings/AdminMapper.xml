@@ -18,7 +18,26 @@
     from t_admin
     where admin_id = #{adminId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+
+
+
+
+
+    <select id="getByUsername" resultType="com.wuliangit.shopos.entity.Admin">
+      select
+      <include refid="Base_Column_List" />
+      from t_admin
+      where username = #{username}
+    </select>
+
+
+
+
+
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_admin
     where admin_id = #{adminId,jdbcType=INTEGER}
   </delete>

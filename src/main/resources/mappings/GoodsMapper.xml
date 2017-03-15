@@ -45,7 +45,7 @@
     <result column="is_own_shop" property="isOwnShop" jdbcType="BIT" />
     <result column="freight" property="freight" jdbcType="DECIMAL" />
     <result column="vat" property="vat" jdbcType="BIT" />
-    <result column="commend" property="commend" jdbcType="TINYINT" />
+    <result column="commend" property="commend" jdbcType="BIT" />
     <result column="evaluation_good_star" property="evaluationGoodStar" jdbcType="INTEGER" />
     <result column="evaluation_count" property="evaluationCount" jdbcType="INTEGER" />
   </resultMap>
@@ -105,7 +105,7 @@
       #{areaid2,jdbcType=INTEGER}, #{isNew,jdbcType=BIT}, #{type,jdbcType=VARCHAR}, #{secondHand,jdbcType=BIT}, 
       #{activityId,jdbcType=INTEGER}, #{activityType,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, 
       #{virtualInvalidRefund,jdbcType=BIT}, #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, 
-      #{isOwnShop,jdbcType=BIT}, #{freight,jdbcType=DECIMAL}, #{vat,jdbcType=BIT}, #{commend,jdbcType=TINYINT}, 
+      #{isOwnShop,jdbcType=BIT}, #{freight,jdbcType=DECIMAL}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, 
       #{evaluationGoodStar,jdbcType=INTEGER}, #{evaluationCount,jdbcType=INTEGER}, #{goodsBody,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -385,7 +385,7 @@
         #{vat,jdbcType=BIT},
       </if>
       <if test="commend != null" >
-        #{commend,jdbcType=TINYINT},
+        #{commend,jdbcType=BIT},
       </if>
       <if test="evaluationGoodStar != null" >
         #{evaluationGoodStar,jdbcType=INTEGER},
@@ -528,7 +528,7 @@
         vat = #{vat,jdbcType=BIT},
       </if>
       <if test="commend != null" >
-        commend = #{commend,jdbcType=TINYINT},
+        commend = #{commend,jdbcType=BIT},
       </if>
       <if test="evaluationGoodStar != null" >
         evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
@@ -586,7 +586,7 @@
       is_own_shop = #{isOwnShop,jdbcType=BIT},
       freight = #{freight,jdbcType=DECIMAL},
       vat = #{vat,jdbcType=BIT},
-      commend = #{commend,jdbcType=TINYINT},
+      commend = #{commend,jdbcType=BIT},
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
       evaluation_count = #{evaluationCount,jdbcType=INTEGER},
       goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
@@ -636,7 +636,7 @@
       is_own_shop = #{isOwnShop,jdbcType=BIT},
       freight = #{freight,jdbcType=DECIMAL},
       vat = #{vat,jdbcType=BIT},
-      commend = #{commend,jdbcType=TINYINT},
+      commend = #{commend,jdbcType=BIT},
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
       evaluation_count = #{evaluationCount,jdbcType=INTEGER}
     where goods_id = #{goodsId,jdbcType=INTEGER}

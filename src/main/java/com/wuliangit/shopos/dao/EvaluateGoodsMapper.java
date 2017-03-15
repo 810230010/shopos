@@ -1,17 +1,7 @@
 package com.wuliangit.shopos.dao;
 
+import com.wuliangit.shopos.core.dao.BaseMapper;
 import com.wuliangit.shopos.entity.EvaluateGoods;
 
-public interface EvaluateGoodsMapper {
-    int deleteByPrimaryKey(Integer gevalId);
-
-    int insert(EvaluateGoods record);
-
-    int insertSelective(EvaluateGoods record);
-
-    EvaluateGoods selectByPrimaryKey(Integer gevalId);
-
-    int updateByPrimaryKeySelective(EvaluateGoods record);
-
-    int updateByPrimaryKey(EvaluateGoods record);
+public interface EvaluateGoodsMapper extends BaseMapper<EvaluateGoods, Integer> {
 }

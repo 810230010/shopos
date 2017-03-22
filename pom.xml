@@ -302,6 +302,16 @@
         </dependency>
         <!-- wechat mp java tools end-->
 
+        <!--短信发送-->
+        <dependency>
+            <groupId>com.cloopen</groupId>
+            <artifactId>CCP_REST_SMS_SDK</artifactId>
+            <version>2.6.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar</systemPath>
+        </dependency>
+        <!--短信发送 end-->
+
     </dependencies>
 
     <build>

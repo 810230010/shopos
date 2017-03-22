@@ -83,7 +83,4 @@
         <property name="toolboxConfigLocation" value="/WEB-INF/classes/velocity-toolbox.xml" />
     </bean>
 
-    <!--springmvc 异常处理-->
-    <bean id="exceptionHandler" class="com.wuliangit.shopos.core.filter.MyExceptionHandler"/>
-
 </beans>

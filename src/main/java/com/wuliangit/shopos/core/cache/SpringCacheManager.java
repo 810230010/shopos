@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * 包装Spring cache抽象
  */
-public class SpringCacheManagerWrapper implements CacheManager {
+public class SpringCacheManager implements CacheManager {
 
     private org.springframework.cache.CacheManager cacheManager;
 

@@ -28,11 +28,7 @@ public class Member {
 
     private String email;
 
-    private Boolean emailBind;
-
     private String mobile;
-
-    private Boolean mobileBind;
 
     private String qq;
 
@@ -79,6 +75,14 @@ public class Member {
     private Integer exppoints;
 
     private Integer inviterId;
+
+    private Date updateTime;
+
+    private String idcardNum;
+
+    private String idcardImg;
+
+    private String authState;
 
     public Integer getMemberId() {
         return memberId;
@@ -176,28 +180,12 @@ public class Member {
         this.email = email == null ? null : email.trim();
     }
 
-    public Boolean getEmailBind() {
-        return emailBind;
-    }
-
-    public void setEmailBind(Boolean emailBind) {
-        this.emailBind = emailBind;
-    }
-
     public String getMobile() {
         return mobile;
     }
 
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
-    }
-
-    public Boolean getMobileBind() {
-        return mobileBind;
-    }
-
-    public void setMobileBind(Boolean mobileBind) {
-        this.mobileBind = mobileBind;
     }
 
     public String getQq() {
@@ -382,5 +370,37 @@ public class Member {
 
     public void setInviterId(Integer inviterId) {
         this.inviterId = inviterId;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getIdcardNum() {
+        return idcardNum;
+    }
+
+    public void setIdcardNum(String idcardNum) {
+        this.idcardNum = idcardNum == null ? null : idcardNum.trim();
+    }
+
+    public String getIdcardImg() {
+        return idcardImg;
+    }
+
+    public void setIdcardImg(String idcardImg) {
+        this.idcardImg = idcardImg == null ? null : idcardImg.trim();
+    }
+
+    public String getAuthState() {
+        return authState;
+    }
+
+    public void setAuthState(String authState) {
+        this.authState = authState == null ? null : authState.trim();
     }
 }

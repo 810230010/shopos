@@ -3,7 +3,9 @@ package com.wuliangit.shopos.entity;
 import java.math.BigDecimal;
 
 public class OrderGoods {
-    private Integer recId;
+    private Integer orderGoodsId;
+
+    private Integer orderCommonId;
 
     private Integer orderId;
 
@@ -14,8 +16,6 @@ public class OrderGoods {
     private String colorName;
 
     private String goodsName;
-
-    private BigDecimal colorPrice;
 
     private Integer goodsNum;
 
@@ -33,12 +33,20 @@ public class OrderGoods {
 
     private BigDecimal commissionPercent;
 
-    public Integer getRecId() {
-        return recId;
+    public Integer getOrderGoodsId() {
+        return orderGoodsId;
     }
 
-    public void setRecId(Integer recId) {
-        this.recId = recId;
+    public void setOrderGoodsId(Integer orderGoodsId) {
+        this.orderGoodsId = orderGoodsId;
+    }
+
+    public Integer getOrderCommonId() {
+        return orderCommonId;
+    }
+
+    public void setOrderCommonId(Integer orderCommonId) {
+        this.orderCommonId = orderCommonId;
     }
 
     public Integer getOrderId() {
@@ -79,14 +87,6 @@ public class OrderGoods {
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName == null ? null : goodsName.trim();
-    }
-
-    public BigDecimal getColorPrice() {
-        return colorPrice;
-    }
-
-    public void setColorPrice(BigDecimal colorPrice) {
-        this.colorPrice = colorPrice;
     }
 
     public Integer getGoodsNum() {

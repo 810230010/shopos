@@ -3,7 +3,7 @@ package com.wuliangit.shopos.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class RefundReturn {
+public class Refund {
     private Integer refundId;
 
     private Integer orderId;

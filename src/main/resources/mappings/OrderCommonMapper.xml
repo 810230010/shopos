@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.OrderCommonMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.OrderCommon" >
-    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <id column="order_common_id" property="orderCommonId" jdbcType="INTEGER" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="shipping_time" property="shippingTime" jdbcType="INTEGER" />
     <result column="shipping_express_id" property="shippingExpressId" jdbcType="INTEGER" />
@@ -29,7 +29,7 @@
     <result column="deliver_explain" property="deliverExplain" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, store_id, shipping_time, shipping_express_id, evaluation_time, evalseller_state, 
+    order_common_id, store_id, shipping_time, shipping_express_id, evaluation_time, evalseller_state, 
     evalseller_time, order_message, order_pointscount, voucher_price, voucher_code, area_id, 
     city_id, area_info, address, tel_phone, mob_phone, reciver_name, reciver_info, reciver_province_id, 
     invoice_info, promotion_info
@@ -43,14 +43,14 @@
     ,
     <include refid="Blob_Column_List" />
     from t_order_common
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_common_id = #{orderCommonId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_order_common
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_common_id = #{orderCommonId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.OrderCommon" >
-    insert into t_order_common (order_id, store_id, shipping_time, 
+    insert into t_order_common (order_common_id, store_id, shipping_time, 
       shipping_express_id, evaluation_time, evalseller_state, 
       evalseller_time, order_message, order_pointscount, 
       voucher_price, voucher_code, area_id, 
@@ -58,7 +58,7 @@
       tel_phone, mob_phone, reciver_name, 
       reciver_info, reciver_province_id, invoice_info, 
       promotion_info, deliver_explain)
-    values (#{orderId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{shippingTime,jdbcType=INTEGER}, 
+    values (#{orderCommonId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{shippingTime,jdbcType=INTEGER}, 
       #{shippingExpressId,jdbcType=INTEGER}, #{evaluationTime,jdbcType=TIMESTAMP}, #{evalsellerState,jdbcType=VARCHAR}, 
       #{evalsellerTime,jdbcType=INTEGER}, #{orderMessage,jdbcType=VARCHAR}, #{orderPointscount,jdbcType=INTEGER}, 
       #{voucherPrice,jdbcType=INTEGER}, #{voucherCode,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER}, 
@@ -70,8 +70,8 @@
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.OrderCommon" >
     insert into t_order_common
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        order_id,
+      <if test="orderCommonId != null" >
+        order_common_id,
       </if>
       <if test="storeId != null" >
         store_id,
@@ -141,8 +141,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        #{orderId,jdbcType=INTEGER},
+      <if test="orderCommonId != null" >
+        #{orderCommonId,jdbcType=INTEGER},
       </if>
       <if test="storeId != null" >
         #{storeId,jdbcType=INTEGER},
@@ -282,7 +282,7 @@
         deliver_explain = #{deliverExplain,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_common_id = #{orderCommonId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wuliangit.shopos.entity.OrderCommon" >
     update t_order_common
@@ -308,7 +308,7 @@
       invoice_info = #{invoiceInfo,jdbcType=VARCHAR},
       promotion_info = #{promotionInfo,jdbcType=VARCHAR},
       deliver_explain = #{deliverExplain,jdbcType=LONGVARCHAR}
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_common_id = #{orderCommonId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.OrderCommon" >
     update t_order_common
@@ -333,6 +333,6 @@
       reciver_province_id = #{reciverProvinceId,jdbcType=INTEGER},
       invoice_info = #{invoiceInfo,jdbcType=VARCHAR},
       promotion_info = #{promotionInfo,jdbcType=VARCHAR}
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_common_id = #{orderCommonId,jdbcType=INTEGER}
   </update>
 </mapper>

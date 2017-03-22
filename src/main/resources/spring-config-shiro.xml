@@ -24,7 +24,7 @@
         <property name="configLocation" value="classpath:ehcache.xml"/>
     </bean>
 
-    <bean id="cacheManager" class="com.wuliangit.shopos.core.cache.SpringCacheManagerWrapper">
+    <bean id="cacheManager" class="com.wuliangit.shopos.core.cache.SpringCacheManager">
         <property name="cacheManager" ref="springCacheManager"/>
     </bean>
 
@@ -144,6 +144,8 @@
 
     <bean id="weixinFilter" class="com.wuliangit.shopos.core.filter.WeixinFilter">
     </bean>
+    <bean id="apiFilter" class="com.wuliangit.shopos.core.filter.ApiFilter">
+    </bean>
 
     <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
         <property name="redirectUrl" value="/admin/login"/>
@@ -162,10 +164,14 @@
                 <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
                 <entry key="logout" value-ref="logoutFilter"/>
                 <entry key="weixin" value-ref="weixinFilter"/>
+                <entry key="api" value-ref="weixinFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
             <value>
+
+                /api/v1/member = api
+
                 <!--总后台用户-->
                 <!--/admin/login = authc-->
                 <!--/admin/logout = logout-->

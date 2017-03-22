@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.StoreJoininMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.StoreJoinin" >
-    <id column="member_id" property="memberId" jdbcType="INTEGER" />
-    <result column="store_joinin_id" property="storeJoininId" jdbcType="INTEGER" />
+    <id column="store_joinin_id" property="storeJoininId" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
     <result column="member_name" property="memberName" jdbcType="VARCHAR" />
     <result column="company_name" property="companyName" jdbcType="VARCHAR" />
     <result column="company_province_id" property="companyProvinceId" jdbcType="INTEGER" />
@@ -55,7 +55,7 @@
     <result column="paying_amount" property="payingAmount" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    member_id, store_joinin_id, member_name, company_name, company_province_id, company_address, 
+    store_joinin_id, member_id, member_name, company_name, company_province_id, company_address, 
     company_address_detail, company_phone, company_employee_count, company_registered_capital, 
     contacts_name, contacts_phone, contacts_email, business_licence_number, business_licence_address, 
     business_licence_start, business_licence_end, business_sphere, business_licence_number_electronic, 
@@ -72,14 +72,14 @@
     select 
     <include refid="Base_Column_List" />
     from t_store_joinin
-    where member_id = #{memberId,jdbcType=INTEGER}
+    where store_joinin_id = #{storeJoininId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_store_joinin
-    where member_id = #{memberId,jdbcType=INTEGER}
+    where store_joinin_id = #{storeJoininId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreJoinin" >
-    insert into t_store_joinin (member_id, store_joinin_id, member_name, 
+    insert into t_store_joinin (store_joinin_id, member_id, member_name, 
       company_name, company_province_id, company_address, 
       company_address_detail, company_phone, company_employee_count, 
       company_registered_capital, contacts_name, 
@@ -100,7 +100,7 @@
       sc_id, store_class_commis_rates, paying_money_certificate, 
       paying_money_certificate_explain, paying_amount
       )
-    values (#{memberId,jdbcType=INTEGER}, #{storeJoininId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
+    values (#{storeJoininId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
       #{companyName,jdbcType=VARCHAR}, #{companyProvinceId,jdbcType=INTEGER}, #{companyAddress,jdbcType=VARCHAR}, 
       #{companyAddressDetail,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, #{companyEmployeeCount,jdbcType=INTEGER}, 
       #{companyRegisteredCapital,jdbcType=INTEGER}, #{contactsName,jdbcType=VARCHAR}, 
@@ -125,11 +125,11 @@
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreJoinin" >
     insert into t_store_joinin
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="memberId != null" >
-        member_id,
-      </if>
       <if test="storeJoininId != null" >
         store_joinin_id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
       </if>
       <if test="memberName != null" >
         member_name,
@@ -280,11 +280,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="memberId != null" >
-        #{memberId,jdbcType=INTEGER},
-      </if>
       <if test="storeJoininId != null" >
         #{storeJoininId,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
       </if>
       <if test="memberName != null" >
         #{memberName,jdbcType=VARCHAR},
@@ -438,8 +438,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.StoreJoinin" >
     update t_store_joinin
     <set >
-      <if test="storeJoininId != null" >
-        store_joinin_id = #{storeJoininId,jdbcType=INTEGER},
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
       </if>
       <if test="memberName != null" >
         member_name = #{memberName,jdbcType=VARCHAR},
@@ -589,11 +589,11 @@
         paying_amount = #{payingAmount,jdbcType=DECIMAL},
       </if>
     </set>
-    where member_id = #{memberId,jdbcType=INTEGER}
+    where store_joinin_id = #{storeJoininId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.StoreJoinin" >
     update t_store_joinin
-    set store_joinin_id = #{storeJoininId,jdbcType=INTEGER},
+    set member_id = #{memberId,jdbcType=INTEGER},
       member_name = #{memberName,jdbcType=VARCHAR},
       company_name = #{companyName,jdbcType=VARCHAR},
       company_province_id = #{companyProvinceId,jdbcType=INTEGER},
@@ -643,6 +643,6 @@
       paying_money_certificate = #{payingMoneyCertificate,jdbcType=VARCHAR},
       paying_money_certificate_explain = #{payingMoneyCertificateExplain,jdbcType=VARCHAR},
       paying_amount = #{payingAmount,jdbcType=DECIMAL}
-    where member_id = #{memberId,jdbcType=INTEGER}
+    where store_joinin_id = #{storeJoininId,jdbcType=INTEGER}
   </update>
 </mapper>

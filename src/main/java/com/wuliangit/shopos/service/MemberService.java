@@ -23,16 +23,30 @@ public interface MemberService {
     Set<String> getPermissions(String username);
 
     /**
-     * 通过openid获取用户
+     * 通过openid获取会员用户
      * @param openid
      * @return
      */
     Member getByOpenid(String openid);
 
     /**
-     * 通过用户名获取用户
+     * 通过用户名获取会员用户
      * @param username
      * @return
      */
     Member getByUsername(String username);
+
+    /**
+     * 保存会员用户
+     * @param member
+     * @return
+     */
+    int saveMember(Member member);
+
+    /**
+     * 更新用户信息
+     * @param member
+     * @return
+     */
+    int updateMember(Member member);
 }

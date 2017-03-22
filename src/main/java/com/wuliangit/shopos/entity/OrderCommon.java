@@ -3,7 +3,7 @@ package com.wuliangit.shopos.entity;
 import java.util.Date;
 
 public class OrderCommon {
-    private Integer orderId;
+    private Integer orderCommonId;
 
     private Integer storeId;
 
@@ -49,12 +49,12 @@ public class OrderCommon {
 
     private String deliverExplain;
 
-    public Integer getOrderId() {
-        return orderId;
+    public Integer getOrderCommonId() {
+        return orderCommonId;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setOrderCommonId(Integer orderCommonId) {
+        this.orderCommonId = orderCommonId;
     }
 
     public Integer getStoreId() {

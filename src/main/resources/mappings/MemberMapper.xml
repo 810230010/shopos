@@ -14,9 +14,7 @@
     <result column="birthday" property="birthday" jdbcType="DATE" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="email_bind" property="emailBind" jdbcType="BIT" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
-    <result column="mobile_bind" property="mobileBind" jdbcType="BIT" />
     <result column="qq" property="qq" jdbcType="VARCHAR" />
     <result column="openid" property="openid" jdbcType="VARCHAR" />
     <result column="wx_photo" property="wxPhoto" jdbcType="VARCHAR" />
@@ -40,13 +38,17 @@
     <result column="areainfo" property="areainfo" jdbcType="VARCHAR" />
     <result column="exppoints" property="exppoints" jdbcType="INTEGER" />
     <result column="inviter_id" property="inviterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="idcard_num" property="idcardNum" jdbcType="VARCHAR" />
+    <result column="idcard_img" property="idcardImg" jdbcType="VARCHAR" />
+    <result column="auth_state" property="authState" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     member_id, username, nikename, truename, passwd, paypwd, salt, photo, sex, birthday, 
-    type, email, email_bind, mobile, mobile_bind, qq, openid, wx_photo, wx_nickname, 
-    login_num, create_time, login_time, login_ip, qqopenid, qqinfo, sinaopenid, sinainfo, 
-    points, available_balance, freeze_balance, state, credit, areaid, cityid, provinceid, 
-    areainfo, exppoints, inviter_id
+    type, email, mobile, qq, openid, wx_photo, wx_nickname, login_num, create_time, login_time, 
+    login_ip, qqopenid, qqinfo, sinaopenid, sinainfo, points, available_balance, freeze_balance, 
+    state, credit, areaid, cityid, provinceid, areainfo, exppoints, inviter_id, update_time, 
+    idcard_num, idcard_img, auth_state
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -54,6 +56,30 @@
     from t_member
     where member_id = #{memberId,jdbcType=INTEGER}
   </select>
+
+
+
+
+
+<!--通过用户名获取用户-->
+  <select id="getByUsername" resultType="com.wuliangit.shopos.entity.Member">
+    select
+    <include refid="Base_Column_List" />
+    from t_member
+    where username = #{username}
+  </select>
+  <!--通过openid获取用户-->
+  <select id="getByOpenid" resultType="com.wuliangit.shopos.entity.Member">
+    select
+    <include refid="Base_Column_List" />
+    from t_member
+    where openid = #{openid}
+  </select>
+
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_member
     where member_id = #{memberId,jdbcType=INTEGER}
@@ -62,29 +88,31 @@
     insert into t_member (member_id, username, nikename, 
       truename, passwd, paypwd, 
       salt, photo, sex, birthday, 
-      type, email, email_bind, 
-      mobile, mobile_bind, qq, 
-      openid, wx_photo, wx_nickname, 
-      login_num, create_time, login_time, 
-      login_ip, qqopenid, qqinfo, 
-      sinaopenid, sinainfo, points, 
-      available_balance, freeze_balance, state, 
-      credit, areaid, cityid, 
-      provinceid, areainfo, exppoints, 
-      inviter_id)
+      type, email, mobile, 
+      qq, openid, wx_photo, 
+      wx_nickname, login_num, create_time, 
+      login_time, login_ip, qqopenid, 
+      qqinfo, sinaopenid, sinainfo, 
+      points, available_balance, freeze_balance, 
+      state, credit, areaid, 
+      cityid, provinceid, areainfo, 
+      exppoints, inviter_id, update_time, 
+      idcard_num, idcard_img, auth_state
+      )
     values (#{memberId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{nikename,jdbcType=VARCHAR}, 
       #{truename,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, #{paypwd,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, #{birthday,jdbcType=DATE}, 
-      #{type,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{emailBind,jdbcType=BIT}, 
-      #{mobile,jdbcType=VARCHAR}, #{mobileBind,jdbcType=BIT}, #{qq,jdbcType=VARCHAR}, 
-      #{openid,jdbcType=VARCHAR}, #{wxPhoto,jdbcType=VARCHAR}, #{wxNickname,jdbcType=VARCHAR}, 
-      #{loginNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP}, 
-      #{loginIp,jdbcType=VARCHAR}, #{qqopenid,jdbcType=VARCHAR}, #{qqinfo,jdbcType=VARCHAR}, 
-      #{sinaopenid,jdbcType=VARCHAR}, #{sinainfo,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER}, 
-      #{availableBalance,jdbcType=DECIMAL}, #{freezeBalance,jdbcType=DECIMAL}, #{state,jdbcType=VARCHAR}, 
-      #{credit,jdbcType=INTEGER}, #{areaid,jdbcType=INTEGER}, #{cityid,jdbcType=INTEGER}, 
-      #{provinceid,jdbcType=INTEGER}, #{areainfo,jdbcType=VARCHAR}, #{exppoints,jdbcType=INTEGER}, 
-      #{inviterId,jdbcType=INTEGER})
+      #{type,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{wxPhoto,jdbcType=VARCHAR}, 
+      #{wxNickname,jdbcType=VARCHAR}, #{loginNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{loginTime,jdbcType=TIMESTAMP}, #{loginIp,jdbcType=VARCHAR}, #{qqopenid,jdbcType=VARCHAR}, 
+      #{qqinfo,jdbcType=VARCHAR}, #{sinaopenid,jdbcType=VARCHAR}, #{sinainfo,jdbcType=VARCHAR}, 
+      #{points,jdbcType=INTEGER}, #{availableBalance,jdbcType=DECIMAL}, #{freezeBalance,jdbcType=DECIMAL}, 
+      #{state,jdbcType=VARCHAR}, #{credit,jdbcType=INTEGER}, #{areaid,jdbcType=INTEGER}, 
+      #{cityid,jdbcType=INTEGER}, #{provinceid,jdbcType=INTEGER}, #{areainfo,jdbcType=VARCHAR}, 
+      #{exppoints,jdbcType=INTEGER}, #{inviterId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{idcardNum,jdbcType=VARCHAR}, #{idcardImg,jdbcType=VARCHAR}, #{authState,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Member" >
     insert into t_member
@@ -125,14 +153,8 @@
       <if test="email != null" >
         email,
       </if>
-      <if test="emailBind != null" >
-        email_bind,
-      </if>
       <if test="mobile != null" >
         mobile,
-      </if>
-      <if test="mobileBind != null" >
-        mobile_bind,
       </if>
       <if test="qq != null" >
         qq,
@@ -203,6 +225,18 @@
       <if test="inviterId != null" >
         inviter_id,
       </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="idcardNum != null" >
+        idcard_num,
+      </if>
+      <if test="idcardImg != null" >
+        idcard_img,
+      </if>
+      <if test="authState != null" >
+        auth_state,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="memberId != null" >
@@ -241,14 +275,8 @@
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="emailBind != null" >
-        #{emailBind,jdbcType=BIT},
-      </if>
       <if test="mobile != null" >
         #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="mobileBind != null" >
-        #{mobileBind,jdbcType=BIT},
       </if>
       <if test="qq != null" >
         #{qq,jdbcType=VARCHAR},
@@ -319,6 +347,18 @@
       <if test="inviterId != null" >
         #{inviterId,jdbcType=INTEGER},
       </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcardNum != null" >
+        #{idcardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardImg != null" >
+        #{idcardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="authState != null" >
+        #{authState,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Member" >
@@ -357,14 +397,8 @@
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="emailBind != null" >
-        email_bind = #{emailBind,jdbcType=BIT},
-      </if>
       <if test="mobile != null" >
         mobile = #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="mobileBind != null" >
-        mobile_bind = #{mobileBind,jdbcType=BIT},
       </if>
       <if test="qq != null" >
         qq = #{qq,jdbcType=VARCHAR},
@@ -435,6 +469,18 @@
       <if test="inviterId != null" >
         inviter_id = #{inviterId,jdbcType=INTEGER},
       </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcardNum != null" >
+        idcard_num = #{idcardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardImg != null" >
+        idcard_img = #{idcardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="authState != null" >
+        auth_state = #{authState,jdbcType=VARCHAR},
+      </if>
     </set>
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
@@ -451,9 +497,7 @@
       birthday = #{birthday,jdbcType=DATE},
       type = #{type,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      email_bind = #{emailBind,jdbcType=BIT},
       mobile = #{mobile,jdbcType=VARCHAR},
-      mobile_bind = #{mobileBind,jdbcType=BIT},
       qq = #{qq,jdbcType=VARCHAR},
       openid = #{openid,jdbcType=VARCHAR},
       wx_photo = #{wxPhoto,jdbcType=VARCHAR},
@@ -476,7 +520,11 @@
       provinceid = #{provinceid,jdbcType=INTEGER},
       areainfo = #{areainfo,jdbcType=VARCHAR},
       exppoints = #{exppoints,jdbcType=INTEGER},
-      inviter_id = #{inviterId,jdbcType=INTEGER}
+      inviter_id = #{inviterId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      idcard_num = #{idcardNum,jdbcType=VARCHAR},
+      idcard_img = #{idcardImg,jdbcType=VARCHAR},
+      auth_state = #{authState,jdbcType=VARCHAR}
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
 </mapper>

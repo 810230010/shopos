@@ -1,11 +1,14 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.core.util.WebUtil;
 import com.wuliangit.shopos.dao.MemberMapper;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -36,5 +39,21 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member getByUsername(String username) {
         return memberMapper.getByUsername(username);
+    }
+
+    @Override
+    public int saveMember(Member member) {
+        return memberMapper.insertSelective(member);
+    }
+
+    @Override
+    public int updateMember(Member member) {
+        member.setUpdateTime(new Date());
+
+        //更新缓存
+        WebUtil.getSession().removeAttribute(CoreConstants.SESSION_CURRENT_USER);
+        WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, member);
+
+        return memberMapper.updateByPrimaryKeySelective(member);
     }
 }

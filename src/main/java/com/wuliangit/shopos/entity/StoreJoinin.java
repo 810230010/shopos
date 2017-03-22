@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class StoreJoinin {
-    private Integer memberId;
-
     private Integer storeJoininId;
+
+    private Integer memberId;
 
     private String memberName;
 
@@ -106,20 +106,20 @@ public class StoreJoinin {
 
     private BigDecimal payingAmount;
 
-    public Integer getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Integer memberId) {
-        this.memberId = memberId;
-    }
-
     public Integer getStoreJoininId() {
         return storeJoininId;
     }
 
     public void setStoreJoininId(Integer storeJoininId) {
         this.storeJoininId = storeJoininId;
+    }
+
+    public Integer getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
     }
 
     public String getMemberName() {

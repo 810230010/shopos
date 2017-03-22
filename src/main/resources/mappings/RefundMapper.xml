@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wuliangit.shopos.dao.RefundReturnMapper" >
-  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.RefundReturn" >
+<mapper namespace="com.wuliangit.shopos.dao.RefundMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Refund" >
     <id column="refund_id" property="refundId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
@@ -46,15 +46,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from t_refund_return
+    from t_refund
     where refund_id = #{refundId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_refund_return
+    delete from t_refund
     where refund_id = #{refundId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wuliangit.shopos.entity.RefundReturn" >
-    insert into t_refund_return (refund_id, order_id, order_sn, 
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Refund" >
+    insert into t_refund (refund_id, order_id, order_sn, 
       refund_sn, store_id, store_name, 
       member_id, member_name, goods_id, 
       order_goods_id, goods_name, goods_num, 
@@ -79,8 +79,8 @@
       #{shipTime,jdbcType=TIMESTAMP}, #{delayTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.RefundReturn" >
-    insert into t_refund_return
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Refund" >
+    insert into t_refund
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="refundId != null" >
         refund_id,
@@ -284,8 +284,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.RefundReturn" >
-    update t_refund_return
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Refund" >
+    update t_refund
     <set >
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=INTEGER},
@@ -386,8 +386,8 @@
     </set>
     where refund_id = #{refundId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.RefundReturn" >
-    update t_refund_return
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Refund" >
+    update t_refund
     set order_id = #{orderId,jdbcType=INTEGER},
       order_sn = #{orderSn,jdbcType=VARCHAR},
       refund_sn = #{refundSn,jdbcType=VARCHAR},

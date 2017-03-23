@@ -117,6 +117,6 @@
     <bean class="com.wuliangit.shopos.core.util.SpringUtils"/>
 
     <!--短信接口-->
-    <bean id="sender" class="com.wuliangit.shopos.core.sms.YXSMSSender"/>
+    <bean id="smsSender" class="com.wuliangit.shopos.core.sms.YXSMSSender"/>
 
 </beans>

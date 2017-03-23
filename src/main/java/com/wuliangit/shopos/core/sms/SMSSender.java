@@ -1,12 +1,10 @@
 package com.wuliangit.shopos.core.sms;
 
-import org.apache.shiro.cache.Cache;
-
 /**
  * 短信接口
  * Created by nilme on 2017/3/22.
  */
-public interface Sender {
+public interface SMSSender {
 
     /**
      * 发送短信接口

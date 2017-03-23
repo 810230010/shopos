@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.wuliangit.shopos.core.cache.SpringCacheManager;
-import com.wuliangit.shopos.core.sms.Sender;
+import com.wuliangit.shopos.core.sms.SMSSender;
 import com.wuliangit.shopos.service.SMSService;
 import org.apache.shiro.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.Random;
 public class SMSServiceImpl implements SMSService {
 
     @Autowired
-    private Sender sender;
+    private SMSSender smsSender;
 
     @Autowired
     private SpringCacheManager springCacheManager;
@@ -25,20 +25,41 @@ public class SMSServiceImpl implements SMSService {
 
     @Override
     public boolean sendRegisterCode(String phone) {
-
-        Random rand = new Random();
-        int tmp = Math.abs(rand.nextInt());
-        int code = tmp % (999999 - 100000 + 1) + 100000;
-
+        String code = this.getRandomCode();
         String timeout = "10";
-
-        boolean res = sender.send(phone, "1", new String[]{timeout, code + ""});
+        boolean res = smsSender.send(phone, "1", new String[]{timeout, code});
         if (res) {
             Cache<Object, Object> cache = springCacheManager.getCache("sms-session");
-            cache.put("phone", code + "");
+            cache.put("phone", code);
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public boolean sendtRepassCode(String phone) {
+        String code = this.getRandomCode();
+        String timeout = "10";
+        boolean res = smsSender.send(phone, "xxxxxx", new String[]{timeout, code});
+        if (res) {
+            Cache<Object, Object> cache = springCacheManager.getCache("sms-session");
+            cache.put("phone", code);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * 获取6位随机验证码
+     * @return
+     */
+    private String getRandomCode(){
+        Random rand = new Random();
+        int tmp = Math.abs(rand.nextInt());
+        int code = tmp % (999999 - 100000 + 1) + 100000;
+        return  code+"";
     }
 }

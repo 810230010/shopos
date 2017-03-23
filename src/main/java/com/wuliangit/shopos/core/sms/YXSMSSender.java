@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by nilme on 2017/3/22.
  */
-public class YXSMSSender implements Sender {
+public class YXSMSSender implements SMSSender {
 
     private static CCPRestSmsSDK ccpRestSmsSDK;
     private static ReentrantLock lock = new ReentrantLock();

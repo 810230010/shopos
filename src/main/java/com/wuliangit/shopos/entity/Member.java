@@ -78,6 +78,12 @@ public class Member {
 
     private Boolean delFlag;
 
+    private Date updateTime;
+
+    private String authState;
+
+    private String idcardNum;
+
     public Integer getMemberId() {
         return memberId;
     }
@@ -372,5 +378,29 @@ public class Member {
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getAuthState() {
+        return authState;
+    }
+
+    public void setAuthState(String authState) {
+        this.authState = authState == null ? null : authState.trim();
+    }
+
+    public String getIdcardNum() {
+        return idcardNum;
+    }
+
+    public void setIdcardNum(String idcardNum) {
+        this.idcardNum = idcardNum == null ? null : idcardNum.trim();
     }
 }

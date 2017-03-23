@@ -106,6 +106,8 @@ public class StoreJoinin {
 
     private BigDecimal payingAmount;
 
+    private Date createTime;
+
     public Integer getStoreJoininId() {
         return storeJoininId;
     }
@@ -512,5 +514,13 @@ public class StoreJoinin {
 
     public void setPayingAmount(BigDecimal payingAmount) {
         this.payingAmount = payingAmount;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

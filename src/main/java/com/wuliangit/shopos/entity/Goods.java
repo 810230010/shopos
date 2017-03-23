@@ -52,7 +52,7 @@ public class Goods {
 
     private String verify;
 
-    private Date addtime;
+    private Date createTime;
 
     private Date edittime;
 
@@ -85,6 +85,8 @@ public class Goods {
     private Integer evaluationGoodStar;
 
     private Integer evaluationCount;
+
+    private Boolean delFlag;
 
     private String goodsBody;
 
@@ -280,12 +282,12 @@ public class Goods {
         this.verify = verify == null ? null : verify.trim();
     }
 
-    public Date getAddtime() {
-        return addtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setAddtime(Date addtime) {
-        this.addtime = addtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Date getEdittime() {
@@ -414,6 +416,14 @@ public class Goods {
 
     public void setEvaluationCount(Integer evaluationCount) {
         this.evaluationCount = evaluationCount;
+    }
+
+    public Boolean getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Boolean delFlag) {
+        this.delFlag = delFlag;
     }
 
     public String getGoodsBody() {

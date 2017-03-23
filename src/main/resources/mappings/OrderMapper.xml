@@ -10,7 +10,6 @@
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
     <result column="member_name" property="memberName" jdbcType="VARCHAR" />
     <result column="member_email" property="memberEmail" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="payment_code" property="paymentCode" jdbcType="VARCHAR" />
     <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
     <result column="finnshed_time" property="finnshedTime" jdbcType="TIMESTAMP" />
@@ -26,12 +25,14 @@
     <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
     <result column="order_from" property="orderFrom" jdbcType="VARCHAR" />
     <result column="shipping_code" property="shippingCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="del_flag" property="delFlag" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
     order_id, order_sn, pay_sn, store_id, store_name, member_id, member_name, member_email, 
-    create_time, payment_code, payment_time, finnshed_time, goods_amount, order_amount, 
-    pd_amount, shipping_fee, evaluation_state, order_state, refund_state, is_lock, delete_state, 
-    refund_amount, order_from, shipping_code
+    payment_code, payment_time, finnshed_time, goods_amount, order_amount, pd_amount, 
+    shipping_fee, evaluation_state, order_state, refund_state, is_lock, delete_state, 
+    refund_amount, order_from, shipping_code, create_time, del_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -46,22 +47,22 @@
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Order" >
     insert into t_order (order_id, order_sn, pay_sn, 
       store_id, store_name, member_id, 
-      member_name, member_email, create_time, 
-      payment_code, payment_time, finnshed_time, 
-      goods_amount, order_amount, pd_amount, 
-      shipping_fee, evaluation_state, order_state, 
-      refund_state, is_lock, delete_state, 
-      refund_amount, order_from, shipping_code
-      )
+      member_name, member_email, payment_code, 
+      payment_time, finnshed_time, goods_amount, 
+      order_amount, pd_amount, shipping_fee, 
+      evaluation_state, order_state, refund_state, 
+      is_lock, delete_state, refund_amount, 
+      order_from, shipping_code, create_time, 
+      del_flag)
     values (#{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{paySn,jdbcType=VARCHAR}, 
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
-      #{memberName,jdbcType=VARCHAR}, #{memberEmail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{paymentCode,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, #{finnshedTime,jdbcType=TIMESTAMP}, 
-      #{goodsAmount,jdbcType=DECIMAL}, #{orderAmount,jdbcType=DECIMAL}, #{pdAmount,jdbcType=DECIMAL}, 
-      #{shippingFee,jdbcType=DECIMAL}, #{evaluationState,jdbcType=VARCHAR}, #{orderState,jdbcType=VARCHAR}, 
-      #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, #{deleteState,jdbcType=VARCHAR}, 
-      #{refundAmount,jdbcType=DECIMAL}, #{orderFrom,jdbcType=VARCHAR}, #{shippingCode,jdbcType=VARCHAR}
-      )
+      #{memberName,jdbcType=VARCHAR}, #{memberEmail,jdbcType=VARCHAR}, #{paymentCode,jdbcType=VARCHAR}, 
+      #{paymentTime,jdbcType=TIMESTAMP}, #{finnshedTime,jdbcType=TIMESTAMP}, #{goodsAmount,jdbcType=DECIMAL}, 
+      #{orderAmount,jdbcType=DECIMAL}, #{pdAmount,jdbcType=DECIMAL}, #{shippingFee,jdbcType=DECIMAL}, 
+      #{evaluationState,jdbcType=VARCHAR}, #{orderState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, 
+      #{isLock,jdbcType=BIT}, #{deleteState,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DECIMAL}, 
+      #{orderFrom,jdbcType=VARCHAR}, #{shippingCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{delFlag,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Order" >
     insert into t_order
@@ -89,9 +90,6 @@
       </if>
       <if test="memberEmail != null" >
         member_email,
-      </if>
-      <if test="createTime != null" >
-        create_time,
       </if>
       <if test="paymentCode != null" >
         payment_code,
@@ -138,6 +136,12 @@
       <if test="shippingCode != null" >
         shipping_code,
       </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -163,9 +167,6 @@
       </if>
       <if test="memberEmail != null" >
         #{memberEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="paymentCode != null" >
         #{paymentCode,jdbcType=VARCHAR},
@@ -212,6 +213,12 @@
       <if test="shippingCode != null" >
         #{shippingCode,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=BIT},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Order" >
@@ -237,9 +244,6 @@
       </if>
       <if test="memberEmail != null" >
         member_email = #{memberEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="paymentCode != null" >
         payment_code = #{paymentCode,jdbcType=VARCHAR},
@@ -286,6 +290,12 @@
       <if test="shippingCode != null" >
         shipping_code = #{shippingCode,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=BIT},
+      </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
@@ -298,7 +308,6 @@
       member_id = #{memberId,jdbcType=INTEGER},
       member_name = #{memberName,jdbcType=VARCHAR},
       member_email = #{memberEmail,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
       payment_code = #{paymentCode,jdbcType=VARCHAR},
       payment_time = #{paymentTime,jdbcType=TIMESTAMP},
       finnshed_time = #{finnshedTime,jdbcType=TIMESTAMP},
@@ -313,7 +322,9 @@
       delete_state = #{deleteState,jdbcType=VARCHAR},
       refund_amount = #{refundAmount,jdbcType=DECIMAL},
       order_from = #{orderFrom,jdbcType=VARCHAR},
-      shipping_code = #{shippingCode,jdbcType=VARCHAR}
+      shipping_code = #{shippingCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=BIT}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 </mapper>

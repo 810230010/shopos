@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.EvaluateGoodsMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.EvaluateGoods" >
-    <id column="geval_id" property="gevalId" jdbcType="INTEGER" />
+    <id column="evaluate_goods_id" property="evaluateGoodsId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
     <result column="order_goods_id" property="orderGoodsId" jdbcType="INTEGER" />
@@ -24,7 +24,7 @@
     <result column="images" property="images" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    geval_id, order_id, order_sn, order_goods_id, goods_id, goods_name, goods_price, 
+    evaluate_goods_id, order_id, order_sn, order_goods_id, goods_id, goods_name, goods_price, 
     goods_images, scores, content, is_anonymous, create_time, store_id, store_name, from_member_id, 
     from_member_name, is_show, remark, explain, images
   </sql>
@@ -32,21 +32,21 @@
     select 
     <include refid="Base_Column_List" />
     from t_evaluate_goods
-    where geval_id = #{gevalId,jdbcType=INTEGER}
+    where evaluate_goods_id = #{evaluateGoodsId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_evaluate_goods
-    where geval_id = #{gevalId,jdbcType=INTEGER}
+    where evaluate_goods_id = #{evaluateGoodsId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.EvaluateGoods" >
-    insert into t_evaluate_goods (geval_id, order_id, order_sn, 
+    insert into t_evaluate_goods (evaluate_goods_id, order_id, order_sn, 
       order_goods_id, goods_id, goods_name, 
       goods_price, goods_images, scores, 
       content, is_anonymous, create_time, 
       store_id, store_name, from_member_id, 
       from_member_name, is_show, remark, 
       explain, images)
-    values (#{gevalId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, 
+    values (#{evaluateGoodsId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, 
       #{orderGoodsId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
       #{goodsPrice,jdbcType=DECIMAL}, #{goodsImages,jdbcType=VARCHAR}, #{scores,jdbcType=INTEGER}, 
       #{content,jdbcType=VARCHAR}, #{isAnonymous,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
@@ -57,8 +57,8 @@
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.EvaluateGoods" >
     insert into t_evaluate_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="gevalId != null" >
-        geval_id,
+      <if test="evaluateGoodsId != null" >
+        evaluate_goods_id,
       </if>
       <if test="orderId != null" >
         order_id,
@@ -119,8 +119,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="gevalId != null" >
-        #{gevalId,jdbcType=INTEGER},
+      <if test="evaluateGoodsId != null" >
+        #{evaluateGoodsId,jdbcType=INTEGER},
       </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
@@ -242,7 +242,7 @@
         images = #{images,jdbcType=VARCHAR},
       </if>
     </set>
-    where geval_id = #{gevalId,jdbcType=INTEGER}
+    where evaluate_goods_id = #{evaluateGoodsId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.EvaluateGoods" >
     update t_evaluate_goods
@@ -265,6 +265,6 @@
       remark = #{remark,jdbcType=VARCHAR},
       explain = #{explain,jdbcType=VARCHAR},
       images = #{images,jdbcType=VARCHAR}
-    where geval_id = #{gevalId,jdbcType=INTEGER}
+    where evaluate_goods_id = #{evaluateGoodsId,jdbcType=INTEGER}
   </update>
 </mapper>

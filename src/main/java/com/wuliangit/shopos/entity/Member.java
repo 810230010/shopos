@@ -20,7 +20,7 @@ public class Member {
 
     private String photo;
 
-    private Boolean sex;
+    private String sex;
 
     private Date birthday;
 
@@ -76,13 +76,7 @@ public class Member {
 
     private Integer inviterId;
 
-    private Date updateTime;
-
-    private String idcardNum;
-
-    private String idcardImg;
-
-    private String authState;
+    private Boolean delFlag;
 
     public Integer getMemberId() {
         return memberId;
@@ -148,12 +142,12 @@ public class Member {
         this.photo = photo == null ? null : photo.trim();
     }
 
-    public Boolean getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
-        this.sex = sex;
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
     }
 
     public Date getBirthday() {
@@ -372,35 +366,11 @@ public class Member {
         this.inviterId = inviterId;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Boolean getDelFlag() {
+        return delFlag;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getIdcardNum() {
-        return idcardNum;
-    }
-
-    public void setIdcardNum(String idcardNum) {
-        this.idcardNum = idcardNum == null ? null : idcardNum.trim();
-    }
-
-    public String getIdcardImg() {
-        return idcardImg;
-    }
-
-    public void setIdcardImg(String idcardImg) {
-        this.idcardImg = idcardImg == null ? null : idcardImg.trim();
-    }
-
-    public String getAuthState() {
-        return authState;
-    }
-
-    public void setAuthState(String authState) {
-        this.authState = authState == null ? null : authState.trim();
+    public void setDelFlag(Boolean delFlag) {
+        this.delFlag = delFlag;
     }
 }

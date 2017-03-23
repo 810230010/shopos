@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.AdminLog" >
     <id column="admin_log_id" property="adminLogId" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="admin_username" property="adminUsername" jdbcType="CHAR" />
     <result column="admin_id" property="adminId" jdbcType="INTEGER" />
     <result column="ip" property="ip" jdbcType="CHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    admin_log_id, content, createtime, admin_username, admin_id, ip
+    admin_log_id, content, create_time, admin_username, admin_id, ip
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,10 +23,10 @@
     where admin_log_id = #{adminLogId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.AdminLog" >
-    insert into t_admin_log (admin_log_id, content, createtime, 
+    insert into t_admin_log (admin_log_id, content, create_time, 
       admin_username, admin_id, ip
       )
-    values (#{adminLogId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+    values (#{adminLogId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{adminUsername,jdbcType=CHAR}, #{adminId,jdbcType=INTEGER}, #{ip,jdbcType=CHAR}
       )
   </insert>
@@ -39,8 +39,8 @@
       <if test="content != null" >
         content,
       </if>
-      <if test="createtime != null" >
-        createtime,
+      <if test="createTime != null" >
+        create_time,
       </if>
       <if test="adminUsername != null" >
         admin_username,
@@ -59,8 +59,8 @@
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="adminUsername != null" >
         #{adminUsername,jdbcType=CHAR},
@@ -79,8 +79,8 @@
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="adminUsername != null" >
         admin_username = #{adminUsername,jdbcType=CHAR},
@@ -97,7 +97,7 @@
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.AdminLog" >
     update t_admin_log
     set content = #{content,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       admin_username = #{adminUsername,jdbcType=CHAR},
       admin_id = #{adminId,jdbcType=INTEGER},
       ip = #{ip,jdbcType=CHAR}

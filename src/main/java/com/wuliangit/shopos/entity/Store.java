@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.entity;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Store {
     private Integer storeId;
@@ -31,7 +32,7 @@ public class Store {
 
     private Integer sort;
 
-    private String createTime;
+    private Date createTime;
 
     private String endTime;
 
@@ -223,12 +224,12 @@ public class Store {
         this.sort = sort;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getEndTime() {

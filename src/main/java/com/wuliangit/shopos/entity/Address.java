@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.entity;
 
+import java.util.Date;
+
 public class Address {
     private Integer addressId;
 
@@ -20,6 +22,8 @@ public class Address {
     private String mobPhone;
 
     private Boolean isDefault;
+
+    private Date createTime;
 
     public Integer getAddressId() {
         return addressId;
@@ -99,5 +103,13 @@ public class Address {
 
     public void setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

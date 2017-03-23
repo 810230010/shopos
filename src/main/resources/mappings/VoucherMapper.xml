@@ -17,10 +17,11 @@
     <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
     <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     voucher_id, voucher_code, title, desc, start_time, end_time, price, limit, store_id, 
-    state, active_time, type, owner_id, owner_name, order_id
+    state, active_time, type, owner_id, owner_name, order_id, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -37,14 +38,14 @@
       desc, start_time, end_time, 
       price, limit, store_id, 
       state, active_time, type, 
-      owner_id, owner_name, order_id
-      )
+      owner_id, owner_name, order_id, 
+      create_time)
     values (#{voucherId,jdbcType=INTEGER}, #{voucherCode,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{desc,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{price,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}, #{storeId,jdbcType=INTEGER}, 
       #{state,jdbcType=VARCHAR}, #{activeTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, 
-      #{ownerId,jdbcType=INTEGER}, #{ownerName,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}
-      )
+      #{ownerId,jdbcType=INTEGER}, #{ownerName,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Voucher" >
     insert into t_voucher
@@ -94,6 +95,9 @@
       <if test="orderId != null" >
         order_id,
       </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="voucherId != null" >
@@ -140,6 +144,9 @@
       </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where voucher_id = #{voucherId,jdbcType=INTEGER}
   </update>
@@ -206,7 +216,8 @@
       type = #{type,jdbcType=VARCHAR},
       owner_id = #{ownerId,jdbcType=INTEGER},
       owner_name = #{ownerName,jdbcType=VARCHAR},
-      order_id = #{orderId,jdbcType=INTEGER}
+      order_id = #{orderId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where voucher_id = #{voucherId,jdbcType=INTEGER}
   </update>
 </mapper>

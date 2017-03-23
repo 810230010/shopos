@@ -34,6 +34,8 @@ public class Voucher {
 
     private Integer orderId;
 
+    private Date createTime;
+
     public Integer getVoucherId() {
         return voucherId;
     }
@@ -152,5 +154,13 @@ public class Voucher {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

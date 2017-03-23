@@ -15,6 +15,10 @@ public class Admin {
 
     private String salt;
 
+    private Date createTime;
+
+    private Boolean delFlag;
+
     public Integer getAdminId() {
         return adminId;
     }
@@ -61,5 +65,21 @@ public class Admin {
 
     public void setSalt(String salt) {
         this.salt = salt == null ? null : salt.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Boolean getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Boolean delFlag) {
+        this.delFlag = delFlag;
     }
 }

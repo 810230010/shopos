@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class EvaluateGoods {
-    private Integer gevalId;
+    private Integer evaluateGoodsId;
 
     private Integer orderId;
 
@@ -44,12 +44,12 @@ public class EvaluateGoods {
 
     private String images;
 
-    public Integer getGevalId() {
-        return gevalId;
+    public Integer getEvaluateGoodsId() {
+        return evaluateGoodsId;
     }
 
-    public void setGevalId(Integer gevalId) {
-        this.gevalId = gevalId;
+    public void setEvaluateGoodsId(Integer evaluateGoodsId) {
+        this.evaluateGoodsId = evaluateGoodsId;
     }
 
     public Integer getOrderId() {

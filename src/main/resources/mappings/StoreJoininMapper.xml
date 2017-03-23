@@ -53,6 +53,7 @@
     <result column="paying_money_certificate" property="payingMoneyCertificate" jdbcType="VARCHAR" />
     <result column="paying_money_certificate_explain" property="payingMoneyCertificateExplain" jdbcType="VARCHAR" />
     <result column="paying_amount" property="payingAmount" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     store_joinin_id, member_id, member_name, company_name, company_province_id, company_address, 
@@ -66,7 +67,7 @@
     taxpayer_id, tax_registration_certificate_electronic, store_name, store_class_ids, 
     store_class_names, joinin_state, joinin_message, joinin_year, sg_name, sg_id, sc_name, 
     sc_id, store_class_commis_rates, paying_money_certificate, paying_money_certificate_explain, 
-    paying_amount
+    paying_amount, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -98,8 +99,8 @@
       joinin_state, joinin_message, joinin_year, 
       sg_name, sg_id, sc_name, 
       sc_id, store_class_commis_rates, paying_money_certificate, 
-      paying_money_certificate_explain, paying_amount
-      )
+      paying_money_certificate_explain, paying_amount, 
+      create_time)
     values (#{storeJoininId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
       #{companyName,jdbcType=VARCHAR}, #{companyProvinceId,jdbcType=INTEGER}, #{companyAddress,jdbcType=VARCHAR}, 
       #{companyAddressDetail,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, #{companyEmployeeCount,jdbcType=INTEGER}, 
@@ -119,8 +120,8 @@
       #{joininState,jdbcType=VARCHAR}, #{joininMessage,jdbcType=VARCHAR}, #{joininYear,jdbcType=INTEGER}, 
       #{sgName,jdbcType=VARCHAR}, #{sgId,jdbcType=INTEGER}, #{scName,jdbcType=VARCHAR}, 
       #{scId,jdbcType=INTEGER}, #{storeClassCommisRates,jdbcType=VARCHAR}, #{payingMoneyCertificate,jdbcType=VARCHAR}, 
-      #{payingMoneyCertificateExplain,jdbcType=VARCHAR}, #{payingAmount,jdbcType=DECIMAL}
-      )
+      #{payingMoneyCertificateExplain,jdbcType=VARCHAR}, #{payingAmount,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreJoinin" >
     insert into t_store_joinin
@@ -278,6 +279,9 @@
       <if test="payingAmount != null" >
         paying_amount,
       </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="storeJoininId != null" >
@@ -432,6 +436,9 @@
       </if>
       <if test="payingAmount != null" >
         #{payingAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -588,6 +595,9 @@
       <if test="payingAmount != null" >
         paying_amount = #{payingAmount,jdbcType=DECIMAL},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where store_joinin_id = #{storeJoininId,jdbcType=INTEGER}
   </update>
@@ -642,7 +652,8 @@
       store_class_commis_rates = #{storeClassCommisRates,jdbcType=VARCHAR},
       paying_money_certificate = #{payingMoneyCertificate,jdbcType=VARCHAR},
       paying_money_certificate_explain = #{payingMoneyCertificateExplain,jdbcType=VARCHAR},
-      paying_amount = #{payingAmount,jdbcType=DECIMAL}
+      paying_amount = #{payingAmount,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where store_joinin_id = #{storeJoininId,jdbcType=INTEGER}
   </update>
 </mapper>

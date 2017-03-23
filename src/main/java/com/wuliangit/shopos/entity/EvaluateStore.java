@@ -1,13 +1,15 @@
 package com.wuliangit.shopos.entity;
 
+import java.util.Date;
+
 public class EvaluateStore {
-    private Integer sevalId;
+    private Integer evaluateStoreId;
 
     private Integer orderId;
 
     private String orderNo;
 
-    private Integer createTime;
+    private Date createTime;
 
     private Integer storeId;
 
@@ -23,12 +25,12 @@ public class EvaluateStore {
 
     private Integer deliveryCredit;
 
-    public Integer getSevalId() {
-        return sevalId;
+    public Integer getEvaluateStoreId() {
+        return evaluateStoreId;
     }
 
-    public void setSevalId(Integer sevalId) {
-        this.sevalId = sevalId;
+    public void setEvaluateStoreId(Integer evaluateStoreId) {
+        this.evaluateStoreId = evaluateStoreId;
     }
 
     public Integer getOrderId() {
@@ -47,11 +49,11 @@ public class EvaluateStore {
         this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
-    public Integer getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Integer createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

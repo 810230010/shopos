@@ -20,8 +20,6 @@ public class Order {
 
     private String memberEmail;
 
-    private Date createTime;
-
     private String paymentCode;
 
     private Date paymentTime;
@@ -51,6 +49,10 @@ public class Order {
     private String orderFrom;
 
     private String shippingCode;
+
+    private Date createTime;
+
+    private Boolean delFlag;
 
     public Integer getOrderId() {
         return orderId;
@@ -114,14 +116,6 @@ public class Order {
 
     public void setMemberEmail(String memberEmail) {
         this.memberEmail = memberEmail == null ? null : memberEmail.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public String getPaymentCode() {
@@ -242,5 +236,21 @@ public class Order {
 
     public void setShippingCode(String shippingCode) {
         this.shippingCode = shippingCode == null ? null : shippingCode.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Boolean getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Boolean delFlag) {
+        this.delFlag = delFlag;
     }
 }

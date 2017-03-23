@@ -26,7 +26,7 @@
     <result column="title_img" property="titleImg" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="verify" property="verify" jdbcType="VARCHAR" />
-    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
     <result column="is_new" property="isNew" jdbcType="BIT" />
     <result column="type" property="type" jdbcType="VARCHAR" />
@@ -43,6 +43,7 @@
     <result column="commend" property="commend" jdbcType="BIT" />
     <result column="evaluation_good_star" property="evaluationGoodStar" jdbcType="INTEGER" />
     <result column="evaluation_count" property="evaluationCount" jdbcType="INTEGER" />
+    <result column="del_flag" property="delFlag" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.Goods" extends="BaseResultMap" >
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
@@ -51,9 +52,9 @@
     goods_id, name, unit, ad_word, store_id, store_name, goods_category_id, brand_id, 
     price, commission, commission_percent, promotion_price, promotion_type, marketprice, 
     storage_alarm, click, salenum, collect, spec, storage, images, title_img, state, 
-    verify, addtime, edittime, is_new, type, second_hand, activity_id, activity_type, 
+    verify, create_time, edittime, is_new, type, second_hand, activity_id, activity_type, 
     is_virtual, virtual_invalid_refund, is_appoint, is_presell, is_own_shop, freight, 
-    vat, commend, evaluation_good_star, evaluation_count
+    vat, commend, evaluation_good_star, evaluation_count, del_flag
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -79,12 +80,13 @@
       click, salenum, collect, 
       spec, storage, images, 
       title_img, state, verify, 
-      addtime, edittime, is_new, 
+      create_time, edittime, is_new, 
       type, second_hand, activity_id, 
       activity_type, is_virtual, virtual_invalid_refund, 
       is_appoint, is_presell, is_own_shop, 
       freight, vat, commend, evaluation_good_star, 
-      evaluation_count, goods_body)
+      evaluation_count, del_flag, goods_body
+      )
     values (#{goodsId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
       #{adWord,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
       #{goodsCategoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
@@ -93,12 +95,13 @@
       #{click,jdbcType=INTEGER}, #{salenum,jdbcType=INTEGER}, #{collect,jdbcType=INTEGER}, 
       #{spec,jdbcType=VARCHAR}, #{storage,jdbcType=INTEGER}, #{images,jdbcType=VARCHAR}, 
       #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{verify,jdbcType=VARCHAR}, 
-      #{addtime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, #{isNew,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, #{isNew,jdbcType=BIT}, 
       #{type,jdbcType=VARCHAR}, #{secondHand,jdbcType=BIT}, #{activityId,jdbcType=INTEGER}, 
       #{activityType,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, 
       #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, 
       #{freight,jdbcType=DECIMAL}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
-      #{evaluationCount,jdbcType=INTEGER}, #{goodsBody,jdbcType=LONGVARCHAR})
+      #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{goodsBody,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     insert into t_goods
@@ -175,8 +178,8 @@
       <if test="verify != null" >
         verify,
       </if>
-      <if test="addtime != null" >
-        addtime,
+      <if test="createTime != null" >
+        create_time,
       </if>
       <if test="edittime != null" >
         edittime,
@@ -225,6 +228,9 @@
       </if>
       <if test="evaluationCount != null" >
         evaluation_count,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
       </if>
       <if test="goodsBody != null" >
         goods_body,
@@ -303,8 +309,8 @@
       <if test="verify != null" >
         #{verify,jdbcType=VARCHAR},
       </if>
-      <if test="addtime != null" >
-        #{addtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="edittime != null" >
         #{edittime,jdbcType=TIMESTAMP},
@@ -353,6 +359,9 @@
       </if>
       <if test="evaluationCount != null" >
         #{evaluationCount,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=BIT},
       </if>
       <if test="goodsBody != null" >
         #{goodsBody,jdbcType=LONGVARCHAR},
@@ -431,8 +440,8 @@
       <if test="verify != null" >
         verify = #{verify,jdbcType=VARCHAR},
       </if>
-      <if test="addtime != null" >
-        addtime = #{addtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="edittime != null" >
         edittime = #{edittime,jdbcType=TIMESTAMP},
@@ -482,6 +491,9 @@
       <if test="evaluationCount != null" >
         evaluation_count = #{evaluationCount,jdbcType=INTEGER},
       </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=BIT},
+      </if>
       <if test="goodsBody != null" >
         goods_body = #{goodsBody,jdbcType=LONGVARCHAR},
       </if>
@@ -513,7 +525,7 @@
       title_img = #{titleImg,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
       verify = #{verify,jdbcType=VARCHAR},
-      addtime = #{addtime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       edittime = #{edittime,jdbcType=TIMESTAMP},
       is_new = #{isNew,jdbcType=BIT},
       type = #{type,jdbcType=VARCHAR},
@@ -530,6 +542,7 @@
       commend = #{commend,jdbcType=BIT},
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
       evaluation_count = #{evaluationCount,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=BIT},
       goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -558,7 +571,7 @@
       title_img = #{titleImg,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
       verify = #{verify,jdbcType=VARCHAR},
-      addtime = #{addtime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       edittime = #{edittime,jdbcType=TIMESTAMP},
       is_new = #{isNew,jdbcType=BIT},
       type = #{type,jdbcType=VARCHAR},
@@ -574,7 +587,8 @@
       vat = #{vat,jdbcType=BIT},
       commend = #{commend,jdbcType=BIT},
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
-      evaluation_count = #{evaluationCount,jdbcType=INTEGER}
+      evaluation_count = #{evaluationCount,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=BIT}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

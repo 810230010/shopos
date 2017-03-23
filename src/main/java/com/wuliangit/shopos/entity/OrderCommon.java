@@ -5,6 +5,8 @@ import java.util.Date;
 public class OrderCommon {
     private Integer orderCommonId;
 
+    private Integer orderId;
+
     private Integer storeId;
 
     private Integer shippingTime;
@@ -24,6 +26,8 @@ public class OrderCommon {
     private Integer voucherPrice;
 
     private String voucherCode;
+
+    private String deliverExplain;
 
     private Integer areaId;
 
@@ -47,14 +51,20 @@ public class OrderCommon {
 
     private String promotionInfo;
 
-    private String deliverExplain;
-
     public Integer getOrderCommonId() {
         return orderCommonId;
     }
 
     public void setOrderCommonId(Integer orderCommonId) {
         this.orderCommonId = orderCommonId;
+    }
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public Integer getStoreId() {
@@ -135,6 +145,14 @@ public class OrderCommon {
 
     public void setVoucherCode(String voucherCode) {
         this.voucherCode = voucherCode == null ? null : voucherCode.trim();
+    }
+
+    public String getDeliverExplain() {
+        return deliverExplain;
+    }
+
+    public void setDeliverExplain(String deliverExplain) {
+        this.deliverExplain = deliverExplain == null ? null : deliverExplain.trim();
     }
 
     public Integer getAreaId() {
@@ -223,13 +241,5 @@ public class OrderCommon {
 
     public void setPromotionInfo(String promotionInfo) {
         this.promotionInfo = promotionInfo == null ? null : promotionInfo.trim();
-    }
-
-    public String getDeliverExplain() {
-        return deliverExplain;
-    }
-
-    public void setDeliverExplain(String deliverExplain) {
-        this.deliverExplain = deliverExplain == null ? null : deliverExplain.trim();
     }
 }

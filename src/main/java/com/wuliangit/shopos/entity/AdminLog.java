@@ -7,7 +7,7 @@ public class AdminLog {
 
     private String content;
 
-    private Date createtime;
+    private Date createTime;
 
     private String adminUsername;
 
@@ -31,12 +31,12 @@ public class AdminLog {
         this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getAdminUsername() {

@@ -10,7 +10,7 @@
     <result column="paypwd" property="paypwd" jdbcType="VARCHAR" />
     <result column="salt" property="salt" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="birthday" property="birthday" jdbcType="DATE" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
@@ -38,17 +38,13 @@
     <result column="areainfo" property="areainfo" jdbcType="VARCHAR" />
     <result column="exppoints" property="exppoints" jdbcType="INTEGER" />
     <result column="inviter_id" property="inviterId" jdbcType="INTEGER" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="idcard_num" property="idcardNum" jdbcType="VARCHAR" />
-    <result column="idcard_img" property="idcardImg" jdbcType="VARCHAR" />
-    <result column="auth_state" property="authState" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
     member_id, username, nikename, truename, passwd, paypwd, salt, photo, sex, birthday, 
     type, email, mobile, qq, openid, wx_photo, wx_nickname, login_num, create_time, login_time, 
     login_ip, qqopenid, qqinfo, sinaopenid, sinainfo, points, available_balance, freeze_balance, 
-    state, credit, areaid, cityid, provinceid, areainfo, exppoints, inviter_id, update_time, 
-    idcard_num, idcard_img, auth_state
+    state, credit, areaid, cityid, provinceid, areainfo, exppoints, inviter_id, del_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -96,12 +92,11 @@
       points, available_balance, freeze_balance, 
       state, credit, areaid, 
       cityid, provinceid, areainfo, 
-      exppoints, inviter_id, update_time, 
-      idcard_num, idcard_img, auth_state
+      exppoints, inviter_id, del_flag
       )
     values (#{memberId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{nikename,jdbcType=VARCHAR}, 
       #{truename,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, #{paypwd,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, #{birthday,jdbcType=DATE}, 
+      #{salt,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
       #{type,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{qq,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{wxPhoto,jdbcType=VARCHAR}, 
       #{wxNickname,jdbcType=VARCHAR}, #{loginNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
@@ -110,8 +105,7 @@
       #{points,jdbcType=INTEGER}, #{availableBalance,jdbcType=DECIMAL}, #{freezeBalance,jdbcType=DECIMAL}, 
       #{state,jdbcType=VARCHAR}, #{credit,jdbcType=INTEGER}, #{areaid,jdbcType=INTEGER}, 
       #{cityid,jdbcType=INTEGER}, #{provinceid,jdbcType=INTEGER}, #{areainfo,jdbcType=VARCHAR}, 
-      #{exppoints,jdbcType=INTEGER}, #{inviterId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{idcardNum,jdbcType=VARCHAR}, #{idcardImg,jdbcType=VARCHAR}, #{authState,jdbcType=VARCHAR}
+      #{exppoints,jdbcType=INTEGER}, #{inviterId,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Member" >
@@ -225,17 +219,8 @@
       <if test="inviterId != null" >
         inviter_id,
       </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="idcardNum != null" >
-        idcard_num,
-      </if>
-      <if test="idcardImg != null" >
-        idcard_img,
-      </if>
-      <if test="authState != null" >
-        auth_state,
+      <if test="delFlag != null" >
+        del_flag,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -264,7 +249,7 @@
         #{photo,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        #{sex,jdbcType=BIT},
+        #{sex,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null" >
         #{birthday,jdbcType=DATE},
@@ -347,17 +332,8 @@
       <if test="inviterId != null" >
         #{inviterId,jdbcType=INTEGER},
       </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="idcardNum != null" >
-        #{idcardNum,jdbcType=VARCHAR},
-      </if>
-      <if test="idcardImg != null" >
-        #{idcardImg,jdbcType=VARCHAR},
-      </if>
-      <if test="authState != null" >
-        #{authState,jdbcType=VARCHAR},
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -386,7 +362,7 @@
         photo = #{photo,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        sex = #{sex,jdbcType=BIT},
+        sex = #{sex,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null" >
         birthday = #{birthday,jdbcType=DATE},
@@ -469,17 +445,8 @@
       <if test="inviterId != null" >
         inviter_id = #{inviterId,jdbcType=INTEGER},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="idcardNum != null" >
-        idcard_num = #{idcardNum,jdbcType=VARCHAR},
-      </if>
-      <if test="idcardImg != null" >
-        idcard_img = #{idcardImg,jdbcType=VARCHAR},
-      </if>
-      <if test="authState != null" >
-        auth_state = #{authState,jdbcType=VARCHAR},
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=BIT},
       </if>
     </set>
     where member_id = #{memberId,jdbcType=INTEGER}
@@ -493,7 +460,7 @@
       paypwd = #{paypwd,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=BIT},
+      sex = #{sex,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=DATE},
       type = #{type,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
@@ -521,10 +488,7 @@
       areainfo = #{areainfo,jdbcType=VARCHAR},
       exppoints = #{exppoints,jdbcType=INTEGER},
       inviter_id = #{inviterId,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      idcard_num = #{idcardNum,jdbcType=VARCHAR},
-      idcard_img = #{idcardImg,jdbcType=VARCHAR},
-      auth_state = #{authState,jdbcType=VARCHAR}
+      del_flag = #{delFlag,jdbcType=BIT}
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
 </mapper>

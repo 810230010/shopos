@@ -11,10 +11,11 @@
     <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
     <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
     <result column="goods_image" property="goodsImage" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     cart_id, member_id, store_id, store_name, goods_id, goods_name, goods_price, goods_num, 
-    goods_image
+    goods_image, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,12 +30,12 @@
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Cart" >
     insert into t_cart (cart_id, member_id, store_id, 
       store_name, goods_id, goods_name, 
-      goods_price, goods_num, goods_image
-      )
+      goods_price, goods_num, goods_image, 
+      create_time)
     values (#{cartId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, 
       #{storeName,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
-      #{goodsPrice,jdbcType=DECIMAL}, #{goodsNum,jdbcType=INTEGER}, #{goodsImage,jdbcType=VARCHAR}
-      )
+      #{goodsPrice,jdbcType=DECIMAL}, #{goodsNum,jdbcType=INTEGER}, #{goodsImage,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Cart" >
     insert into t_cart
@@ -66,6 +67,9 @@
       <if test="goodsImage != null" >
         goods_image,
       </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cartId != null" >
@@ -94,6 +98,9 @@
       </if>
       <if test="goodsImage != null" >
         #{goodsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -124,6 +131,9 @@
       <if test="goodsImage != null" >
         goods_image = #{goodsImage,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where cart_id = #{cartId,jdbcType=INTEGER}
   </update>
@@ -136,7 +146,8 @@
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_price = #{goodsPrice,jdbcType=DECIMAL},
       goods_num = #{goodsNum,jdbcType=INTEGER},
-      goods_image = #{goodsImage,jdbcType=VARCHAR}
+      goods_image = #{goodsImage,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where cart_id = #{cartId,jdbcType=INTEGER}
   </update>
 </mapper>

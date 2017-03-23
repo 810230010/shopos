@@ -12,10 +12,11 @@
     <result column="tel_phone" property="telPhone" jdbcType="VARCHAR" />
     <result column="mob_phone" property="mobPhone" jdbcType="VARCHAR" />
     <result column="is_default" property="isDefault" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     address_id, member_id, reciver_name, area_id, city_id, area_info, address, tel_phone, 
-    mob_phone, is_default
+    mob_phone, is_default, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -31,11 +32,11 @@
     insert into t_address (address_id, member_id, reciver_name, 
       area_id, city_id, area_info, 
       address, tel_phone, mob_phone, 
-      is_default)
+      is_default, create_time)
     values (#{addressId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{reciverName,jdbcType=VARCHAR}, 
       #{areaId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{telPhone,jdbcType=VARCHAR}, #{mobPhone,jdbcType=VARCHAR}, 
-      #{isDefault,jdbcType=BIT})
+      #{isDefault,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Address" >
     insert into t_address
@@ -70,6 +71,9 @@
       <if test="isDefault != null" >
         is_default,
       </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="addressId != null" >
@@ -101,6 +105,9 @@
       </if>
       <if test="isDefault != null" >
         #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -134,6 +141,9 @@
       <if test="isDefault != null" >
         is_default = #{isDefault,jdbcType=BIT},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
@@ -147,7 +157,8 @@
       address = #{address,jdbcType=VARCHAR},
       tel_phone = #{telPhone,jdbcType=VARCHAR},
       mob_phone = #{mobPhone,jdbcType=VARCHAR},
-      is_default = #{isDefault,jdbcType=BIT}
+      is_default = #{isDefault,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
 </mapper>

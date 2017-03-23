@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.entity;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Cart {
     private Integer cartId;
@@ -20,6 +21,8 @@ public class Cart {
     private Integer goodsNum;
 
     private String goodsImage;
+
+    private Date createTime;
 
     public Integer getCartId() {
         return cartId;
@@ -91,5 +94,13 @@ public class Cart {
 
     public void setGoodsImage(String goodsImage) {
         this.goodsImage = goodsImage == null ? null : goodsImage.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

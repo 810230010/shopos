@@ -16,7 +16,7 @@
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="close_info" property="closeInfo" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="VARCHAR" />
     <result column="label" property="label" jdbcType="VARCHAR" />
     <result column="banner" property="banner" jdbcType="VARCHAR" />
@@ -100,7 +100,7 @@
       #{memberId,jdbcType=INTEGER}, #{sellerNikename,jdbcType=VARCHAR}, #{scId,jdbcType=INTEGER}, 
       #{storeCompanyName,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
-      #{closeInfo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, 
+      #{closeInfo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{endTime,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, #{banner,jdbcType=VARCHAR}, 
       #{logo,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{qq,jdbcType=VARCHAR}, #{ww,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, 
@@ -325,7 +325,7 @@
         #{sort,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null" >
         #{endTime,jdbcType=VARCHAR},
@@ -489,7 +489,7 @@
         sort = #{sort,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null" >
         end_time = #{endTime,jdbcType=VARCHAR},
@@ -626,7 +626,7 @@
       state = #{state,jdbcType=VARCHAR},
       close_info = #{closeInfo,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=VARCHAR},
       label = #{label,jdbcType=VARCHAR},
       banner = #{banner,jdbcType=VARCHAR},

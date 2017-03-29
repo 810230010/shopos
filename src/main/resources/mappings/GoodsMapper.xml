@@ -69,12 +69,6 @@
   </select>
 
 
-  <delete id="deleteCollectGoods">
-    delete from t_goods
-    where goods_id = #{goodsId,jdbcType=INTEGER}
-  </delete>
-
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_goods
     where goods_id = #{goodsId,jdbcType=INTEGER}

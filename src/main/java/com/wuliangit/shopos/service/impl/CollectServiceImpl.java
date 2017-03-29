@@ -50,6 +50,6 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public int deleteCollectGoods(Integer goodsId) {
         Member user = WebUtil.getCurrentMember();
-        return goodsMapper.deleteCollectGoods(goodsId,user.getMemberId());
+        return favoritesGoodsMapper.deleteCollectGoods(goodsId,user.getMemberId());
     }
 }

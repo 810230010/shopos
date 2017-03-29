@@ -59,5 +59,17 @@ public class MCollectController {
         return result;
     }
 
+    /**
+     * 用户收藏店铺列表
+     * @return
+     */
+    @RequestMapping("/store/list")
+    public Object getCollectStoreList(){
+        RestResult result = new RestResult();
+
+
+        return result;
+    }
+
 
 }

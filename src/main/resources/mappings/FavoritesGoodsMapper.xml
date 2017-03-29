@@ -25,10 +25,15 @@
 
 <!--用户收藏商品列表-->
   <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.CollectGoodsDTO">
-    select fg.*, g.price
+    select fg.*, g.price, g.title_img
     from t_favorites_goods fg left join t_goods g on g.goods_id = fg.goods_id
     where fg.member_id = #{memberId}
   </select>
+  <!--删除收藏商品-->
+  <delete id="deleteCollectGoods">
+    delete from t_favorites_goods
+    where member_id = #{memberId} and goods_id = #{goodsId}
+  </delete>
 
 
 
@@ -36,6 +41,7 @@
     delete from t_favorites_goods
     where favorites_good_id = #{favoritesGoodId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.FavoritesGoods" >
     insert into t_favorites_goods (favorites_good_id, member_id, member_name, 
       fav_time, goods_id, goods_name, 

@@ -93,21 +93,21 @@
 * url:/api/v1/member/collect/goods/delete
 
 ## 22. 用户收藏店铺列表
-* url:/api/v1/member/collect/goods/list
+* url:/api/v1/member/collect/store/list
 
 ## 23. 用户收藏店铺
-* url:/api/v1/member/collect/goods/add
+* url:/api/v1/member/collect/store/add
 
 ## 24. 删除收藏店铺
-* url:/api/v1/member/collect/goods/delete
+* url:/api/v1/member/collect/store/delete
 
-## 25. 收藏商品列表
+## 25. 购物车商品列表
 * url:/api/v1/member/cart/list
 
-## 26. 移除商品
+## 26. 购物车移除商品
 * url:/api/v1/member/cart/delete/{goodsId}
 
-## 27. 更新商品数量
+## 27. 购物车更新商品数量
 * url:/api/v1/member/cart/update/{goodsId}/{goodsNum}
 
 ## 28. 订单列表

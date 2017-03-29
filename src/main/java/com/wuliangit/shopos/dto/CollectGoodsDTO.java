@@ -12,6 +12,8 @@ public class CollectGoodsDTO {
 
     private Integer memberId;
 
+    private String titleImg;
+
     private Date favTime;
 
     private Integer goodsId;
@@ -23,6 +25,14 @@ public class CollectGoodsDTO {
     private BigDecimal price;
 
     private String logMsg;
+
+    public String getTitleImg() {
+        return titleImg;
+    }
+
+    public void setTitleImg(String titleImg) {
+        this.titleImg = titleImg;
+    }
 
     public Integer getGoodsId() {
         return goodsId;

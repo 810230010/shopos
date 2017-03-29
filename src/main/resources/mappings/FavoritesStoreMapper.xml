@@ -22,7 +22,7 @@
 
 
   <!--用户收藏店铺列表-->
-    <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.CollectStoreDTO">
+    <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.ApiCollectStoreDTO">
       select s.name, s.logo, s.label, fs.fav_time
       from t_favorites_store fs left join t_store s on s.store_id = fs.store_id
       where fs.member_id = #{memberId}

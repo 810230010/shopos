@@ -2,7 +2,7 @@ package com.wuliangit.shopos.dto;
 
 import java.util.Date;
 
-public class MemberUpdateDTO {
+public class ApiMemberUpdateDTO {
     private Integer memberId;
 
     private String username;

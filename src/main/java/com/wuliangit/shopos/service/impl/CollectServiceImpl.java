@@ -6,8 +6,8 @@ import com.wuliangit.shopos.dao.FavoritesGoodsMapper;
 import com.wuliangit.shopos.dao.FavoritesStoreMapper;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
-import com.wuliangit.shopos.dto.CollectGoodsDTO;
-import com.wuliangit.shopos.dto.CollectStoreDTO;
+import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
+import com.wuliangit.shopos.dto.ApiCollectStoreDTO;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +35,10 @@ public class CollectServiceImpl implements CollectService {
 
 
     @Override
-    public ArrayList<CollectGoodsDTO> getCollectGoodsList(Integer page, Integer pageSize) {
+    public ArrayList<ApiCollectGoodsDTO> getCollectGoodsList(Integer page, Integer pageSize) {
         Member user = WebUtil.getCurrentMember();
         PageHelper.startPage(page,pageSize);
-        ArrayList<CollectGoodsDTO> collectGoods = favoritesGoodsMapper.getCollectGoodsList(user.getMemberId());
+        ArrayList<ApiCollectGoodsDTO> collectGoods = favoritesGoodsMapper.getCollectGoodsList(user.getMemberId());
         return collectGoods;
     }
 
@@ -63,10 +63,10 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public ArrayList<CollectStoreDTO> getCollectStireList(Integer page, Integer pageSize) {
+    public ArrayList<ApiCollectStoreDTO> getCollectStireList(Integer page, Integer pageSize) {
         Member user = WebUtil.getCurrentMember();
         PageHelper.startPage(page,pageSize);
-        ArrayList<CollectStoreDTO> collectStores = favoritesStoreMapper.getCollectGoodsList(user.getMemberId());
+        ArrayList<ApiCollectStoreDTO> collectStores = favoritesStoreMapper.getCollectGoodsList(user.getMemberId());
         return collectStores;
     }
 

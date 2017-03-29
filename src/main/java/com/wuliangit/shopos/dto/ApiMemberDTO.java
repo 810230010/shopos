@@ -3,7 +3,7 @@ package com.wuliangit.shopos.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class MemberDTO {
+public class ApiMemberDTO {
     private Integer memberId;
 
     private String username;

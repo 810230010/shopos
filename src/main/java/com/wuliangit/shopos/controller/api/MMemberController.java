@@ -6,7 +6,7 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.dto.MemberUpdateDTO;
+import com.wuliangit.shopos.dto.ApiMemberUpdateDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.SMSService;
@@ -207,7 +207,7 @@ public class MMemberController {
      * @return
      */
     @RequestMapping("/info/update")
-    public Object updateUserInfo(MemberUpdateDTO member){
+    public Object updateUserInfo(ApiMemberUpdateDTO member){
         RestResult result = new RestResult();
         Member memberUpdate = WebUtil.getCurrentMember();
         mapper.map(member,memberUpdate);

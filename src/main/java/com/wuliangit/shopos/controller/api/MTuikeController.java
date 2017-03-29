@@ -3,7 +3,7 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.dto.EarningsDTO;
+import com.wuliangit.shopos.dto.ApiEarningsDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.TuikeService;
@@ -46,7 +46,7 @@ public class MTuikeController {
     @RequestMapping("/tuike/earnings")
     public Object getEarnings() {
         RestResult result = new RestResult();
-        EarningsDTO earnings = tuikeService.getEarnings();
+        ApiEarningsDTO earnings = tuikeService.getEarnings();
 
         result.add("earnings",earnings);
 

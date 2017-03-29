@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
-import com.wuliangit.shopos.dto.CollectStoreDTO;
+import com.wuliangit.shopos.dto.ApiCollectStoreDTO;
 import com.wuliangit.shopos.entity.FavoritesStore;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,7 +15,7 @@ public interface FavoritesStoreMapper extends BaseMapper<FavoritesStore, Integer
      * @param memberId
      * @return
      */
-    ArrayList<CollectStoreDTO> getCollectGoodsList(Integer memberId);
+    ArrayList<ApiCollectStoreDTO> getCollectGoodsList(Integer memberId);
 
     /**
      * 删除收藏店铺

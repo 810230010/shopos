@@ -3,7 +3,7 @@ package com.wuliangit.shopos.service.impl;
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.MemberMapper;
-import com.wuliangit.shopos.dto.EarningsDTO;
+import com.wuliangit.shopos.dto.ApiEarningsDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.TuikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +20,11 @@ public class TuikeServiceImpl implements TuikeService {
     private MemberMapper memberMapper;
 
     @Override
-    public EarningsDTO getEarnings() {
+    public ApiEarningsDTO getEarnings() {
         Member member = (Member) WebUtil.getSession().getAttribute(CoreConstants.SESSION_CURRENT_USER);
         Member member2 = memberMapper.selectByPrimaryKey(member.getMemberId());
 
-        EarningsDTO earnings = new EarningsDTO();
+        ApiEarningsDTO earnings = new ApiEarningsDTO();
         earnings.setAvailableBalance(member2.getAvailableBalance());
         earnings.setFreezeBalance(member2.getFreezeBalance());
 

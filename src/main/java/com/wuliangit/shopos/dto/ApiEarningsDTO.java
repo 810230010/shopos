@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Created by nilme on 2017/3/27.
  */
-public class EarningsDTO {
+public class ApiEarningsDTO {
 
     private BigDecimal availableBalance;
 

@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by nilme on 2017/3/29.
  */
-public class CollectStoreDTO {
+public class ApiCollectStoreDTO {
 
     private String name;
 

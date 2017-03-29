@@ -1,8 +1,8 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.dto.CollectGoodsDTO;
-import com.wuliangit.shopos.dto.CollectStoreDTO;
+import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
+import com.wuliangit.shopos.dto.ApiCollectStoreDTO;
 import com.wuliangit.shopos.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +30,7 @@ public class MCollectController {
     public Object getCollectGoodsList(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                       @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        ArrayList<CollectGoodsDTO> collectGoods = collectService.getCollectGoodsList(page, pageSize);
+        ArrayList<ApiCollectGoodsDTO> collectGoods = collectService.getCollectGoodsList(page, pageSize);
         result.add("collectGoods", collectGoods);
         return result;
     }
@@ -70,7 +70,7 @@ public class MCollectController {
     public Object getCollectStoreList(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                       @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        ArrayList<CollectStoreDTO> collectStores = collectService.getCollectStireList(page, pageSize);
+        ArrayList<ApiCollectStoreDTO> collectStores = collectService.getCollectStireList(page, pageSize);
         result.add("collectStores", collectStores);
         return result;
     }

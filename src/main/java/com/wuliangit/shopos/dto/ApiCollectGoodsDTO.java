@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by nilme on 2017/3/29.
  */
-public class CollectGoodsDTO {
+public class ApiCollectGoodsDTO {
 
     private Integer favoritesGoodId;
 

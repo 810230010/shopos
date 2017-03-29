@@ -17,7 +17,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:spring-context.xml
-            classpath:spring-config-shiro.xml
+            classpath:spring-shiro.xml
         </param-value>
     </context-param>
     <listener>
@@ -60,13 +60,27 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
-
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
+    <!-- shiro 安全过滤器 end-->
 
+
+    <!-- druid监控 -->
+    <servlet>
+        <servlet-name>DruidStatView</servlet-name>
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DruidStatView</servlet-name>
+        <url-pattern>/admin/monitor/druid/*</url-pattern>
+    </servlet-mapping>
+    <!-- druid监控 end -->
+
+    <!-- SpringMVC 拦截器 -->
     <servlet>
         <servlet-name>spring</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -82,6 +96,7 @@
         <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <!-- SpringMVC 拦截器 end-->
 
 
     <!--springMVC HTTP 使用 PUT 方式提交时取不到参数解决方案 -->

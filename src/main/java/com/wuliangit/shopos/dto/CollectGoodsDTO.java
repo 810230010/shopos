@@ -1,14 +1,16 @@
-package com.wuliangit.shopos.entity;
+package com.wuliangit.shopos.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class FavoritesGoods {
+/**
+ * Created by nilme on 2017/3/29.
+ */
+public class CollectGoodsDTO {
+
     private Integer favoritesGoodId;
 
     private Integer memberId;
-
-    private String memberName;
 
     private Date favTime;
 
@@ -18,7 +20,17 @@ public class FavoritesGoods {
 
     private BigDecimal logPrice;
 
+    private BigDecimal price;
+
     private String logMsg;
+
+    public Integer getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
 
     public Integer getFavoritesGoodId() {
         return favoritesGoodId;
@@ -36,14 +48,6 @@ public class FavoritesGoods {
         this.memberId = memberId;
     }
 
-    public String getMemberName() {
-        return memberName;
-    }
-
-    public void setMemberName(String memberName) {
-        this.memberName = memberName == null ? null : memberName.trim();
-    }
-
     public Date getFavTime() {
         return favTime;
     }
@@ -52,20 +56,13 @@ public class FavoritesGoods {
         this.favTime = favTime;
     }
 
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }
 
     public String getGoodsName() {
         return goodsName;
     }
 
     public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
+        this.goodsName = goodsName;
     }
 
     public BigDecimal getLogPrice() {
@@ -76,11 +73,19 @@ public class FavoritesGoods {
         this.logPrice = logPrice;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public String getLogMsg() {
         return logMsg;
     }
 
     public void setLogMsg(String logMsg) {
-        this.logMsg = logMsg == null ? null : logMsg.trim();
+        this.logMsg = logMsg;
     }
 }

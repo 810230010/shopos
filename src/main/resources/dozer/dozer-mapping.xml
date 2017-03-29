@@ -7,25 +7,4 @@
         <class-b>com.alaban.dto.UserDTO</class-b>
     </mapping>
 
-    <mapping>
-        <class-a>com.alaban.entity.Zhulituan</class-a>
-        <class-b>com.alaban.dto.CreaterTDO</class-b>
-        <field>
-            <a>nickname</a>
-            <b>creater</b>
-        </field>
-        <field>
-            <a>company</a>
-            <b>zhulituanName</b>
-        </field>
-    </mapping>
-
-    <mapping>
-        <class-a>com.alaban.entity.User</class-a>
-        <class-b>com.alaban.dto.CreaterTDO</class-b>
-        <field>
-            <a>nickname</a>
-            <b>creater</b>
-        </field>
-    </mapping>
 </mappings>

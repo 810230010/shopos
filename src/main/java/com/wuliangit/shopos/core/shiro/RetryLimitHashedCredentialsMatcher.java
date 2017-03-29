@@ -1,4 +1,4 @@
-package com.wuliangit.shopos.core.filter;
+package com.wuliangit.shopos.core.shiro;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

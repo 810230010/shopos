@@ -41,7 +41,7 @@ public interface MemberService {
      * @param member
      * @return
      */
-    int saveMember(Member member);
+    int createMember(Member member);
 
     /**
      * 更新用户信息

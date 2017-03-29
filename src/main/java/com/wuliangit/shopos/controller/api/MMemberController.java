@@ -12,12 +12,15 @@ import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.SMSService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.cache.Cache;
+import org.apache.shiro.session.Session;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -47,18 +50,22 @@ public class MMemberController {
      *
      * @return
      */
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Object login(String username, String password) {
         RestResult restResult = new RestResult();
         String error = null;
         try {
             SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.MEMBER, UserToken.LoginType.APP));
-            restResult.add("token", SecurityUtils.getSubject().getSession());
+            Session session = WebUtil.getSession();
+            restResult.add("token", session.getId());
             return restResult;
         } catch (UnknownAccountException e) {
             error = "用户不存在";
         } catch (IncorrectCredentialsException e) {
             error = "用户名/密码错误";
+        } catch (ExcessiveAttemptsException e) {
+            e.printStackTrace();
+            error = "密码重试超过5次，请10分钟后再试";
         } catch (AuthenticationException e) {
             e.printStackTrace();
             error = "用户名/密码错误";
@@ -125,7 +132,7 @@ public class MMemberController {
             member.setAuthState(POJOConstants.NOT_AUTH);
             member.setSalt(PasswordHelper.generateSalt());
             member.setPasswd(PasswordHelper.generatePassword(password,member.getSalt()));
-            memberService.saveMember(member);
+            memberService.createMember(member);
 
         }else{
             result.setCode(RestResult.CODE_BUSINESS_ERROR);
@@ -225,18 +232,5 @@ public class MMemberController {
         return result;
     }
 
-
-    /**
-     * 申请成为推客
-     * @return
-     */
-    @RequestMapping("/tuike/apply")
-    public Object tuikeApply(){
-        RestResult result = new RestResult();
-        Member memberUpdate = WebUtil.getCurrentMember();
-        memberUpdate.setType(POJOConstants.USER_TYPE_PRE_TUIKE);
-        memberService.updateMember(memberUpdate);
-        return result;
-    }
 
 }

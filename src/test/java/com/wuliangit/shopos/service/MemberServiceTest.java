@@ -36,33 +36,20 @@ public class MemberServiceTest {
 
 
     @Test
-    @Transactional
+//    @Transactional
     public void addMember() {
         Member member = new Member();
-        member.setUsername("jjjjj");
+        member.setUsername("nilme");
         member.setEmail("taoshanchang1@foxmail.com");
         member.setSalt(PasswordHelper.generateSalt());
-        member.setPasswd(PasswordHelper.generatePassword("123456",member.getSalt()));
-        member.setNikename("Nilme2");
+        member.setPasswd(PasswordHelper.generatePassword("11",member.getSalt()));
+        member.setNikename("Nilme");
         member.setCreateTime(new Date());
         member.setLoginTime(new Date());
         member.setMemberId(1);
+        member.setUpdateTime(new Date());
 
-        memberMapper.updateByPrimaryKeySelective(member);
-
-        int a = 1/0;
-
-        Member member1 = new Member();
-        member1.setUsername("bbbb");
-        member1.setMemberId(5);
-        member1.setEmail("taoshanchang3@foxmail.com");
-        member1.setSalt(PasswordHelper.generateSalt());
-        member1.setPasswd(PasswordHelper.generatePassword("123456",member1.getSalt()));
-        member1.setNikename("Nilme3");
-        member1.setCreateTime(new Date());
-        member1.setLoginTime(new Date());
-
-        memberMapper.updateByPrimaryKeySelective(member1);
+        memberMapper.insertSelective(member);
 
     }
 

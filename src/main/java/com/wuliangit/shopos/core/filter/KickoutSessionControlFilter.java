@@ -16,9 +16,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-2-18
- * <p>Version: 1.0
+ * Created by nilme on 2017/3/29.
  */
 public class KickoutSessionControlFilter extends AccessControlFilter {
 

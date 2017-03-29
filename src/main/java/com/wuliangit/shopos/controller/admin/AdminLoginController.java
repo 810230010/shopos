@@ -1,11 +1,13 @@
 package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.core.realm.UserToken;
+import com.wuliangit.shopos.core.util.WebUtil;
 import com.wuliangit.shopos.service.AdminService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,10 +32,15 @@ public class AdminLoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(Model model, String username, String password, String loginType) {
+    public String login(Model model, String username, String password) {
         String error = null;
         try {
             SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.ADMIN, UserToken.LoginType.WEB));
+            System.out.println(WebUtil.getSession().getId());
+            System.out.println(WebUtil.getSession().getHost());
+            System.out.println(WebUtil.getSession().getLastAccessTime());
+            System.out.println(WebUtil.getSession().getStartTimestamp());
+            System.out.println(WebUtil.getSession().getTimeout());
             return "admin/index";
         } catch (UnknownAccountException e) {
             error = "用户不存在";
@@ -60,6 +67,9 @@ public class AdminLoginController {
         SecurityUtils.getSubject().logout();
         return "admin/login";
     }
+
+
+
 
 
 }

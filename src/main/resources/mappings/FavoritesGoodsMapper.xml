@@ -6,7 +6,7 @@
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
     <result column="member_name" property="memberName" jdbcType="VARCHAR" />
     <result column="fav_time" property="favTime" jdbcType="TIMESTAMP" />
-    <result column="goods_id" property="goodsId" jdbcType="TIMESTAMP" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
     <result column="log_price" property="logPrice" jdbcType="DECIMAL" />
     <result column="log_msg" property="logMsg" jdbcType="VARCHAR" />
@@ -21,6 +21,17 @@
     from t_favorites_goods
     where favorites_good_id = #{favoritesGoodId,jdbcType=INTEGER}
   </select>
+
+
+<!--用户收藏商品列表-->
+  <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.CollectGoodsDTO">
+    select fg.*, g.price
+    from t_favorites_goods fg left join t_goods g on g.goods_id = fg.goods_id
+    where fg.member_id = #{memberId}
+  </select>
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_favorites_goods
     where favorites_good_id = #{favoritesGoodId,jdbcType=INTEGER}
@@ -30,7 +41,7 @@
       fav_time, goods_id, goods_name, 
       log_price, log_msg)
     values (#{favoritesGoodId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
-      #{favTime,jdbcType=TIMESTAMP}, #{goodsId,jdbcType=TIMESTAMP}, #{goodsName,jdbcType=VARCHAR}, 
+      #{favTime,jdbcType=TIMESTAMP}, #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
       #{logPrice,jdbcType=DECIMAL}, #{logMsg,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.FavoritesGoods" >
@@ -75,7 +86,7 @@
         #{favTime,jdbcType=TIMESTAMP},
       </if>
       <if test="goodsId != null" >
-        #{goodsId,jdbcType=TIMESTAMP},
+        #{goodsId,jdbcType=INTEGER},
       </if>
       <if test="goodsName != null" >
         #{goodsName,jdbcType=VARCHAR},
@@ -101,7 +112,7 @@
         fav_time = #{favTime,jdbcType=TIMESTAMP},
       </if>
       <if test="goodsId != null" >
-        goods_id = #{goodsId,jdbcType=TIMESTAMP},
+        goods_id = #{goodsId,jdbcType=INTEGER},
       </if>
       <if test="goodsName != null" >
         goods_name = #{goodsName,jdbcType=VARCHAR},
@@ -120,7 +131,7 @@
     set member_id = #{memberId,jdbcType=INTEGER},
       member_name = #{memberName,jdbcType=VARCHAR},
       fav_time = #{favTime,jdbcType=TIMESTAMP},
-      goods_id = #{goodsId,jdbcType=TIMESTAMP},
+      goods_id = #{goodsId,jdbcType=INTEGER},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       log_price = #{logPrice,jdbcType=DECIMAL},
       log_msg = #{logMsg,jdbcType=VARCHAR}

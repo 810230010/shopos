@@ -1,4 +1,4 @@
-package com.wuliangit.shopos.core.filter;
+package com.wuliangit.shopos.core.shiro;
 
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;

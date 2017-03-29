@@ -29,7 +29,7 @@
     </bean>
 
     <!-- 凭证匹配器 处理重复登录失败 -->
-    <bean id="credentialsMatcher" class="com.wuliangit.shopos.core.filter.RetryLimitHashedCredentialsMatcher">
+    <bean id="credentialsMatcher" class="com.wuliangit.shopos.core.shiro.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="cacheManager"/>
         <property name="hashAlgorithmName" value="${password.algorithmName}"/>
         <property name="hashIterations" value="${password.hashIterations}"/>
@@ -46,12 +46,9 @@
         <property name="authorizationCacheName" value="authorizationCache"/>
     </bean>
 
-    <!-- 会话ID生成器 -->
-    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
-
     <!-- 会话Cookie模板 -->
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <constructor-arg value="sid"/>
+        <constructor-arg value="token"/>
         <property name="httpOnly" value="true"/>
         <property name="maxAge" value="-1"/>
     </bean>
@@ -65,23 +62,17 @@
     <!-- rememberMe管理器 -->
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
         <!-- rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位） -->
-        <property name="cipherKey"
-                  value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
         <property name="cookie" ref="rememberMeCookie"/>
     </bean>
 
+    <!-- 会话ID生成器 -->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
     <!-- 会话DAO -->
-    <bean id="sessionDAO"
-          class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+    <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
         <property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>
         <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
-    </bean>
-
-    <!-- 会话验证调度器 -->
-    <bean id="sessionValidationScheduler"
-          class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
-        <property name="sessionValidationInterval" value="1800000"/>
-        <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
     <bean id="sessionFactory" class="org.apache.shiro.session.mgt.SimpleSessionFactory"/>
@@ -90,10 +81,12 @@
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <!-- 86400000 milliseconds = 24 hours -->
         <property name="globalSessionTimeout" value="86400000"/>
+        <!-- 是否删除无效的，默认也是开启 -->
         <property name="deleteInvalidSessions" value="true"/>
         <property name="sessionDAO" ref="sessionDAO"/>
         <property name="sessionFactory" ref="sessionFactory"/>
 
+        <!--默认会话验证调度器-->
         <property name="sessionValidationInterval" value="86400000"/>
         <property name="sessionValidationSchedulerEnabled" value="true"/>
         <!--<property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>-->
@@ -101,6 +94,19 @@
         <property name="sessionIdCookieEnabled" value="true"/>
         <property name="cacheManager" ref="cacheManager"/>
         <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
+
+    <!-- 会话验证调度器 定期的验证会话是否已过期-->
+    <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+        <property name="sessionValidationInterval" value="1800000"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+    <!--当有多个realm的时候可以配置realm的匹配方案，-->
+    <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+        <property name="authenticationStrategy">
+            <bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
+        </property>
     </bean>
 
     <!-- 安全管理器 -->
@@ -115,13 +121,6 @@
         <property name="sessionManager" ref="sessionManager"/>
         <property name="cacheManager" ref="cacheManager"/>
         <property name="rememberMeManager" ref="rememberMeManager"/>
-    </bean>
-
-    <!--当有多个realm的时候可以配置realm的匹配方案，-->
-    <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
-        <property name="authenticationStrategy">
-            <bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
-        </property>
     </bean>
 
     <!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
@@ -155,7 +154,7 @@
         <property name="port" value="8443"/>
     </bean>
     <!-- Shiro的Web过滤器 -->
-    <bean id="shiroFilter" class="com.wuliangit.shopos.core.filter.MyShiroFilterFactoryBean">
+    <bean id="shiroFilter" class="com.wuliangit.shopos.core.shiro.MyShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/admin/login"/>
         <property name="filters">
@@ -170,16 +169,24 @@
         <property name="filterChainDefinitions">
             <value>
 
+                <!--静态资源-->
+                /assets/** = anon
+
+                <!--接口api-->
                 /api/v1/member = api
 
                 <!--总后台用户-->
-                <!--/admin/login = authc-->
-                <!--/admin/logout = logout-->
-                <!--/admin/** = kickout,sysUser-->
-                <!--/zlt/** = kickout,sysUser-->
+                /admin/login = authc
+                /admin/logout = logout
+                /admin/** = kickout,sysUser
 
 
-                <!--&lt;!&ndash;/web/** = anon&ndash;&gt;-->
+
+
+
+
+                <!--微信-->
+                <!--/web/** = anon-->
                 <!--/wx/testlogin = anon-->
                 <!--/wx/islogin = anon-->
                 <!--/wx/login = anon-->

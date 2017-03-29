@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public int saveMember(Member member) {
+    public int createMember(Member member) {
         return memberMapper.insertSelective(member);
     }
 

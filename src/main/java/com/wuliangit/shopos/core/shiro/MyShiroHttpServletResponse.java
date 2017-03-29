@@ -1,4 +1,4 @@
-package com.wuliangit.shopos.core.filter;
+package com.wuliangit.shopos.core.shiro;
 
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.servlet.ShiroHttpServletResponse;

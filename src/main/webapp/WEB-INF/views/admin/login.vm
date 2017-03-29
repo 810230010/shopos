@@ -32,6 +32,7 @@
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Password" required="" name="password">
                 </div>
+
                 <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
 
                 <a href="login.html#"><small>忘记密码?</small></a>

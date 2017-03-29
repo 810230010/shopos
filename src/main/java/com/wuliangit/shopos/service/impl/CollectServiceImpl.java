@@ -46,4 +46,10 @@ public class CollectServiceImpl implements CollectService {
         favoritesGoods.setMemberName(user.getNikename());
         return favoritesGoodsMapper.insertSelective(favoritesGoods);
     }
+
+    @Override
+    public int deleteCollectGoods(Integer goodsId) {
+        Member user = WebUtil.getCurrentMember();
+        return goodsMapper.deleteCollectGoods(goodsId,user.getMemberId());
+    }
 }

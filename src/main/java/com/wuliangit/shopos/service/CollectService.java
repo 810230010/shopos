@@ -21,4 +21,11 @@ public interface CollectService {
      * @return
      */
     int addCollectGoods(Integer goodsId);
+
+    /**
+     * 删除收藏商品
+     * @param goodsId
+     * @return
+     */
+    int deleteCollectGoods(Integer goodsId);
 }

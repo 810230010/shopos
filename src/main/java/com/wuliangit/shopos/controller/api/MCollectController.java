@@ -4,6 +4,7 @@ import com.wuliangit.shopos.core.controller.RestResult;
 import com.wuliangit.shopos.dto.CollectGoodsDTO;
 import com.wuliangit.shopos.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,8 +46,18 @@ public class MCollectController {
         return result;
     }
 
-
-
+    /**
+     * 删除收藏商品
+     *
+     * @param goodsId
+     * @return
+     */
+    @RequestMapping("/goods/delete")
+    public Object deleteCollectGoods(Integer goodsId) {
+        RestResult result = new RestResult();
+        int res = collectService.deleteCollectGoods(goodsId);
+        return result;
+    }
 
 
 }

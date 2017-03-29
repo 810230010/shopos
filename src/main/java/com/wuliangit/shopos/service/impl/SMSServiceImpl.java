@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.service.impl;
 
-import com.wuliangit.shopos.core.cache.SpringCacheManager;
-import com.wuliangit.shopos.core.sms.SMSSender;
+import com.wuliangit.shopos.common.cache.SpringCacheManager;
+import com.wuliangit.shopos.common.sms.SMSSender;
 import com.wuliangit.shopos.service.SMSService;
 import org.apache.shiro.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;

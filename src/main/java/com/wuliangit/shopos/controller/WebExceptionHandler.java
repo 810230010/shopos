@@ -1,6 +1,6 @@
 package com.wuliangit.shopos.controller;
 
-import com.wuliangit.shopos.core.controller.RestResult;
+import com.wuliangit.shopos.common.controller.RestResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

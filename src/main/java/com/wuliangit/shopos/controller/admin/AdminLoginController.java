@@ -1,13 +1,12 @@
 package com.wuliangit.shopos.controller.admin;
 
-import com.wuliangit.shopos.core.realm.UserToken;
-import com.wuliangit.shopos.core.util.WebUtil;
+import com.wuliangit.shopos.common.shiro.realm.UserToken;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.service.AdminService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

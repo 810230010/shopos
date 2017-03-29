@@ -1,6 +1,6 @@
 package com.wuliangit.shopos.dao;
 
-import com.wuliangit.shopos.core.dao.BaseMapper;
+import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.dto.CollectGoodsDTO;
 import com.wuliangit.shopos.entity.FavoritesGoods;
 import org.apache.ibatis.annotations.Param;

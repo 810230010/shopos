@@ -1,17 +1,15 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.core.sms.YXSMSSender;
-import com.wuliangit.shopos.core.util.PasswordHelper;
+import com.wuliangit.shopos.common.sms.YXSMSSender;
+import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.dao.MemberMapper;
 import com.wuliangit.shopos.entity.Member;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 

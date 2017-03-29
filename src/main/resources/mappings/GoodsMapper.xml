@@ -67,14 +67,11 @@
     from t_goods
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </select>
-
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_goods
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </delete>
-
-    <insert id="insert" parameterType="com.wuliangit.shopos.entity.Goods" >
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Goods" >
     insert into t_goods (goods_id, name, unit, 
       ad_word, store_id, store_name, 
       goods_category_id, brand_id, price, 

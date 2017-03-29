@@ -114,9 +114,9 @@
         <property name="partnerKey" value="jFBBO5JrYxHJYagmLFb2a6l2eZDBo1nu"/>
     </bean>
 
-    <bean class="com.wuliangit.shopos.core.util.SpringUtils"/>
+    <bean class="com.wuliangit.shopos.common.util.SpringUtils"/>
 
     <!--短信接口-->
-    <bean id="smsSender" class="com.wuliangit.shopos.core.sms.YXSMSSender"/>
+    <bean id="smsSender" class="com.wuliangit.shopos.common.sms.YXSMSSender"/>
 
 </beans>

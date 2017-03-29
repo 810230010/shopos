@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.wuliangit.shopos.common.CoreConstants;
-import com.wuliangit.shopos.core.util.WebUtil;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.MemberMapper;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;

@@ -89,7 +89,7 @@
 
     </bean>
 
-    <bean class="com.wuliangit.shopos.core.util.SpringUtils"/>
+    <bean class="com.wuliangit.shopos.common.util.SpringUtils"/>
 
 
     <!-- ehcache缓存管理器 -->
@@ -101,12 +101,12 @@
         <property name="configLocation" value="classpath:ehcache.xml"/>
     </bean>
 
-    <bean id="cacheManager" class="com.wuliangit.shopos.core.cache.SpringCacheManager">
+    <bean id="cacheManager" class="com.wuliangit.shopos.common.cache.SpringCacheManager">
         <property name="cacheManager" ref="springCacheManager"/>
     </bean>
 
     <!--短信接口-->
-    <bean id="sender" class="com.wuliangit.shopos.core.sms.YXSMSSender">
+    <bean id="sender" class="com.wuliangit.shopos.common.sms.YXSMSSender">
         <property name="url" value="${sms.url}"/>
         <property name="port" value="${sms.port}"/>
         <property name="accountSid" value="${sms.accountSid}"/>

@@ -104,11 +104,19 @@
 ## 25. 购物车商品列表
 * url:/api/v1/member/cart/list
 
+## 25. 添加购物车商品
+* url:/api/v1/member/cart/add
+
 ## 26. 购物车移除商品
 * url:/api/v1/member/cart/delete/{goodsId}
 
 ## 27. 购物车更新商品数量
 * url:/api/v1/member/cart/update/{goodsId}/{goodsNum}
+
+
+
+
+
 
 ## 28. 订单列表
 * url:/api/v1/member/order/list

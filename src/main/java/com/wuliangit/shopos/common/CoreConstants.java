@@ -7,6 +7,11 @@ public class CoreConstants {
     //当前用户session索引
     public static final String SESSION_CURRENT_USER = "CURRENT_USER";
 
+
+    public static final String PARAM_DIGEST = "digest";
+    public static final String PARAM_USERNAME = "username";
+
+
     public static final String CURRENT_NAME = "CURRENT_NAME";
 
     public static final String SESSION_CURRENT_MENU = "SESSION_CURRENT_MENU";

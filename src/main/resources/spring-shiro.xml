@@ -24,12 +24,12 @@
         <property name="configLocation" value="classpath:ehcache.xml"/>
     </bean>
 
-    <bean id="cacheManager" class="com.wuliangit.shopos.core.cache.SpringCacheManager">
+    <bean id="cacheManager" class="com.wuliangit.shopos.common.cache.SpringCacheManager">
         <property name="cacheManager" ref="springCacheManager"/>
     </bean>
 
     <!-- 凭证匹配器 处理重复登录失败 -->
-    <bean id="credentialsMatcher" class="com.wuliangit.shopos.core.shiro.RetryLimitHashedCredentialsMatcher">
+    <bean id="credentialsMatcher" class="com.wuliangit.shopos.common.shiro.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="cacheManager"/>
         <property name="hashAlgorithmName" value="${password.algorithmName}"/>
         <property name="hashIterations" value="${password.hashIterations}"/>
@@ -37,7 +37,7 @@
     </bean>
 
     <!-- Realm实现 -->
-    <bean id="userRealm" class="com.wuliangit.shopos.core.realm.UserRealm">
+    <bean id="userRealm" class="com.wuliangit.shopos.common.shiro.realm.UserRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
         <property name="cachingEnabled" value="true"/>
         <property name="authenticationCachingEnabled" value="false"/>
@@ -47,13 +47,13 @@
     </bean>
 
     <!-- 会话Cookie模板 -->
-    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+    <bean id="sessionIdCookie" class="com.wuliangit.shopos.common.shiro.OnlineCookie">
         <constructor-arg value="token"/>
         <property name="httpOnly" value="true"/>
         <property name="maxAge" value="-1"/>
     </bean>
 
-    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+    <bean id="rememberMeCookie" class="com.wuliangit.shopos.common.shiro.OnlineCookie">
         <constructor-arg value="rememberMe"/>
         <property name="httpOnly" value="true"/>
         <property name="maxAge" value="2592000"/><!-- 30天 -->
@@ -75,7 +75,7 @@
         <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
     </bean>
 
-    <bean id="sessionFactory" class="org.apache.shiro.session.mgt.SimpleSessionFactory"/>
+    <bean id="sessionFactory" class="com.wuliangit.shopos.common.shiro.mgt.OnlineSessionFactory"/>
 
     <!-- 会话管理器 -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
@@ -129,7 +129,7 @@
         <property name="arguments" ref="securityManager"/>
     </bean>
 
-    <bean id="kickoutSessionControlFilter" class="com.wuliangit.shopos.core.filter.KickoutSessionControlFilter">
+    <bean id="kickoutSessionControlFilter" class="com.wuliangit.shopos.common.shiro.filter.KickoutSessionControlFilter">
         <property name="cacheManager" ref="cacheManager"/>
         <property name="sessionManager" ref="sessionManager"/>
         <property name="kickoutAfter" value="false"/>
@@ -137,13 +137,13 @@
         <property name="kickoutUrl" value="/admin/login?kickout=1"/>
     </bean>
 
-    <bean id="sysUserFilter" class="com.wuliangit.shopos.core.filter.SysUserFilter">
+    <bean id="sysUserFilter" class="com.wuliangit.shopos.common.shiro.filter.SysUserFilter">
         <property name="loginUrl" value="/admin/login"/>
     </bean>
 
-    <bean id="weixinFilter" class="com.wuliangit.shopos.core.filter.WeixinFilter">
+    <bean id="weixinFilter" class="com.wuliangit.shopos.common.shiro.filter.WeixinFilter">
     </bean>
-    <bean id="apiFilter" class="com.wuliangit.shopos.core.filter.ApiFilter">
+    <bean id="apiFilter" class="com.wuliangit.shopos.common.shiro.filter.ApiFilter">
     </bean>
 
     <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
@@ -154,7 +154,7 @@
         <property name="port" value="8443"/>
     </bean>
     <!-- Shiro的Web过滤器 -->
-    <bean id="shiroFilter" class="com.wuliangit.shopos.core.shiro.MyShiroFilterFactoryBean">
+    <bean id="shiroFilter" class="com.wuliangit.shopos.common.shiro.MyShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/admin/login"/>
         <property name="filters">

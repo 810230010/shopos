@@ -19,10 +19,27 @@
     from t_favorites_store
     where favorites_store_id = #{favoritesStoreId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+
+  <!--用户收藏店铺列表-->
+    <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.CollectStoreDTO">
+      select s.name, s.logo, s.label, fs.fav_time
+      from t_favorites_store fs left join t_store s on s.store_id = fs.store_id
+      where fs.member_id = #{memberId}
+    </select>
+  <!--删除收藏店铺-->
+  <delete id="deleteCollectGoods">
+    delete from t_favorites_store
+    where member_id = #{memberId} and store_id = #{storeId}
+  </delete>
+
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_favorites_store
     where favorites_store_id = #{favoritesStoreId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.FavoritesStore" >
     insert into t_favorites_store (favorites_store_id, member_id, member_name, 
       fav_time, store_id, store_name, 

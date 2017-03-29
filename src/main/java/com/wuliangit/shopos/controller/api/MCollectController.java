@@ -1,11 +1,12 @@
 package com.wuliangit.shopos.controller.api;
 
-import com.wuliangit.shopos.core.controller.RestResult;
+import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.CollectGoodsDTO;
+import com.wuliangit.shopos.dto.CollectStoreDTO;
 import com.wuliangit.shopos.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -26,9 +27,10 @@ public class MCollectController {
      * @return
      */
     @RequestMapping("/goods/list")
-    public Object getCollectGoodsList() {
+    public Object getCollectGoodsList(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                      @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        ArrayList<CollectGoodsDTO> collectGoods = collectService.getCollectGoodsList();
+        ArrayList<CollectGoodsDTO> collectGoods = collectService.getCollectGoodsList(page, pageSize);
         result.add("collectGoods", collectGoods);
         return result;
     }
@@ -61,15 +63,44 @@ public class MCollectController {
 
     /**
      * 用户收藏店铺列表
+     *
      * @return
      */
     @RequestMapping("/store/list")
-    public Object getCollectStoreList(){
+    public Object getCollectStoreList(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                      @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        RestResult result = new RestResult();
+        ArrayList<CollectStoreDTO> collectStores = collectService.getCollectStireList(page, pageSize);
+        result.add("collectStores", collectStores);
+        return result;
+    }
+
+    /**
+     * 用户添加收藏店铺
+     * @param storeId
+     * @return
+     */
+    @RequestMapping("/store/add")
+    public Object addCollectStore(Integer storeId) {
+        RestResult result = new RestResult();
+        int res = collectService.addCollectStore(storeId);
+        return result;
+    }
+
+    /**
+     * 删除收藏店铺
+     * @param storeId
+     * @return
+     */
+    @RequestMapping("/store/delete")
+    public Object deleteCollectStore(Integer storeId){
         RestResult result = new RestResult();
 
+        int res = collectService.deleteCollectStore(storeId);
 
         return result;
     }
+
 
 
 }

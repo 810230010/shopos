@@ -20,7 +20,7 @@ public class Cart {
 
     private Integer goodsNum;
 
-    private String goodsImage;
+    private String goodsTitleImg;
 
     private Date createTime;
 
@@ -88,12 +88,12 @@ public class Cart {
         this.goodsNum = goodsNum;
     }
 
-    public String getGoodsImage() {
-        return goodsImage;
+    public String getGoodsTitleImg() {
+        return goodsTitleImg;
     }
 
-    public void setGoodsImage(String goodsImage) {
-        this.goodsImage = goodsImage == null ? null : goodsImage.trim();
+    public void setGoodsTitleImg(String goodsTitleImg) {
+        this.goodsTitleImg = goodsTitleImg == null ? null : goodsTitleImg.trim();
     }
 
     public Date getCreateTime() {

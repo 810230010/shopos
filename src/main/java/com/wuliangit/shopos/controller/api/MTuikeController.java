@@ -1,8 +1,8 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.POJOConstants;
-import com.wuliangit.shopos.core.controller.RestResult;
-import com.wuliangit.shopos.core.util.WebUtil;
+import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.EarningsDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;

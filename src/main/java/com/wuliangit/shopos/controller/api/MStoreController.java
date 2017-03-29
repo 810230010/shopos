@@ -1,6 +1,6 @@
 package com.wuliangit.shopos.controller.api;
 
-import com.wuliangit.shopos.core.controller.RestResult;
+import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;

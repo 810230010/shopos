@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.CollectGoodsDTO;
+import com.wuliangit.shopos.dto.CollectStoreDTO;
 
 import java.util.ArrayList;
 
@@ -12,8 +13,10 @@ public interface CollectService {
     /**
      * 用户收藏商品列表
      * @return
+     * @param page
+     * @param pageSize
      */
-    ArrayList<CollectGoodsDTO> getCollectGoodsList();
+    ArrayList<CollectGoodsDTO> getCollectGoodsList(Integer page, Integer pageSize);
 
     /**
      * 用户收藏商品
@@ -28,4 +31,26 @@ public interface CollectService {
      * @return
      */
     int deleteCollectGoods(Integer goodsId);
+
+    /**
+     * 用户收藏店铺列表
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    ArrayList<CollectStoreDTO> getCollectStireList(Integer page, Integer pageSize);
+
+    /**
+     * 用户收藏店铺
+     * @param storeId
+     * @return
+     */
+    int addCollectStore(Integer storeId);
+
+    /**
+     * 删除收藏店铺
+     * @param storeId
+     * @return
+     */
+    int deleteCollectStore(Integer storeId);
 }

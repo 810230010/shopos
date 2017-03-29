@@ -1,11 +1,11 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.POJOConstants;
-import com.wuliangit.shopos.core.cache.SpringCacheManager;
-import com.wuliangit.shopos.core.controller.RestResult;
-import com.wuliangit.shopos.core.realm.UserToken;
-import com.wuliangit.shopos.core.util.PasswordHelper;
-import com.wuliangit.shopos.core.util.WebUtil;
+import com.wuliangit.shopos.common.cache.SpringCacheManager;
+import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.shiro.realm.UserToken;
+import com.wuliangit.shopos.common.util.PasswordHelper;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MemberUpdateDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
@@ -21,6 +21,7 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -51,7 +52,8 @@ public class MMemberController {
      * @return
      */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public Object login(String username, String password) {
+    public Object login(@RequestParam(required = true)String username,
+                        @RequestParam(required = true)String password) {
         RestResult restResult = new RestResult();
         String error = null;
         try {

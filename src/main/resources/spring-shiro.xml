@@ -34,6 +34,7 @@
         <property name="hashAlgorithmName" value="${password.algorithmName}"/>
         <property name="hashIterations" value="${password.hashIterations}"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
+        <property name="tokenManager" ref="tokenManager"/>
     </bean>
 
     <!-- Realm实现 -->
@@ -109,6 +110,15 @@
         </property>
     </bean>
 
+    <!-- Subject工厂 -->
+    <bean id="subjectFactory" class="com.wuliangit.shopos.common.shiro.mgt.StatelessAndOnlineWebSubjectFactory">
+        <property name="statelessUrl">
+            <list>
+                <value>/api/**</value>
+            </list>
+        </property>
+    </bean>
+
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- 这个对象一定要放在reamls前 -->
@@ -120,6 +130,7 @@
         </property>
         <property name="sessionManager" ref="sessionManager"/>
         <property name="cacheManager" ref="cacheManager"/>
+        <property name="subjectFactory" ref="subjectFactory"/>
         <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
@@ -141,9 +152,16 @@
         <property name="loginUrl" value="/admin/login"/>
     </bean>
 
+    <bean id="tokenManager" class="com.wuliangit.shopos.common.shiro.token.EhcacheTokenManager">
+        <property name="cacheManager" ref="cacheManager"/>
+        <property name="cacheName" value="tokenCache"/>
+    </bean>
+
     <bean id="weixinFilter" class="com.wuliangit.shopos.common.shiro.filter.WeixinFilter">
+        <property name="tokenManager" ref="tokenManager"/>
     </bean>
     <bean id="apiFilter" class="com.wuliangit.shopos.common.shiro.filter.ApiFilter">
+        <property name="tokenManager" ref="tokenManager"/>
     </bean>
 
     <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
@@ -163,7 +181,7 @@
                 <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
                 <entry key="logout" value-ref="logoutFilter"/>
                 <entry key="weixin" value-ref="weixinFilter"/>
-                <entry key="api" value-ref="weixinFilter"/>
+                <entry key="api" value-ref="apiFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
@@ -172,8 +190,10 @@
                 <!--静态资源-->
                 /assets/** = anon
 
+
                 <!--接口api-->
-                /api/v1/member = api
+                /api/v1/member/login = anon
+                /api/v1/** = api
 
                 <!--总后台用户-->
                 /admin/login = authc

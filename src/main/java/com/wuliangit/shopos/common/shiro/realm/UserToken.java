@@ -29,7 +29,7 @@ public class UserToken implements AuthenticationToken {
     }
 
     public enum LoginType {
-        APP(0), WEB(1), WX(2);
+        APP(0), WEB(1), WX(2), TOKEN(3);
         private final int type;
         private LoginType(int type) {
             this.type = type;

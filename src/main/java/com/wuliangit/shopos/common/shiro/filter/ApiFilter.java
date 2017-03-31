@@ -1,38 +1,57 @@
 package com.wuliangit.shopos.common.shiro.filter;
 
-import me.chanjar.weixin.common.api.WxConsts;
-import me.chanjar.weixin.mp.api.WxMpService;
+import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.shiro.realm.StatelessToken;
+import com.wuliangit.shopos.common.shiro.realm.UserToken;
+import com.wuliangit.shopos.common.shiro.token.TokenManager;
+import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.entity.Member;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.web.filter.PathMatchingFilter;
-import org.apache.shiro.web.util.WebUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.web.filter.AccessControlFilter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import java.io.IOException;
 
 /**
  * Created by taoshanchang on 16/8/1.
  */
-public class ApiFilter extends PathMatchingFilter {
+public class ApiFilter extends AccessControlFilter {
 
-    @Autowired
-    private WxMpService wxMpService;
+    static final String TOKEN = "token";
+    static final String TIMESTAMP = "timestamp";
+    private TokenManager tokenManager;
 
     @Override
-    protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) {
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue){
+        String token = request.getParameter(TOKEN);
+
         // 判断用户是否已经登录
-        if (SecurityUtils.getSubject().isAuthenticated()) {
+        Member member = (Member)tokenManager.getTokenData(token);
+        if (member != null){
+            Member user = WebUtil.getCurrentMember();
+            if (user == null){
+                SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER,user);
+            }
             return true;
+        }else {
+            throw new UnauthenticatedException();
         }
-//        没有登录过跳转到微信授权登录页
-        String loginUrl = wxMpService.oauth2buildAuthorizationUrl(WxConsts.OAUTH2_SCOPE_BASE, "base");
-        try {
-            WebUtils.issueRedirect(request, response, loginUrl);
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+//        String timestamp = request.getParameter(TIMESTAMP);
+//        if (Math.abs(new Date().getTime() - new Long(timestamp)) > 2000) {
+//            throw new RepetActionException("重复提交");
+//        }
+    }
+
+    @Override
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+        getSubject(request, response).logout();
+        saveRequestAndRedirectToLogin(request, response);
         return false;
+    }
+
+    public void setTokenManager(TokenManager tokenManager) {
+        this.tokenManager = tokenManager;
     }
 }

@@ -56,4 +56,9 @@ public class MemberServiceImpl implements MemberService {
 
         return memberMapper.updateByPrimaryKeySelective(member);
     }
+
+    @Override
+    public Object getByMemberId(Integer userId) {
+        return memberMapper.selectByPrimaryKey(userId);
+    }
 }

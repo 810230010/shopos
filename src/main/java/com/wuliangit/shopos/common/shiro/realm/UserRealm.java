@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.common.shiro.realm;
 
 import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.AdminService;
@@ -69,18 +70,19 @@ public class UserRealm extends AuthorizingRealm {
                 user = memberService.getByOpenid(userToken.getUsername());
             }else if(userToken.getLoginType() == UserToken.LoginType.APP){
                 user = memberService.getByUsername(userToken.getUsername());
+            }else if(userToken.getLoginType() == UserToken.LoginType.TOKEN){
+
             }
 
             if (user == null) {
                 throw new UnknownAccountException();
             }
             authenticationInfo = new SimpleAuthenticationInfo(
-                    user.getUsername(), //用户名
-                    user.getPasswd(), //密码
+                    user.getUsername(),
+                    user.getPasswd(),
                     ByteSource.Util.bytes(user.getSalt()),
                     getName()
             );
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, user);
         } else if (userToken.getUserType() == UserToken.UserType.ADMIN) {
             Admin user = adminService.getByUsername(userToken.getUsername());
             if ((user == null)) {

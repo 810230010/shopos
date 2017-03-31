@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class OnlineCookie extends SimpleCookie {
 
-
     private static final transient Logger log = LoggerFactory.getLogger(SimpleCookie.class);
 
     public OnlineCookie(String name) {
@@ -27,6 +26,7 @@ public class OnlineCookie extends SimpleCookie {
 
         value = request.getParameter(name);
 
+        //重写cookie，使其可以将cookie作为参数放在url或者消息体里面
         if (!StringUtils.isEmpty(value)){
             return value;
         }

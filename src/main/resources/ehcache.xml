@@ -58,6 +58,16 @@
            overflowToDisk="false"
            statistics="true">
     </cache>
+
+    <!--token缓存-->
+    <cache name="tokenCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
     
 
 </ehcache>

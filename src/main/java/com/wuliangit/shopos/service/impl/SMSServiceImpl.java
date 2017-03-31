@@ -22,14 +22,13 @@ public class SMSServiceImpl implements SMSService {
     @Autowired
     private SpringCacheManager springCacheManager;
 
-
     @Override
     public boolean sendRegisterCode(String phone) {
         String code = this.getRandomCode();
         String timeout = "10";
         boolean res = smsSender.send(phone, "1", new String[]{timeout, code});
         if (res) {
-            Cache<Object, Object> cache = springCacheManager.getCache("sms-session");
+            Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
             cache.put("phone", code);
             return true;
         } else {
@@ -43,7 +42,7 @@ public class SMSServiceImpl implements SMSService {
         String timeout = "10";
         boolean res = smsSender.send(phone, "xxxxxx", new String[]{timeout, code});
         if (res) {
-            Cache<Object, Object> cache = springCacheManager.getCache("sms-session");
+            Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
             cache.put("phone", code);
             return true;
         } else {

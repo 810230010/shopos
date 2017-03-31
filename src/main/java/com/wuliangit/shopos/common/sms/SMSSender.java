@@ -16,4 +16,10 @@ public interface SMSSender {
      */
     boolean send(String phone, String templateId, String[] datas);
 
+    /**
+     * 获取缓存名称
+     * @return
+     */
+    String getCacheName();
+
 }

@@ -82,8 +82,7 @@
 
         <!-- 打开PSCache，并且指定每个连接上PSCache的大小  如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。-->
         <property name="poolPreparedStatements" value="${druid.poolPreparedStatements}"/>
-        <property name="maxPoolPreparedStatementPerConnectionSize"
-                  value="${druid.maxPoolPreparedStatementPerConnectionSize}"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${druid.maxPoolPreparedStatementPerConnectionSize}"/>
 
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="${druid.filters}"/>

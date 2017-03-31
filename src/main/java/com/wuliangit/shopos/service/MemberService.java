@@ -49,4 +49,11 @@ public interface MemberService {
      * @return
      */
     int updateMember(Member member);
+
+    /**
+     * 通过用户id获取用户
+     * @param userId
+     * @return
+     */
+    Object getByMemberId(Integer userId);
 }

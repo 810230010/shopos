@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.common.sms;
 
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.HashMap;
@@ -15,7 +16,11 @@ public class YXSMSSender implements SMSSender {
     private static ReentrantLock lock = new ReentrantLock();
 
     public static final String SuccessCode = "000000";
+    //default cacheName
+    public static final String DEFAULT_CACHE_NAME = "sms-session";
 
+    @Value("${sms.cacheName}")
+    private String cacheName;
     @Value("${sms.url}")
     private String url;
     @Value("${sms.port}")
@@ -37,6 +42,14 @@ public class YXSMSSender implements SMSSender {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String getCacheName() {
+        if (StringUtils.isEmpty(this.getCacheName())){
+            return DEFAULT_CACHE_NAME;
+        }
+        return cacheName;
     }
 
     private CCPRestSmsSDK getSDK() {
@@ -77,6 +90,7 @@ public class YXSMSSender implements SMSSender {
         this.appId = appId;
     }
 
-
-
+    public void setCacheName(String cacheName) {
+        this.cacheName = cacheName;
+    }
 }

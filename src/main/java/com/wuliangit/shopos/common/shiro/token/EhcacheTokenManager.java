@@ -24,7 +24,8 @@ public class EhcacheTokenManager implements TokenManager {
 
     @Override
     public Object getTokenData(String token) {
-        return null;
+        Cache<Object, Object> cache = cacheManager.getCache(cacheName);
+        return cache.get(token);
     }
 
     @Override

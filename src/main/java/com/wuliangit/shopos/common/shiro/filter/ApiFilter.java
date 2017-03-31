@@ -19,7 +19,6 @@ import javax.servlet.ServletResponse;
 public class ApiFilter extends AccessControlFilter {
 
     static final String TOKEN = "token";
-    static final String TIMESTAMP = "timestamp";
     private TokenManager tokenManager;
 
     @Override
@@ -28,6 +27,7 @@ public class ApiFilter extends AccessControlFilter {
 
         // 判断用户是否已经登录
         Member member = (Member)tokenManager.getTokenData(token);
+
         if (member != null){
             Member user = WebUtil.getCurrentMember();
             if (user == null){
@@ -35,20 +35,16 @@ public class ApiFilter extends AccessControlFilter {
             }
             return true;
         }else {
-            throw new UnauthenticatedException();
+            return false;
         }
 
-//        String timestamp = request.getParameter(TIMESTAMP);
-//        if (Math.abs(new Date().getTime() - new Long(timestamp)) > 2000) {
-//            throw new RepetActionException("重复提交");
-//        }
     }
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         getSubject(request, response).logout();
         saveRequestAndRedirectToLogin(request, response);
-        return false;
+        return true;
     }
 
     public void setTokenManager(TokenManager tokenManager) {

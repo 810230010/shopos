@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.entity.Member;
+import com.wuliangit.shopos.service.MemberService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -11,6 +12,7 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,6 +24,9 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
     private Cache<String, AtomicInteger> passwordRetryCache;
 
     private TokenManager tokenManager;
+
+    @Autowired
+    private MemberService memberService;
 
     public void setTokenManager(TokenManager tokenManager) {
         this.tokenManager = tokenManager;
@@ -46,7 +51,6 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
             if (user == null) {
                 return false;
             }
-
             SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, user);
             tokenManager.createToken(SecurityUtils.getSubject().getSession().getId().toString(), user);
             return true;
@@ -69,7 +73,10 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
                 //clear retry count
                 passwordRetryCache.remove(username);
             }
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, user);
+            Member member = memberService.getByUsername(username);
+            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, member);
+            String tokenkey  = SecurityUtils.getSubject().getSession().getId().toString();
+            tokenManager.createToken(tokenkey, member);
             return matches;
         }
 

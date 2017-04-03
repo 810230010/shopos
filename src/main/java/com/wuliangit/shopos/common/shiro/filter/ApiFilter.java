@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.entity.Member;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import sun.misc.BASE64Encoder;
 
@@ -48,34 +49,25 @@ public class ApiFilter extends AccessControlFilter {
             }
         }
 
-        map.put("token",serverToken);
+        map.put("token", serverToken);
 
         String sortParam = this.sortParameter(map);
 
-        HttpServletRequest httpServletRequest = (HttpServletRequest)request;
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
         String requestURI = httpServletRequest.getRequestURI();
 
-        String perSingUrl = requestURI+sortParam;
+        String perSingUrl = requestURI + sortParam;
 
         // 生成一个MD5加密计算摘要
-        MessageDigest md5= null;
-        try {
-            md5 = MessageDigest.getInstance("MD5");
-            BASE64Encoder base64en = new BASE64Encoder();
-            //加密后的字符串
-            String signServer=base64en.encode(md5.digest(perSingUrl.getBytes("utf-8")));
+        MessageDigest md5 = null;
+        String signUrl = new Md5Hash(perSingUrl).toString();
 
-            if (signServer.equals(sign)) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (signUrl.equals(sign)) {
+            return true;
+        } else {
+            return false;
         }
-
-        return false;
 
     }
 
@@ -108,7 +100,7 @@ public class ApiFilter extends AccessControlFilter {
 
             if (!list.get(i).equals(SIGN)) {
                 if (flag == 0) {
-                    bs.append("?"+list.get(i)).append("=").append(maptest.get(list.get(i)));
+                    bs.append("?" + list.get(i)).append("=").append(maptest.get(list.get(i)));
                     flag = 1;
                 } else {
                     bs.append("&").append(list.get(i)).append("=").append(maptest.get(list.get(i)));

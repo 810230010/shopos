@@ -15,7 +15,6 @@ import java.util.ArrayList;
  * Created by nilme on 2017/3/30.
  */
 
-
 @RestController
 @RequestMapping("/api/v1/public")
 public class MGoodsController {

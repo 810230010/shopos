@@ -34,7 +34,6 @@
         <property name="hashAlgorithmName" value="${password.algorithmName}"/>
         <property name="hashIterations" value="${password.hashIterations}"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
-        <property name="tokenManager" ref="tokenManager"/>
     </bean>
 
     <!-- Realm实现 -->
@@ -193,7 +192,7 @@
 
                 <!--接口api-->
                 /api/v1/member/login = anon
-                /api/v1/** = api
+                /api/** = api
 
                 <!--总后台用户-->
                 /admin/login = authc

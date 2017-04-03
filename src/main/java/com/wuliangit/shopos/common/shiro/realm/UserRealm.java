@@ -1,7 +1,6 @@
 package com.wuliangit.shopos.common.shiro.realm;
 
 import com.wuliangit.shopos.common.CoreConstants;
-import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.AdminService;
@@ -66,12 +65,10 @@ public class UserRealm extends AuthorizingRealm {
         if (userToken.getUserType() == UserToken.UserType.MEMBER) {
             Member user = null;
 
-            if (userToken.getLoginType() == UserToken.LoginType.WX){
+            if (userToken.getLoginType() == UserToken.LoginType.WX) {
                 user = memberService.getByOpenid(userToken.getUsername());
-            }else if(userToken.getLoginType() == UserToken.LoginType.APP){
+            } else {
                 user = memberService.getByUsername(userToken.getUsername());
-            }else if(userToken.getLoginType() == UserToken.LoginType.TOKEN){
-
             }
 
             if (user == null) {
@@ -94,7 +91,6 @@ public class UserRealm extends AuthorizingRealm {
                     ByteSource.Util.bytes(user.getSalt()),
                     getName()
             );
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, user);
         }
         return authenticationInfo;
     }

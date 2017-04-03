@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.cache.SpringCacheManager;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
+import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.ApiMemberUpdateDTO;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by nilme on 2017/3/15.
@@ -46,6 +48,9 @@ public class MMemberController {
     @Autowired
     private Mapper mapper;
 
+    @Autowired
+    private TokenManager tokenManager;
+
     /**
      * 登录
      *
@@ -57,9 +62,13 @@ public class MMemberController {
         RestResult restResult = new RestResult();
         String error = null;
         try {
-            SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.MEMBER, UserToken.LoginType.APP));
-            Session session = WebUtil.getSession();
-            restResult.add("token", session.getId());
+            SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.MEMBER, UserToken.LoginType.TOKEN));
+            Member user = memberService.getByUsername(username);
+            String token = tokenManager.createToken(user.getMemberId());
+
+            restResult.add("token",token);
+            restResult.add("userId",user.getMemberId());
+
             return restResult;
         } catch (UnknownAccountException e) {
             error = "用户不存在";

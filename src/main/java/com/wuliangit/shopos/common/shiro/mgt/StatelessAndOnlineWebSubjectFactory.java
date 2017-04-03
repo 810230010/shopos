@@ -62,8 +62,8 @@ public class StatelessAndOnlineWebSubjectFactory extends DefaultSubjectFactory {
         }
 
         if (isStatelessUrl){
-            //不创建session
-//            context.setSessionCreationEnabled(false);
+//           无状态接口， 不创建session
+            context.setSessionCreationEnabled(false);
         }
         WebDelegatingSubject webDelegatingSubject = new WebDelegatingSubject(principals, authenticated, host, session, sessionEnabled, request, response, securityManager);
         return webDelegatingSubject;

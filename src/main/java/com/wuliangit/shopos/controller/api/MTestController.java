@@ -28,18 +28,12 @@ public class MTestController {
         return result;
     }
 
-    @RequestMapping("/api")
+    @RequestMapping("/api2")
     public Object api2(Integer a)  {
         RestResult result = new RestResult();
 
 
-
         return result;
-    }
-
-    public static void main(String[] args) {
-        String signUrl = new Md5Hash("/api/v1/?code=1&timestamp=1491275623230&token=0&userId=0").toString();
-        System.out.println(signUrl);
     }
 
 }

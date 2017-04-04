@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.alibaba.druid.filter.config.ConfigTools;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.dao.AdminLogMapper;
 import com.wuliangit.shopos.dao.MemberMapper;
@@ -62,7 +63,6 @@ public class MemberServiceTest {
         memberService.getByUsername("test");
     }
 
-
     @Test
     public void getPlaceholder () {
         smsService.sendRegisterCode("18066265836");
@@ -73,6 +73,27 @@ public class MemberServiceTest {
 
 
 
+    }
+
+
+
+    public static void main(String[] args) throws Exception {
+        //密码明文
+        String password = "Kr^##lg*bX8Vt4";
+        System.out.println("密码[ "+password+" ]的加密信息如下：\n");
+        String [] keyPair = ConfigTools.genKeyPair(512);
+        //私钥
+        String privateKey = keyPair[0];
+        //公钥
+        String publicKey = keyPair[1];
+        //用私钥加密后的密文
+        String password2 = ConfigTools.encrypt(privateKey, password);
+        System.out.println("privateKey:"+privateKey);
+        System.out.println("publicKey:"+publicKey);
+        System.out.println("password:"+password2);
+
+        String decrypt = ConfigTools.decrypt(publicKey,password2);
+        System.out.println(decrypt);
     }
 
 

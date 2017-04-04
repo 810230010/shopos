@@ -17,7 +17,6 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.cache.Cache;
-import org.apache.shiro.session.Session;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by nilme on 2017/3/15.
@@ -56,9 +54,9 @@ public class MMemberController {
      *
      * @return
      */
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public Object login(@RequestParam(required = true)String username,
-                        @RequestParam(required = true)String password) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Object login(@RequestParam(required = true) String username,
+                        @RequestParam(required = true) String password) {
         RestResult restResult = new RestResult();
         String error = null;
         try {
@@ -66,8 +64,8 @@ public class MMemberController {
             Member user = memberService.getByUsername(username);
             String token = tokenManager.createToken(user.getMemberId());
 
-            restResult.add("token",token);
-            restResult.add("userId",user.getMemberId());
+            restResult.add("token", token);
+            restResult.add("userId", user.getMemberId());
 
             return restResult;
         } catch (UnknownAccountException e) {
@@ -107,9 +105,16 @@ public class MMemberController {
      * @param phone
      * @return
      */
-    @RequestMapping("/register/get-code")
+    @RequestMapping("/register/getCode")
     public Object getRegisterCode(String phone) {
         RestResult result = new RestResult();
+        Member byUsername = memberService.getByUsername(phone);
+        if (byUsername != null) {
+            result.setCode(202);
+            result.setMsg("该手机已经被注册");
+            return result;
+        }
+
         boolean b = smsService.sendRegisterCode(phone);
         if (b) {
             return result;
@@ -121,18 +126,48 @@ public class MMemberController {
     }
 
     /**
+     * 注册短信验证码验证
+     *
+     * @param phone
+     * @param code
+     * @return
+     */
+    @RequestMapping("/register/codeCheck")
+    public Object getRegisterCodeCheck(String phone, String code) {
+        RestResult result = new RestResult();
+        String checkCode = smsService.getCheckCode(phone);
+        if (code.equals(checkCode)) {
+            return result;
+        } else {
+            result.setCode(RestResult.CODE_SERVERERROR);
+            result.setMsg("验证码错误");
+            return result;
+        }
+    }
+
+    /**
      * 用户注册
+     *
      * @param phone
      * @param password
      * @param code
      * @return
      */
     @RequestMapping("/register")
-    public Object register(String phone,String password,String code) {
+    public Object register(@RequestParam(required = true) String phone,
+                           @RequestParam(required = true) String password,
+                           @RequestParam(required = true) String code) {
         RestResult result = new RestResult();
-        Cache<Object, Object> cache = springCacheManager.getCache("sms-session");
-        String cacheCode = (String)cache.get(phone);
-        if (cacheCode.equals(code)){
+
+        Member byUsername = memberService.getByUsername(phone);
+        if (byUsername != null) {
+            result.setCode(202);
+            result.setMsg("该手机已经被注册");
+            return result;
+        }
+
+        String checkCode = smsService.getCheckCode(phone);
+        if (code.equals(checkCode)) {
 
             Member member = new Member();
             member.setCreateTime(new Date());
@@ -142,10 +177,10 @@ public class MMemberController {
             member.setType(POJOConstants.USER_TYPE_DEFAULT);
             member.setAuthState(POJOConstants.NOT_AUTH);
             member.setSalt(PasswordHelper.generateSalt());
-            member.setPasswd(PasswordHelper.generatePassword(password,member.getSalt()));
+            member.setPasswd(PasswordHelper.generatePassword(password, member.getSalt()));
             memberService.createMember(member);
 
-        }else{
+        } else {
             result.setCode(RestResult.CODE_BUSINESS_ERROR);
             result.setMsg("验证码错误");
         }
@@ -154,22 +189,23 @@ public class MMemberController {
 
     /**
      * 更新密码
+     *
      * @param newpass
      * @param code
      * @return
      */
     @RequestMapping("/repass")
-    public Object repass(String newpass,String code){
+    public Object repass(String newpass, String code) {
         RestResult result = new RestResult();
         Member member = WebUtil.getCurrentMember();
         Cache<Object, Object> cache = springCacheManager.getCache("sms-session");
-        String cacheCode = (String)cache.get(member.getUsername());
-        if (cacheCode.equals(code)){
+        String cacheCode = (String) cache.get(member.getUsername());
+        if (cacheCode.equals(code)) {
 //            member.setSalt(PasswordHelper.generateSalt());//salt不更新，后面还有支付密码也会用到这个salt
-            member.setPasswd(PasswordHelper.generatePassword(newpass,member.getSalt()));
+            member.setPasswd(PasswordHelper.generatePassword(newpass, member.getSalt()));
             memberService.updateMember(member);
             result.setMsg("密码更新成功");
-        }else{
+        } else {
             result.setCode(RestResult.CODE_BUSINESS_ERROR);
             result.setMsg("验证码错误");
         }
@@ -179,11 +215,12 @@ public class MMemberController {
 
     /**
      * 修改密码获取验证码
+     *
      * @param phone
      * @return
      */
-    @RequestMapping("/repass/get-code")
-    public Object getRepassCode(String phone){
+    @RequestMapping("/repass/getCode")
+    public Object getRepassCode(String phone) {
         RestResult result = new RestResult();
         boolean res = smsService.sendtRepassCode(phone);
         if (res) {
@@ -197,13 +234,14 @@ public class MMemberController {
 
     /**
      * 获取用户信息
+     *
      * @return
      */
     @RequestMapping("/info")
-    public Object getUserInfo(){
+    public Object getUserInfo() {
         RestResult result = new RestResult();
         Member member = WebUtil.getCurrentMember();
-        result.put("memberInfo",member);
+        result.put("memberInfo", member);
 
 
         // TODO
@@ -212,26 +250,28 @@ public class MMemberController {
 
     /**
      * 更新用户信息
+     *
      * @param member 会员信息
      * @return
      */
     @RequestMapping("/info/update")
-    public Object updateUserInfo(ApiMemberUpdateDTO member){
+    public Object updateUserInfo(ApiMemberUpdateDTO member) {
         RestResult result = new RestResult();
         Member memberUpdate = WebUtil.getCurrentMember();
-        mapper.map(member,memberUpdate);
+        mapper.map(member, memberUpdate);
         memberService.updateMember(memberUpdate);
         return result;
     }
 
     /**
      * 提交认证资料
+     *
      * @param truename
      * @param idcardNum
      * @return
      */
     @RequestMapping("authenticate")
-    public Object Authenticate(String truename, String idcardNum){
+    public Object Authenticate(String truename, String idcardNum) {
         RestResult result = new RestResult();
 
         Member memberUpdate = WebUtil.getCurrentMember();

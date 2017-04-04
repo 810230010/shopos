@@ -32,6 +32,10 @@ public class ApiFilter extends AccessControlFilter {
         String timestamp = request.getParameter(TIMESTAMP);
         Integer userId = Integer.parseInt(request.getParameter(USERID));
 
+        if (sign == null || timestamp == null || userId == null) {
+            return false;
+        }
+
         // 判断用户是否已经登录
         String serverToken = tokenManager.getToken(userId);
 
@@ -60,7 +64,6 @@ public class ApiFilter extends AccessControlFilter {
         String perSingUrl = requestURI + sortParam;
 
         // 生成一个MD5加密计算摘要
-        MessageDigest md5 = null;
         String signUrl = new Md5Hash(perSingUrl).toString();
 
         if (signUrl.equals(sign)) {
@@ -76,8 +79,19 @@ public class ApiFilter extends AccessControlFilter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         RestResult result = new RestResult();
-        result.setCode(401);
-        result.setMsg("unauthentication request! pelease login before request the api");
+
+        String sign = request.getParameter(SIGN);
+        String timestamp = request.getParameter(TIMESTAMP);
+        Integer userId = Integer.parseInt(request.getParameter(USERID));
+
+        if (sign == null || timestamp == null || userId == null) {
+            result.setCode(402);
+            result.setMsg("parameter of 'sign' and 'timestamp' and 'userId' could not be null, please check it again!");
+        }else{
+            result.setCode(401);
+            result.setMsg("unauthentication request! pelease login before request the api");
+        }
+
         Gson gson = new Gson();
         httpResponse.getWriter().write(gson.toJson(result));
         return false;

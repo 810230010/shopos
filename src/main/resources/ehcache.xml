@@ -55,20 +55,18 @@
     
     <!-- 短信服务的缓存 -->
     <cache name="sms-session"
-           maxEntriesLocalHeap="2000"
+           maxBytesLocalHeap="20M"
            eternal="false"
            timeToIdleSeconds="600"
-           timeToLiveSeconds="0"
-           overflowToDisk="false"
-           statistics="true">
+           timeToLiveSeconds="600">
     </cache>
 
     <!--token缓存-->
     <cache name="tokenCache"
            maxBytesLocalHeap="20M"
            eternal="false"
-           timeToIdleSeconds="600"
-           timeToLiveSeconds="600">
+           timeToIdleSeconds="2592000"
+           timeToLiveSeconds="2592000">
     </cache>
 
 

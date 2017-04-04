@@ -18,4 +18,11 @@ public interface SMSService {
      * @return
      */
     boolean sendtRepassCode(String phone);
+
+    /**
+     * 获取缓存的验证码
+     * @param phone
+     * @return
+     */
+    String getCheckCode(String phone);
 }

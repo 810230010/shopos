@@ -29,7 +29,7 @@ public class SMSServiceImpl implements SMSService {
         boolean res = smsSender.send(phone, "1", new String[]{timeout, code});
         if (res) {
             Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
-            cache.put("phone", code);
+            cache.put(phone, code);
             return true;
         } else {
             return false;
@@ -40,14 +40,21 @@ public class SMSServiceImpl implements SMSService {
     public boolean sendtRepassCode(String phone) {
         String code = this.getRandomCode();
         String timeout = "10";
-        boolean res = smsSender.send(phone, "xxxxxx", new String[]{timeout, code});
+        boolean res = smsSender.send(phone, "1", new String[]{timeout, code});
         if (res) {
             Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
-            cache.put("phone", code);
+            cache.put(phone, code);
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String getCheckCode(String phone) {
+        Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
+        String cacheCode = (String)cache.get(phone);
+        return cacheCode;
     }
 
 

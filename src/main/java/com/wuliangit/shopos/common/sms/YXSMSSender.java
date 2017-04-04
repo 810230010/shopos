@@ -46,7 +46,7 @@ public class YXSMSSender implements SMSSender {
 
     @Override
     public String getCacheName() {
-        if (StringUtils.isEmpty(this.getCacheName())){
+        if (StringUtils.isEmpty(this.cacheName)){
             return DEFAULT_CACHE_NAME;
         }
         return cacheName;

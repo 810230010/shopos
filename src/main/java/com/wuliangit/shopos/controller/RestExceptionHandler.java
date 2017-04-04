@@ -19,6 +19,7 @@ public class RestExceptionHandler {
     public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
         RestResult result = new RestResult();
         result.setCode(500);
+        exception.printStackTrace();
         result.setMsg(exception.getMessage());
         return result;
     }

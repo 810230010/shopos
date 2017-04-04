@@ -1,13 +1,9 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.common.util.WebUtil;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.misc.BASE64Encoder;
-
-import java.security.MessageDigest;
 
 /**
  * Created by nilme on 2017/3/21.
@@ -27,26 +23,8 @@ public class MTestController {
     }
 
     public static void main(String[] args) {
-
-        // 生成一个MD5加密计算摘要
-        MessageDigest md5 = null;
-        try {
-            md5 = MessageDigest.getInstance("MD5");
-            BASE64Encoder base64en = new BASE64Encoder();
-
-            String url = "/api/v1/test/api?a=1&timestamp=123123123&token=e79fd3b742a0403f8c3a45090e82889e&userId=1";
-
-            String md5Hash = new Md5Hash(url).toString();
-
-            System.out.println("shiro:"+md5Hash);
-
-            //加密后的字符串
-            String signServer = base64en.encode(md5.digest(url.getBytes("utf-8")));
-
-            System.out.println(signServer);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String signUrl = new Md5Hash("/api/v1/?code=1&timestamp=1491275623230&token=0&userId=0").toString();
+        System.out.println(signUrl);
     }
 
 }

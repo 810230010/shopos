@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.BalanceCashMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.BalanceCash" >
+    <id column="balance_cash_id" property="balanceCashId" jdbcType="INTEGER" />
+    <result column="balance_cash_sn" property="balanceCashSn" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+    <result column="bank_user" property="bankUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="is_payment" property="isPayment" jdbcType="BIT" />
+    <result column="payment_admin" property="paymentAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    balance_cash_id, balance_cash_sn, member_id, member_name, amount, bank_name, bank_no, 
+    bank_user, create_time, payment_time, is_payment, payment_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_balance_cash
+    where balance_cash_id = #{balanceCashId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_balance_cash
+    where balance_cash_id = #{balanceCashId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.BalanceCash" >
+    insert into t_balance_cash (balance_cash_id, balance_cash_sn, member_id, 
+      member_name, amount, bank_name, 
+      bank_no, bank_user, create_time, 
+      payment_time, is_payment, payment_admin
+      )
+    values (#{balanceCashId,jdbcType=INTEGER}, #{balanceCashSn,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
+      #{memberName,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{bankName,jdbcType=VARCHAR}, 
+      #{bankNo,jdbcType=VARCHAR}, #{bankUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{paymentTime,jdbcType=TIMESTAMP}, #{isPayment,jdbcType=BIT}, #{paymentAdmin,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.BalanceCash" >
+    insert into t_balance_cash
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="balanceCashId != null" >
+        balance_cash_id,
+      </if>
+      <if test="balanceCashSn != null" >
+        balance_cash_sn,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="memberName != null" >
+        member_name,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="bankNo != null" >
+        bank_no,
+      </if>
+      <if test="bankUser != null" >
+        bank_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="paymentTime != null" >
+        payment_time,
+      </if>
+      <if test="isPayment != null" >
+        is_payment,
+      </if>
+      <if test="paymentAdmin != null" >
+        payment_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="balanceCashId != null" >
+        #{balanceCashId,jdbcType=INTEGER},
+      </if>
+      <if test="balanceCashSn != null" >
+        #{balanceCashSn,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null" >
+        #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankUser != null" >
+        #{bankUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentTime != null" >
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPayment != null" >
+        #{isPayment,jdbcType=BIT},
+      </if>
+      <if test="paymentAdmin != null" >
+        #{paymentAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.BalanceCash" >
+    update t_balance_cash
+    <set >
+      <if test="balanceCashSn != null" >
+        balance_cash_sn = #{balanceCashSn,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null" >
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null" >
+        bank_no = #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankUser != null" >
+        bank_user = #{bankUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentTime != null" >
+        payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPayment != null" >
+        is_payment = #{isPayment,jdbcType=BIT},
+      </if>
+      <if test="paymentAdmin != null" >
+        payment_admin = #{paymentAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where balance_cash_id = #{balanceCashId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.BalanceCash" >
+    update t_balance_cash
+    set balance_cash_sn = #{balanceCashSn,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=INTEGER},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_no = #{bankNo,jdbcType=VARCHAR},
+      bank_user = #{bankUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      is_payment = #{isPayment,jdbcType=BIT},
+      payment_admin = #{paymentAdmin,jdbcType=VARCHAR}
+    where balance_cash_id = #{balanceCashId,jdbcType=INTEGER}
+  </update>
+</mapper>

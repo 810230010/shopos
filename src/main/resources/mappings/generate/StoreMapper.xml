@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.StoreMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Store" >
+    <id column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="grade_id" property="gradeId" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="seller_nikename" property="sellerNikename" jdbcType="VARCHAR" />
+    <result column="sc_id" property="scId" jdbcType="INTEGER" />
+    <result column="store_company_name" property="storeCompanyName" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="area_info" property="areaInfo" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="zip" property="zip" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="close_info" property="closeInfo" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="label" property="label" jdbcType="VARCHAR" />
+    <result column="banner" property="banner" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="ww" property="ww" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="domain" property="domain" jdbcType="VARCHAR" />
+    <result column="domain_times" property="domainTimes" jdbcType="INTEGER" />
+    <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
+    <result column="theme" property="theme" jdbcType="VARCHAR" />
+    <result column="credit" property="credit" jdbcType="INTEGER" />
+    <result column="desccredit" property="desccredit" jdbcType="REAL" />
+    <result column="servicecredit" property="servicecredit" jdbcType="REAL" />
+    <result column="deliverycredit" property="deliverycredit" jdbcType="REAL" />
+    <result column="collect" property="collect" jdbcType="INTEGER" />
+    <result column="slide_url" property="slideUrl" jdbcType="VARCHAR" />
+    <result column="stamp" property="stamp" jdbcType="VARCHAR" />
+    <result column="printdesc" property="printdesc" jdbcType="VARCHAR" />
+    <result column="sales" property="sales" jdbcType="INTEGER" />
+    <result column="presales" property="presales" jdbcType="VARCHAR" />
+    <result column="aftersales" property="aftersales" jdbcType="VARCHAR" />
+    <result column="workingtime" property="workingtime" jdbcType="VARCHAR" />
+    <result column="free_price" property="freePrice" jdbcType="DECIMAL" />
+    <result column="decoration_switch" property="decorationSwitch" jdbcType="BIT" />
+    <result column="decoration_only" property="decorationOnly" jdbcType="BIT" />
+    <result column="seven_day_return" property="sevenDayReturn" jdbcType="BIT" />
+    <result column="real_goods" property="realGoods" jdbcType="BIT" />
+    <result column="sales_return" property="salesReturn" jdbcType="BIT" />
+    <result column="live" property="live" jdbcType="BIT" />
+    <result column="pay_after" property="payAfter" jdbcType="BIT" />
+    <result column="store_free_time" property="storeFreeTime" jdbcType="VARCHAR" />
+    <result column="live_store_name" property="liveStoreName" jdbcType="VARCHAR" />
+    <result column="live_store_address" property="liveStoreAddress" jdbcType="VARCHAR" />
+    <result column="live_store_tel" property="liveStoreTel" jdbcType="VARCHAR" />
+    <result column="live_store_gps" property="liveStoreGps" jdbcType="VARCHAR" />
+    <result column="live_store_bus" property="liveStoreBus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    store_id, name, grade_id, member_id, seller_nikename, sc_id, store_company_name, 
+    province_id, area_info, address, zip, state, close_info, sort, create_time, end_time, 
+    label, banner, logo, keywords, description, qq, ww, phone, domain, domain_times, 
+    is_recommend, theme, credit, desccredit, servicecredit, deliverycredit, collect, 
+    slide_url, stamp, printdesc, sales, presales, aftersales, workingtime, free_price, 
+    decoration_switch, decoration_only, seven_day_return, real_goods, sales_return, live, 
+    pay_after, store_free_time, live_store_name, live_store_address, live_store_tel, 
+    live_store_gps, live_store_bus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_store
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_store
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Store" >
+    insert into t_store (store_id, name, grade_id, 
+      member_id, seller_nikename, sc_id, 
+      store_company_name, province_id, area_info, 
+      address, zip, state, 
+      close_info, sort, create_time, 
+      end_time, label, banner, 
+      logo, keywords, description, 
+      qq, ww, phone, domain, 
+      domain_times, is_recommend, theme, 
+      credit, desccredit, servicecredit, 
+      deliverycredit, collect, slide_url, 
+      stamp, printdesc, sales, 
+      presales, aftersales, workingtime, 
+      free_price, decoration_switch, decoration_only, 
+      seven_day_return, real_goods, sales_return, 
+      live, pay_after, store_free_time, 
+      live_store_name, live_store_address, live_store_tel, 
+      live_store_gps, live_store_bus)
+    values (#{storeId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gradeId,jdbcType=INTEGER}, 
+      #{memberId,jdbcType=INTEGER}, #{sellerNikename,jdbcType=VARCHAR}, #{scId,jdbcType=INTEGER}, 
+      #{storeCompanyName,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{closeInfo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, #{banner,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{ww,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, 
+      #{domainTimes,jdbcType=INTEGER}, #{isRecommend,jdbcType=BIT}, #{theme,jdbcType=VARCHAR}, 
+      #{credit,jdbcType=INTEGER}, #{desccredit,jdbcType=REAL}, #{servicecredit,jdbcType=REAL}, 
+      #{deliverycredit,jdbcType=REAL}, #{collect,jdbcType=INTEGER}, #{slideUrl,jdbcType=VARCHAR}, 
+      #{stamp,jdbcType=VARCHAR}, #{printdesc,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER}, 
+      #{presales,jdbcType=VARCHAR}, #{aftersales,jdbcType=VARCHAR}, #{workingtime,jdbcType=VARCHAR}, 
+      #{freePrice,jdbcType=DECIMAL}, #{decorationSwitch,jdbcType=BIT}, #{decorationOnly,jdbcType=BIT}, 
+      #{sevenDayReturn,jdbcType=BIT}, #{realGoods,jdbcType=BIT}, #{salesReturn,jdbcType=BIT}, 
+      #{live,jdbcType=BIT}, #{payAfter,jdbcType=BIT}, #{storeFreeTime,jdbcType=VARCHAR}, 
+      #{liveStoreName,jdbcType=VARCHAR}, #{liveStoreAddress,jdbcType=VARCHAR}, #{liveStoreTel,jdbcType=VARCHAR}, 
+      #{liveStoreGps,jdbcType=VARCHAR}, #{liveStoreBus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Store" >
+    insert into t_store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="gradeId != null" >
+        grade_id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="sellerNikename != null" >
+        seller_nikename,
+      </if>
+      <if test="scId != null" >
+        sc_id,
+      </if>
+      <if test="storeCompanyName != null" >
+        store_company_name,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="areaInfo != null" >
+        area_info,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="zip != null" >
+        zip,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="closeInfo != null" >
+        close_info,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="label != null" >
+        label,
+      </if>
+      <if test="banner != null" >
+        banner,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="ww != null" >
+        ww,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="domain != null" >
+        domain,
+      </if>
+      <if test="domainTimes != null" >
+        domain_times,
+      </if>
+      <if test="isRecommend != null" >
+        is_recommend,
+      </if>
+      <if test="theme != null" >
+        theme,
+      </if>
+      <if test="credit != null" >
+        credit,
+      </if>
+      <if test="desccredit != null" >
+        desccredit,
+      </if>
+      <if test="servicecredit != null" >
+        servicecredit,
+      </if>
+      <if test="deliverycredit != null" >
+        deliverycredit,
+      </if>
+      <if test="collect != null" >
+        collect,
+      </if>
+      <if test="slideUrl != null" >
+        slide_url,
+      </if>
+      <if test="stamp != null" >
+        stamp,
+      </if>
+      <if test="printdesc != null" >
+        printdesc,
+      </if>
+      <if test="sales != null" >
+        sales,
+      </if>
+      <if test="presales != null" >
+        presales,
+      </if>
+      <if test="aftersales != null" >
+        aftersales,
+      </if>
+      <if test="workingtime != null" >
+        workingtime,
+      </if>
+      <if test="freePrice != null" >
+        free_price,
+      </if>
+      <if test="decorationSwitch != null" >
+        decoration_switch,
+      </if>
+      <if test="decorationOnly != null" >
+        decoration_only,
+      </if>
+      <if test="sevenDayReturn != null" >
+        seven_day_return,
+      </if>
+      <if test="realGoods != null" >
+        real_goods,
+      </if>
+      <if test="salesReturn != null" >
+        sales_return,
+      </if>
+      <if test="live != null" >
+        live,
+      </if>
+      <if test="payAfter != null" >
+        pay_after,
+      </if>
+      <if test="storeFreeTime != null" >
+        store_free_time,
+      </if>
+      <if test="liveStoreName != null" >
+        live_store_name,
+      </if>
+      <if test="liveStoreAddress != null" >
+        live_store_address,
+      </if>
+      <if test="liveStoreTel != null" >
+        live_store_tel,
+      </if>
+      <if test="liveStoreGps != null" >
+        live_store_gps,
+      </if>
+      <if test="liveStoreBus != null" >
+        live_store_bus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeId != null" >
+        #{gradeId,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerNikename != null" >
+        #{sellerNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="scId != null" >
+        #{scId,jdbcType=INTEGER},
+      </if>
+      <if test="storeCompanyName != null" >
+        #{storeCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="areaInfo != null" >
+        #{areaInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="closeInfo != null" >
+        #{closeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null" >
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="ww != null" >
+        #{ww,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null" >
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="domainTimes != null" >
+        #{domainTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isRecommend != null" >
+        #{isRecommend,jdbcType=BIT},
+      </if>
+      <if test="theme != null" >
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="desccredit != null" >
+        #{desccredit,jdbcType=REAL},
+      </if>
+      <if test="servicecredit != null" >
+        #{servicecredit,jdbcType=REAL},
+      </if>
+      <if test="deliverycredit != null" >
+        #{deliverycredit,jdbcType=REAL},
+      </if>
+      <if test="collect != null" >
+        #{collect,jdbcType=INTEGER},
+      </if>
+      <if test="slideUrl != null" >
+        #{slideUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="stamp != null" >
+        #{stamp,jdbcType=VARCHAR},
+      </if>
+      <if test="printdesc != null" >
+        #{printdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null" >
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="presales != null" >
+        #{presales,jdbcType=VARCHAR},
+      </if>
+      <if test="aftersales != null" >
+        #{aftersales,jdbcType=VARCHAR},
+      </if>
+      <if test="workingtime != null" >
+        #{workingtime,jdbcType=VARCHAR},
+      </if>
+      <if test="freePrice != null" >
+        #{freePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="decorationSwitch != null" >
+        #{decorationSwitch,jdbcType=BIT},
+      </if>
+      <if test="decorationOnly != null" >
+        #{decorationOnly,jdbcType=BIT},
+      </if>
+      <if test="sevenDayReturn != null" >
+        #{sevenDayReturn,jdbcType=BIT},
+      </if>
+      <if test="realGoods != null" >
+        #{realGoods,jdbcType=BIT},
+      </if>
+      <if test="salesReturn != null" >
+        #{salesReturn,jdbcType=BIT},
+      </if>
+      <if test="live != null" >
+        #{live,jdbcType=BIT},
+      </if>
+      <if test="payAfter != null" >
+        #{payAfter,jdbcType=BIT},
+      </if>
+      <if test="storeFreeTime != null" >
+        #{storeFreeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreName != null" >
+        #{liveStoreName,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreAddress != null" >
+        #{liveStoreAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreTel != null" >
+        #{liveStoreTel,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreGps != null" >
+        #{liveStoreGps,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreBus != null" >
+        #{liveStoreBus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Store" >
+    update t_store
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeId != null" >
+        grade_id = #{gradeId,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerNikename != null" >
+        seller_nikename = #{sellerNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="scId != null" >
+        sc_id = #{scId,jdbcType=INTEGER},
+      </if>
+      <if test="storeCompanyName != null" >
+        store_company_name = #{storeCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="areaInfo != null" >
+        area_info = #{areaInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="closeInfo != null" >
+        close_info = #{closeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null" >
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="ww != null" >
+        ww = #{ww,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null" >
+        domain = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="domainTimes != null" >
+        domain_times = #{domainTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isRecommend != null" >
+        is_recommend = #{isRecommend,jdbcType=BIT},
+      </if>
+      <if test="theme != null" >
+        theme = #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        credit = #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="desccredit != null" >
+        desccredit = #{desccredit,jdbcType=REAL},
+      </if>
+      <if test="servicecredit != null" >
+        servicecredit = #{servicecredit,jdbcType=REAL},
+      </if>
+      <if test="deliverycredit != null" >
+        deliverycredit = #{deliverycredit,jdbcType=REAL},
+      </if>
+      <if test="collect != null" >
+        collect = #{collect,jdbcType=INTEGER},
+      </if>
+      <if test="slideUrl != null" >
+        slide_url = #{slideUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="stamp != null" >
+        stamp = #{stamp,jdbcType=VARCHAR},
+      </if>
+      <if test="printdesc != null" >
+        printdesc = #{printdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null" >
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="presales != null" >
+        presales = #{presales,jdbcType=VARCHAR},
+      </if>
+      <if test="aftersales != null" >
+        aftersales = #{aftersales,jdbcType=VARCHAR},
+      </if>
+      <if test="workingtime != null" >
+        workingtime = #{workingtime,jdbcType=VARCHAR},
+      </if>
+      <if test="freePrice != null" >
+        free_price = #{freePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="decorationSwitch != null" >
+        decoration_switch = #{decorationSwitch,jdbcType=BIT},
+      </if>
+      <if test="decorationOnly != null" >
+        decoration_only = #{decorationOnly,jdbcType=BIT},
+      </if>
+      <if test="sevenDayReturn != null" >
+        seven_day_return = #{sevenDayReturn,jdbcType=BIT},
+      </if>
+      <if test="realGoods != null" >
+        real_goods = #{realGoods,jdbcType=BIT},
+      </if>
+      <if test="salesReturn != null" >
+        sales_return = #{salesReturn,jdbcType=BIT},
+      </if>
+      <if test="live != null" >
+        live = #{live,jdbcType=BIT},
+      </if>
+      <if test="payAfter != null" >
+        pay_after = #{payAfter,jdbcType=BIT},
+      </if>
+      <if test="storeFreeTime != null" >
+        store_free_time = #{storeFreeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreName != null" >
+        live_store_name = #{liveStoreName,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreAddress != null" >
+        live_store_address = #{liveStoreAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreTel != null" >
+        live_store_tel = #{liveStoreTel,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreGps != null" >
+        live_store_gps = #{liveStoreGps,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStoreBus != null" >
+        live_store_bus = #{liveStoreBus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Store" >
+    update t_store
+    set name = #{name,jdbcType=VARCHAR},
+      grade_id = #{gradeId,jdbcType=INTEGER},
+      member_id = #{memberId,jdbcType=INTEGER},
+      seller_nikename = #{sellerNikename,jdbcType=VARCHAR},
+      sc_id = #{scId,jdbcType=INTEGER},
+      store_company_name = #{storeCompanyName,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      area_info = #{areaInfo,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      close_info = #{closeInfo,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      banner = #{banner,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      ww = #{ww,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      domain = #{domain,jdbcType=VARCHAR},
+      domain_times = #{domainTimes,jdbcType=INTEGER},
+      is_recommend = #{isRecommend,jdbcType=BIT},
+      theme = #{theme,jdbcType=VARCHAR},
+      credit = #{credit,jdbcType=INTEGER},
+      desccredit = #{desccredit,jdbcType=REAL},
+      servicecredit = #{servicecredit,jdbcType=REAL},
+      deliverycredit = #{deliverycredit,jdbcType=REAL},
+      collect = #{collect,jdbcType=INTEGER},
+      slide_url = #{slideUrl,jdbcType=VARCHAR},
+      stamp = #{stamp,jdbcType=VARCHAR},
+      printdesc = #{printdesc,jdbcType=VARCHAR},
+      sales = #{sales,jdbcType=INTEGER},
+      presales = #{presales,jdbcType=VARCHAR},
+      aftersales = #{aftersales,jdbcType=VARCHAR},
+      workingtime = #{workingtime,jdbcType=VARCHAR},
+      free_price = #{freePrice,jdbcType=DECIMAL},
+      decoration_switch = #{decorationSwitch,jdbcType=BIT},
+      decoration_only = #{decorationOnly,jdbcType=BIT},
+      seven_day_return = #{sevenDayReturn,jdbcType=BIT},
+      real_goods = #{realGoods,jdbcType=BIT},
+      sales_return = #{salesReturn,jdbcType=BIT},
+      live = #{live,jdbcType=BIT},
+      pay_after = #{payAfter,jdbcType=BIT},
+      store_free_time = #{storeFreeTime,jdbcType=VARCHAR},
+      live_store_name = #{liveStoreName,jdbcType=VARCHAR},
+      live_store_address = #{liveStoreAddress,jdbcType=VARCHAR},
+      live_store_tel = #{liveStoreTel,jdbcType=VARCHAR},
+      live_store_gps = #{liveStoreGps,jdbcType=VARCHAR},
+      live_store_bus = #{liveStoreBus,jdbcType=VARCHAR}
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </update>
+</mapper>

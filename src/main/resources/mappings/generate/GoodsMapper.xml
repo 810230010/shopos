@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Goods" >
+    <id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="ad_word" property="adWord" jdbcType="VARCHAR" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="goods_category_id" property="goodsCategoryId" jdbcType="INTEGER" />
+    <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="commission" property="commission" jdbcType="DECIMAL" />
+    <result column="commission_percent" property="commissionPercent" jdbcType="DECIMAL" />
+    <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL" />
+    <result column="promotion_type" property="promotionType" jdbcType="VARCHAR" />
+    <result column="marketprice" property="marketprice" jdbcType="DECIMAL" />
+    <result column="storage_alarm" property="storageAlarm" jdbcType="INTEGER" />
+    <result column="click" property="click" jdbcType="INTEGER" />
+    <result column="salenum" property="salenum" jdbcType="INTEGER" />
+    <result column="collect" property="collect" jdbcType="INTEGER" />
+    <result column="spec" property="spec" jdbcType="VARCHAR" />
+    <result column="storage" property="storage" jdbcType="INTEGER" />
+    <result column="images" property="images" jdbcType="VARCHAR" />
+    <result column="title_img" property="titleImg" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="verify" property="verify" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+    <result column="is_new" property="isNew" jdbcType="BIT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="second_hand" property="secondHand" jdbcType="BIT" />
+    <result column="activity_id" property="activityId" jdbcType="INTEGER" />
+    <result column="activity_type" property="activityType" jdbcType="VARCHAR" />
+    <result column="is_virtual" property="isVirtual" jdbcType="BIT" />
+    <result column="virtual_invalid_refund" property="virtualInvalidRefund" jdbcType="BIT" />
+    <result column="is_appoint" property="isAppoint" jdbcType="BIT" />
+    <result column="is_presell" property="isPresell" jdbcType="BIT" />
+    <result column="is_own_shop" property="isOwnShop" jdbcType="BIT" />
+    <result column="freight" property="freight" jdbcType="DECIMAL" />
+    <result column="vat" property="vat" jdbcType="BIT" />
+    <result column="commend" property="commend" jdbcType="BIT" />
+    <result column="evaluation_good_star" property="evaluationGoodStar" jdbcType="INTEGER" />
+    <result column="evaluation_count" property="evaluationCount" jdbcType="INTEGER" />
+    <result column="del_flag" property="delFlag" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.Goods" extends="BaseResultMap" >
+    <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_id, name, unit, ad_word, store_id, store_name, goods_category_id, brand_id, 
+    price, commission, commission_percent, promotion_price, promotion_type, marketprice, 
+    storage_alarm, click, salenum, collect, spec, storage, images, title_img, state, 
+    verify, create_time, edittime, is_new, type, second_hand, activity_id, activity_type, 
+    is_virtual, virtual_invalid_refund, is_appoint, is_presell, is_own_shop, freight, 
+    vat, commend, evaluation_good_star, evaluation_count, del_flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    goods_body
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Goods" >
+    insert into t_goods (goods_id, name, unit, 
+      ad_word, store_id, store_name, 
+      goods_category_id, brand_id, price, 
+      commission, commission_percent, promotion_price, 
+      promotion_type, marketprice, storage_alarm, 
+      click, salenum, collect, 
+      spec, storage, images, 
+      title_img, state, verify, 
+      create_time, edittime, is_new, 
+      type, second_hand, activity_id, 
+      activity_type, is_virtual, virtual_invalid_refund, 
+      is_appoint, is_presell, is_own_shop, 
+      freight, vat, commend, evaluation_good_star, 
+      evaluation_count, del_flag, goods_body
+      )
+    values (#{goodsId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{adWord,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
+      #{goodsCategoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{commission,jdbcType=DECIMAL}, #{commissionPercent,jdbcType=DECIMAL}, #{promotionPrice,jdbcType=DECIMAL}, 
+      #{promotionType,jdbcType=VARCHAR}, #{marketprice,jdbcType=DECIMAL}, #{storageAlarm,jdbcType=INTEGER}, 
+      #{click,jdbcType=INTEGER}, #{salenum,jdbcType=INTEGER}, #{collect,jdbcType=INTEGER}, 
+      #{spec,jdbcType=VARCHAR}, #{storage,jdbcType=INTEGER}, #{images,jdbcType=VARCHAR}, 
+      #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{verify,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, #{isNew,jdbcType=BIT}, 
+      #{type,jdbcType=VARCHAR}, #{secondHand,jdbcType=BIT}, #{activityId,jdbcType=INTEGER}, 
+      #{activityType,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, 
+      #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, 
+      #{freight,jdbcType=DECIMAL}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
+      #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{goodsBody,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="adWord != null" >
+        ad_word,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="storeName != null" >
+        store_name,
+      </if>
+      <if test="goodsCategoryId != null" >
+        goods_category_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="commission != null" >
+        commission,
+      </if>
+      <if test="commissionPercent != null" >
+        commission_percent,
+      </if>
+      <if test="promotionPrice != null" >
+        promotion_price,
+      </if>
+      <if test="promotionType != null" >
+        promotion_type,
+      </if>
+      <if test="marketprice != null" >
+        marketprice,
+      </if>
+      <if test="storageAlarm != null" >
+        storage_alarm,
+      </if>
+      <if test="click != null" >
+        click,
+      </if>
+      <if test="salenum != null" >
+        salenum,
+      </if>
+      <if test="collect != null" >
+        collect,
+      </if>
+      <if test="spec != null" >
+        spec,
+      </if>
+      <if test="storage != null" >
+        storage,
+      </if>
+      <if test="images != null" >
+        images,
+      </if>
+      <if test="titleImg != null" >
+        title_img,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="verify != null" >
+        verify,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="edittime != null" >
+        edittime,
+      </if>
+      <if test="isNew != null" >
+        is_new,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="secondHand != null" >
+        second_hand,
+      </if>
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="activityType != null" >
+        activity_type,
+      </if>
+      <if test="isVirtual != null" >
+        is_virtual,
+      </if>
+      <if test="virtualInvalidRefund != null" >
+        virtual_invalid_refund,
+      </if>
+      <if test="isAppoint != null" >
+        is_appoint,
+      </if>
+      <if test="isPresell != null" >
+        is_presell,
+      </if>
+      <if test="isOwnShop != null" >
+        is_own_shop,
+      </if>
+      <if test="freight != null" >
+        freight,
+      </if>
+      <if test="vat != null" >
+        vat,
+      </if>
+      <if test="commend != null" >
+        commend,
+      </if>
+      <if test="evaluationGoodStar != null" >
+        evaluation_good_star,
+      </if>
+      <if test="evaluationCount != null" >
+        evaluation_count,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="goodsBody != null" >
+        goods_body,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="adWord != null" >
+        #{adWord,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null" >
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCategoryId != null" >
+        #{goodsCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="commission != null" >
+        #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="commissionPercent != null" >
+        #{commissionPercent,jdbcType=DECIMAL},
+      </if>
+      <if test="promotionPrice != null" >
+        #{promotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="promotionType != null" >
+        #{promotionType,jdbcType=VARCHAR},
+      </if>
+      <if test="marketprice != null" >
+        #{marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="storageAlarm != null" >
+        #{storageAlarm,jdbcType=INTEGER},
+      </if>
+      <if test="click != null" >
+        #{click,jdbcType=INTEGER},
+      </if>
+      <if test="salenum != null" >
+        #{salenum,jdbcType=INTEGER},
+      </if>
+      <if test="collect != null" >
+        #{collect,jdbcType=INTEGER},
+      </if>
+      <if test="spec != null" >
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="storage != null" >
+        #{storage,jdbcType=INTEGER},
+      </if>
+      <if test="images != null" >
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="titleImg != null" >
+        #{titleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="verify != null" >
+        #{verify,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isNew != null" >
+        #{isNew,jdbcType=BIT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHand != null" >
+        #{secondHand,jdbcType=BIT},
+      </if>
+      <if test="activityId != null" >
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityType != null" >
+        #{activityType,jdbcType=VARCHAR},
+      </if>
+      <if test="isVirtual != null" >
+        #{isVirtual,jdbcType=BIT},
+      </if>
+      <if test="virtualInvalidRefund != null" >
+        #{virtualInvalidRefund,jdbcType=BIT},
+      </if>
+      <if test="isAppoint != null" >
+        #{isAppoint,jdbcType=BIT},
+      </if>
+      <if test="isPresell != null" >
+        #{isPresell,jdbcType=BIT},
+      </if>
+      <if test="isOwnShop != null" >
+        #{isOwnShop,jdbcType=BIT},
+      </if>
+      <if test="freight != null" >
+        #{freight,jdbcType=DECIMAL},
+      </if>
+      <if test="vat != null" >
+        #{vat,jdbcType=BIT},
+      </if>
+      <if test="commend != null" >
+        #{commend,jdbcType=BIT},
+      </if>
+      <if test="evaluationGoodStar != null" >
+        #{evaluationGoodStar,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationCount != null" >
+        #{evaluationCount,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=BIT},
+      </if>
+      <if test="goodsBody != null" >
+        #{goodsBody,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Goods" >
+    update t_goods
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="adWord != null" >
+        ad_word = #{adWord,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null" >
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCategoryId != null" >
+        goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="commission != null" >
+        commission = #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="commissionPercent != null" >
+        commission_percent = #{commissionPercent,jdbcType=DECIMAL},
+      </if>
+      <if test="promotionPrice != null" >
+        promotion_price = #{promotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="promotionType != null" >
+        promotion_type = #{promotionType,jdbcType=VARCHAR},
+      </if>
+      <if test="marketprice != null" >
+        marketprice = #{marketprice,jdbcType=DECIMAL},
+      </if>
+      <if test="storageAlarm != null" >
+        storage_alarm = #{storageAlarm,jdbcType=INTEGER},
+      </if>
+      <if test="click != null" >
+        click = #{click,jdbcType=INTEGER},
+      </if>
+      <if test="salenum != null" >
+        salenum = #{salenum,jdbcType=INTEGER},
+      </if>
+      <if test="collect != null" >
+        collect = #{collect,jdbcType=INTEGER},
+      </if>
+      <if test="spec != null" >
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="storage != null" >
+        storage = #{storage,jdbcType=INTEGER},
+      </if>
+      <if test="images != null" >
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="titleImg != null" >
+        title_img = #{titleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="verify != null" >
+        verify = #{verify,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isNew != null" >
+        is_new = #{isNew,jdbcType=BIT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHand != null" >
+        second_hand = #{secondHand,jdbcType=BIT},
+      </if>
+      <if test="activityId != null" >
+        activity_id = #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityType != null" >
+        activity_type = #{activityType,jdbcType=VARCHAR},
+      </if>
+      <if test="isVirtual != null" >
+        is_virtual = #{isVirtual,jdbcType=BIT},
+      </if>
+      <if test="virtualInvalidRefund != null" >
+        virtual_invalid_refund = #{virtualInvalidRefund,jdbcType=BIT},
+      </if>
+      <if test="isAppoint != null" >
+        is_appoint = #{isAppoint,jdbcType=BIT},
+      </if>
+      <if test="isPresell != null" >
+        is_presell = #{isPresell,jdbcType=BIT},
+      </if>
+      <if test="isOwnShop != null" >
+        is_own_shop = #{isOwnShop,jdbcType=BIT},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=DECIMAL},
+      </if>
+      <if test="vat != null" >
+        vat = #{vat,jdbcType=BIT},
+      </if>
+      <if test="commend != null" >
+        commend = #{commend,jdbcType=BIT},
+      </if>
+      <if test="evaluationGoodStar != null" >
+        evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationCount != null" >
+        evaluation_count = #{evaluationCount,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=BIT},
+      </if>
+      <if test="goodsBody != null" >
+        goods_body = #{goodsBody,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wuliangit.shopos.entity.Goods" >
+    update t_goods
+    set name = #{name,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      ad_word = #{adWord,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=INTEGER},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      commission = #{commission,jdbcType=DECIMAL},
+      commission_percent = #{commissionPercent,jdbcType=DECIMAL},
+      promotion_price = #{promotionPrice,jdbcType=DECIMAL},
+      promotion_type = #{promotionType,jdbcType=VARCHAR},
+      marketprice = #{marketprice,jdbcType=DECIMAL},
+      storage_alarm = #{storageAlarm,jdbcType=INTEGER},
+      click = #{click,jdbcType=INTEGER},
+      salenum = #{salenum,jdbcType=INTEGER},
+      collect = #{collect,jdbcType=INTEGER},
+      spec = #{spec,jdbcType=VARCHAR},
+      storage = #{storage,jdbcType=INTEGER},
+      images = #{images,jdbcType=VARCHAR},
+      title_img = #{titleImg,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      verify = #{verify,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      edittime = #{edittime,jdbcType=TIMESTAMP},
+      is_new = #{isNew,jdbcType=BIT},
+      type = #{type,jdbcType=VARCHAR},
+      second_hand = #{secondHand,jdbcType=BIT},
+      activity_id = #{activityId,jdbcType=INTEGER},
+      activity_type = #{activityType,jdbcType=VARCHAR},
+      is_virtual = #{isVirtual,jdbcType=BIT},
+      virtual_invalid_refund = #{virtualInvalidRefund,jdbcType=BIT},
+      is_appoint = #{isAppoint,jdbcType=BIT},
+      is_presell = #{isPresell,jdbcType=BIT},
+      is_own_shop = #{isOwnShop,jdbcType=BIT},
+      freight = #{freight,jdbcType=DECIMAL},
+      vat = #{vat,jdbcType=BIT},
+      commend = #{commend,jdbcType=BIT},
+      evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
+      evaluation_count = #{evaluationCount,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=BIT},
+      goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Goods" >
+    update t_goods
+    set name = #{name,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      ad_word = #{adWord,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=INTEGER},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      commission = #{commission,jdbcType=DECIMAL},
+      commission_percent = #{commissionPercent,jdbcType=DECIMAL},
+      promotion_price = #{promotionPrice,jdbcType=DECIMAL},
+      promotion_type = #{promotionType,jdbcType=VARCHAR},
+      marketprice = #{marketprice,jdbcType=DECIMAL},
+      storage_alarm = #{storageAlarm,jdbcType=INTEGER},
+      click = #{click,jdbcType=INTEGER},
+      salenum = #{salenum,jdbcType=INTEGER},
+      collect = #{collect,jdbcType=INTEGER},
+      spec = #{spec,jdbcType=VARCHAR},
+      storage = #{storage,jdbcType=INTEGER},
+      images = #{images,jdbcType=VARCHAR},
+      title_img = #{titleImg,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      verify = #{verify,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      edittime = #{edittime,jdbcType=TIMESTAMP},
+      is_new = #{isNew,jdbcType=BIT},
+      type = #{type,jdbcType=VARCHAR},
+      second_hand = #{secondHand,jdbcType=BIT},
+      activity_id = #{activityId,jdbcType=INTEGER},
+      activity_type = #{activityType,jdbcType=VARCHAR},
+      is_virtual = #{isVirtual,jdbcType=BIT},
+      virtual_invalid_refund = #{virtualInvalidRefund,jdbcType=BIT},
+      is_appoint = #{isAppoint,jdbcType=BIT},
+      is_presell = #{isPresell,jdbcType=BIT},
+      is_own_shop = #{isOwnShop,jdbcType=BIT},
+      freight = #{freight,jdbcType=DECIMAL},
+      vat = #{vat,jdbcType=BIT},
+      commend = #{commend,jdbcType=BIT},
+      evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
+      evaluation_count = #{evaluationCount,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=BIT}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.FavoritesStoreMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.FavoritesStore" >
+    <id column="favorites_store_id" property="favoritesStoreId" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="fav_time" property="favTime" jdbcType="TIMESTAMP" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="log_msg" property="logMsg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    favorites_store_id, member_id, member_name, fav_time, store_id, store_name, log_msg
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_favorites_store
+    where favorites_store_id = #{favoritesStoreId,jdbcType=INTEGER}
+  </select>
+
+
+  <!--用户收藏店铺列表-->
+    <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.ApiCollectStoreDTO">
+      select s.name, s.logo, s.label, fs.fav_time
+      from t_favorites_store fs left join t_store s on s.store_id = fs.store_id
+      where fs.member_id = #{memberId}
+    </select>
+  <!--删除收藏店铺-->
+  <delete id="deleteCollectGoods">
+    delete from t_favorites_store
+    where member_id = #{memberId} and store_id = #{storeId}
+  </delete>
+
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_favorites_store
+    where favorites_store_id = #{favoritesStoreId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.FavoritesStore" >
+    insert into t_favorites_store (favorites_store_id, member_id, member_name, 
+      fav_time, store_id, store_name, 
+      log_msg)
+    values (#{favoritesStoreId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
+      #{favTime,jdbcType=TIMESTAMP}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
+      #{logMsg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.FavoritesStore" >
+    insert into t_favorites_store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="favoritesStoreId != null" >
+        favorites_store_id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="memberName != null" >
+        member_name,
+      </if>
+      <if test="favTime != null" >
+        fav_time,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="storeName != null" >
+        store_name,
+      </if>
+      <if test="logMsg != null" >
+        log_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="favoritesStoreId != null" >
+        #{favoritesStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="favTime != null" >
+        #{favTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null" >
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="logMsg != null" >
+        #{logMsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.FavoritesStore" >
+    update t_favorites_store
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null" >
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="favTime != null" >
+        fav_time = #{favTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null" >
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="logMsg != null" >
+        log_msg = #{logMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where favorites_store_id = #{favoritesStoreId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.FavoritesStore" >
+    update t_favorites_store
+    set member_id = #{memberId,jdbcType=INTEGER},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      fav_time = #{favTime,jdbcType=TIMESTAMP},
+      store_id = #{storeId,jdbcType=INTEGER},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      log_msg = #{logMsg,jdbcType=VARCHAR}
+    where favorites_store_id = #{favoritesStoreId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.StoreGradeMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.StoreGrade" >
+    <id column="store_grade_id" property="storeGradeId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="CHAR" />
+    <result column="goods_limit" property="goodsLimit" jdbcType="INTEGER" />
+    <result column="album_limit" property="albumLimit" jdbcType="INTEGER" />
+    <result column="space_limit" property="spaceLimit" jdbcType="INTEGER" />
+    <result column="template_number" property="templateNumber" jdbcType="INTEGER" />
+    <result column="template" property="template" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="function" property="function" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.StoreGrade" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    store_grade_id, name, goods_limit, album_limit, space_limit, template_number, template, 
+    price, function, sort
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_store_grade
+    where store_grade_id = #{storeGradeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_store_grade
+    where store_grade_id = #{storeGradeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreGrade" >
+    insert into t_store_grade (store_grade_id, name, goods_limit, 
+      album_limit, space_limit, template_number, 
+      template, price, function, 
+      sort, description)
+    values (#{storeGradeId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{goodsLimit,jdbcType=INTEGER}, 
+      #{albumLimit,jdbcType=INTEGER}, #{spaceLimit,jdbcType=INTEGER}, #{templateNumber,jdbcType=INTEGER}, 
+      #{template,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{function,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreGrade" >
+    insert into t_store_grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeGradeId != null" >
+        store_grade_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="goodsLimit != null" >
+        goods_limit,
+      </if>
+      <if test="albumLimit != null" >
+        album_limit,
+      </if>
+      <if test="spaceLimit != null" >
+        space_limit,
+      </if>
+      <if test="templateNumber != null" >
+        template_number,
+      </if>
+      <if test="template != null" >
+        template,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="function != null" >
+        function,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeGradeId != null" >
+        #{storeGradeId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="goodsLimit != null" >
+        #{goodsLimit,jdbcType=INTEGER},
+      </if>
+      <if test="albumLimit != null" >
+        #{albumLimit,jdbcType=INTEGER},
+      </if>
+      <if test="spaceLimit != null" >
+        #{spaceLimit,jdbcType=INTEGER},
+      </if>
+      <if test="templateNumber != null" >
+        #{templateNumber,jdbcType=INTEGER},
+      </if>
+      <if test="template != null" >
+        #{template,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="function != null" >
+        #{function,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.StoreGrade" >
+    update t_store_grade
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="goodsLimit != null" >
+        goods_limit = #{goodsLimit,jdbcType=INTEGER},
+      </if>
+      <if test="albumLimit != null" >
+        album_limit = #{albumLimit,jdbcType=INTEGER},
+      </if>
+      <if test="spaceLimit != null" >
+        space_limit = #{spaceLimit,jdbcType=INTEGER},
+      </if>
+      <if test="templateNumber != null" >
+        template_number = #{templateNumber,jdbcType=INTEGER},
+      </if>
+      <if test="template != null" >
+        template = #{template,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="function != null" >
+        function = #{function,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where store_grade_id = #{storeGradeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wuliangit.shopos.entity.StoreGrade" >
+    update t_store_grade
+    set name = #{name,jdbcType=CHAR},
+      goods_limit = #{goodsLimit,jdbcType=INTEGER},
+      album_limit = #{albumLimit,jdbcType=INTEGER},
+      space_limit = #{spaceLimit,jdbcType=INTEGER},
+      template_number = #{templateNumber,jdbcType=INTEGER},
+      template = #{template,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      function = #{function,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where store_grade_id = #{storeGradeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.StoreGrade" >
+    update t_store_grade
+    set name = #{name,jdbcType=CHAR},
+      goods_limit = #{goodsLimit,jdbcType=INTEGER},
+      album_limit = #{albumLimit,jdbcType=INTEGER},
+      space_limit = #{spaceLimit,jdbcType=INTEGER},
+      template_number = #{templateNumber,jdbcType=INTEGER},
+      template = #{template,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      function = #{function,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER}
+    where store_grade_id = #{storeGradeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,8 +1,9 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.common.sms.YXSMSSender;
 import com.wuliangit.shopos.common.util.PasswordHelper;
+import com.wuliangit.shopos.dao.AdminLogMapper;
 import com.wuliangit.shopos.dao.MemberMapper;
+import com.wuliangit.shopos.entity.AdminLog;
 import com.wuliangit.shopos.entity.Member;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nilme on 2017/3/20.
@@ -31,6 +33,9 @@ public class MemberServiceTest {
 
     @Autowired
     private SMSService smsService;
+
+    @Autowired
+    private AdminLogMapper adminLogMapper;
 
 
     @Test
@@ -61,6 +66,13 @@ public class MemberServiceTest {
     @Test
     public void getPlaceholder () {
         smsService.sendRegisterCode("18066265836");
+    }
+
+    @Test
+    public void test(){
+
+
+
     }
 
 

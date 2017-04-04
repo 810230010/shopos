@@ -1,0 +1,110 @@
+2017-04-04 17:54:04,931 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-04 17:54:05,034 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@13a5fe33, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3108bc, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@370736d9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5f9d02cb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@63753b6d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6b09bb57]
+ 2017-04-04 17:54:45,113 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-04 17:54:45,165 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@13a5fe33, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3108bc, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@370736d9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5f9d02cb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@63753b6d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6b09bb57]
+ 2017-04-04 17:54:45,488 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-04 17:54:46,575 - Refreshing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 17:54:46 CST 2017]; root of context hierarchy
+ 2017-04-04 17:54:47,649 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:54:47,675 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:54:52,468 - {dataSource-1} inited
+ 2017-04-04 17:54:53,788 - Initializing EhCache CacheManager
+ 2017-04-04 17:54:54,332 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent4844918494347388838.jar
+ 2017-04-04 17:54:54,332 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent4844918494347388838.jar
+ 2017-04-04 17:54:54,345 - using Agent sizeof engine
+ 2017-04-04 17:54:54,407 - using Agent sizeof engine
+ 2017-04-04 17:54:54,882 - Closing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 17:54:46 CST 2017]; root of context hierarchy
+ 2017-04-04 17:54:54,885 - Shutting down EhCache CacheManager
+ 2017-04-04 17:54:54,903 - {dataSource-1} closed
+ 2017-04-04 17:55:21,031 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-04 17:55:21,107 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@78b66d36, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5223e5ee, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@bef2d72, org.springframework.test.context.support.DirtiesContextTestExecutionListener@69b2283a, org.springframework.test.context.transaction.TransactionalTestExecutionListener@22a637e7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6fe7aac8]
+ 2017-04-04 17:55:21,538 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-04 17:55:22,797 - Refreshing org.springframework.context.support.GenericApplicationContext@2e005c4b: startup date [Tue Apr 04 17:55:22 CST 2017]; root of context hierarchy
+ 2017-04-04 17:55:23,341 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:55:23,376 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:55:24,909 - {dataSource-1} inited
+ 2017-04-04 17:55:26,210 - Initializing EhCache CacheManager
+ 2017-04-04 17:55:26,747 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent6674599976738092888.jar
+ 2017-04-04 17:55:26,747 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent6674599976738092888.jar
+ 2017-04-04 17:55:26,757 - using Agent sizeof engine
+ 2017-04-04 17:55:26,760 - using Agent sizeof engine
+ 2017-04-04 17:55:27,620 - Closing org.springframework.context.support.GenericApplicationContext@2e005c4b: startup date [Tue Apr 04 17:55:22 CST 2017]; root of context hierarchy
+ 2017-04-04 17:55:27,622 - Shutting down EhCache CacheManager
+ 2017-04-04 17:55:27,645 - {dataSource-1} closed
+ 2017-04-04 17:56:25,111 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-04 17:56:25,181 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@13a5fe33, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3108bc, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@370736d9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5f9d02cb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@63753b6d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6b09bb57]
+ 2017-04-04 17:56:25,402 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-04 17:56:26,178 - Refreshing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 17:56:26 CST 2017]; root of context hierarchy
+ 2017-04-04 17:56:26,816 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:56:26,829 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:56:28,688 - {dataSource-1} inited
+ 2017-04-04 17:56:30,023 - Initializing EhCache CacheManager
+ 2017-04-04 17:56:30,645 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent3275406266158755969.jar
+ 2017-04-04 17:56:30,645 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent3275406266158755969.jar
+ 2017-04-04 17:56:30,659 - using Agent sizeof engine
+ 2017-04-04 17:56:30,662 - using Agent sizeof engine
+ 2017-04-04 17:56:31,126 - Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+ 2017-04-04 17:56:31,153 - SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+ 2017-04-04 17:56:31,204 - Closing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 17:56:26 CST 2017]; root of context hierarchy
+ 2017-04-04 17:56:31,206 - Shutting down EhCache CacheManager
+ 2017-04-04 17:56:31,221 - {dataSource-1} closed
+ 2017-04-04 17:56:51,234 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-04 17:56:51,261 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@13a5fe33, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3108bc, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@370736d9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5f9d02cb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@63753b6d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6b09bb57]
+ 2017-04-04 17:56:51,406 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-04 17:56:52,146 - Refreshing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 17:56:52 CST 2017]; root of context hierarchy
+ 2017-04-04 17:56:52,548 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:56:52,558 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:56:54,341 - {dataSource-1} inited
+ 2017-04-04 17:56:55,510 - Initializing EhCache CacheManager
+ 2017-04-04 17:56:56,062 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent853150014098440569.jar
+ 2017-04-04 17:56:56,062 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent853150014098440569.jar
+ 2017-04-04 17:56:56,074 - using Agent sizeof engine
+ 2017-04-04 17:56:56,077 - using Agent sizeof engine
+ 2017-04-04 17:56:56,544 - Closing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 17:56:52 CST 2017]; root of context hierarchy
+ 2017-04-04 17:56:56,551 - Shutting down EhCache CacheManager
+ 2017-04-04 17:56:56,575 - {dataSource-1} closed
+ 2017-04-04 17:58:03,185 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-04 17:58:03,205 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@13a5fe33, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3108bc, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@370736d9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5f9d02cb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@63753b6d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6b09bb57]
+ 2017-04-04 17:58:03,397 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-04 17:58:04,056 - Refreshing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 17:58:04 CST 2017]; root of context hierarchy
+ 2017-04-04 17:58:04,588 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:58:04,595 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 17:58:06,182 - {dataSource-1} inited
+ 2017-04-04 17:58:07,492 - Initializing EhCache CacheManager
+ 2017-04-04 17:58:07,843 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent1150761197293900156.jar
+ 2017-04-04 17:58:07,843 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent1150761197293900156.jar
+ 2017-04-04 17:58:07,858 - using Agent sizeof engine
+ 2017-04-04 17:58:07,897 - using Agent sizeof engine
+ 2017-04-04 17:58:08,429 - Closing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 17:58:04 CST 2017]; root of context hierarchy
+ 2017-04-04 17:58:08,431 - Shutting down EhCache CacheManager
+ 2017-04-04 17:58:08,450 - {dataSource-1} closed
+ 2017-04-04 19:37:43,083 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-04 19:37:43,173 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@13a5fe33, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3108bc, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@370736d9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5f9d02cb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@63753b6d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6b09bb57]
+ 2017-04-04 19:37:43,629 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-04 19:37:45,745 - Refreshing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 19:37:45 CST 2017]; root of context hierarchy
+ 2017-04-04 19:37:46,931 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 19:37:46,968 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 19:37:49,636 - {dataSource-1} inited
+ 2017-04-04 19:37:50,161 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-04 19:37:50,228 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@78b66d36, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5223e5ee, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@bef2d72, org.springframework.test.context.support.DirtiesContextTestExecutionListener@69b2283a, org.springframework.test.context.transaction.TransactionalTestExecutionListener@22a637e7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6fe7aac8]
+ 2017-04-04 19:37:50,696 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-04 19:37:51,875 - Refreshing org.springframework.context.support.GenericApplicationContext@2e005c4b: startup date [Tue Apr 04 19:37:51 CST 2017]; root of context hierarchy
+ 2017-04-04 19:37:52,403 - Initializing EhCache CacheManager
+ 2017-04-04 19:37:52,520 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 19:37:52,547 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-04 19:37:53,000 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent1002701066868417378.jar
+ 2017-04-04 19:37:53,000 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent1002701066868417378.jar
+ 2017-04-04 19:37:53,028 - using Agent sizeof engine
+ 2017-04-04 19:37:53,084 - using Agent sizeof engine
+ 2017-04-04 19:37:54,178 - Closing org.springframework.context.support.GenericApplicationContext@1786dec2: startup date [Tue Apr 04 19:37:45 CST 2017]; root of context hierarchy
+ 2017-04-04 19:37:54,180 - Shutting down EhCache CacheManager
+ 2017-04-04 19:37:54,197 - {dataSource-1} closed
+ 2017-04-04 19:37:54,970 - {dataSource-1} inited
+ 2017-04-04 19:37:57,144 - Initializing EhCache CacheManager
+ 2017-04-04 19:37:57,606 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent1007797295497030725.jar
+ 2017-04-04 19:37:57,607 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent1007797295497030725.jar
+ 2017-04-04 19:37:57,616 - using Agent sizeof engine
+ 2017-04-04 19:37:57,618 - using Agent sizeof engine
+ 2017-04-04 19:37:58,188 - Closing org.springframework.context.support.GenericApplicationContext@2e005c4b: startup date [Tue Apr 04 19:37:51 CST 2017]; root of context hierarchy
+ 2017-04-04 19:37:58,190 - Shutting down EhCache CacheManager
+ 2017-04-04 19:37:58,199 - {dataSource-1} closed
+ 

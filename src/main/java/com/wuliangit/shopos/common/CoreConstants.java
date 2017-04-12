@@ -2,7 +2,7 @@ package com.wuliangit.shopos.common;
 
 public class CoreConstants {
 
-    public static final String IMG_BASE_URL = "http://ohc6hqrk9.bkt.clouddn.com/";
+    public static final String IMG_BASE_URL = "http://ooa95t7wi.bkt.clouddn.com/";
 
     //当前用户session索引
     public static final String SESSION_CURRENT_USER = "CURRENT_USER";

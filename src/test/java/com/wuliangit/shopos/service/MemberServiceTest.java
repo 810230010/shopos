@@ -4,8 +4,11 @@ import com.alibaba.druid.filter.config.ConfigTools;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.dao.AdminLogMapper;
 import com.wuliangit.shopos.dao.MemberMapper;
+import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
 import com.wuliangit.shopos.entity.AdminLog;
+import com.wuliangit.shopos.entity.FavoritesGoods;
 import com.wuliangit.shopos.entity.Member;
+import org.dozer.Mapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,7 @@ import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring-context.xml"})
+@ContextConfiguration(locations = {"classpath:spring-context.xml","classpath:spring-shiro.xml"})
 @TransactionConfiguration(defaultRollback = true)
 public class MemberServiceTest {
 
@@ -37,6 +40,10 @@ public class MemberServiceTest {
 
     @Autowired
     private AdminLogMapper adminLogMapper;
+
+
+    @Autowired
+    private Mapper mapper;
 
 
     @Test
@@ -72,6 +79,25 @@ public class MemberServiceTest {
     public void test(){
 
 
+
+    }
+
+    @Test
+    public void dozeTest(){
+        ApiCollectGoodsDTO apiCollectGoodsDTO = new ApiCollectGoodsDTO();
+
+        apiCollectGoodsDTO.setFavoritesGoodId(1);
+        apiCollectGoodsDTO.setFavTime(new Date());
+        apiCollectGoodsDTO.setLogMsg("xxxxxx");
+
+
+        FavoritesGoods favoritesGoods = new FavoritesGoods();
+
+        ApiCollectGoodsDTO map = mapper.map(apiCollectGoodsDTO, ApiCollectGoodsDTO.class);
+
+        System.out.println(map.getLogMsg());
+
+//        System.out.println(favoritesGoods.getLogMsg());
 
     }
 

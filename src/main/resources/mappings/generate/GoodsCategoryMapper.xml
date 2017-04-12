@@ -9,9 +9,10 @@
     <result column="keywords" property="keywords" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="is_show" property="isShow" jdbcType="BIT" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    goods_category_id, name, parent_id, sort, keywords, description, is_show
+    goods_category_id, name, parent_id, sort, keywords, description, is_show, img
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,10 +27,10 @@
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.GoodsCategory" >
     insert into t_goods_category (goods_category_id, name, parent_id, 
       sort, keywords, description, 
-      is_show)
+      is_show, img)
     values (#{goodsCategoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
       #{sort,jdbcType=INTEGER}, #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{isShow,jdbcType=BIT})
+      #{isShow,jdbcType=BIT}, #{img,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.GoodsCategory" >
     insert into t_goods_category
@@ -55,6 +56,9 @@
       <if test="isShow != null" >
         is_show,
       </if>
+      <if test="img != null" >
+        img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="goodsCategoryId != null" >
@@ -77,6 +81,9 @@
       </if>
       <if test="isShow != null" >
         #{isShow,jdbcType=BIT},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -101,6 +108,9 @@
       <if test="isShow != null" >
         is_show = #{isShow,jdbcType=BIT},
       </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
     </set>
     where goods_category_id = #{goodsCategoryId,jdbcType=INTEGER}
   </update>
@@ -111,7 +121,8 @@
       sort = #{sort,jdbcType=INTEGER},
       keywords = #{keywords,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      is_show = #{isShow,jdbcType=BIT}
+      is_show = #{isShow,jdbcType=BIT},
+      img = #{img,jdbcType=VARCHAR}
     where goods_category_id = #{goodsCategoryId,jdbcType=INTEGER}
   </update>
 </mapper>

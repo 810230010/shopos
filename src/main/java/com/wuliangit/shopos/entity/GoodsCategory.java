@@ -15,6 +15,8 @@ public class GoodsCategory {
 
     private Boolean isShow;
 
+    private String img;
+
     public Integer getGoodsCategoryId() {
         return goodsCategoryId;
     }
@@ -69,5 +71,13 @@ public class GoodsCategory {
 
     public void setIsShow(Boolean isShow) {
         this.isShow = isShow;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
     }
 }

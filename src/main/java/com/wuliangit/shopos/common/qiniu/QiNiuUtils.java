@@ -37,7 +37,7 @@ public class QiNiuUtils {
             lock.lock();
             if (auth == null) {
                 Properties prop = new Properties();
-                InputStream in = QiNiuUtils.class.getClassLoader().getResourceAsStream("alaban.properties");
+                InputStream in = QiNiuUtils.class.getClassLoader().getResourceAsStream("shopos.properties");
                 try {
                     prop.load(in);
                     accessKey = prop.getProperty("qiniu.accessKey").trim();

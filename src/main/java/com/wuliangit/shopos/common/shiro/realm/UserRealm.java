@@ -41,19 +41,10 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        HashMap<String, Object> user = (HashMap) principals;
-        String username = (String) user.get("username");
-        UserToken.UserType userType = (UserToken.UserType) user.get("userType");
-        SimpleAuthorizationInfo authorizationInfo = null;
-        if (userType == UserToken.UserType.MEMBER) {
-            authorizationInfo = new SimpleAuthorizationInfo();
-            authorizationInfo.setRoles(memberService.getRoles(username));
-            authorizationInfo.setStringPermissions(memberService.getPermissions(username));
-        } else if (userType == UserToken.UserType.ADMIN) {
-            authorizationInfo = new SimpleAuthorizationInfo();
-            authorizationInfo.setRoles(adminService.getRoles(username));
-            authorizationInfo.setStringPermissions(adminService.getPermissions(username));
-        }
+        String username = (String) principals.getPrimaryPrincipal();
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        authorizationInfo.setRoles(adminService.getRoles(username));
+        authorizationInfo.setStringPermissions(adminService.getPermissions(username));
         return authorizationInfo;
     }
 

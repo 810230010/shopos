@@ -42,9 +42,11 @@ public class MGoodsController {
                               @RequestParam(value = "searchKey", required = false) String searchKey,
                               @RequestParam(value = "orderType", required = false) String order,
                               @RequestParam(value = "brandId", required = false) Integer brandId,
-                              @RequestParam(value = "goodsCategoryId", required = false) Integer goodsCategoryId) {
+                              @RequestParam(value = "goodsCategoryId", required = false) Integer goodsCategoryId,
+                              @RequestParam(value = "storeId", required = false) Integer storeId,
+                              @RequestParam(value = "storeGoodsCategoryId", required = false)Integer storeGoodsCategoryId) {
         RestResult result = new RestResult();
-        ArrayList<ApiGoodsListDTO> goods = searchService.apiGoodsSearch(page, pageSize, searchKey, order, brandId, goodsCategoryId);
+        ArrayList<ApiGoodsListDTO> goods = searchService.apiGoodsSearch(page,pageSize,searchKey,order,brandId,goodsCategoryId,storeId,storeGoodsCategoryId);
         result.add("goods", goods);
         return result;
     }

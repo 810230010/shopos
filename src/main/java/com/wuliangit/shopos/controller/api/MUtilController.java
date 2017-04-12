@@ -1,6 +1,9 @@
 package com.wuliangit.shopos.controller.api;
 
+import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,16 +16,15 @@ public class MUtilController {
 
 
     /**
-     * 注册获取验证码
-     * @param phone
+     * 获取七牛上传图片接口
      * @return
      */
-//    @RequestMapping("/api/v1/util")
-//    public Object getRegisterCode(String phone){
-//
-//
-//
-//
-//    }
+    @RequestMapping(value = "/qiniu/uptoken")
+    public @ResponseBody
+    Object getUpToken(){
+        RestResult result = new RestResult();
+        result.put("uptoken", QiNiuUtils.getToken());
+        return result;
+    }
 
 }

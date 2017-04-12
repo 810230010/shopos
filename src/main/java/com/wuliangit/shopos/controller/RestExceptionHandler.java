@@ -37,6 +37,7 @@ public class RestExceptionHandler {
         RestResult result = new RestResult();
         result.setCode(HttpStatus.METHOD_NOT_ALLOWED.value());
         result.setMsg(ex.getMessage());
+        ex.printStackTrace();
         return result;
 
     }

@@ -3,6 +3,7 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.entity.Cart;
 import com.wuliangit.shopos.service.CartService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

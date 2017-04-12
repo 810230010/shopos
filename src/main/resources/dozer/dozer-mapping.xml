@@ -3,8 +3,6 @@
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
     <mapping date-format="yyyy-MM-dd">
-        <class-a>com.alaban.entity.User</class-a>
-        <class-b>com.alaban.dto.UserDTO</class-b>
     </mapping>
 
 </mappings>

@@ -7,8 +7,10 @@ import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.service.AdminService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,11 +39,14 @@ public class AdminLoginController {
         String error = null;
         try {
             SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.ADMIN, UserToken.LoginType.WEB));
-            return "admin/index";
+            return "redirect:/admin/index";
         } catch (UnknownAccountException e) {
             error = "用户不存在";
         } catch (IncorrectCredentialsException e) {
             error = "用户名/密码错误";
+        } catch (ExcessiveAttemptsException e) {
+            e.printStackTrace();
+            error = "重试此时过多，请稍候再试";
         } catch (AuthenticationException e) {
             e.printStackTrace();
             error = "用户名/密码错误";

@@ -1,7 +1,9 @@
 package com.wuliangit.shopos.controller;
 
+import com.wuliangit.shopos.common.controller.RestResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,8 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 public class AdminExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
+    @ResponseBody
     public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
-        return "admin/login";
+        RestResult result = new RestResult();
+        exception.printStackTrace();
+        result.setCode(500);
+        result.setMsg(exception.getMessage());
+        return result;
     }
 
 }

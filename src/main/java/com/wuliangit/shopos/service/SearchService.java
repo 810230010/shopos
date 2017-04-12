@@ -10,5 +10,23 @@ import java.util.ArrayList;
  */
 public interface SearchService {
 
-    ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page, Integer pageSize, String searchKey, String order, Integer brandId, Integer goodsCategoryId);
+    /**
+     * @param page                 页码
+     * @param pageSize             页大小
+     * @param searchKey            搜索树关键词
+     * @param order                排序
+     * @param brandId              品牌id
+     * @param goodsCategoryId      商品分类id
+     * @param storeId              店铺id
+     * @param storeGoodsCategoryId 店铺内分类id
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page,
+                                              Integer pageSize,
+                                              String searchKey,
+                                              String order,
+                                              Integer brandId,
+                                              Integer goodsCategoryId,
+                                              Integer storeId,
+                                              Integer storeGoodsCategoryId);
 }

@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service;
 
 import com.alibaba.druid.filter.config.ConfigTools;
+import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.dao.AdminLogMapper;
 import com.wuliangit.shopos.dao.MemberMapper;
@@ -64,6 +65,11 @@ public class MemberServiceTest {
 
     }
 
+    @Test
+    public void getToken(){
+        System.out.println(QiNiuUtils.getToken());
+    }
+
 
     @Test
     public void getByUsername() {
@@ -121,6 +127,7 @@ public class MemberServiceTest {
         String decrypt = ConfigTools.decrypt(publicKey,password2);
         System.out.println(decrypt);
     }
+
 
 
 }

@@ -41,4 +41,9 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
     public GoodsCategory getById(Integer goodsCategoryId) {
         return goodsCategoryMapper.selectByPrimaryKey(goodsCategoryId);
     }
+
+    @Override
+    public int updateGoodsCategory(GoodsCategory goodsCategory) {
+        return goodsCategoryMapper.updateByPrimaryKeySelective(goodsCategory);
+    }
 }

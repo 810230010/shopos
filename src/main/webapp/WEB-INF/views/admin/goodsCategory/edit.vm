@@ -25,6 +25,7 @@
                             <label class="col-sm-3 control-label">分类名称</label>
                             <div class="col-sm-7">
                                 <input id="name" value="$goodsCategory.name" name="name" type="text" class="form-control">
+                                <input id="goodsCategoryId" value="$goodsCategory.goodsCategoryId" name="goodsCategoryId" type="text" class="hidden form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -40,6 +41,7 @@
                             <label class="col-sm-3 control-label">分类页菜单图标</label>
                             <div class="col-sm-7">
                                 <input id="upload-image" class="file" name="file" type="file" multiple>
+                                <input id="img" name="img" type="text" class="hidden">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -116,57 +118,34 @@
     elem.checked = "$goodsCategory.isShow";
     var switchery = new Switchery(elem, {color: '#1AB394'});
 
-    var img = "";
-
     $('#upload-image').fileinput({
-//        theme: 'mytheme',
         language: 'zh',
         uploadUrl: "http://up.qiniu.com",
-        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
-        showUpload: false, //是否显示上传按钮
-        showRemove: false,
-        browseClass: "btn btn-primary", //按钮样式
-        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{6}！",
         uploadExtraData: {
             token: '$uploadToken'
         },
-        maxFileCount: 6,
-        deleteUrl: "/utils/donothing",
+        overwriteInitial: true,
+        autoReplace: true,
+        showUploadedThumbs: false,
+        uploadAsync:true,
+//        browseClass: "btn btn-primary", //按钮样式
+        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{1}！",
+        maxFileCount: 1,
+        layoutTemplates :{ actionDelete :'' },
+        initialPreviewShowDelete: false,
+        showUpload: false, //是否显示上传按钮
+        showRemove: false,
+        showClose: false,
+        deleteUrl: "/admin/util/donothing",
         initialPreviewAsData: true,
         initialPreview: ['$goodsCategory.img'],
-        initialPreviewConfig: [],
+        initialPreviewConfig: [{ size: 576237, width: "120px", key: '$goodsCategory.img',extra: {activityId: '$goodsCategory.goodsCategoryId'} }],
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
     }).on("fileuploaded", function (event, data, previewId, index) {
-        img = data.response.key;
-        console.log(img);
-    }).on("filebatchuploadcomplete", function (event, data, previewId, index) {
-
-        console.log(elem.checked);
-
-        $.post("/admin/goodsCategory/edit",
-                {
-                    goodsCategoryId:"$goodsCategory.goodsCategoryId",
-                    name: $("#name").val(),
-                    parentId: $("#parentId").val(),
-                    sort: $("#sort").val(),
-                    keywords: $("#keywords").val(),
-                    description: $("#description").val(),
-                    isShow: elem.checked,
-                    img: img
-                },
-                function (data, status) {
-                    if (data.code == 200) {
-                        swal({
-                            title: "成功!",
-                            text: "商品分类添加成功!",
-                            type: "success",
-                            showConfirmButton: false,
-                            timer: 2000,
-                        });
-                        setTimeout(function () {
-                            window.location.href = "/admin/goodsCategory/listPage";
-                        }, 2000);
-                    }
-                });
+        $("#img").val(data.response.key);
+        console.log("自动上传成功");
+    }).on("filebatchselected", function(event, files) {
+        $(this).fileinput("upload");
     });
     $(".parent_select").select2({
         ajax: {
@@ -213,7 +192,31 @@
     });
 
     $("#submit").on('click', function () {
-        $('#upload-image').fileinput('upload');
+        $.post("/admin/goodsCategory/edit",
+                {
+                    goodsCategoryId:"$goodsCategory.goodsCategoryId",
+                    name: $("#name").val(),
+                    parentId: $("#parentId").val(),
+                    sort: $("#sort").val(),
+                    keywords: $("#keywords").val(),
+                    description: $("#description").val(),
+                    isShow: elem.checked,
+                    img: $("#img").val()
+    },
+        function (data, status) {
+            if (data.code == 200) {
+                swal({
+                    title: "成功!",
+                    text: "商品分类修改成功!",
+                    type: "success",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+                setTimeout(function () {
+                    window.location.href = "/admin/goodsCategory/listPage";
+                }, 2000);
+            }
+        });
     });
 
 

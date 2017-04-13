@@ -16,7 +16,8 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>商品分类列表</small></h5>
+                    <h5 id="rank">商品分类列表(1级) </h5>
+                    <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
@@ -37,6 +38,11 @@
 <script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
 
 <script>
+
+    var rank = 1;
+    var upParentId = [];
+    var parentId = 0;
+
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
@@ -49,7 +55,7 @@
                     param.orderColumn = d.columns[d.order[0]['column']]['data'];
                     param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
-                    param.parentId = 0;
+                    param.parentId = parentId;
                     return param;
                 },
             },
@@ -58,9 +64,9 @@
                 {"data":"name","width": "20%","title":"分类名称","orderable": false},
                 {"data":"parentId","width": "10%","title":"父id","visible": false},
                 {"data":"sort","width": "10%","title":"排序","orderable": true},
-                {"data":"keywords","width": "10%","title":"关键词","orderable": false},
-                {"data":"description","width": "10%","title":"描述","orderable": false},
-                {"data":"isShow","title":"是否显示","orderable": true},
+                {"data":"keywords","width": "20%","title":"关键词","orderable": false},
+                {"data":"description","width": "20%","title":"描述","orderable": false},
+                {"data":"isShow","width": "10%","title":"是否显示","orderable": true},
                 {"data":"id","width": "20%","title":"操作","orderable": false},
             ],
             "columnDefs" : [{
@@ -73,6 +79,9 @@
                         '</a>',
                         '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
                         '编辑 <i class="fa fa-edit"></i>',
+                        '</a>',
+                        '<a class="table-button btn btn-primary btn-xs table-action getsub" href="javascript:void(0)">',
+                        '下级 <i class="fa fa-code-fork"></i>',
                         '</a>'
                     ].join('');
                 }
@@ -118,7 +127,35 @@
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
             window.location.href = "/admin/goodsCategory/editPage?goodsCategoryId="+data.goodsCategoryId;
-        } );
+        });
+
+        table.on( 'click', '.getsub', function () {
+            rank = rank +1;
+            if (rank > 1){
+                $('#back').show();
+            }else{
+                $('#back').hide();
+            }
+            $('#rank').html("商品分类列表("+rank+"级)")
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+
+            parentId = data.goodsCategoryId;
+            upParentId[rank] = data.parentId;
+            table = $('#datatables').DataTable().ajax.reload();
+        });
+
+        $("#back").on('click', function () {
+            rank = rank - 1;
+            if (rank > 1){
+                $('#back').show();
+            }else{
+                $('#back').hide();
+            }
+            parentId = upParentId[rank];
+            $('#rank').html("商品分类列表("+rank+"级)")
+            table = $('#datatables').DataTable().ajax.reload();
+        });
     });
 </script>
 

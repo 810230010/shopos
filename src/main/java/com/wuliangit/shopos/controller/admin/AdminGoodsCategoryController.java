@@ -68,6 +68,15 @@ public class AdminGoodsCategoryController {
         return result;
     }
 
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Object edit(GoodsCategory goodsCategory) {
+        RestResult result = new RestResult();
+        goodsCategory.setImg(QiNiuUtils.getRealUrl(goodsCategory.getImg()));
+        int res = goodsCategoryService.updateGoodsCategory(goodsCategory);
+        return result;
+    }
+
     @RequestMapping("/search")
     @ResponseBody
     public Object search(@RequestParam("draw") int draw,

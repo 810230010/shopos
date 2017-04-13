@@ -36,9 +36,16 @@ public interface GoodsCategoryService {
     ArrayList<GoodsCategory> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId);
 
     /**
-     * 通过id获取
+     * 通过id获取商品分类
      * @param goodsCategoryId
      * @return
      */
     GoodsCategory getById(Integer goodsCategoryId);
+
+    /**
+     * 更新商品分类
+     * @param goodsCategory
+     * @return
+     */
+    int updateGoodsCategory(GoodsCategory goodsCategory);
 }

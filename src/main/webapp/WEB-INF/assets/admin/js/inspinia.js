@@ -97,10 +97,11 @@ $(document).ready(function () {
 
     // Append config box / Only for demo purpose
     // Uncomment on server mode to enable XHR calls
-    $.get("/assets/admin/skin-config.html", function (data) {
-        if (!$('body').hasClass('no-skin-config'))
-            $('body').append(data);
-    });
+    //这里可以设置界面的样式
+    // $.get("/assets/admin/skin-config.html", function (data) {
+    //     if (!$('body').hasClass('no-skin-config'))
+    //         $('body').append(data);
+    // });
 
     // Minimalize menu
     $('.navbar-minimalize').on('click', function () {

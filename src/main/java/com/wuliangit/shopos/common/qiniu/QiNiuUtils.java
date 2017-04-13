@@ -71,7 +71,11 @@ public class QiNiuUtils {
     }
 
     public static String getRealUrl(String url) {
-        return BASE_URL+url;
+        if (url.contains("http://")){
+            return url;
+        }else{
+            return BASE_URL+url;
+        }
     }
 
     public static String getHttp(String url) {

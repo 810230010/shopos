@@ -17,13 +17,21 @@ public class AdminUtilController {
 
     /**
      * 获取七牛上传图片接口
+     *
      * @return
      */
     @RequestMapping(value = "/qiniu/uptoken")
-    public @ResponseBody
-    Object getUpToken(){
+    @ResponseBody
+    public Object getUpToken() {
         RestResult result = new RestResult();
         result.put("uptoken", QiNiuUtils.getToken());
+        return result;
+    }
+
+    @RequestMapping(value = "/donothing")
+    @ResponseBody
+    public Object donothing() {
+        RestResult result = new RestResult();
         return result;
     }
 

@@ -48,4 +48,11 @@ public interface GoodsCategoryService {
      * @return
      */
     int updateGoodsCategory(GoodsCategory goodsCategory);
+
+    /**
+     * 删除商品分类
+     * @param goodsCategoryId
+     * @return
+     */
+    int deleteCategory(Integer goodsCategoryId);
 }

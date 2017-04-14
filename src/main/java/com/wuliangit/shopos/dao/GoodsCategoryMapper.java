@@ -27,4 +27,6 @@ public interface GoodsCategoryMapper extends BaseMapper<GoodsCategory, Integer> 
                                     @Param("orderColumn") String orderColumn,
                                     @Param("orderType")String orderType,
                                     @Param("parentId")Integer parentId);
+
+
 }

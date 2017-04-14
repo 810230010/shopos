@@ -77,6 +77,14 @@ public class AdminGoodsCategoryController {
         return result;
     }
 
+    @RequestMapping("delete")
+    public Object delete(Integer goodsCategoryId){
+        RestResult result = new RestResult();
+        int res = goodsCategoryService.deleteCategory(goodsCategoryId);
+        return result;
+    }
+
+
     @RequestMapping("/search")
     @ResponseBody
     public Object search(@RequestParam("draw") int draw,

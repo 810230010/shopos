@@ -46,4 +46,9 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
     public int updateGoodsCategory(GoodsCategory goodsCategory) {
         return goodsCategoryMapper.updateByPrimaryKeySelective(goodsCategory);
     }
+
+    @Override
+    public int deleteCategory(Integer goodsCategoryId) {
+        return goodsCategoryMapper.deleteByPrimaryKey(goodsCategoryId);
+    }
 }

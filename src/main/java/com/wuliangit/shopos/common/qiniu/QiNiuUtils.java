@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.common.qiniu;
 
 import com.qiniu.util.Auth;
+import com.wuliangit.shopos.common.util.PropertyPlaceholder;
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -23,10 +24,10 @@ public class QiNiuUtils {
     private static Auth auth;
     private static ReentrantLock lock = new ReentrantLock();
 
-    private static String accessKey = "";
-    private static String secretKey = "";
-    private static String bucket = "";
-    public static String BASE_URL = "";
+    private static String accessKey = PropertyPlaceholder.getProperty("qiniu.accessKey");
+    private static String secretKey = PropertyPlaceholder.getProperty("qiniu.secretKey");
+    private static String bucket = PropertyPlaceholder.getProperty("qiniu.bucket");
+    public static String BASE_URL = PropertyPlaceholder.getProperty("qiniu.baseUrl");
 
     public static String getToken() {
         return getAuth().uploadToken(bucket);
@@ -36,38 +37,11 @@ public class QiNiuUtils {
         if (auth == null) {
             lock.lock();
             if (auth == null) {
-                Properties prop = new Properties();
-                InputStream in = QiNiuUtils.class.getClassLoader().getResourceAsStream("shopos.properties");
-                try {
-                    prop.load(in);
-                    accessKey = prop.getProperty("qiniu.accessKey").trim();
-                    secretKey = prop.getProperty("qiniu.secretKey").trim();
-                    bucket = prop.getProperty("qiniu.bucket").trim();
-                    BASE_URL = prop.getProperty("qiniu.baseUrl").trim();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 auth = Auth.create(accessKey, secretKey);
             }
             lock.unlock();
         }
         return auth;
-    }
-
-
-    public static String getRealUrls(String urls) {
-        if (StringUtils.isEmpty(urls)){
-            return null;
-        }
-
-        String[] split = urls.split("&&");
-        StringBuffer bf = new StringBuffer();
-        for (String s : split) {
-            bf.append(BASE_URL+ s + "&&");
-        }
-        String res = bf.toString();
-        int i = res.lastIndexOf("&&");
-        return res.substring(0,i);
     }
 
     public static String getRealUrl(String url) {

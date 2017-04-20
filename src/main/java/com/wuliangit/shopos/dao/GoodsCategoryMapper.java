@@ -29,4 +29,10 @@ public interface GoodsCategoryMapper extends BaseMapper<GoodsCategory, Integer> 
                                     @Param("parentId")Integer parentId);
 
 
+    /**
+     * 通过父类获取商品分类
+     * @param parentId
+     * @return
+     */
+    List<GoodsCategory> getGoodsCategoryListByParentId(Integer parentId);
 }

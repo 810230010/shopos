@@ -44,6 +44,7 @@
     <result column="evaluation_good_star" property="evaluationGoodStar" jdbcType="INTEGER" />
     <result column="evaluation_count" property="evaluationCount" jdbcType="INTEGER" />
     <result column="del_flag" property="delFlag" jdbcType="BIT" />
+    <result column="carriage" property="carriage" jdbcType="DECIMAL" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.Goods" extends="BaseResultMap" >
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
@@ -54,7 +55,7 @@
     storage_alarm, click, salenum, collect, spec, storage, images, title_img, state, 
     verify, create_time, edittime, is_new, type, second_hand, activity_id, activity_type, 
     is_virtual, virtual_invalid_refund, is_appoint, is_presell, is_own_shop, freight, 
-    vat, commend, evaluation_good_star, evaluation_count, del_flag
+    vat, commend, evaluation_good_star, evaluation_count, del_flag, carriage
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -85,8 +86,8 @@
       activity_type, is_virtual, virtual_invalid_refund, 
       is_appoint, is_presell, is_own_shop, 
       freight, vat, commend, evaluation_good_star, 
-      evaluation_count, del_flag, goods_body
-      )
+      evaluation_count, del_flag, carriage, 
+      goods_body)
     values (#{goodsId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
       #{adWord,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
       #{goodsCategoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
@@ -100,8 +101,8 @@
       #{activityType,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, 
       #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, 
       #{freight,jdbcType=DECIMAL}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
-      #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{goodsBody,jdbcType=LONGVARCHAR}
-      )
+      #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{carriage,jdbcType=DECIMAL}, 
+      #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     insert into t_goods
@@ -231,6 +232,9 @@
       </if>
       <if test="delFlag != null" >
         del_flag,
+      </if>
+      <if test="carriage != null" >
+        carriage,
       </if>
       <if test="goodsBody != null" >
         goods_body,
@@ -363,6 +367,9 @@
       <if test="delFlag != null" >
         #{delFlag,jdbcType=BIT},
       </if>
+      <if test="carriage != null" >
+        #{carriage,jdbcType=DECIMAL},
+      </if>
       <if test="goodsBody != null" >
         #{goodsBody,jdbcType=LONGVARCHAR},
       </if>
@@ -494,6 +501,9 @@
       <if test="delFlag != null" >
         del_flag = #{delFlag,jdbcType=BIT},
       </if>
+      <if test="carriage != null" >
+        carriage = #{carriage,jdbcType=DECIMAL},
+      </if>
       <if test="goodsBody != null" >
         goods_body = #{goodsBody,jdbcType=LONGVARCHAR},
       </if>
@@ -543,6 +553,7 @@
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
       evaluation_count = #{evaluationCount,jdbcType=INTEGER},
       del_flag = #{delFlag,jdbcType=BIT},
+      carriage = #{carriage,jdbcType=DECIMAL},
       goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -588,7 +599,8 @@
       commend = #{commend,jdbcType=BIT},
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
       evaluation_count = #{evaluationCount,jdbcType=INTEGER},
-      del_flag = #{delFlag,jdbcType=BIT}
+      del_flag = #{delFlag,jdbcType=BIT},
+      carriage = #{carriage,jdbcType=DECIMAL}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

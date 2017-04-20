@@ -24,4 +24,9 @@
         </if>
         sort asc
     </select>
+
+    <!--通过父类获取商品分类-->
+    <select id="getGoodsCategoryListByParentId" resultType="com.wuliangit.shopos.entity.GoodsCategory">
+        select * from t_goods_category where parent_id = #{parentId}
+    </select>
 </mapper>

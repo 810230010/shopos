@@ -47,7 +47,7 @@
 ## 7. 获取用户信息
 * url:/api/v1/member/info
 
-## 8. 获取用户信息
+## 8. 更新用户信息
 * url:/api/v1/member/info/update
 
 ## 9. 实名认证

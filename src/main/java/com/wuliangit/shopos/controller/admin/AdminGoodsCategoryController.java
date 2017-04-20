@@ -59,6 +59,15 @@ public class AdminGoodsCategoryController {
         return result;
     }
 
+    @RequestMapping("/get/grade")
+    @ResponseBody
+    public Object getGrade(@RequestParam(value = "parentId", required = false, defaultValue = "0") Integer parentId) {
+        RestResult result = new RestResult();
+        List<GoodsCategory> goodsCategories = goodsCategoryService.getGoodsCategoryListByParentId(parentId);
+        result.add("goodsCategories", goodsCategories);
+        return result;
+    }
+
     @RequestMapping("/add")
     @ResponseBody
     public Object add(GoodsCategory goodsCategory) {

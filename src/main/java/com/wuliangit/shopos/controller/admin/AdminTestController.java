@@ -1,6 +1,8 @@
 package com.wuliangit.shopos.controller.admin;
 
+import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -18,5 +20,11 @@ public class AdminTestController {
             throw new Exception("测试错误");
         }
        return "admin/login";
+    }
+
+    @RequestMapping("/page1")
+    public String page1(Model model){
+        model.addAttribute("uploadToken", QiNiuUtils.getToken());
+        return "admin/test";
     }
 }

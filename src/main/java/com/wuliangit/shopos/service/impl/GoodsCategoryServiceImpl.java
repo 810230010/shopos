@@ -51,4 +51,9 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
     public int deleteCategory(Integer goodsCategoryId) {
         return goodsCategoryMapper.deleteByPrimaryKey(goodsCategoryId);
     }
+
+    @Override
+    public List<GoodsCategory> getGoodsCategoryListByParentId(Integer parentId) {
+        return goodsCategoryMapper.getGoodsCategoryListByParentId(parentId);
+    }
 }

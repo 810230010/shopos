@@ -88,6 +88,8 @@ public class Goods {
 
     private Boolean delFlag;
 
+    private Long carriage;
+
     private String goodsBody;
 
     public Integer getGoodsId() {
@@ -424,6 +426,14 @@ public class Goods {
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public Long getCarriage() {
+        return carriage;
+    }
+
+    public void setCarriage(Long carriage) {
+        this.carriage = carriage;
     }
 
     public String getGoodsBody() {

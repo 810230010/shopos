@@ -111,7 +111,7 @@ public class MemberServiceTest {
 
     public static void main(String[] args) throws Exception {
         //密码明文
-        String password = "Kr^##lg*bX8Vt4";
+        String password = "";
         System.out.println("密码[ "+password+" ]的加密信息如下：\n");
         String [] keyPair = ConfigTools.genKeyPair(512);
         //私钥

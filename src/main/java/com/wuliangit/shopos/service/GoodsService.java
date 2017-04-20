@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.entity.Goods;
 
 import java.util.ArrayList;
 
@@ -17,4 +18,12 @@ public interface GoodsService {
      * @return
      */
     ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page, Integer pageSize, String searchKey, String order);
+
+    /**
+     * 创建商品
+     * @param goods
+     * @param skuStr
+     * @return
+     */
+    int createGoods(Goods goods, String skuStr);
 }

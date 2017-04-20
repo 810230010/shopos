@@ -1,10 +1,11 @@
 #parse("/admin/models/begin.vm")
 <link href="/assets/admin/css/plugins/steps/jquery.steps.css" rel="stylesheet">
 <link href="/assets/admin/css/plugins/select2/select2.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/assets/admin/css/plugins/wangeditor/wangEditor.min.css">
+
+
 <link rel="stylesheet" type="text/css" href="/assets/admin/css/plugins/webuploader/webuploader.css">
 <link href="/assets/admin/css/plugins/fileinput/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
-
-<link rel="stylesheet" type="text/css" href="/assets/admin/css/plugins/wangeditor/wangEditor.min.css">
 
 <link href="/assets/admin/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
 
@@ -40,7 +41,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-            <form id="wizard" action="#" class="wizard-big form-horizontal">
+            <form id="wizard" class="wizard-big form-horizontal">
                 <h1>选择商品类型</h1>
                 <fieldset>
                     <div class="row">
@@ -88,19 +89,19 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">商品价格:</label>
                                     <div class="col-sm-7">
-                                        <input id="price" name="price" type="text" class="form-control">
+                                       <input id="price" name="price" type="number" step="0.01" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">商品佣金:</label>
                                     <div class="col-sm-7">
-                                        <input id="commission" name="commission" type="text" class="form-control">
+                                        <input name="commission" id="commission" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">运费:</label>
                                     <div class="col-sm-7">
-                                        <input id="carriage" name="carriage" type="text" class="form-control">
+                                         <input id="carriage" name="carriage" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -116,13 +117,13 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="goods-logo-div">
                                     <label class="col-sm-3 control-label">商品logo图片:</label>
                                     <div class="col-sm-4">
                                         <input id="goods-logo" class="file" name="file" type="file" multiple>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="goods-images-div">
                                     <label class="col-sm-3 control-label">商品图片集:</label>
                                     <div class="col-sm-8">
                                         <input id="goods-images" class="file" name="file" type="file" multiple>
@@ -135,7 +136,7 @@
 
                 <h1>图文详情</h1>
                 <fieldset>
-                    <textarea id="content" style="height:600px;max-height:600px;">
+                    <textarea id="goodsBody" style="height:600px;max-height:600px;">
                         <p>请输入内容...</p>
                     </textarea>
                 </fieldset>
@@ -169,10 +170,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-2">
                                         <div class="btn btn-primary dim" type="button" id="sku-content-add">添加新属性</div>
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-2">
                                         <div class="btn btn-primary dim" type="button" id="create_table">生成表格</div>
                                     </div>
                                 </div>
@@ -192,6 +193,9 @@
 </div>
 #parse("/admin/models/footer.vm")
 
+<!-- Tags Input -->
+<script src="/assets/admin/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+
 <!-- Select2 -->
 <script src="/assets/admin/js/plugins/select2/select2.full.min.js"></script>
 <script src="/assets/admin/js/plugins/select2/zh-CN.js"></script>
@@ -201,9 +205,6 @@
 
 <!-- Jquery Validate -->
 <script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
-
-<!-- Tags Input -->
-<script src="/assets/admin/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
 
 <!--webuploader-->
 <script type="text/javascript" src="/assets/admin/js/plugins/webuploader/webuploader.min.js"></script>
@@ -226,6 +227,7 @@
 
 <script>
     var uploadToken = '$uploadToken';
+    var domain = '$domain';
 </script>
 
 

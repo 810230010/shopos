@@ -72,7 +72,7 @@ public class AdminGoodsCategoryController {
     @ResponseBody
     public Object add(GoodsCategory goodsCategory) {
         RestResult result = new RestResult();
-        goodsCategory.setImg(CoreConstants.IMG_BASE_URL + goodsCategory.getImg());
+        goodsCategory.setImg(QiNiuUtils.BASE_URL + goodsCategory.getImg());
         int res = goodsCategoryService.createGoodsCategory(goodsCategory);
         return result;
     }

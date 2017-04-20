@@ -1,9 +1,12 @@
 package com.wuliangit.shopos.controller.admin;
 
+import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
+import com.wuliangit.shopos.entity.GoodsSku;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by nilme on 2017/3/21.
@@ -26,5 +29,13 @@ public class AdminTestController {
     public String page1(Model model){
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         return "admin/test";
+    }
+
+    @RequestMapping("/test1")
+    @ResponseBody
+    public Object test1(String skus){
+        RestResult result = new RestResult();
+        System.out.println(skus);
+        return result;
     }
 }

@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.StoreMapper" >
 
+    <!--通过用户名获取店铺简要信息-->
+    <select id="getStoreMin" resultType="com.wuliangit.shopos.model.StoreMin">
+        select  store_id, name where member_id = #{memberId}
+    </select>
+
 </mapper>

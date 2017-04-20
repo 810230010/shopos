@@ -1,7 +1,6 @@
 /**
  * Created by nilme on 2017/4/19.
  */
-
 var category1, category2, category3;//分类定义
 
 $("#wizard").steps({
@@ -16,10 +15,11 @@ $("#wizard").steps({
         loading: "加载中 ..."
     },
     onStepChanging: function (event, currentIndex, newIndex) {
+        return true;
         if (currentIndex > newIndex) {
             return true;
         }
-        if (currentIndex = 1) {
+        if (currentIndex == 0) {
             if (category1 == null || category1 == "" || category2 == null || category2 == "" || category3 == null || category3 == "") {
                 toastr.options = {
                     closeButton: true,
@@ -33,13 +33,45 @@ $("#wizard").steps({
                 return true;
             }
         }
+        if (currentIndex == 1) {
+            //商品图片集
+            var images = "";
+            var imgs_dom = $("#goods-images-div .kv-zoom-cache .kv-file-content img");
+            var flag = 0;
+            imgs_dom.each(function (index, item) {
+                if (flag ==0){
+                    images += item.src;
+                    flag = 1;
+                }else{
+                    images += "&&" + item.src;
+                }
+            });
+            //商品标题图片
+            var logo_dom = $("#goods-logo-div .kv-zoom-cache .kv-file-content img");
+            var titleImg = logo_dom.attr("src");
+            var form = $(this);
+            form.valid();
+            if (titleImg==null||titleImg==""||images=="") {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 1500
+                };
+                toastr.error('请选择商品logo图片和图片集');
+                return false;
+            } else {
+                return true;
+            }
+        }
         var form = $(this);
         return form.valid();
     },
     onStepChanged: function (event, currentIndex, priorIndex) {
-        return true;
+
     },
     onFinishing: function (event, currentIndex) {
+        return true;
         var form = $(this);
 
         // Disable validation on fields that are disabled.
@@ -50,10 +82,99 @@ $("#wizard").steps({
         return form.valid();
     },
     onFinished: function (event, currentIndex) {
-        console.log("onFinished");
+        ////////////////商品图片集//////////////
+        var images = "";
+        var imgs_dom = $("#goods-images-div .kv-zoom-cache .kv-file-content img");
+        var flag = 0;
+        imgs_dom.each(function (index, item) {
+            if (flag ==0){
+                images += item.src;
+                flag = 1;
+            }else{
+                images += "&&" + item.src;
+            }
+        });
+        //////////////商品标题图片//////////////
+        var logo_dom = $("#goods-logo-div .kv-zoom-cache .kv-file-content img");
+        var titleImg = logo_dom.attr("src");
+
+        ////////////////商品属性//////////////
+        var attr_data = [];//属性对象
+
+        var sku_img_name = $("input[id='sku_img_name']").val();
+        var sku_img_list = $('[id^=img_value]');
+        var sku_img_src_list = $('[id^=img_src]');
+
+        if (sku_img_list.length > 0 && (sku_img_name!=""||sku_img_name!=null)) {
+            var obj = {};
+
+            obj.name = sku_img_name;
+            obj.isImg = true;
+
+            var imgs = new Array();
+            sku_img_list.each(function (index, element) {
+                var obj = {};
+                obj.name = element.value;
+                obj.img = $(sku_img_src_list[index]).attr("src");
+                imgs.push(obj);
+            });
+            obj.values = imgs;
+            attr_data.push(obj)
+        }
+
+        var list_name = $('[id^=sku_attribute_item_name]');
+
+        list_name.each(function (index, element) {
+            if (element.value != null && element.value != "") {
+                var obj = {};
+                obj.name = $(element).val();
+                obj.isImg = false;
+
+                var id = element.id.replace("sku_attribute_item_name", "");
+                var values = $("#sku_attribute_item_value" + id).tagsinput('items');
+                obj.values = values;
+                attr_data.push(obj);
+            }
+        });
+
+        ////////////////表格信息//////////
+        var table_data = [];
+        $('#process').children('tbody').children('tr').each(function(rowIndex, row) {
+            var cell = $(row).children();
+            var rowlength= $(row).children().length;
+            var oj = {};
+            var values = "";
+            var falg = 0;
+            for (var i = 0;i<rowlength-2;i++){
+                if (falg==0){
+                    values += cell[i].innerHTML;
+                    falg=1;
+                }else{
+                    values += ","+cell[i].innerHTML;
+                }
+            }
+            oj.skuStock = $($(cell[rowlength-1]).children()).val();
+            oj.skuPrice = $($(cell[rowlength-2]).children()).val();
+            oj.skuValue =values;
+            table_data.push(oj);
+        });
+        console.log(table_data);
+        ////////////////提交/////////////
         $.post("/admin/goods/add",
             {
-                category: category3,
+                goodsCategoryId: category3,
+                images:images,
+                titleImg:titleImg,
+                name:$("#name").val(),
+                unit:$("#unit").val(),
+                price:$("#price").val(),
+                commission:$("#commission").val(),
+                carriage:$("#carriage").val(),
+                adWord:$("#adWord").val(),
+                name:$("#name").val(),
+                goodsBody:$("#goodsBody").val(),
+                skuStr:JSON.stringify(table_data),
+                attrs:JSON.stringify(attr_data),
             },
             function (data, status) {
                 if (data.code == 200) {
@@ -65,18 +186,54 @@ $("#wizard").steps({
                         timer: 2000,
                     });
                     setTimeout(function () {
-                        window.location.href = "/admin/goods/add";
+                        window.location.href = "/admin/goods/addPage";
                     }, 2000);
                 }
             });
     }
 }).validate({
-    errorPlacement: function (error, element) {
-        element.before(error);
+    errorPlacement: function (error, element)
+    {
+        error.insertAfter(element);
+    },
+    messages:{
+        name: {
+            required: "请输入商品名称",
+        },
+        unit: {
+            required: "请输入商品单位",
+        },
+        price: {
+            required: "请输入商品价格",
+        },
+        commission: {
+            required: "请输入商品佣金",
+        },
+        carriage: {
+            required: "请输入商品运费",
+        },
+        adWord: {
+            required: "请输入商品广告词",
+        }
     },
     rules: {
-        confirm: {
-            equalTo: "#password"
+        name: {
+            required: true,
+        },
+        unit: {
+            required: true,
+        },
+        price: {
+            required: true,
+        },
+        commission: {
+            required: true,
+        },
+        carriage: {
+            required: true,
+        },
+        adWord: {
+            required: true,
         }
     }
 });
@@ -182,8 +339,12 @@ $('#goods-logo').fileinput({
     initialPreviewConfig: [],
     allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
 }).on("fileuploaded", function (event, data, previewId, index) {
-    $("#img").val(data.response.key);
-    console.log("自动上传成功");
+    console.log("自动上传成功index:"+index);
+    console.log("fileuploaded-filenames--for"+index+"="+data.filenames[index]);
+
+    var img_dom = $(".kv-file-content img[title='"+data.filenames[index]+"']");
+
+    img_dom.attr('src', 'http://ooa95t7wi.bkt.clouddn.com/'+data.response.key);
 }).on("filebatchselected", function (event, files) {
     $(this).fileinput("upload");
 });
@@ -194,7 +355,7 @@ $('#goods-images').fileinput({
     uploadExtraData: {
         token: uploadToken
     },
-    overwriteInitial: true,
+    overwriteInitial: false,
     autoReplace: true,
     showUploadedThumbs: true,
     uploadAsync: true,
@@ -206,36 +367,19 @@ $('#goods-images').fileinput({
     showUpload: false, //是否显示上传按钮
     showRemove: false,
     showClose: false,
-    deleteUrl: "/admin/util/donothing",
     initialPreviewAsData: true,
     initialPreview: [],
     initialPreviewConfig: [],
     allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
 }).on("fileuploaded", function (event, data, previewId, index) {
-    console.log("自动上传成功");
-    console.log(previewId);
-    console.log(index);
+    console.log("自动上传成功index:"+index);
+    console.log("fileuploaded-filenames--for"+index+"="+data.filenames[index]);
+
+    var img_dom = $(".kv-file-content img[title='"+data.filenames[index]+"']");
+
+    img_dom.attr('src', 'http://ooa95t7wi.bkt.clouddn.com/'+data.response.key);
 }).on("filebatchselected", function (event, files) {
     $(this).fileinput("upload");
-}).on('filesuccessremove', function(event, id) {
-    console.log(id);
-}).on('filedeleted', function(event, key) {
-    console.log('Key = ' + key);
-}).on('fileselect', function(event, numFiles, label) {
-    console.log("fileselect");
-    console.log(numFiles);
-    console.log(label);
-    return false;
-}).on('fileclear', function(event) {
-    console.log("fileclear");
-}).on('filecleared', function(event) {
-    console.log("filecleared");
-}).on('fileloaded', function(event, file, previewId, index, reader) {
-    console.log("fileloaded");
-    console.log(file);
-    console.log(previewId);
-    console.log(index);
-    console.log(reader);
 });
 
 $(".brand-select").select2({
@@ -302,8 +446,8 @@ function uploadInit() {
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',    //上传模式,依次退化
         browse_button: btnId,       //上传选择的点选按钮，**必需**
-        uptoken : '$uploadToken',
-        domain: '$domain',
+        uptoken : uploadToken,
+        domain: domain,
         container: containerId,           //上传区域DOM ID，默认是browser_button的父元素，
         max_file_size: '100mb',           //最大文件体积限制
         flash_swf_url: '../js/plupload/Moxie.swf',  //引入flash,相对路径
@@ -355,15 +499,10 @@ function uploadInit() {
     });
 }
 
-var editor = new wangEditor('content');
+var editor = new wangEditor('goodsBody');
 editor.config.customUpload = true;  // 设置自定义上传的开关
 editor.config.customUploadInit = uploadInit;  // 配置自定义上传初始化事件，uploadInit方法在上面定义了
 editor.create();
-
-$("#sku-content-add").on('click', function () {
-    $("#sku-content").html();
-});
-
 
 ///////////////////添加属性//////////////////////
 
@@ -386,9 +525,9 @@ var temp = '<div id="sku_attribute_item{id}">' +
     '<div class="hr-line-dashed"></div>' +
     '</div>';
 
-var img_temp = '<div id="img_content{imgid}" class="pull-left" style="height: 140xp;width: 120px;margin-right: 10px;">' +
+var img_temp = '<div id="img_content{imgid}" class="pull-left" style="height: 140px;width: 120px;margin-right: 10px;">' +
     '<img id="img_src{imgid}" style="height: 120px; width:120px;overflow: hidden">' +
-    '<input id="img_value{imgid}" name="name" type="text" class="form-control">' +
+    '<input id="img_value{imgid}" name="img_value_name" type="text" class="form-control">' +
     '</div>';
 
 var id = 1;
@@ -418,7 +557,7 @@ $("#create_table").on('click', function () {
 
 function reCreateTable() {
     var arrayTile = new Array();//标题组数
-    var arrayInfor = new Array();//盛放每组选中的CheckBox值的对象
+    var arrayInfor = new Array();//属性数组
 
     var sku_img_name = $("input[id='sku_img_name']").val();
     var sku_img_list = $('[id^=img_value]');
@@ -449,9 +588,6 @@ function reCreateTable() {
     if (arrayTile.length > 0 && arrayInfor.length > 0) {
         step.Creat_Table(arrayTile, arrayInfor);
     }
-
-    var data = $('#createTable').tableToJSON();
-    console.log(data);
 }
 
 var uploader = WebUploader.create({
@@ -486,26 +622,23 @@ uploader.on('fileQueued', function (file) {
             return;
         }
         $("#img_src" + imgid).attr('src', src);
-        imgid++;
     }, 0.7, 0.7);
 });
 
 // 文件上传过程中创建进度条实时显示。
 uploader.on('uploadProgress', function (file, percentage) {
     var li = $('#' + file.id), percent = li.find('.progress span');
-
     // 避免重复创建
     if (!percent.length) {
         percent = $('<p class="progress"><span></span></p>').appendTo(li).find('span');
     }
-
     percent.css('width', percentage * 100 + '%');
 });
 
 // 文件上传成功，给item添加成功class, 用样式标记上传成功。
 uploader.on('uploadSuccess', function (file, response) {
-
-    $('#' + file.id).addClass('upload-state-done');
+    $("#img_src" + imgid).attr('src', 'http://ooa95t7wi.bkt.clouddn.com/'+response.key);
+    imgid++
     console.log(response);
 });
 

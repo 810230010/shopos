@@ -11,6 +11,7 @@
     <result column="goods_category_id" property="goodsCategoryId" jdbcType="INTEGER" />
     <result column="brand_id" property="brandId" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="carriage" property="carriage" jdbcType="DECIMAL" />
     <result column="commission" property="commission" jdbcType="DECIMAL" />
     <result column="commission_percent" property="commissionPercent" jdbcType="DECIMAL" />
     <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL" />
@@ -44,18 +45,18 @@
     <result column="evaluation_good_star" property="evaluationGoodStar" jdbcType="INTEGER" />
     <result column="evaluation_count" property="evaluationCount" jdbcType="INTEGER" />
     <result column="del_flag" property="delFlag" jdbcType="BIT" />
-    <result column="carriage" property="carriage" jdbcType="DECIMAL" />
+    <result column="attrs" property="attrs" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.Goods" extends="BaseResultMap" >
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     goods_id, name, unit, ad_word, store_id, store_name, goods_category_id, brand_id, 
-    price, commission, commission_percent, promotion_price, promotion_type, marketprice, 
-    storage_alarm, click, salenum, collect, spec, storage, images, title_img, state, 
-    verify, create_time, edittime, is_new, type, second_hand, activity_id, activity_type, 
+    price, carriage, commission, commission_percent, promotion_price, promotion_type, 
+    marketprice, storage_alarm, click, salenum, collect, spec, storage, images, title_img, 
+    state, verify, create_time, edittime, is_new, type, second_hand, activity_id, activity_type, 
     is_virtual, virtual_invalid_refund, is_appoint, is_presell, is_own_shop, freight, 
-    vat, commend, evaluation_good_star, evaluation_count, del_flag, carriage
+    vat, commend, evaluation_good_star, evaluation_count, del_flag, attrs
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -76,32 +77,32 @@
     insert into t_goods (goods_id, name, unit, 
       ad_word, store_id, store_name, 
       goods_category_id, brand_id, price, 
-      commission, commission_percent, promotion_price, 
-      promotion_type, marketprice, storage_alarm, 
-      click, salenum, collect, 
-      spec, storage, images, 
-      title_img, state, verify, 
-      create_time, edittime, is_new, 
-      type, second_hand, activity_id, 
+      carriage, commission, commission_percent, 
+      promotion_price, promotion_type, marketprice, 
+      storage_alarm, click, salenum, 
+      collect, spec, storage, 
+      images, title_img, state, 
+      verify, create_time, edittime, 
+      is_new, type, second_hand, activity_id, 
       activity_type, is_virtual, virtual_invalid_refund, 
       is_appoint, is_presell, is_own_shop, 
       freight, vat, commend, evaluation_good_star, 
-      evaluation_count, del_flag, carriage, 
+      evaluation_count, del_flag, attrs, 
       goods_body)
     values (#{goodsId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
       #{adWord,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
       #{goodsCategoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
-      #{commission,jdbcType=DECIMAL}, #{commissionPercent,jdbcType=DECIMAL}, #{promotionPrice,jdbcType=DECIMAL}, 
-      #{promotionType,jdbcType=VARCHAR}, #{marketprice,jdbcType=DECIMAL}, #{storageAlarm,jdbcType=INTEGER}, 
-      #{click,jdbcType=INTEGER}, #{salenum,jdbcType=INTEGER}, #{collect,jdbcType=INTEGER}, 
-      #{spec,jdbcType=VARCHAR}, #{storage,jdbcType=INTEGER}, #{images,jdbcType=VARCHAR}, 
-      #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{verify,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, #{isNew,jdbcType=BIT}, 
-      #{type,jdbcType=VARCHAR}, #{secondHand,jdbcType=BIT}, #{activityId,jdbcType=INTEGER}, 
+      #{carriage,jdbcType=DECIMAL}, #{commission,jdbcType=DECIMAL}, #{commissionPercent,jdbcType=DECIMAL}, 
+      #{promotionPrice,jdbcType=DECIMAL}, #{promotionType,jdbcType=VARCHAR}, #{marketprice,jdbcType=DECIMAL}, 
+      #{storageAlarm,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, #{salenum,jdbcType=INTEGER}, 
+      #{collect,jdbcType=INTEGER}, #{spec,jdbcType=VARCHAR}, #{storage,jdbcType=INTEGER}, 
+      #{images,jdbcType=VARCHAR}, #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{verify,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, 
+      #{isNew,jdbcType=BIT}, #{type,jdbcType=VARCHAR}, #{secondHand,jdbcType=BIT}, #{activityId,jdbcType=INTEGER}, 
       #{activityType,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, 
       #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, 
       #{freight,jdbcType=DECIMAL}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
-      #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{carriage,jdbcType=DECIMAL}, 
+      #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{attrs,jdbcType=VARCHAR}, 
       #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
@@ -133,6 +134,9 @@
       </if>
       <if test="price != null" >
         price,
+      </if>
+      <if test="carriage != null" >
+        carriage,
       </if>
       <if test="commission != null" >
         commission,
@@ -233,8 +237,8 @@
       <if test="delFlag != null" >
         del_flag,
       </if>
-      <if test="carriage != null" >
-        carriage,
+      <if test="attrs != null" >
+        attrs,
       </if>
       <if test="goodsBody != null" >
         goods_body,
@@ -267,6 +271,9 @@
       </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="carriage != null" >
+        #{carriage,jdbcType=DECIMAL},
       </if>
       <if test="commission != null" >
         #{commission,jdbcType=DECIMAL},
@@ -367,8 +374,8 @@
       <if test="delFlag != null" >
         #{delFlag,jdbcType=BIT},
       </if>
-      <if test="carriage != null" >
-        #{carriage,jdbcType=DECIMAL},
+      <if test="attrs != null" >
+        #{attrs,jdbcType=VARCHAR},
       </if>
       <if test="goodsBody != null" >
         #{goodsBody,jdbcType=LONGVARCHAR},
@@ -401,6 +408,9 @@
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="carriage != null" >
+        carriage = #{carriage,jdbcType=DECIMAL},
       </if>
       <if test="commission != null" >
         commission = #{commission,jdbcType=DECIMAL},
@@ -501,8 +511,8 @@
       <if test="delFlag != null" >
         del_flag = #{delFlag,jdbcType=BIT},
       </if>
-      <if test="carriage != null" >
-        carriage = #{carriage,jdbcType=DECIMAL},
+      <if test="attrs != null" >
+        attrs = #{attrs,jdbcType=VARCHAR},
       </if>
       <if test="goodsBody != null" >
         goods_body = #{goodsBody,jdbcType=LONGVARCHAR},
@@ -520,6 +530,7 @@
       goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
+      carriage = #{carriage,jdbcType=DECIMAL},
       commission = #{commission,jdbcType=DECIMAL},
       commission_percent = #{commissionPercent,jdbcType=DECIMAL},
       promotion_price = #{promotionPrice,jdbcType=DECIMAL},
@@ -553,7 +564,7 @@
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
       evaluation_count = #{evaluationCount,jdbcType=INTEGER},
       del_flag = #{delFlag,jdbcType=BIT},
-      carriage = #{carriage,jdbcType=DECIMAL},
+      attrs = #{attrs,jdbcType=VARCHAR},
       goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -567,6 +578,7 @@
       goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
+      carriage = #{carriage,jdbcType=DECIMAL},
       commission = #{commission,jdbcType=DECIMAL},
       commission_percent = #{commissionPercent,jdbcType=DECIMAL},
       promotion_price = #{promotionPrice,jdbcType=DECIMAL},
@@ -600,7 +612,7 @@
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
       evaluation_count = #{evaluationCount,jdbcType=INTEGER},
       del_flag = #{delFlag,jdbcType=BIT},
-      carriage = #{carriage,jdbcType=DECIMAL}
+      attrs = #{attrs,jdbcType=VARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

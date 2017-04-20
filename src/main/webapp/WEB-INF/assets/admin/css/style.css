@@ -8555,6 +8555,12 @@ body.md-skin {
   margin-left: 10px;
 }
 
+
 .bootstrap-tagsinput {
   width: 100% !important;
+}
+
+.bootstrap-tagsinput input{
+  border: 0px solid #ccc !important;
+  display: inline !important;
 }

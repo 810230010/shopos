@@ -22,6 +22,8 @@ public class Goods {
 
     private BigDecimal price;
 
+    private Long carriage;
+
     private BigDecimal commission;
 
     private BigDecimal commissionPercent;
@@ -88,7 +90,7 @@ public class Goods {
 
     private Boolean delFlag;
 
-    private Long carriage;
+    private String attrs;
 
     private String goodsBody;
 
@@ -162,6 +164,14 @@ public class Goods {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Long getCarriage() {
+        return carriage;
+    }
+
+    public void setCarriage(Long carriage) {
+        this.carriage = carriage;
     }
 
     public BigDecimal getCommission() {
@@ -428,12 +438,12 @@ public class Goods {
         this.delFlag = delFlag;
     }
 
-    public Long getCarriage() {
-        return carriage;
+    public String getAttrs() {
+        return attrs;
     }
 
-    public void setCarriage(Long carriage) {
-        this.carriage = carriage;
+    public void setAttrs(String attrs) {
+        this.attrs = attrs == null ? null : attrs.trim();
     }
 
     public String getGoodsBody() {

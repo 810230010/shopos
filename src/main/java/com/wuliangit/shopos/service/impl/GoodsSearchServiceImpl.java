@@ -1,8 +1,9 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
-import com.wuliangit.shopos.service.SearchService;
+import com.wuliangit.shopos.service.GoodsSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,11 @@ import java.util.ArrayList;
  */
 
 @Service
-public class SearchServiceImpl implements SearchService {
+public class GoodsSearchServiceImpl implements GoodsSearchService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
 
     @Override
     public ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page,
@@ -28,9 +30,8 @@ public class SearchServiceImpl implements SearchService {
                                                      Integer goodsCategoryId,
                                                      Integer storeId,
                                                      Integer storeGoodsCategoryId) {
-
-
-
-        return null;
+        PageHelper.startPage(page,pageSize);
+        ArrayList<ApiGoodsListDTO> goodses = goodsMapper.apiGoodsSearch(searchKey,order,brandId,goodsCategoryId,storeId,storeGoodsCategoryId);
+        return goodses;
     }
 }

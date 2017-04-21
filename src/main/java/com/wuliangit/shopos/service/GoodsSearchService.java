@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * 搜索服务
  * Created by nilme on 2017/4/4.
  */
-public interface SearchService {
+public interface GoodsSearchService {
 
     /**
      * @param page                 页码

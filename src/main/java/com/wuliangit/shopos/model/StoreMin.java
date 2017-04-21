@@ -9,7 +9,6 @@ public class StoreMin {
 
     private String name;
 
-
     public Integer getStoreId() {
         return storeId;
     }

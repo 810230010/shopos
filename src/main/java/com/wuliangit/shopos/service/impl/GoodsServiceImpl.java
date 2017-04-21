@@ -43,7 +43,13 @@ public class GoodsServiceImpl implements GoodsService {
 
         goods.setStoreId(store.getStoreId());
         goods.setStoreName(store.getName());
-        goods.setEdittime(new Date());
+        goods.setEditTime(new Date());
+
+        if (store.getStoreId().equals(0)) {
+            goods.setIsPlatform(true);
+        } else {
+            goods.setIsPlatform(false);
+        }
 
         int res = goodsMapper.insertSelective(goods);
 

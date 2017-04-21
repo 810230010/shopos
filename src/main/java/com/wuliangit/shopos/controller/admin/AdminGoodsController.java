@@ -21,11 +21,20 @@ public class AdminGoodsController {
     @Autowired
     private GoodsService goodsService;
 
+    /**
+     * 商品列表页面
+     * @return
+     */
     @RequestMapping("/listPage")
     public String listPage(){
         return "admin/goods/list";
     }
 
+    /**
+     * 商品添加页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/addPage")
     public String addPage(Model model){
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
@@ -33,13 +42,17 @@ public class AdminGoodsController {
         return "admin/goods/add";
     }
 
+    /**
+     * 商品添加
+     * @param goods
+     * @param skuStr
+     * @return
+     */
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Goods goods,String skuStr){
         RestResult result = new RestResult();
-
         int res = goodsService.createGoods(goods,skuStr);
-
         return result;
     }
 

@@ -2,9 +2,8 @@ package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
-import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.service.GoodsService;
-import com.wuliangit.shopos.service.SearchService;
+import com.wuliangit.shopos.service.GoodsSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,10 +23,10 @@ public class MGoodsController {
     @Autowired
     private GoodsService goodsService;
     @Autowired
-    private SearchService searchService;
+    private GoodsSearchService goodsSearchService;
 
     /**
-     *
+     * 商品搜索
      * @param page    页码
      * @param pageSize 页大小
      * @param searchKey 搜索值
@@ -46,7 +45,7 @@ public class MGoodsController {
                               @RequestParam(value = "storeId", required = false) Integer storeId,
                               @RequestParam(value = "storeGoodsCategoryId", required = false)Integer storeGoodsCategoryId) {
         RestResult result = new RestResult();
-        ArrayList<ApiGoodsListDTO> goods = searchService.apiGoodsSearch(page,pageSize,searchKey,order,brandId,goodsCategoryId,storeId,storeGoodsCategoryId);
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.apiGoodsSearch(page,pageSize,searchKey,order,brandId,goodsCategoryId,storeId,storeGoodsCategoryId);
         result.add("goods", goods);
         return result;
     }

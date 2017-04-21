@@ -52,7 +52,7 @@ public class Goods {
 
     private Date createTime;
 
-    private Date edittime;
+    private Date editTime;
 
     private Boolean isNew;
 
@@ -74,8 +74,6 @@ public class Goods {
 
     private Boolean isOwnShop;
 
-    private BigDecimal freight;
-
     private Boolean vat;
 
     private Boolean commend;
@@ -87,6 +85,10 @@ public class Goods {
     private Boolean delFlag;
 
     private String attrs;
+
+    private Boolean isPlatform;
+
+    private String area;
 
     private String goodsBody;
 
@@ -282,12 +284,12 @@ public class Goods {
         this.createTime = createTime;
     }
 
-    public Date getEdittime() {
-        return edittime;
+    public Date getEditTime() {
+        return editTime;
     }
 
-    public void setEdittime(Date edittime) {
-        this.edittime = edittime;
+    public void setEditTime(Date editTime) {
+        this.editTime = editTime;
     }
 
     public Boolean getIsNew() {
@@ -370,14 +372,6 @@ public class Goods {
         this.isOwnShop = isOwnShop;
     }
 
-    public BigDecimal getFreight() {
-        return freight;
-    }
-
-    public void setFreight(BigDecimal freight) {
-        this.freight = freight;
-    }
-
     public Boolean getVat() {
         return vat;
     }
@@ -424,6 +418,22 @@ public class Goods {
 
     public void setAttrs(String attrs) {
         this.attrs = attrs == null ? null : attrs.trim();
+    }
+
+    public Boolean getIsPlatform() {
+        return isPlatform;
+    }
+
+    public void setIsPlatform(Boolean isPlatform) {
+        this.isPlatform = isPlatform;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
     }
 
     public String getGoodsBody() {

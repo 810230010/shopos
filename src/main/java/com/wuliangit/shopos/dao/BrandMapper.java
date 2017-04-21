@@ -12,13 +12,16 @@ import java.util.ArrayList;
  * @Description 品牌Mapper
  */
 public interface BrandMapper extends BaseMapper<Brand, Integer> {
-     //获取后台品牌查询列表
+    /**
+     *  获取后台品牌查询列表
+     */
      ArrayList<Brand> search(@Param("searchKey") String searchKey,
                                      @Param("orderColumn") String orderColumn,
                                      @Param("orderType")String orderType);
-     //根据分类名称查询分类id
-     int queryCategoryIdByName(@Param("name") String categoryName);
 
-     //查询品牌名是否存在
+
+    /**
+     * 查询品牌名是否存在
+     */
     Brand queryBrandName(@Param("brandName") String brandName);
 }

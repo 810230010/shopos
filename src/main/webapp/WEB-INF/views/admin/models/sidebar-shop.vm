@@ -26,7 +26,7 @@
                     <li><a href="/admin/goods/listPage">商品列表</a></li>
                     <li><a href="/admin/goodsCategory/listPage">商品分类</a></li>
                     <li><a href="dashboard_3.html">用户评论</a></li>
-                    <li><a href="dashboard_4_1.html">品牌管理</a></li>
+                    <li><a href="/admin/brand/brandListPage">品牌管理</a></li>
                     <li><a href="dashboard_5.html">商品类型</a></li>
                 </ul>
             </li>

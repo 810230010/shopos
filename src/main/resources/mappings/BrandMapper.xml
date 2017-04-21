@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.BrandMapper" >
+    <select id="search" resultType="com.wuliangit.shopos.entity.Brand">
+        select * from t_brand
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or keywords like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        sort asc
+    </select>
+    <select id="queryCategoryIdByName" resultType="java.lang.Integer">
+        select goods_category_id
+        from t_goods_category
+        where name=#{name};
+    </select>
+    <select id="queryBrandName" resultType="com.wuliangit.shopos.entity.Brand">
+        select * from t_brand
+        where
+        name=#{brandName};
+    </select>
 
 </mapper>

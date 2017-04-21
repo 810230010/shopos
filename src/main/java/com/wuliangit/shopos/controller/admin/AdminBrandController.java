@@ -36,14 +36,23 @@ public class AdminBrandController {
         return "admin/brand/list";
     }
 
-    //添加品牌页面
+    /**
+     *
+     * 添加品牌页面
+     * @return
+     */
     @RequestMapping(value = ("/addPage"))
     public String addPage(Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         return "admin/brand/add";
     }
 
-    //跳转到编辑页面
+    /**
+     * 编辑页面跳转
+     * @param model
+     * @param brandId
+     * @return
+     */
     @RequestMapping(value = ("/editPage"))
     public String addPage(Model model, Integer brandId) {
         Brand brand = brandService.getBrandById(brandId);
@@ -52,18 +61,30 @@ public class AdminBrandController {
         return "admin/brand/edit";
     }
 
-    //添加品牌
+    /**
+     * 添加品牌
+     * @param brand
+     * @return
+     */
     @RequestMapping(value = ("/addBrand"), method = RequestMethod.POST)
     @ResponseBody
     public Object addBrand(Brand brand) {
         RestResult result = new RestResult();
-        System.out.println(brand.getPic());
         brand.setPic(QiNiuUtils.BASE_URL + brand.getPic());
         brandService.addBrand(brand);
         return result;
     }
 
-    //查询品牌列表
+    /**
+     * 查询品牌列表
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("/search")
     @ResponseBody
     public Object search(@RequestParam("draw") int draw,
@@ -77,7 +98,11 @@ public class AdminBrandController {
         return new PageResult<Brand>(brands, draw);
     }
 
-    //修改品牌
+    /**
+     * 修改品牌
+     * @param brand
+     * @return
+     */
     @RequestMapping(value = "/editBrand", method = RequestMethod.POST)
     @ResponseBody
     public Object updateBrand(Brand brand) {
@@ -91,7 +116,11 @@ public class AdminBrandController {
         return result;
     }
 
-    //验证品牌名是否存在
+    /**
+     * 验证品牌名是否存在
+     * @param brandName
+     * @return
+     */
     @RequestMapping(value = ("/checkBrandName"), method = RequestMethod.POST)
     @ResponseBody
     public String checkBrandNameExistence(String brandName) {
@@ -104,7 +133,11 @@ public class AdminBrandController {
         return message;
     }
 
-    //删除一条品牌信息
+    /**
+     * 删除品牌
+     * @param brandId
+     * @return
+     */
     @RequestMapping(value = ("/deleteBrand"), method = RequestMethod.POST)
     public Object deleteBrand(Integer brandId) {
         RestResult result = new RestResult();

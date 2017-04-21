@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 
 /**
- * Created by Administrator on 2017/4/15.
+ * Created by JangJanPing on 2017/4/15.
  */
 @Service
 @Transactional
@@ -21,7 +21,6 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public int addBrand(Brand brand) {
-        brand.setGoodsCategoryId(brandMapper.queryCategoryIdByName(brand.getCategoryName()));
         return brandMapper.insertSelective(brand);
     }
 

@@ -100,4 +100,20 @@ public class Brand {
     public void setGoodsCategoryId(Integer goodsCategoryId) {
         this.goodsCategoryId = goodsCategoryId;
     }
+
+    @Override
+    public String toString() {
+        return "Brand{" +
+                "brandId=" + brandId +
+                ", name='" + name + '\'' +
+                ", initial='" + initial + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", pic='" + pic + '\'' +
+                ", sort=" + sort +
+                ", isRecommend=" + isRecommend +
+                ", storeId=" + storeId +
+                ", brandApply='" + brandApply + '\'' +
+                ", goodsCategoryId=" + goodsCategoryId +
+                '}';
+    }
 }

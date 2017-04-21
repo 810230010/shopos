@@ -61,7 +61,7 @@
             },
             "columns": [
                 {"data":"goodsCategoryId","width":"7%","title":"序号","visible": false},
-                {"data":"name","width": "20%","title":"分类名称","orderable": false},
+                {"data":"name","width": "20%","title":"分类","orderable": false},
                 {"data":"parentId","width": "10%","title":"父id","visible": false},
                 {"data":"sort","width": "10%","title":"排序","orderable": true},
                 {"data":"keywords","width": "20%","title":"关键词","orderable": false},
@@ -96,7 +96,7 @@
             "responsive": true,
             "dom": '<"html5buttons"B>lTfgitp',
             "buttons": [
-                { extend: 'copy'},
+                {extend: 'copy'},
                 {extend: 'csv'},
                 {extend: 'excel', title: 'ExampleFile'},
                 {extend: 'pdf', title: 'ExampleFile'},

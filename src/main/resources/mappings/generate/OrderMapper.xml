@@ -45,31 +45,34 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Order" >
-    insert into t_order (order_id, order_sn, pay_sn, 
-      store_id, store_name, member_id, 
-      member_name, member_email, payment_code, 
-      payment_time, finnshed_time, goods_amount, 
-      order_amount, pd_amount, shipping_fee, 
-      evaluation_state, order_state, refund_state, 
-      is_lock, delete_state, refund_amount, 
-      order_from, shipping_code, create_time, 
-      del_flag)
-    values (#{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{paySn,jdbcType=VARCHAR}, 
-      #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
-      #{memberName,jdbcType=VARCHAR}, #{memberEmail,jdbcType=VARCHAR}, #{paymentCode,jdbcType=VARCHAR}, 
-      #{paymentTime,jdbcType=TIMESTAMP}, #{finnshedTime,jdbcType=TIMESTAMP}, #{goodsAmount,jdbcType=DECIMAL}, 
-      #{orderAmount,jdbcType=DECIMAL}, #{pdAmount,jdbcType=DECIMAL}, #{shippingFee,jdbcType=DECIMAL}, 
-      #{evaluationState,jdbcType=VARCHAR}, #{orderState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, 
-      #{isLock,jdbcType=BIT}, #{deleteState,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DECIMAL}, 
-      #{orderFrom,jdbcType=VARCHAR}, #{shippingCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{delFlag,jdbcType=BIT})
+    <selectKey resultType="java.lang.Integer" keyProperty="orderId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_order (order_sn, pay_sn, store_id, 
+      store_name, member_id, member_name, 
+      member_email, payment_code, payment_time, 
+      finnshed_time, goods_amount, order_amount, 
+      pd_amount, shipping_fee, evaluation_state, 
+      order_state, refund_state, is_lock, 
+      delete_state, refund_amount, order_from, 
+      shipping_code, create_time, del_flag
+      )
+    values (#{orderSn,jdbcType=VARCHAR}, #{paySn,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
+      #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
+      #{memberEmail,jdbcType=VARCHAR}, #{paymentCode,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, 
+      #{finnshedTime,jdbcType=TIMESTAMP}, #{goodsAmount,jdbcType=DECIMAL}, #{orderAmount,jdbcType=DECIMAL}, 
+      #{pdAmount,jdbcType=DECIMAL}, #{shippingFee,jdbcType=DECIMAL}, #{evaluationState,jdbcType=VARCHAR}, 
+      #{orderState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
+      #{deleteState,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DECIMAL}, #{orderFrom,jdbcType=VARCHAR}, 
+      #{shippingCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Order" >
+    <selectKey resultType="java.lang.Integer" keyProperty="orderId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        order_id,
-      </if>
       <if test="orderSn != null" >
         order_sn,
       </if>
@@ -144,9 +147,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        #{orderId,jdbcType=INTEGER},
-      </if>
       <if test="orderSn != null" >
         #{orderSn,jdbcType=VARCHAR},
       </if>

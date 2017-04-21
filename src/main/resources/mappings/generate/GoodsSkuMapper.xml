@@ -22,17 +22,20 @@
     where goods_sku_id = #{goodsSkuId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.GoodsSku" >
-    insert into t_goods_sku (goods_sku_id, sku_value, sku_price, 
-      sku_stock, goods_id)
-    values (#{goodsSkuId,jdbcType=INTEGER}, #{skuValue,jdbcType=VARCHAR}, #{skuPrice,jdbcType=DECIMAL}, 
-      #{skuStock,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER})
+    <selectKey resultType="java.lang.Integer" keyProperty="goodsSkuId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_goods_sku (sku_value, sku_price, sku_stock, 
+      goods_id)
+    values (#{skuValue,jdbcType=VARCHAR}, #{skuPrice,jdbcType=DECIMAL}, #{skuStock,jdbcType=INTEGER}, 
+      #{goodsId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.GoodsSku" >
+    <selectKey resultType="java.lang.Integer" keyProperty="goodsSkuId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_goods_sku
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsSkuId != null" >
-        goods_sku_id,
-      </if>
       <if test="skuValue != null" >
         sku_value,
       </if>
@@ -47,9 +50,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsSkuId != null" >
-        #{goodsSkuId,jdbcType=INTEGER},
-      </if>
       <if test="skuValue != null" >
         #{skuValue,jdbcType=VARCHAR},
       </if>

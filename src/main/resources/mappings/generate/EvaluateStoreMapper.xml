@@ -29,21 +29,24 @@
     where evaluate_store_id = #{evaluateStoreId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.EvaluateStore" >
-    insert into t_evaluate_store (evaluate_store_id, order_id, order_no, 
-      create_time, store_id, store_name, 
-      member_id, member_name, desc_credit, 
-      service_credit, delivery_credit)
-    values (#{evaluateStoreId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
-      #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{descCredit,jdbcType=INTEGER}, 
-      #{serviceCredit,jdbcType=INTEGER}, #{deliveryCredit,jdbcType=INTEGER})
+    <selectKey resultType="java.lang.Integer" keyProperty="evaluateStoreId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_evaluate_store (order_id, order_no, create_time, 
+      store_id, store_name, member_id, 
+      member_name, desc_credit, service_credit, 
+      delivery_credit)
+    values (#{orderId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
+      #{memberName,jdbcType=VARCHAR}, #{descCredit,jdbcType=INTEGER}, #{serviceCredit,jdbcType=INTEGER}, 
+      #{deliveryCredit,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.EvaluateStore" >
+    <selectKey resultType="java.lang.Integer" keyProperty="evaluateStoreId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_evaluate_store
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="evaluateStoreId != null" >
-        evaluate_store_id,
-      </if>
       <if test="orderId != null" >
         order_id,
       </if>
@@ -76,9 +79,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="evaluateStoreId != null" >
-        #{evaluateStoreId,jdbcType=INTEGER},
-      </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
       </if>

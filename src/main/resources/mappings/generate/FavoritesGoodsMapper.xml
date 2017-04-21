@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.FavoritesGoodsMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.FavoritesGoods" >
-    <id column="favorites_good_id" property="favoritesGoodId" jdbcType="INTEGER" />
+    <id column="favorites_goods_id" property="favoritesGoodsId" jdbcType="INTEGER" />
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
     <result column="member_name" property="memberName" jdbcType="VARCHAR" />
     <result column="fav_time" property="favTime" jdbcType="TIMESTAMP" />
@@ -12,50 +12,36 @@
     <result column="log_msg" property="logMsg" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    favorites_good_id, member_id, member_name, fav_time, goods_id, goods_name, log_price, 
+    favorites_goods_id, member_id, member_name, fav_time, goods_id, goods_name, log_price, 
     log_msg
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from t_favorites_goods
-    where favorites_good_id = #{favoritesGoodId,jdbcType=INTEGER}
+    where favorites_goods_id = #{favoritesGoodsId,jdbcType=INTEGER}
   </select>
-
-
-<!--用户收藏商品列表-->
-  <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.ApiCollectGoodsDTO">
-    select fg.*, g.price, g.title_img
-    from t_favorites_goods fg left join t_goods g on g.goods_id = fg.goods_id
-    where fg.member_id = #{memberId}
-  </select>
-  <!--删除收藏商品-->
-  <delete id="deleteCollectGoods">
-    delete from t_favorites_goods
-    where member_id = #{memberId} and goods_id = #{goodsId}
-  </delete>
-
-
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_favorites_goods
-    where favorites_good_id = #{favoritesGoodId,jdbcType=INTEGER}
+    where favorites_goods_id = #{favoritesGoodsId,jdbcType=INTEGER}
   </delete>
-
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.FavoritesGoods" >
-    insert into t_favorites_goods (favorites_good_id, member_id, member_name, 
-      fav_time, goods_id, goods_name, 
-      log_price, log_msg)
-    values (#{favoritesGoodId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
-      #{favTime,jdbcType=TIMESTAMP}, #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
-      #{logPrice,jdbcType=DECIMAL}, #{logMsg,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="favoritesGoodsId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_favorites_goods (member_id, member_name, fav_time, 
+      goods_id, goods_name, log_price, 
+      log_msg)
+    values (#{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{favTime,jdbcType=TIMESTAMP}, 
+      #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{logPrice,jdbcType=DECIMAL}, 
+      #{logMsg,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.FavoritesGoods" >
+    <selectKey resultType="java.lang.Integer" keyProperty="favoritesGoodsId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_favorites_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="favoritesGoodId != null" >
-        favorites_good_id,
-      </if>
       <if test="memberId != null" >
         member_id,
       </if>
@@ -79,9 +65,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="favoritesGoodId != null" >
-        #{favoritesGoodId,jdbcType=INTEGER},
-      </if>
       <if test="memberId != null" >
         #{memberId,jdbcType=INTEGER},
       </if>
@@ -130,7 +113,7 @@
         log_msg = #{logMsg,jdbcType=VARCHAR},
       </if>
     </set>
-    where favorites_good_id = #{favoritesGoodId,jdbcType=INTEGER}
+    where favorites_goods_id = #{favoritesGoodsId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.FavoritesGoods" >
     update t_favorites_goods
@@ -141,6 +124,6 @@
       goods_name = #{goodsName,jdbcType=VARCHAR},
       log_price = #{logPrice,jdbcType=DECIMAL},
       log_msg = #{logMsg,jdbcType=VARCHAR}
-    where favorites_good_id = #{favoritesGoodId,jdbcType=INTEGER}
+    where favorites_goods_id = #{favoritesGoodsId,jdbcType=INTEGER}
   </update>
 </mapper>

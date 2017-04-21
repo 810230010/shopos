@@ -18,28 +18,32 @@ public class UserToken implements AuthenticationToken {
     private char[] password;
 
     public enum UserType {
-        ADMIN(0), MEMBER(1);
+        ADMIN(0), MEMBER(1), STORE(2);
         private final int type;
+
         private UserType(int type) {
             this.type = type;
         }
+
         public int getType() {
             return type;
         }
     }
 
     public enum LoginType {
-        APP(0), WEB(1), WX(2), TOKEN(3);
+        APP(0), WEB(1), WX(2), TOKEN(3), ADMIN(4);
         private final int type;
+
         private LoginType(int type) {
             this.type = type;
         }
+
         public int getType() {
             return type;
         }
     }
 
-    public UserToken(final String username, final String password, UserType userType,LoginType loginType) {
+    public UserToken(final String username, final String password, UserType userType, LoginType loginType) {
         this.username = username;
         this.loginType = loginType;
         this.userType = userType;
@@ -49,9 +53,9 @@ public class UserToken implements AuthenticationToken {
     @Override
     public Object getPrincipal() {
         HashMap<String, Object> user = new HashMap<>();
-        user.put("username",username);
-        user.put("loginType",loginType);
-        user.put("userType",userType);
+        user.put("username", username);
+        user.put("loginType", loginType);
+        user.put("userType", userType);
         return user;
     }
 

@@ -26,8 +26,6 @@ public class Goods {
 
     private BigDecimal commission;
 
-    private BigDecimal commissionPercent;
-
     private BigDecimal promotionPrice;
 
     private String promotionType;
@@ -41,8 +39,6 @@ public class Goods {
     private Integer salenum;
 
     private Integer collect;
-
-    private String spec;
 
     private Integer storage;
 
@@ -182,14 +178,6 @@ public class Goods {
         this.commission = commission;
     }
 
-    public BigDecimal getCommissionPercent() {
-        return commissionPercent;
-    }
-
-    public void setCommissionPercent(BigDecimal commissionPercent) {
-        this.commissionPercent = commissionPercent;
-    }
-
     public BigDecimal getPromotionPrice() {
         return promotionPrice;
     }
@@ -244,14 +232,6 @@ public class Goods {
 
     public void setCollect(Integer collect) {
         this.collect = collect;
-    }
-
-    public String getSpec() {
-        return spec;
-    }
-
-    public void setSpec(String spec) {
-        this.spec = spec == null ? null : spec.trim();
     }
 
     public Integer getStorage() {

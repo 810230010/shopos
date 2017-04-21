@@ -25,19 +25,22 @@
     where goods_category_id = #{goodsCategoryId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.GoodsCategory" >
-    insert into t_goods_category (goods_category_id, name, parent_id, 
-      sort, keywords, description, 
-      is_show, img)
-    values (#{goodsCategoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
-      #{sort,jdbcType=INTEGER}, #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{isShow,jdbcType=BIT}, #{img,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="goodsCategoryId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_goods_category (name, parent_id, sort, 
+      keywords, description, is_show, 
+      img)
+    values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{isShow,jdbcType=BIT}, 
+      #{img,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.GoodsCategory" >
+    <selectKey resultType="java.lang.Integer" keyProperty="goodsCategoryId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_goods_category
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsCategoryId != null" >
-        goods_category_id,
-      </if>
       <if test="name != null" >
         name,
       </if>
@@ -61,9 +64,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsCategoryId != null" >
-        #{goodsCategoryId,jdbcType=INTEGER},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>

@@ -80,55 +80,58 @@
     where store_joinin_id = #{storeJoininId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreJoinin" >
-    insert into t_store_joinin (store_joinin_id, member_id, member_name, 
-      company_name, company_province_id, company_address, 
-      company_address_detail, company_phone, company_employee_count, 
-      company_registered_capital, contacts_name, 
-      contacts_phone, contacts_email, business_licence_number, 
-      business_licence_address, business_licence_start, 
-      business_licence_end, business_sphere, business_licence_number_electronic, 
-      organization_code, organization_code_electronic, 
-      general_taxpayer, bank_account_name, bank_account_number, 
-      bank_name, bank_code, bank_address, 
-      bank_licence_electronic, is_settlement_account, 
-      settlement_bank_account_name, settlement_bank_account_number, 
-      settlement_bank_name, settlement_bank_code, 
-      settlement_bank_address, tax_registration_certificate, 
-      taxpayer_id, tax_registration_certificate_electronic, 
-      store_name, store_class_ids, store_class_names, 
-      joinin_state, joinin_message, joinin_year, 
-      sg_name, sg_id, sc_name, 
-      sc_id, store_class_commis_rates, paying_money_certificate, 
+    <selectKey resultType="java.lang.Integer" keyProperty="storeJoininId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_store_joinin (member_id, member_name, company_name, 
+      company_province_id, company_address, company_address_detail, 
+      company_phone, company_employee_count, company_registered_capital, 
+      contacts_name, contacts_phone, contacts_email, 
+      business_licence_number, business_licence_address, 
+      business_licence_start, business_licence_end, business_sphere, 
+      business_licence_number_electronic, organization_code, 
+      organization_code_electronic, general_taxpayer, 
+      bank_account_name, bank_account_number, bank_name, 
+      bank_code, bank_address, bank_licence_electronic, 
+      is_settlement_account, settlement_bank_account_name, 
+      settlement_bank_account_number, settlement_bank_name, 
+      settlement_bank_code, settlement_bank_address, 
+      tax_registration_certificate, taxpayer_id, 
+      tax_registration_certificate_electronic, store_name, 
+      store_class_ids, store_class_names, joinin_state, 
+      joinin_message, joinin_year, sg_name, 
+      sg_id, sc_name, sc_id, 
+      store_class_commis_rates, paying_money_certificate, 
       paying_money_certificate_explain, paying_amount, 
       create_time)
-    values (#{storeJoininId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
-      #{companyName,jdbcType=VARCHAR}, #{companyProvinceId,jdbcType=INTEGER}, #{companyAddress,jdbcType=VARCHAR}, 
-      #{companyAddressDetail,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, #{companyEmployeeCount,jdbcType=INTEGER}, 
-      #{companyRegisteredCapital,jdbcType=INTEGER}, #{contactsName,jdbcType=VARCHAR}, 
-      #{contactsPhone,jdbcType=VARCHAR}, #{contactsEmail,jdbcType=VARCHAR}, #{businessLicenceNumber,jdbcType=VARCHAR}, 
-      #{businessLicenceAddress,jdbcType=VARCHAR}, #{businessLicenceStart,jdbcType=DATE}, 
-      #{businessLicenceEnd,jdbcType=DATE}, #{businessSphere,jdbcType=VARCHAR}, #{businessLicenceNumberElectronic,jdbcType=VARCHAR}, 
-      #{organizationCode,jdbcType=VARCHAR}, #{organizationCodeElectronic,jdbcType=VARCHAR}, 
-      #{generalTaxpayer,jdbcType=VARCHAR}, #{bankAccountName,jdbcType=VARCHAR}, #{bankAccountNumber,jdbcType=VARCHAR}, 
-      #{bankName,jdbcType=VARCHAR}, #{bankCode,jdbcType=VARCHAR}, #{bankAddress,jdbcType=VARCHAR}, 
-      #{bankLicenceElectronic,jdbcType=VARCHAR}, #{isSettlementAccount,jdbcType=BIT}, 
-      #{settlementBankAccountName,jdbcType=VARCHAR}, #{settlementBankAccountNumber,jdbcType=VARCHAR}, 
-      #{settlementBankName,jdbcType=VARCHAR}, #{settlementBankCode,jdbcType=VARCHAR}, 
-      #{settlementBankAddress,jdbcType=VARCHAR}, #{taxRegistrationCertificate,jdbcType=VARCHAR}, 
-      #{taxpayerId,jdbcType=VARCHAR}, #{taxRegistrationCertificateElectronic,jdbcType=VARCHAR}, 
-      #{storeName,jdbcType=VARCHAR}, #{storeClassIds,jdbcType=VARCHAR}, #{storeClassNames,jdbcType=VARCHAR}, 
-      #{joininState,jdbcType=VARCHAR}, #{joininMessage,jdbcType=VARCHAR}, #{joininYear,jdbcType=INTEGER}, 
-      #{sgName,jdbcType=VARCHAR}, #{sgId,jdbcType=INTEGER}, #{scName,jdbcType=VARCHAR}, 
-      #{scId,jdbcType=INTEGER}, #{storeClassCommisRates,jdbcType=VARCHAR}, #{payingMoneyCertificate,jdbcType=VARCHAR}, 
+    values (#{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{companyProvinceId,jdbcType=INTEGER}, #{companyAddress,jdbcType=VARCHAR}, #{companyAddressDetail,jdbcType=VARCHAR}, 
+      #{companyPhone,jdbcType=VARCHAR}, #{companyEmployeeCount,jdbcType=INTEGER}, #{companyRegisteredCapital,jdbcType=INTEGER}, 
+      #{contactsName,jdbcType=VARCHAR}, #{contactsPhone,jdbcType=VARCHAR}, #{contactsEmail,jdbcType=VARCHAR}, 
+      #{businessLicenceNumber,jdbcType=VARCHAR}, #{businessLicenceAddress,jdbcType=VARCHAR}, 
+      #{businessLicenceStart,jdbcType=DATE}, #{businessLicenceEnd,jdbcType=DATE}, #{businessSphere,jdbcType=VARCHAR}, 
+      #{businessLicenceNumberElectronic,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}, 
+      #{organizationCodeElectronic,jdbcType=VARCHAR}, #{generalTaxpayer,jdbcType=VARCHAR}, 
+      #{bankAccountName,jdbcType=VARCHAR}, #{bankAccountNumber,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, 
+      #{bankCode,jdbcType=VARCHAR}, #{bankAddress,jdbcType=VARCHAR}, #{bankLicenceElectronic,jdbcType=VARCHAR}, 
+      #{isSettlementAccount,jdbcType=BIT}, #{settlementBankAccountName,jdbcType=VARCHAR}, 
+      #{settlementBankAccountNumber,jdbcType=VARCHAR}, #{settlementBankName,jdbcType=VARCHAR}, 
+      #{settlementBankCode,jdbcType=VARCHAR}, #{settlementBankAddress,jdbcType=VARCHAR}, 
+      #{taxRegistrationCertificate,jdbcType=VARCHAR}, #{taxpayerId,jdbcType=VARCHAR}, 
+      #{taxRegistrationCertificateElectronic,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, 
+      #{storeClassIds,jdbcType=VARCHAR}, #{storeClassNames,jdbcType=VARCHAR}, #{joininState,jdbcType=VARCHAR}, 
+      #{joininMessage,jdbcType=VARCHAR}, #{joininYear,jdbcType=INTEGER}, #{sgName,jdbcType=VARCHAR}, 
+      #{sgId,jdbcType=INTEGER}, #{scName,jdbcType=VARCHAR}, #{scId,jdbcType=INTEGER}, 
+      #{storeClassCommisRates,jdbcType=VARCHAR}, #{payingMoneyCertificate,jdbcType=VARCHAR}, 
       #{payingMoneyCertificateExplain,jdbcType=VARCHAR}, #{payingAmount,jdbcType=DECIMAL}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreJoinin" >
+    <selectKey resultType="java.lang.Integer" keyProperty="storeJoininId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_store_joinin
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="storeJoininId != null" >
-        store_joinin_id,
-      </if>
       <if test="memberId != null" >
         member_id,
       </if>
@@ -284,9 +287,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="storeJoininId != null" >
-        #{storeJoininId,jdbcType=INTEGER},
-      </if>
       <if test="memberId != null" >
         #{memberId,jdbcType=INTEGER},
       </if>

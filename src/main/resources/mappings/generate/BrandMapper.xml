@@ -28,21 +28,24 @@
     where brand_id = #{brandId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Brand" >
-    insert into t_brand (brand_id, name, initial, 
-      category_name, pic, sort, 
-      is_recommend, store_id, brand_apply, 
-      goods_category_id)
-    values (#{brandId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{initial,jdbcType=VARCHAR}, 
-      #{categoryName,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
-      #{isRecommend,jdbcType=BIT}, #{storeId,jdbcType=INTEGER}, #{brandApply,jdbcType=VARCHAR}, 
-      #{goodsCategoryId,jdbcType=INTEGER})
+    <selectKey resultType="java.lang.Integer" keyProperty="brandId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_brand (name, initial, category_name, 
+      pic, sort, is_recommend, 
+      store_id, brand_apply, goods_category_id
+      )
+    values (#{name,jdbcType=VARCHAR}, #{initial,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, 
+      #{pic,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{isRecommend,jdbcType=BIT}, 
+      #{storeId,jdbcType=INTEGER}, #{brandApply,jdbcType=VARCHAR}, #{goodsCategoryId,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Brand" >
+    <selectKey resultType="java.lang.Integer" keyProperty="brandId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_brand
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="brandId != null" >
-        brand_id,
-      </if>
       <if test="name != null" >
         name,
       </if>
@@ -72,9 +75,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="brandId != null" >
-        #{brandId,jdbcType=INTEGER},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>

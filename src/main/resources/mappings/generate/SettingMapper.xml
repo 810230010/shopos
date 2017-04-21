@@ -21,17 +21,20 @@
     where setting_id = #{settingId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Setting" >
-    insert into t_setting (setting_id, name, option, 
-      value)
-    values (#{settingId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{option,jdbcType=VARCHAR}, 
-      #{value,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="settingId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_setting (name, option, value
+      )
+    values (#{name,jdbcType=VARCHAR}, #{option,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Setting" >
+    <selectKey resultType="java.lang.Integer" keyProperty="settingId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_setting
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="settingId != null" >
-        setting_id,
-      </if>
       <if test="name != null" >
         name,
       </if>
@@ -43,9 +46,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="settingId != null" >
-        #{settingId,jdbcType=INTEGER},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>

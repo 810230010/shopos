@@ -36,21 +36,24 @@
     where store_grade_id = #{storeGradeId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreGrade" >
-    insert into t_store_grade (store_grade_id, name, goods_limit, 
-      album_limit, space_limit, template_number, 
-      template, price, function, 
-      sort, description)
-    values (#{storeGradeId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{goodsLimit,jdbcType=INTEGER}, 
-      #{albumLimit,jdbcType=INTEGER}, #{spaceLimit,jdbcType=INTEGER}, #{templateNumber,jdbcType=INTEGER}, 
-      #{template,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{function,jdbcType=VARCHAR}, 
-      #{sort,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="storeGradeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_store_grade (name, goods_limit, album_limit, 
+      space_limit, template_number, template, 
+      price, function, sort, 
+      description)
+    values (#{name,jdbcType=CHAR}, #{goodsLimit,jdbcType=INTEGER}, #{albumLimit,jdbcType=INTEGER}, 
+      #{spaceLimit,jdbcType=INTEGER}, #{templateNumber,jdbcType=INTEGER}, #{template,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{function,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{description,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreGrade" >
+    <selectKey resultType="java.lang.Integer" keyProperty="storeGradeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_store_grade
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="storeGradeId != null" >
-        store_grade_id,
-      </if>
       <if test="name != null" >
         name,
       </if>
@@ -83,9 +86,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="storeGradeId != null" >
-        #{storeGradeId,jdbcType=INTEGER},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=CHAR},
       </if>

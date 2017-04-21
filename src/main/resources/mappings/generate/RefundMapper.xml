@@ -54,37 +54,38 @@
     where refund_id = #{refundId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Refund" >
-    insert into t_refund (refund_id, order_id, order_sn, 
-      refund_sn, store_id, store_name, 
-      member_id, member_name, goods_id, 
-      order_goods_id, goods_name, goods_num, 
-      refund_amount, goods_image, order_goods_type, 
-      refund_type, seller_state, refund_state, 
-      is_lock, goods_state, create_time, 
-      seller_handle_time, admin_time, reason_info, 
-      pics_info, buyer_message, seller_message, 
-      admin_message, express_id, invoice_no, 
-      ship_time, delay_time, receive_time
-      )
-    values (#{refundId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, 
-      #{refundSn,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
-      #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, 
-      #{orderGoodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, 
-      #{refundAmount,jdbcType=DECIMAL}, #{goodsImage,jdbcType=VARCHAR}, #{orderGoodsType,jdbcType=VARCHAR}, 
-      #{refundType,jdbcType=VARCHAR}, #{sellerState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, 
-      #{isLock,jdbcType=BIT}, #{goodsState,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{sellerHandleTime,jdbcType=TIMESTAMP}, #{adminTime,jdbcType=TIMESTAMP}, #{reasonInfo,jdbcType=VARCHAR}, 
-      #{picsInfo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, #{sellerMessage,jdbcType=VARCHAR}, 
-      #{adminMessage,jdbcType=VARCHAR}, #{expressId,jdbcType=INTEGER}, #{invoiceNo,jdbcType=VARCHAR}, 
-      #{shipTime,jdbcType=TIMESTAMP}, #{delayTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}
-      )
+    <selectKey resultType="java.lang.Integer" keyProperty="refundId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_refund (order_id, order_sn, refund_sn, 
+      store_id, store_name, member_id, 
+      member_name, goods_id, order_goods_id, 
+      goods_name, goods_num, refund_amount, 
+      goods_image, order_goods_type, refund_type, 
+      seller_state, refund_state, is_lock, 
+      goods_state, create_time, seller_handle_time, 
+      admin_time, reason_info, pics_info, 
+      buyer_message, seller_message, admin_message, 
+      express_id, invoice_no, ship_time, 
+      delay_time, receive_time)
+    values (#{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{refundSn,jdbcType=VARCHAR}, 
+      #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
+      #{memberName,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, #{orderGoodsId,jdbcType=INTEGER}, 
+      #{goodsName,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, #{refundAmount,jdbcType=DECIMAL}, 
+      #{goodsImage,jdbcType=VARCHAR}, #{orderGoodsType,jdbcType=VARCHAR}, #{refundType,jdbcType=VARCHAR}, 
+      #{sellerState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
+      #{goodsState,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{sellerHandleTime,jdbcType=TIMESTAMP}, 
+      #{adminTime,jdbcType=TIMESTAMP}, #{reasonInfo,jdbcType=VARCHAR}, #{picsInfo,jdbcType=VARCHAR}, 
+      #{buyerMessage,jdbcType=VARCHAR}, #{sellerMessage,jdbcType=VARCHAR}, #{adminMessage,jdbcType=VARCHAR}, 
+      #{expressId,jdbcType=INTEGER}, #{invoiceNo,jdbcType=VARCHAR}, #{shipTime,jdbcType=TIMESTAMP}, 
+      #{delayTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Refund" >
+    <selectKey resultType="java.lang.Integer" keyProperty="refundId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_refund
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="refundId != null" >
-        refund_id,
-      </if>
       <if test="orderId != null" >
         order_id,
       </if>
@@ -183,9 +184,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="refundId != null" >
-        #{refundId,jdbcType=INTEGER},
-      </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
       </if>

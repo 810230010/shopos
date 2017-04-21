@@ -30,23 +30,24 @@
     where balance_cash_id = #{balanceCashId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.BalanceCash" >
-    insert into t_balance_cash (balance_cash_id, balance_cash_sn, member_id, 
-      member_name, amount, bank_name, 
-      bank_no, bank_user, create_time, 
-      payment_time, is_payment, payment_admin
-      )
-    values (#{balanceCashId,jdbcType=INTEGER}, #{balanceCashSn,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
-      #{memberName,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{bankName,jdbcType=VARCHAR}, 
-      #{bankNo,jdbcType=VARCHAR}, #{bankUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{paymentTime,jdbcType=TIMESTAMP}, #{isPayment,jdbcType=BIT}, #{paymentAdmin,jdbcType=VARCHAR}
-      )
+    <selectKey resultType="java.lang.Integer" keyProperty="balanceCashId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_balance_cash (balance_cash_sn, member_id, member_name, 
+      amount, bank_name, bank_no, 
+      bank_user, create_time, payment_time, 
+      is_payment, payment_admin)
+    values (#{balanceCashSn,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{bankName,jdbcType=VARCHAR}, #{bankNo,jdbcType=VARCHAR}, 
+      #{bankUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{paymentTime,jdbcType=TIMESTAMP}, 
+      #{isPayment,jdbcType=BIT}, #{paymentAdmin,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.BalanceCash" >
+    <selectKey resultType="java.lang.Integer" keyProperty="balanceCashId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_balance_cash
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="balanceCashId != null" >
-        balance_cash_id,
-      </if>
       <if test="balanceCashSn != null" >
         balance_cash_sn,
       </if>
@@ -82,9 +83,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="balanceCashId != null" >
-        #{balanceCashId,jdbcType=INTEGER},
-      </if>
       <if test="balanceCashSn != null" >
         #{balanceCashSn,jdbcType=VARCHAR},
       </if>

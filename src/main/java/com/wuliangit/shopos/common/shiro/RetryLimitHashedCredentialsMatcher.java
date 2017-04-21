@@ -2,8 +2,10 @@ package com.wuliangit.shopos.common.shiro;
 
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
+import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.service.AdminService;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.SecurityUtils;
@@ -21,6 +23,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher {
 
     private Cache<String, AtomicInteger> passwordRetryCache;
+
+    @Autowired
+    private AdminService adminService;
 
     @Autowired
     private MemberService memberService;
@@ -42,8 +47,7 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
             new Exception("token 不匹配");
         }
 
-        HashMap<String, Object> hashUser = (HashMap) token.getPrincipal();
-        String username = (String) hashUser.get("username");
+        String username = userToken.getUsername();
         //retry count + 1
         AtomicInteger retryCount = passwordRetryCache.get(username);
         if (retryCount == null) {
@@ -61,15 +65,6 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
             passwordRetryCache.remove(username);
         }
 
-        //如果不是tokne登录需要保存用户session
-        if (userToken.getLoginType() != UserToken.LoginType.TOKEN) {
-            Member member = memberService.getByUsername(username);
-            StoreMin storeMin = storeService.getStoreMin(member.getMemberId());
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, member);
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeMin);
-        } else {
-
-        }
         return matches;
     }
 }

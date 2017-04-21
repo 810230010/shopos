@@ -13,7 +13,6 @@
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="carriage" property="carriage" jdbcType="DECIMAL" />
     <result column="commission" property="commission" jdbcType="DECIMAL" />
-    <result column="commission_percent" property="commissionPercent" jdbcType="DECIMAL" />
     <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL" />
     <result column="promotion_type" property="promotionType" jdbcType="VARCHAR" />
     <result column="marketprice" property="marketprice" jdbcType="DECIMAL" />
@@ -21,7 +20,6 @@
     <result column="click" property="click" jdbcType="INTEGER" />
     <result column="salenum" property="salenum" jdbcType="INTEGER" />
     <result column="collect" property="collect" jdbcType="INTEGER" />
-    <result column="spec" property="spec" jdbcType="VARCHAR" />
     <result column="storage" property="storage" jdbcType="INTEGER" />
     <result column="images" property="images" jdbcType="VARCHAR" />
     <result column="title_img" property="titleImg" jdbcType="VARCHAR" />
@@ -52,11 +50,11 @@
   </resultMap>
   <sql id="Base_Column_List" >
     goods_id, name, unit, ad_word, store_id, store_name, goods_category_id, brand_id, 
-    price, carriage, commission, commission_percent, promotion_price, promotion_type, 
-    marketprice, storage_alarm, click, salenum, collect, spec, storage, images, title_img, 
-    state, verify, create_time, edittime, is_new, type, second_hand, activity_id, activity_type, 
-    is_virtual, virtual_invalid_refund, is_appoint, is_presell, is_own_shop, freight, 
-    vat, commend, evaluation_good_star, evaluation_count, del_flag, attrs
+    price, carriage, commission, promotion_price, promotion_type, marketprice, storage_alarm, 
+    click, salenum, collect, storage, images, title_img, state, verify, create_time, 
+    edittime, is_new, type, second_hand, activity_id, activity_type, is_virtual, virtual_invalid_refund, 
+    is_appoint, is_presell, is_own_shop, freight, vat, commend, evaluation_good_star, 
+    evaluation_count, del_flag, attrs
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -74,13 +72,15 @@
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Goods" >
-    insert into t_goods (goods_id, name, unit, 
-      ad_word, store_id, store_name, 
-      goods_category_id, brand_id, price, 
-      carriage, commission, commission_percent, 
-      promotion_price, promotion_type, marketprice, 
-      storage_alarm, click, salenum, 
-      collect, spec, storage, 
+    <selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_goods (name, unit, ad_word, 
+      store_id, store_name, goods_category_id, 
+      brand_id, price, carriage, 
+      commission, promotion_price, promotion_type, 
+      marketprice, storage_alarm, click, 
+      salenum, collect, storage, 
       images, title_img, state, 
       verify, create_time, edittime, 
       is_new, type, second_hand, activity_id, 
@@ -89,13 +89,12 @@
       freight, vat, commend, evaluation_good_star, 
       evaluation_count, del_flag, attrs, 
       goods_body)
-    values (#{goodsId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
-      #{adWord,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
-      #{goodsCategoryId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
-      #{carriage,jdbcType=DECIMAL}, #{commission,jdbcType=DECIMAL}, #{commissionPercent,jdbcType=DECIMAL}, 
-      #{promotionPrice,jdbcType=DECIMAL}, #{promotionType,jdbcType=VARCHAR}, #{marketprice,jdbcType=DECIMAL}, 
-      #{storageAlarm,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, #{salenum,jdbcType=INTEGER}, 
-      #{collect,jdbcType=INTEGER}, #{spec,jdbcType=VARCHAR}, #{storage,jdbcType=INTEGER}, 
+    values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{adWord,jdbcType=VARCHAR}, 
+      #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{goodsCategoryId,jdbcType=INTEGER}, 
+      #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{carriage,jdbcType=DECIMAL}, 
+      #{commission,jdbcType=DECIMAL}, #{promotionPrice,jdbcType=DECIMAL}, #{promotionType,jdbcType=VARCHAR}, 
+      #{marketprice,jdbcType=DECIMAL}, #{storageAlarm,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, 
+      #{salenum,jdbcType=INTEGER}, #{collect,jdbcType=INTEGER}, #{storage,jdbcType=INTEGER}, 
       #{images,jdbcType=VARCHAR}, #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
       #{verify,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, 
       #{isNew,jdbcType=BIT}, #{type,jdbcType=VARCHAR}, #{secondHand,jdbcType=BIT}, #{activityId,jdbcType=INTEGER}, 
@@ -106,11 +105,11 @@
       #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
+    <selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
-        goods_id,
-      </if>
       <if test="name != null" >
         name,
       </if>
@@ -141,9 +140,6 @@
       <if test="commission != null" >
         commission,
       </if>
-      <if test="commissionPercent != null" >
-        commission_percent,
-      </if>
       <if test="promotionPrice != null" >
         promotion_price,
       </if>
@@ -164,9 +160,6 @@
       </if>
       <if test="collect != null" >
         collect,
-      </if>
-      <if test="spec != null" >
-        spec,
       </if>
       <if test="storage != null" >
         storage,
@@ -245,9 +238,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
-        #{goodsId,jdbcType=INTEGER},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
@@ -278,9 +268,6 @@
       <if test="commission != null" >
         #{commission,jdbcType=DECIMAL},
       </if>
-      <if test="commissionPercent != null" >
-        #{commissionPercent,jdbcType=DECIMAL},
-      </if>
       <if test="promotionPrice != null" >
         #{promotionPrice,jdbcType=DECIMAL},
       </if>
@@ -301,9 +288,6 @@
       </if>
       <if test="collect != null" >
         #{collect,jdbcType=INTEGER},
-      </if>
-      <if test="spec != null" >
-        #{spec,jdbcType=VARCHAR},
       </if>
       <if test="storage != null" >
         #{storage,jdbcType=INTEGER},
@@ -415,9 +399,6 @@
       <if test="commission != null" >
         commission = #{commission,jdbcType=DECIMAL},
       </if>
-      <if test="commissionPercent != null" >
-        commission_percent = #{commissionPercent,jdbcType=DECIMAL},
-      </if>
       <if test="promotionPrice != null" >
         promotion_price = #{promotionPrice,jdbcType=DECIMAL},
       </if>
@@ -438,9 +419,6 @@
       </if>
       <if test="collect != null" >
         collect = #{collect,jdbcType=INTEGER},
-      </if>
-      <if test="spec != null" >
-        spec = #{spec,jdbcType=VARCHAR},
       </if>
       <if test="storage != null" >
         storage = #{storage,jdbcType=INTEGER},
@@ -532,7 +510,6 @@
       price = #{price,jdbcType=DECIMAL},
       carriage = #{carriage,jdbcType=DECIMAL},
       commission = #{commission,jdbcType=DECIMAL},
-      commission_percent = #{commissionPercent,jdbcType=DECIMAL},
       promotion_price = #{promotionPrice,jdbcType=DECIMAL},
       promotion_type = #{promotionType,jdbcType=VARCHAR},
       marketprice = #{marketprice,jdbcType=DECIMAL},
@@ -540,7 +517,6 @@
       click = #{click,jdbcType=INTEGER},
       salenum = #{salenum,jdbcType=INTEGER},
       collect = #{collect,jdbcType=INTEGER},
-      spec = #{spec,jdbcType=VARCHAR},
       storage = #{storage,jdbcType=INTEGER},
       images = #{images,jdbcType=VARCHAR},
       title_img = #{titleImg,jdbcType=VARCHAR},
@@ -580,7 +556,6 @@
       price = #{price,jdbcType=DECIMAL},
       carriage = #{carriage,jdbcType=DECIMAL},
       commission = #{commission,jdbcType=DECIMAL},
-      commission_percent = #{commissionPercent,jdbcType=DECIMAL},
       promotion_price = #{promotionPrice,jdbcType=DECIMAL},
       promotion_type = #{promotionType,jdbcType=VARCHAR},
       marketprice = #{marketprice,jdbcType=DECIMAL},
@@ -588,7 +563,6 @@
       click = #{click,jdbcType=INTEGER},
       salenum = #{salenum,jdbcType=INTEGER},
       collect = #{collect,jdbcType=INTEGER},
-      spec = #{spec,jdbcType=VARCHAR},
       storage = #{storage,jdbcType=INTEGER},
       images = #{images,jdbcType=VARCHAR},
       title_img = #{titleImg,jdbcType=VARCHAR},

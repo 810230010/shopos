@@ -56,15 +56,17 @@
     from t_member
     where member_id = #{memberId,jdbcType=INTEGER}
   </select>
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_member
     where member_id = #{memberId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Member" >
-    insert into t_member (member_id, username, nikename, 
-      truename, passwd, paypwd, 
-      salt, photo, sex, birthday, 
+    <selectKey resultType="java.lang.Integer" keyProperty="memberId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_member (username, nikename, truename, 
+      passwd, paypwd, salt, 
+      photo, sex, birthday, 
       type, email, mobile, 
       qq, openid, wx_photo, 
       wx_nickname, login_num, create_time, 
@@ -76,9 +78,9 @@
       exppoints, inviter_id, del_flag, 
       update_time, auth_state, idcard_num
       )
-    values (#{memberId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{nikename,jdbcType=VARCHAR}, 
-      #{truename,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, #{paypwd,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+    values (#{username,jdbcType=VARCHAR}, #{nikename,jdbcType=VARCHAR}, #{truename,jdbcType=VARCHAR}, 
+      #{passwd,jdbcType=VARCHAR}, #{paypwd,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
       #{type,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{qq,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{wxPhoto,jdbcType=VARCHAR}, 
       #{wxNickname,jdbcType=VARCHAR}, #{loginNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
@@ -92,11 +94,11 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Member" >
+    <selectKey resultType="java.lang.Integer" keyProperty="memberId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_member
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="memberId != null" >
-        member_id,
-      </if>
       <if test="username != null" >
         username,
       </if>
@@ -216,9 +218,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="memberId != null" >
-        #{memberId,jdbcType=INTEGER},
-      </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>

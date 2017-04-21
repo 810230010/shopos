@@ -34,25 +34,28 @@
     where voucher_id = #{voucherId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Voucher" >
-    insert into t_voucher (voucher_id, voucher_code, title, 
-      desc, start_time, end_time, 
-      price, limit, store_id, 
-      state, active_time, type, 
-      owner_id, owner_name, order_id, 
-      create_time)
-    values (#{voucherId,jdbcType=INTEGER}, #{voucherCode,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{desc,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{price,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}, #{storeId,jdbcType=INTEGER}, 
-      #{state,jdbcType=VARCHAR}, #{activeTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, 
-      #{ownerId,jdbcType=INTEGER}, #{ownerName,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP})
+    <selectKey resultType="java.lang.Integer" keyProperty="voucherId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_voucher (voucher_code, title, desc, 
+      start_time, end_time, price, 
+      limit, store_id, state, 
+      active_time, type, owner_id, 
+      owner_name, order_id, create_time
+      )
+    values (#{voucherCode,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, 
+      #{limit,jdbcType=DECIMAL}, #{storeId,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, 
+      #{activeTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, #{ownerId,jdbcType=INTEGER}, 
+      #{ownerName,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Voucher" >
+    <selectKey resultType="java.lang.Integer" keyProperty="voucherId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_voucher
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="voucherId != null" >
-        voucher_id,
-      </if>
       <if test="voucherCode != null" >
         voucher_code,
       </if>
@@ -100,9 +103,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="voucherId != null" >
-        #{voucherId,jdbcType=INTEGER},
-      </if>
       <if test="voucherCode != null" >
         #{voucherCode,jdbcType=VARCHAR},
       </if>

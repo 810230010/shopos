@@ -22,17 +22,20 @@
     where area_id = #{areaId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Area" >
-    insert into t_area (area_id, name, parent_id, 
-      sort, deep)
-    values (#{areaId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
-      #{sort,jdbcType=INTEGER}, #{deep,jdbcType=INTEGER})
+    <selectKey resultType="java.lang.Integer" keyProperty="areaId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_area (name, parent_id, sort, 
+      deep)
+    values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{deep,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Area" >
+    <selectKey resultType="java.lang.Integer" keyProperty="areaId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_area
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="areaId != null" >
-        area_id,
-      </if>
       <if test="name != null" >
         name,
       </if>
@@ -47,9 +50,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="areaId != null" >
-        #{areaId,jdbcType=INTEGER},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>

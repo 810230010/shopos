@@ -24,27 +24,29 @@
     from t_address
     where address_id = #{addressId,jdbcType=INTEGER}
   </select>
-
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_address
     where address_id = #{addressId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Address" >
-    insert into t_address (address_id, member_id, reciver_name, 
-      area_id, city_id, area_info, 
-      address, tel_phone, mob_phone, 
-      is_default, create_time)
-    values (#{addressId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{reciverName,jdbcType=VARCHAR}, 
-      #{areaId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{telPhone,jdbcType=VARCHAR}, #{mobPhone,jdbcType=VARCHAR}, 
-      #{isDefault,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+    <selectKey resultType="java.lang.Integer" keyProperty="addressId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_address (member_id, reciver_name, area_id, 
+      city_id, area_info, address, 
+      tel_phone, mob_phone, is_default, 
+      create_time)
+    values (#{memberId,jdbcType=INTEGER}, #{reciverName,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER}, 
+      #{cityId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{telPhone,jdbcType=VARCHAR}, #{mobPhone,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Address" >
+    <selectKey resultType="java.lang.Integer" keyProperty="addressId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_address
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="addressId != null" >
-        address_id,
-      </if>
       <if test="memberId != null" >
         member_id,
       </if>
@@ -77,9 +79,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="addressId != null" >
-        #{addressId,jdbcType=INTEGER},
-      </if>
       <if test="memberId != null" >
         #{memberId,jdbcType=INTEGER},
       </if>
@@ -162,5 +161,4 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
-
 </mapper>

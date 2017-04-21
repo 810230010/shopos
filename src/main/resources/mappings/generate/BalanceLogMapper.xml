@@ -27,21 +27,22 @@
     where balance_log_id = #{balanceLogId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.BalanceLog" >
-    insert into t_balance_log (balance_log_id, member_id, member_name, 
-      admin_name, type, av_amount, 
-      freeze_amount, create_time, desc
-      )
-    values (#{balanceLogId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
-      #{adminName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{avAmount,jdbcType=DECIMAL}, 
-      #{freezeAmount,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{desc,jdbcType=VARCHAR}
-      )
+    <selectKey resultType="java.lang.Integer" keyProperty="balanceLogId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_balance_log (member_id, member_name, admin_name, 
+      type, av_amount, freeze_amount, 
+      create_time, desc)
+    values (#{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{avAmount,jdbcType=DECIMAL}, #{freezeAmount,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{desc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.BalanceLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="balanceLogId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_balance_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="balanceLogId != null" >
-        balance_log_id,
-      </if>
       <if test="memberId != null" >
         member_id,
       </if>
@@ -68,9 +69,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="balanceLogId != null" >
-        #{balanceLogId,jdbcType=INTEGER},
-      </if>
       <if test="memberId != null" >
         #{memberId,jdbcType=INTEGER},
       </if>

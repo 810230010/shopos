@@ -26,4 +26,6 @@ public interface GoodsService {
      * @return
      */
     int createGoods(Goods goods, String skuStr);
+
+
 }

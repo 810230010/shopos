@@ -19,41 +19,27 @@
     from t_favorites_store
     where favorites_store_id = #{favoritesStoreId,jdbcType=INTEGER}
   </select>
-
-
-  <!--用户收藏店铺列表-->
-    <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.ApiCollectStoreDTO">
-      select s.name, s.logo, s.label, fs.fav_time
-      from t_favorites_store fs left join t_store s on s.store_id = fs.store_id
-      where fs.member_id = #{memberId}
-    </select>
-  <!--删除收藏店铺-->
-  <delete id="deleteCollectGoods">
-    delete from t_favorites_store
-    where member_id = #{memberId} and store_id = #{storeId}
-  </delete>
-
-
-
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_favorites_store
     where favorites_store_id = #{favoritesStoreId,jdbcType=INTEGER}
   </delete>
-
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.FavoritesStore" >
-    insert into t_favorites_store (favorites_store_id, member_id, member_name, 
-      fav_time, store_id, store_name, 
-      log_msg)
-    values (#{favoritesStoreId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
-      #{favTime,jdbcType=TIMESTAMP}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
-      #{logMsg,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="favoritesStoreId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_favorites_store (member_id, member_name, fav_time, 
+      store_id, store_name, log_msg
+      )
+    values (#{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{favTime,jdbcType=TIMESTAMP}, 
+      #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{logMsg,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.FavoritesStore" >
+    <selectKey resultType="java.lang.Integer" keyProperty="favoritesStoreId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_favorites_store
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="favoritesStoreId != null" >
-        favorites_store_id,
-      </if>
       <if test="memberId != null" >
         member_id,
       </if>
@@ -74,9 +60,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="favoritesStoreId != null" >
-        #{favoritesStoreId,jdbcType=INTEGER},
-      </if>
       <if test="memberId != null" >
         #{memberId,jdbcType=INTEGER},
       </if>

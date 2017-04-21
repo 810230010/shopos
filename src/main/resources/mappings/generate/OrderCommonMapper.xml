@@ -44,31 +44,32 @@
     where order_common_id = #{orderCommonId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.OrderCommon" >
-    insert into t_order_common (order_common_id, order_id, store_id, 
-      shipping_time, shipping_express_id, evaluation_time, 
-      evalseller_state, evalseller_time, order_message, 
-      order_pointscount, voucher_price, voucher_code, 
-      deliver_explain, area_id, city_id, 
-      area_info, address, tel_phone, 
-      mob_phone, reciver_name, reciver_info, 
-      reciver_province_id, invoice_info, promotion_info
-      )
-    values (#{orderCommonId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, 
-      #{shippingTime,jdbcType=INTEGER}, #{shippingExpressId,jdbcType=INTEGER}, #{evaluationTime,jdbcType=TIMESTAMP}, 
-      #{evalsellerState,jdbcType=VARCHAR}, #{evalsellerTime,jdbcType=INTEGER}, #{orderMessage,jdbcType=VARCHAR}, 
-      #{orderPointscount,jdbcType=INTEGER}, #{voucherPrice,jdbcType=INTEGER}, #{voucherCode,jdbcType=VARCHAR}, 
-      #{deliverExplain,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, 
-      #{areaInfo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{telPhone,jdbcType=VARCHAR}, 
-      #{mobPhone,jdbcType=VARCHAR}, #{reciverName,jdbcType=VARCHAR}, #{reciverInfo,jdbcType=VARCHAR}, 
-      #{reciverProvinceId,jdbcType=INTEGER}, #{invoiceInfo,jdbcType=VARCHAR}, #{promotionInfo,jdbcType=VARCHAR}
-      )
+    <selectKey resultType="java.lang.Integer" keyProperty="orderCommonId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_order_common (order_id, store_id, shipping_time, 
+      shipping_express_id, evaluation_time, evalseller_state, 
+      evalseller_time, order_message, order_pointscount, 
+      voucher_price, voucher_code, deliver_explain, 
+      area_id, city_id, area_info, 
+      address, tel_phone, mob_phone, 
+      reciver_name, reciver_info, reciver_province_id, 
+      invoice_info, promotion_info)
+    values (#{orderId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{shippingTime,jdbcType=INTEGER}, 
+      #{shippingExpressId,jdbcType=INTEGER}, #{evaluationTime,jdbcType=TIMESTAMP}, #{evalsellerState,jdbcType=VARCHAR}, 
+      #{evalsellerTime,jdbcType=INTEGER}, #{orderMessage,jdbcType=VARCHAR}, #{orderPointscount,jdbcType=INTEGER}, 
+      #{voucherPrice,jdbcType=INTEGER}, #{voucherCode,jdbcType=VARCHAR}, #{deliverExplain,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{telPhone,jdbcType=VARCHAR}, #{mobPhone,jdbcType=VARCHAR}, 
+      #{reciverName,jdbcType=VARCHAR}, #{reciverInfo,jdbcType=VARCHAR}, #{reciverProvinceId,jdbcType=INTEGER}, 
+      #{invoiceInfo,jdbcType=VARCHAR}, #{promotionInfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.OrderCommon" >
+    <selectKey resultType="java.lang.Integer" keyProperty="orderCommonId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_order_common
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderCommonId != null" >
-        order_common_id,
-      </if>
       <if test="orderId != null" >
         order_id,
       </if>
@@ -140,9 +141,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderCommonId != null" >
-        #{orderCommonId,jdbcType=INTEGER},
-      </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
       </if>

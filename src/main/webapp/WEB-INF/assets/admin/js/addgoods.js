@@ -15,7 +15,6 @@ $("#wizard").steps({
         loading: "加载中 ..."
     },
     onStepChanging: function (event, currentIndex, newIndex) {
-        return true;
         if (currentIndex > newIndex) {
             return true;
         }
@@ -71,7 +70,6 @@ $("#wizard").steps({
 
     },
     onFinishing: function (event, currentIndex) {
-        return true;
         var form = $(this);
 
         // Disable validation on fields that are disabled.
@@ -168,6 +166,7 @@ $("#wizard").steps({
                 name:$("#name").val(),
                 unit:$("#unit").val(),
                 price:$("#price").val(),
+                marketprice:$("#marketprice").val(),
                 commission:$("#commission").val(),
                 carriage:$("#carriage").val(),
                 adWord:$("#adWord").val(),

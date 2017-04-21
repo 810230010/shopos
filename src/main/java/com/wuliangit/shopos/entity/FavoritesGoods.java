@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class FavoritesGoods {
-    private Integer favoritesGoodId;
+    private Integer favoritesGoodsId;
 
     private Integer memberId;
 
@@ -20,12 +20,12 @@ public class FavoritesGoods {
 
     private String logMsg;
 
-    public Integer getFavoritesGoodId() {
-        return favoritesGoodId;
+    public Integer getFavoritesGoodsId() {
+        return favoritesGoodsId;
     }
 
-    public void setFavoritesGoodId(Integer favoritesGoodId) {
-        this.favoritesGoodId = favoritesGoodId;
+    public void setFavoritesGoodsId(Integer favoritesGoodsId) {
+        this.favoritesGoodsId = favoritesGoodsId;
     }
 
     public Integer getMemberId() {

@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.entity.Admin;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.AdminService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -38,7 +39,15 @@ public class AdminLoginController {
     public String login(Model model, String username, String password) {
         String error = null;
         try {
-            SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.ADMIN, UserToken.LoginType.WEB));
+            SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.ADMIN, UserToken.LoginType.ADMIN));
+
+            Admin admin = adminService.getByUsername(username);
+            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, admin);
+            StoreMin storeMin = new StoreMin();
+            storeMin.setStoreId(0);
+            storeMin.setName("自营");
+            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeMin);
+
             return "redirect:/admin/index";
         } catch (UnknownAccountException e) {
             error = "用户不存在";

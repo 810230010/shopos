@@ -1,9 +1,13 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.GoodsMapper;
+import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.entity.Goods;
+import com.wuliangit.shopos.entity.GoodsSku;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nilme on 2017/3/30.
@@ -22,6 +28,9 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
 
+    @Autowired
+    private GoodsSkuMapper goodsSkuMapper;
+
     @Override
     public ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page, Integer pageSize, String searchKey, String order) {
         return null;
@@ -32,9 +41,21 @@ public class GoodsServiceImpl implements GoodsService {
     public int createGoods(Goods goods, String skuStr) {
         StoreMin store = WebUtil.getCurrentStore();
 
+        goods.setStoreId(store.getStoreId());
+        goods.setStoreName(store.getName());
+        goods.setEdittime(new Date());
+
         int res = goodsMapper.insertSelective(goods);
 
+        Gson gson = new Gson();
+        List<GoodsSku> skus = gson.fromJson(skuStr, new TypeToken<List<GoodsSku>>() {
+        }.getType());
 
-        return 0;
+        for (GoodsSku sku : skus) {
+            sku.setGoodsId(goods.getGoodsId());
+            goodsSkuMapper.insertSelective(sku);
+        }
+
+        return res;
     }
 }

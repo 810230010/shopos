@@ -65,7 +65,7 @@
                 {"data":"sort","width": "10%","title":"排序","orderable": true},
                 {"data":"isRecommend","width": "10%","title":"是否推荐","orderable": true},
                 {"data":"brandApply","width": "10%","title":"是否审核通过","orderable": false},
-                {"data":"id","width": "20%","title":"操作","orderable": false},
+                {"data":"id","width": "15%","title":"操作","orderable": false},
             ],
             "columnDefs" : [{
                 "targets": 6,
@@ -138,7 +138,7 @@
                async: false,
                data: {"brandId": data.brandId},
                 success:function(data) {
-                   alert(data)
+                   alert(data.code)
                    if (data.code == 200) {
                        swal({
                            title: "成功!",

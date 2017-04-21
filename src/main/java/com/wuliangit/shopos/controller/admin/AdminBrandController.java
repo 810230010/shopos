@@ -27,22 +27,25 @@ public class AdminBrandController {
     @Autowired
     private BrandService brandService;
 
-    //品牌列表页面
+    /**
+     * 品牌列表页面
+     * @return
+     */
     @RequestMapping(value = ("/brandListPage"))
-    public String brandListPage(){
+    public String brandListPage() {
         return "admin/brand/list";
     }
 
     //添加品牌页面
     @RequestMapping(value = ("/addPage"))
-    public String addPage(Model model){
+    public String addPage(Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         return "admin/brand/add";
     }
 
     //跳转到编辑页面
     @RequestMapping(value = ("/editPage"))
-    public String addPage(Model model, Integer brandId){
+    public String addPage(Model model, Integer brandId) {
         Brand brand = brandService.getBrandById(brandId);
         model.addAttribute("brand", brand);
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
@@ -50,12 +53,12 @@ public class AdminBrandController {
     }
 
     //添加品牌
-    @RequestMapping(value=("/addBrand"), method = RequestMethod.POST)
+    @RequestMapping(value = ("/addBrand"), method = RequestMethod.POST)
     @ResponseBody
-    public Object addBrand(Brand brand){
+    public Object addBrand(Brand brand) {
         RestResult result = new RestResult();
         System.out.println(brand.getPic());
-        brand.setPic(CoreConstants.IMG_BASE_URL + brand.getPic());
+        brand.setPic(QiNiuUtils.BASE_URL + brand.getPic());
         brandService.addBrand(brand);
         return result;
     }
@@ -75,13 +78,13 @@ public class AdminBrandController {
     }
 
     //修改品牌
-    @RequestMapping(value="/editBrand", method = RequestMethod.POST)
+    @RequestMapping(value = "/editBrand", method = RequestMethod.POST)
     @ResponseBody
     public Object updateBrand(Brand brand) {
         RestResult result = new RestResult();
-        if(brand.getPic().length() > 0){
+        if (brand.getPic().length() > 0) {
             brand.setPic(QiNiuUtils.getRealUrl(brand.getPic()));
-        }else{
+        } else {
             brand.setPic(null);
         }
         brandService.updateBrand(brand);
@@ -89,20 +92,20 @@ public class AdminBrandController {
     }
 
     //验证品牌名是否存在
-    @RequestMapping(value=("/checkBrandName"), method = RequestMethod.POST)
+    @RequestMapping(value = ("/checkBrandName"), method = RequestMethod.POST)
     @ResponseBody
     public String checkBrandNameExistence(String brandName) {
         String message = "";
-        if(brandService.hasBrandName(brandName)) {
+        if (brandService.hasBrandName(brandName)) {
             message = "品牌名已存在";
-        }else{
+        } else {
             message = "可以添加该品牌名";
         }
         return message;
     }
 
     //删除一条品牌信息
-    @RequestMapping(value=("/deleteBrand"), method = RequestMethod.POST)
+    @RequestMapping(value = ("/deleteBrand"), method = RequestMethod.POST)
     public Object deleteBrand(Integer brandId) {
         RestResult result = new RestResult();
         brandService.deleteBrandByID(brandId);

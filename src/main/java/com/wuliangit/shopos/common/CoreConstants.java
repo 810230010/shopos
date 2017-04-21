@@ -11,8 +11,6 @@ public class CoreConstants {
     public static final String PARAM_DIGEST = "digest";
     public static final String PARAM_USERNAME = "username";
 
-    public static final String IMG_BASE_URL = "http://ooa95t7wi.bkt.clouddn.com/";
-
     public static final String CURRENT_NAME = "CURRENT_NAME";
 
     public static final String SESSION_CURRENT_MENU = "SESSION_CURRENT_MENU";

@@ -138,7 +138,8 @@ public class AdminBrandController {
      * @param brandId
      * @return
      */
-    @RequestMapping(value = ("/deleteBrand"), method = RequestMethod.POST)
+    @RequestMapping(value = ("/deleteBrand"), method = RequestMethod.GET)
+    @ResponseBody
     public Object deleteBrand(Integer brandId) {
         RestResult result = new RestResult();
         brandService.deleteBrandByID(brandId);

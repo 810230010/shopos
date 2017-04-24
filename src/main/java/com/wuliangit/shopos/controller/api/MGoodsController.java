@@ -2,6 +2,8 @@ package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.entity.Goods;
+import com.wuliangit.shopos.entity.GoodsSku;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.GoodsSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +12,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nilme on 2017/3/30.
  */
 
 @RestController
-@RequestMapping("/api/v1/public")
+@RequestMapping("/api/v1/public/goods")
 public class MGoodsController {
-
 
     @Autowired
     private GoodsService goodsService;
     @Autowired
     private GoodsSearchService goodsSearchService;
+
 
     /**
      * 商品搜索
@@ -35,7 +38,7 @@ public class MGoodsController {
      * @param goodsCategoryId   商品分类id
      * @return
      */
-    @RequestMapping("/goods/search")
+    @RequestMapping("/search")
     public Object goodsSearch(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
                               @RequestParam(value = "searchKey", required = false) String searchKey,
@@ -49,4 +52,20 @@ public class MGoodsController {
         result.add("goods", goods);
         return result;
     }
+
+    /**
+     *
+     * @param goodsId
+     * @return
+     */
+    @RequestMapping("/get")
+    public Object getGoods(Integer goodsId){
+        RestResult result = new RestResult();
+        Goods goods = goodsService.getGoodsById(goodsId);
+        List<GoodsSku> goodsSku = goodsService.getGoodsSkuByGoodsId(goodsId);
+        result.add("goods",goods);
+        result.add("goodsSku",goodsSku);
+        return result;
+    }
+
 }

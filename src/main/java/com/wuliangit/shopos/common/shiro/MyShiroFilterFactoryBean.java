@@ -1,6 +1,5 @@
 package com.wuliangit.shopos.common.shiro;
 
-import com.wuliangit.shopos.common.shiro.MyShiroHttpServletResponse;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.FilterChainManager;
@@ -16,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MyShiroFilterFactoryBean extends ShiroFilterFactoryBean {
 
-    @Override  
-      public Class getObjectType() {  
-        return MySpringShiroFilter.class;  
-      } 
+    @Override
+    public Class getObjectType() {
+        return MySpringShiroFilter.class;
+    }
 
     @Override
     protected AbstractShiroFilter createInstance() throws Exception {
@@ -42,22 +41,22 @@ public class MyShiroFilterFactoryBean extends ShiroFilterFactoryBean {
         return new MySpringShiroFilter((WebSecurityManager) securityManager, chainResolver);
     }
 
-    private static final class MySpringShiroFilter extends AbstractShiroFilter {  
+    private static final class MySpringShiroFilter extends AbstractShiroFilter {
 
         protected MySpringShiroFilter(WebSecurityManager webSecurityManager, FilterChainResolver resolver) {
-          super();  
-          if (webSecurityManager == null) {  
-            throw new IllegalArgumentException("WebSecurityManager property cannot be null.");  
-          }  
-          setSecurityManager(webSecurityManager);  
-          if (resolver != null) {  
-            setFilterChainResolver(resolver);  
-          }  
-        }  
+            super();
+            if (webSecurityManager == null) {
+                throw new IllegalArgumentException("WebSecurityManager property cannot be null.");
+            }
+            setSecurityManager(webSecurityManager);
+            if (resolver != null) {
+                setFilterChainResolver(resolver);
+            }
+        }
 
-        @Override  
+        @Override
         protected ServletResponse wrapServletResponse(HttpServletResponse orig, ShiroHttpServletRequest request) {
-          return new MyShiroHttpServletResponse(orig, getServletContext(), request);
-        }  
+            return new MyShiroHttpServletResponse(orig, getServletContext(), request);
+        }
     }
 }

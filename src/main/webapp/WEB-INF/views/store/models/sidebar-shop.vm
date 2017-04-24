@@ -13,7 +13,7 @@
                         <li><a href="contacts.html">Contacts</a></li>
                         <li><a href="mailbox.html">Mailbox</a></li>
                         <li class="divider"></li>
-                        <li><a href="/admin/logout">注销</a></li>
+                        <li><a href="/store/logout">注销</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -23,10 +23,10 @@
             <li class="active">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">商品</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="/admin/goods/listPage">商品列表</a></li>
-                    <li><a href="/admin/goodsCategory/listPage">商品分类</a></li>
+                    <li><a href="/store/goods/listPage">商品列表</a></li>
+                    <li><a href="/store/goodsCategory/listPage">商品分类</a></li>
                     <li><a href="dashboard_3.html">用户评论</a></li>
-                    <li><a href="/admin/brand/brandListPage">品牌管理</a></li>
+                    <li><a href="/store/brand/brandListPage">品牌管理</a></li>
                     <li><a href="dashboard_5.html">商品类型</a></li>
                 </ul>
             </li>

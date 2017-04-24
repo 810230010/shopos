@@ -64,4 +64,15 @@ public class GoodsServiceImpl implements GoodsService {
 
         return res;
     }
+
+    @Override
+    public Goods getGoodsById(Integer goodsId) {
+        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+        return goods;
+    }
+
+    @Override
+    public List<GoodsSku> getGoodsSkuByGoodsId(Integer goodsId) {
+        return goodsSkuMapper.getGoodsSkuByGoodsId(goodsId);
+    }
 }

@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.entity.Member;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import sun.misc.BASE64Encoder;
 
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.MessageDigest;
 import java.util.*;
+
+import static com.wuliangit.shopos.common.CoreConstants.SESSION_CURRENT_USERID;
 
 /**
  * Created by taoshanchang on 16/8/1.
@@ -28,17 +32,25 @@ public class ApiFilter extends AccessControlFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+
         String sign = request.getParameter(SIGN);
         String timestamp = request.getParameter(TIMESTAMP);
-        Integer userId = Integer.parseInt(request.getParameter(USERID));
+        String userIdStr = request.getParameter(USERID);
 
-        if (sign == null || timestamp == null || userId == null) {
+        //判断必须参数是否为空
+        if (sign == null || timestamp == null || userIdStr == null) {
             return false;
         }
+
+        Integer userId = Integer.parseInt(userIdStr);
+
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setAttribute(SESSION_CURRENT_USERID,userId);
 
         // 判断用户是否已经登录
         String serverToken = tokenManager.getToken(userId);
 
+        //获取参数
         Enumeration<String> enumeration = request.getParameterNames();
         Map map = new HashMap();
         while (enumeration.hasMoreElements()) {
@@ -66,11 +78,14 @@ public class ApiFilter extends AccessControlFilter {
         // 生成一个MD5加密计算摘要
         String signUrl = new Md5Hash(perSingUrl).toString();
 
-        if (signUrl.equals(sign)) {
-            return true;
-        } else {
-            return false;
-        }
+//        if (signUrl.equals(sign)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+
+        //调试的时候不进行鉴权
+        return true;
 
     }
 
@@ -82,7 +97,7 @@ public class ApiFilter extends AccessControlFilter {
 
         String sign = request.getParameter(SIGN);
         String timestamp = request.getParameter(TIMESTAMP);
-        Integer userId = Integer.parseInt(request.getParameter(USERID));
+        String userId = request.getParameter(USERID);
 
         if (sign == null || timestamp == null || userId == null) {
             result.setCode(402);
@@ -101,6 +116,11 @@ public class ApiFilter extends AccessControlFilter {
         this.tokenManager = tokenManager;
     }
 
+    /**
+     * 对参数字典序排序，并拼接成url参数
+     * @param maptest
+     * @return
+     */
     private String sortParameter(Map maptest) {
         Collection<String> keyset = maptest.keySet();
         List<String> list = new ArrayList<String>(keyset);

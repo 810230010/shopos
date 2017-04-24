@@ -1,0 +1,243 @@
+#parse("/store/models/begin.vm")
+<link href="/assets/admin/css/plugins/steps/jquery.steps.css" rel="stylesheet">
+<link href="/assets/admin/css/plugins/select2/select2.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/assets/admin/css/plugins/wangeditor/wangEditor.min.css">
+
+
+<link rel="stylesheet" type="text/css" href="/assets/admin/css/plugins/webuploader/webuploader.css">
+<link href="/assets/admin/css/plugins/fileinput/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
+
+<link href="/assets/admin/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
+
+<style>
+    .category-selete ul li {
+        list-style-type: none;
+        border-bottom: 1px solid gainsboro;
+        width: 100%;
+    }
+
+    .category-selete ul li a {
+        display: block;
+        width: 100%;
+        color: #5f5f5f;
+        cursor: pointer;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .category-selete {
+        height: 400px;
+        overflow-y: scroll;
+    }
+
+</style>
+
+#parse("/store/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>商品-添加商品</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <form id="wizard" class="wizard-big form-horizontal">
+                <h1>选择商品类型</h1>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <p>一级类型</p>
+                            <div class="ibox-content category-selete b-r-md">
+                                <ul id="category1">
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <p>二级类型</p>
+                            <div class="ibox-content category-selete b-r-md">
+                                <ul id="category2">
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <p>三级类型</p>
+                            <div class="ibox-content category-selete b-r-md">
+                                <ul id="category3">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <h1>通用信息</h1>
+                <fieldset>
+                    <div class="ibox-content">
+                        <h4>通用信息</h4>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">商品名称:</label>
+                                    <div class="col-sm-7">
+                                        <input id="name" name="name" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">规格名称(单位):</label>
+                                    <div class="col-sm-7">
+                                        <input id="unit" name="unit" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">商品价格:</label>
+                                    <div class="col-sm-7">
+                                       <input id="price" name="price" type="number" step="0.01" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">市场价:</label>
+                                    <div class="col-sm-7">
+                                        <input id="marketprice" name="marketprice" type="number" step="0.01" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">商品佣金:</label>
+                                    <div class="col-sm-7">
+                                        <input name="commission" id="commission" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">运费:</label>
+                                    <div class="col-sm-7">
+                                         <input id="carriage" name="carriage" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">商品广告词:</label>
+                                    <div class="col-sm-7">
+                                        <input id="adWord" name="adWord" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">品牌:</label>
+                                    <div class="col-sm-7">
+                                        <select id="" name="" class="brand-select form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="goods-logo-div">
+                                    <label class="col-sm-3 control-label">商品logo图片:</label>
+                                    <div class="col-sm-4">
+                                        <input id="goods-logo" class="file" name="file" type="file" multiple>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="goods-images-div">
+                                    <label class="col-sm-3 control-label">商品图片集:</label>
+                                    <div class="col-sm-8">
+                                        <input id="goods-images" class="file" name="file" type="file" multiple>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <h1>图文详情</h1>
+                <fieldset>
+                    <textarea id="goodsBody" style="height:600px;max-height:600px;">
+                        <p>请输入内容...</p>
+                    </textarea>
+                </fieldset>
+
+                <h1>填写商品属性</h1>
+                <fieldset>
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>添加商品属性</small></h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div id="sku_content">
+                                    <div id="sku_img">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label">图片属性</label>
+                                            <div class="col-sm-2">
+                                                <input id="sku_img_name" name="sku_img_name" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div id="with_img" class="form-group">
+                                            <label class="col-sm-1 control-label">属性值</label>
+                                            <div class="col-sm-11">
+                                                <div id="sku_img_list" class="uploader-list"></div>
+                                                <div id="sku_img_picker" class="pull-left"></div>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
+                                    </div>
+                                    <div id="sku_attribute">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <div class="btn btn-primary dim" type="button" id="sku-content-add">添加新属性</div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="btn btn-primary dim" type="button" id="create_table">生成表格</div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div id="createTable">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+#parse("/store/models/footer.vm")
+
+<!-- Tags Input -->
+<script src="/assets/admin/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+
+<!-- Select2 -->
+<script src="/assets/admin/js/plugins/select2/select2.full.min.js"></script>
+<script src="/assets/admin/js/plugins/select2/zh-CN.js"></script>
+
+<!-- Steps -->
+<script src="/assets/admin/js/plugins/steps/jquery.steps.min.js"></script>
+
+<!-- Jquery Validate -->
+<script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
+
+<!--webuploader-->
+<script type="text/javascript" src="/assets/admin/js/plugins/webuploader/webuploader.min.js"></script>
+
+<!-- 文件上传 -->
+<script src="/assets/admin/js/plugins/fileinput/fileinput.min.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
+
+<!-- 富文本编辑 -->
+<script type="text/javascript" src="/assets/admin/js/plugins/wangeditor/wangEditor.min.js"></script>
+<script type="text/javascript" src="/assets/admin/js/plugins/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/assets/admin/js/plugins/plupload/zh_CN.js"></script>
+<script type="text/javascript" src="/assets/admin/js/plugins/qiniu/qiniu.js"></script>
+
+<script src="/assets/admin/js/sku.js" type="text/javascript"></script>
+
+<script src="/assets/admin/js/plugins/jquery.tabletojson.min.js"></script>
+
+
+<script>
+    var uploadToken = '$uploadToken';
+    var domain = '$domain';
+</script>
+
+
+<script src="/assets/admin/js/addgoods.js" type="text/javascript"></script>
+
+
+#parse("/store/models/end.vm")

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -23,7 +24,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Set<String> getRoles(String username) {
-        return null;
+        Set<String> roles = new HashSet<>();
+        roles.add("user");
+        return roles;
     }
 
     @Override

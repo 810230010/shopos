@@ -1,0 +1,8 @@
+<link href="/assets/admin/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div id="wrapper">
+    #parse("/store/models/sidebar-shop.vm")
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        #parse("/store/models/navbar.vm")

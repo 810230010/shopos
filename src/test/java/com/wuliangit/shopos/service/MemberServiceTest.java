@@ -51,14 +51,13 @@ public class MemberServiceTest {
 //    @Transactional
     public void addMember() {
         Member member = new Member();
-        member.setUsername("nilme");
+        member.setUsername("aaaa");
         member.setEmail("taoshanchang1@foxmail.com");
         member.setSalt(PasswordHelper.generateSalt());
         member.setPasswd(PasswordHelper.generatePassword("11",member.getSalt()));
         member.setNikename("Nilme");
         member.setCreateTime(new Date());
         member.setLoginTime(new Date());
-        member.setMemberId(1);
         member.setUpdateTime(new Date());
 
         memberMapper.insertSelective(member);

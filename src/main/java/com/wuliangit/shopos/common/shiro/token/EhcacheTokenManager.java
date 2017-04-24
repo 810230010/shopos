@@ -41,12 +41,14 @@ public class EhcacheTokenManager implements TokenManager<Integer,Member> {
 
     @Override
     public void createTokenData(String token, Member data) {
-
+        Cache<Object, Object> cache = cacheManager.getCache(cacheName);
+        cache.put(token, data);
     }
 
     @Override
     public Member getTokenData(String token) {
-        return null;
+        Cache<Object, Object> cache = cacheManager.getCache(cacheName);
+        return (Member)cache.get(token);
     }
 
     @Override

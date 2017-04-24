@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.GoodsSkuMapper" >
 
+    <!--获取商品sku信息-->
+    <select id="getGoodsSkuByGoodsId" resultType="com.wuliangit.shopos.entity.GoodsSku">
+        select
+        <include refid="Base_Column_List" />
+        from t_goods_sku
+        where goods_id = #{goodsId,jdbcType=INTEGER}
+    </select>
 </mapper>

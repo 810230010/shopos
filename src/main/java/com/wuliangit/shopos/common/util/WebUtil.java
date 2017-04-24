@@ -1,10 +1,13 @@
 package com.wuliangit.shopos.common.util;
 
 import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.model.StoreMin;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+
+import static com.wuliangit.shopos.common.CoreConstants.SESSION_CURRENT_USERID;
 
 /**
  * 项目公共方法
@@ -17,8 +20,14 @@ public class WebUtil {
      * @return
      */
     public static Member getCurrentMember(){
-        Member member = (Member) SecurityUtils.getSubject().getSession().getAttribute(CoreConstants.SESSION_CURRENT_USER);
-        return member;
+        TokenManager bean = SpringUtils.getBean(TokenManager.class);
+
+        Session session = SecurityUtils.getSubject().getSession();
+        Integer userId = (Integer)session.getAttribute(SESSION_CURRENT_USERID);
+
+        String token = bean.getToken(userId);
+        Object tokenData = bean.getTokenData(token);
+        return (Member)tokenData;
     }
 
     /**

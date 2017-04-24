@@ -1,6 +1,5 @@
 package com.wuliangit.shopos.controller.admin;
 
-import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
@@ -30,18 +29,32 @@ public class AdminGoodsCategoryController {
     @Autowired
     private GoodsCategoryService goodsCategoryService;
 
-
+    /**
+     * 商品分类列表页面
+     * @return
+     */
     @RequestMapping("/listPage")
     public String listPage() {
         return "admin/goodsCategory/list";
     }
 
+    /**
+     * 商品分类添加页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/addPage")
     public String addPage(Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         return "admin/goodsCategory/add";
     }
 
+    /**
+     * 商品分类编辑页面
+     * @param model
+     * @param goodsCategoryId
+     * @return
+     */
     @RequestMapping("/editPage")
     public String editPage(Model model,Integer goodsCategoryId) {
         GoodsCategory goodsCategory = goodsCategoryService.getById(goodsCategoryId);
@@ -50,6 +63,10 @@ public class AdminGoodsCategoryController {
         return "admin/goodsCategory/edit";
     }
 
+    /**
+     * 获取所有分类
+     * @return
+     */
     @RequestMapping("/get/all")
     @ResponseBody
     public Object getAll() {
@@ -59,6 +76,11 @@ public class AdminGoodsCategoryController {
         return result;
     }
 
+    /**
+     * 获取子分类
+     * @param parentId
+     * @return
+     */
     @RequestMapping("/get/grade")
     @ResponseBody
     public Object getGrade(@RequestParam(value = "parentId", required = false, defaultValue = "0") Integer parentId) {
@@ -68,6 +90,11 @@ public class AdminGoodsCategoryController {
         return result;
     }
 
+    /**
+     * 添加商品分类
+     * @param goodsCategory
+     * @return
+     */
     @RequestMapping("/add")
     @ResponseBody
     public Object add(GoodsCategory goodsCategory) {
@@ -77,6 +104,11 @@ public class AdminGoodsCategoryController {
         return result;
     }
 
+    /**
+     * 编辑商品分类
+     * @param goodsCategory
+     * @return
+     */
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(GoodsCategory goodsCategory) {
@@ -86,6 +118,11 @@ public class AdminGoodsCategoryController {
         return result;
     }
 
+    /**
+     * 删除商品分类
+     * @param goodsCategoryId
+     * @return
+     */
     @RequestMapping("delete")
     public Object delete(Integer goodsCategoryId){
         RestResult result = new RestResult();
@@ -93,7 +130,17 @@ public class AdminGoodsCategoryController {
         return result;
     }
 
-
+    /**
+     * 搜索商品分类
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @param parentId
+     * @return
+     */
     @RequestMapping("/search")
     @ResponseBody
     public Object search(@RequestParam("draw") int draw,

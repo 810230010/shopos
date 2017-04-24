@@ -53,7 +53,7 @@ public class QiNiuUtils {
     }
 
     public static String getHttp(String url) {
-        String responseMsg = "";
+        String responseMsg = null;
         HttpClient httpClient = new HttpClient();
         GetMethod getMethod = new GetMethod(url);
         getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,new DefaultHttpMethodRetryHandler());

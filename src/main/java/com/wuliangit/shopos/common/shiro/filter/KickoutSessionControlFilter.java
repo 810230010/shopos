@@ -25,7 +25,7 @@ public class KickoutSessionControlFilter extends AccessControlFilter {
     private int maxSession = 1; //同一个帐号最大会话数 默认1
 
     private SessionManager sessionManager;
-    private Cache<String, Deque<Serializable>> cache;
+    private Cache<Object, Deque<Serializable>> cache;
 
     public void setKickoutUrl(String kickoutUrl) {
         this.kickoutUrl = kickoutUrl;
@@ -61,14 +61,14 @@ public class KickoutSessionControlFilter extends AccessControlFilter {
         }
 
         Session session = subject.getSession();
-        String username = (String) subject.getPrincipal();
+        Object principal = subject.getPrincipal();
         Serializable sessionId = session.getId();
 
         //TODO 同步控制
-        Deque<Serializable> deque = cache.get(username);
+        Deque<Serializable> deque = cache.get(principal);
         if(deque == null) {
             deque = new LinkedList<Serializable>();
-            cache.put(username, deque);
+            cache.put(principal, deque);
         }
 
         //如果队列里没有此sessionId，且用户没有被踢出；放入队列

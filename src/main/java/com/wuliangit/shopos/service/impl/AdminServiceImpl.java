@@ -6,6 +6,7 @@ import com.wuliangit.shopos.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,10 +19,11 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
-
     @Override
     public Set<String> getRoles(String username) {
-        return null;
+        Set<String> roles = new HashSet<>();
+        roles.add("admin");
+        return roles;
     }
 
     @Override

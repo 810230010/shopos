@@ -4,7 +4,7 @@
 
     <!--通过用户名获取店铺简要信息-->
     <select id="getStoreMin" resultType="com.wuliangit.shopos.model.StoreMin">
-        select  store_id, name where member_id = #{memberId}
+        select  store_id, name from t_store where member_id = #{memberId}
     </select>
 
 </mapper>

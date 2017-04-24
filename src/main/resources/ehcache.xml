@@ -12,7 +12,6 @@
            maxEntriesLocalHeap="2000"
            eternal="false"
            timeToIdleSeconds="3600"
-           timeToLiveSeconds="3600"
            overflowToDisk="false"
            statistics="true">
     </cache>
@@ -21,7 +20,6 @@
            maxEntriesLocalHeap="2000"
            eternal="false"
            timeToIdleSeconds="3600"
-           timeToLiveSeconds="0"
            overflowToDisk="false"
            statistics="true">
     </cache>
@@ -30,7 +28,6 @@
            maxEntriesLocalHeap="2000"
            eternal="false"
            timeToIdleSeconds="3600"
-           timeToLiveSeconds="3600"
            overflowToDisk="false"
            statistics="true">
     </cache>
@@ -39,7 +36,6 @@
            maxEntriesLocalHeap="2000"
            eternal="false"
            timeToIdleSeconds="3600"
-           timeToLiveSeconds="3600"
            overflowToDisk="false"
            statistics="true">
     </cache>
@@ -47,7 +43,6 @@
     <cache name="shiro-kickout-session"
            maxEntriesLocalHeap="2000"
            eternal="false"
-           timeToIdleSeconds="3600"
            timeToLiveSeconds="3600"
            overflowToDisk="false"
            statistics="true">

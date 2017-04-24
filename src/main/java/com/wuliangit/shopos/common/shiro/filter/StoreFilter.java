@@ -6,7 +6,7 @@ import org.apache.shiro.web.filter.AccessControlFilter;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-public class SysUserFilter extends AccessControlFilter {
+public class StoreFilter extends AccessControlFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
@@ -14,7 +14,12 @@ public class SysUserFilter extends AccessControlFilter {
             return true;
         }
         if(SecurityUtils.getSubject().isAuthenticated()){
-            return true;
+            if (SecurityUtils.getSubject().hasRole("store")){
+                return true;
+            }else{
+                System.out.println("没有店铺角色，被拦截！！！");
+                return false;
+            }
         }
         return false;
     }

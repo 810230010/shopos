@@ -29,21 +29,17 @@
     </bean>
 
     <!-- 凭证匹配器 处理重复登录失败 -->
-    <bean id="credentialsMatcher" class="com.wuliangit.shopos.common.shiro.RetryLimitHashedCredentialsMatcher">
-        <constructor-arg ref="cacheManager"/>
+    <!--<bean id="credentialsMatcher" class="com.wuliangit.shopos.common.shiro.RetryLimitHashedCredentialsMatcher">-->
+        <!--<constructor-arg ref="cacheManager"/>-->
+        <!--<property name="hashAlgorithmName" value="${password.algorithmName}"/>-->
+        <!--<property name="hashIterations" value="${password.hashIterations}"/>-->
+        <!--<property name="storedCredentialsHexEncoded" value="true"/>-->
+    <!--</bean>-->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <!--<constructor-arg ref="cacheManager"/>-->
         <property name="hashAlgorithmName" value="${password.algorithmName}"/>
         <property name="hashIterations" value="${password.hashIterations}"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
-    </bean>
-
-    <!-- Realm实现 -->
-    <bean id="userRealm" class="com.wuliangit.shopos.common.shiro.realm.UserRealm">
-        <property name="credentialsMatcher" ref="credentialsMatcher"/>
-        <property name="cachingEnabled" value="true"/>
-        <property name="authenticationCachingEnabled" value="true"/>
-        <property name="authenticationCacheName" value="authenticationCache"/>
-        <property name="authorizationCachingEnabled" value="true"/>
-        <property name="authorizationCacheName" value="authorizationCache"/>
     </bean>
 
     <!-- 会话Cookie模板 -->
@@ -102,12 +98,7 @@
         <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
-    <!--当有多个realm的时候可以配置realm的匹配方案，-->
-    <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
-        <property name="authenticationStrategy">
-            <bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
-        </property>
-    </bean>
+
 
     <!-- Subject工厂 -->
     <bean id="subjectFactory" class="com.wuliangit.shopos.common.shiro.mgt.StatelessAndOnlineWebSubjectFactory">
@@ -118,13 +109,57 @@
         </property>
     </bean>
 
+
+    <!--店铺reaml-->
+    <bean id="storeRealm" class="com.wuliangit.shopos.common.shiro.realm.StoreRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <property name="cachingEnabled" value="true"/>
+        <property name="authenticationCachingEnabled" value="true"/>
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+        <property name="authorizationCacheName" value="authorizationCache"/>
+    </bean>
+
+    <!--会员reaml-->
+    <bean id="adminRealm" class="com.wuliangit.shopos.common.shiro.realm.AdminRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <property name="cachingEnabled" value="true"/>
+        <property name="authenticationCachingEnabled" value="true"/>
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+        <property name="authorizationCacheName" value="authorizationCache"/>
+    </bean>
+
+    <!-- Realm实现 -->
+    <bean id="userRealm" class="com.wuliangit.shopos.common.shiro.realm.UserRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <property name="cachingEnabled" value="true"/>
+        <property name="authenticationCachingEnabled" value="true"/>
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+        <property name="authorizationCacheName" value="authorizationCache"/>
+    </bean>
+
+    <!--当有多个realm的时候可以配置realm的authentic匹配方案，-->
+    <bean id="authenticator" class="com.wuliangit.shopos.common.shiro.realm.CustomizedModularRealmAuthenticator">
+        <property name="authenticationStrategy">
+            <bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
+        </property>
+    </bean>
+    <!--当有多个realm的时候可以配置realm的authorizer匹配方案，-->
+    <bean id="authorizer" class="com.wuliangit.shopos.common.shiro.realm.CustomizedModularRealmAuthorizer">
+    </bean>
+
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- 这个对象一定要放在reamls前 -->
-        <property name="authenticator" ref="authenticator"/>
+        <!--<property name="authorizer" ref="authorizer"/>-->
+        <!--<property name="authenticator" ref="authenticator"/>-->
         <property name="realms">
             <list>
+                <!--<ref bean="adminRealm"/>-->
                 <ref bean="userRealm"/>
+                <!--<ref bean="storeRealm"/>-->
             </list>
         </property>
         <property name="sessionManager" ref="sessionManager"/>
@@ -144,11 +179,15 @@
         <property name="sessionManager" ref="sessionManager"/>
         <property name="kickoutAfter" value="false"/>
         <property name="maxSession" value="1"/>
-        <property name="kickoutUrl" value="/admin/login?kickout=1"/>
+        <property name="kickoutUrl" value="/admin/login"/>
     </bean>
 
-    <bean id="sysUserFilter" class="com.wuliangit.shopos.common.shiro.filter.SysUserFilter">
+    <bean id="adminFilter" class="com.wuliangit.shopos.common.shiro.filter.AdminFilter">
         <property name="loginUrl" value="/admin/login"/>
+    </bean>
+
+    <bean id="storeFilter" class="com.wuliangit.shopos.common.shiro.filter.StoreFilter">
+        <property name="loginUrl" value="/store/login"/>
     </bean>
 
     <bean id="tokenManager" class="com.wuliangit.shopos.common.shiro.token.EhcacheTokenManager">
@@ -176,7 +215,8 @@
         <property name="loginUrl" value="/admin/login"/>
         <property name="filters">
             <util:map>
-                <entry key="sysUser" value-ref="sysUserFilter"/>
+                <entry key="sysUser" value-ref="adminFilter"/>
+                <entry key="storeUser" value-ref="storeFilter"/>
                 <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
                 <entry key="logout" value-ref="logoutFilter"/>
                 <entry key="weixin" value-ref="weixinFilter"/>
@@ -194,12 +234,17 @@
                 /api/v1/member/register/codeCheck = anon
                 /api/v1/member/register = anon
                 /api/v1/public/** = anon
-                <!--/api/** = api-->
+                /api/** = api
 
                 <!--总后台用户-->
                 /admin/login = authc
                 /admin/logout = logout
                 /admin/** = kickout,sysUser
+
+                <!--店铺后台用户-->
+                <!--/store/login = authc-->
+                <!--/store/logout = logout-->
+                /store/** = storeUser
             </value>
         </property>
     </bean>

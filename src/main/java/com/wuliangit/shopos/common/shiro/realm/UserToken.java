@@ -18,27 +18,27 @@ public class UserToken implements AuthenticationToken {
     private char[] password;
 
     public enum UserType {
-        ADMIN(0), MEMBER(1), STORE(2);
-        private final int type;
+        ADMIN("admin"), MEMBER("member"), STORE("store");
+        private final String type;
 
-        private UserType(int type) {
+        private UserType(String type) {
             this.type = type;
         }
 
-        public int getType() {
+        public String getType() {
             return type;
         }
     }
 
     public enum LoginType {
-        APP(0), WEB(1), WX(2), TOKEN(3), ADMIN(4);
-        private final int type;
+        APP("app"), WEB("web"), WX("wx"), TOKEN("token"), ADMIN("admin"),STORE("store");
+        private final String type;
 
-        private LoginType(int type) {
+        private LoginType(String type) {
             this.type = type;
         }
 
-        public int getType() {
+        public String getType() {
             return type;
         }
     }

@@ -63,6 +63,7 @@ public class MMemberController {
             SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.MEMBER, UserToken.LoginType.TOKEN));
             Member user = memberService.getByUsername(username);
             String token = tokenManager.createToken(user.getMemberId());
+            tokenManager.createTokenData(token,user);
 
             restResult.add("token", token);
             restResult.add("userId", user.getMemberId());
@@ -195,7 +196,7 @@ public class MMemberController {
      * @return
      */
     @RequestMapping("/repass")
-    public Object repass(String newpass, String code) {
+    public Object repass(String newpass, String code,Integer userId) {
         RestResult result = new RestResult();
         Member member = WebUtil.getCurrentMember();
         Cache<Object, Object> cache = springCacheManager.getCache("sms-session");
@@ -242,9 +243,6 @@ public class MMemberController {
         RestResult result = new RestResult();
         Member member = WebUtil.getCurrentMember();
         result.put("memberInfo", member);
-
-
-        // TODO
         return result;
     }
 
@@ -271,7 +269,7 @@ public class MMemberController {
      * @return
      */
     @RequestMapping("authenticate")
-    public Object Authenticate(String truename, String idcardNum) {
+    public Object Authenticate(String truename, String idcardNum,Integer userId) {
         RestResult result = new RestResult();
 
         Member memberUpdate = WebUtil.getCurrentMember();

@@ -237,7 +237,7 @@
 </script>
 
 
-<script src="/assets/admin/js/addgoods.js" type="text/javascript"></script>
+<script src="/assets/admin/js/admin-addgoods.js" type="text/javascript"></script>
 
 
 #parse("/admin/models/end.vm")

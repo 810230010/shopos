@@ -26,7 +26,6 @@ public class StoreFilter extends AccessControlFilter {
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        getSubject(request, response).logout();
         saveRequestAndRedirectToLogin(request,response);
         return false;
     }

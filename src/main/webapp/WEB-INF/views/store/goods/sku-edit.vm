@@ -1,0 +1,222 @@
+#parse("/store/models/begin.vm")
+<link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+
+<style>
+
+</style>
+
+#parse("/store/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>商品-库存分类</h2>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>商品属性</small></h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal">
+                        <div id="sku_content">
+                            <div id="sku_img">
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">图片属性</label>
+                                    <div class="col-sm-2">
+                                        <input id="sku_img_name" name="sku_img_name" type="text" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div id="with_img" class="form-group">
+                                    <label class="col-sm-1 control-label">属性值</label>
+                                    <div class="col-sm-11">
+                                        <div id="sku_img_list" class="uploader-list"></div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                            </div>
+                            <div id="sku_attribute">
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="createTable">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 id="rank">库存分类</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table id="datatables" class="table table-striped table-bordered table-hover dataTables-example" >
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <div class="btn btn-primary" id="update">提交修改</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/store/models/footer.vm")
+
+<script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
+
+<script>
+
+    ///////////////////添加属性//////////////////////
+
+    var temp = '<div id="sku_attribute_item{id}">' +
+            '<div class="form-group">' +
+            '<label class="col-sm-1 control-label">其他属性</label>' +
+            '<div class="col-sm-2">' +
+            '<input id="sku_attribute_item_name{id}" name="name" type="text" class="form-control" readonly>' +
+            '</div>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label class="col-sm-1 control-label">属性值</label>' +
+            '<div class="col-sm-11">' +
+            '<div id="sku_attribute_item_value{id}" style="margin-top: 8px;"></div>'+
+            '</div>' +
+            '</div>' +
+            '<div class="hr-line-dashed"></div>' +
+            '</div>';
+
+    var img_temp = '<div id="img_content{imgid}" class="pull-left" style="height: 130px;width: 120px;margin-right: 10px;">' +
+            '<img id="img_src{imgid}" style="height: 120px; width:120px;overflow: hidden">' +
+            '<input id="img_value{imgid}" name="img_value_name" style="position: relative;top: -30px;" type="text" class="form-control" readonly>' +
+            '</div>';
+
+    var id = 1;
+    var imgid = 1;
+    $(document).ready(function () {
+        var attrs = JSON.parse('$goods.attrs');
+
+        var list = $("#sku_img_list");
+
+        $.each( attrs,function(index,item){
+            if (item.isImg){
+                $("#sku_img_name").val(item.name);
+                $.each(item.values, function(index,item){
+                    list.append(img_temp.replace(new RegExp('{imgid}', 'gm'), imgid));
+                    $("#img_src" + imgid).attr('src', item.img);
+                    $("#img_value" + imgid).val(item.name);
+                    imgid++;
+                });
+            }else{
+                $("#sku_attribute").append(temp.replace(new RegExp('{id}', 'gm'), id));
+                $("#sku_attribute_item_name"+ id).val(item.name);
+                $.each(item.values, function(index,item){
+                    $("#sku_attribute_item_value"+ id).append('<span class="label label-primary" style="margin-right: 10px;">'+item+'</span>');
+                });
+                id++;
+            }
+        });
+
+    });
+
+    $(document).ready(function () {
+        var t = $('#datatables').DataTable({
+            "ajax": {
+                'url': '/store/goods/goodsSku',
+                "data": function(d) {
+                    var param = {};
+                    param.draw = d.draw;
+                    param.goodsId = $goods.goodsId;
+                    return param;
+                },
+            },
+            "columns": [
+                {"data":"goodsSkuId","width":"5%","title":"sku编号","orderable": false},
+                {"data":"skuValue", "width": "10%", "title":"商品属性组合", "orderable": false,
+                    "render": function (data, type, row) {
+                        var values = data.split("\#\#");
+                        var html = '';
+                        $.each(values, function(index,item){
+                            html += '<span class="label label-primary" style="margin-right: 10px;">'+item+'</span>';
+                        });
+                        return html;
+                    }
+                },
+                {"data":"skuPrice","width": "10%","title":"价格",
+                    "render": function (data, type, row) {
+                        var html = '<input name="sku_price" type="text" value="'+data+'">';
+                        return html;
+                    }
+                },
+                {"data":"skuStock","width": "10%","title":"库存",
+                    "render": function (data, type, row) {
+                        var html = '<input name="sku_stock" type="text" value="'+data+'">';
+                        return html;
+                    }
+                }
+            ],
+            "paging": false,
+            "searching": false,
+            "ordering":false,
+            "serverSide": true,
+            "deferRender": true,
+            "processing": true,
+            "autoWidth": true,
+            "responsive": true,
+            "language": {
+                "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
+            }
+        });
+
+        $("#update").click(function(){
+
+            ////////////////表格信息//////////
+            var table_data = [];
+            $('#datatables').children('tbody').children('tr').each(function(rowIndex, row) {
+                var cell = $(row).children();
+                var oj = {};
+                oj.goodsSkuId = $(cell[0]).html();
+                oj.skuPrice = $($(cell[2]).children()).val();
+                oj.skuStock = $($(cell[3]).children()).val();
+                table_data.push(oj);
+            });
+
+            $.post("/store/goods/updateSku",
+                    {
+                        skuStr: JSON.stringify(table_data)
+                    },
+                    function (data, status) {
+                        if (data.code == 200) {
+                            swal({
+                                title: "成功!",
+                                text: "商品库存修改成功!",
+                                type: "success",
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                            setTimeout(function () {
+                                window.location.href = "/store/goods/listPage";
+                            }, 2000);
+                        }
+                    });
+        });
+
+    });
+</script>
+
+#parse("/store/models/end.vm")

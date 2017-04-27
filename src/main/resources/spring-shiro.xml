@@ -182,12 +182,18 @@
         <property name="kickoutUrl" value="/admin/login"/>
     </bean>
 
+    <!--总后台拦截器-->
     <bean id="adminFilter" class="com.wuliangit.shopos.common.shiro.filter.AdminFilter">
         <property name="loginUrl" value="/admin/login"/>
     </bean>
 
+    <!--店铺拦截器-->
     <bean id="storeFilter" class="com.wuliangit.shopos.common.shiro.filter.StoreFilter">
         <property name="loginUrl" value="/store/login"/>
+    </bean>
+
+    <!--后台管理员和店铺公共拦截器-->
+    <bean id="dashFilter" class="com.wuliangit.shopos.common.shiro.filter.DashFilter">
     </bean>
 
     <bean id="tokenManager" class="com.wuliangit.shopos.common.shiro.token.EhcacheTokenManager">

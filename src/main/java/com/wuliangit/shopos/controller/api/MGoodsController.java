@@ -54,7 +54,7 @@ public class MGoodsController {
     }
 
     /**
-     *
+     * 商品详情接口
      * @param goodsId
      * @return
      */

@@ -1,4 +1,9 @@
 #parse("/store/models/begin.vm")
+<link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+
+<style>
+
+</style>
 
 #parse("/store/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -14,55 +19,20 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
+        <div class="col-lg-12">
+            <div class="ibox">
                 <div class="ibox-title">
-                    <span class="label label-success pull-right">Monthly</span>
-                    <h5>Income</h5>
+                    <h5 id="rank">商品列表</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">40 886,200</h1>
-                    <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
-                    <small>Total income</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-info pull-right">Annual</span>
-                    <h5>Orders</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">275,800</h1>
-                    <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-                    <small>New orders</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-primary pull-right">Today</span>
-                    <h5>visits</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">106,120</h1>
-                    <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
-                    <small>New visits</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-danger pull-right">Low value</span>
-                    <h5>User activity</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">80,600</h1>
-                    <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
-                    <small>In first month</small>
+                    <div class="table-responsive">
+                        <table id="datatables" class="table table-striped table-bordered table-hover dataTables-example" >
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,6 +40,137 @@
 </div>
 #parse("/store/models/footer.vm")
 
+<script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
 
+<script>
+
+    var rank = 1;
+    var upParentId = [];
+    var parentId = 0;
+
+    $(document).ready(function () {
+        var t = $('#datatables').DataTable({
+            "ajax": {
+                'url': '/store/goods/search',
+                "data": function(d) {
+                    var param = {};
+                    param.page = d.start/d.length + 1;
+                    param.pageSize = d.length;
+                    param.draw = d.draw;
+                    param.orderColumn = d.columns[d.order[0]['column']]['data'];
+                    param.orderType = d.order[0]['dir'];
+                    param.searchKey = d.search["value"];
+                    param.parentId = parentId;
+                    return param;
+                },
+            },
+            "columns": [
+                {"data":"goodsId","width":"5%","title":"编号"},
+                {
+                    "data":"name",
+                    "width": "10%",
+                    "title":"商品缩略图",
+                    "orderable": false,
+                    "render": function (data, type, row) {
+                        var html = '<div class="pull-left"><img src="' + row.titleImg + '" style="width: 100px;height: 100px;"></div>';
+                        return html;
+                    }
+                },
+                {"data":"storeName","width": "10%","title":"名称/价格/邮费",
+                    "render": function (data, type, row) {
+                        return '<div style="padding-left: 10px;">' +
+                                '<p>名称:'+row.name+'</p>' +
+                                '<p>价格:'+row.price+'</p>' +
+                                '<p>邮费:'+row.carriage+'</p>' +
+                                '</div>';
+                    }
+                },
+                {"data":"storeName","width": "10%","title":"商家名称"},
+                {"data":"state","width": "10%","title":"审核状态"},
+                {"data":null,"width": "10%","title":"操作","render": function (data, type, row) {
+                    return [
+                        '<div><a class="table-button-vertical btn btn-danger btn-xs table-action view" href="javascript:void(0)">',
+                        '删除 <i class="fa fa-trash-o"></i>',
+                        '</a></div>',
+                        '<div><a class="table-button-vertical btn btn-primary btn-xs table-action edit" href="/store/goods/editPage?goodsId='+row.goodsId+'">',
+                        '编辑详情 <i class="fa fa-edit"></i>',
+                        '</a></div>',
+                        '<div><a class="table-button-vertical btn btn-primary btn-xs table-action edit" href="/store/goods/editSkuPage?goodsId='+row.goodsId+'">',
+                        '编辑库存 <i class="fa fa-edit"></i>',
+                        '</a></div>'
+                    ].join('');
+                }},
+            ],
+            "searching": true,
+            "ordering":true,
+            "serverSide": true,
+            "deferRender": true,
+            "processing": true,
+            "autoWidth": false,
+            "lengthMenu": [ 10, 15, 20 ],
+            "responsive": true,
+            "dom": '<"html5buttons"B>lTfgitp',
+            "buttons": [
+                {extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
+                {extend: 'print',
+                    customize: function (win){
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                    }
+                }
+            ],
+            "language": {
+                "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
+            },
+            "fnDrawCallback" : function(){
+                this.api().column(0).nodes().each(function(cell, i) {
+                    cell.innerHTML =  i + 1;
+                });
+            },
+        });
+        var table = $('#datatables').DataTable();
+
+        table.on( 'click', '.edit', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            window.location.href = "/store/goods/editPage?goodsId="+data.goodsId;
+        });
+
+        table.on( 'click', '.getsub', function () {
+            rank = rank +1;
+            if (rank > 1){
+                $('#back').show();
+            }else{
+                $('#back').hide();
+            }
+            $('#rank').html("商品分类列表("+rank+"级)")
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+
+            parentId = data.goodsCategoryId;
+            upParentId[rank] = data.parentId;
+            table = $('#datatables').DataTable().ajax.reload();
+        });
+
+        $("#back").on('click', function () {
+            rank = rank - 1;
+            if (rank > 1){
+                $('#back').show();
+            }else{
+                $('#back').hide();
+            }
+            parentId = upParentId[rank];
+            $('#rank').html("商品分类列表("+rank+"级)")
+            table = $('#datatables').DataTable().ajax.reload();
+        });
+    });
+</script>
 
 #parse("/store/models/end.vm")

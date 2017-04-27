@@ -25,7 +25,6 @@ import java.util.List;
 @RequestMapping("/admin/goodsCategory")
 public class AdminGoodsCategoryController {
 
-
     @Autowired
     private GoodsCategoryService goodsCategoryService;
 

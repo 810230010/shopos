@@ -8551,7 +8551,11 @@ body.md-skin {
   }
 }
 
-.table-button{
+.table-button-vertical{
+  margin: 4px;
+}
+
+.table-button-{
   margin-left: 10px;
 }
 

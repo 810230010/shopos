@@ -25,4 +25,20 @@
             </if>
         </where>
     </select>
+
+    <!--后台商品搜索-->
+    <select id="search" resultType="com.wuliangit.shopos.entity.Goods">
+        select * from t_goods
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or ad_word like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or store_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType}
+        </if>
+    </select>
 </mapper>

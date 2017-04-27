@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.util.WebUtil;
@@ -7,6 +8,7 @@ import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.entity.Goods;
+import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.entity.GoodsSku;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.GoodsService;
@@ -42,6 +44,7 @@ public class GoodsServiceImpl implements GoodsService {
         StoreMin store = WebUtil.getCurrentStore();
 
         goods.setStoreId(store.getStoreId());
+        goods.setCreateTime(new Date());
         goods.setStoreName(store.getName());
         goods.setEditTime(new Date());
 
@@ -74,5 +77,18 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<GoodsSku> getGoodsSkuByGoodsId(Integer goodsId) {
         return goodsSkuMapper.getGoodsSkuByGoodsId(goodsId);
+    }
+
+    @Override
+    public ArrayList<Goods> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId) {
+        PageHelper.startPage(page, pageSize);
+        ArrayList<Goods> goodses = goodsMapper.search(searchKey, orderColumn, orderType, parentId);
+        return goodses;
+    }
+
+    @Override
+    public int uodateGoods(Goods goods) {
+        goods.setEditTime(new Date());
+        return goodsMapper.updateByPrimaryKeySelective(goods);
     }
 }

@@ -22,4 +22,17 @@ public class PageResult<T> extends HashMap<String, Object> {
         this.put(RECORDS_FILTERED, pageInfo.getTotal());
         this.put(DATA, pageInfo.getList());
     }
+
+    public PageResult(List<T> list, int draw, boolean pageable) {
+        if (pageable){
+            PageInfo<T> pageInfo = new PageInfo<T>(list);
+        }else{
+            this.put(DATA, list);
+        }
+        this.put(DRAW, draw);
+        this.put(RECORDS_TOTAL, list.size());
+        this.put(RECORDS_FILTERED, list.size());
+
+    }
+
 }

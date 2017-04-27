@@ -26,4 +26,17 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
                                               @Param("goodsCategoryId") Integer goodsCategoryId,
                                               @Param("storeId") Integer storeId,
                                               @Param("storeGoodsCategoryId") Integer storeGoodsCategoryId);
+
+    /**
+     * 后台商品搜索
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param parentId
+     * @return
+     */
+    ArrayList<Goods> search(@Param("searchKey")String searchKey,
+                            @Param("orderColumn")String orderColumn,
+                            @Param("orderType")String orderType,
+                            @Param("parentId")Integer parentId);
 }

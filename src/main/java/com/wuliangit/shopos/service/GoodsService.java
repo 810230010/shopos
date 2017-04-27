@@ -43,4 +43,25 @@ public interface GoodsService {
      * @return
      */
     List<GoodsSku> getGoodsSkuByGoodsId(Integer goodsId);
+
+
+
+    /**
+     * 后台商品搜索
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param parentId
+     * @return
+     */
+    ArrayList<Goods> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId);
+
+    /**
+     * 更新商品详情
+     * @param goods
+     * @return
+     */
+    int uodateGoods(Goods goods);
 }

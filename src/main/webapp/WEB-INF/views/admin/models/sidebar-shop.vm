@@ -26,7 +26,7 @@
                     <li><a href="/admin/goods/listPage">系统设置</a></li>
                     <li><a href="/admin/goods/listPage">邮件服务设置</a></li>
                     <li><a href="/admin/goodsCategory/listPage">短信服务设置</a></li>
-                    <li><a href="dashboard_3.html"></a>图片存储设置</li>
+                    <li><a href="dashboard_3.html">图片存储设置</a></li>
                 </ul>
             </li>
             <li>
@@ -37,7 +37,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-globe"></i> <span class="nav-label">统计</span><span class="label label-info pull-right">NEW</span></a>
+                <a href="index.html#"><i class="fa fa-globe"></i> <span class="nav-label">统计</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="toastr_notifications.html">客户统计</a></li>
                     <li><a href="nestable_list.html">订单统计</a></li>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.TuikeMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Tuike" >
+    <id column="tuike_id" property="tuikeId" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="is_check" property="isCheck" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="available_balance" property="availableBalance" jdbcType="DECIMAL" />
+    <result column="freeze_balance" property="freezeBalance" jdbcType="DECIMAL" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="share_count" property="shareCount" jdbcType="VARCHAR" />
+    <result column="buy_count" property="buyCount" jdbcType="VARCHAR" />
+    <result column="alipay_account" property="alipayAccount" jdbcType="VARCHAR" />
+    <result column="bank_card" property="bankCard" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tuike_id, member_id, state, is_check, create_time, update_time, available_balance, 
+    freeze_balance, code, share_count, buy_count, alipay_account, bank_card
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_tuike
+    where tuike_id = #{tuikeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_tuike
+    where tuike_id = #{tuikeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Tuike" >
+    <selectKey resultType="java.lang.Integer" keyProperty="tuikeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_tuike (member_id, state, is_check, 
+      create_time, update_time, available_balance, 
+      freeze_balance, code, share_count, 
+      buy_count, alipay_account, bank_card
+      )
+    values (#{memberId,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{isCheck,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{availableBalance,jdbcType=DECIMAL}, 
+      #{freezeBalance,jdbcType=DECIMAL}, #{code,jdbcType=VARCHAR}, #{shareCount,jdbcType=VARCHAR}, 
+      #{buyCount,jdbcType=VARCHAR}, #{alipayAccount,jdbcType=VARCHAR}, #{bankCard,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Tuike" >
+    <selectKey resultType="java.lang.Integer" keyProperty="tuikeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_tuike
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isCheck != null" >
+        is_check,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="availableBalance != null" >
+        available_balance,
+      </if>
+      <if test="freezeBalance != null" >
+        freeze_balance,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="shareCount != null" >
+        share_count,
+      </if>
+      <if test="buyCount != null" >
+        buy_count,
+      </if>
+      <if test="alipayAccount != null" >
+        alipay_account,
+      </if>
+      <if test="bankCard != null" >
+        bank_card,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null" >
+        #{isCheck,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="availableBalance != null" >
+        #{availableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBalance != null" >
+        #{freezeBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="shareCount != null" >
+        #{shareCount,jdbcType=VARCHAR},
+      </if>
+      <if test="buyCount != null" >
+        #{buyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null" >
+        #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        #{bankCard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Tuike" >
+    update t_tuike
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null" >
+        is_check = #{isCheck,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="availableBalance != null" >
+        available_balance = #{availableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBalance != null" >
+        freeze_balance = #{freezeBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="shareCount != null" >
+        share_count = #{shareCount,jdbcType=VARCHAR},
+      </if>
+      <if test="buyCount != null" >
+        buy_count = #{buyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null" >
+        alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        bank_card = #{bankCard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tuike_id = #{tuikeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Tuike" >
+    update t_tuike
+    set member_id = #{memberId,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR},
+      is_check = #{isCheck,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      available_balance = #{availableBalance,jdbcType=DECIMAL},
+      freeze_balance = #{freezeBalance,jdbcType=DECIMAL},
+      code = #{code,jdbcType=VARCHAR},
+      share_count = #{shareCount,jdbcType=VARCHAR},
+      buy_count = #{buyCount,jdbcType=VARCHAR},
+      alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      bank_card = #{bankCard,jdbcType=VARCHAR}
+    where tuike_id = #{tuikeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -27,9 +27,7 @@ public class MStoreController {
     @RequestMapping("/new-store")
     public Object applyStore(StoreJoinin storeJoinin){
         RestResult result = new RestResult();
-
         int res = storeService.createStoreJoinin(storeJoinin);
-
         return result;
     }
 }

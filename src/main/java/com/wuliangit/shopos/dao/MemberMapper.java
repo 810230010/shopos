@@ -1,7 +1,11 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.TuikeMemberDTO;
 import com.wuliangit.shopos.entity.Member;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MemberMapper extends BaseMapper<Member, Integer> {
 
@@ -18,4 +22,13 @@ public interface MemberMapper extends BaseMapper<Member, Integer> {
      * @return
      */
     Member getByUsername(String username);
+
+    /**
+     * 获取推客审核列表
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @return
+     */
+    List<TuikeMemberDTO> getCheckList(@Param("searchKey") String searchKey,@Param("orderColumn") String orderColumn,@Param("orderType") String orderType);
 }

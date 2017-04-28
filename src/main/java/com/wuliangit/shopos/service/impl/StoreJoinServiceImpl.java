@@ -16,12 +16,18 @@ import java.util.ArrayList;
 public class StoreJoinServiceImpl implements StoreJoinService {
     @Autowired
     private StoreJoininMapper storeJoininMapper;
+
     @Override
-    /**
-     * 查询申请成为店铺列表
-     */
-    public ArrayList<StoreJoinin> getJoinStores(Integer page, Integer pageSize, String searchKey, String orderColumn) {
+    public ArrayList<StoreJoinin> getJoinStores(Integer page, Integer pageSize, String searchKey) {
         PageHelper.startPage(page, pageSize);
-        return storeJoininMapper.queryJoinStores(searchKey, orderColumn);
+        return storeJoininMapper.queryJoinStores(searchKey);
     }
+
+
+    @Override
+    public int updateRejectedJoininStoreStatus(String joininMessage, Integer memberId) {
+        return storeJoininMapper.rejectStoreJoininApply(joininMessage, memberId);
+    }
+
+
 }

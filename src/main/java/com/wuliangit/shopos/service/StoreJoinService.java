@@ -19,5 +19,13 @@ public interface StoreJoinService {
      * @param orderType
      * @return
      */
-     ArrayList<StoreJoinin> getJoinStores(Integer page, Integer pageSize, String searchKey, String orderColumn);
+     ArrayList<StoreJoinin> getJoinStores(Integer page, Integer pageSize, String searchKey);
+
+    /**
+     * 更改审批不通过的店铺状态
+     * @param joininMessage
+     * @param memberId
+     * @return
+     */
+     int updateRejectedJoininStoreStatus(String joininMessage, Integer memberId);
 }

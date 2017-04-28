@@ -47,8 +47,6 @@
                     param.page = d.start/d.length + 1;
                     param.pageSize = d.length;
                     param.draw = d.draw;
-                    param.orderColumn = d.columns[d.order[0]['column']]['data'];
-//                    param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
                     return param;
                 },
@@ -120,14 +118,36 @@
         table.on( 'click', '.reject', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/admin/brand/editPage?brandId="+data.memberId;
+            var joininMessage;
+            layer.prompt(function(val, index){
+                joininMessage = val;
+                layer.close(index);
+                $.ajax({
+                    url : "/admin/store/reject",
+                    type : "post",
+                    data : {"joininMessage" : joininMessage, "memberId" : data.memberId},
+                    success:function(response) {
+                        alert(response.msg)
+                        if(response.code == 200) {
+
+                            layer.alert('操作成功，信息将反馈给用户!', {icon: 6});
+                        }
+                    },
+                    error:function(response) {
+                        alert("系统出错")
+                    }
+                })
+
+            });
+
+
+            window.location.href = "#";
         });
 
         //申请通过
         table.on('click', '.delete', function() {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            layer.confirm('确定删除改品牌?!', {icon: 5,btnAlign:'c',title:'提示'}, function(index){
                 //do something
                 $.ajax({
                     url: "/admin/brand/deleteBrand",
@@ -147,7 +167,6 @@
                     }
                 });
                 layer.close(index);
-            });
 
 
         });

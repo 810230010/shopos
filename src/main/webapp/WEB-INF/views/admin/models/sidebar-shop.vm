@@ -26,7 +26,7 @@
                     <li><a href="/admin/goods/listPage">系统设置</a></li>
                     <li><a href="/admin/goods/listPage">邮件服务设置</a></li>
                     <li><a href="/admin/goodsCategory/listPage">短信服务设置</a></li>
-                    <li><a href="dashboard_3.html"></a>图片存储设置</li>
+                    <li><a href="dashboard_3.html">图片存储设置</a></li>
                 </ul>
             </li>
             <li>
@@ -37,7 +37,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-globe"></i> <span class="nav-label">统计</span><span class="label label-info pull-right">NEW</span></a>
+                <a href="index.html#"><i class="fa fa-globe"></i> <span class="nav-label">统计</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="toastr_notifications.html">客户统计</a></li>
                     <li><a href="nestable_list.html">订单统计</a></li>
@@ -46,7 +46,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">会员</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">会员管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="typography.html">会员列表</a></li>
                     <li><a href="icons.html">充值提现申请</a></li>
@@ -56,14 +56,14 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">推客</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">推客管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="typography.html">推客列表</a></li>
-                    <li><a href="typography.html">申请列表</a></li>
+                    <li><a href="/admin/tuike/listPage">申请列表</a></li>
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">商家</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">商家管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="typography.html">商家列表</a></li>
                     <li><a href="/admin/store/storeListPage">申请列表</a></li>
@@ -74,7 +74,14 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">权限</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">品牌管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="typography.html">品牌列表</a></li>
+                    <li><a href="typography.html">待审核列表</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="ecommerce_products_grid.html">管理员列表</a></li>
                     <li><a href="ecommerce_product_list.html">管理员日志</a></li>
@@ -82,7 +89,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">邮件</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">邮件管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="ecommerce_products_grid.html">发送邮件</a></li>
                 </ul>

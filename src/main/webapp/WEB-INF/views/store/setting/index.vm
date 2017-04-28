@@ -1,0 +1,241 @@
+#parse("/store/models/begin.vm")
+
+<link href="/assets/admin/css/plugins/fileinput/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="/assets/admin/css/plugins/sweetalert/sweetalert.css" media="all" rel="stylesheet" type="text/css"/>
+#parse("/store/models/header.vm")
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>设置-店铺信息修改</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" id="form">
+                        <div class="form-group"><label class="col-sm-2 control-label">店铺名称</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" name="name" value="$!{store.name}" readonly></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">店主卖家用户名</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" name="sellerNikename" value="$!{store.sellerNikename}" readonly></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">店铺公司名称</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" name="storeCompanyName" value="$!{store.storeCompanyName}" readonly></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">店铺子标题</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" id="label" name="label" value="$!{store.label}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group" id="store-logo-div"><label class="col-sm-2 control-label">店铺logo图片:</label>
+                            <div class="col-sm-4">
+                                <input id="store-logo" class="file" name="file" type="file" multiple>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group" id="store-banner-div"><label class="col-sm-2 control-label">店铺横幅:</label>
+                            <div class="col-sm-8">
+                                <input id="store-banner" class="file" name="file" type="file" multiple>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">店铺seo关键字</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" name="keywords" id="keywords" value="$!{store.keywords}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">店铺seo描述</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" name="description" id="description" value="$!{store.description}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">QQ</label>
+                            <div class="col-sm-8"><input type="number" class="form-control" name="qq" id="qq" value="$!{store.qq}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">阿里旺旺</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" name="ww" id="ww" value="$!{store.ww}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">商家电话</label>
+                            <div class="col-sm-8"><input type="tel" class="form-control" name="phone" id="phone" value="$!{store.phone}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">售前客服</label>
+                            <div class="col-sm-8"><input type="tel" class="form-control" name="presales" id="presales" value="$!{store.presales}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">售后客服</label>
+                            <div class="col-sm-8"><input type="tel" class="form-control" name="aftersales" value="$!{store.aftersales}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">实体店铺GPS位置</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" name="liveStoreGps" id="liveStoreGps" value="$!{store.liveStoreGps}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">实体商家地址</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" name="liveStoreAddress" id="liveStoreAddress" value="$!{store.liveStoreAddress}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <div class="btn btn-primary" id="submit">保存</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/store/models/footer.vm")
+
+<!-- Jquery Validate -->
+<script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
+
+<script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<!-- 文件上传 -->
+<script src="/assets/admin/js/plugins/fileinput/fileinput.min.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
+
+<script>
+    $('#store-logo').fileinput({
+        language: 'zh',
+        uploadUrl: "http://up.qiniu.com",
+        uploadExtraData: {
+            token: '$uploadToken'
+        },
+        overwriteInitial: true,
+        autoReplace: true,
+        showUploadedThumbs: false,
+        uploadAsync: true,
+//        browseClass: "btn btn-primary", //按钮样式
+        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{1}！",
+        maxFileCount: 1,
+        layoutTemplates: {actionDelete: '',actionZoom:''},
+        initialPreviewShowDelete: false,
+        showUpload: false, //是否显示上传按钮
+        showRemove: false,
+        showClose: false,
+        initialPreviewAsData: true,
+        initialPreview: ['$store.logo'],
+        initialPreviewConfig: [],
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
+    }).on("fileuploaded", function (event, data, previewId, index) {
+        console.log("自动上传成功index:"+index);
+        console.log("fileuploaded-filenames--for"+index+"="+data.filenames[index]);
+
+        var img_dom = $(".kv-file-content img[title='"+data.filenames[index]+"']");
+
+        img_dom.attr('src', '$domain'+data.response.key);
+    }).on("filebatchselected", function (event, files) {
+        $(this).fileinput("upload");
+    });
+
+    $('#store-banner').fileinput({
+        language: 'zh',
+        uploadUrl: "http://up.qiniu.com",
+        uploadExtraData: {
+            token: '$uploadToken'
+        },
+        overwriteInitial: false,
+        autoReplace: true,
+        showUploadedThumbs: true,
+        uploadAsync: true,
+//        browseClass: "btn btn-primary", //按钮样式
+        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{1}！",
+        maxFileCount: 5,
+        layoutTemplates: {actionZoom: ''},
+        initialPreviewShowDelete: true,
+        showUpload: false, //是否显示上传按钮
+        showRemove: false,
+        showClose: false,
+        initialPreviewAsData: true,
+        deleteUrl: "/store/util/donothing",
+        initialPreview: [
+            #if($store.banner)
+                #foreach($image in $store.banner.split("&&"))
+                    '$image',
+                #end
+            #end
+        ],
+        initialPreviewConfig: [
+            #if($store.banner)
+                #foreach($image in $store.banner.split("&&"))
+                    {key: '$image'},
+                #end
+            #end
+        ],
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
+    }).on("fileuploaded", function (event, data, previewId, index) {
+        console.log("自动上传成功index:"+index);
+        console.log("fileuploaded-filenames--for"+index+"="+data.filenames[index]);
+
+        var img_dom = $(".kv-file-content img[title='"+data.filenames[index]+"']");
+
+        img_dom.attr('src', '$domain'+data.response.key);
+    }).on("filebatchselected", function (event, files) {
+        $(this).fileinput("upload");
+    });
+
+
+    $("#submit").on('click', function () {
+
+        var form = $("#form");
+        form.valid();
+
+        ////////////////banner图片集//////////////
+        var images = "";
+        var imgs_dom = $("#store-banner-div .kv-zoom-cache .kv-file-content img");
+        var flag = 0;
+        imgs_dom.each(function (index, item) {
+            if (flag ==0){
+                images += item.src;
+                flag = 1;
+            }else{
+                images += "&&" + item.src;
+            }
+        });
+        //////////////logo图片//////////////
+        var logo_dom = $("#store-logo-div .kv-zoom-cache .kv-file-content img");
+        var logo_img = logo_dom.attr("src");
+
+        $.post("/store/setting/update",
+                {
+                    storeId: $store.storeId,
+                    label: $("#label").val(),
+                    banner: images,
+                    logo: logo_img,
+                    keywords: $("#keywords").val(),
+                    description: $("#description").val(),
+                    qq: $("#qq").val(),
+                    ww: $("#ww").val(),
+                    phone: $("#phone").val(),
+                    presales: $("#presales").val(),
+                    aftersales: $("#aftersales").val(),
+                    liveStoreAddress: $("#liveStoreAddress").val(),
+                    liveStoreGps: $("#liveStoreGps").val(),
+                },
+                function (data, status) {
+                    if (data.code == 200) {
+                        swal({
+                            title: "成功!",
+                            text: "店铺信息修改成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(function () {
+                            window.location.href = "/store/setting";
+                        }, 2000);
+                    }
+                });
+    });
+
+    $("#form").validate();
+
+</script>
+
+
+#parse("/store/models/end.vm")

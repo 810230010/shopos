@@ -2,6 +2,7 @@ package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dto.TuikeMemberDTO;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.service.TuikeService;
@@ -45,12 +46,13 @@ public class AdminTuikeController {
                                @RequestParam(value = "orderType", required = false) String orderType,
                                @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
         List<TuikeMemberDTO> tuikeMemberDTO = tuikeService.getCheckList(searchKey,orderColumn,orderType,page,pageSize);
         return new PageResult<TuikeMemberDTO>(tuikeMemberDTO,draw);
     }
 
     /**
-     * 是否审核通过操作
+     * 审核推客
      * @param memberId
      * @param state
      * @return

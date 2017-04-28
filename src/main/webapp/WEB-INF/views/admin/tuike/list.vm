@@ -64,10 +64,10 @@
                 {"data":"points","width": "10%","title":"积分","orderable": true},
                 {"data":"memberId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
                     return [
-                        '<a class="btn btn-danger btn-xs table-action no" href="javascript:void(0)">',
+                        '<a class="btn btn-danger btn-xs table-action unpass" href="javascript:void(0)">',
                         '不通过 <i class="fa fa-trash-o"></i>',
                         '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action yes" href="javascript:void(0)" style="margin-left: 10px;">',
+                        '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)" style="margin-left: 10px;">',
                         '通过 <i class="fa fa-edit"></i>',
                         '</a>'
                     ].join('');
@@ -110,12 +110,12 @@
         });
         var table = $('#datatables').DataTable();
 
-        table.on( 'click', '.no', function () {
+        table.on( 'click', '.unpass', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
             $.operation(data,"UNCHECK");
         });
-        table.on( 'click', '.yes', function () {
+        table.on( 'click', '.pass', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
             $.operation(data,"CHECKED");
@@ -137,7 +137,7 @@
                         timer: 2000,
                     });
                     setTimeout(function () {
-                        table = $('#datatables').DataTable().ajax.reload();
+                        $('#datatables').DataTable().ajax.reload();
                     }, 2000);
                 }else if(data.code == 500){
                     swal({
@@ -148,7 +148,7 @@
                         timer: 2000,
                     });
                     setTimeout(function () {
-                        table = $('#datatables').DataTable().ajax.reload();
+                        $('#datatables').DataTable().ajax.reload();
                     }, 2000);
                 }
             }

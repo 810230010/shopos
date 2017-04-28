@@ -58,6 +58,12 @@ public class StoreGoodsController {
         return "store/goods/add";
     }
 
+    /**
+     * 商品编辑界面
+     * @param model
+     * @param goodsId
+     * @return
+     */
     @RequestMapping("/editPage")
     public String editPage(Model model,Integer goodsId){
         Goods goods = goodsService.getGoodsById(goodsId);
@@ -142,6 +148,17 @@ public class StoreGoodsController {
         return result;
     }
 
+    /**
+     * 商品列表查询
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @param parentId
+     * @return
+     */
     @RequestMapping("/search")
     @ResponseBody
     public Object search(@RequestParam("draw") int draw,

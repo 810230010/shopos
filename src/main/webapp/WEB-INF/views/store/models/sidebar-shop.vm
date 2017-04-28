@@ -65,6 +65,9 @@
                     <li><a href="ecommerce-cart.html">退换货申请列表</a></li>
                 </ul>
             </li>
+            <li class="special_link">
+                <a href="/store/setting"><i class="fa fa-database"></i> <span class="nav-label">设置</span></a>
+            </li>
         </ul>
 
     </div>

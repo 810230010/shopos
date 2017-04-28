@@ -3,8 +3,11 @@ package com.wuliangit.shopos.controller.store;
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.entity.Admin;
+import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.AdminService;
+import com.wuliangit.shopos.service.MemberService;
+import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -26,7 +29,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class StoreLoginController {
 
     @Autowired
-    private AdminService adminService;
+    private MemberService memberService;
+    @Autowired
+    private StoreService storeService;
 
     @RequestMapping("/index")
     public String viewToIndex(Model model) {
@@ -39,11 +44,10 @@ public class StoreLoginController {
         try {
             SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.STORE, UserToken.LoginType.STORE));
 
-            Admin admin = adminService.getByUsername(username);
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, admin);
-            StoreMin storeMin = new StoreMin();
-            storeMin.setStoreId(0);
-            storeMin.setName("自营");
+            Member member = memberService.getByUsername(username);
+            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, member);
+
+            StoreMin storeMin = storeService.getStoreMin(member.getMemberId());
             SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeMin);
 
             return "redirect:/store/index";

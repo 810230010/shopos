@@ -64,4 +64,11 @@ public interface GoodsService {
      * @return
      */
     int uodateGoods(Goods goods);
+
+    /**
+     * 删除商品
+     * @param goodsId
+     * @return
+     */
+    int deleteGoods(Integer goodsId);
 }

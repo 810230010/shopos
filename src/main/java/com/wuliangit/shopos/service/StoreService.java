@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.model.StoreMin;
 
@@ -38,4 +39,18 @@ public interface StoreService {
      * @return
      */
     Set<String> getPermissions(String username);
+
+    /**
+     * 通过店铺id获取店铺信息
+     * @param storeId
+     * @return
+     */
+    Store getStoreByStoreId(Integer storeId);
+
+    /**
+     * 更新店铺信息店铺
+     * @param store
+     * @return
+     */
+    int updateStore(Store store);
 }

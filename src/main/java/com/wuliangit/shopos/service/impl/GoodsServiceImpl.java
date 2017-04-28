@@ -56,6 +56,7 @@ public class GoodsServiceImpl implements GoodsService {
 
         int res = goodsMapper.insertSelective(goods);
 
+        //解析sku的json数据
         Gson gson = new Gson();
         List<GoodsSku> skus = gson.fromJson(skuStr, new TypeToken<List<GoodsSku>>() {
         }.getType());
@@ -89,6 +90,14 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int uodateGoods(Goods goods) {
         goods.setEditTime(new Date());
+        return goodsMapper.updateByPrimaryKeySelective(goods);
+    }
+
+    @Override
+    @Transactional
+    public int deleteGoods(Integer goodsId) {
+        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+        goods.setDelFlag(true);
         return goodsMapper.updateByPrimaryKeySelective(goods);
     }
 }

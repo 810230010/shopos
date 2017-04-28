@@ -46,7 +46,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">会员</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">会员管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="typography.html">会员列表</a></li>
                     <li><a href="icons.html">充值提现申请</a></li>
@@ -56,14 +56,14 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">推客</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">推客管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="typography.html">推客列表</a></li>
                     <li><a href="typography.html">申请列表</a></li>
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">商家</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">商家管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="typography.html">商家列表</a></li>
                     <li><a href="typography.html">申请列表</a></li>
@@ -74,7 +74,14 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">权限</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">品牌管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="typography.html">品牌列表</a></li>
+                    <li><a href="typography.html">待审核列表</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="ecommerce_products_grid.html">管理员列表</a></li>
                     <li><a href="ecommerce_product_list.html">管理员日志</a></li>
@@ -82,7 +89,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">邮件</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">邮件管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="ecommerce_products_grid.html">发送邮件</a></li>
                 </ul>

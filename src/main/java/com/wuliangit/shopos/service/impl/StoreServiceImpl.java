@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service.impl;
 
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
+import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreService;
@@ -44,5 +45,15 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public Set<String> getPermissions(String username) {
         return null;
+    }
+
+    @Override
+    public Store getStoreByStoreId(Integer storeId) {
+        return storeMapper.selectByPrimaryKey(storeId);
+    }
+
+    @Override
+    public int updateStore(Store store) {
+        return storeMapper.updateByPrimaryKeySelective(store);
     }
 }

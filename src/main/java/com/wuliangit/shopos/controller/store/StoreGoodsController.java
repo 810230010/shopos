@@ -156,6 +156,19 @@ public class StoreGoodsController {
         return new PageResult<Goods>(goodses, draw);
     }
 
+
+    /**
+     * 删除商品
+     * @return
+     */
+    @RequestMapping("/delete")
+    public Object delete(Integer goodsId){
+        RestResult result = new RestResult();
+        int res = goodsService.deleteGoods(goodsId);
+        return result;
+    }
+
+
     /**
      * 编辑商品sku
      * @return

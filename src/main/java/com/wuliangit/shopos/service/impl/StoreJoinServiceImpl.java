@@ -29,5 +29,10 @@ public class StoreJoinServiceImpl implements StoreJoinService {
         return storeJoininMapper.rejectStoreJoininApply(joininMessage, memberId);
     }
 
+    @Override
+    public int passApplyForJoininStore(Integer memberId) {
+        return storeJoininMapper.passStoreJoininApply(memberId);
+    }
+
 
 }

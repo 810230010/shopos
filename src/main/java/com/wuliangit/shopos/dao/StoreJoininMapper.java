@@ -21,4 +21,6 @@ public interface StoreJoininMapper extends BaseMapper<StoreJoinin, Integer> {
       * @return
       */
      int rejectStoreJoininApply(@Param("joininMessage") String joininMessage, @Param("memberId") Integer memberId);
+
+     int passStoreJoininApply(@Param("memberId") Integer memberId);
 }

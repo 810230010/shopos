@@ -65,5 +65,17 @@ public class AdminStoreController {
         storeJoinService.updateRejectedJoininStoreStatus(joininMessage, memberId);
         return response;
     }
-     
+
+    /**
+     * 入驻商家申请通过
+     * @param memberId
+     * @return
+     */
+    @RequestMapping(value = ("/pass"), method = RequestMethod.POST)
+    @ResponseBody
+    public Object passApplyForJoininStore(Integer memberId) {
+        RestResult result = new RestResult();
+        storeJoinService.passApplyForJoininStore(memberId);
+        return result;
+    }
 }

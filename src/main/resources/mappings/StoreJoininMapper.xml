@@ -24,4 +24,12 @@
         where
         member_id=#{memberId}
     </update>
+    <!-- 更改申请通过的店铺状态-->
+    <update id="passStoreJoininApply">
+        update t_store_joinin
+        set
+        joinin_state="CHECK_PASS",joinin_message=""
+        where
+        member_id=#{memberId}
+    </update>
 </mapper>

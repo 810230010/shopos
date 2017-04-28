@@ -127,9 +127,7 @@
                     type : "post",
                     data : {"joininMessage" : joininMessage, "memberId" : data.memberId},
                     success:function(response) {
-                        alert(response.msg)
                         if(response.code == 200) {
-
                             layer.alert('操作成功，信息将反馈给用户!', {icon: 6});
                         }
                     },
@@ -145,28 +143,23 @@
         });
 
         //申请通过
-        table.on('click', '.delete', function() {
+        table.on('click', '.pass', function() {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
                 //do something
                 $.ajax({
-                    url: "/admin/brand/deleteBrand",
-                    type: "get",
-                    data: {"brandId": data.brandId},
+                    url: "/admin/store/pass",
+                    type: "post",
+                    data: {"memberId": data.memberId},
                     success:function(result) {
                         if (result.code == 200) {
-                            layer.open({
-                                title: '提示'
-                                ,content: '删除成功!!'
-                            })
-                            window.location.reload();
+                            layer.alert('申请通过，信息将反馈给用户!', {icon: 6});
                         }
                     },
                     error:function(result) {
                         alert("系统出错!")
                     }
                 });
-                layer.close(index);
 
 
         });

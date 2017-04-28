@@ -28,4 +28,11 @@ public interface StoreJoinService {
      * @return
      */
      int updateRejectedJoininStoreStatus(String joininMessage, Integer memberId);
+
+    /**
+     * 用户申请成为商家请求通过
+     * @param memberId
+     * @return
+     */
+    int passApplyForJoininStore(Integer memberId);
 }

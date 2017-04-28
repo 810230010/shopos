@@ -50,7 +50,7 @@ public class TuikeServiceImpl implements TuikeService {
     @Override
     public List<TuikeMemberDTO> getCheckList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize) {
         PageHelper.startPage(page,pageSize);
-        List<TuikeMemberDTO> result = memberMapper.getCheckList(searchKey,orderColumn,orderType);
+        List<TuikeMemberDTO> result = tuikeMapper.getCheckList(searchKey,orderColumn,orderType);
         return result;
     }
 

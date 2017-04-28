@@ -29,9 +29,9 @@ public class AdminTuikeController {
      * 获取审核列表页面
      * @return
      */
-    @RequestMapping("/check")
+    @RequestMapping("/listPage")
     public String listPage() {
-        return "admin/tuike/check";
+        return "admin/tuike/list";
     }
 
     /**

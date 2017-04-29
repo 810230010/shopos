@@ -1,9 +1,13 @@
 package com.wuliangit.shopos.controller;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.entity.Admin;
+import com.wuliangit.shopos.model.StoreUser;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +17,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ControllerAdvice(basePackages = "com.wuliangit.shopos.controller.admin")
 public class AdminGlobalHandler {
+
+    @ModelAttribute("admin")
+    public Admin newUser() {
+        Admin admin = WebUtil.getCurrentAdmin();
+        return admin;
+    }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public String errorHandlerOverJson(HttpServletRequest request, ResourceNotFoundException exception) {

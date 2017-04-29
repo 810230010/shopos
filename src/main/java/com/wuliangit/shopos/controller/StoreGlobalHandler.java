@@ -24,7 +24,6 @@ public class StoreGlobalHandler {
 
     @ModelAttribute("storeUser")
     public StoreUser newUser() {
-        System.out.println("============应用到所有@RequestMapping注解方法，在其执行之前把返回值放入Model");
         StoreUser storeUser = WebUtil.getCurrentStore();
         return storeUser;
     }

@@ -40,7 +40,7 @@ public class AdminLoginController {
             SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.ADMIN, UserToken.LoginType.ADMIN));
 
             Admin admin = adminService.getByUsername(username);
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, admin);
+            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_ADMIN, admin);
             StoreUser storeUser = new StoreUser();
             storeUser.setStoreId(0);
             storeUser.setName("自营");

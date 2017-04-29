@@ -2,6 +2,7 @@ package com.wuliangit.shopos.common.util;
 
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
+import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.model.StoreUser;
 import org.apache.shiro.SecurityUtils;
@@ -37,6 +38,15 @@ public class WebUtil {
     public static StoreUser getCurrentStore(){
         StoreUser store = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute(CoreConstants.SESSION_CURRENT_STORE);
         return store;
+    }
+
+    /**
+     * 获取当前管理员
+     * @return
+     */
+    public static Admin getCurrentAdmin(){
+        Admin admin = (Admin) SecurityUtils.getSubject().getSession().getAttribute(CoreConstants.SESSION_CURRENT_ADMIN);
+        return admin;
     }
 
     /**

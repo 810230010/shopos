@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by 26229 on 2017/4/27.
  */
-public class TuikeMemberDTO {
+public class TuikeCheckListDTO {
 
     private Integer memberId;
 
@@ -19,10 +19,10 @@ public class TuikeMemberDTO {
 
     private Integer points;
 
-    public TuikeMemberDTO() {
+    public TuikeCheckListDTO() {
     }
 
-    public TuikeMemberDTO(Integer memberId, String nikename, String sex, String email, Date createTime, Integer points) {
+    public TuikeCheckListDTO(Integer memberId, String nikename, String sex, String email, Date createTime, Integer points) {
         this.memberId = memberId;
         this.nikename = nikename;
         this.sex = sex;

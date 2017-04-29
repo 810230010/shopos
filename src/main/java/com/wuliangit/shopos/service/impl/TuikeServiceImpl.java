@@ -6,7 +6,8 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.MemberMapper;
 import com.wuliangit.shopos.dao.TuikeMapper;
 import com.wuliangit.shopos.dto.ApiEarningsDTO;
-import com.wuliangit.shopos.dto.TuikeMemberDTO;
+import com.wuliangit.shopos.dto.TuikeCheckListDTO;
+import com.wuliangit.shopos.dto.TuikePageListDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.TuikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +49,26 @@ public class TuikeServiceImpl implements TuikeService {
     }
 
     @Override
-    public List<TuikeMemberDTO> getCheckList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize) {
+    public List<TuikeCheckListDTO> getCheckList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize) {
         PageHelper.startPage(page,pageSize);
-        List<TuikeMemberDTO> result = tuikeMapper.getCheckList(searchKey,orderColumn,orderType);
+        List<TuikeCheckListDTO> result = tuikeMapper.getCheckList(searchKey,orderColumn,orderType);
         return result;
     }
 
     @Override
     public Integer checkOperation(Integer memberId, String state) {
         return tuikeMapper.checkOperation(memberId,state);
+    }
+
+    @Override
+    public List<TuikePageListDTO> getTuikeList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
+        List<TuikePageListDTO> result = tuikeMapper.getTuikeList(searchKey,orderColumn,orderType);
+        return result;
+    }
+
+    @Override
+    public Integer forbiddenTuike(Integer tuikeId, String state) {
+        return tuikeMapper.forbiddenTuike(tuikeId,state);
     }
 }

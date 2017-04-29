@@ -58,8 +58,8 @@
             <li>
                 <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">推客管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="typography.html">推客列表</a></li>
-                    <li><a href="/admin/tuike/listPage">申请列表</a></li>
+                    <li><a href="/admin/tuike/tuikeListPage">推客列表</a></li>
+                    <li><a href="/admin/tuike/checkListPage">申请列表</a></li>
                 </ul>
             </li>
             <li>

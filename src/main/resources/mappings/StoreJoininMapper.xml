@@ -16,6 +16,7 @@
         store_joinin_id asc
     </select>
 
+
     <!--更改申请不通过的状态-->
     <update id="rejectStoreJoininApply">
         update t_store_joinin
@@ -32,4 +33,10 @@
         where
         member_id=#{memberId}
     </update>
+
+    <!--查询需要入驻店铺的详细信息-->
+    <select id="queryStoreJoininByMemberId" resultType="com.wuliangit.shopos.entity.StoreJoinin">
+        select * from t_store_joinin
+        where member_id=#{memberId}
+    </select>
 </mapper>

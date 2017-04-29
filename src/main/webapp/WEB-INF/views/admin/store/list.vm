@@ -165,7 +165,10 @@
         });
          //申请店铺详细信息
         table.on( 'click', '.detail', function () {
-          
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            var memberId = data.memberId;
+            window.location.href = "/admin/store/detailPage?memberId="+memberId;
         });
 
         $("#back").on('click', function () {

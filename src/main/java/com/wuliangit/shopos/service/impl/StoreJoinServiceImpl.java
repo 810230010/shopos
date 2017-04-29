@@ -34,5 +34,10 @@ public class StoreJoinServiceImpl implements StoreJoinService {
         return storeJoininMapper.passStoreJoininApply(memberId);
     }
 
+    @Override
+    public StoreJoinin getStoreJoininDetail(Integer memberId) {
+        return storeJoininMapper.queryStoreJoininByMemberId(memberId);
+    }
+
 
 }

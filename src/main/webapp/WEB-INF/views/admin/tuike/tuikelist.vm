@@ -5,7 +5,7 @@
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>推客-推客审核</h2>
+        <h2>推客-推客管理</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">待审核列表</h5>
+                    <h5 id="rank">管理列表 </h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -40,7 +40,7 @@
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': '/admin/tuike/getCheckList',
+                'url': '/admin/tuike/getTuikeList',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -53,22 +53,18 @@
                 },
             },
             "columns": [
-                {"data":"memberId","width":"7%","title":"序号","orderable": false},
+                {"data":"tuikeId","width":"5%","title":"序号","orderable": false},
                 {"data":"nikename","width": "10%","title":"会员名称","orderable": false},
-                {"data":"sex","width": "10%","title":"性别","orderable": false,"render": function(data, type,row){
-                    if(data == "MAN")return "男";
-                    else return "女";
-                }},
-                {"data":"email","width": "10%","title":"邮箱","orderable": false},
-                {"data":"createTime","width": "10%","title":"创建时间","orderable": true},
-                {"data":"points","width": "10%","title":"积分","orderable": true},
-                {"data":"memberId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
+                {"data":"createTime","width": "15%","title":"创建时间","orderable": true},
+                {"data":"availableBalance","width": "10%","title":"可用余额","orderable": true},
+                {"data":"freezeBalance","width": "10%","title":"冻结金额","orderable": true},
+                {"data":"code","width": "10%","title":"推客码","orderable": false},
+                {"data":"shareCount","width": "10%","title":"分享访问次数","orderable": true},
+                {"data":"buyCount","width": "10%","title":"分享购买次数","orderable": true},
+                {"data":"tuikeId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
                     return [
-                        '<a class="btn btn-danger btn-xs table-action unpass" href="javascript:void(0)">',
-                        '不通过 <i class="fa fa-trash-o"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)" style="margin-left: 10px;">',
-                        '通过 <i class="fa fa-edit"></i>',
+                        '<a class="table-button btn btn-danger btn-xs table-action forbidden" href="javascript:void(0)" style="margin-left: 10px;">',
+                        '禁用 <i class="fa fa-minus-circle"></i>',
                         '</a>'
                     ].join('');
                 }},
@@ -87,6 +83,7 @@
                 {extend: 'csv'},
                 {extend: 'excel', title: 'ExampleFile'},
                 {extend: 'pdf', title: 'ExampleFile'},
+
                 {extend: 'print',
                     customize: function (win){
                         $(win.document.body).addClass('white-bg');
@@ -109,28 +106,23 @@
         });
         var table = $('#datatables').DataTable();
 
-        table.on( 'click', '.unpass', function () {
+        table.on( 'click', '.forbidden', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            $.operation(data,"UNCHECK");
-        });
-        table.on( 'click', '.pass', function () {
-            var tr = $(this).closest('tr');
-            var data = table.row(tr).data();
-            $.operation(data,"CHECKED");
+            $.operation(data,"FORBIDDEN");
         });
     });
     $.operation = function(data,flag){
         $.ajax({
             type: "post",
-            url: "/admin/tuike/checkOperation",
-            data: "memberId=" + data.memberId + "&state=" + flag,
+            url: "/admin/tuike/forbiddenTuike",
+            data: "tuikeId=" + data.tuikeId + "&state=" + flag,
             async: false,
             success: function (data) {
                 if (data.code == 200) {
                     swal({
                         title: "成功!",
-                        text: "审核成功!",
+                        text: "禁用成功!",
                         type: "success",
                         showConfirmButton: false,
                         timer: 2000,
@@ -141,7 +133,7 @@
                 }else if(data.code == 500){
                     swal({
                         title: "失败!",
-                        text: "审核失败!",
+                        text: "禁用失败!",
                         type: "error",
                         showConfirmButton: false,
                         timer: 2000,

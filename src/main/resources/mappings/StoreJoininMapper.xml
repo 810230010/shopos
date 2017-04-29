@@ -2,4 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.StoreJoininMapper" >
 
+    <!--查询申请成为店铺的列表 -->
+    <select id="queryJoinStores" resultType="com.wuliangit.shopos.entity.StoreJoinin">
+        select * from t_store_joinin
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                ( member_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or company_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or store_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+        </where>
+        order by
+        store_joinin_id asc
+    </select>
+
+    <!--更改申请不通过的状态-->
+    <update id="rejectStoreJoininApply">
+        update t_store_joinin
+        set
+        joinin_state="CHECK_FAILURE",joinin_message=#{joininMessage}
+        where
+        member_id=#{memberId}
+    </update>
+    <!-- 更改申请通过的店铺状态-->
+    <update id="passStoreJoininApply">
+        update t_store_joinin
+        set
+        joinin_state="CHECK_PASS",joinin_message=""
+        where
+        member_id=#{memberId}
+    </update>
 </mapper>

@@ -15,20 +15,4 @@
     from t_member
     where openid = #{openid}
   </select>
-  <!--获取推客审核列表-->
-  <select id="getCheckList" resultType="com.wuliangit.shopos.dto.TuikeMemberDTO">
-    select m.member_id,m.nikename,m.sex,m.email,m.create_time,m.points
-    from t_member m,t_tuike k
-    <where>
-      k.is_check = 0 AND k.member_id = m.member_id AND k.state = "INIT"
-      <if test="searchKey != null and searchKey != '' ">
-        and ( q.title like '%${searchKey}%')
-      </if>
-    </where>
-    order by
-    <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
-      ${orderColumn} ${orderType},
-    </if>
-    k.create_time desc
-  </select>
 </mapper>

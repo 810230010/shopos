@@ -23,12 +23,5 @@ public interface MemberMapper extends BaseMapper<Member, Integer> {
      */
     Member getByUsername(String username);
 
-    /**
-     * 获取推客审核列表
-     * @param searchKey
-     * @param orderColumn
-     * @param orderType
-     * @return
-     */
-    List<TuikeMemberDTO> getCheckList(@Param("searchKey") String searchKey,@Param("orderColumn") String orderColumn,@Param("orderType") String orderType);
+
 }

@@ -53,4 +53,6 @@ public interface StoreService {
      * @return
      */
     int updateStore(Store store);
+
+
 }

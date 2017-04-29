@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  * wab端异常捕获
  */
 @RestControllerAdvice(basePackages = "com.wuliangit.shopos.controller.web")
-public class WebExceptionHandler {
+public class WebGlobalHandler {
 
     @ExceptionHandler(value = Exception.class)
     public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {

@@ -1,11 +1,14 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
-import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.StoreService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +34,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public StoreMin getStoreMin(Integer memberId) {
-        return storeMapper.getStoreMin(memberId);
+    public StoreUser getStoreUser(Integer memberId) {
+        return storeMapper.getStoreUser(memberId);
     }
 
     @Override
@@ -54,6 +57,12 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public int updateStore(Store store) {
-        return storeMapper.updateByPrimaryKeySelective(store);
+        int res = storeMapper.updateByPrimaryKeySelective(store);
+
+        StoreUser currentStore = WebUtil.getCurrentStore();
+        StoreUser storeUser = storeMapper.getStoreUser(currentStore.getMemberId());
+
+        SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE,storeUser);
+        return res;
     }
 }

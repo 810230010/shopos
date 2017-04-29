@@ -2,16 +2,14 @@ package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
-import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.entity.Admin;
-import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.AdminService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,10 +41,10 @@ public class AdminLoginController {
 
             Admin admin = adminService.getByUsername(username);
             SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, admin);
-            StoreMin storeMin = new StoreMin();
-            storeMin.setStoreId(0);
-            storeMin.setName("自营");
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeMin);
+            StoreUser storeUser = new StoreUser();
+            storeUser.setStoreId(0);
+            storeUser.setName("自营");
+            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeUser);
 
             return "redirect:/admin/index";
         } catch (UnknownAccountException e) {

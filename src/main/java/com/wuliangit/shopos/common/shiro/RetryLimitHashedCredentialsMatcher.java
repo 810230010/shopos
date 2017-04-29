@@ -1,25 +1,13 @@
 package com.wuliangit.shopos.common.shiro;
 
-import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
-import com.wuliangit.shopos.entity.Admin;
-import com.wuliangit.shopos.entity.Member;
-import com.wuliangit.shopos.model.StoreMin;
-import com.wuliangit.shopos.service.AdminService;
-import com.wuliangit.shopos.service.MemberService;
-import com.wuliangit.shopos.service.StoreService;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.mgt.RealmSecurityManager;
-import org.apache.shiro.realm.AuthorizingRealm;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher {

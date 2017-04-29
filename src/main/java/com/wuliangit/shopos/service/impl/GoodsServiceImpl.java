@@ -8,9 +8,8 @@ import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.entity.Goods;
-import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.entity.GoodsSku;
-import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +40,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional
     public int createGoods(Goods goods, String skuStr) {
-        StoreMin store = WebUtil.getCurrentStore();
+        StoreUser store = WebUtil.getCurrentStore();
 
         goods.setStoreId(store.getStoreId());
         goods.setCreateTime(new Date());

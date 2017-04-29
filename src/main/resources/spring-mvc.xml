@@ -20,6 +20,7 @@
     <!-- 开启controller注解支持 -->
     <context:component-scan base-package="com.wuliangit.shopos.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <!--<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>-->
     </context:component-scan>
 
     <!-- 当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->

@@ -2,7 +2,7 @@ package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
-import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.model.StoreUser;
 
 import java.util.Set;
 
@@ -24,7 +24,7 @@ public interface StoreService {
      * @param memberId
      * @return
      */
-    StoreMin getStoreMin(Integer memberId);
+    StoreUser getStoreUser(Integer memberId);
 
     /**
      * 店铺角色
@@ -48,7 +48,7 @@ public interface StoreService {
     Store getStoreByStoreId(Integer storeId);
 
     /**
-     * 更新店铺信息店铺
+     * 更新店铺信息店铺,并更新店铺缓存信息
      * @param store
      * @return
      */

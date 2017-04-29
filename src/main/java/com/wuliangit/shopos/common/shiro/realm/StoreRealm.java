@@ -1,12 +1,11 @@
 package com.wuliangit.shopos.common.shiro.realm;
 
 import com.wuliangit.shopos.entity.Member;
-import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -54,9 +53,9 @@ public class StoreRealm extends AuthorizingRealm {
             throw new UnknownAccountException();
         }
 
-        StoreMin storeMin = storeService.getStoreMin(member.getMemberId());
+        StoreUser storeUser = storeService.getStoreUser(member.getMemberId());
 
-        if (storeMin == null) {
+        if (storeUser == null) {
             throw new UnknownAccountException();
         }
 

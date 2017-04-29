@@ -1,14 +1,9 @@
 package com.wuliangit.shopos.common.shiro.realm;
 
 import com.wuliangit.shopos.entity.Admin;
-import com.wuliangit.shopos.entity.Member;
-import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.AdminService;
-import com.wuliangit.shopos.service.MemberService;
-import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;

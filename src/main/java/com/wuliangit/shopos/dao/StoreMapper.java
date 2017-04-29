@@ -2,7 +2,7 @@ package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.entity.Store;
-import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.model.StoreUser;
 
 public interface StoreMapper extends BaseMapper<Store, Integer> {
     /**
@@ -10,5 +10,5 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @param memberId
      * @return
      */
-    StoreMin getStoreMin(Integer memberId);
+    StoreUser getStoreUser(Integer memberId);
 }

@@ -1,26 +1,20 @@
 package com.wuliangit.shopos.common.shiro.realm;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
-import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
-import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.AdminService;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.StoreService;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.HashMap;
 
 public class UserRealm extends AuthorizingRealm {
 
@@ -57,9 +51,9 @@ public class UserRealm extends AuthorizingRealm {
             authorizationInfo.setRoles(memberService.getRoles(((Member)principal).getUsername()));
             authorizationInfo.setStringPermissions(memberService.getPermissions(((Member)principal).getUsername()));
             return authorizationInfo;
-        }else if(principal instanceof StoreMin){
-            authorizationInfo.setRoles(storeService.getRoles(((StoreMin)principal).getName()));
-            authorizationInfo.setStringPermissions(storeService.getPermissions(((StoreMin)principal).getName()));
+        }else if(principal instanceof StoreUser){
+            authorizationInfo.setRoles(storeService.getRoles(((StoreUser)principal).getName()));
+            authorizationInfo.setStringPermissions(storeService.getPermissions(((StoreUser)principal).getName()));
             return authorizationInfo;
         }
         return null;
@@ -102,12 +96,12 @@ public class UserRealm extends AuthorizingRealm {
             if (member == null) {
                 throw new UnknownAccountException();
             }
-            StoreMin storeMin = storeService.getStoreMin(member.getMemberId());
-            if (storeMin == null) {
+            StoreUser storeUser = storeService.getStoreUser(member.getMemberId());
+            if (storeUser == null) {
                 throw new UnknownAccountException();
             }
             authenticationInfo = new SimpleAuthenticationInfo(
-                    storeMin,
+                    storeUser,
                     member.getPasswd(),
                     ByteSource.Util.bytes(member.getSalt()),
                     getName()

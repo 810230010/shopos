@@ -28,7 +28,7 @@ public class AdminTestController {
     @RequestMapping("/page1")
     public String page1(Model model){
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        return "admin/test";
+        return "admin/testxx";
     }
 
     @RequestMapping("/test1")

@@ -2,10 +2,8 @@ package com.wuliangit.shopos.controller.store;
 
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
-import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
-import com.wuliangit.shopos.model.StoreMin;
-import com.wuliangit.shopos.service.AdminService;
+import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.SecurityUtils;
@@ -47,8 +45,8 @@ public class StoreLoginController {
             Member member = memberService.getByUsername(username);
             SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_USER, member);
 
-            StoreMin storeMin = storeService.getStoreMin(member.getMemberId());
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeMin);
+            StoreUser storeUser = storeService.getStoreUser(member.getMemberId());
+            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeUser);
 
             return "redirect:/store/index";
         } catch (UnknownAccountException e) {

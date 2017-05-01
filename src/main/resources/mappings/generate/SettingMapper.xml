@@ -4,11 +4,11 @@
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Setting" >
     <id column="setting_id" property="settingId" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="option" property="option" jdbcType="VARCHAR" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
     <result column="value" property="value" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    setting_id, name, option, value
+    setting_id, name, key, value
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,9 +24,9 @@
     <selectKey resultType="java.lang.Integer" keyProperty="settingId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_setting (name, option, value
+    insert into t_setting (name, key, value
       )
-    values (#{name,jdbcType=VARCHAR}, #{option,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
+    values (#{name,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Setting" >
@@ -38,8 +38,8 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="option != null" >
-        option,
+      <if test="key != null" >
+        key,
       </if>
       <if test="value != null" >
         value,
@@ -49,8 +49,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="option != null" >
-        #{option,jdbcType=VARCHAR},
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
       </if>
       <if test="value != null" >
         #{value,jdbcType=VARCHAR},
@@ -63,8 +63,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="option != null" >
-        option = #{option,jdbcType=VARCHAR},
+      <if test="key != null" >
+        key = #{key,jdbcType=VARCHAR},
       </if>
       <if test="value != null" >
         value = #{value,jdbcType=VARCHAR},
@@ -75,7 +75,7 @@
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Setting" >
     update t_setting
     set name = #{name,jdbcType=VARCHAR},
-      option = #{option,jdbcType=VARCHAR},
+      key = #{key,jdbcType=VARCHAR},
       value = #{value,jdbcType=VARCHAR}
     where setting_id = #{settingId,jdbcType=INTEGER}
   </update>

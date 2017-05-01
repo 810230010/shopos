@@ -1,10 +1,12 @@
 package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.service.MailService;
 import com.wuliangit.shopos.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,9 +24,26 @@ public class AdminSettingController {
     private SettingService settingService;
 
 
-    @RequestMapping("/mailPage")
+    /**
+     * 邮件服务器设置界面
+     * @return
+     */
+    @RequestMapping("/mailSettingPage")
     public String mailPage(){
         return "admin/setting/mail";
+    }
+
+    /**
+     * 文件存储设置
+     * @return
+     */
+    @RequestMapping("/bucketSettingPage")
+    public String bucketSettingPage(Model model){
+        model.addAttribute("accessKey",settingService.getSetting(QiNiuUtils.BUCKET_ACCESSKEY));
+        model.addAttribute("secretKey",settingService.getSetting(QiNiuUtils.BUCKET_SECRETKEY));
+        model.addAttribute("bucket",settingService.getSetting(QiNiuUtils.BUCKET_BUCKET));
+        model.addAttribute("domain",settingService.getSetting(QiNiuUtils.BUCKET_DOMAIN));
+        return "admin/setting/bucket";
     }
 
     /**
@@ -43,6 +62,22 @@ public class AdminSettingController {
             result.put("code",RestResult.CODE_SERVERERROR);
             result.put("msg",RestResult.MSG_ERROR);
         }
+        return result;
+    }
+
+    /**
+     * 更新文件存储配置
+     * @param accessKey
+     * @param secretKey
+     * @param bucket
+     * @param domain
+     * @return
+     */
+    @RequestMapping("/updateBucketSetting")
+    @ResponseBody
+    public Object updateBucketSetting(String accessKey, String secretKey, String bucket, String domain){
+        RestResult result = new RestResult();
+        settingService.updateBucketSetting(accessKey,secretKey,bucket,domain);
         return result;
     }
 

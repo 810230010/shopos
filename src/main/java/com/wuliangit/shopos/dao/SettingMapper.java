@@ -16,9 +16,9 @@ public interface SettingMapper extends BaseMapper<Setting, Integer> {
 
     /**
      * 更新设置表里的具体某项值
-     * @param mailServiceSite
-     * @param mailServiceSite1
+     * @param key
+     * @param value
      * @return
      */
-    Integer updateSetting(@Param("key")String mailServiceSite, @Param("value") String mailServiceSite1);
+    Integer updateSetting(@Param("key")String key, @Param("value") String value);
 }

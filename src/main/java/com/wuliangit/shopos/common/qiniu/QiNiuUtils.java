@@ -2,6 +2,8 @@ package com.wuliangit.shopos.common.qiniu;
 
 import com.qiniu.util.Auth;
 import com.wuliangit.shopos.common.util.PropertyPlaceholder;
+import com.wuliangit.shopos.common.util.SpringUtils;
+import com.wuliangit.shopos.service.SettingService;
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -24,24 +26,39 @@ public class QiNiuUtils {
     private static Auth auth;
     private static ReentrantLock lock = new ReentrantLock();
 
+    public static final String BUCKET_ACCESSKEY = "BUCKET_ACCESSKEY";
+    public static final String BUCKET_SECRETKEY = "BUCKET_SECRETKEY";
+    public static final String BUCKET_BUCKET = "BUCKET_BUCKET";
+    public static final String BUCKET_DOMAIN = "BUCKET_DOMAIN";
+
     private static String accessKey = PropertyPlaceholder.getProperty("qiniu.accessKey");
     private static String secretKey = PropertyPlaceholder.getProperty("qiniu.secretKey");
-    private static String bucket = PropertyPlaceholder.getProperty("qiniu.bucket");
+    private static String BUCKET = PropertyPlaceholder.getProperty("qiniu.bucket");
     public static String BASE_URL = PropertyPlaceholder.getProperty("qiniu.baseUrl");
 
     public static String getToken() {
-        return getAuth().uploadToken(bucket);
+        return getAuth().uploadToken(BUCKET);
     }
 
     public static Auth getAuth() {
         if (auth == null) {
             lock.lock();
             if (auth == null) {
+                SettingService settingService = SpringUtils.getBean(SettingService.class);
+                accessKey = settingService.getSetting(BUCKET_ACCESSKEY);
+                secretKey = settingService.getSetting(BUCKET_SECRETKEY);
+                BUCKET = settingService.getSetting(BUCKET_BUCKET);
+                BASE_URL = settingService.getSetting(BUCKET_DOMAIN);
                 auth = Auth.create(accessKey, secretKey);
             }
             lock.unlock();
         }
         return auth;
+    }
+
+    public static Auth updateAuth(){
+        auth = null;
+        return QiNiuUtils.getAuth();
     }
 
     public static String getRealUrl(String url) {

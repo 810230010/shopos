@@ -6,6 +6,7 @@ package com.wuliangit.shopos.service;
 public interface SettingService {
     /**
      * 更新邮箱设置
+     *
      * @param mailServiceSite
      * @param mailUserName
      * @param mailPassword
@@ -16,8 +17,19 @@ public interface SettingService {
 
     /**
      * 通过key获取设置的值
+     *
      * @param key
      * @return
      */
     String getSetting(String key);
+
+    /**
+     * 更新文件存储配置
+     *
+     * @param accessKey
+     * @param secretKey
+     * @param bucket
+     * @param domain
+     */
+    void updateBucketSetting(String accessKey, String secretKey, String bucket, String domain);
 }

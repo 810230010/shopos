@@ -2,6 +2,7 @@ package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.service.MailService;
+import com.wuliangit.shopos.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,9 @@ public class AdminSettingController {
 
     @Autowired
     private MailService mailService;
+    @Autowired
+    private SettingService settingService;
+
 
     @RequestMapping("/mailPage")
     public String mailPage(){
@@ -34,7 +38,7 @@ public class AdminSettingController {
     @ResponseBody
     public RestResult updateMail(String mailServiceSite, String mailUserName, String mailPassword){
         RestResult result = new RestResult();
-        Integer info = mailService.updateMail(mailServiceSite,mailUserName,mailPassword);
+        Integer info = settingService.updateMailSetting(mailServiceSite,mailUserName,mailPassword);
         if(info != 1){
             result.put("code",RestResult.CODE_SERVERERROR);
             result.put("msg",RestResult.MSG_ERROR);

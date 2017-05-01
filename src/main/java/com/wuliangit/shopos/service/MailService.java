@@ -13,13 +13,7 @@ public interface MailService {
      */
     void sendMail(String user, String template);
 
-    /**
-     * 更新邮箱设置
-     * @param mailServiceSite
-     * @param mailUserName
-     * @param mailPassword
-     * @return
-     */
-    Integer updateMail(String mailServiceSite, String mailUserName, String mailPassword);
+
+
 
 }

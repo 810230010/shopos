@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.SettingMapper" >
 
-    <update id="updateMail">
+    <update id="updateSetting">
         UPDATE t_setting
         SET value = #{value}
         WHERE `key` = #{key}

@@ -35,4 +35,11 @@ public interface StoreJoinService {
      * @return
      */
     int passApplyForJoininStore(Integer memberId);
+
+    /**
+     * 得到申请入驻店铺的详细信息
+     * @param memberId
+     * @return
+     */
+    StoreJoinin getStoreJoininDetail(Integer memberId);
 }

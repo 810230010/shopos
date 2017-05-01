@@ -8,6 +8,7 @@ import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.service.StoreJoinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,5 +78,18 @@ public class AdminStoreController {
         RestResult result = new RestResult();
         storeJoinService.passApplyForJoininStore(memberId);
         return result;
+    }
+
+    /**
+     * 进入申请入驻店铺的详细信息
+     * @param memberId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/detailPage")
+    public String jumpToStoreJoininDetail(Integer memberId, Model model) {
+        StoreJoinin store = storeJoinService.getStoreJoininDetail(memberId);
+        model.addAttribute("store",store);
+        return "/admin/store/detail";
     }
 }

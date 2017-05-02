@@ -9,4 +9,21 @@
         where s.member_id = #{memberId}
     </select>
 
+    <!-- 获得某个店铺品牌-->
+    <select id="getStoreBrands" resultType="com.wuliangit.shopos.model.StoreBrand">
+        select a.brand_id as brandId,a.`name` as brandName,a.category_name as categoryName,a.pic,b.id,b.is_onshelf as isOnshelf,b.passed
+        from t_brand a,t_store_brand b
+        <where>
+            a.brand_id=b.brand_id
+            <if test="searchKey != null and searchKey != '' ">
+                (and brandName like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or passed like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or isOnshelf like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+            and a.brand_id=b.brand_id and b.store_id=#{storeId}
+        </where>
+        order by id
+    </select>
+
+
 </mapper>

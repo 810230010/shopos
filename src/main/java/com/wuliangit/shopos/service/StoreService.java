@@ -2,8 +2,10 @@ package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
+import com.wuliangit.shopos.model.StoreBrand;
 import com.wuliangit.shopos.model.StoreUser;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -54,5 +56,13 @@ public interface StoreService {
      */
     int updateStore(Store store);
 
-
+    /**
+     * 获取店铺的品牌信息
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param storeId
+     * @return
+     */
+    List<StoreBrand> getStoreBrands(Integer page, Integer pageSize, String searchKey, Integer storeId);
 }

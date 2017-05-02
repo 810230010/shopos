@@ -37,7 +37,7 @@
             <li>
                 <a href="index.html#"><i class="fa fa-edit"></i> <span class="nav-label">品牌管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="form_basic.html">品牌列表</a></li>
+                    <li><a href="/store/brand/listPage">品牌列表</a></li>
                     <li><a href="form_basic.html">申请入驻品牌</a></li>
                 </ul>
             </li>

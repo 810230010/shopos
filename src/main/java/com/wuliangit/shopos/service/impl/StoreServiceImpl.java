@@ -1,11 +1,13 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
+import com.wuliangit.shopos.model.StoreBrand;
 import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.SecurityUtils;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -64,5 +67,11 @@ public class StoreServiceImpl implements StoreService {
 
         SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE,storeUser);
         return res;
+    }
+
+    @Override
+    public List<StoreBrand> getStoreBrands(Integer page, Integer pageSize, String searchKey, Integer storeId) {
+        PageHelper.startPage(page, pageSize);
+        return storeMapper.getStoreBrands(storeId, searchKey);
     }
 }

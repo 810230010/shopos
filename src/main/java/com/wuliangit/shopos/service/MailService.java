@@ -12,4 +12,8 @@ public interface MailService {
      * @param template 模板名称
      */
     void sendMail(String user, String template);
+
+
+
+
 }

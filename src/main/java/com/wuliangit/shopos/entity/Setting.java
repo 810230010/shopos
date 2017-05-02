@@ -5,7 +5,7 @@ public class Setting {
 
     private String name;
 
-    private String option;
+    private String key;
 
     private String value;
 
@@ -25,12 +25,12 @@ public class Setting {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getOption() {
-        return option;
+    public String getKey() {
+        return key;
     }
 
-    public void setOption(String option) {
-        this.option = option == null ? null : option.trim();
+    public void setKey(String key) {
+        this.key = key == null ? null : key.trim();
     }
 
     public String getValue() {

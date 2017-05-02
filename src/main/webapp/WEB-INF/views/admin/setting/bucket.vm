@@ -1,0 +1,102 @@
+#parse("/admin/models/begin.vm")
+<link href="/assets/admin/css/plugins/sweetalert/sweetalert.css" media="all" rel="stylesheet" type="text/css"/>
+#parse("/admin/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>设置-文件存储设置</h2>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>文件存储设置</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="form" class="form-horizontal">
+                        <p>请填写七牛文件存储的配置 | <a href="https://www.qiniu.com">如何获取accessKey/secretKey</a></p>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">accessKey</label>
+                            <div class="col-lg-10">
+                                <input type="text" placeholder="请填写accessKey" id="accessKey" name="accessKey" value="$!{accessKey}" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">secretKey</label>
+                            <div class="col-lg-10">
+                                <input type="text" placeholder="请填写secretKey" id="secretKey" name="secretKey" value="$!{secretKey}" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">bucket(存储空间)</label>
+                            <div class="col-lg-10">
+                                <input type="text" placeholder="请填写bucket" id="bucket" name="bucket" value="$!{bucket}" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">域名</label>
+                            <div class="col-lg-10">
+                                <input type="text" placeholder="请填写域名" id="domain" name="domain" value="$!{domain}" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <div class="btn btn-sm btn-primary" id="submit">提交</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+<!-- Jquery Validate -->
+<script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
+
+<script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+
+<script>
+    $("#submit").on('click', function () {
+        var form = $("#form");
+        if(!form.valid()){
+           return ;
+        }
+
+        $.post("/admin/setting/updateBucketSetting",
+                {
+                    accessKey: $("#accessKey").val(),
+                    secretKey: $("#secretKey").val(),
+                    bucket: $("#bucket").val(),
+                    domain: $("#domain").val(),
+                },
+                function (data, status) {
+                    if (data.code == 200) {
+                        swal({
+                            title: "成功!",
+                            text: "文件存储配置修改成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    }else{
+                        swal({
+                            title: "失败!",
+                            text: "文件存储配置修改失败!",
+                            type: "error",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    }
+                });
+    });
+
+    $("#form").validate();
+</script>
+
+#parse("/admin/models/end.vm")

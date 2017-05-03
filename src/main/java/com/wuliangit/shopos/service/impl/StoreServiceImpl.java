@@ -74,4 +74,14 @@ public class StoreServiceImpl implements StoreService {
         PageHelper.startPage(page, pageSize);
         return storeMapper.getStoreBrands(storeId, searchKey);
     }
+
+    @Override
+    public int updateBrandStatus(Integer id, String status) {
+        return storeMapper.updateBrandStatusByPrimaryKey(id, status);
+    }
+
+    @Override
+    public int deleteStoreBrand(Integer id) {
+        return storeMapper.deleteStoreBrand(id);
+    }
 }

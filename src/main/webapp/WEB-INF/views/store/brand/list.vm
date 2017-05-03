@@ -1,7 +1,6 @@
 #parse("/store/models/begin.vm")
 
 <link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-##<link href="/admin/css/plugins/layui/layer.css" rel="stylesheet">
 #parse("/store/models/header.vm")
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -28,7 +27,6 @@
 #parse("/store/models/footer.vm")
 
 <script src="/assets/admin/js/plugins/dataTables/datatables.min.js" type="text/javascript"></script>
-##<script src="../../admin/js/plugins/layUI/layer.js" type="text/javascript"></script>
 <script>
 
     var rank = 1;
@@ -62,20 +60,37 @@
                     }
                 },
                 {"data":"passed","width": "10%","title":"是否入驻成功","orderable": false},
+                {"data":"isOnshelf","width": "10%","title":"上下架状态","orderable": false},
                 {"data":"id","width": "15%","title":"操作","orderable": false},
             ],
             "columnDefs" : [{
-                "targets": 5,
-                "data": "brandId",
+                "targets": 6,
+                "data": "id",
                 "render": function (data, type, row) {
-                    return [
-                        '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
-                        '删除品牌<i class="fa fa-trash-o"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
-                        '已上架<i class="fa fa-edit"></i>',
-                        '</a>'
-                    ].join('');
+                    var aTxt = row.isOnshelf == "已上架"?"下架":"上架";
+                    if(row.isOnshelf != ""){
+                        return [
+                            '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
+                            '删除品牌<i class="fa fa-trash-o"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
+                            aTxt,'<i class="fa fa-edit"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
+                            '详细信息<i class="fa fa-edit"></i>',
+                            '</a>'
+                        ].join('');
+                    } else{
+                        return [
+                            '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
+                            '删除品牌<i class="fa fa-trash-o"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
+                            '详细信息<i class="fa fa-edit"></i>',
+                            '</a>'
+                        ].join('');
+                    }
+
                 }
             } ],
             "searching": true,
@@ -112,44 +127,71 @@
                     cell.innerHTML =  i + 1;
                 });
             },
+
         });
 
-//        var table = $('#brandTable').DataTable();
-//        //上下架
-//        table.on( 'click', '.edit', function () {
-//            var tr = $(this).closest('tr');
-//            var data = table.row(tr).data();
-//            window.location.href = "/admin/brand/editPage?brandId="+data.brandId;
-//        });
+        var table = $('#brandTable').DataTable();
+        //上下架
+        table.on( 'click', '.edit', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            $.ajax({
+                url: "/store/brand/updateBrandStatus",
+                data : {"id":data.id, "status":"已"+$(".edit").text()},
+                success:function(result) {
+                    if(result == "ok"){
+                        swal({
+                            title: "成功!",
+                            text: "商品分类修改成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(function () {
+                            window.location.href = "/store/brand/listPage";
+                        }, 2000);
+                    }
+                },
+                error:function(result) {
+                    alert("系统出错")
+                }
+         });
+        });
 //
-//        //删除品牌
-//        table.on('click', '.delete', function() {
-//            var tr = $(this).closest('tr');
-//            var data = table.row(tr).data();
-//            layer.confirm('确定删除改品牌?!', {icon: 5,btnAlign:'c',title:'提示'}, function(index){
-//                //do something
-//                $.ajax({
-//                    url: "/admin/brand/deleteBrand",
-//                    type: "get",
-//                    data: {"brandId": data.brandId},
-//                    success:function(result) {
-//                        if (result.code == 200) {
-//                            layer.open({
-//                                title: '提示'
-//                                ,content: '删除成功!!'
-//                            })
-//                            window.location.reload();
-//                        }
-//                    },
-//                    error:function(result) {
-//                        alert("系统出错!")
-//                    }
-//                });
-//                layer.close(index);
-//            });
-//
-//
-//        });
+        //删除品牌
+        table.on('click', '.delete', function() {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            swal({
+                        title: "确定删除该品牌?",
+                        text: "删除该品牌不可恢复!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确认",
+                        closeOnConfirm: true
+                    },
+                    function(){
+                        $.ajax({
+                            url: "/store/brand/deleteBrand",
+                            type: "get",
+                            data: {"id": data.id},
+                            success:function(result) {
+                                if(result == "ok"){
+                                    swal("Deleted!", "Your brand has been deleted.", "success");
+                                }
+                            },
+                            error:function(result) {
+                                alert("系统出错!")
+                            }
+                        });
+
+                    });
+
+
+
+
+        });
 //
 //        $("#back").on('click', function () {
 //            rank = rank - 1;

@@ -25,5 +25,16 @@
         order by id
     </select>
 
+    <!--修改店铺某品牌上下架状态 -->
+    <update id="updateBrandStatusByPrimaryKey">
+        update t_store_brand
+        set is_onshelf=#{status}
+        where id=#{id}
+    </update>
 
+    <!--删除店铺某个品牌-->
+    <delete id="deleteStoreBrand">
+        delete from t_store_brand
+        where id=#{id}
+    </delete>
 </mapper>

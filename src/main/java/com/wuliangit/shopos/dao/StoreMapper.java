@@ -30,4 +30,11 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return
      */
     int updateBrandStatusByPrimaryKey(@Param("id") Integer id, @Param("status") String status);
+
+    /**
+     * 删除某个店铺的品牌
+     * @param id
+     * @return
+     */
+    int deleteStoreBrand(@Param("id") Integer id);
 }

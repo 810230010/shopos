@@ -68,4 +68,16 @@ public class StoreBrandController {
         storeService.updateBrandStatus(id, status);
         return "ok";
     }
+
+    /**
+     * 删除某个店铺的品牌
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteBrand")
+    @ResponseBody
+    public String deleteStoreBrand(Integer id) {
+        storeService.deleteStoreBrand(id);
+        return "ok";
+    }
 }

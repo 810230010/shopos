@@ -72,4 +72,11 @@ public interface StoreService {
      * @return
      */
     int updateBrandStatus(Integer id, String status);
+
+    /**
+     * 删除店铺某个品牌
+     * @param id
+     * @return
+     */
+    int deleteStoreBrand(Integer id);
 }

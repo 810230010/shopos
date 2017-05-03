@@ -56,4 +56,16 @@ public class StoreBrandController {
         List<StoreBrand> storeBrands = storeService.getStoreBrands(page, pageSize, searchKey, storeId);
         return new PageResult<StoreBrand>(storeBrands, draw);
     }
+    /**
+     * 更改店铺某品牌上下架状态
+     * @param id
+     * @param status
+     * @return
+     */
+    @RequestMapping("/updateBrandStatus")
+    @ResponseBody
+    public String changOnshelfStatus(Integer id, String status){
+        storeService.updateBrandStatus(id, status);
+        return "ok";
+    }
 }

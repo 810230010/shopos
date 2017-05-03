@@ -22,4 +22,12 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return
      */
     List<StoreBrand> getStoreBrands(@Param("storeId") Integer storeId, @Param("searchKey") String searchKey);
+
+    /**
+     * 更改店铺某品牌上下架状态
+     * @param id
+     * @param status
+     * @return
+     */
+    int updateBrandStatusByPrimaryKey(@Param("id") Integer id, @Param("status") String status);
 }

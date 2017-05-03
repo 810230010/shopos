@@ -62,20 +62,31 @@
                     }
                 },
                 {"data":"passed","width": "10%","title":"是否入驻成功","orderable": false},
+                {"data":"isOnshelf","width": "10%","title":"上下架状态","orderable": false},
                 {"data":"id","width": "15%","title":"操作","orderable": false},
             ],
             "columnDefs" : [{
-                "targets": 5,
-                "data": "brandId",
+                "targets": 6,
+                "data": "id",
                 "render": function (data, type, row) {
-                    return [
-                        '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
-                        '删除品牌<i class="fa fa-trash-o"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
-                        '已上架<i class="fa fa-edit"></i>',
-                        '</a>'
-                    ].join('');
+                    var aTxt = row.isOnshelf == "已上架"?"下架":"上架";
+                    if(row.isOnshelf != ""){
+                        return [
+                            '<a class="btn btn-danger btn-xs table-action delete" style="margin-left:40px" href="javascript:void(0)">',
+                            '删除品牌<i class="fa fa-trash-o"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
+                            aTxt,'<i class="fa fa-edit"></i>',
+                            '</a>'
+                        ].join('');
+                    } else{
+                        return [
+                            '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
+                            '删除品牌<i class="fa fa-trash-o"></i>',
+                            '</a>',
+                        ].join('');
+                    }
+
                 }
             } ],
             "searching": true,
@@ -112,15 +123,39 @@
                     cell.innerHTML =  i + 1;
                 });
             },
+
         });
 
-//        var table = $('#brandTable').DataTable();
-//        //上下架
-//        table.on( 'click', '.edit', function () {
-//            var tr = $(this).closest('tr');
-//            var data = table.row(tr).data();
+        var table = $('#brandTable').DataTable();
+        //上下架
+        table.on( 'click', '.edit', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            $.ajax({
+                url: "/store/brand/updateBrandStatus",
+                data : {"id":data.id, "status":"已"+$(".edit").text()},
+                success:function(result) {
+                    if(result == "ok"){
+                        swal({
+                            title: "成功!",
+                            text: "商品分类修改成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(function () {
+                            window.location.href = "/store/brand/listPage";
+                        }, 2000);
+                    }
+                },
+                error:function(result) {
+                    alert("系统出错")
+                }
+
+
 //            window.location.href = "/admin/brand/editPage?brandId="+data.brandId;
-//        });
+         });
+        });
 //
 //        //删除品牌
 //        table.on('click', '.delete', function() {

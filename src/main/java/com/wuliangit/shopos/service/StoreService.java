@@ -65,4 +65,11 @@ public interface StoreService {
      * @return
      */
     List<StoreBrand> getStoreBrands(Integer page, Integer pageSize, String searchKey, Integer storeId);
+    /**
+     * 更改店铺某品牌上下架状态
+     * @param id
+     * @param status
+     * @return
+     */
+    int updateBrandStatus(Integer id, String status);
 }

@@ -19,6 +19,7 @@ public interface GoodsSearchService {
      * @param goodsCategoryId      商品分类id
      * @param storeId              店铺id
      * @param storeGoodsCategoryId 店铺内分类id
+     * @param type                 商品类型
      * @return
      */
     ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page,
@@ -28,5 +29,5 @@ public interface GoodsSearchService {
                                               Integer brandId,
                                               Integer goodsCategoryId,
                                               Integer storeId,
-                                              Integer storeGoodsCategoryId);
+                                              Integer storeGoodsCategoryId, String type);
 }

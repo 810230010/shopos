@@ -3,6 +3,7 @@ package com.wuliangit.shopos.dao;
 import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.GoodsCategory;
+import com.wuliangit.shopos.model.StoreAddBrand;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
@@ -24,4 +25,10 @@ public interface BrandMapper extends BaseMapper<Brand, Integer> {
      * 查询品牌名是否存在
      */
     Brand queryBrandName(@Param("brandName") String brandName);
+
+
+    ArrayList<StoreAddBrand> searchBrands(@Param("searchKey") String searchKey,
+                                          @Param("orderColumn") String orderColumn,
+                                          @Param("orderType")String orderType);
+
 }

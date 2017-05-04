@@ -10,6 +10,7 @@
                 ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
                 or keywords like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
             </if>
+            and brand_apply="PASS"
         </where>
         order by
         <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
@@ -23,6 +24,23 @@
         select * from t_brand
         where
         name=#{brandName};
+    </select>
+
+    <!--查询待审核品牌-->
+    <select id="searchBrands" resultType="com.wuliangit.shopos.model.StoreAddBrand">
+        select a.brand_id as brandId,a.name as brandName,a.category_name as categoryName,a.pic,a.store_id,b.name as storeName,b.grade_id as gradeId
+        from t_brand a, t_store b
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or keywords like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+            and a.store_id=b.store_id and a.brand_apply="APPLYING"
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType}
+        </if>
     </select>
 
 </mapper>

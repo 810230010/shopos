@@ -158,23 +158,43 @@ $("#wizard").steps({
             oj.skuValue =values;
             table_data.push(oj);
         });
+
+        //商品类型
+        var goods_type = $("input[name='goods_type']:checked").val();
+
+        var goods_type_value ='';
+
+        switch(goods_type)
+        {
+            case 'activity':
+                goods_type_value = 'GOODS_TYPE_ACTIVITY';
+                break;
+            case 'normal':
+                goods_type_value = 'GOODS_TYPE_NORMAL';
+                break;
+            default:
+        }
+
         ////////////////提交/////////////
         $.post("/store/goods/add",
             {
                 goodsCategoryId: category3,
-                images:images,
-                titleImg:titleImg,
-                name:$("#name").val(),
-                unit:$("#unit").val(),
-                price:$("#price").val(),
-                marketprice:$("#marketprice").val(),
-                commission:$("#commission").val(),
-                carriage:$("#carriage").val(),
-                adWord:$("#adWord").val(),
-                name:$("#name").val(),
-                goodsBody:$("#goodsBody").val(),
-                skuStr:JSON.stringify(table_data),
-                attrs:JSON.stringify(attr_data),
+                images: images,
+                titleImg: titleImg,
+                name: $("#name").val(),
+                unit: $("#unit").val(),
+                price: $("#price").val(),
+                marketprice: $("#marketprice").val(),
+                commission: $("#commission").val(),
+                carriage: $("#carriage").val(),
+                adWord: $("#adWord").val(),
+                sellTimeBegin: $("#datetimepicker-begin").val(),
+                sellTimeEnd: $("#datetimepicker-end").val(),
+                name: $("#name").val(),
+                type: goods_type_value,
+                goodsBody: $("#goodsBody").val(),
+                skuStr: JSON.stringify(table_data),
+                attrs: JSON.stringify(attr_data),
             },
             function (data, status) {
                 if (data.code == 200) {
@@ -188,6 +208,14 @@ $("#wizard").steps({
                     setTimeout(function () {
                         window.location.href = "/store/goods/addPage";
                     }, 2000);
+                }else{
+                    swal({
+                        title: "请重试!",
+                        text: "商品添加失败!",
+                        type: "error",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
                 }
             });
     }
@@ -314,6 +342,45 @@ function getCategory(parentId) {
 
 
 ///////////////////输入通用属性//////////////////////
+
+$(document).ready(function() {
+    $("input[name='goods_type']").change(
+        function() {
+           var goods_type = $("input[name='goods_type']:checked").val();
+
+            switch(goods_type)
+            {
+                case 'activity':
+                    $(".goods-type-model").addClass("hidden");
+                    $("#activity-time").removeClass("hidden");
+                    break;
+                case 'normal':
+                    $(".goods-type-model").addClass("hidden");
+                    break;
+                default:
+                    $(".goods-type-model").addClass("hidden");
+            }
+
+        });
+
+    $('#datetimepicker-begin').datetimepicker({
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true,
+        todayBtn: true,
+        language: 'zh-CN',
+        format: 'yyyy-mm-dd hh:ii:ss',
+    });
+
+    $('#datetimepicker-end').datetimepicker({
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true,
+        todayBtn: true,
+        language: 'zh-CN',
+        format: 'yyyy-mm-dd hh:ii:ss',
+    });
+});
 
 $('#goods-logo').fileinput({
     language: 'zh',

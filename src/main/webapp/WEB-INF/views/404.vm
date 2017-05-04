@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SHOPOD | 404 错误</title>
+
+    <link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/assets/admin/css/animate.css" rel="stylesheet">
+    <link href="/assets/admin/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+
+    <div class="middle-box text-center animated fadeInDown">
+        <h1>404</h1>
+        <h3 class="font-bold">页面不见了</h3>
+
+        <div class="error-desc">
+            对不起，页面无法找到，请检查您的网址
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="/assets/admin/js/jquery-3.1.1.min.js"></script>
+    <script src="/assets/admin/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

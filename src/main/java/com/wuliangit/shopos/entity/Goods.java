@@ -90,6 +90,12 @@ public class Goods {
 
     private String area;
 
+    private Boolean check;
+
+    private Date sellTimeBegin;
+
+    private Date sellTimeEnd;
+
     private String goodsBody;
 
     public Integer getGoodsId() {
@@ -434,6 +440,30 @@ public class Goods {
 
     public void setArea(String area) {
         this.area = area == null ? null : area.trim();
+    }
+
+    public Boolean getCheck() {
+        return check;
+    }
+
+    public void setCheck(Boolean check) {
+        this.check = check;
+    }
+
+    public Date getSellTimeBegin() {
+        return sellTimeBegin;
+    }
+
+    public void setSellTimeBegin(Date sellTimeBegin) {
+        this.sellTimeBegin = sellTimeBegin;
+    }
+
+    public Date getSellTimeEnd() {
+        return sellTimeEnd;
+    }
+
+    public void setSellTimeEnd(Date sellTimeEnd) {
+        this.sellTimeEnd = sellTimeEnd;
     }
 
     public String getGoodsBody() {

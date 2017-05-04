@@ -3,6 +3,7 @@ package com.wuliangit.shopos.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.dao.BrandMapper;
 import com.wuliangit.shopos.entity.Brand;
+import com.wuliangit.shopos.model.StoreAddBrand;
 import com.wuliangit.shopos.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,13 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public int deleteBrandByID(Integer brandId) {
         return brandMapper.deleteByPrimaryKey(brandId);
+    }
+
+    @Override
+    public ArrayList<StoreAddBrand> searchBrands(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
+        PageHelper.startPage(page, pageSize);
+        return brandMapper.searchBrands(searchKey, orderColumn, orderType);
+
     }
 
 

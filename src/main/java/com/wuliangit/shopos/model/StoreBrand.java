@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.model;
 
 /**
- * Created by Administrator on 2017/5/1.
+ * Created by JangJanPing on 2017/5/1.
  */
 public class StoreBrand {
     private Integer id;

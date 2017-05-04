@@ -4,7 +4,7 @@
 
     <!--api商品搜索-->
     <select id="apiGoodsSearch" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
-        select goods_id,name,store_name,price,title_img,salenum, carriage,area from t_goods
+        select goods_id, name, store_name, price, title_img, salenum, carriage, area from t_goods
         <where>
             <if test="brandId != null and brandId !=''">
                 brand_id = #{brandId}
@@ -17,6 +17,9 @@
             </if>
             <if test="storeGoodsCategoryId != null and storeGoodsCategoryId !=''">
                 and store_goods_category_id = #{storeGoodsCategoryId}
+            </if>
+            <if test="type != null and type !=''">
+                and type = #{type}
             </if>
             <if test="searchKey != null and searchKey != '' ">
                 and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')

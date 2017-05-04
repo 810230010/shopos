@@ -71,8 +71,7 @@
                 showMethod: 'slideDown',
                 timeOut: 2500
             };
-            toastr.success('Responsive Admin Theme', 'Welcome to INSPINIA');
-
+            toastr.success('欢迎回来!', '感谢使用SHOPOS系统!');
         }, 1300);
     });
 </script>

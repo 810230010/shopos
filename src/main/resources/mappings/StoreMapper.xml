@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.StoreMapper">
 
+    <!--插入一条店铺品牌记录-->
+    <insert id="addStoreBrand">
+             insert into t_store_brand(store_id, brand_id)
+             values (#{storeId}, #{brandId})
+    </insert>
+
     <!--通过用户名获取店铺简要信息-->
     <select id="getStoreUser" resultType="com.wuliangit.shopos.model.StoreUser">
         select s.store_id, s.name, s.logo, s.seller_nikename, s.member_id ,m.username, m.nikename, m.photo
@@ -25,6 +31,7 @@
         order by id
     </select>
 
+
     <!--修改店铺某品牌上下架状态 -->
     <update id="updateBrandStatusByPrimaryKey">
         update t_store_brand
@@ -37,4 +44,11 @@
         delete from t_store_brand
         where id=#{id}
     </delete>
+
+    <!--查询所有品牌-->
+    <select id="queryAllBrands" resultType="com.wuliangit.shopos.entity.Brand">
+        select brand_id,name,category_name,pic
+        from t_brand
+        where brand_apply="PASS"
+    </select>
 </mapper>

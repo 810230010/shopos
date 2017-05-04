@@ -170,7 +170,6 @@
     //分类列表下拉框
     $(".parent_select").select2({
         minimumResultsForSearch: -1,
-        placeholder:"aaa",
         ajax: {
             url: "/admin/goodsCategory/get/all",
             dataType: 'json',

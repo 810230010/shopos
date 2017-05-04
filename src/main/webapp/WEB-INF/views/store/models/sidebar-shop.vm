@@ -31,7 +31,7 @@
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">商品</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="/store/goods/listPage">商品列表</a></li>
-                    <li><a href="/store/goodsCategory/listPage">商品分类</a></li>
+                    <li><a href="/store/goods/addPage">添加商品</a></li>
                 </ul>
             </li>
             <li>
@@ -45,13 +45,6 @@
                 <a href="index.html#"><i class="fa fa-globe"></i> <span class="nav-label">评论管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="toastr_notifications.html">评论列表</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">库存</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="typography.html">库存入库</a></li>
-                    <li><a href="icons.html">库存出库</a></li>
                 </ul>
             </li>
             <li>

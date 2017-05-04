@@ -1,0 +1,149 @@
+package com.wuliangit.shopos.controller.api;
+
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.AlipayConstants;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.domain.AlipayTradeAppPayModel;
+import com.alipay.api.domain.AlipayTradeWapPayModel;
+import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.api.request.AlipayTradeAppPayRequest;
+import com.alipay.api.request.AlipayTradeWapPayRequest;
+import com.alipay.api.response.AlipayTradeAppPayResponse;
+import com.alipay.api.response.AlipayTradeWapPayResponse;
+import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.pay.AliPay;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+/**
+ * Created by nilme on 2017/5/3.
+ */
+
+@Controller
+@RequestMapping(value = "/api/v1/pay")
+public class MPayController {
+
+    /**
+     * 准备付款
+     *
+     * @return
+     */
+    @RequestMapping(value = "/order/prepare", method = RequestMethod.POST)
+    @ResponseBody
+    public Object preparePay() {
+        RestResult result = new RestResult();
+
+        AlipayClient alipayClient = AliPay.getAlipayClient();
+
+        //实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay
+        AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
+
+        //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
+        AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
+        model.setBody("我是测试数据");
+        model.setSubject("App支付测试Java");
+        model.setOutTradeNo("11111");
+        model.setTimeoutExpress("30m");
+        model.setTotalAmount("0.01");
+        model.setProductCode("QUICK_MSECURITY_PAY");
+        request.setBizModel(model);
+        request.setNotifyUrl("http://shop.wuliangit.com/api/v1/pay/alipay/notify");
+        try {
+            //这里和普通的接口调用不同，使用的是sdkExecute
+            AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
+            result.add("payInfo", response.getBody());
+            System.out.println(response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    /**
+     * 准备付款
+     *
+     * @return
+     */
+    @RequestMapping(value = "/order/prepare1", method = RequestMethod.POST)
+    @ResponseBody
+    public Object preparePay2() {
+        RestResult result = new RestResult();
+
+        AlipayClient alipayClient = AliPay.getAlipayClient();
+
+        AlipayTradeWapPayRequest alipay_request = new AlipayTradeWapPayRequest();
+
+        // 封装请求支付信息
+        AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
+        model.setBody("我是测试数据");
+        model.setSubject("App支付测试Java");
+        model.setOutTradeNo("10101010");
+        model.setTimeoutExpress("30m");
+        model.setTotalAmount("0.01");
+        model.setProductCode("QUICK_MSECURITY_PAYq");
+        alipay_request.setBizModel(model);
+        // 设置异步通知地址
+        alipay_request.setNotifyUrl("http://shop.wuliangit.com/api/v1/pay/alipay/notify");
+        // 设置同步地址
+        alipay_request.setReturnUrl("http://shop.wuliangit.com/store");
+
+        // form表单生产
+        String form = "";
+        try {
+            // 调用SDK生成表单
+            AlipayTradeWapPayResponse alipayTradeWapPayResponse = alipayClient.pageExecute(alipay_request);
+
+            String body = alipayTradeWapPayResponse.getBody();
+
+            System.out.println(body);
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    @RequestMapping("/alipay/notify")
+    public void alipayNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, IOException {
+        //获取支付宝POST过来反馈信息
+        Map<String,String> params = new HashMap<String,String>();
+        Map requestParams = request.getParameterMap();
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+            String name = (String) iter.next();
+            String[] values = (String[]) requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i]
+                        : valueStr + values[i] + ",";
+            }
+            //乱码解决，这段代码在出现乱码时使用。
+            //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+            params.put(name, valueStr);
+        }
+        //切记alipaypublickey是支付宝的公钥，请去open.alipay.com对应应用下查看。
+        //boolean AlipaySignature.rsaCheckV1(Map<String, String> params, String publicKey, String charset, String sign_type)
+        boolean flag = AlipaySignature.rsaCheckV1(params, AliPay.getAlipayPublicKey(), AlipayConstants.CHARSET_UTF8, AlipayConstants.SIGN_TYPE_RSA2);
+
+        System.out.println("zhifubao xxxxxxx");
+
+        PrintWriter out = response.getWriter();
+        out.println("success"); // 请不要修改或删除
+        out.flush();
+
+    }
+
+
+
+}

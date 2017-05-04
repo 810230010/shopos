@@ -22,4 +22,11 @@ public class POJOConstants {
     //等待认证
     public final static String WAIT_AUTH = "WAIT_AUTH";
 
+
+    //商品类型
+    //活动商品
+    public final static String GOODS_TYPE_ACTIVITY = "GOODS_TYPE_ACTIVITY";
+    //普通商品
+    public final static String GOODS_TYPE_NORMAL = "GOODS_TYPE_NORMAL";
+
 }

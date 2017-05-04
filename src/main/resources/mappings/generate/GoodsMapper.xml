@@ -45,6 +45,9 @@
     <result column="attrs" property="attrs" jdbcType="VARCHAR" />
     <result column="is_platform" property="isPlatform" jdbcType="BIT" />
     <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="check" property="check" jdbcType="BIT" />
+    <result column="sell_time_begin" property="sellTimeBegin" jdbcType="TIMESTAMP" />
+    <result column="sell_time_end" property="sellTimeEnd" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.Goods" extends="BaseResultMap" >
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
@@ -55,7 +58,7 @@
     click, salenum, collect, storage, images, title_img, state, verify, create_time, 
     edit_time, is_new, type, second_hand, activity_id, activity_type, is_virtual, virtual_invalid_refund, 
     is_appoint, is_presell, is_own_shop, vat, commend, evaluation_good_star, evaluation_count, 
-    del_flag, attrs, is_platform, area
+    del_flag, attrs, is_platform, area, check, sell_time_begin, sell_time_end
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -89,8 +92,8 @@
       is_appoint, is_presell, is_own_shop, 
       vat, commend, evaluation_good_star, 
       evaluation_count, del_flag, attrs, 
-      is_platform, area, goods_body
-      )
+      is_platform, area, check, sell_time_begin, 
+      sell_time_end, goods_body)
     values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{adWord,jdbcType=VARCHAR}, 
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{goodsCategoryId,jdbcType=INTEGER}, 
       #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{carriage,jdbcType=DECIMAL}, 
@@ -104,8 +107,8 @@
       #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, 
       #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
       #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{attrs,jdbcType=VARCHAR}, 
-      #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{goodsBody,jdbcType=LONGVARCHAR}
-      )
+      #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{check,jdbcType=BIT}, #{sellTimeBegin,jdbcType=TIMESTAMP}, 
+      #{sellTimeEnd,jdbcType=TIMESTAMP}, #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     <selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="AFTER" >
@@ -239,6 +242,15 @@
       <if test="area != null" >
         area,
       </if>
+      <if test="check != null" >
+        check,
+      </if>
+      <if test="sellTimeBegin != null" >
+        sell_time_begin,
+      </if>
+      <if test="sellTimeEnd != null" >
+        sell_time_end,
+      </if>
       <if test="goodsBody != null" >
         goods_body,
       </if>
@@ -369,6 +381,15 @@
       </if>
       <if test="area != null" >
         #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="check != null" >
+        #{check,jdbcType=BIT},
+      </if>
+      <if test="sellTimeBegin != null" >
+        #{sellTimeBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellTimeEnd != null" >
+        #{sellTimeEnd,jdbcType=TIMESTAMP},
       </if>
       <if test="goodsBody != null" >
         #{goodsBody,jdbcType=LONGVARCHAR},
@@ -504,6 +525,15 @@
       <if test="area != null" >
         area = #{area,jdbcType=VARCHAR},
       </if>
+      <if test="check != null" >
+        check = #{check,jdbcType=BIT},
+      </if>
+      <if test="sellTimeBegin != null" >
+        sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellTimeEnd != null" >
+        sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
+      </if>
       <if test="goodsBody != null" >
         goods_body = #{goodsBody,jdbcType=LONGVARCHAR},
       </if>
@@ -554,6 +584,9 @@
       attrs = #{attrs,jdbcType=VARCHAR},
       is_platform = #{isPlatform,jdbcType=BIT},
       area = #{area,jdbcType=VARCHAR},
+      check = #{check,jdbcType=BIT},
+      sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
+      sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
       goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -600,7 +633,10 @@
       del_flag = #{delFlag,jdbcType=BIT},
       attrs = #{attrs,jdbcType=VARCHAR},
       is_platform = #{isPlatform,jdbcType=BIT},
-      area = #{area,jdbcType=VARCHAR}
+      area = #{area,jdbcType=VARCHAR},
+      check = #{check,jdbcType=BIT},
+      sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
+      sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

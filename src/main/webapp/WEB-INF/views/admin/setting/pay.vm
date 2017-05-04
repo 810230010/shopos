@@ -1,0 +1,149 @@
+#parse("/admin/models/begin.vm")
+<link href="/assets/admin/css/plugins/sweetalert/sweetalert.css" media="all" rel="stylesheet" type="text/css"/>
+#parse("/admin/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>设置-支付设置</h2>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="tabs.html#tab-1">支付宝</a></li>
+                    <li class=""><a data-toggle="tab" href="tabs.html#tab-2">微信</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <form id="zhifubao-form" class="form-horizontal">
+                                <p>请填写支付宝配置 | <a href="https://doc.open.alipay.com" target="_blank">如何获取配置</a></p>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">APPID</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" placeholder="请填写APPID" id="appId" name="appId" value="$!{appId}" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">支付宝公钥</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" placeholder="请填写支付宝公钥" id="alipayPublicKey" name="alipayPublicKey" value="$!{alipayPublicKey}" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">应用私钥</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" placeholder="请填写应用私钥" id="appPrivateKey" name="appPrivateKey" value="$!{appPrivateKey}" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"></label>
+                                    <div class="col-lg-8">
+                                        <div class="switch">
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" #if ($alipayCheck == "true") checked #end class="onoffswitch-checkbox" id="zhifubao-check" name="zhifubao-check">
+                                                <label class="onoffswitch-label" for="zhifubao-check">
+                                                    <span class="onoffswitch-inner"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <div class="btn btn-sm btn-primary" id="zhifubao-submit">提交</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            <form id="zhifubao-form" class="form-horizontal">
+                                <p>请填写微信支付配置 | <a href="https://www.qiniu.com">如何获取配置</a></p>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">accessKey</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="请填写accessKey" id="accessKey" name="accessKey" value="$!{accessKey}" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">secretKey</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="请填写secretKey" id="secretKey" name="secretKey" value="$!{secretKey}" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">bucket(存储空间)</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="请填写bucket" id="bucket" name="bucket" value="$!{bucket}" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <div class="btn btn-sm btn-primary" id="zhifubao-submit">提交</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+<!-- Jquery Validate -->
+<script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
+
+<script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+
+<script>
+    $("#zhifubao-submit").on('click', function () {
+        var form = $("#zhifubao-form");
+        if(!form.valid()){
+            return ;
+        }
+        var check = 'false';
+        if($('#zhifubao-check').is(':checked')) {
+            check = 'true'
+        }
+
+        $.post("/admin/setting/updateAliPaySetting",
+                {
+                    alipayPublicKey: $("#alipayPublicKey").val(),
+                    appId: $("#appId").val(),
+                    appPrivateKey: $("#appPrivateKey").val(),
+                    alipayCheck: check,
+                },
+                function (data, status) {
+                    if (data.code == 200) {
+                        swal({
+                            title: "成功!",
+                            text: "支付宝配置修改成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    }else{
+                        swal({
+                            title: "失败!",
+                            text: "支付宝配置修改失败!",
+                            type: "error",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    }
+                });
+    });
+
+    $("#form").validate();
+</script>
+
+#parse("/admin/models/end.vm")

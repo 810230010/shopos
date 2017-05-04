@@ -32,4 +32,13 @@ public interface SettingService {
      * @param domain
      */
     void updateBucketSetting(String accessKey, String secretKey, String bucket, String domain);
+
+    /**
+     * 支付设置更新
+     * @param alipayPublicKey
+     * @param appId
+     * @param appPrivateKey
+     * @param alipayCheck
+     */
+    void updatePaySetting(String alipayPublicKey, String appId, String appPrivateKey, String alipayCheck);
 }

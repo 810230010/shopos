@@ -134,8 +134,8 @@
         },
     }).on('change', function (e) {
          $("#name").val($("#parentId").select2('data')[0].name);
-         $("#pic").src = $("#parentId").select2('data')[0].pic;
-         $("#categoryName").val($("#parentId").select2('data')[0].categoryName);
+        $("#pic").attr('src',$("#parentId").select2('data')[0].pic);
+        $("#categoryName").val($("#parentId").select2('data')[0].categoryName);
          brandId = $("#parentId").select2('data')[0].id;
         //this.value
     }).on('select', function (e) {
@@ -164,6 +164,10 @@
                     }
                 });
     });
-
+ ##　店铺添加品牌
+    $("#add").click(function(){
+        window.location.href = "/store/brand/addPage"
+    })
+    
 </script>
 #parse("/store/models/end.vm")

@@ -61,8 +61,6 @@
                 {"data":"brandId","width":"7%","title":"品牌序号","visible": false},
                 {"data":"name","width": "10%","title":"品牌名称","orderable": false},
                 {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
-                {"data":"sort","width": "10%","title":"排序","orderable": true},
-                {"data":"isRecommend","width": "10%","title":"是否推荐","orderable": true},
                 {
                     "data":"pic",
                     "width": "10%",
@@ -73,6 +71,8 @@
                         return html;
                     }
                 },
+                {"data":"storeName","width": "10%","title":"申请店铺","orderable": false},
+                {"data":"gradeId","width": "10%","title":"店铺等级","orderable": true},
                 {
                     "data":"brandId",
                     "width": "15%",
@@ -80,11 +80,14 @@
                     "orderable": false,
                     "render": function (data, type, row) {
                         return [
-                            '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
-                            '删除 <i class="fa fa-trash-o"></i>',
+                            '<a class="btn btn-danger btn-xs table-action reject" href="javascript:void(0)">',
+                            '拒绝 <i class="fa fa-trash-o"></i>',
                             '</a>',
-                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
-                            '编辑 <i class="fa fa-edit"></i>',
+                            '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)">',
+                            '通过 <i class="fa fa-edit"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
+                            '店铺详情 <i class="fa fa-edit"></i>',
                             '</a>',
                         ].join('');
                     }},
@@ -126,14 +129,14 @@
         });
         var table = $('#brandTable').DataTable();
 
-        //修改
+        //拒绝
         table.on( 'click', '.edit', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
             window.location.href = "/admin/brand/editPage?brandId="+data.brandId;
         });
 
-        //删除一条记录
+        //通过
         table.on('click', '.delete', function() {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
@@ -162,33 +165,14 @@
 
         });
 
-        table.on( 'click', '.getsub', function () {
-            rank = rank +1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            $('#rank').html("商品分类列表("+rank+"级)")
+        //跳转到商家详情页
+        table.on( 'click', '.detail', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-
-            goodsCategoryId = data.goodsCategoryId;
-            upParentId[rank] = data.goodsCategoryId;
-            table = $('#brandTable').DataTable().ajax.reload();
+            window.location.href = "/admin/store/detailPage?memberId="+data.memberId;
         });
 
-        $("#back").on('click', function () {
-            rank = rank - 1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            parentId = upParentId[rank];
-            $('#rank').html("商品分类列表("+rank+"级)")
-            table = $('#brandTable').DataTable().ajax.reload();
-        });
+
     });
 </script>
 

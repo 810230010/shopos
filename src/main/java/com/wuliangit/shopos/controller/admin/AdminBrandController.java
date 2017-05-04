@@ -145,4 +145,22 @@ public class AdminBrandController {
         brandService.deleteBrandByID(brandId);
         return result;
     }
+
+    /**
+     * 跳转到validate_brand.vm
+     * @return
+     */
+    @RequestMapping("/validateBrandPage")
+    public String jumpToValidateBrandPage(){
+        return "/admin/brand/validate_brand";
+    }
+
+    /**
+     * 跳转到validate_store_brand.vm
+     * @return
+     */
+    @RequestMapping("/validateStoreBrandPage")
+    public String turnToValidateStoreBrandPage(){
+        return "/admin/brand/validate_store_brand";
+    }
 }

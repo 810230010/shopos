@@ -4,7 +4,7 @@ import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
 /**
- * Created by 26229 on 2017/5/1.
+ * Created by pangweichao on 2017/5/1.
  */
 public class MailAuthenticator extends Authenticator {
 

@@ -5,6 +5,7 @@ import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.service.MailService;
 import com.wuliangit.shopos.service.SettingService;
+import org.apache.velocity.VelocityContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,15 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Created by 26229 on 2017/4/30.
+ * Created by pangweichao on 2017/4/30.
  */
 @Controller
 @RequestMapping("/admin/setting")
 public class AdminSettingController {
 
-    @Autowired
-    private MailService mailService;
     @Autowired
     private SettingService settingService;
 
@@ -110,21 +112,6 @@ public class AdminSettingController {
     public Object updateAliPaySetting(String alipayPublicKey, String appId, String appPrivateKey,String alipayCheck) {
         RestResult result = new RestResult();
         settingService.updatePaySetting(alipayPublicKey, appId, appPrivateKey, alipayCheck);
-        return result;
-    }
-
-    /**
-     * 测试邮件的发送
-     *
-     * @param user
-     * @param templt
-     * @return
-     */
-    @RequestMapping(value = "/testSend", method = RequestMethod.POST)
-    @ResponseBody
-    public RestResult testSend(String user, String templt) {
-        RestResult result = new RestResult();
-        mailService.sendMail(user, templt);
         return result;
     }
 

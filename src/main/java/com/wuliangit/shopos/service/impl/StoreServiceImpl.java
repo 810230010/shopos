@@ -5,6 +5,7 @@ import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
+import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.model.StoreBrand;
@@ -14,6 +15,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -83,5 +85,15 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public int deleteStoreBrand(Integer id) {
         return storeMapper.deleteStoreBrand(id);
+    }
+
+    @Override
+    public ArrayList<Brand> getAllBrands() {
+        return storeMapper.queryAllBrands();
+    }
+
+    @Override
+    public int addStoreBrand(Integer storeId, Integer brandId) {
+        return storeMapper.addStoreBrand(storeId, brandId);
     }
 }

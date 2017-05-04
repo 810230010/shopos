@@ -2,6 +2,8 @@ package com.wuliangit.shopos.controller.store;
 
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.controller.PageResult;
+import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreBrand;
 import com.wuliangit.shopos.model.StoreUser;
@@ -80,4 +82,42 @@ public class StoreBrandController {
         storeService.deleteStoreBrand(id);
         return "ok";
     }
+
+    /**
+     * 跳转到申请入驻页面
+     * @return
+     */
+    @RequestMapping("/joinPage")
+    public String jumpToDetailPage() {
+        return "/store/brand/joinBrand";
+    }
+
+    /**
+     * 获取所有品牌
+     * @return
+     */
+    @RequestMapping("/allBrands")
+    @ResponseBody
+   public Object getAllBrands(){
+        RestResult result = new RestResult();
+        List<Brand> brands = storeService.getAllBrands();
+        result.add("brands", brands);
+        return result;
+   }
+
+    /**
+     * 店铺申请入驻品牌
+     * @return
+     */
+    @RequestMapping("/applyForJoinBrand")
+    @ResponseBody
+    public Object applyForJoinBrand(Integer brandId){
+       RestResult result = new RestResult();
+       StoreUser store = (StoreUser) SecurityUtils.getSubject()
+               .getSession()
+               .getAttribute(CoreConstants.SESSION_CURRENT_STORE);
+       Integer storeId = store.getStoreId();
+       storeService.addStoreBrand(storeId, brandId);
+       return result;
+   }
 }

@@ -29,9 +29,10 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
                                                      Integer brandId,
                                                      Integer goodsCategoryId,
                                                      Integer storeId,
-                                                     Integer storeGoodsCategoryId) {
-        PageHelper.startPage(page,pageSize);
-        ArrayList<ApiGoodsListDTO> goodses = goodsMapper.apiGoodsSearch(searchKey,order,brandId,goodsCategoryId,storeId,storeGoodsCategoryId);
+                                                     Integer storeGoodsCategoryId,
+                                                     String type) {
+        PageHelper.startPage(page, pageSize);
+        ArrayList<ApiGoodsListDTO> goodses = goodsMapper.apiGoodsSearch(searchKey, order, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type);
         return goodses;
     }
 }

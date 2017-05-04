@@ -33,6 +33,7 @@
                     <li><a href="/admin/setting/mailSettingPage">邮件服务设置</a></li>
                     <li><a href="/admin/goodsCategory/listPage">短信服务设置</a></li>
                     <li><a href="/admin/setting/bucketSettingPage">文件存储设置</a></li>
+                    <li><a href="/admin/setting/paySettingPage">支付设置</a></li>
                 </ul>
             </li>
             <li>

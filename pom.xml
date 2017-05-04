@@ -312,6 +312,18 @@
         </dependency>
         <!--短信发送 end-->
 
+
+        <!--支付宝-->
+        <dependency>
+            <groupId>com.alipay</groupId>
+            <artifactId>alipay</artifactId>
+            <version>1.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/alipay-sdk-java20170411150054.jar</systemPath>
+        </dependency>
+        <!--支付宝end-->
+
+
         <!--邮件发送-->
         <dependency>
             <groupId>javax.mail</groupId>

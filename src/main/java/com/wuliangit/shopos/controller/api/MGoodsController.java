@@ -30,12 +30,14 @@ public class MGoodsController {
 
     /**
      * 商品搜索
-     * @param page    页码
-     * @param pageSize 页大小
-     * @param searchKey 搜索值
-     * @param order   排序类型
-     * @param brandId   品牌类型id
-     * @param goodsCategoryId   商品分类id
+     *
+     * @param page            页码
+     * @param pageSize        页大小
+     * @param searchKey       搜索值
+     * @param order           排序类型
+     * @param brandId         品牌类型id
+     * @param goodsCategoryId 商品分类id
+     * @param type            商品类型 GOODS_TYPE_ACTIVITY(活动商品);GOODS_TYPE_NORMAL(普通商品)
      * @return
      */
     @RequestMapping("/search")
@@ -46,25 +48,27 @@ public class MGoodsController {
                               @RequestParam(value = "brandId", required = false) Integer brandId,
                               @RequestParam(value = "goodsCategoryId", required = false) Integer goodsCategoryId,
                               @RequestParam(value = "storeId", required = false) Integer storeId,
-                              @RequestParam(value = "storeGoodsCategoryId", required = false)Integer storeGoodsCategoryId) {
+                              @RequestParam(value = "type", required = false) String type,
+                              @RequestParam(value = "storeGoodsCategoryId", required = false) Integer storeGoodsCategoryId) {
         RestResult result = new RestResult();
-        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.apiGoodsSearch(page,pageSize,searchKey,order,brandId,goodsCategoryId,storeId,storeGoodsCategoryId);
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.apiGoodsSearch(page, pageSize, searchKey, order, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type);
         result.add("goods", goods);
         return result;
     }
 
     /**
      * 商品详情接口
+     *
      * @param goodsId
      * @return
      */
     @RequestMapping("/get")
-    public Object getGoods(Integer goodsId){
+    public Object getGoods(Integer goodsId) {
         RestResult result = new RestResult();
         Goods goods = goodsService.getGoodsById(goodsId);
         List<GoodsSku> goodsSku = goodsService.getGoodsSkuByGoodsId(goodsId);
-        result.add("goods",goods);
-        result.add("goodsSku",goodsSku);
+        result.add("goods", goods);
+        result.add("goodsSku", goodsSku);
         return result;
     }
 

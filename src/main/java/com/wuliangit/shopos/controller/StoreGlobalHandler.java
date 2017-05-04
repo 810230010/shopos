@@ -6,12 +6,14 @@ import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 后台管理界面异常捕获
@@ -28,6 +30,19 @@ public class StoreGlobalHandler {
         return storeUser;
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        System.out.println("============应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器");
+        DateFormat defaultFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        CustomDateEditor defaultFormatEditor = new CustomDateEditor(defaultFormat, true);
+
+        DateFormat dateFormatxxxx = new SimpleDateFormat("MMM d, YYYY");
+        CustomDateEditor xxxxEditor = new CustomDateEditor(dateFormatxxxx, true);
+
+
+        binder.registerCustomEditor(Date.class, defaultFormatEditor);
+        binder.registerCustomEditor(Date.class, "xxxxx", xxxxEditor);
+    }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public String errorHandlerOverJson(HttpServletRequest request, ResourceNotFoundException exception) {

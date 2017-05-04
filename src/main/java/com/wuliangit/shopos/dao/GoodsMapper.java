@@ -6,7 +6,6 @@ import com.wuliangit.shopos.entity.Goods;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface GoodsMapper extends BaseMapper<Goods, Integer> {
 
@@ -18,6 +17,7 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @param goodsCategoryId
      * @param storeId
      * @param storeGoodsCategoryId
+     * @param type
      * @return
      */
     ArrayList<ApiGoodsListDTO> apiGoodsSearch(@Param("searchKey") String searchKey,
@@ -25,7 +25,8 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
                                               @Param("brandId") Integer brandId,
                                               @Param("goodsCategoryId") Integer goodsCategoryId,
                                               @Param("storeId") Integer storeId,
-                                              @Param("storeGoodsCategoryId") Integer storeGoodsCategoryId);
+                                              @Param("storeGoodsCategoryId") Integer storeGoodsCategoryId,
+                                              @Param("type") String type);
 
     /**
      * 后台商品搜索

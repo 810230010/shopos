@@ -83,8 +83,18 @@
             <li>
                 <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">品牌管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="typography.html">品牌列表</a></li>
-                    <li><a href="typography.html">待审核列表</a></li>
+                    <li><a href="/admin/brand/brandListPage">品牌列表</a></li>
+                    <li>
+                        <a href="widgets.html#">待审核列表<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="/admin/brand/validateBrandPage">店铺申请添加品牌列表</a>
+                            </li>
+                            <li>
+                                <a href="/admin/brand/validateStoreBrandPage">店铺申请入驻品牌列表</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>

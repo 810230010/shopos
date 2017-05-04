@@ -6,10 +6,7 @@
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>商品-商品品牌</h2>
-        <p>
-            <a type="button" class="btn btn-w-m btn-primary" href="/admin/brand/addPage">添加商品品牌</a>
-        </p>
+        <h2>审核品牌</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -17,7 +14,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">商品品牌列表 </h5>
+                    <h5 id="rank">审核品牌</h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -84,10 +81,10 @@
                     "render": function (data, type, row) {
                         return [
                             '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
-                            '删除 <i class="fa fa-trash-o"></i>',
+                            '拒绝 <i class="fa fa-trash-o"></i>',
                             '</a>',
                             '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
-                            '编辑 <i class="fa fa-edit"></i>',
+                            '通过 <i class="fa fa-edit"></i>',
                             '</a>',
                         ].join('');
                     }},

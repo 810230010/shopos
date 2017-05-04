@@ -10,6 +10,7 @@
                 ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
                 or keywords like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
             </if>
+            and brand_apply="PASS"
         </where>
         order by
         <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">

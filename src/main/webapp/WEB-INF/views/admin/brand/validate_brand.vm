@@ -1,13 +1,20 @@
-#parse("/store/models/begin.vm")
+#parse("/admin/models/begin.vm")
 
 <link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-#parse("/store/models/header.vm")
+<link href="/assets/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
+<link href="/assets/admin/css/plugins/layui/layer.css" rel="stylesheet">
+#parse("/admin/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>审核品牌</h2>
+    </div>
+</div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">店铺品牌列表</h5>
+                    <h5 id="rank">审核品牌</h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -24,9 +31,12 @@
         </div>
     </div>
 </div>
-#parse("/store/models/footer.vm")
+#parse("/admin/models/footer.vm")
 
-<script src="/assets/admin/js/plugins/dataTables/datatables.min.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
+<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/layUI/layer.js"></script>
 <script>
 
     var rank = 1;
@@ -35,19 +45,21 @@
     $(document).ready(function () {
         var t = $('#brandTable').DataTable({
             "ajax": {
-                'url': '/store/brand/search',
+                'url': '/admin/brand/search',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
                     param.pageSize = d.length;
                     param.draw = d.draw;
+                    param.orderColumn = d.columns[d.order[0]['column']]['data'];
+                    param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
                     return param;
                 },
             },
             "columns": [
                 {"data":"brandId","width":"7%","title":"品牌序号","visible": false},
-                {"data":"brandName","width": "10%","title":"品牌名称","orderable": false},
+                {"data":"name","width": "10%","title":"品牌名称","orderable": false},
                 {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
                 {
                     "data":"pic",
@@ -55,36 +67,29 @@
                     "title":"品牌图片",
                     "orderable": false,
                     "render": function (data, type, row) {
-                        var html = '<div class="pull-left"><img src="' + row.pic + '" style="width: 100px;height: 100px;"></div>';
+                        var html = '<div class="pull-left"><img src="' + row.pic + '" style="width: 60px;height: 60px;"></div>';
                         return html;
                     }
                 },
-                {"data":"passed","width": "10%","title":"是否入驻成功","orderable": false},
-                {"data":"isOnshelf","width": "10%","title":"上下架状态","orderable": false},
+                {"data":"storeName","width": "10%","title":"申请店铺","orderable": false},
+                {"data":"gradeId","width": "10%","title":"店铺等级","orderable": true},
                 {
-                    "data":"id",
+                    "data":"brandId",
                     "width": "15%",
                     "title":"操作",
                     "orderable": false,
                     "render": function (data, type, row) {
-                        var aTxt = row.isOnshelf == "已上架"?"下架":"上架";
-                        if(row.isOnshelf != ""){
-                            return [
-                                '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
-                                '删除品牌<i class="fa fa-trash-o"></i>',
-                                '</a>',
-                                '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
-                                aTxt,'<i class="fa fa-edit"></i>',
-                                '</a>'
-                            ].join('');
-                        } else{
-                            return [
-                                '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
-                                '删除品牌<i class="fa fa-trash-o"></i>',
-                                '</a>'
-                            ].join('');
-                        }
-
+                        return [
+                            '<a class="btn btn-danger btn-xs table-action reject" href="javascript:void(0)">',
+                            '拒绝 <i class="fa fa-trash-o"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)">',
+                            '通过 <i class="fa fa-edit"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
+                            '店铺详情 <i class="fa fa-edit"></i>',
+                            '</a>',
+                        ].join('');
                     }},
             ],
             "searching": true,
@@ -121,70 +126,54 @@
                     cell.innerHTML =  i + 1;
                 });
             },
-
         });
-
         var table = $('#brandTable').DataTable();
-        //上下架
+
+        //拒绝
         table.on( 'click', '.edit', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            $.ajax({
-                url: "/store/brand/updateBrandStatus",
-                data : {"id":data.id, "status":"已"+$(".edit").text()},
-                success:function(result) {
-                    if(result == "ok"){
-                        swal({
-                            title: "成功!",
-                            text: "商品分类修改成功!",
-                            type: "success",
-                            showConfirmButton: false,
-                            timer: 2000,
-                        });
-                        setTimeout(function () {
-                            window.location.href = "/store/brand/listPage";
-                        }, 2000);
-                    }
-                },
-                error:function(result) {
-                    alert("系统出错")
-                }
-         });
+            window.location.href = "/admin/brand/editPage?brandId="+data.brandId;
         });
-//
-        //删除品牌
+
+        //通过
         table.on('click', '.delete', function() {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            swal({
-                        title: "确定删除该品牌?",
-                        text: "删除该品牌不可恢复!",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确认",
-                        closeOnConfirm: true
+            layer.confirm('确定删除改品牌?!', {icon: 5,btnAlign:'c',title:'提示'}, function(index){
+                //do something
+                $.ajax({
+                    url: "/admin/brand/deleteBrand",
+                    type: "get",
+                    data: {"brandId": data.brandId},
+                    success:function(result) {
+                        if (result.code == 200) {
+                            layer.open({
+                                title: '提示'
+                                ,content: '删除成功!!'
+                            })
+                            window.location.reload();
+                        }
                     },
-                    function(){
-                        $.ajax({
-                            url: "/store/brand/deleteBrand",
-                            type: "get",
-                            data: {"id": data.id},
-                            success:function(result) {
-                                if(result == "ok"){
-                                    swal("Deleted!", "Your brand has been deleted.", "success");
-                                }
-                            },
-                            error:function(result) {
-                                alert("系统出错!")
-                            }
-                        });
+                    error:function(result) {
+                        alert("系统出错!")
+                    }
+                });
+                layer.close(index);
+            });
 
-                    });
+
+        });
+
+        //跳转到商家详情页
+        table.on( 'click', '.detail', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            window.location.href = "/admin/store/detailPage?memberId="+data.memberId;
         });
 
 
     });
 </script>
 
-#parse("/store/models/end.vm")
+#parse("/admin/models/end.vm")

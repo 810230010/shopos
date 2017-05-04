@@ -1,14 +1,14 @@
-#parse("/admin/models/begin.vm")
+#parse("/store/models/begin.vm")
 <link href="/assets/admin/css/plugins/select2/select2.min.css" rel="stylesheet">
 <link href="/assets/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
 <link href="/assets/admin/css/plugins/magiccheck/magic-check.css" rel="stylesheet" type="text/css">
 <!-- 文件上传 -->
 <link href="/assets/admin/css/plugins/fileinput/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
 
-#parse("/admin/models/header.vm")
+#parse("/store/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>商品 - 添加商品品牌</h2>
+        <h2>店铺 - 申请添加商品品牌</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -42,13 +42,7 @@
                             </div>
                         </div>
 
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">排序</label>
-                            <div class="col-sm-7">
-                                <input id="sort" name="sort" class="form-control" type="text" />
-                            </div>
-                        </div>
+
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">首字母</label>
@@ -57,25 +51,12 @@
                             </div>
                         </div>
 
+
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">加入推荐</label>
-                            <div class="col-lg-7">
-                                <label>
-                                    <input id="r3" name="isRec" type="radio" class="magic-radio" value="1"/>
-                                    <label for="r3">是</label>
-                                </label>
-                                <label style="display:inline-block;margin-left: 15px">
-                                    <input id="r4" name="isRec" type="radio" class="magic-radio" value="0"/>
-                                    <label for="r4">否</label>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <div class="col-sm-4 col-sm-offset-6">
-                                <div class="btn btn-danger" type="submit" id="submit">确定</div>
-                                <div id="submit" class="btn btn-info" type="reset">重置</div>
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <div class="btn btn-danger" type="submit" id="submit">提交申请</div>
+                                <input type="reset" class="btn btn-success" value="重置"/>
                             </div>
                         </div>
                     </form>
@@ -84,7 +65,7 @@
         </div>
     </div>
 </div>
-#parse("/admin/models/footer.vm")
+#parse("/store/models/footer.vm")
 <!-- Select2 -->
 <script src="/assets/admin/js/plugins/select2/select2.full.min.js"></script>
 <script src="/assets/admin/js/plugins/select2/zh-CN.js"></script>
@@ -101,7 +82,7 @@
      function check(brandName) {
          var flag = false;
          $.ajax({
-             url: "/admin/brand/checkBrandName",
+             url: "/store/brand/checkBrandName",
              type: "post",
              async: false,
              data:{"brandName": brandName},
@@ -142,27 +123,26 @@
         img = data.response.key;
         console.log(img);
     }).on("filebatchuploadcomplete", function (event, data, previewId, index) {
-        $.post("/admin/brand/addBrand",
+        $.post("/store/brand/addBrand",
                 {
                     name: $("#name").val(),
-                    sort: $("#sort").val(),
                     categoryName: $("#parentId").select2('data')[0].name,
                     goodsCategoryId: $("#parentId").select2('data')[0].id,
-                    isRecommend: $("input[name='isRec']:checked").val() == 0?false:true,
                     initial:$("#initial").val(),
-                    pic: img
+                    pic: img,
+                    brandApply: "APPLYING"
                 },
                 function (data, status) {
                     if (data.code == 200) {
                         swal({
                             title: "成功!",
-                            text: "商品分类添加成功!",
+                            text: "品牌添加成功!",
                             type: "success",
                             showConfirmButton: false,
                             timer: 2000,
                         });
                         setTimeout(function () {
-                            window.location.href = "/admin/brand/addPage";
+                            window.location.href = "/store/brand/addPage";
                         }, 2000);
                     }
                 });
@@ -170,9 +150,8 @@
     //分类列表下拉框
     $(".parent_select").select2({
         minimumResultsForSearch: -1,
-        placeholder:"aaa",
         ajax: {
-            url: "/admin/goodsCategory/get/all",
+            url: "/store/brand/get/all",
             dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -221,10 +200,10 @@
         if(check($("#name").val()) == true){
             $('#upload-image').fileinput('upload');
         }else{
-            alert("请先解决你的错误再提交!")
+            sweetAlert("Oops...", "请先解决错误再提交", "error");
         }
 
     });
    
 </script>
-#parse("/admin/models/end.vm")
+#parse("/store/models/end.vm")

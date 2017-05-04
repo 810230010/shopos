@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.entity.Store;
@@ -61,9 +62,7 @@ public class StoreBrandController {
                                @RequestParam(value = "searchKey", required = false) String searchKey,
                                @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        StoreUser store = (StoreUser) SecurityUtils.getSubject()
-                .getSession()
-                .getAttribute(CoreConstants.SESSION_CURRENT_STORE);
+        StoreUser store = WebUtil.getCurrentStore();
         Integer storeId = store.getStoreId();
         List<StoreBrand> storeBrands = storeService.getStoreBrands(page, pageSize, searchKey, storeId);
         return new PageResult<StoreBrand>(storeBrands, draw);
@@ -123,9 +122,7 @@ public class StoreBrandController {
     @ResponseBody
     public Object applyForJoinBrand(Integer brandId){
        RestResult result = new RestResult();
-       StoreUser store = (StoreUser) SecurityUtils.getSubject()
-               .getSession()
-               .getAttribute(CoreConstants.SESSION_CURRENT_STORE);
+       StoreUser store = WebUtil.getCurrentStore();
        Integer storeId = store.getStoreId();
        storeService.addStoreBrand(storeId, brandId);
        return result;
@@ -180,9 +177,7 @@ public class StoreBrandController {
     @ResponseBody
     public Object addBrand(Brand brand){
         RestResult result = new RestResult();
-        StoreUser store = (StoreUser) SecurityUtils.getSubject()
-                .getSession()
-                .getAttribute(CoreConstants.SESSION_CURRENT_STORE);
+        StoreUser store = WebUtil.getCurrentStore();
         Integer storeId = store.getStoreId();
         brand.setStoreId(storeId);
         brand.setPic(QiNiuUtils.getRealUrl(brand.getPic()));

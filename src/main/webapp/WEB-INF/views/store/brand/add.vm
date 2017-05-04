@@ -129,7 +129,8 @@
                     categoryName: $("#parentId").select2('data')[0].name,
                     goodsCategoryId: $("#parentId").select2('data')[0].id,
                     initial:$("#initial").val(),
-                    pic: img
+                    pic: img,
+                    brandApply: "APPLYING"
                 },
                 function (data, status) {
                     if (data.code == 200) {

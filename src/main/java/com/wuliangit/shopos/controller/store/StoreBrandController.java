@@ -64,7 +64,7 @@ public class StoreBrandController {
                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         StoreUser store = WebUtil.getCurrentStore();
         Integer storeId = store.getStoreId();
-        List<StoreBrand> storeBrands = storeService.getStoreBrands(page, pageSize, searchKey, storeId);
+        List<StoreBrand> storeBrands = brandService.getStoreBrands(page, pageSize, searchKey, storeId);
         return new PageResult<StoreBrand>(storeBrands, draw);
     }
     /**
@@ -76,7 +76,7 @@ public class StoreBrandController {
     @RequestMapping("/updateBrandStatus")
     @ResponseBody
     public String changOnshelfStatus(Integer id, String status){
-        storeService.updateBrandStatus(id, status);
+        brandService.updateBrandStatus(id, status);
         return "ok";
     }
 
@@ -88,7 +88,7 @@ public class StoreBrandController {
     @RequestMapping("/deleteBrand")
     @ResponseBody
     public String deleteStoreBrand(Integer id) {
-        storeService.deleteStoreBrand(id);
+        brandService.deleteStoreBrand(id);
         return "ok";
     }
 
@@ -109,7 +109,7 @@ public class StoreBrandController {
     @ResponseBody
    public Object getAllBrands(){
         RestResult result = new RestResult();
-        List<Brand> brands = storeService.getAllBrands();
+        List<Brand> brands = brandService.getAllBrands();
         result.add("brands", brands);
         return result;
    }
@@ -124,7 +124,7 @@ public class StoreBrandController {
        RestResult result = new RestResult();
        StoreUser store = WebUtil.getCurrentStore();
        Integer storeId = store.getStoreId();
-       storeService.addStoreBrand(storeId, brandId);
+       brandService.addStoreBrand(storeId, brandId);
        return result;
    }
 

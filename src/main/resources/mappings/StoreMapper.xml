@@ -2,12 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.StoreMapper">
 
-    <!--插入一条店铺品牌记录-->
-    <insert id="addStoreBrand">
-             insert into t_store_brand(store_id, brand_id)
-             values (#{storeId}, #{brandId})
-    </insert>
-
     <!--通过用户名获取店铺简要信息-->
     <select id="getStoreUser" resultType="com.wuliangit.shopos.model.StoreUser">
         select s.store_id, s.name, s.logo, s.seller_nikename, s.member_id ,m.username, m.nikename, m.photo
@@ -15,40 +9,4 @@
         where s.member_id = #{memberId}
     </select>
 
-    <!-- 获得某个店铺品牌-->
-    <select id="getStoreBrands" resultType="com.wuliangit.shopos.model.StoreBrand">
-        select a.brand_id as brandId,a.`name` as brandName,a.category_name as categoryName,a.pic,b.id,b.is_onshelf as isOnshelf,b.passed
-        from t_brand a,t_store_brand b
-        <where>
-            a.brand_id=b.brand_id
-            <if test="searchKey != null and searchKey != '' ">
-                (and brandName like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
-                or passed like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
-                or isOnshelf like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
-            </if>
-            and a.brand_id=b.brand_id and b.store_id=#{storeId}
-        </where>
-        order by id
-    </select>
-
-
-    <!--修改店铺某品牌上下架状态 -->
-    <update id="updateBrandStatusByPrimaryKey">
-        update t_store_brand
-        set is_onshelf=#{status}
-        where id=#{id}
-    </update>
-
-    <!--删除店铺某个品牌-->
-    <delete id="deleteStoreBrand">
-        delete from t_store_brand
-        where id=#{id}
-    </delete>
-
-    <!--查询所有品牌-->
-    <select id="queryAllBrands" resultType="com.wuliangit.shopos.entity.Brand">
-        select brand_id,name,category_name,pic
-        from t_brand
-        where brand_apply="PASS"
-    </select>
 </mapper>

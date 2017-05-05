@@ -58,41 +58,5 @@ public interface StoreService {
      */
     int updateStore(Store store);
 
-    /**
-     * 获取店铺的品牌信息
-     * @param page
-     * @param pageSize
-     * @param searchKey
-     * @param storeId
-     * @return
-     */
-    List<StoreBrand> getStoreBrands(Integer page, Integer pageSize, String searchKey, Integer storeId);
-    /**
-     * 更改店铺某品牌上下架状态
-     * @param id
-     * @param status
-     * @return
-     */
-    int updateBrandStatus(Integer id, String status);
 
-    /**
-     * 删除店铺某个品牌
-     * @param id
-     * @return
-     */
-    int deleteStoreBrand(Integer id);
-
-    /**
-     * 查询所有品牌
-     * @return
-     */
-    ArrayList<Brand> getAllBrands();
-
-    /**
-     * 添加店铺申请入驻品牌记录
-     * @param storeId
-     * @param brandId
-     * @return
-     */
-    int addStoreBrand(Integer storeId, Integer brandId);
 }

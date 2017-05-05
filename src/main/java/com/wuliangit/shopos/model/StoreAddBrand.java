@@ -4,13 +4,23 @@ package com.wuliangit.shopos.model;
  * Created by JangJanPing on 2017/5/4.
  */
 public class StoreAddBrand {
+    private Integer id;
     private Integer brandId;
     private String brandName;
     private String categoryName;
     private String pic;
     private Integer storeId;
+    private Integer memberId;
     private String storeName;
     private Integer gradeId;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getBrandId() {
         return brandId;
@@ -66,5 +76,13 @@ public class StoreAddBrand {
 
     public void setGradeId(Integer gradeId) {
         this.gradeId = gradeId;
+    }
+
+    public Integer getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
     }
 }

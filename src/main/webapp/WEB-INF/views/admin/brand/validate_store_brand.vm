@@ -2,11 +2,10 @@
 
 <link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 <link href="/assets/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-<link href="/assets/admin/css/plugins/layui/layer.css" rel="stylesheet">
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>审核品牌</h2>
+        <h2>审核店铺入驻品牌</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -14,7 +13,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">审核品牌</h5>
+                    <h5 id="rank">审核店铺品牌</h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -34,18 +33,14 @@
 #parse("/admin/models/footer.vm")
 
 <script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
-<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/layUI/layer.js"></script>
 <script>
 
     var rank = 1;
-    var upParentId = [];
 
     $(document).ready(function () {
         var t = $('#brandTable').DataTable({
             "ajax": {
-                'url': '/admin/brand/search',
+                'url': '/admin/brand/searchStoreJoinBrands',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -58,11 +53,11 @@
                 },
             },
             "columns": [
-                {"data":"brandId","width":"7%","title":"品牌序号","visible": false},
-                {"data":"name","width": "10%","title":"品牌名称","orderable": false},
-                {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
-                {"data":"sort","width": "10%","title":"排序","orderable": true},
-                {"data":"isRecommend","width": "10%","title":"是否推荐","orderable": true},
+                {"data":"id","width":"7%","title":"品牌序号","visible": false},
+                {"data":"storeName","width": "10%","title":"店铺名称","orderable": false},
+                {"data":"categoryName","width": "10%","title":"店铺分类","orderable": false},
+                {"data":"gradeId","width": "10%","title":"店铺等级","orderable": false},
+                {"data":"brandName","width": "10%","title":"申请入驻的品牌","orderable": false},
                 {
                     "data":"pic",
                     "width": "10%",
@@ -74,18 +69,21 @@
                     }
                 },
                 {
-                    "data":"brandId",
-                    "width": "15%",
+                    "data":"memberId",
+                    "width": "20%",
                     "title":"操作",
                     "orderable": false,
                     "render": function (data, type, row) {
                         return [
-                            '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
+                            '<a class="btn btn-danger btn-xs table-action reject" href="javascript:void(0)">',
                             '拒绝 <i class="fa fa-trash-o"></i>',
                             '</a>',
-                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
+                            '<a class="table-button btn btn-primary btn-xs table-action pass" style="margin-left:20px" href="javascript:void(0)">',
                             '通过 <i class="fa fa-edit"></i>',
                             '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action detail" style="margin-left:20px" href="javascript:void(0)">',
+                            '店铺详情<i class="fa fa-edit"></i>',
+                            '</a>'
                         ].join('');
                     }},
             ],
@@ -126,69 +124,69 @@
         });
         var table = $('#brandTable').DataTable();
 
-        //修改
-        table.on( 'click', '.edit', function () {
+        //拒绝
+        table.on( 'click', '.reject', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/admin/brand/editPage?brandId="+data.brandId;
+            swal({
+                        title: "确定不通过?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确认",
+                        closeOnConfirm: true
+                    },
+                    function(){
+                        $.ajax({
+                            url: "/admin/brand/updateStoreJoinBrandStatus",
+                            type: "get",
+                            data: {"id": data.id, "status":"不通过"},
+                            success:function(result) {
+                                if(result == "ok"){
+                                    swal("拒绝申请", "已拒绝该店铺的入驻品牌申请", "success");
+                                    setTimeout(function () {
+                                        window.location.href = "/admin/brand/validateStoreBrandPage";
+                                    }, 2000);
+                                }
+                            },
+                            error:function(result) {
+                                alert("系统出错!")
+                            }
+                        });
+
+                    });
         });
 
-        //删除一条记录
-        table.on('click', '.delete', function() {
+        //申请通过
+        table.on('click', '.pass', function() {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            layer.confirm('确定删除改品牌?!', {icon: 5,btnAlign:'c',title:'提示'}, function(index){
-                //do something
                 $.ajax({
-                    url: "/admin/brand/deleteBrand",
+                    url: "/admin/brand/updateStoreJoinBrandStatus",
                     type: "get",
-                    data: {"brandId": data.brandId},
+                    data: {"id": data.id, "status":"通过"},
                     success:function(result) {
-                        if (result.code == 200) {
-                            layer.open({
-                                title: '提示'
-                                ,content: '删除成功!!'
-                            })
-                            window.location.reload();
+                        if (result == "ok") {
+                            swal("通过申请", "已通过该店铺的入驻品牌申请", "success");
+                            setTimeout(function () {
+                                window.location.href = "/admin/brand/validateStoreBrandPage";
+                            }, 2000);
                         }
                     },
                     error:function(result) {
                         alert("系统出错!")
                     }
                 });
-                layer.close(index);
-            });
-
 
         });
-
-        table.on( 'click', '.getsub', function () {
-            rank = rank +1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            $('#rank').html("商品分类列表("+rank+"级)")
+        //店铺详情
+        table.on( 'click', '.detail', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-
-            goodsCategoryId = data.goodsCategoryId;
-            upParentId[rank] = data.goodsCategoryId;
-            table = $('#brandTable').DataTable().ajax.reload();
+            window.location.href = "/admin/store/detailPage?memberId="+data.memberId;
         });
 
-        $("#back").on('click', function () {
-            rank = rank - 1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            parentId = upParentId[rank];
-            $('#rank').html("商品分类列表("+rank+"级)")
-            table = $('#brandTable').DataTable().ajax.reload();
-        });
+
     });
 </script>
 

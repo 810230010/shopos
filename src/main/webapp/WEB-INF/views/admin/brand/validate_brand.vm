@@ -2,7 +2,6 @@
 
 <link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 <link href="/assets/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-<link href="/assets/admin/css/plugins/layui/layer.css" rel="stylesheet">
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -34,9 +33,6 @@
 #parse("/admin/models/footer.vm")
 
 <script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
-<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/layUI/layer.js"></script>
 <script>
 
     var rank = 1;
@@ -59,8 +55,6 @@
             },
             "columns": [
                 {"data":"brandId","width":"7%","title":"品牌序号","visible": false},
-                {"data":"brandName","width": "10%","title":"品牌名称","orderable": false},
-                {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
                 {
                     "data":"pic",
                     "width": "10%",
@@ -71,10 +65,12 @@
                         return html;
                     }
                 },
+                {"data":"brandName","width": "10%","title":"品牌名称","orderable": false},
+                {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
                 {"data":"storeName","width": "10%","title":"申请店铺","orderable": false},
                 {"data":"gradeId","width": "10%","title":"店铺等级","orderable": true},
                 {
-                    "data":"brandId",
+                    "data":"memberId",
                     "width": "15%",
                     "title":"操作",
                     "orderable": false,
@@ -83,10 +79,10 @@
                             '<a class="btn btn-danger btn-xs table-action reject" href="javascript:void(0)">',
                             '拒绝 <i class="fa fa-trash-o"></i>',
                             '</a>',
-                            '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)">',
+                            '<a class="table-button btn btn-primary btn-xs table-action pass" style=margin-left:10px; href="javascript:void(0)">',
                             '通过 <i class="fa fa-edit"></i>',
                             '</a>',
-                            '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
+                            '<a class="table-button btn btn-primary btn-xs table-action detail" style="margin-left:10px" href="javascript:void(0)">',
                             '店铺详情 <i class="fa fa-edit"></i>',
                             '</a>',
                         ].join('');
@@ -111,7 +107,6 @@
                     customize: function (win){
                         $(win.document.body).addClass('white-bg');
                         $(win.document.body).css('font-size', '10px');
-
                         $(win.document.body).find('table')
                                 .addClass('compact')
                                 .css('font-size', 'inherit');
@@ -127,40 +122,71 @@
                 });
             },
         });
+
         var table = $('#brandTable').DataTable();
 
+        // Apply the search
+        table.columns().eq( 0 ).each( function ( colIdx ) {//当搜索框中输入内容时动态重绘表格
+            $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+                table
+                        .column( colIdx )
+                        .search( this.value )
+                        .draw();
+            } );
+        } );
         //拒绝
-        table.on( 'click', '.edit', function () {
+        table.on( 'click', '.reject', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/admin/brand/editPage?brandId="+data.brandId;
+            swal({
+                        title: "确定不通过?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确认",
+                        closeOnConfirm: true
+                    },
+                    function(){
+                        $.ajax({
+                            url: "/admin/brand/updateStatus",
+                            type: "get",
+                            data: {"brandId": data.brandId, "status":"NOTPASS"},
+                            success:function(result) {
+                                if(result == "ok"){
+                                    swal("拒绝申请", "已拒绝该店铺的添加品牌申请", "success");
+                                    setTimeout(function () {
+                                        window.location.href = "/admin/brand/validateBrandPage";
+                                    }, 2000);
+                                }
+                            },
+                            error:function(result) {
+                                alert("系统出错!")
+                            }
+                        });
+
+                    });
         });
 
         //通过
-        table.on('click', '.delete', function() {
+        table.on('click', '.pass', function() {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            layer.confirm('确定删除改品牌?!', {icon: 5,btnAlign:'c',title:'提示'}, function(index){
-                //do something
                 $.ajax({
-                    url: "/admin/brand/deleteBrand",
+                    url: "/admin/brand/updateStatus",
                     type: "get",
-                    data: {"brandId": data.brandId},
+                    data: {"brandId": data.brandId, "status":"PASS"},
                     success:function(result) {
-                        if (result.code == 200) {
-                            layer.open({
-                                title: '提示'
-                                ,content: '删除成功!!'
-                            })
-                            window.location.reload();
+                        if (result == "ok") {
+                            swal("通过申请", "已通过该店铺的添加品牌申请", "success");
+                            setTimeout(function () {
+                                window.location.href = "/admin/brand/brandListPage";
+                            }, 2000);
                         }
                     },
                     error:function(result) {
                         alert("系统出错!")
                     }
                 });
-                layer.close(index);
-            });
 
 
         });

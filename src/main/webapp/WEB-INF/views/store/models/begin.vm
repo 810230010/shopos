@@ -15,6 +15,8 @@
     <link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/admin/font-awesome/css/font-awesome.css" rel="stylesheet">
 
+    <!-- Sweet Alert -->
+    <link href="/assets/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- Toastr style -->
     <link href="/assets/admin/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 

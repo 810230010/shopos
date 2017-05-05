@@ -3,9 +3,8 @@ package com.wuliangit.shopos.controller.admin;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
-import com.wuliangit.shopos.service.MailService;
+import com.wuliangit.shopos.dto.SettingDTO;
 import com.wuliangit.shopos.service.SettingService;
-import org.apache.velocity.VelocityContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by pangweichao on 2017/4/30.
@@ -112,6 +110,24 @@ public class AdminSettingController {
     public Object updateAliPaySetting(String alipayPublicKey, String appId, String appPrivateKey,String alipayCheck) {
         RestResult result = new RestResult();
         settingService.updatePaySetting(alipayPublicKey, appId, appPrivateKey, alipayCheck);
+        return result;
+    }
+
+    /**
+     * 获取邮箱设置的各项参数
+     * @return
+     */
+    @RequestMapping("/getMailSetting")
+    @ResponseBody
+    public Object getMailSetting(){
+        RestResult result = new RestResult();
+        List<SettingDTO> info = settingService.getMailSetting();
+        if(info == null){
+            result.put("code",RestResult.CODE_SERVERERROR);
+            result.put("msg",RestResult.MSG_ERROR);
+        }else{
+            result.put("data",info);
+        }
         return result;
     }
 

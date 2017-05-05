@@ -25,4 +25,9 @@ public class MailServiceImpl implements MailService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void sendForegetPass(String to) {
+
+    }
 }

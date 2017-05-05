@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.StoreDetailDTO;
+import com.wuliangit.shopos.dto.StorePageListDTO;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
@@ -58,5 +60,30 @@ public interface StoreService {
      */
     int updateStore(Store store);
 
+    /**
+     * 获取商家列表的数据
+     * @param page
+     * @param pageSize
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    List<StorePageListDTO> getStoreList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
+
+    /**
+     * 更改店铺状态
+     * @param storeId
+     * @param state
+     * @return
+     */
+    Integer updateStoreState(Integer storeId, String state);
+
+    /**
+     * 获取商家详情
+     * @param storeId
+     * @return
+     */
+    StoreDetailDTO storeDetailPage(Integer storeId);
 
 }

@@ -9,4 +9,34 @@
         where s.member_id = #{memberId}
     </select>
 
+    <!--获取商家列表数据-->
+    <select id="getStoreList" resultType="com.wuliangit.shopos.dto.StorePageListDTO">
+        select store_id,name,state,create_time,seller_nikename,type
+        from t_store
+        <where>
+            state = "OPEN" OR state = "CLOSE"
+            <if test="searchKey != null and searchKey != '' ">
+                and ( q.title like '%${searchKey}%')
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        create_time desc
+    </select>
+
+    <!--更改商家状态-->
+    <update id="updateStoreState">
+        UPDATE t_store
+        SET state = #{state}
+        where store_id = #{storeId}
+    </update>
+
+    <!--获取商家详情-->
+    <select id="storeDetailPage" resultType="com.wuliangit.shopos.dto.StoreDetailDTO">
+        select name,grade_id,member_id,type,store_company_name,address,state,create_time,banner,phone,credit,live_store_name,live_store_address
+        from t_store
+        where store_id = #{storeId}
+    </select>
 </mapper>

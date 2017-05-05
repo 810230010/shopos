@@ -2,9 +2,12 @@ package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
+import com.wuliangit.shopos.dto.StoreDetailDTO;
+import com.wuliangit.shopos.dto.StorePageListDTO;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
@@ -71,5 +74,22 @@ public class StoreServiceImpl implements StoreService {
         return res;
     }
 
+    @Override
+    public List<StorePageListDTO> getStoreList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
+        List<StorePageListDTO> result = new ArrayList<StorePageListDTO>();
+        PageHelper.startPage(page,pageSize);
+        result = storeMapper.getStoreList(orderColumn, orderType, searchKey);
+        return result;
+    }
 
+    @Override
+    public Integer updateStoreState(Integer storeId, String state) {
+        return storeMapper.updateStoreState(storeId,state);
+    }
+
+    @Override
+    public StoreDetailDTO storeDetailPage(Integer storeId) {
+        return storeMapper.storeDetailPage(storeId);
+    }
 }

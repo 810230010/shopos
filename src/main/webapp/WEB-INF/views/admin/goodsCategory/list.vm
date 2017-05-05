@@ -145,17 +145,6 @@
             table = $('#datatables').DataTable().ajax.reload();
         });
 
-        $("#back").on('click', function () {
-            rank = rank - 1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            parentId = upParentId[rank];
-            $('#rank').html("商品分类列表("+rank+"级)")
-            table = $('#datatables').DataTable().ajax.reload();
-        });
     });
 </script>
 

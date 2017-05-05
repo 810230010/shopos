@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by 26229 on 2017/4/30.
+ * 系统设置相关接口和页面
+ * Created by nilme on 2017/4/30.
  */
 @Controller
 @RequestMapping("/admin/setting")

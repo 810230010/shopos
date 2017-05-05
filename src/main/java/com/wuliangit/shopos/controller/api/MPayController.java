@@ -3,7 +3,6 @@ package com.wuliangit.shopos.controller.api;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.AlipayConstants;
-import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.domain.AlipayTradeWapPayModel;
 import com.alipay.api.internal.util.AlipaySignature;
@@ -34,6 +33,9 @@ import java.util.Map;
 @RequestMapping(value = "/api/v1/pay")
 public class MPayController {
 
+
+    private String notifyUrl = "http://shop.wuliangit.com/api/v1/pay/alipay/notify";
+
     /**
      * 准备付款
      *
@@ -58,7 +60,7 @@ public class MPayController {
         model.setTotalAmount("0.01");
         model.setProductCode("QUICK_MSECURITY_PAY");
         request.setBizModel(model);
-        request.setNotifyUrl("http://shop.wuliangit.com/api/v1/pay/alipay/notify");
+        request.setNotifyUrl(notifyUrl);
         try {
             //这里和普通的接口调用不同，使用的是sdkExecute
             AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);

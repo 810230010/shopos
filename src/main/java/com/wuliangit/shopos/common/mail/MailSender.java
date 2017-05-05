@@ -152,10 +152,11 @@ public class MailSender {
      * 发送邮件
      *
      * @param recipient 收件人邮箱地址
-     * @param context   页面的动态的内容
+     * @param context   模板的动态的内容
+     * @param templates 模板
      * @throws MessagingException
      */
-    public void send(String recipient, VelocityContext context) throws MessagingException {
+    public void send(String recipient, VelocityContext context, String templates) throws MessagingException {
         VelocityEngine engine = new VelocityEngine();
         Properties properties = new Properties();
         StringWriter writer = new StringWriter();
@@ -173,7 +174,7 @@ public class MailSender {
         properties.setProperty("input.encoding","UTF-8");
         properties.setProperty("output.encoding","UTF-8");
         engine.init(properties);
-        Template template = engine.getTemplate("templates/mail/sign.vm");
+        Template template = engine.getTemplate(templates);
         template.merge(context,writer);
         message.setText(writer.toString());
         // 发送

@@ -1,5 +1,9 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.SettingDTO;
+
+import java.util.List;
+
 /**
  * Created by nilme on 2017/5/1.
  */
@@ -41,4 +45,10 @@ public interface SettingService {
      * @param alipayCheck
      */
     void updatePaySetting(String alipayPublicKey, String appId, String appPrivateKey, String alipayCheck);
+
+    /**
+     * 获取邮箱的各项参数
+     * @return
+     */
+    List<SettingDTO> getMailSetting();
 }

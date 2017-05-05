@@ -4,9 +4,14 @@ import com.wuliangit.shopos.common.mail.MailSender;
 import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.dao.SettingMapper;
+import com.wuliangit.shopos.dto.SettingDTO;
+import com.wuliangit.shopos.entity.Setting;
 import com.wuliangit.shopos.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nilme on 2017/5/1.
@@ -54,5 +59,14 @@ public class SettingServiceImpl implements SettingService {
         settingMapper.updateSetting(AliPay.ALIPAY_CHECK, alipayCheck);
         //更新文件存储配置
         AliPay.updateAlipayClient();
+    }
+
+    @Override
+    public List<SettingDTO> getMailSetting() {
+        List<SettingDTO> result = new ArrayList<SettingDTO>();
+        result.add(new SettingDTO(MailSender.MAIL_PASSWORD,settingMapper.getSetting(MailSender.MAIL_PASSWORD)));
+        result.add(new SettingDTO(MailSender.MAIL_SERVICE_SITE,settingMapper.getSetting(MailSender.MAIL_SERVICE_SITE)));
+        result.add(new SettingDTO(MailSender.MAIL_USERNAME,settingMapper.getSetting(MailSender.MAIL_USERNAME)));
+        return result;
     }
 }

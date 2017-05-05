@@ -55,7 +55,7 @@
             <li>
                 <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">会员管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="typography.html">会员列表</a></li>
+                    <li><a href="/admin/member/memberList">会员列表</a></li>
                     <li><a href="icons.html">充值提现申请</a></li>
                     <li><a href="draggable_panels.html">会员留言</a></li>
                     <li><a href="helper_classes.html">收货地址列表</a></li>

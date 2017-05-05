@@ -1,8 +1,11 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.MemberMapper;
+import com.wuliangit.shopos.dto.MemberListDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -63,5 +67,18 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Object getByMemberId(Integer userId) {
         return memberMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public List<MemberListDTO> getMemberList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
+        PageHelper.startPage(page,pageSize);
+        List<MemberListDTO> result = memberMapper.getMemberList(orderColumn,orderType,searchKey);
+        return result;
+    }
+
+    @Override
+    public Integer deleteMember(Integer memberId) {
+        return memberMapper.deleteMember(memberId);
     }
 }

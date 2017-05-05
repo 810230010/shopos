@@ -1,7 +1,9 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.MemberListDTO;
 import com.wuliangit.shopos.entity.Member;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -56,4 +58,22 @@ public interface MemberService {
      * @return
      */
     Object getByMemberId(Integer userId);
+
+    /**
+     * 获取会员列表数据
+     * @param page
+     * @param pageSize
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    List<MemberListDTO> getMemberList(Integer page,Integer pageSize,String orderColumn,String orderType,String searchKey);
+
+    /**
+     * 删除会员
+     * @param memberId
+     * @return
+     */
+    Integer deleteMember(Integer memberId);
 }

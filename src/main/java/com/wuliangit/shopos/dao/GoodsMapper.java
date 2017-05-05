@@ -3,6 +3,7 @@ package com.wuliangit.shopos.dao;
 import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.entity.Goods;
+import com.wuliangit.shopos.model.GoodsWithoutBody;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
@@ -40,4 +41,11 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
                             @Param("orderColumn")String orderColumn,
                             @Param("orderType")String orderType,
                             @Param("parentId")Integer parentId);
+
+    /**
+     * 不包行商品详情的商品对象
+     * @param goodsId
+     * @return
+     */
+    GoodsWithoutBody selectGoodsWithoutBodyByPrimaryKey(Integer goodsId);
 }

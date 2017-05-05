@@ -8,6 +8,7 @@
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
     <result column="seller_nikename" property="sellerNikename" jdbcType="VARCHAR" />
     <result column="sc_id" property="scId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="store_company_name" property="storeCompanyName" jdbcType="VARCHAR" />
     <result column="province_id" property="provinceId" jdbcType="INTEGER" />
     <result column="area_info" property="areaInfo" jdbcType="VARCHAR" />
@@ -58,7 +59,7 @@
     <result column="live_store_bus" property="liveStoreBus" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    store_id, name, grade_id, member_id, seller_nikename, sc_id, store_company_name, 
+    store_id, name, grade_id, member_id, seller_nikename, sc_id, type, store_company_name, 
     province_id, area_info, address, zip, state, close_info, sort, create_time, end_time, 
     label, banner, logo, keywords, description, qq, ww, phone, domain, domain_times, 
     is_recommend, theme, credit, desccredit, servicecredit, deliverycredit, collect, 
@@ -82,13 +83,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_store (name, grade_id, member_id, 
-      seller_nikename, sc_id, store_company_name, 
-      province_id, area_info, address, 
-      zip, state, close_info, 
-      sort, create_time, end_time, 
-      label, banner, logo, 
-      keywords, description, qq, 
-      ww, phone, domain, 
+      seller_nikename, sc_id, type, 
+      store_company_name, province_id, area_info, 
+      address, zip, state, 
+      close_info, sort, create_time, 
+      end_time, label, banner, 
+      logo, keywords, description, 
+      qq, ww, phone, domain, 
       domain_times, is_recommend, theme, 
       credit, desccredit, servicecredit, 
       deliverycredit, collect, slide_url, 
@@ -100,13 +101,13 @@
       live_store_name, live_store_address, live_store_tel, 
       live_store_gps, live_store_bus)
     values (#{name,jdbcType=VARCHAR}, #{gradeId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, 
-      #{sellerNikename,jdbcType=VARCHAR}, #{scId,jdbcType=INTEGER}, #{storeCompanyName,jdbcType=VARCHAR}, 
-      #{provinceId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{zip,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{closeInfo,jdbcType=VARCHAR}, 
-      #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=VARCHAR}, 
-      #{label,jdbcType=VARCHAR}, #{banner,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
-      #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
-      #{ww,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, 
+      #{sellerNikename,jdbcType=VARCHAR}, #{scId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{storeCompanyName,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{closeInfo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, #{banner,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{ww,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, 
       #{domainTimes,jdbcType=INTEGER}, #{isRecommend,jdbcType=BIT}, #{theme,jdbcType=VARCHAR}, 
       #{credit,jdbcType=INTEGER}, #{desccredit,jdbcType=REAL}, #{servicecredit,jdbcType=REAL}, 
       #{deliverycredit,jdbcType=REAL}, #{collect,jdbcType=INTEGER}, #{slideUrl,jdbcType=VARCHAR}, 
@@ -138,6 +139,9 @@
       </if>
       <if test="scId != null" >
         sc_id,
+      </if>
+      <if test="type != null" >
+        type,
       </if>
       <if test="storeCompanyName != null" >
         store_company_name,
@@ -299,6 +303,9 @@
       </if>
       <if test="scId != null" >
         #{scId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="storeCompanyName != null" >
         #{storeCompanyName,jdbcType=VARCHAR},
@@ -464,6 +471,9 @@
       <if test="scId != null" >
         sc_id = #{scId,jdbcType=INTEGER},
       </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
       <if test="storeCompanyName != null" >
         store_company_name = #{storeCompanyName,jdbcType=VARCHAR},
       </if>
@@ -618,6 +628,7 @@
       member_id = #{memberId,jdbcType=INTEGER},
       seller_nikename = #{sellerNikename,jdbcType=VARCHAR},
       sc_id = #{scId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
       store_company_name = #{storeCompanyName,jdbcType=VARCHAR},
       province_id = #{provinceId,jdbcType=INTEGER},
       area_info = #{areaInfo,jdbcType=VARCHAR},

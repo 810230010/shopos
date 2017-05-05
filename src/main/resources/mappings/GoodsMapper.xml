@@ -44,4 +44,12 @@
             ${orderColumn} ${orderType}
         </if>
     </select>
+
+    <!--不包行商品详情的商品对象-->
+    <select id="selectGoodsWithoutBodyByPrimaryKey" resultType="com.wuliangit.shopos.model.GoodsWithoutBody">
+        select
+        <include refid="Base_Column_List" />
+        from t_goods
+        where goods_id = #{goodsId,jdbcType=INTEGER}
+    </select>
 </mapper>

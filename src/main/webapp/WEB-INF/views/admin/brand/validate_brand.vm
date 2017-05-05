@@ -45,7 +45,7 @@
     $(document).ready(function () {
         var t = $('#brandTable').DataTable({
             "ajax": {
-                'url': '/admin/brand/search',
+                'url': '/admin/brand/searchBrands',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -59,7 +59,7 @@
             },
             "columns": [
                 {"data":"brandId","width":"7%","title":"品牌序号","visible": false},
-                {"data":"name","width": "10%","title":"品牌名称","orderable": false},
+                {"data":"brandName","width": "10%","title":"品牌名称","orderable": false},
                 {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
                 {
                     "data":"pic",

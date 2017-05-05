@@ -16,6 +16,8 @@ public class Store {
 
     private Integer scId;
 
+    private String type;
+
     private String storeCompanyName;
 
     private Integer provinceId;
@@ -158,6 +160,14 @@ public class Store {
 
     public void setScId(Integer scId) {
         this.scId = scId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public String getStoreCompanyName() {

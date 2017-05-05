@@ -12,6 +12,11 @@ import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.alipay.api.response.AlipayTradeWapPayResponse;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.pay.AliPay;
+import com.wuliangit.shopos.entity.Order;
+import com.wuliangit.shopos.exception.OrderException;
+import com.wuliangit.shopos.model.OrderInfo;
+import com.wuliangit.shopos.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -33,39 +39,41 @@ import java.util.Map;
 @RequestMapping(value = "/api/v1/pay")
 public class MPayController {
 
-
     private String notifyUrl = "http://shop.wuliangit.com/api/v1/pay/alipay/notify";
 
+    @Autowired
+    private OrderService orderService;
+
     /**
-     * 准备付款
+     * 创建订单
      *
      * @return
      */
     @RequestMapping(value = "/order/prepare", method = RequestMethod.POST)
     @ResponseBody
-    public Object preparePay() {
+    public Object createOrder(OrderInfo[] orderInfos, Integer addressId, String orderFrom, BigDecimal goodsAmount) throws OrderException {
         RestResult result = new RestResult();
 
-        AlipayClient alipayClient = AliPay.getAlipayClient();
+        Order order = orderService.createOrder(orderInfos, addressId, orderFrom, goodsAmount);
 
-        //实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay
+
+        AlipayClient alipayClient = AliPay.getAlipayClient();
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
 
         //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
         AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
-        model.setBody("我是测试数据");
-        model.setSubject("App支付测试Java");
-        model.setOutTradeNo("11111");
+        model.setBody(order.getOrderName());
+        model.setSubject("商品支付");
+        model.setOutTradeNo(order.getOutTradeNo());
         model.setTimeoutExpress("30m");
-        model.setTotalAmount("0.01");
-        model.setProductCode("QUICK_MSECURITY_PAY");
+        model.setTotalAmount(order.getOrderAmount().toString());
+        model.setProductCode(AliPay.PRODUCTCODE);
         request.setBizModel(model);
         request.setNotifyUrl(notifyUrl);
         try {
-            //这里和普通的接口调用不同，使用的是sdkExecute
             AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
-            result.add("payInfo", response.getBody());
-            System.out.println(response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
+            result.add("payInfo", response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
+            System.out.println(response.getBody());
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }

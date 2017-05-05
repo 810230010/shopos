@@ -7,21 +7,19 @@ public class OrderGoods {
 
     private Integer orderCommonId;
 
+    private Integer goodsSkuId;
+
     private Integer orderId;
 
     private Integer goodsId;
 
-    private Integer goodsColorId;
-
-    private String colorName;
+    private String skuName;
 
     private String goodsName;
 
     private Integer goodsNum;
 
     private String goodsImage;
-
-    private String colorImage;
 
     private BigDecimal goodsPayPrice;
 
@@ -31,7 +29,7 @@ public class OrderGoods {
 
     private String goodsType;
 
-    private BigDecimal commissionPercent;
+    private BigDecimal commission;
 
     public Integer getOrderGoodsId() {
         return orderGoodsId;
@@ -47,6 +45,14 @@ public class OrderGoods {
 
     public void setOrderCommonId(Integer orderCommonId) {
         this.orderCommonId = orderCommonId;
+    }
+
+    public Integer getGoodsSkuId() {
+        return goodsSkuId;
+    }
+
+    public void setGoodsSkuId(Integer goodsSkuId) {
+        this.goodsSkuId = goodsSkuId;
     }
 
     public Integer getOrderId() {
@@ -65,20 +71,12 @@ public class OrderGoods {
         this.goodsId = goodsId;
     }
 
-    public Integer getGoodsColorId() {
-        return goodsColorId;
+    public String getSkuName() {
+        return skuName;
     }
 
-    public void setGoodsColorId(Integer goodsColorId) {
-        this.goodsColorId = goodsColorId;
-    }
-
-    public String getColorName() {
-        return colorName;
-    }
-
-    public void setColorName(String colorName) {
-        this.colorName = colorName == null ? null : colorName.trim();
+    public void setSkuName(String skuName) {
+        this.skuName = skuName == null ? null : skuName.trim();
     }
 
     public String getGoodsName() {
@@ -103,14 +101,6 @@ public class OrderGoods {
 
     public void setGoodsImage(String goodsImage) {
         this.goodsImage = goodsImage == null ? null : goodsImage.trim();
-    }
-
-    public String getColorImage() {
-        return colorImage;
-    }
-
-    public void setColorImage(String colorImage) {
-        this.colorImage = colorImage == null ? null : colorImage.trim();
     }
 
     public BigDecimal getGoodsPayPrice() {
@@ -145,11 +135,11 @@ public class OrderGoods {
         this.goodsType = goodsType == null ? null : goodsType.trim();
     }
 
-    public BigDecimal getCommissionPercent() {
-        return commissionPercent;
+    public BigDecimal getCommission() {
+        return commission;
     }
 
-    public void setCommissionPercent(BigDecimal commissionPercent) {
-        this.commissionPercent = commissionPercent;
+    public void setCommission(BigDecimal commission) {
+        this.commission = commission;
     }
 }

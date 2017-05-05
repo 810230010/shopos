@@ -15,6 +15,7 @@ public class CoreConstants {
     public static final String SESSION_CURRENT_ADMIN = "SESSION_CURRENT_ADMIN";
 
 
+
     public static final String PARAM_DIGEST = "digest";
     public static final String PARAM_USERNAME = "username";
 

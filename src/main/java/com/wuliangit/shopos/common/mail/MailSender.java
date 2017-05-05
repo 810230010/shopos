@@ -3,8 +3,12 @@ package com.wuliangit.shopos.common.mail;
 import com.sun.mail.util.MailSSLSocketFactory;
 import com.wuliangit.shopos.common.util.SpringUtils;
 import com.wuliangit.shopos.service.SettingService;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -12,7 +16,11 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -32,12 +40,22 @@ public class MailSender {
     private transient MailAuthenticator authenticator;
     //邮箱session
     private transient Session session;
+    //模板引擎
+    private transient VelocityEngine velocityEngine;
 
     public static final String MAIL_SERVICE_SITE = "MAIL_SERVICE_SITE";
     public static final String MAIL_USERNAME = "MAIL_USERNAME";
     public static final String MAIL_PASSWORD = "MAIL_PASSWORD";
 
     private MailSender() {
+    }
+
+    public VelocityEngine getVelocityEngine() {
+        return velocityEngine;
+    }
+
+    public void setVelocityEngine(VelocityEngine velocityEngine) {
+        this.velocityEngine = velocityEngine;
     }
 
     /**
@@ -134,11 +152,13 @@ public class MailSender {
      * 发送邮件
      *
      * @param recipient 收件人邮箱地址
-     * @param subject   邮件主题
-     * @param content   邮件内容
+     * @param context   页面的动态的内容
      * @throws MessagingException
      */
-    public void send(String recipient, String subject, Object content) throws MessagingException {
+    public void send(String recipient, VelocityContext context) throws MessagingException {
+        VelocityEngine engine = new VelocityEngine();
+        Properties properties = new Properties();
+        StringWriter writer = new StringWriter();
         // 创建mime类型邮件
         final MimeMessage message = new MimeMessage(session);
         // 设置发信人
@@ -146,9 +166,16 @@ public class MailSender {
         // 设置收件人
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
         // 设置主题
-        message.setSubject(subject);
+        message.setSubject("注册验证");
         // 设置邮件内容
-        message.setContent(content.toString(), "text/html;charset=utf-8");
+        properties.setProperty("resource.loader", "class");
+        properties.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        properties.setProperty("input.encoding","UTF-8");
+        properties.setProperty("output.encoding","UTF-8");
+        engine.init(properties);
+        Template template = engine.getTemplate("templates/mail/sign.vm");
+        template.merge(context,writer);
+        message.setText(writer.toString());
         // 发送
         Transport.send(message);
     }

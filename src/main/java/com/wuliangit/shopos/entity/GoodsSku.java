@@ -1,11 +1,13 @@
 package com.wuliangit.shopos.entity;
 
+import java.math.BigDecimal;
+
 public class GoodsSku {
     private Integer goodsSkuId;
 
     private String skuValue;
 
-    private Long skuPrice;
+    private BigDecimal skuPrice;
 
     private Integer skuStock;
 
@@ -27,11 +29,11 @@ public class GoodsSku {
         this.skuValue = skuValue == null ? null : skuValue.trim();
     }
 
-    public Long getSkuPrice() {
+    public BigDecimal getSkuPrice() {
         return skuPrice;
     }
 
-    public void setSkuPrice(Long skuPrice) {
+    public void setSkuPrice(BigDecimal skuPrice) {
         this.skuPrice = skuPrice;
     }
 

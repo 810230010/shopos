@@ -4,24 +4,22 @@
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.OrderGoods" >
     <id column="order_goods_id" property="orderGoodsId" jdbcType="INTEGER" />
     <result column="order_common_id" property="orderCommonId" jdbcType="INTEGER" />
+    <result column="goods_sku_id" property="goodsSkuId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="goods_color_id" property="goodsColorId" jdbcType="INTEGER" />
-    <result column="color_name" property="colorName" jdbcType="VARCHAR" />
+    <result column="sku_name" property="skuName" jdbcType="VARCHAR" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
     <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
     <result column="goods_image" property="goodsImage" jdbcType="VARCHAR" />
-    <result column="color_image" property="colorImage" jdbcType="VARCHAR" />
     <result column="goods_pay_price" property="goodsPayPrice" jdbcType="DECIMAL" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
     <result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
-    <result column="commission_percent" property="commissionPercent" jdbcType="DECIMAL" />
+    <result column="commission" property="commission" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_goods_id, order_common_id, order_id, goods_id, goods_color_id, color_name, 
-    goods_name, goods_num, goods_image, color_image, goods_pay_price, store_id, member_id, 
-    goods_type, commission_percent
+    order_goods_id, order_common_id, goods_sku_id, order_id, goods_id, sku_name, goods_name, 
+    goods_num, goods_image, goods_pay_price, store_id, member_id, goods_type, commission
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -37,16 +35,16 @@
     <selectKey resultType="java.lang.Integer" keyProperty="orderGoodsId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_order_goods (order_common_id, order_id, goods_id, 
-      goods_color_id, color_name, goods_name, 
-      goods_num, goods_image, color_image, 
-      goods_pay_price, store_id, member_id, 
-      goods_type, commission_percent)
-    values (#{orderCommonId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
-      #{goodsColorId,jdbcType=INTEGER}, #{colorName,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
-      #{goodsNum,jdbcType=INTEGER}, #{goodsImage,jdbcType=VARCHAR}, #{colorImage,jdbcType=VARCHAR}, 
-      #{goodsPayPrice,jdbcType=DECIMAL}, #{storeId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, 
-      #{goodsType,jdbcType=VARCHAR}, #{commissionPercent,jdbcType=DECIMAL})
+    insert into t_order_goods (order_common_id, goods_sku_id, order_id, 
+      goods_id, sku_name, goods_name, 
+      goods_num, goods_image, goods_pay_price, 
+      store_id, member_id, goods_type, 
+      commission)
+    values (#{orderCommonId,jdbcType=INTEGER}, #{goodsSkuId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+      #{goodsId,jdbcType=INTEGER}, #{skuName,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
+      #{goodsNum,jdbcType=INTEGER}, #{goodsImage,jdbcType=VARCHAR}, #{goodsPayPrice,jdbcType=DECIMAL}, 
+      #{storeId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{goodsType,jdbcType=VARCHAR}, 
+      #{commission,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.OrderGoods" >
     <selectKey resultType="java.lang.Integer" keyProperty="orderGoodsId" order="AFTER" >
@@ -57,17 +55,17 @@
       <if test="orderCommonId != null" >
         order_common_id,
       </if>
+      <if test="goodsSkuId != null" >
+        goods_sku_id,
+      </if>
       <if test="orderId != null" >
         order_id,
       </if>
       <if test="goodsId != null" >
         goods_id,
       </if>
-      <if test="goodsColorId != null" >
-        goods_color_id,
-      </if>
-      <if test="colorName != null" >
-        color_name,
+      <if test="skuName != null" >
+        sku_name,
       </if>
       <if test="goodsName != null" >
         goods_name,
@@ -77,9 +75,6 @@
       </if>
       <if test="goodsImage != null" >
         goods_image,
-      </if>
-      <if test="colorImage != null" >
-        color_image,
       </if>
       <if test="goodsPayPrice != null" >
         goods_pay_price,
@@ -93,13 +88,16 @@
       <if test="goodsType != null" >
         goods_type,
       </if>
-      <if test="commissionPercent != null" >
-        commission_percent,
+      <if test="commission != null" >
+        commission,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderCommonId != null" >
         #{orderCommonId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSkuId != null" >
+        #{goodsSkuId,jdbcType=INTEGER},
       </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
@@ -107,11 +105,8 @@
       <if test="goodsId != null" >
         #{goodsId,jdbcType=INTEGER},
       </if>
-      <if test="goodsColorId != null" >
-        #{goodsColorId,jdbcType=INTEGER},
-      </if>
-      <if test="colorName != null" >
-        #{colorName,jdbcType=VARCHAR},
+      <if test="skuName != null" >
+        #{skuName,jdbcType=VARCHAR},
       </if>
       <if test="goodsName != null" >
         #{goodsName,jdbcType=VARCHAR},
@@ -121,9 +116,6 @@
       </if>
       <if test="goodsImage != null" >
         #{goodsImage,jdbcType=VARCHAR},
-      </if>
-      <if test="colorImage != null" >
-        #{colorImage,jdbcType=VARCHAR},
       </if>
       <if test="goodsPayPrice != null" >
         #{goodsPayPrice,jdbcType=DECIMAL},
@@ -137,8 +129,8 @@
       <if test="goodsType != null" >
         #{goodsType,jdbcType=VARCHAR},
       </if>
-      <if test="commissionPercent != null" >
-        #{commissionPercent,jdbcType=DECIMAL},
+      <if test="commission != null" >
+        #{commission,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -148,17 +140,17 @@
       <if test="orderCommonId != null" >
         order_common_id = #{orderCommonId,jdbcType=INTEGER},
       </if>
+      <if test="goodsSkuId != null" >
+        goods_sku_id = #{goodsSkuId,jdbcType=INTEGER},
+      </if>
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=INTEGER},
       </if>
       <if test="goodsId != null" >
         goods_id = #{goodsId,jdbcType=INTEGER},
       </if>
-      <if test="goodsColorId != null" >
-        goods_color_id = #{goodsColorId,jdbcType=INTEGER},
-      </if>
-      <if test="colorName != null" >
-        color_name = #{colorName,jdbcType=VARCHAR},
+      <if test="skuName != null" >
+        sku_name = #{skuName,jdbcType=VARCHAR},
       </if>
       <if test="goodsName != null" >
         goods_name = #{goodsName,jdbcType=VARCHAR},
@@ -168,9 +160,6 @@
       </if>
       <if test="goodsImage != null" >
         goods_image = #{goodsImage,jdbcType=VARCHAR},
-      </if>
-      <if test="colorImage != null" >
-        color_image = #{colorImage,jdbcType=VARCHAR},
       </if>
       <if test="goodsPayPrice != null" >
         goods_pay_price = #{goodsPayPrice,jdbcType=DECIMAL},
@@ -184,8 +173,8 @@
       <if test="goodsType != null" >
         goods_type = #{goodsType,jdbcType=VARCHAR},
       </if>
-      <if test="commissionPercent != null" >
-        commission_percent = #{commissionPercent,jdbcType=DECIMAL},
+      <if test="commission != null" >
+        commission = #{commission,jdbcType=DECIMAL},
       </if>
     </set>
     where order_goods_id = #{orderGoodsId,jdbcType=INTEGER}
@@ -193,19 +182,18 @@
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.OrderGoods" >
     update t_order_goods
     set order_common_id = #{orderCommonId,jdbcType=INTEGER},
+      goods_sku_id = #{goodsSkuId,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},
-      goods_color_id = #{goodsColorId,jdbcType=INTEGER},
-      color_name = #{colorName,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_num = #{goodsNum,jdbcType=INTEGER},
       goods_image = #{goodsImage,jdbcType=VARCHAR},
-      color_image = #{colorImage,jdbcType=VARCHAR},
       goods_pay_price = #{goodsPayPrice,jdbcType=DECIMAL},
       store_id = #{storeId,jdbcType=INTEGER},
       member_id = #{memberId,jdbcType=INTEGER},
       goods_type = #{goodsType,jdbcType=VARCHAR},
-      commission_percent = #{commissionPercent,jdbcType=DECIMAL}
+      commission = #{commission,jdbcType=DECIMAL}
     where order_goods_id = #{orderGoodsId,jdbcType=INTEGER}
   </update>
 </mapper>

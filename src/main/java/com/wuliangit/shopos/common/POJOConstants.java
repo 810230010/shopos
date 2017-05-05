@@ -29,4 +29,12 @@ public class POJOConstants {
     //普通商品
     public final static String GOODS_TYPE_NORMAL = "GOODS_TYPE_NORMAL";
 
+    //支付方式
+    //微信支付
+    public final static String PAYWAY_WX = "PAYWAY_WX";
+    //支付宝支付
+    public final static String PAYWAY_ALIPAY = "PAYWAY_ALIPAY";
+    //银行卡支付
+    public final static String PAYWAY_CARD = "PAYWAY_CARD";
+
 }

@@ -3,8 +3,8 @@
 <mapper namespace="com.wuliangit.shopos.dao.OrderMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Order" >
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
-    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
-    <result column="pay_sn" property="paySn" jdbcType="VARCHAR" />
+    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="store_name" property="storeName" jdbcType="VARCHAR" />
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
@@ -27,12 +27,13 @@
     <result column="shipping_code" property="shippingCode" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="del_flag" property="delFlag" jdbcType="BIT" />
+    <result column="order_name" property="orderName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, order_sn, pay_sn, store_id, store_name, member_id, member_name, member_email, 
+    order_id, out_trade_no, trade_no, store_id, store_name, member_id, member_name, member_email, 
     payment_code, payment_time, finnshed_time, goods_amount, order_amount, pd_amount, 
     shipping_fee, evaluation_state, order_state, refund_state, is_lock, delete_state, 
-    refund_amount, order_from, shipping_code, create_time, del_flag
+    refund_amount, order_from, shipping_code, create_time, del_flag, order_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -48,24 +49,24 @@
     <selectKey resultType="java.lang.Integer" keyProperty="orderId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_order (order_sn, pay_sn, store_id, 
+    insert into t_order (out_trade_no, trade_no, store_id, 
       store_name, member_id, member_name, 
       member_email, payment_code, payment_time, 
       finnshed_time, goods_amount, order_amount, 
       pd_amount, shipping_fee, evaluation_state, 
       order_state, refund_state, is_lock, 
       delete_state, refund_amount, order_from, 
-      shipping_code, create_time, del_flag
-      )
-    values (#{orderSn,jdbcType=VARCHAR}, #{paySn,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
+      shipping_code, create_time, del_flag, 
+      order_name)
+    values (#{outTradeNo,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
       #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
       #{memberEmail,jdbcType=VARCHAR}, #{paymentCode,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, 
       #{finnshedTime,jdbcType=TIMESTAMP}, #{goodsAmount,jdbcType=DECIMAL}, #{orderAmount,jdbcType=DECIMAL}, 
       #{pdAmount,jdbcType=DECIMAL}, #{shippingFee,jdbcType=DECIMAL}, #{evaluationState,jdbcType=VARCHAR}, 
       #{orderState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
       #{deleteState,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DECIMAL}, #{orderFrom,jdbcType=VARCHAR}, 
-      #{shippingCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=BIT}
-      )
+      #{shippingCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=BIT}, 
+      #{orderName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Order" >
     <selectKey resultType="java.lang.Integer" keyProperty="orderId" order="AFTER" >
@@ -73,11 +74,11 @@
     </selectKey>
     insert into t_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderSn != null" >
-        order_sn,
+      <if test="outTradeNo != null" >
+        out_trade_no,
       </if>
-      <if test="paySn != null" >
-        pay_sn,
+      <if test="tradeNo != null" >
+        trade_no,
       </if>
       <if test="storeId != null" >
         store_id,
@@ -145,13 +146,16 @@
       <if test="delFlag != null" >
         del_flag,
       </if>
+      <if test="orderName != null" >
+        order_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderSn != null" >
-        #{orderSn,jdbcType=VARCHAR},
+      <if test="outTradeNo != null" >
+        #{outTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="paySn != null" >
-        #{paySn,jdbcType=VARCHAR},
+      <if test="tradeNo != null" >
+        #{tradeNo,jdbcType=VARCHAR},
       </if>
       <if test="storeId != null" >
         #{storeId,jdbcType=INTEGER},
@@ -219,16 +223,19 @@
       <if test="delFlag != null" >
         #{delFlag,jdbcType=BIT},
       </if>
+      <if test="orderName != null" >
+        #{orderName,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Order" >
     update t_order
     <set >
-      <if test="orderSn != null" >
-        order_sn = #{orderSn,jdbcType=VARCHAR},
+      <if test="outTradeNo != null" >
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="paySn != null" >
-        pay_sn = #{paySn,jdbcType=VARCHAR},
+      <if test="tradeNo != null" >
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
       </if>
       <if test="storeId != null" >
         store_id = #{storeId,jdbcType=INTEGER},
@@ -296,13 +303,16 @@
       <if test="delFlag != null" >
         del_flag = #{delFlag,jdbcType=BIT},
       </if>
+      <if test="orderName != null" >
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Order" >
     update t_order
-    set order_sn = #{orderSn,jdbcType=VARCHAR},
-      pay_sn = #{paySn,jdbcType=VARCHAR},
+    set out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=INTEGER},
       store_name = #{storeName,jdbcType=VARCHAR},
       member_id = #{memberId,jdbcType=INTEGER},
@@ -324,7 +334,8 @@
       order_from = #{orderFrom,jdbcType=VARCHAR},
       shipping_code = #{shippingCode,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      del_flag = #{delFlag,jdbcType=BIT}
+      del_flag = #{delFlag,jdbcType=BIT},
+      order_name = #{orderName,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 </mapper>

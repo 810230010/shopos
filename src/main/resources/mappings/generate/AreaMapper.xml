@@ -7,9 +7,10 @@
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="deep" property="deep" jdbcType="INTEGER" />
+    <result column="region" property="region" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    area_id, name, parent_id, sort, deep
+    area_id, name, parent_id, sort, deep, region
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,9 +27,9 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_area (name, parent_id, sort, 
-      deep)
+      deep, region)
     values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
-      #{deep,jdbcType=INTEGER})
+      #{deep,jdbcType=INTEGER}, #{region,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Area" >
     <selectKey resultType="java.lang.Integer" keyProperty="areaId" order="AFTER" >
@@ -48,6 +49,9 @@
       <if test="deep != null" >
         deep,
       </if>
+      <if test="region != null" >
+        region,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="name != null" >
@@ -61,6 +65,9 @@
       </if>
       <if test="deep != null" >
         #{deep,jdbcType=INTEGER},
+      </if>
+      <if test="region != null" >
+        #{region,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -79,6 +86,9 @@
       <if test="deep != null" >
         deep = #{deep,jdbcType=INTEGER},
       </if>
+      <if test="region != null" >
+        region = #{region,jdbcType=VARCHAR},
+      </if>
     </set>
     where area_id = #{areaId,jdbcType=INTEGER}
   </update>
@@ -87,7 +97,8 @@
     set name = #{name,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
-      deep = #{deep,jdbcType=INTEGER}
+      deep = #{deep,jdbcType=INTEGER},
+      region = #{region,jdbcType=VARCHAR}
     where area_id = #{areaId,jdbcType=INTEGER}
   </update>
 </mapper>

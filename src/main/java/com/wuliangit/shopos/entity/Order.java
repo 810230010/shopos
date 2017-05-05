@@ -6,9 +6,9 @@ import java.util.Date;
 public class Order {
     private Integer orderId;
 
-    private String orderSn;
+    private String outTradeNo;
 
-    private String paySn;
+    private String tradeNo;
 
     private Integer storeId;
 
@@ -54,6 +54,8 @@ public class Order {
 
     private Boolean delFlag;
 
+    private String orderName;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -62,20 +64,20 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getOrderSn() {
-        return orderSn;
+    public String getOutTradeNo() {
+        return outTradeNo;
     }
 
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn == null ? null : orderSn.trim();
+    public void setOutTradeNo(String outTradeNo) {
+        this.outTradeNo = outTradeNo == null ? null : outTradeNo.trim();
     }
 
-    public String getPaySn() {
-        return paySn;
+    public String getTradeNo() {
+        return tradeNo;
     }
 
-    public void setPaySn(String paySn) {
-        this.paySn = paySn == null ? null : paySn.trim();
+    public void setTradeNo(String tradeNo) {
+        this.tradeNo = tradeNo == null ? null : tradeNo.trim();
     }
 
     public Integer getStoreId() {
@@ -252,5 +254,13 @@ public class Order {
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public String getOrderName() {
+        return orderName;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName == null ? null : orderName.trim();
     }
 }

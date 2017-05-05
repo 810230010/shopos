@@ -11,6 +11,8 @@ public class Area {
 
     private Integer deep;
 
+    private String region;
+
     public Integer getAreaId() {
         return areaId;
     }
@@ -49,5 +51,13 @@ public class Area {
 
     public void setDeep(Integer deep) {
         this.deep = deep;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region == null ? null : region.trim();
     }
 }

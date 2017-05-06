@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class ApiCollectGoodsDTO {
 
-    private Integer favoritesGoodId;
+    private Integer favoritesGoodsId;
 
     private Integer memberId;
 
@@ -42,12 +42,12 @@ public class ApiCollectGoodsDTO {
         this.goodsId = goodsId;
     }
 
-    public Integer getFavoritesGoodId() {
-        return favoritesGoodId;
+    public Integer getFavoritesGoodsId() {
+        return favoritesGoodsId;
     }
 
-    public void setFavoritesGoodId(Integer favoritesGoodId) {
-        this.favoritesGoodId = favoritesGoodId;
+    public void setFavoritesGoodsId(Integer favoritesGoodsId) {
+        this.favoritesGoodsId = favoritesGoodsId;
     }
 
     public Integer getMemberId() {

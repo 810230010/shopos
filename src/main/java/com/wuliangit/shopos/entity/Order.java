@@ -32,7 +32,7 @@ public class Order {
 
     private BigDecimal pdAmount;
 
-    private BigDecimal shippingFee;
+    private BigDecimal carriage;
 
     private String evaluationState;
 
@@ -48,11 +48,9 @@ public class Order {
 
     private String orderFrom;
 
-    private String shippingCode;
+    private String carriageName;
 
     private Date createTime;
-
-    private Boolean delFlag;
 
     private String orderName;
 
@@ -168,12 +166,12 @@ public class Order {
         this.pdAmount = pdAmount;
     }
 
-    public BigDecimal getShippingFee() {
-        return shippingFee;
+    public BigDecimal getCarriage() {
+        return carriage;
     }
 
-    public void setShippingFee(BigDecimal shippingFee) {
-        this.shippingFee = shippingFee;
+    public void setCarriage(BigDecimal carriage) {
+        this.carriage = carriage;
     }
 
     public String getEvaluationState() {
@@ -232,12 +230,12 @@ public class Order {
         this.orderFrom = orderFrom == null ? null : orderFrom.trim();
     }
 
-    public String getShippingCode() {
-        return shippingCode;
+    public String getCarriageName() {
+        return carriageName;
     }
 
-    public void setShippingCode(String shippingCode) {
-        this.shippingCode = shippingCode == null ? null : shippingCode.trim();
+    public void setCarriageName(String carriageName) {
+        this.carriageName = carriageName == null ? null : carriageName.trim();
     }
 
     public Date getCreateTime() {
@@ -246,14 +244,6 @@ public class Order {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public Boolean getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Boolean delFlag) {
-        this.delFlag = delFlag;
     }
 
     public String getOrderName() {

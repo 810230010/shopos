@@ -1,27 +1,31 @@
 package com.wuliangit.shopos.model;
 
+import com.wuliangit.shopos.entity.OrderGoods;
+
+import java.util.List;
+
 /**
  * Created by nilme on 2017/5/5.
  */
 public class OrderInfo {
 
-    private Integer goodsSkuId;
+    private Integer storeId;
 
-    private Integer goodsNum;
+    private List<OrderGoodsInfo> orderGoodsInfoList;
 
-    public Integer getGoodsSkuId() {
-        return goodsSkuId;
+    public Integer getStoreId() {
+        return storeId;
     }
 
-    public void setGoodsSkuId(Integer goodsSkuId) {
-        this.goodsSkuId = goodsSkuId;
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
-    public Integer getGoodsNum() {
-        return goodsNum;
+    public List<OrderGoodsInfo> getOrderGoodsInfoList() {
+        return orderGoodsInfoList;
     }
 
-    public void setGoodsNum(Integer goodsNum) {
-        this.goodsNum = goodsNum;
+    public void setOrderGoodsInfoList(List<OrderGoodsInfo> orderGoodsInfoList) {
+        this.orderGoodsInfoList = orderGoodsInfoList;
     }
 }

@@ -13,7 +13,7 @@
     area_id, name, parent_id, sort, deep, region
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_area
     where area_id = #{areaId,jdbcType=INTEGER}

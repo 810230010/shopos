@@ -9,12 +9,14 @@ import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
 import com.wuliangit.shopos.dto.ApiCollectStoreDTO;
 import com.wuliangit.shopos.entity.*;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nilme on 2017/3/29.
@@ -32,8 +34,6 @@ public class CollectServiceImpl implements CollectService {
     @Autowired
     private StoreMapper storeMapper;
 
-
-
     @Override
     public ArrayList<ApiCollectGoodsDTO> getCollectGoodsList(Integer page, Integer pageSize) {
         Member user = WebUtil.getCurrentMember();
@@ -43,9 +43,21 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public int addCollectGoods(Integer goodsId) {
+    public int addCollectGoods(Integer goodsId) throws Exception {
         Member user = WebUtil.getCurrentMember();
+
+        FavoritesGoods oldFavoritesGoods = favoritesGoodsMapper.getFavoritesGoodsByUserIdAndGoodsId(user.getMemberId(),goodsId);
+
+        if (oldFavoritesGoods != null){
+            throw new OptionException("重复收藏");
+        }
+
         Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+
+        if (goods == null){
+            throw new OptionException("商品不存在");
+        }
+
         FavoritesGoods favoritesGoods = new FavoritesGoods();
         favoritesGoods.setFavTime(new Date());
         favoritesGoods.setGoodsId(goods.getGoodsId());
@@ -71,9 +83,20 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public int addCollectStore(Integer storeId) {
+    public int addCollectStore(Integer storeId) throws Exception{
         Member user = WebUtil.getCurrentMember();
+        FavoritesStore oldFavoritesStore = favoritesStoreMapper.getFavoritesStoreByUserIdAndStoreId(user.getMemberId(),storeId);
+
+        if (oldFavoritesStore != null){
+            throw new OptionException("重复收藏");
+        }
+
         Store store = storeMapper.selectByPrimaryKey(storeId);
+
+        if (store == null){
+            throw new OptionException("店铺不存在");
+        }
+
         FavoritesStore favoritesStore = new FavoritesStore();
         favoritesStore.setMemberName(user.getNikename());
         favoritesStore.setMemberId(user.getMemberId());

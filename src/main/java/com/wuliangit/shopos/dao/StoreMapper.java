@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreBrand;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.model.StoreUser;
 import org.apache.ibatis.annotations.Param;
 
@@ -53,4 +54,11 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return
      */
     int addStoreBrand(@Param("storeId") Integer storeId, @Param("brandId") Integer brandId);
+
+    /**
+     * 获取店铺简要信息
+     * @param storeId
+     * @return
+     */
+    StoreMin getStoreMinByStoreId(Integer storeId);
 }

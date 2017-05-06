@@ -45,7 +45,7 @@
         </if>
     </select>
 
-    <!--不包行商品详情的商品对象-->
+    <!--不包含商品详情的商品对象-->
     <select id="selectGoodsWithoutBodyByPrimaryKey" resultType="com.wuliangit.shopos.model.GoodsWithoutBody">
         select
         <include refid="Base_Column_List" />

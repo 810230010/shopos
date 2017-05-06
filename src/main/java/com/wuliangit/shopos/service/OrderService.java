@@ -1,10 +1,11 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.entity.Order;
+import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.OrderInfo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by nilme on 2017/5/5.
@@ -20,6 +21,6 @@ public interface OrderService {
      * @param goodsAmount
      * @return
      */
-    Order createOrder(OrderInfo[] orderInfos, Integer addressId, String orderFrom, BigDecimal goodsAmount) throws OrderException;
+    AlipayTradeAppPayModel createOrder(List<OrderInfo> orderInfos, Integer addressId, String orderFrom, BigDecimal goodsAmount) throws OrderException;
 
 }

@@ -6,6 +6,7 @@ import com.wuliangit.shopos.entity.FavoritesGoods;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface FavoritesGoodsMapper extends BaseMapper<FavoritesGoods, Integer> {
 
@@ -25,4 +26,12 @@ public interface FavoritesGoodsMapper extends BaseMapper<FavoritesGoods, Integer
      * @return
      */
     int deleteCollectGoods(@Param("goodsId") Integer goodsId, @Param("memberId") Integer memberId);
+
+    /**
+     * 通过用户id和商品id获取用户商品收藏
+     * @param memberId
+     * @param goodsId
+     * @return
+     */
+    FavoritesGoods getFavoritesGoodsByUserIdAndGoodsId(@Param("memberId")Integer memberId,  @Param("goodsId")Integer goodsId);
 }

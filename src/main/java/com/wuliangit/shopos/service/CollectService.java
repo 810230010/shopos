@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
 import com.wuliangit.shopos.dto.ApiCollectStoreDTO;
+import com.wuliangit.shopos.exception.OptionException;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public interface CollectService {
      * @param goodsId
      * @return
      */
-    int addCollectGoods(Integer goodsId);
+    int addCollectGoods(Integer goodsId) throws Exception;
 
     /**
      * 删除收藏商品
@@ -45,7 +46,7 @@ public interface CollectService {
      * @param storeId
      * @return
      */
-    int addCollectStore(Integer storeId);
+    int addCollectStore(Integer storeId) throws Exception;
 
     /**
      * 删除收藏店铺

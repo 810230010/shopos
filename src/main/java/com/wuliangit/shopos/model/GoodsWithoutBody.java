@@ -25,7 +25,7 @@ public class GoodsWithoutBody {
 
     private BigDecimal price;
 
-    private Long carriage;
+    private BigDecimal carriage;
 
     private BigDecimal commission;
 
@@ -93,7 +93,7 @@ public class GoodsWithoutBody {
 
     private String area;
 
-    private Boolean check;
+    private Boolean isCheck;
 
     private Date sellTimeBegin;
 
@@ -172,11 +172,11 @@ public class GoodsWithoutBody {
         this.price = price;
     }
 
-    public Long getCarriage() {
+    public BigDecimal getCarriage() {
         return carriage;
     }
 
-    public void setCarriage(Long carriage) {
+    public void setCarriage(BigDecimal carriage) {
         this.carriage = carriage;
     }
 
@@ -445,11 +445,11 @@ public class GoodsWithoutBody {
     }
 
     public Boolean getCheck() {
-        return check;
+        return isCheck;
     }
 
     public void setCheck(Boolean check) {
-        this.check = check;
+        isCheck = check;
     }
 
     public Date getSellTimeBegin() {

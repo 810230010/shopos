@@ -24,4 +24,13 @@ public interface FavoritesStoreMapper extends BaseMapper<FavoritesStore, Integer
      * @return
      */
     int deleteCollectGoods(@Param("storeId") Integer storeId, @Param("memberId")Integer memberId);
+
+
+    /**
+     * 通过用户id和店铺id获取用户收藏的店铺
+     * @param memberId
+     * @param storeId
+     * @return
+     */
+    FavoritesStore getFavoritesStoreByUserIdAndStoreId(@Param("memberId")Integer memberId, @Param("storeId")Integer storeId);
 }

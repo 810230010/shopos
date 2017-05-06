@@ -101,7 +101,7 @@ public class ApiFilter extends AccessControlFilter {
 
         if (sign == null || timestamp == null || userId == null) {
             result.setCode(402);
-            result.setMsg("parameter of 'sign' and 'timestamp' and 'userId' could not be null, please check it again!");
+            result.setMsg("parameter of \'sign\' and \'timestamp\' and \'userId\' could not be null, please check it again!");
         }else{
             result.setCode(401);
             result.setMsg("unauthentication request! pelease login before request the api");

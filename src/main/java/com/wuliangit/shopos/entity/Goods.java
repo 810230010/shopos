@@ -22,7 +22,7 @@ public class Goods {
 
     private BigDecimal price;
 
-    private Long carriage;
+    private BigDecimal carriage;
 
     private BigDecimal commission;
 
@@ -90,7 +90,7 @@ public class Goods {
 
     private String area;
 
-    private Boolean check;
+    private Boolean isCheck;
 
     private Date sellTimeBegin;
 
@@ -170,11 +170,11 @@ public class Goods {
         this.price = price;
     }
 
-    public Long getCarriage() {
+    public BigDecimal getCarriage() {
         return carriage;
     }
 
-    public void setCarriage(Long carriage) {
+    public void setCarriage(BigDecimal carriage) {
         this.carriage = carriage;
     }
 
@@ -442,12 +442,12 @@ public class Goods {
         this.area = area == null ? null : area.trim();
     }
 
-    public Boolean getCheck() {
-        return check;
+    public Boolean getIsCheck() {
+        return isCheck;
     }
 
-    public void setCheck(Boolean check) {
-        this.check = check;
+    public void setIsCheck(Boolean isCheck) {
+        this.isCheck = isCheck;
     }
 
     public Date getSellTimeBegin() {

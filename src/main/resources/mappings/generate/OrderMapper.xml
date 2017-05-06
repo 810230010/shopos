@@ -16,7 +16,7 @@
     <result column="goods_amount" property="goodsAmount" jdbcType="DECIMAL" />
     <result column="order_amount" property="orderAmount" jdbcType="DECIMAL" />
     <result column="pd_amount" property="pdAmount" jdbcType="DECIMAL" />
-    <result column="shipping_fee" property="shippingFee" jdbcType="DECIMAL" />
+    <result column="carriage" property="carriage" jdbcType="DECIMAL" />
     <result column="evaluation_state" property="evaluationState" jdbcType="VARCHAR" />
     <result column="order_state" property="orderState" jdbcType="VARCHAR" />
     <result column="refund_state" property="refundState" jdbcType="VARCHAR" />
@@ -24,16 +24,15 @@
     <result column="delete_state" property="deleteState" jdbcType="VARCHAR" />
     <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
     <result column="order_from" property="orderFrom" jdbcType="VARCHAR" />
-    <result column="shipping_code" property="shippingCode" jdbcType="VARCHAR" />
+    <result column="carriage_name" property="carriageName" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="del_flag" property="delFlag" jdbcType="BIT" />
     <result column="order_name" property="orderName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     order_id, out_trade_no, trade_no, store_id, store_name, member_id, member_name, member_email, 
     payment_code, payment_time, finnshed_time, goods_amount, order_amount, pd_amount, 
-    shipping_fee, evaluation_state, order_state, refund_state, is_lock, delete_state, 
-    refund_amount, order_from, shipping_code, create_time, del_flag, order_name
+    carriage, evaluation_state, order_state, refund_state, is_lock, delete_state, refund_amount, 
+    order_from, carriage_name, create_time, order_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -53,20 +52,20 @@
       store_name, member_id, member_name, 
       member_email, payment_code, payment_time, 
       finnshed_time, goods_amount, order_amount, 
-      pd_amount, shipping_fee, evaluation_state, 
+      pd_amount, carriage, evaluation_state, 
       order_state, refund_state, is_lock, 
       delete_state, refund_amount, order_from, 
-      shipping_code, create_time, del_flag, 
-      order_name)
+      carriage_name, create_time, order_name
+      )
     values (#{outTradeNo,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
       #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
       #{memberEmail,jdbcType=VARCHAR}, #{paymentCode,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, 
       #{finnshedTime,jdbcType=TIMESTAMP}, #{goodsAmount,jdbcType=DECIMAL}, #{orderAmount,jdbcType=DECIMAL}, 
-      #{pdAmount,jdbcType=DECIMAL}, #{shippingFee,jdbcType=DECIMAL}, #{evaluationState,jdbcType=VARCHAR}, 
+      #{pdAmount,jdbcType=DECIMAL}, #{carriage,jdbcType=DECIMAL}, #{evaluationState,jdbcType=VARCHAR}, 
       #{orderState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
       #{deleteState,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DECIMAL}, #{orderFrom,jdbcType=VARCHAR}, 
-      #{shippingCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=BIT}, 
-      #{orderName,jdbcType=VARCHAR})
+      #{carriageName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{orderName,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Order" >
     <selectKey resultType="java.lang.Integer" keyProperty="orderId" order="AFTER" >
@@ -113,8 +112,8 @@
       <if test="pdAmount != null" >
         pd_amount,
       </if>
-      <if test="shippingFee != null" >
-        shipping_fee,
+      <if test="carriage != null" >
+        carriage,
       </if>
       <if test="evaluationState != null" >
         evaluation_state,
@@ -137,14 +136,11 @@
       <if test="orderFrom != null" >
         order_from,
       </if>
-      <if test="shippingCode != null" >
-        shipping_code,
+      <if test="carriageName != null" >
+        carriage_name,
       </if>
       <if test="createTime != null" >
         create_time,
-      </if>
-      <if test="delFlag != null" >
-        del_flag,
       </if>
       <if test="orderName != null" >
         order_name,
@@ -190,8 +186,8 @@
       <if test="pdAmount != null" >
         #{pdAmount,jdbcType=DECIMAL},
       </if>
-      <if test="shippingFee != null" >
-        #{shippingFee,jdbcType=DECIMAL},
+      <if test="carriage != null" >
+        #{carriage,jdbcType=DECIMAL},
       </if>
       <if test="evaluationState != null" >
         #{evaluationState,jdbcType=VARCHAR},
@@ -214,14 +210,11 @@
       <if test="orderFrom != null" >
         #{orderFrom,jdbcType=VARCHAR},
       </if>
-      <if test="shippingCode != null" >
-        #{shippingCode,jdbcType=VARCHAR},
+      <if test="carriageName != null" >
+        #{carriageName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="delFlag != null" >
-        #{delFlag,jdbcType=BIT},
       </if>
       <if test="orderName != null" >
         #{orderName,jdbcType=VARCHAR},
@@ -270,8 +263,8 @@
       <if test="pdAmount != null" >
         pd_amount = #{pdAmount,jdbcType=DECIMAL},
       </if>
-      <if test="shippingFee != null" >
-        shipping_fee = #{shippingFee,jdbcType=DECIMAL},
+      <if test="carriage != null" >
+        carriage = #{carriage,jdbcType=DECIMAL},
       </if>
       <if test="evaluationState != null" >
         evaluation_state = #{evaluationState,jdbcType=VARCHAR},
@@ -294,14 +287,11 @@
       <if test="orderFrom != null" >
         order_from = #{orderFrom,jdbcType=VARCHAR},
       </if>
-      <if test="shippingCode != null" >
-        shipping_code = #{shippingCode,jdbcType=VARCHAR},
+      <if test="carriageName != null" >
+        carriage_name = #{carriageName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="delFlag != null" >
-        del_flag = #{delFlag,jdbcType=BIT},
       </if>
       <if test="orderName != null" >
         order_name = #{orderName,jdbcType=VARCHAR},
@@ -324,7 +314,7 @@
       goods_amount = #{goodsAmount,jdbcType=DECIMAL},
       order_amount = #{orderAmount,jdbcType=DECIMAL},
       pd_amount = #{pdAmount,jdbcType=DECIMAL},
-      shipping_fee = #{shippingFee,jdbcType=DECIMAL},
+      carriage = #{carriage,jdbcType=DECIMAL},
       evaluation_state = #{evaluationState,jdbcType=VARCHAR},
       order_state = #{orderState,jdbcType=VARCHAR},
       refund_state = #{refundState,jdbcType=VARCHAR},
@@ -332,9 +322,8 @@
       delete_state = #{deleteState,jdbcType=VARCHAR},
       refund_amount = #{refundAmount,jdbcType=DECIMAL},
       order_from = #{orderFrom,jdbcType=VARCHAR},
-      shipping_code = #{shippingCode,jdbcType=VARCHAR},
+      carriage_name = #{carriageName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      del_flag = #{delFlag,jdbcType=BIT},
       order_name = #{orderName,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>

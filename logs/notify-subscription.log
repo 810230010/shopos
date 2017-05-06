@@ -1465,3 +1465,246 @@
 2017-05-06 17:09:50,875 - Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController].
 2017-05-06 17:09:50,880 - Shutting down EhCache CacheManager
 2017-05-06 17:09:50,897 - {dataSource-1} closed
+2017-05-06 17:23:17,384 - Root WebApplicationContext: initialization started
+2017-05-06 17:23:17,518 - Refreshing Root WebApplicationContext: startup date [Sat May 06 17:23:17 CST 2017]; root of context hierarchy
+2017-05-06 17:23:17,585 - Loading XML bean definitions from class path resource [spring-context.xml]
+2017-05-06 17:23:18,197 - Loading XML bean definitions from class path resource [spring-shiro.xml]
+2017-05-06 17:23:18,591 - Loading properties file from class path resource [shopos.properties]
+2017-05-06 17:23:18,607 - Loading properties file from class path resource [shopos.properties]
+2017-05-06 17:23:18,610 - Loading properties file from class path resource [shopos.properties]
+2017-05-06 17:23:18,619 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-05-06 17:23:18,938 - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:20,423 - {dataSource-1} inited
+2017-05-06 17:23:20,423 - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,918 - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,919 - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,928 - Bean 'memberMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,932 - Bean 'memberMapper' of type [class com.sun.proxy.$Proxy40] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,936 - Bean 'memberAdviceMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,938 - Bean 'memberAdviceMapper' of type [class com.sun.proxy.$Proxy42] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,939 - Bean 'memberServiceImpl' of type [class com.wuliangit.shopos.service.impl.MemberServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,950 - Bean 'storeJoininMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,953 - Bean 'storeJoininMapper' of type [class com.sun.proxy.$Proxy43] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,955 - Bean 'storeMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,957 - Bean 'storeMapper' of type [class com.sun.proxy.$Proxy44] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,958 - Bean 'storeServiceImpl' of type [class com.wuliangit.shopos.service.impl.StoreServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,969 - Bean 'adminMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,971 - Bean 'adminMapper' of type [class com.sun.proxy.$Proxy45] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,972 - Bean 'adminServiceImpl' of type [class com.wuliangit.shopos.service.impl.AdminServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,990 - Bean 'credentialsMatcher' of type [class org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:21,993 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2017-05-06 17:23:21,993 - Bean 'userRealm' of type [class com.wuliangit.shopos.common.shiro.realm.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,066 - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,067 - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,070 - Bean 'sessionFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.OnlineSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,096 - Initializing EhCache CacheManager
+2017-05-06 17:23:22,467 - Located valid 'tools.jar' at '/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre/../lib/tools.jar'
+2017-05-06 17:23:22,712 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent7762429545968014801.jar
+2017-05-06 17:23:22,712 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent7762429545968014801.jar
+2017-05-06 17:23:22,726 - using Agent sizeof engine
+2017-05-06 17:23:22,728 - using Agent sizeof engine
+2017-05-06 17:23:22,729 - Bean 'ehcacheManager' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,730 - Bean 'ehcacheManager' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,733 - Bean 'springCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,735 - Bean 'cacheManager' of type [class com.wuliangit.shopos.common.cache.SpringCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,744 - Bean 'sessionIdCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,746 - Bean 'sessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,752 - Bean 'subjectFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.StatelessAndOnlineWebSubjectFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,786 - Bean 'rememberMeCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,787 - Bean 'rememberMeManager' of type [class org.apache.shiro.web.mgt.CookieRememberMeManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,788 - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,820 - Bean 'adminFilter' of type [class com.wuliangit.shopos.common.shiro.filter.AdminFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,827 - Bean 'storeFilter' of type [class com.wuliangit.shopos.common.shiro.filter.StoreFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,835 - Bean 'kickoutSessionControlFilter' of type [class com.wuliangit.shopos.common.shiro.filter.KickoutSessionControlFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,841 - Bean 'logoutFilter' of type [class org.apache.shiro.web.filter.authc.LogoutFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:22,893 - Bean 'wxMpConfig' of type [class me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:23,221 - Bean 'wxMpService' of type [class me.chanjar.weixin.mp.api.WxMpServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:23,226 - Bean 'tokenManager' of type [class com.wuliangit.shopos.common.shiro.token.EhcacheTokenManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:23,226 - Bean 'weixinFilter' of type [class com.wuliangit.shopos.common.shiro.filter.WeixinFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:23,231 - Bean 'apiFilter' of type [class com.wuliangit.shopos.common.shiro.filter.ApiFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:23,233 - Bean 'util:map#2349f14d' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:23,233 - Bean 'util:map#2349f14d' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-05-06 17:23:23,764 - Trying to find Dozer configuration file: dozer.properties
+2017-05-06 17:23:23,773 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2017-05-06 17:23:23,778 - Initializing Dozer. Version: 5.5.0, Thread Name: main
+2017-05-06 17:23:23,793 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2017-05-06 17:23:23,795 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2017-05-06 17:23:23,795 - Initializing a new instance of dozer bean mapper.
+2017-05-06 17:23:23,820 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2017-05-06 17:23:23,829 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2017-05-06 17:23:24,162 - Root WebApplicationContext: initialization completed in 6775 ms
+2017-05-06 17:23:24,259 - New update(s) found: 2.6.5 [http://www.terracotta.org/confluence/display/release/Release+Notes+Ehcache+Core+2.6]. Please check http://ehcache.org for the latest version.
+2017-05-06 17:23:24,994 - FrameworkServlet 'spring': initialization started
+2017-05-06 17:23:24,997 - Refreshing WebApplicationContext for namespace 'spring-servlet': startup date [Sat May 06 17:23:24 CST 2017]; parent: Root WebApplicationContext
+2017-05-06 17:23:24,998 - Loading XML bean definitions from class path resource [spring-mvc.xml]
+2017-05-06 17:23:25,487 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-05-06 17:23:26,087 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+2017-05-06 17:23:26,284 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2017-05-06 17:23:26,435 - Mapped "{[/admin/brand/search]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminBrandController.search(int,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,437 - Mapped "{[/admin/brand/editBrand],methods=[POST]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminBrandController.updateBrand(com.wuliangit.shopos.entity.Brand)
+2017-05-06 17:23:26,437 - Mapped "{[/admin/brand/searchBrands]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminBrandController.searchBrands(int,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,438 - Mapped "{[/admin/brand/updateStoreJoinBrandStatus]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminBrandController.updateStoreJoinBrandStatus(java.lang.Integer,java.lang.String)
+2017-05-06 17:23:26,438 - Mapped "{[/admin/brand/brandListPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminBrandController.brandListPage()
+2017-05-06 17:23:26,438 - Mapped "{[/admin/brand/addPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminBrandController.addPage(org.springframework.ui.Model)
+2017-05-06 17:23:26,438 - Mapped "{[/admin/brand/editPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminBrandController.addPage(org.springframework.ui.Model,java.lang.Integer)
+2017-05-06 17:23:26,439 - Mapped "{[/admin/brand/checkBrandName],methods=[POST]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminBrandController.checkBrandNameExistence(java.lang.String)
+2017-05-06 17:23:26,439 - Mapped "{[/admin/brand/deleteBrand],methods=[GET]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminBrandController.deleteBrand(java.lang.Integer)
+2017-05-06 17:23:26,439 - Mapped "{[/admin/brand/validateBrandPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminBrandController.jumpToValidateBrandPage()
+2017-05-06 17:23:26,439 - Mapped "{[/admin/brand/validateStoreBrandPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminBrandController.turnToValidateStoreBrandPage()
+2017-05-06 17:23:26,439 - Mapped "{[/admin/brand/searchStoreJoinBrands]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminBrandController.searchStoreJoinBrands(int,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,441 - Mapped "{[/admin/brand/updateStatus]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminBrandController.updateBrandStatus(java.lang.Integer,java.lang.String)
+2017-05-06 17:23:26,441 - Mapped "{[/admin/brand/addBrand],methods=[POST]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminBrandController.addBrand(com.wuliangit.shopos.entity.Brand)
+2017-05-06 17:23:26,443 - Mapped "{[/admin/test]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminController.logout()
+2017-05-06 17:23:26,450 - Mapped "{[/admin/goodsCategory/add]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminGoodsCategoryController.add(com.wuliangit.shopos.entity.GoodsCategory)
+2017-05-06 17:23:26,450 - Mapped "{[/admin/goodsCategory/delete]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminGoodsCategoryController.delete(java.lang.Integer)
+2017-05-06 17:23:26,450 - Mapped "{[/admin/goodsCategory/search]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminGoodsCategoryController.search(int,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,450 - Mapped "{[/admin/goodsCategory/addPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminGoodsCategoryController.addPage(org.springframework.ui.Model)
+2017-05-06 17:23:26,451 - Mapped "{[/admin/goodsCategory/editPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminGoodsCategoryController.editPage(org.springframework.ui.Model,java.lang.Integer)
+2017-05-06 17:23:26,451 - Mapped "{[/admin/goodsCategory/get/grade]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminGoodsCategoryController.getGrade(java.lang.Integer)
+2017-05-06 17:23:26,451 - Mapped "{[/admin/goodsCategory/edit]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminGoodsCategoryController.edit(com.wuliangit.shopos.entity.GoodsCategory)
+2017-05-06 17:23:26,451 - Mapped "{[/admin/goodsCategory/listPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminGoodsCategoryController.listPage()
+2017-05-06 17:23:26,451 - Mapped "{[/admin/goodsCategory/get/all]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminGoodsCategoryController.getAll()
+2017-05-06 17:23:26,452 - Mapped "{[/admin/goods/add]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminGoodsController.add(com.wuliangit.shopos.entity.Goods,java.lang.String)
+2017-05-06 17:23:26,454 - Mapped "{[/admin/goods/addPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminGoodsController.addPage(org.springframework.ui.Model)
+2017-05-06 17:23:26,454 - Mapped "{[/admin/goods/listPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminGoodsController.listPage()
+2017-05-06 17:23:26,456 - Mapped "{[/admin/index]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminLoginController.viewToIndex(org.springframework.ui.Model)
+2017-05-06 17:23:26,456 - Mapped "{[/admin/login],methods=[GET]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminLoginController.login()
+2017-05-06 17:23:26,456 - Mapped "{[/admin/login],methods=[POST]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminLoginController.login(org.springframework.ui.Model,java.lang.String,java.lang.String)
+2017-05-06 17:23:26,456 - Mapped "{[/admin/logout],methods=[GET]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminLoginController.logout()
+2017-05-06 17:23:26,458 - Mapped "{[/admin/member/memberList]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminMemberController.memberList(org.springframework.ui.Model)
+2017-05-06 17:23:26,458 - Mapped "{[/admin/member/adviceListPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminMemberController.adviceListPage()
+2017-05-06 17:23:26,459 - Mapped "{[/admin/member/adviceList]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminMemberController.getAdviceList(java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String)
+2017-05-06 17:23:26,459 - Mapped "{[/admin/member/updateAdviceStatus]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminMemberController.updateAdviceScanStatus(java.lang.Integer,java.lang.String)
+2017-05-06 17:23:26,459 - Mapped "{[/admin/member/getMemberList]}" onto public com.wuliangit.shopos.common.controller.PageResult com.wuliangit.shopos.controller.admin.AdminMemberController.getMemberList(java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String)
+2017-05-06 17:23:26,459 - Mapped "{[/admin/member/deleteMember]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminMemberController.deleteMember(java.lang.Integer)
+2017-05-06 17:23:26,460 - Mapped "{[/admin/member/updateMemberState]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminMemberController.updateMemberState(java.lang.Integer,java.lang.String)
+2017-05-06 17:23:26,462 - Mapped "{[/admin/setting/mailSettingPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminSettingController.mailPage()
+2017-05-06 17:23:26,462 - Mapped "{[/admin/setting/bucketSettingPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminSettingController.bucketSettingPage(org.springframework.ui.Model)
+2017-05-06 17:23:26,463 - Mapped "{[/admin/setting/updateMail]}" onto public com.wuliangit.shopos.common.controller.RestResult com.wuliangit.shopos.controller.admin.AdminSettingController.updateMail(java.lang.String,java.lang.String,java.lang.String)
+2017-05-06 17:23:26,463 - Mapped "{[/admin/setting/paySettingPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminSettingController.paySettingPage(org.springframework.ui.Model)
+2017-05-06 17:23:26,463 - Mapped "{[/admin/setting/updateAliPaySetting]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminSettingController.updateAliPaySetting(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+2017-05-06 17:23:26,463 - Mapped "{[/admin/setting/updateBucketSetting]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminSettingController.updateBucketSetting(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+2017-05-06 17:23:26,463 - Mapped "{[/admin/setting/getMailSetting]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminSettingController.getMailSetting()
+2017-05-06 17:23:26,466 - Mapped "{[/admin/store/search]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminStoreController.search(int,java.lang.String,java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,466 - Mapped "{[/admin/store/applyListPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminStoreController.applyListPage()
+2017-05-06 17:23:26,466 - Mapped "{[/admin/store/storeListPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminStoreController.storeListPage()
+2017-05-06 17:23:26,467 - Mapped "{[/admin/store/reject],methods=[POST]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminStoreController.updateJoininStoreStatus(java.lang.String,java.lang.Integer)
+2017-05-06 17:23:26,467 - Mapped "{[/admin/store/applyDetailPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminStoreController.jumpToStoreJoininDetail(java.lang.Integer,org.springframework.ui.Model)
+2017-05-06 17:23:26,467 - Mapped "{[/admin/store/pass],methods=[POST]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminStoreController.passApplyForJoininStore(java.lang.Integer)
+2017-05-06 17:23:26,467 - Mapped "{[/admin/store/getStoreList]}" onto public com.wuliangit.shopos.common.controller.PageResult com.wuliangit.shopos.controller.admin.AdminStoreController.getStoreList(java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String)
+2017-05-06 17:23:26,468 - Mapped "{[/admin/store/updateStoreState]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminStoreController.updateStoreState(java.lang.Integer,java.lang.String)
+2017-05-06 17:23:26,468 - Mapped "{[/admin/store/storeDetailPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminStoreController.storeDetailPage(java.lang.Integer,org.springframework.ui.Model)
+2017-05-06 17:23:26,470 - Mapped "{[/admin/test/page1]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminTestController.page1(org.springframework.ui.Model)
+2017-05-06 17:23:26,470 - Mapped "{[/admin/test/test1]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminTestController.test1(java.lang.String)
+2017-05-06 17:23:26,471 - Mapped "{[/admin/test/exception]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminTestController.login(java.lang.Integer) throws java.lang.Exception
+2017-05-06 17:23:26,472 - Mapped "{[/admin/tuike/checkListPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminTuikeController.checkListPage()
+2017-05-06 17:23:26,473 - Mapped "{[/admin/tuike/tuikeListPage]}" onto public java.lang.String com.wuliangit.shopos.controller.admin.AdminTuikeController.tuikeListPage()
+2017-05-06 17:23:26,473 - Mapped "{[/admin/tuike/getCheckList]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminTuikeController.getCheckList(int,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,473 - Mapped "{[/admin/tuike/checkOperation]}" onto public com.wuliangit.shopos.common.controller.RestResult com.wuliangit.shopos.controller.admin.AdminTuikeController.checkOperation(java.lang.Integer,java.lang.String)
+2017-05-06 17:23:26,473 - Mapped "{[/admin/tuike/getTuikeList]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminTuikeController.getTuikeList(int,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,473 - Mapped "{[/admin/tuike/forbiddenTuike]}" onto public com.wuliangit.shopos.common.controller.RestResult com.wuliangit.shopos.controller.admin.AdminTuikeController.forbiddenTuike(java.lang.Integer,java.lang.String)
+2017-05-06 17:23:26,475 - Mapped "{[/admin/util/qiniu/uptoken]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminUtilController.getUpToken()
+2017-05-06 17:23:26,475 - Mapped "{[/admin/util/donothing]}" onto public java.lang.Object com.wuliangit.shopos.controller.admin.AdminUtilController.donothing()
+2017-05-06 17:23:26,477 - Mapped "{[/api/v1/member/address/default/{addressId}]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MAddressController.setDefaultAddress(java.lang.Integer)
+2017-05-06 17:23:26,477 - Mapped "{[/api/v1/member/address/delete/{addressId}]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MAddressController.deleteAddress(java.lang.Integer)
+2017-05-06 17:23:26,477 - Mapped "{[/api/v1/member/address/update/{addressId}]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MAddressController.updateAddress(com.wuliangit.shopos.entity.Address)
+2017-05-06 17:23:26,477 - Mapped "{[/api/v1/member/address/get-default]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MAddressController.getDefaultAddress()
+2017-05-06 17:23:26,478 - Mapped "{[/api/v1/member/address/list]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MAddressController.addressList(java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,478 - Mapped "{[/api/v1/member/address/add]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MAddressController.addAddress(com.wuliangit.shopos.entity.Address)
+2017-05-06 17:23:26,479 - Mapped "{[/api/v1/member/cart/list]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCartController.getCartList(java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,480 - Mapped "{[/api/v1/member/cart/delete]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCartController.deleteCartGoods(java.lang.Integer)
+2017-05-06 17:23:26,480 - Mapped "{[/api/v1/member/cart/cart/add]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCartController.addCartGoods(java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,480 - Mapped "{[/api/v1/member/cart/update]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCartController.updateCartGoods(java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,482 - Mapped "{[/api/v1/member/collect/store/list]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCollectController.getCollectStoreList(java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,482 - Mapped "{[/api/v1/member/collect/goods/list]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCollectController.getCollectGoodsList(java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,482 - Mapped "{[/api/v1/member/collect/goods/add]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCollectController.addCollectGoods(java.lang.Integer) throws java.lang.Exception
+2017-05-06 17:23:26,482 - Mapped "{[/api/v1/member/collect/goods/delete]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCollectController.deleteCollectGoods(java.lang.Integer)
+2017-05-06 17:23:26,483 - Mapped "{[/api/v1/member/collect/store/add]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCollectController.addCollectStore(java.lang.Integer) throws java.lang.Exception
+2017-05-06 17:23:26,483 - Mapped "{[/api/v1/member/collect/store/delete]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCollectController.deleteCollectStore(java.lang.Integer)
+2017-05-06 17:23:26,483 - Mapped "{[/api/v1/public/common/area]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MCommonController.getArea(java.lang.Integer)
+2017-05-06 17:23:26,484 - Mapped "{[/api/v1/public/goods/get]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MGoodsController.getGoods(java.lang.Integer)
+2017-05-06 17:23:26,484 - Mapped "{[/api/v1/public/goods/search]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MGoodsController.goodsSearch(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Integer)
+2017-05-06 17:23:26,488 - Mapped "{[/api/v1/member/register]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.register(java.lang.String,java.lang.String,java.lang.String)
+2017-05-06 17:23:26,488 - Mapped "{[/api/v1/member/info]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.getUserInfo()
+2017-05-06 17:23:26,488 - Mapped "{[/api/v1/member/register/getCode]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.getRegisterCode(java.lang.String)
+2017-05-06 17:23:26,489 - Mapped "{[/api/v1/member/register/codeCheck]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.getRegisterCodeCheck(java.lang.String,java.lang.String)
+2017-05-06 17:23:26,489 - Mapped "{[/api/v1/member/repass]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.repass(java.lang.String,java.lang.String,java.lang.Integer)
+2017-05-06 17:23:26,489 - Mapped "{[/api/v1/member/repass/getCode]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.getRepassCode(java.lang.String)
+2017-05-06 17:23:26,489 - Mapped "{[/api/v1/member/info/update]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.updateUserInfo(com.wuliangit.shopos.dto.ApiMemberUpdateDTO)
+2017-05-06 17:23:26,489 - Mapped "{[/api/v1/member/login],methods=[POST]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.login(java.lang.String,java.lang.String)
+2017-05-06 17:23:26,489 - Mapped "{[/api/v1/member/logout]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.logout()
+2017-05-06 17:23:26,489 - Mapped "{[/api/v1/member/authenticate]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MMemberController.Authenticate(java.lang.String,java.lang.String,java.lang.Integer)
+2017-05-06 17:23:26,491 - Mapped "{[/api/v1/pay/order/prepare1],methods=[POST]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MPayController.preparePay2()
+2017-05-06 17:23:26,491 - Mapped "{[/api/v1/pay/alipay/notify]}" onto public void com.wuliangit.shopos.controller.api.MPayController.alipayNotify(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws com.alipay.api.AlipayApiException,java.io.IOException
+2017-05-06 17:23:26,491 - Mapped "{[/api/v1/pay/order/prepare],methods=[POST]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MPayController.createOrder(java.lang.String,java.lang.Integer,java.lang.String,java.math.BigDecimal) throws com.wuliangit.shopos.exception.OrderException
+2017-05-06 17:23:26,492 - Mapped "{[/api/v1/member/new-store]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MStoreController.applyStore(com.wuliangit.shopos.entity.StoreJoinin)
+2017-05-06 17:23:26,494 - Mapped "{[/api/v1/test/api2]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MTestController.api2(java.lang.Integer)
+2017-05-06 17:23:26,494 - Mapped "{[/api/v1/test/api]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MTestController.api1(java.lang.Integer)
+2017-05-06 17:23:26,495 - Mapped "{[/api/v1/member/tuike/apply]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MTuikeController.tuikeApply()
+2017-05-06 17:23:26,496 - Mapped "{[/api/v1/member/tuike/earnings]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MTuikeController.getEarnings()
+2017-05-06 17:23:26,496 - Mapped "{[/api/v1/member/tuike/earnings/cash]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MTuikeController.earningsCash()
+2017-05-06 17:23:26,496 - Mapped "{[/api/v1/util/qiniu/uptoken]}" onto public java.lang.Object com.wuliangit.shopos.controller.api.MUtilController.getUpToken()
+2017-05-06 17:23:26,500 - Mapped "{[/store/brand/search]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreBrandController.searchBrands(int,java.lang.String,java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,500 - Mapped "{[/store/brand/checkBrandName]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreBrandController.checkBrandNameExistence(java.lang.String)
+2017-05-06 17:23:26,501 - Mapped "{[/store/brand/listPage]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreBrandController.jumpToBrandListPage()
+2017-05-06 17:23:26,501 - Mapped "{[/store/brand/updateBrandStatus]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreBrandController.changOnshelfStatus(java.lang.Integer,java.lang.String)
+2017-05-06 17:23:26,501 - Mapped "{[/store/brand/joinPage]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreBrandController.jumpToDetailPage()
+2017-05-06 17:23:26,501 - Mapped "{[/store/brand/applyForJoinBrand]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreBrandController.applyForJoinBrand(java.lang.Integer)
+2017-05-06 17:23:26,501 - Mapped "{[/store/brand/addPage]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreBrandController.jumpToAddBrandPage(org.springframework.ui.Model)
+2017-05-06 17:23:26,502 - Mapped "{[/store/brand/deleteBrand]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreBrandController.deleteStoreBrand(java.lang.Integer)
+2017-05-06 17:23:26,502 - Mapped "{[/store/brand/allBrands]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreBrandController.getAllBrands()
+2017-05-06 17:23:26,502 - Mapped "{[/store/brand/addBrand]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreBrandController.addBrand(com.wuliangit.shopos.entity.Brand)
+2017-05-06 17:23:26,503 - Mapped "{[/store/brand/get/all]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreBrandController.getAll()
+2017-05-06 17:23:26,504 - Mapped "{[/store/goodsCategory/get/grade]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreGoodsCategoryController.getGrade(java.lang.Integer)
+2017-05-06 17:23:26,507 - Mapped "{[/store/goods/add]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreGoodsController.add(com.wuliangit.shopos.entity.Goods,java.lang.String)
+2017-05-06 17:23:26,507 - Mapped "{[/store/goods/delete]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreGoodsController.delete(java.lang.Integer)
+2017-05-06 17:23:26,507 - Mapped "{[/store/goods/search]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreGoodsController.search(int,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Integer)
+2017-05-06 17:23:26,507 - Mapped "{[/store/goods/addPage]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreGoodsController.addPage(org.springframework.ui.Model)
+2017-05-06 17:23:26,508 - Mapped "{[/store/goods/editPage]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreGoodsController.editPage(org.springframework.ui.Model,java.lang.Integer)
+2017-05-06 17:23:26,508 - Mapped "{[/store/goods/edit]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreGoodsController.edit(com.wuliangit.shopos.entity.Goods)
+2017-05-06 17:23:26,508 - Mapped "{[/store/goods/listPage]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreGoodsController.listPage()
+2017-05-06 17:23:26,508 - Mapped "{[/store/goods/goodsSku]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreGoodsController.goodsSku(int,java.lang.Integer)
+2017-05-06 17:23:26,508 - Mapped "{[/store/goods/updateSku]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreGoodsController.updateSku(java.lang.String)
+2017-05-06 17:23:26,508 - Mapped "{[/store/goods/editSkuPage]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreGoodsController.editSkuPage(org.springframework.ui.Model,java.lang.Integer)
+2017-05-06 17:23:26,508 - Mapped "{[/store/goods/deleteImg]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreGoodsController.deleteImg()
+2017-05-06 17:23:26,510 - Mapped "{[/store/index]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreLoginController.viewToIndex(org.springframework.ui.Model)
+2017-05-06 17:23:26,511 - Mapped "{[/store/login],methods=[GET]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreLoginController.login()
+2017-05-06 17:23:26,511 - Mapped "{[/store/login],methods=[POST]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreLoginController.login(org.springframework.ui.Model,java.lang.String,java.lang.String)
+2017-05-06 17:23:26,511 - Mapped "{[/store/logout],methods=[GET]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreLoginController.logout()
+2017-05-06 17:23:26,513 - Mapped "{[/store/setting/update]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreSettingController.setting(com.wuliangit.shopos.dto.StoreUpdateDTO)
+2017-05-06 17:23:26,513 - Mapped "{[/store/setting]}" onto public java.lang.String com.wuliangit.shopos.controller.store.StoreSettingController.indexPage(org.springframework.ui.Model)
+2017-05-06 17:23:26,514 - Mapped "{[/store/util/donothing]}" onto public java.lang.Object com.wuliangit.shopos.controller.store.StoreUtilController.donothing()
+2017-05-06 17:23:27,358 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-servlet': startup date [Sat May 06 17:23:24 CST 2017]; parent: Root WebApplicationContext
+2017-05-06 17:23:27,369 - Detected @ModelAttribute methods in adminGlobalHandler
+2017-05-06 17:23:27,370 - Detected @ModelAttribute methods in storeGlobalHandler
+2017-05-06 17:23:27,370 - Detected @InitBinder methods in storeGlobalHandler
+2017-05-06 17:23:28,098 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-servlet': startup date [Sat May 06 17:23:24 CST 2017]; parent: Root WebApplicationContext
+2017-05-06 17:23:28,102 - Detected @ModelAttribute methods in adminGlobalHandler
+2017-05-06 17:23:28,102 - Detected @ModelAttribute methods in storeGlobalHandler
+2017-05-06 17:23:28,102 - Detected @InitBinder methods in storeGlobalHandler
+2017-05-06 17:23:28,658 - Detected @ExceptionHandler methods in adminGlobalHandler
+2017-05-06 17:23:28,658 - Detected @ExceptionHandler methods in restExceptionHandler
+2017-05-06 17:23:28,658 - Detected @ExceptionHandler methods in storeGlobalHandler
+2017-05-06 17:23:28,658 - Detected @ExceptionHandler methods in webGlobalHandler
+2017-05-06 17:23:28,838 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-servlet': startup date [Sat May 06 17:23:24 CST 2017]; parent: Root WebApplicationContext
+2017-05-06 17:23:28,840 - Detected @ModelAttribute methods in adminGlobalHandler
+2017-05-06 17:23:28,840 - Detected @ModelAttribute methods in storeGlobalHandler
+2017-05-06 17:23:28,840 - Detected @InitBinder methods in storeGlobalHandler
+2017-05-06 17:23:29,091 - Loading Velocity config from [class path resource [velocity.properties]]
+2017-05-06 17:23:29,101 - ClasspathResourceLoader with name 'springMacro' added to configured VelocityEngine
+2017-05-06 17:23:29,238 - Using VelocityToolboxView instead of default VelocityView due to specified toolboxConfigLocation
+2017-05-06 17:23:29,389 - FrameworkServlet 'spring': initialization completed in 4394 ms
+2017-05-06 17:23:33,876 - Enabling session validation scheduler...
+2017-05-06 17:23:34,005 - Using config file '/WEB-INF/classes/velocity-toolbox.xml'
+2017-05-06 17:23:34,006 - XMLToolboxManager has been deprecated. Please use org.apache.velocity.tools.ToolboxFactory instead.
+2017-05-06 17:23:34,006 - ServletToolboxManager has been deprecated. Please use org.apache.velocity.tools.ToolboxFactory instead.
+2017-05-06 17:23:35,949 - ==>  Preparing: select admin_id, username, password, login_time, login_num, salt, create_time, del_flag from t_admin where username = ? 
+2017-05-06 17:23:36,078 - ==> Parameters: admin(String)
+2017-05-06 17:23:36,129 - <==    Columns: admin_id, username, password, login_time, login_num, salt, create_time, del_flag
+2017-05-06 17:23:36,135 - <==        Row: 1, admin, 9d0af500942d61f8902e02f25cae0b8a, 2017-03-15 20:29:43.0, 1, 9ea0e725a6a9fa946ebe017e5f56c68f, 2017-03-15 20:29:43.0, 0
+2017-05-06 17:23:36,138 - <==      Total: 1
+2017-05-06 17:23:36,146 - ==>  Preparing: select admin_id, username, password, login_time, login_num, salt, create_time, del_flag from t_admin where username = ? 
+2017-05-06 17:23:36,147 - ==> Parameters: admin(String)
+2017-05-06 17:23:36,190 - <==    Columns: admin_id, username, password, login_time, login_num, salt, create_time, del_flag
+2017-05-06 17:23:36,193 - <==        Row: 1, admin, 9d0af500942d61f8902e02f25cae0b8a, 2017-03-15 20:29:43.0, 1, 9ea0e725a6a9fa946ebe017e5f56c68f, 2017-03-15 20:29:43.0, 0
+2017-05-06 17:23:36,203 - <==      Total: 1

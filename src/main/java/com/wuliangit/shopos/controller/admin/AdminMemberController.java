@@ -8,7 +8,6 @@ import com.wuliangit.shopos.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -112,13 +111,30 @@ public class AdminMemberController {
      */
     @RequestMapping("/updateAdviceStatus")
     @ResponseBody
-    public String updateAdviceScanStatus(Integer adviceId, String type){
-        if("0".equals(type)){
+    public String updateAdviceScanStatus(Integer adviceId, String type) {
+        if ("0".equals(type)) {
             memberService.updateAdviceLookStatus(adviceId);
-        }else{
+        } else {
             memberService.deleteAdvice(adviceId);
         }
         return "ok";
+    }
+
+     /** 更改会员状态
+     * @param memberId
+     * @param state
+     * @return
+     */
+    @RequestMapping("/updateMemberState")
+    @ResponseBody
+    public Object updateMemberState(Integer memberId, String state){
+        RestResult result = new RestResult();
+        Integer info = memberService.updateMemberState(memberId,state);
+        if(info != 1){
+            result.put("code",RestResult.CODE_SERVERERROR);
+            result.put("msg",RestResult.MSG_ERROR);
+        }
+        return result;
     }
 
 }

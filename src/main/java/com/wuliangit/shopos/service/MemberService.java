@@ -104,4 +104,10 @@ public interface MemberService {
      */
     int deleteAdvice(Integer adviceId);
 
+     /** 更改会员状态
+     * @param memberId
+     * @param state
+     * @return
+     */
+    Integer updateMemberState(Integer memberId, String state);
 }

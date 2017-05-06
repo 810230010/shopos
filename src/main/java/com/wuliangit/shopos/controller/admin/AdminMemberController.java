@@ -3,6 +3,7 @@ package com.wuliangit.shopos.controller.admin;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.MemberListDTO;
+import com.wuliangit.shopos.entity.MemberAdvice;
 import com.wuliangit.shopos.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,6 +72,53 @@ public class AdminMemberController {
             result.put("msg",RestResult.MSG_ERROR);
         }
         return result;
+    }
+
+    /**
+     * 跳转到会员留言列表
+     * @return
+     */
+    @RequestMapping("/adviceListPage")
+    public String adviceListPage() {
+        return "/admin/member/advice_list";
+    }
+    /**
+     * 会员留言列表
+     * @param page
+     * @param pageSize
+     * @param draw
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    @RequestMapping("/adviceList")
+    @ResponseBody
+    public Object getAdviceList(@RequestParam(value = "page", required = false, defaultValue = "1")Integer page,
+                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                @RequestParam("draw") Integer draw,
+                                @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                                @RequestParam(value = "orderType", required = false) String orderType,
+                                @RequestParam(value = "searchKey", required = false) String searchKey) {
+        List<MemberAdvice> advices = memberService.getMemberAdviceList(page, pageSize, orderColumn, orderType, searchKey);
+        return new PageResult<MemberAdvice>(advices, draw);
+    }
+
+    /**
+     * 更改留言状态
+     * @param adviceId
+     * @param type 0表示修改为已读  1表示删除标志
+     * @return
+     */
+    @RequestMapping("/updateAdviceStatus")
+    @ResponseBody
+    public String updateAdviceScanStatus(Integer adviceId, String type){
+        if("0".equals(type)){
+            memberService.updateAdviceLookStatus(adviceId);
+        }else{
+            memberService.deleteAdvice(adviceId);
+        }
+        return "ok";
     }
 
 }

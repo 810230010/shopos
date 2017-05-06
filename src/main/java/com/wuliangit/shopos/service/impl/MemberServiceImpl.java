@@ -4,17 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.dao.MemberAdviceMapper;
 import com.wuliangit.shopos.dao.MemberMapper;
 import com.wuliangit.shopos.dto.MemberListDTO;
 import com.wuliangit.shopos.entity.Member;
+import com.wuliangit.shopos.entity.MemberAdvice;
 import com.wuliangit.shopos.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by nilme on 2017/3/15.
@@ -25,6 +24,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberMapper memberMapper;
+
+    @Autowired
+    private MemberAdviceMapper memberAdviceMapper;
 
     @Override
     public Set<String> getRoles(String username) {
@@ -80,5 +82,21 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Integer deleteMember(Integer memberId) {
         return memberMapper.deleteMember(memberId);
+    }
+
+    @Override
+    public ArrayList<MemberAdvice> getMemberAdviceList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
+        PageHelper.startPage(page, pageSize);
+        return memberAdviceMapper.queryMemberAdviceList(orderColumn, orderType, searchKey);
+    }
+
+    @Override
+    public int updateAdviceLookStatus(Integer adviceId) {
+        return memberAdviceMapper.updateAdviceLookStatus(adviceId);
+    }
+
+    @Override
+    public int deleteAdvice(Integer adviceId) {
+        return memberAdviceMapper.deleteByPrimaryKey(adviceId);
     }
 }

@@ -39,20 +39,16 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
     Integer updateStoreState(@Param("storeId") Integer storeId,@Param("state") String state);
 
     /**
-     * 获取商家详情
-     * @param storeId
-     * @return
-     */
-<<<<<<< HEAD
-    int addStoreBrand(@Param("storeId") Integer storeId, @Param("brandId") Integer brandId);
-
-    /**
      * 获取店铺简要信息
      * @param storeId
      * @return
      */
     StoreMin getStoreMinByStoreId(Integer storeId);
-=======
+
+    /**
+     * 获取商家详情
+     * @param storeId
+     * @return
+     */
     StoreDetailDTO storeDetailPage(Integer storeId);
->>>>>>> 2487f0453c5ef144c3cec580ecb6fccdf9f26d14
 }

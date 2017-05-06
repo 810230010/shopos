@@ -6,53 +6,54 @@
         <div class="wrapper wrapper-content" style="height: 1000px">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <span class="label pull-right"><i class="fa fa-cny fa-2x"></i></span>
-                            <h5>今日销售总额</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">275,800</h1>
-                            <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-                            <small>New orders</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <span class="label pull-right"><i class="fa fa-list-alt fa-2x"></i></span>
-                            <h5>订单</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">275,800</h1>
-                            <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-                            <small>New orders</small>
+                    <div class="widget style1">
+                        <div class="row">
+                            <div class="col-xs-4 text-center">
+                                <i class="fa fa-trophy fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Today income </span>
+                                <h2 class="font-bold">$ 4,232</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <span class="label pull-right"><i class="fa fa-comments-o fa-2x"></i></span>
-                            <h5>今日评论数</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">275,800</h1>
-                            <small>New comments</small>
+                    <div class="widget style1 navy-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-cloud fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> 今日订单数 </span>
+                                <h2 class="font-bold">1</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <span class="label pull-right"><i class="fa fa-users fa-2x"></i></span>
-                            <h5>今日访问量</h5>
+                    <div class="widget style1 lazur-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-comment-o fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> 今日评论数 </span>
+                                <h2 class="font-bold">1</h2>
+                            </div>
                         </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">275,800</h1>
-                            <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-                            <small>New orders</small>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="widget style1 yellow-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-users fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> 今日评论数 </span>
+                                <h2 class="font-bold">1</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +83,6 @@
                         </div>
                     </div>
                 </div>
-##                <div class="col-sm-4"></div>
                 <div style="background-color:white;border-left:1px solid silver;width:46%;float:right;margin-right:16px">
                     <div class="ibox">
                         <div class="ibox-title">
@@ -110,36 +110,36 @@
                     </div>
                 </div>
                 <div class="col-lg-12" style="height:40px"></div>
-                <div class="col-lg-12" style="background-color:white" style="position:relative;">
+                <div class="col-lg-12" style="background-color:white">
                     <div class="ibox">
                         <div class="ibox-content">
                             <div class="col-lg-2 text-center">
-                                <h5><i class="fa fa-file-text fa-3x"></i></h5>
+                                <h5 class="widget style1 yellow-bg"><i class="fa fa-file-text fa-3x"></i></h5>
                                 <small>未确认订单</small>
                                 <h1 class="no-margins">0</h1>
                             </div>
                             <div class="col-lg-2 text-center">
-                                <h5><i class="fa fa-cc-paypal fa-3x"></i></h5>
+                                <h5 class="widget style1 lazur-bg"><i class="fa fa-cc-paypal fa-3x"></i></h5>
                                 <small>待支付订单</small>
                                 <h1 class="no-margins">0</h1>
                             </div>
                             <div class="col-lg-2 text-center">
-                                <h5><i class="fa fa-truck fa-3x"></i></h5>
+                                <h5 class="widget style1 red-bg"><i class="fa fa-truck fa-3x"></i></h5>
                                 <small>待发货订单</small>
                                 <h1 class="no-margins">0</h1>
                             </div>
                             <div class="col-lg-2 text-center">
-                                <h5><i class="fa fa-check-square fa-3x"></i></h5>
+                                <h5 class="widget style1 black-bg"><i class="fa fa-check-square fa-3x"></i></h5>
                                 <small>已成交订单</small>
                                 <h1 class="no-margins">0</h1>
                             </div>
                             <div class="col-lg-2 text-center">
-                                <h5><i class="fa fa-history fa-3x"></i></h5>
+                                <h5 class="widget style1 "><i class="fa fa-history fa-3x"></i></h5>
                                 <small>部分发货订单</small>
                                 <h1 class="no-margins">0</h1>
                             </div>
                             <div class="col-lg-2 text-center">
-                                <h5><i class="fa fa-frown-o fa-3x"></i></h5>
+                                <h5 class="widget style1 yellow-bg"><i class="fa fa-frown-o fa-3x"></i></h5>
                                 <small>用户退款申请</small>
                                 <h1 class="no-margins">0</h1>
                             </div>

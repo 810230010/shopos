@@ -38,4 +38,12 @@ public interface MemberMapper extends BaseMapper<Member, Integer> {
      * @return
      */
     Integer deleteMember(Integer memberId);
+
+    /**
+     * 更改会员状态
+     * @param memberId
+     * @param state
+     * @return
+     */
+    Integer updateMemberState(Integer memberId, String state);
 }

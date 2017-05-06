@@ -76,9 +76,6 @@
                     return [
                         '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
                         '删除 <i class="fa fa-times"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action state" href="javascript:void(0)" style="margin-left: 10px;">',
-                        '更改状态 <i class="fa fa-check"></i>',
                         '</a>'
                     ].join('');
                 }},
@@ -145,11 +142,6 @@
                             });
                 }
             });
-        });
-        table.on( 'click', '.state', function () {
-            var tr = $(this).closest('tr');
-            var data = table.row(tr).data();
-            $.operation(data);
         });
     });
 </script>

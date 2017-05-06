@@ -8,6 +8,7 @@ import com.wuliangit.shopos.dao.MemberMapper;
 import com.wuliangit.shopos.dto.MemberListDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -80,5 +81,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Integer deleteMember(Integer memberId) {
         return memberMapper.deleteMember(memberId);
+    }
+
+    @Override
+    public Integer updateMemberState(@Param("memberId") Integer memberId,@Param("state") String state) {
+        return memberMapper.updateMemberState(memberId,state);
     }
 }

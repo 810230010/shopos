@@ -29,4 +29,11 @@
     SET del_flag = 1
     WHERE member_id = #{memberId}
   </update>
+
+  <!--更改会员状态-->
+  <update id="updateMemberState">
+    UPDATE t_member
+    SET auth_state = #{state}
+    WHERE member_id = #{memberId}
+  </update>
 </mapper>

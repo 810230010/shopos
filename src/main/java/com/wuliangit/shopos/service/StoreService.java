@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.StoreDetailDTO;
+import com.wuliangit.shopos.dto.StorePageListDTO;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
@@ -59,40 +61,29 @@ public interface StoreService {
     int updateStore(Store store);
 
     /**
-     * 获取店铺的品牌信息
+     * 获取商家列表的数据
      * @param page
      * @param pageSize
+     * @param orderColumn
+     * @param orderType
      * @param searchKey
+     * @return
+     */
+    List<StorePageListDTO> getStoreList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
+
+    /**
+     * 更改店铺状态
+     * @param storeId
+     * @param state
+     * @return
+     */
+    Integer updateStoreState(Integer storeId, String state);
+
+    /**
+     * 获取商家详情
      * @param storeId
      * @return
      */
-    List<StoreBrand> getStoreBrands(Integer page, Integer pageSize, String searchKey, Integer storeId);
-    /**
-     * 更改店铺某品牌上下架状态
-     * @param id
-     * @param status
-     * @return
-     */
-    int updateBrandStatus(Integer id, String status);
+    StoreDetailDTO storeDetailPage(Integer storeId);
 
-    /**
-     * 删除店铺某个品牌
-     * @param id
-     * @return
-     */
-    int deleteStoreBrand(Integer id);
-
-    /**
-     * 查询所有品牌
-     * @return
-     */
-    ArrayList<Brand> getAllBrands();
-
-    /**
-     * 添加店铺申请入驻品牌记录
-     * @param storeId
-     * @param brandId
-     * @return
-     */
-    int addStoreBrand(Integer storeId, Integer brandId);
 }

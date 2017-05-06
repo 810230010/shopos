@@ -26,8 +26,15 @@ public class MailServiceImpl implements MailService {
         }
     }
 
+<<<<<<< HEAD
     @Override
     public void sendForegetPass(String to) {
 
     }
+=======
+//    @Override
+//    public void sendForegetPass(String to) {
+//
+//    }
+>>>>>>> 2487f0453c5ef144c3cec580ecb6fccdf9f26d14
 }

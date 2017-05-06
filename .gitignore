@@ -8,6 +8,7 @@
 /target
 *.iml
 /log
+rebel.xml
 
 # Package Files #
 *.war

@@ -8,7 +8,7 @@
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>申请店铺详细信息</h2>
+        <h2>商家-申请店铺详细信息</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -16,14 +16,18 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5><small>申请详情</small></h5>
+                    <h5>申请详情</h5>
                 </div>
                 <div class="ibox-content">
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">店主用户名</label>
                             <div class="col-sm-7">
-                                <input type="text" value="$store.memberName" class="form-control">
+                                <span class="form-control">
+                                    #if($store.memberName)
+                                    $store.memberName
+                                    #end
+                                </span>
                             </div>
                         </div>
 
@@ -31,35 +35,55 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">申请店铺名</label>
                             <div class="col-sm-7">
-                                <input type="text" value="$store.storeName" class="form-control">
+                                <span class="form-control">
+                                    #if($store.storeName)
+                                    $store.storeName
+                                    #end
+                                </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公司名</label>
                             <div class="col-sm-7">
-                                <input type="text" value="$store.companyName" class="form-control">
+                                <span class="form-control">
+                                    #if($store.companyName)
+                                    $store.companyName
+                                    #end
+                                </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公司详细地址</label>
                             <div class="col-sm-7">
-                                <input value="$store.companyAddressDetail" name="sort" class="form-control" type="text" />
+                                <span class="form-control">
+                                    #if($store.companyAddressDetail)
+                                    $store.companyAddressDetail
+                                    #end
+                                </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公司电话</label>
                             <div class="col-sm-7">
-                                <input id="sort" value="$store.companyPhone" name="sort" class="form-control" type="text" />
+                                <span class="form-control">
+                                    #if($store.companyPhone)
+                                    $store.companyPhone
+                                    #end
+                                </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">注册总资金</label>
                             <div class="col-sm-7">
-                                <input value="$store.companyRegisteredCapital" class="form-control" type="text" />
+                                <span class="form-control">
+                                    #if($store.companyRegisteredCapital)
+                                    $store.companyRegisteredCapital
+                                    #end
+                                </span>
                             </div>
                         </div>
 
@@ -67,7 +91,11 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系人姓名</label>
                             <div class="col-sm-7">
-                                <input value="$store.contactsName" name="sort" class="form-control" type="text" />
+                                <span class="form-control">
+                                    #if($store.contactsName)
+                                    $store.contactsName
+                                    #end
+                                </span>
                             </div>
                         </div>
 
@@ -75,7 +103,11 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系人电话</label>
                             <div class="col-sm-7">
-                                <input value="$store.contactsPhone"class="form-control" type="text" />
+                                <span class="form-control">
+                                    #if($store.contactsPhone)
+                                    $store.contactsPhone
+                                    #end
+                                </span>
                             </div>
                         </div>
 
@@ -83,7 +115,11 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">营业执照号</label>
                             <div class="col-sm-7">
-                                <input value="$store.businessLicenceNumber" class="form-control" type="text" />
+                                <span class="form-control">
+                                    #if($store.businessLicenceNumber)
+                                    $store.businessLicenceNumber
+                                    #end
+                                </span>
                             </div>
                         </div>
                         
@@ -91,7 +127,11 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">法定经营范围</label>
                             <div class="col-sm-7">
-                                <input value="$store.businessSphere" class="form-control" type="text" />
+                                <span class="form-control">
+                                    #if($store.businessSphere)
+                                    $store.businessSphere
+                                    #end
+                                </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -105,14 +145,22 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">税务登记证号</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" value="$store.taxRegistrationCertificateElectronic">
+                                <span class="form-control">
+                                    #if($store.taxRegistrationCertificateElectronic)
+                                    $store.taxRegistrationCertificateElectronic
+                                    #end
+                                </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">店铺分类名称</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" value="$store.scName">
+                                <span class="form-control">
+                                    #if($store.scName)
+                                    $store.scName
+                                    #end
+                                </span>
                             </div>
                         </div>
 
@@ -120,7 +168,11 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">付款金额</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" value="$store.payingAmount">
+                                <span class="form-control">
+                                    #if($store.payingAmount)
+                                    $store.payingAmount
+                                    #end
+                                </span>
                             </div>
                         </div>
                     </form>
@@ -137,37 +189,4 @@
 
 <!-- Jquery Validate -->
 <script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
-<script>
- 
-##    $('#upload-image').fileinput({
-##        language: 'zh',
-##        uploadUrl: "http://up.qiniu.com",
-##        uploadExtraData: {
-##            token: '$uploadToken'
-##        },
-##        overwriteInitial: true,
-##        autoReplace: true,
-##        showUploadedThumbs: false,
-##        uploadAsync:true,
-##//        browseClass: "btn btn-primary", //按钮样式
-##        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{1}！",
-##        maxFileCount: 1,
-##        layoutTemplates :{ actionDelete :'' },
-##        initialPreviewShowDelete: false,
-##        showUpload: false, //是否显示上传按钮
-##        showRemove: false,
-##        showClose: false,
-##        deleteUrl: "/admin/util/donothing",
-##        initialPreviewAsData: true,
-##        initialPreview: ['$brand.pic'],
-##        initialPreviewConfig: [{ size: 576237, width: "120px", key: '$brand.pic',extra: {activityId: '$brand.brandId'} }],
-##        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
-##    }).on("fileuploaded", function (event, data, previewId, index) {
-##        $("#img").val(data.response.key);
-##        console.log("自动上传成功");
-##    }).on("filebatchselected", function(event, files) {
-##        $(this).fileinput("upload");
-##    });
-
-</script>
 #parse("/admin/models/end.vm")

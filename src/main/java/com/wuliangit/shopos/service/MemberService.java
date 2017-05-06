@@ -1,7 +1,11 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.MemberListDTO;
 import com.wuliangit.shopos.entity.Member;
+import com.wuliangit.shopos.entity.MemberAdvice;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -56,4 +60,54 @@ public interface MemberService {
      * @return
      */
     Object getByMemberId(Integer userId);
+
+    /**
+     * 获取会员列表数据
+     * @param page
+     * @param pageSize
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    List<MemberListDTO> getMemberList(Integer page,Integer pageSize,String orderColumn,String orderType,String searchKey);
+
+    /**
+     * 删除会员
+     * @param memberId
+     * @return
+     */
+    Integer deleteMember(Integer memberId);
+
+    /**
+     * 查询会员留言列表
+     * @param page
+     * @param pageSize
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    ArrayList<MemberAdvice> getMemberAdviceList(Integer page,Integer pageSize,String orderColumn,String orderType,String searchKey);
+
+    /**
+     * 更改留言查看状态
+     * @param adviceId
+     * @return
+     */
+    int updateAdviceLookStatus(Integer adviceId);
+
+    /**
+     * 删除留言
+     * @param adviceId
+     * @return
+     */
+    int deleteAdvice(Integer adviceId);
+
+     /** 更改会员状态
+     * @param memberId
+     * @param state
+     * @return
+     */
+    Integer updateMemberState(Integer memberId, String state);
 }

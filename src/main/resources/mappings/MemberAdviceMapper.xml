@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuliangit.shopos.dao.MemberAdviceMapper">
+
+
+    <!--查询会员留言列表-->
+    <select id="queryMemberAdviceList" resultType="com.wuliangit.shopos.entity.MemberAdvice">
+        select * from t_member_advice
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                (member_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+        </where>
+        order by
+        advice_id desc
+    </select>
+
+    <!--更改留言浏览状态-->
+    <update id="updateAdviceLookStatus">
+        update t_member_advice
+        set status=1
+        where advice_id=#{adviceId}
+    </update>
+</mapper>

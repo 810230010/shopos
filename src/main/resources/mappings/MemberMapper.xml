@@ -15,4 +15,25 @@
     from t_member
     where openid = #{openid}
   </select>
+
+  <!--获取会员列表的数据-->
+  <select id="getMemberList" resultType="com.wuliangit.shopos.dto.MemberListDTO">
+    select member_id,nikename,sex,birthday,type,mobile,points,auth_state
+    from t_member
+    where del_flag = 0
+  </select>
+
+  <!--删除会员-->
+  <update id="deleteMember">
+    UPDATE t_member
+    SET del_flag = 1
+    WHERE member_id = #{memberId}
+  </update>
+
+  <!--更改会员状态-->
+  <update id="updateMemberState">
+    UPDATE t_member
+    SET auth_state = #{state}
+    WHERE member_id = #{memberId}
+  </update>
 </mapper>

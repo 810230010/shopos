@@ -20,6 +20,6 @@ public interface MailService {
     void sendMail(String user, VelocityContext context, String templates);
 
 
-    void sendForegetPass(String to);
+    //void sendForegetPass(String to);
 
 }

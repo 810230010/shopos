@@ -1,11 +1,15 @@
 package com.wuliangit.shopos.controller.admin;
 
+import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.dto.StoreDetailDTO;
+import com.wuliangit.shopos.dto.StorePageListDTO;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.service.StoreJoinService;
+import com.wuliangit.shopos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by JangJanPing on 2017/4/27.
@@ -27,14 +32,27 @@ public class AdminStoreController {
     @Autowired
     private StoreJoinService storeJoinService;
 
+    @Autowired
+    private StoreService storeService;
+
     /**
      * 跳转到申请成为商家页面
      * @return
      */
-    @RequestMapping("/storeListPage")
-    public String listPage() {
-        return "admin/store/list";
+    @RequestMapping("/applyListPage")
+    public String applyListPage() {
+        return "admin/store/applylist";
     }
+
+    /**
+     * 跳转到商家列表页面
+     * @return
+     */
+    @RequestMapping("/storeListPage")
+    public String storeListPage(){
+        return "admin/store/storelist";
+    }
+
     /**
      * 查询申请店铺列表
      * @param draw
@@ -86,10 +104,64 @@ public class AdminStoreController {
      * @param model
      * @return
      */
-    @RequestMapping("/detailPage")
+    @RequestMapping("/applyDetailPage")
     public String jumpToStoreJoininDetail(Integer memberId, Model model) {
         StoreJoinin store = storeJoinService.getStoreJoininDetail(memberId);
         model.addAttribute("store",store);
-        return "/admin/store/detail";
+        return "/admin/store/applydetail";
     }
+
+    /**
+     * 获取商家列表数据
+     * @param page
+     * @param pageSize
+     * @param draw
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    @RequestMapping("/getStoreList")
+    @ResponseBody
+    public PageResult getStoreList(@RequestParam(value = "page", required = false, defaultValue = "1")Integer page,
+                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                   @RequestParam("draw") Integer draw,
+                                   @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                                   @RequestParam(value = "orderType", required = false) String orderType,
+                                   @RequestParam(value = "searchKey", required = false) String searchKey){
+        List<StorePageListDTO> result = storeService.getStoreList(page, pageSize, orderColumn,orderType,searchKey);
+        return new PageResult<StorePageListDTO>(result,draw);
+    }
+
+    /**
+     * 更改店铺状态
+     * @param storeId
+     * @param state
+     * @return
+     */
+    @RequestMapping("/updateStoreState")
+    @ResponseBody
+    public Object updateStoreState(Integer storeId, String state){
+        RestResult result = new RestResult();
+        Integer info = storeService.updateStoreState(storeId,state);
+        if(info != 1){
+            result.put("code",RestResult.CODE_SERVERERROR);
+            result.put("msg",RestResult.MSG_ERROR);
+        }
+        return result;
+    }
+
+    /**
+     * 获取商家详情
+     * @param storeId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/storeDetailPage")
+    public String storeDetailPage(Integer storeId,Model model){
+        StoreDetailDTO info = storeService.storeDetailPage(storeId);
+        model.addAttribute("store",info);
+        return "/admin/store/storedetail";
+    }
+
 }

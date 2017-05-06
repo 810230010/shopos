@@ -5,6 +5,11 @@
 <link href="/assets/admin/css/plugins/layui/layer.css" rel="stylesheet">
 #parse("/admin/models/header.vm")
 
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>商家-申请列表</h2>
+    </div>
+</div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -72,7 +77,7 @@
                         '通过申请 <i class="fa fa-edit"></i>',
                         '</a>',
                         '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
-                        '详细信息 <i class="fa fa-code-fork"></i>',
+                        '详细信息 <i class="fa fa-tag"></i>',
                         '</a>'
                     ].join('');
                 }
@@ -168,7 +173,7 @@
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
             var memberId = data.memberId;
-            window.location.href = "/admin/store/detailPage?memberId="+memberId;
+            window.location.href = "/admin/store/applyDetailPage?memberId="+memberId;
         });
 
         $("#back").on('click', function () {

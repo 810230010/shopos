@@ -1,12 +1,10 @@
 package com.wuliangit.shopos.controller.admin;
 
-import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.entity.Brand;
-import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.model.StoreAddBrand;
 import com.wuliangit.shopos.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,7 +151,7 @@ public class AdminBrandController {
      */
     @RequestMapping("/validateBrandPage")
     public String jumpToValidateBrandPage(){
-        return "/admin/brand/validate_brand";
+        return "admin/brand/validate_brand";
     }
 
     /**
@@ -162,7 +160,7 @@ public class AdminBrandController {
      */
     @RequestMapping("/validateStoreBrandPage")
     public String turnToValidateStoreBrandPage(){
-        return "/admin/brand/validate_store_brand";
+        return "admin/brand/validate_store_brand";
     }
 
     /**
@@ -185,6 +183,53 @@ public class AdminBrandController {
                          @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         orderColumn = StringUtils.camelToUnderline(orderColumn);
         ArrayList<StoreAddBrand> brands = brandService.searchBrands(page, pageSize, searchKey, orderColumn, orderType);
+        return new PageResult<StoreAddBrand>(brands, draw);
+    }
+
+    /**
+     * 更改店铺申请品牌的申请状态
+     * @return
+     */
+    @RequestMapping("/updateStatus")
+    @ResponseBody
+    public String updateBrandStatus(Integer brandId, String status){
+        brandService.updateAddBrandStatus(brandId, status);
+        return "ok";
+    }
+
+    /**
+     * 更改店铺入驻品牌状态
+     * @param id
+     * @param status
+     * @return
+     */
+    @RequestMapping("/updateStoreJoinBrandStatus")
+    @ResponseBody
+    public String updateStoreJoinBrandStatus(Integer id, String status){
+        brandService.updateStoreJoinBrand(id, status);
+        return "ok";
+    }
+
+    /**
+     * 查询店铺申请入驻品牌列表
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/searchStoreJoinBrands")
+    @ResponseBody
+    public Object searchStoreJoinBrands(@RequestParam("draw") int draw,
+                               @RequestParam(value = "searchKey", required = false) String searchKey,
+                               @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                               @RequestParam(value = "orderType", required = false) String orderType,
+                               @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
+        ArrayList<StoreAddBrand> brands = brandService.getStoreJoinBrands(page, pageSize, searchKey, orderColumn, orderType);
         return new PageResult<StoreAddBrand>(brands, draw);
     }
 }

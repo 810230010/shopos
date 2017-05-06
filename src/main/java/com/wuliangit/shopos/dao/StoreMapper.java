@@ -1,6 +1,8 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.StoreDetailDTO;
+import com.wuliangit.shopos.dto.StorePageListDTO;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreBrand;
@@ -20,39 +22,28 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
     StoreUser getStoreUser(Integer memberId);
 
     /**
-     * 获得某个店铺品牌
+     * 获取商家列表的数据
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    List<StorePageListDTO> getStoreList(@Param("orderColumn") String orderColumn,@Param("orderType") String orderType,@Param("searchKey") String searchKey);
+
+    /**
+     * 更改商家状态
+     * @param storeId
+     * @param state
+     * @return
+     */
+    Integer updateStoreState(@Param("storeId") Integer storeId,@Param("state") String state);
+
+    /**
+     * 获取商家详情
      * @param storeId
      * @return
      */
-    List<StoreBrand> getStoreBrands(@Param("storeId") Integer storeId, @Param("searchKey") String searchKey);
-
-    /**
-     * 更改店铺某品牌上下架状态
-     * @param id
-     * @param status
-     * @return
-     */
-    int updateBrandStatusByPrimaryKey(@Param("id") Integer id, @Param("status") String status);
-
-    /**
-     * 删除某个店铺的品牌
-     * @param id
-     * @return
-     */
-    int deleteStoreBrand(@Param("id") Integer id);
-
-    /**
-     * 查询所有品牌
-     * @return
-     */
-    ArrayList<Brand> queryAllBrands();
-
-    /**
-     * 店铺入驻品牌
-     * @param storeId
-     * @param brandId
-     * @return
-     */
+<<<<<<< HEAD
     int addStoreBrand(@Param("storeId") Integer storeId, @Param("brandId") Integer brandId);
 
     /**
@@ -61,4 +52,7 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return
      */
     StoreMin getStoreMinByStoreId(Integer storeId);
+=======
+    StoreDetailDTO storeDetailPage(Integer storeId);
+>>>>>>> 2487f0453c5ef144c3cec580ecb6fccdf9f26d14
 }

@@ -5,10 +5,7 @@
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>商品-商品类型</h2>
-        <p>
-            <a type="button" class="btn btn-w-m btn-primary" href="/admin/goodsCategory/addPage">添加商品类型</a>
-        </p>
+        <h2>商家-商家列表</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -16,7 +13,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">商品分类列表(1级) </h5>
+                    <h5 id="rank">商家列表</h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -35,18 +32,15 @@
 </div>
 #parse("/admin/models/footer.vm")
 
+<script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
 
 <script>
 
-    var rank = 1;
-    var upParentId = [];
-    var parentId = 0;
-
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': '/admin/goodsCategory/search',
+                'url': '/admin/store/getStoreList',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -55,37 +49,30 @@
                     param.orderColumn = d.columns[d.order[0]['column']]['data'];
                     param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
-                    param.parentId = parentId;
                     return param;
                 },
             },
             "columns": [
-                {"data":"goodsCategoryId","width":"7%","title":"序号","visible": false},
-                {"data":"name","width": "20%","title":"分类","orderable": false},
-                {"data":"parentId","width": "10%","title":"父id","visible": false},
-                {"data":"sort","width": "10%","title":"排序","orderable": true},
-                {"data":"keywords","width": "20%","title":"关键词","orderable": false},
-                {"data":"description","width": "20%","title":"描述","orderable": false},
-                {"data":"isShow","width": "10%","title":"是否显示","orderable": true},
-                {"data":"id","width": "20%","title":"操作","orderable": false},
-            ],
-            "columnDefs" : [{
-                "targets": 7,
-                "data": "goodsCategoryId",
-                "render": function (data, type, row) {
+                {"data":"storeId","width":"7%","title":"序号","orderable": false},
+                {"data":"name","width": "10%","title":"商家名称","orderable": false},
+                {"data":"type","width": "10%","title":"商家类型","orderable": false},
+                {"data":"state","width": "10%","title":"状态","orderable": false,"render": function(data, type, row){
+                    if(data == "CLOSE")return "关闭";
+                    else return "开启";
+                }},
+                {"data":"createTime","width": "10%","title":"创建时间","orderable": true},
+                {"data":"sellerNikename","width": "10%","title":"店主商家用户名","orderable": false},
+                {"data":"storeId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
                     return [
-                        '<a class="btn btn-danger btn-xs table-action view" href="javascript:void(0)">',
-                        '删除 <i class="fa fa-trash-o"></i>',
+                        '<a class="btn btn-danger btn-xs table-action state" href="javascript:void(0)">',
+                        '更改状态 <i class="fa fa-flag"></i>',
                         '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
-                        '编辑 <i class="fa fa-edit"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action getsub" href="javascript:void(0)">',
-                        '下级 <i class="fa fa-code-fork"></i>',
+                        '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)" style="margin-left: 10px;">',
+                        '详细信息 <i class="fa fa-tag"></i>',
                         '</a>'
                     ].join('');
-                }
-            } ],
+                }},
+            ],
             "searching": true,
             "ordering":true,
             "serverSide": true,
@@ -100,7 +87,6 @@
                 {extend: 'csv'},
                 {extend: 'excel', title: 'ExampleFile'},
                 {extend: 'pdf', title: 'ExampleFile'},
-
                 {extend: 'print',
                     customize: function (win){
                         $(win.document.body).addClass('white-bg');
@@ -123,29 +109,53 @@
         });
         var table = $('#datatables').DataTable();
 
-        table.on( 'click', '.edit', function () {
+        table.on( 'click', '.state', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/admin/goodsCategory/editPage?goodsCategoryId="+data.goodsCategoryId;
+            $.operation(data);
         });
-
-        table.on( 'click', '.getsub', function () {
-            rank = rank +1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            $('#rank').html("商品分类列表("+rank+"级)")
+        table.on( 'click', '.detail', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-
-            parentId = data.goodsCategoryId;
-            upParentId[rank] = data.parentId;
-            table = $('#datatables').DataTable().ajax.reload();
+            window.location.href = "/admin/store/storeDetailPage?storeId="+data.storeId;
         });
-
     });
+    $.operation = function(data){
+        var s;
+        if(data.state == "CLOSE")s = "OPEN";
+        else s = "CLOSE";
+        $.ajax({
+            type: "post",
+            url: "/admin/store/updateStoreState",
+            data: "storeId=" + data.storeId + "&state=" + s,
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    swal({
+                        title: "成功!",
+                        text: "状态更改成功!",
+                        type: "success",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                    setTimeout(function () {
+                        $('#datatables').DataTable().ajax.reload();
+                    }, 2000);
+                }else if(data.code == 500){
+                    swal({
+                        title: "失败!",
+                        text: "状态更改失败!",
+                        type: "error",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                    setTimeout(function () {
+                        $('#datatables').DataTable().ajax.reload();
+                    }, 2000);
+                }
+            }
+        });
+    }
 </script>
 
 #parse("/admin/models/end.vm")

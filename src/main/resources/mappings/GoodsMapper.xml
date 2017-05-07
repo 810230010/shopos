@@ -52,4 +52,18 @@
         from t_goods
         where goods_id = #{goodsId,jdbcType=INTEGER}
     </select>
+
+    <!--获取商铺商品-->
+    <select id="getStoreGoods" resultType="com.wuliangit.shopos.dto.StoreGoodsDetailDTO">
+        SELECT goods_id,name,unit,ad_word,price
+        FROM t_goods
+        WHERE store_id = #{storeId}
+    </select>
+
+    <!--获取商品的简要信息-->
+    <select id="getSimplGoodsInfo" resultType="com.wuliangit.shopos.dto.StoreGoodsDetailDTO">
+        SELECT goods_id,name,unit,ad_word,price
+        FROM t_goods
+        WHERE goods_id = #{goodsId}
+    </select>
 </mapper>

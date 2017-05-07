@@ -1,0 +1,289 @@
+2017-04-12 22:14:19,549 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-12 22:14:19,582 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@18eed359, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3e9b1010, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@6c3708b3, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6f1fba17, org.springframework.test.context.transaction.TransactionalTestExecutionListener@185d8b6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@67784306]
+ 2017-04-12 22:14:19,857 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-12 22:14:21,383 - Loading XML bean definitions from class path resource [spring-shiro.xml]
+ 2017-04-12 22:14:21,771 - Refreshing org.springframework.context.support.GenericApplicationContext@2833cc44: startup date [Wed Apr 12 22:14:21 CST 2017]; root of context hierarchy
+ 2017-04-12 22:14:22,240 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-12 22:14:22,247 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-12 22:14:22,251 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-12 22:14:22,395 - Bean 'org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy#333291e3' of type [class org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:22,399 - Bean 'authenticator' of type [class org.apache.shiro.authc.pam.ModularRealmAuthenticator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:22,544 - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:24,395 - {dataSource-1} inited
+ 2017-04-12 22:14:24,395 - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:25,918 - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:25,920 - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:25,937 - Bean 'adminMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:25,939 - Bean 'adminMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:25,943 - Bean 'adminServiceImpl' of type [class com.wuliangit.shopos.service.impl.AdminServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:25,950 - Bean 'memberMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:25,952 - Bean 'memberMapper' of type [class com.sun.proxy.$Proxy28] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:25,953 - Bean 'memberServiceImpl' of type [class com.wuliangit.shopos.service.impl.MemberServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:25,974 - Initializing EhCache CacheManager
+ 2017-04-12 22:14:26,684 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent4535971838813222268.jar
+ 2017-04-12 22:14:26,684 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent4535971838813222268.jar
+ 2017-04-12 22:14:26,695 - using Agent sizeof engine
+ 2017-04-12 22:14:26,696 - using Agent sizeof engine
+ 2017-04-12 22:14:26,697 - Bean 'ehcacheManager' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,697 - Bean 'ehcacheManager' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,703 - Bean 'springCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,703 - Bean 'cacheManager' of type [class com.wuliangit.shopos.common.cache.SpringCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,720 - Bean 'credentialsMatcher' of type [class com.wuliangit.shopos.common.shiro.RetryLimitHashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,724 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+ 2017-04-12 22:14:26,724 - Bean 'userRealm' of type [class com.wuliangit.shopos.common.shiro.realm.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,754 - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,754 - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,757 - Bean 'sessionFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.OnlineSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,765 - Bean 'sessionIdCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,765 - Bean 'sessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,773 - Bean 'subjectFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.StatelessAndOnlineWebSubjectFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,844 - Bean 'rememberMeCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,844 - Bean 'rememberMeManager' of type [class org.apache.shiro.web.mgt.CookieRememberMeManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,845 - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,870 - Bean 'sysUserFilter' of type [class com.wuliangit.shopos.common.shiro.filter.AdminFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,877 - Bean 'kickoutSessionControlFilter' of type [class com.wuliangit.shopos.common.shiro.filter.KickoutSessionControlFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:26,882 - Bean 'logoutFilter' of type [class org.apache.shiro.web.filter.authc.LogoutFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:27,088 - Bean 'wxMpConfig' of type [class me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:27,372 - Bean 'wxMpService' of type [class me.chanjar.weixin.mp.api.WxMpServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:27,377 - Bean 'tokenManager' of type [class com.wuliangit.shopos.common.shiro.token.EhcacheTokenManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:27,379 - Bean 'weixinFilter' of type [class com.wuliangit.shopos.common.shiro.filter.WeixinFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:27,384 - Bean 'apiFilter' of type [class com.wuliangit.shopos.common.shiro.filter.ApiFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:27,387 - Bean 'util:map#5fdcaa40' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:27,387 - Bean 'util:map#5fdcaa40' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 22:14:27,865 - Trying to find Dozer configuration file: dozer.properties
+ 2017-04-12 22:14:27,887 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+ 2017-04-12 22:14:27,890 - Initializing Dozer. Version: 5.5.0, Thread Name: main
+ 2017-04-12 22:14:27,892 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+ 2017-04-12 22:14:27,893 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+ 2017-04-12 22:14:27,894 - Initializing a new instance of dozer bean mapper.
+ 2017-04-12 22:14:28,036 - New update(s) found: 2.6.5 [http://www.terracotta.org/confluence/display/release/Release+Notes+Ehcache+Core+2.6]. Please check http://ehcache.org for the latest version.
+ 2017-04-12 22:14:28,308 - Closing org.springframework.context.support.GenericApplicationContext@2833cc44: startup date [Wed Apr 12 22:14:21 CST 2017]; root of context hierarchy
+ 2017-04-12 22:14:28,312 - Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController].
+ 2017-04-12 22:14:28,314 - Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController].
+ 2017-04-12 22:14:28,319 - Shutting down EhCache CacheManager
+ 2017-04-12 22:14:28,336 - {dataSource-1} closed
+ 2017-04-12 23:50:14,217 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-12 23:50:14,309 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@18eed359, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3e9b1010, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@6c3708b3, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6f1fba17, org.springframework.test.context.transaction.TransactionalTestExecutionListener@185d8b6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@67784306]
+ 2017-04-12 23:50:14,665 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-12 23:50:15,831 - Loading XML bean definitions from class path resource [spring-shiro.xml]
+ 2017-04-12 23:50:16,157 - Refreshing org.springframework.context.support.GenericApplicationContext@2833cc44: startup date [Wed Apr 12 23:50:16 CST 2017]; root of context hierarchy
+ 2017-04-12 23:50:16,814 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-12 23:50:16,830 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-12 23:50:16,833 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-12 23:50:17,139 - Bean 'org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy#333291e3' of type [class org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:17,146 - Bean 'authenticator' of type [class org.apache.shiro.authc.pam.ModularRealmAuthenticator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:17,241 - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:19,511 - {dataSource-1} inited
+ 2017-04-12 23:50:19,511 - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:20,695 - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:20,702 - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:20,752 - Bean 'adminMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:20,770 - Bean 'adminMapper' of type [class com.sun.proxy.$Proxy26] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:20,796 - Bean 'adminServiceImpl' of type [class com.wuliangit.shopos.service.impl.AdminServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:20,816 - Bean 'memberMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:20,822 - Bean 'memberMapper' of type [class com.sun.proxy.$Proxy28] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:20,827 - Bean 'memberServiceImpl' of type [class com.wuliangit.shopos.service.impl.MemberServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:20,977 - Initializing EhCache CacheManager
+ 2017-04-12 23:50:21,778 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent4625457544686016007.jar
+ 2017-04-12 23:50:21,778 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent4625457544686016007.jar
+ 2017-04-12 23:50:21,791 - using Agent sizeof engine
+ 2017-04-12 23:50:21,825 - using Agent sizeof engine
+ 2017-04-12 23:50:21,827 - Bean 'ehcacheManager' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,828 - Bean 'ehcacheManager' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,832 - Bean 'springCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,832 - Bean 'cacheManager' of type [class com.wuliangit.shopos.common.cache.SpringCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,846 - Bean 'credentialsMatcher' of type [class com.wuliangit.shopos.common.shiro.RetryLimitHashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,848 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+ 2017-04-12 23:50:21,857 - Bean 'userRealm' of type [class com.wuliangit.shopos.common.shiro.realm.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,918 - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,918 - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,921 - Bean 'sessionFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.OnlineSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,934 - Bean 'sessionIdCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:21,934 - Bean 'sessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,060 - Bean 'subjectFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.StatelessAndOnlineWebSubjectFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,279 - Bean 'rememberMeCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,281 - Bean 'rememberMeManager' of type [class org.apache.shiro.web.mgt.CookieRememberMeManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,283 - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,329 - Bean 'sysUserFilter' of type [class com.wuliangit.shopos.common.shiro.filter.AdminFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,337 - Bean 'kickoutSessionControlFilter' of type [class com.wuliangit.shopos.common.shiro.filter.KickoutSessionControlFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,346 - Bean 'logoutFilter' of type [class org.apache.shiro.web.filter.authc.LogoutFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,462 - Bean 'wxMpConfig' of type [class me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,828 - Bean 'wxMpService' of type [class me.chanjar.weixin.mp.api.WxMpServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,833 - Bean 'tokenManager' of type [class com.wuliangit.shopos.common.shiro.token.EhcacheTokenManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,834 - Bean 'weixinFilter' of type [class com.wuliangit.shopos.common.shiro.filter.WeixinFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,843 - Bean 'apiFilter' of type [class com.wuliangit.shopos.common.shiro.filter.ApiFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,846 - Bean 'util:map#5fdcaa40' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:22,846 - Bean 'util:map#5fdcaa40' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-12 23:50:23,213 - New update(s) found: 2.6.5 [http://www.terracotta.org/confluence/display/release/Release+Notes+Ehcache+Core+2.6]. Please check http://ehcache.org for the latest version.
+ 2017-04-12 23:50:23,352 - Trying to find Dozer configuration file: dozer.properties
+ 2017-04-12 23:50:23,364 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+ 2017-04-12 23:50:23,368 - Initializing Dozer. Version: 5.5.0, Thread Name: main
+ 2017-04-12 23:50:23,371 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+ 2017-04-12 23:50:23,372 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+ 2017-04-12 23:50:23,372 - Initializing a new instance of dozer bean mapper.
+ 2017-04-12 23:50:23,712 - Closing org.springframework.context.support.GenericApplicationContext@2833cc44: startup date [Wed Apr 12 23:50:16 CST 2017]; root of context hierarchy
+ 2017-04-12 23:50:23,716 - Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController].
+ 2017-04-12 23:50:23,717 - Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController].
+ 2017-04-12 23:50:23,722 - Shutting down EhCache CacheManager
+ 2017-04-12 23:50:23,748 - {dataSource-1} closed
+ 2017-04-23 20:07:18,018 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-23 20:07:18,203 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@18eed359, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3e9b1010, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@6c3708b3, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6f1fba17, org.springframework.test.context.transaction.TransactionalTestExecutionListener@185d8b6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@67784306]
+ 2017-04-23 20:07:18,635 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-23 20:07:19,848 - Loading XML bean definitions from class path resource [spring-shiro.xml]
+ 2017-04-23 20:07:20,262 - Refreshing org.springframework.context.support.GenericApplicationContext@2833cc44: startup date [Sun Apr 23 20:07:20 CST 2017]; root of context hierarchy
+ 2017-04-23 20:07:20,938 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-23 20:07:20,954 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-23 20:07:20,967 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-23 20:07:21,261 - Bean 'org.apache.shiro.authc.pam.FirstSuccessfulStrategy#15ff3e9e' of type [class org.apache.shiro.authc.pam.FirstSuccessfulStrategy] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:21,304 - Bean 'authenticator' of type [class com.wuliangit.shopos.common.shiro.realm.CustomizedModularRealmAuthenticator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:21,372 - Bean 'authorizer' of type [class com.wuliangit.shopos.common.shiro.realm.CustomizedModularRealmAuthorizer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:21,467 - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:23,438 - {dataSource-1} inited
+ 2017-04-23 20:07:23,439 - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,135 - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,137 - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,150 - Bean 'adminMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,152 - Bean 'adminMapper' of type [class com.sun.proxy.$Proxy27] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,155 - Bean 'adminServiceImpl' of type [class com.wuliangit.shopos.service.impl.AdminServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,173 - Initializing EhCache CacheManager
+ 2017-04-23 20:07:25,811 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent2375716023342322919.jar
+ 2017-04-23 20:07:25,812 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent2375716023342322919.jar
+ 2017-04-23 20:07:25,829 - using Agent sizeof engine
+ 2017-04-23 20:07:25,831 - using Agent sizeof engine
+ 2017-04-23 20:07:25,832 - Bean 'ehcacheManager' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,832 - Bean 'ehcacheManager' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,836 - Bean 'springCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,837 - Bean 'cacheManager' of type [class com.wuliangit.shopos.common.cache.SpringCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,850 - Bean 'memberMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,852 - Bean 'memberMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,852 - Bean 'memberServiceImpl' of type [class com.wuliangit.shopos.service.impl.MemberServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,859 - Bean 'storeJoininMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,861 - Bean 'storeJoininMapper' of type [class com.sun.proxy.$Proxy30] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,863 - Bean 'storeMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,865 - Bean 'storeMapper' of type [class com.sun.proxy.$Proxy31] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,866 - Bean 'storeServiceImpl' of type [class com.wuliangit.shopos.service.impl.StoreServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,867 - Bean 'credentialsMatcher' of type [class com.wuliangit.shopos.common.shiro.RetryLimitHashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,869 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+ 2017-04-23 20:07:25,869 - Bean 'adminRealm' of type [class com.wuliangit.shopos.common.shiro.realm.AdminRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,878 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+ 2017-04-23 20:07:25,878 - Bean 'userRealm' of type [class com.wuliangit.shopos.common.shiro.realm.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,890 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+ 2017-04-23 20:07:25,891 - Bean 'storeRealm' of type [class com.wuliangit.shopos.common.shiro.realm.StoreRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,935 - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,936 - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,938 - Bean 'sessionFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.OnlineSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,947 - Bean 'sessionIdCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,949 - Bean 'sessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:25,962 - Bean 'subjectFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.StatelessAndOnlineWebSubjectFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,115 - Bean 'rememberMeCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,116 - Bean 'rememberMeManager' of type [class org.apache.shiro.web.mgt.CookieRememberMeManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,123 - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,190 - Bean 'adminFilter' of type [class com.wuliangit.shopos.common.shiro.filter.AdminFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,195 - Bean 'storeFilter' of type [class com.wuliangit.shopos.common.shiro.filter.StoreFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,200 - Bean 'kickoutSessionControlFilter' of type [class com.wuliangit.shopos.common.shiro.filter.KickoutSessionControlFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,204 - Bean 'logoutFilter' of type [class org.apache.shiro.web.filter.authc.LogoutFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,305 - Bean 'wxMpConfig' of type [class me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,772 - Bean 'wxMpService' of type [class me.chanjar.weixin.mp.api.WxMpServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,781 - Bean 'tokenManager' of type [class com.wuliangit.shopos.common.shiro.token.EhcacheTokenManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,782 - Bean 'weixinFilter' of type [class com.wuliangit.shopos.common.shiro.filter.WeixinFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,799 - Bean 'apiFilter' of type [class com.wuliangit.shopos.common.shiro.filter.ApiFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,803 - Bean 'util:map#359f7cdf' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:26,803 - Bean 'util:map#359f7cdf' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:07:27,464 - Trying to find Dozer configuration file: dozer.properties
+ 2017-04-23 20:07:27,476 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+ 2017-04-23 20:07:27,479 - Initializing Dozer. Version: 5.5.0, Thread Name: main
+ 2017-04-23 20:07:27,482 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+ 2017-04-23 20:07:27,483 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+ 2017-04-23 20:07:27,484 - Initializing a new instance of dozer bean mapper.
+ 2017-04-23 20:07:27,861 - ==>  Preparing: insert into t_member ( username, nikename, passwd, salt, email, create_time, login_time, update_time ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+ 2017-04-23 20:07:28,209 - ==> Parameters: admin(String), Nilme(String), ff383c483e842f0289f293fb3fa254f8(String), b44e735b27ec7fb5b12a063fbab66e44(String), taoshanchang1@foxmail.com(String), 2017-04-23 20:07:27.634(Timestamp), 2017-04-23 20:07:27.634(Timestamp), 2017-04-23 20:07:27.634(Timestamp)
+ 2017-04-23 20:07:28,271 - <==    Updates: 1
+ 2017-04-23 20:07:28,272 - ==>  Preparing: SELECT LAST_INSERT_ID() 
+ 2017-04-23 20:07:28,284 - ==> Parameters: 
+ 2017-04-23 20:07:28,342 - <==    Columns: LAST_INSERT_ID()
+ 2017-04-23 20:07:28,342 - <==        Row: 12
+ 2017-04-23 20:07:28,343 - <==      Total: 1
+ 2017-04-23 20:07:28,349 - Closing org.springframework.context.support.GenericApplicationContext@2833cc44: startup date [Sun Apr 23 20:07:20 CST 2017]; root of context hierarchy
+ 2017-04-23 20:07:28,352 - Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController].
+ 2017-04-23 20:07:28,353 - Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController].
+ 2017-04-23 20:07:28,357 - Shutting down EhCache CacheManager
+ 2017-04-23 20:07:28,371 - {dataSource-1} closed
+ 2017-04-23 20:13:01,561 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ 2017-04-23 20:13:01,606 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@76908cc0, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2473d930, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@35047d03, org.springframework.test.context.support.DirtiesContextTestExecutionListener@49b0b76, org.springframework.test.context.transaction.TransactionalTestExecutionListener@769f71a9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4c9f8c13]
+ 2017-04-23 20:13:02,039 - Loading XML bean definitions from class path resource [spring-context.xml]
+ 2017-04-23 20:13:03,077 - Loading XML bean definitions from class path resource [spring-shiro.xml]
+ 2017-04-23 20:13:03,204 - Refreshing org.springframework.context.support.GenericApplicationContext@4466af20: startup date [Sun Apr 23 20:13:03 CST 2017]; root of context hierarchy
+ 2017-04-23 20:13:03,945 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-23 20:13:03,958 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-23 20:13:03,971 - Loading properties file from class path resource [shopos.properties]
+ 2017-04-23 20:13:04,580 - Bean 'org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy#65b104b9' of type [class org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:04,598 - Bean 'authenticator' of type [class com.wuliangit.shopos.common.shiro.realm.CustomizedModularRealmAuthenticator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:04,625 - Bean 'authorizer' of type [class com.wuliangit.shopos.common.shiro.realm.CustomizedModularRealmAuthorizer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:04,782 - Bean 'org.springframework.beans.factory.config.MethodInvokingFactoryBean#0' of type [class org.springframework.beans.factory.config.MethodInvokingFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:06,840 - {dataSource-1} inited
+ 2017-04-23 20:13:06,840 - Bean 'dataSource' of type [class com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:08,642 - Bean 'sqlSessionFactory' of type [class org.mybatis.spring.SqlSessionFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:08,642 - Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:08,657 - Bean 'adminMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:08,664 - Bean 'adminMapper' of type [class com.sun.proxy.$Proxy27] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:08,669 - Bean 'adminServiceImpl' of type [class com.wuliangit.shopos.service.impl.AdminServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:08,692 - Initializing EhCache CacheManager
+ 2017-04-23 20:13:09,263 - Extracted agent jar to temporary file /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent5180574677370243288.jar
+ 2017-04-23 20:13:09,264 - Trying to load agent @ /var/folders/ct/1ksx0yr1637c1crzc8ff_dg40000gn/T/ehcache-sizeof-agent5180574677370243288.jar
+ 2017-04-23 20:13:09,275 - using Agent sizeof engine
+ 2017-04-23 20:13:09,279 - using Agent sizeof engine
+ 2017-04-23 20:13:09,282 - Bean 'ehcacheManager' of type [class org.springframework.cache.ehcache.EhCacheManagerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,282 - Bean 'ehcacheManager' of type [class net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,288 - Bean 'springCacheManager' of type [class org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,289 - Bean 'cacheManager' of type [class com.wuliangit.shopos.common.cache.SpringCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,313 - Bean 'memberMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,315 - Bean 'memberMapper' of type [class com.sun.proxy.$Proxy29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,316 - Bean 'memberServiceImpl' of type [class com.wuliangit.shopos.service.impl.MemberServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,334 - Bean 'storeJoininMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,336 - Bean 'storeJoininMapper' of type [class com.sun.proxy.$Proxy30] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,338 - Bean 'storeMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,340 - Bean 'storeMapper' of type [class com.sun.proxy.$Proxy31] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,341 - Bean 'storeServiceImpl' of type [class com.wuliangit.shopos.service.impl.StoreServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,344 - Bean 'credentialsMatcher' of type [class com.wuliangit.shopos.common.shiro.RetryLimitHashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,346 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+ 2017-04-23 20:13:09,346 - Bean 'adminRealm' of type [class com.wuliangit.shopos.common.shiro.realm.AdminRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,376 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+ 2017-04-23 20:13:09,377 - Bean 'userRealm' of type [class com.wuliangit.shopos.common.shiro.realm.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,398 - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+ 2017-04-23 20:13:09,398 - Bean 'storeRealm' of type [class com.wuliangit.shopos.common.shiro.realm.StoreRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,436 - Bean 'sessionIdGenerator' of type [class org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,436 - Bean 'sessionDAO' of type [class org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,439 - Bean 'sessionFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.OnlineSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,456 - Bean 'sessionIdCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,457 - Bean 'sessionManager' of type [class org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,466 - Bean 'subjectFactory' of type [class com.wuliangit.shopos.common.shiro.mgt.StatelessAndOnlineWebSubjectFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,604 - Bean 'rememberMeCookie' of type [class com.wuliangit.shopos.common.shiro.OnlineCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,605 - Bean 'rememberMeManager' of type [class org.apache.shiro.web.mgt.CookieRememberMeManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,606 - Bean 'securityManager' of type [class org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,666 - Bean 'adminFilter' of type [class com.wuliangit.shopos.common.shiro.filter.AdminFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,672 - Bean 'storeFilter' of type [class com.wuliangit.shopos.common.shiro.filter.StoreFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,680 - Bean 'kickoutSessionControlFilter' of type [class com.wuliangit.shopos.common.shiro.filter.KickoutSessionControlFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,686 - Bean 'logoutFilter' of type [class org.apache.shiro.web.filter.authc.LogoutFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:09,768 - Bean 'wxMpConfig' of type [class me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:10,283 - Bean 'wxMpService' of type [class me.chanjar.weixin.mp.api.WxMpServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:10,290 - Bean 'tokenManager' of type [class com.wuliangit.shopos.common.shiro.token.EhcacheTokenManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:10,291 - Bean 'weixinFilter' of type [class com.wuliangit.shopos.common.shiro.filter.WeixinFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:10,322 - Bean 'apiFilter' of type [class com.wuliangit.shopos.common.shiro.filter.ApiFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:10,326 - Bean 'util:map#51fadaff' of type [class org.springframework.beans.factory.config.MapFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:10,326 - Bean 'util:map#51fadaff' of type [class java.util.LinkedHashMap] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ 2017-04-23 20:13:10,932 - Trying to find Dozer configuration file: dozer.properties
+ 2017-04-23 20:13:10,945 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+ 2017-04-23 20:13:10,948 - Initializing Dozer. Version: 5.5.0, Thread Name: main
+ 2017-04-23 20:13:10,950 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+ 2017-04-23 20:13:10,952 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+ 2017-04-23 20:13:10,953 - Initializing a new instance of dozer bean mapper.
+ 2017-04-23 20:13:11,483 - ==>  Preparing: insert into t_member ( username, nikename, passwd, salt, email, create_time, login_time, update_time ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+ 2017-04-23 20:13:11,779 - ==> Parameters: admin(String), Nilme(String), 0dcbbb0d7f3c18599da31e9c9d0b4865(String), 2361559458941d1443dec34092902172(String), taoshanchang1@foxmail.com(String), 2017-04-23 20:13:11.289(Timestamp), 2017-04-23 20:13:11.289(Timestamp), 2017-04-23 20:13:11.289(Timestamp)
+ 2017-04-23 20:13:11,848 - Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+ 2017-04-23 20:13:11,910 - SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+ 2017-04-23 20:13:11,952 - Closing org.springframework.context.support.GenericApplicationContext@4466af20: startup date [Sun Apr 23 20:13:03 CST 2017]; root of context hierarchy
+ 2017-04-23 20:13:11,961 - Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController].
+ 2017-04-23 20:13:11,962 - Unregistering existing Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController].
+ 2017-04-23 20:13:11,966 - Shutting down EhCache CacheManager
+ 2017-04-23 20:13:11,981 - {dataSource-1} closed
+ 

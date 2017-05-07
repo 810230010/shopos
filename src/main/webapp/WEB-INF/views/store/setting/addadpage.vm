@@ -1,0 +1,247 @@
+#parse("/store/models/begin.vm")
+
+<link href="/assets/admin/css/plugins/fileinput/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="/assets/admin/css/plugins/sweetalert/sweetalert.css" media="all" rel="stylesheet" type="text/css"/>
+#parse("/store/models/header.vm")
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>设置-广告设置</h2>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>广告添加</h5>
+                    <p align="right">
+                        <a type="button" class="btn btn-w-m btn-primary btn-small" href="/store/setting/showAdPage">返回</a>
+                    </p>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" id="form">
+                        <div class="form-group" id="store-logo-div"><label class="col-sm-2 control-label">商品广告:</label>
+                            <div class="col-sm-4">
+                                <input id="store-logo" class="file" name="file" type="file" multiple>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">选择商品</label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b" name="goods" id="goods" onchange="$.change()">
+                                    <option value="0">--请选择--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">商品名称</label>
+                            <div class="col-sm-8"><input class="form-control" name="name" id="name" readonly></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">商品价格</label>
+                            <div class="col-sm-8"><input class="form-control" name="price" id="price" value="" readonly></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">商品规格</label>
+                            <div class="col-sm-8"><input class="form-control" name="unit" id="unit" value="" readonly></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">商品介绍</label>
+                            <div class="col-sm-8"><input class="form-control" name="adWord" id="adWord" value="" readonly></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <div class="btn btn-primary" id="submit">保存</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/store/models/footer.vm")
+
+<!-- Jquery Validate -->
+<script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
+
+<script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<!-- 文件上传 -->
+<script src="/assets/admin/js/plugins/fileinput/fileinput.min.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "post",
+            url: "/store/goods/getStoreGoods",
+            data: {
+
+            },
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    for(var i=0;i<data.data.length;i++){
+                        $("#goods").append("<option value='"+ data.data[i].goodsId +"'>"+ data.data[i].name +"</option>")
+                    }
+                }
+            }
+        });
+    });
+
+    $.change = function(){
+        $.ajax({
+            type: "post",
+            url: "/store/goods/getSimplGoodsInfo",
+            data: {
+                goodsId: $("#goods").val(),
+            },
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    $("#name").val(data.data.name);
+                    $("#price").val(data.data.price);
+                    $("#adWord").val(data.data.adWord);
+                    $("#unit").val(data.data.unit);
+                }
+            }
+        });
+    }
+
+    $('#store-logo').fileinput({
+        language: 'zh',
+        uploadUrl: "http://up.qiniu.com",
+        uploadExtraData: {
+            token: '$uploadToken'
+        },
+        overwriteInitial: true,
+        autoReplace: true,
+        showUploadedThumbs: false,
+        uploadAsync: true,
+//        browseClass: "btn btn-primary", //按钮样式
+        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{1}！",
+        maxFileCount: 1,
+        layoutTemplates: {actionDelete: '', actionZoom: ''},
+        initialPreviewShowDelete: false,
+        showUpload: false, //是否显示上传按钮
+        showRemove: false,
+        showClose: false,
+        initialPreviewAsData: true,
+        initialPreview: [''],
+        initialPreviewConfig: [],
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
+    }).on("fileuploaded", function (event, data, previewId, index) {
+        console.log("自动上传成功index:" + index);
+        console.log("fileuploaded-filenames--for" + index + "=" + data.filenames[index]);
+
+        var img_dom = $(".kv-file-content img[title='" + data.filenames[index] + "']");
+
+        img_dom.attr('src', '$domain' + data.response.key);
+    }).on("filebatchselected", function (event, files) {
+        $(this).fileinput("upload");
+    });
+
+
+    $("#submit").on('click', function () {
+
+        var form = $("#form");
+        form.valid();
+
+        //////////////logo图片//////////////
+        var logo_dom = $("#store-logo-div .kv-zoom-cache .kv-file-content img");
+        var logo_img = logo_dom.attr("src");
+
+        if($("#goods").val() == 0 || logo_img == undefined ){
+            swal({
+                title: "失败!",
+                text: "请选择图片或商品!",
+                type: "error",
+                showConfirmButton: false,
+                timer: 2000,
+            });
+        }else{
+            $.post("/store/goods/verifyImg",
+                    {
+                        goodsId: $("#goods").val(),
+                    },
+                    function (data, status) {
+                        if (data.code == 200 && data.data == null) {
+                            $.sub();
+                        }else if(data.code == 200 && data.data != null){
+                            swal({  title: "此商品已有广告，确定要将其覆盖吗？",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonText: "是的，覆盖",
+                                cancelButtonText: "取消",
+                                closeOnConfirm: false,
+                                closeOnCancel: true
+                            },function(isConfirm){
+                                if(isConfirm){
+                                    $.post("/store/goods/updateGoodsAd",
+                                            {
+                                                goodsId: $("#goods").val(),
+                                                img: logo_img
+                                            },
+                                            function (data, status) {
+                                                if (data.code == 200) {
+                                                    swal({
+                                                        title: "成功!",
+                                                        text: "已覆盖!",
+                                                        type: "success",
+                                                        showConfirmButton: false,
+                                                        timer: 2000,
+                                                    });
+                                                    setTimeout(function () {
+                                                        window.location.href = "/store/setting/showAdPage";
+                                                    }, 2000);
+                                                }
+                                            });
+                                }
+                            });
+                        }
+                    }
+
+            )
+            ;
+        }
+    });
+
+    $.sub = function(){
+        $.ajax({
+            url : "/store/goods/insertGoodsAd",
+            type : "post",
+            data : {
+                goodsId: $("#goods").val(),
+                img: logo_img
+            },
+            async: false,
+            success:function(response) {
+                if(response.code == 200) {
+                    swal({
+                        title: "成功!",
+                        text: "添加成功!",
+                        type: "success",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                    setTimeout(function () {
+                        window.location.href = "/store/setting/showAdPage";
+                    }, 2000);
+                }
+            },
+            error:function(response) {
+                alert("系统出错")
+            }
+        })
+    }
+
+    $("#form").validate();
+
+</script>
+
+
+#parse("/store/models/end.vm")

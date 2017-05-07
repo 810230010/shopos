@@ -1,0 +1,86 @@
+#parse("/store/models/begin.vm")
+
+#parse("/store/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>设置-广告设置</h2>
+        <p>
+            <a type="button" class="btn btn-w-m btn-primary" href="/store/setting/addadpage">添加商品广告</a>
+        </p>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" id="space">
+    </div>
+</div>
+#parse("/store/models/footer.vm")
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url : "/store/goods/getStoreGoods",
+            type : "post",
+            data : {},
+            async: false,
+            success:function(response) {
+                if(response.code == 200) {
+                    for(var i = 0 ; i < response.data.length ; i++){
+                        var spname;
+                        var spword;
+                        if(GetLength(response.data[i].name)>15)spname = cutstr(response.data[i].name,15);
+                        else spname = response.data[i].name;
+                        if(GetLength(response.data[i].adWord)>40)spword = cutstr(response.data[i].adWord,20);
+                        else spword = response.data[i].adWord
+                        $("#space").append("<div class='col-md-3'><div class='ibox'><div class='ibox-content product-box'><div class='product-imitation'>" +
+                                "<img src='"+  response.data[i].img +"' style='width:280px;height:200px'/></div><div class='product-desc'><span class='product-price fa fa-jpy'>"+ response.data[i].price +"</span><small class='text-muted'>" +
+                        ""+ response.data[i].unit +"</small><span class='product-name'>"+  spname +"</span><div class='small m-t-xs' id='word'>"+ spword +"</div><div class='m-t text-righ'>" +
+                        "<a href='/store/setting/updateAdPage?goodsId="+ response.data[i].goodsId +"' class='btn btn-xs btn-outline btn-primary'>编辑 <i class='fa fa-long-arrow-right'></i> </a>" +
+                        "</div></div></div></div></div>");
+                    }
+                }
+            },
+            error:function(response) {
+                alert("系统出错")
+            }
+        })
+    });
+
+    var GetLength = function (str) {
+        ///<summary>获得字符串实际长度，中文2，英文1</summary>
+        ///<param name="str">要获得长度的字符串</param>
+        var realLength = 0, len = str.length, charCode = -1;
+        for (var i = 0; i < len; i++) {
+            charCode = str.charCodeAt(i);
+            if (charCode >= 0 && charCode <= 128) realLength += 1;
+            else realLength += 2;
+        }
+        return realLength;
+    };
+
+
+    function cutstr(str, len) {
+        var str_length = 0;
+        var str_len = 0;
+        str_cut = new String();
+        str_len = str.length;
+        for (var i = 0; i < str_len; i++) {
+            a = str.charAt(i);
+            str_length++;
+            if (escape(a).length > 4) {
+                //中文字符的长度经编码之后大于4
+                str_length++;
+            }
+            str_cut = str_cut.concat(a);
+            if (str_length >= len) {
+                str_cut = str_cut.concat("...");
+                return str_cut;
+            }
+        }
+        //如果给定字符串小于指定长度，则返回源字符串；
+        if (str_length < len) {
+            return str;
+        }
+    }
+</script>
+
+#parse("/store/models/end.vm")

@@ -7,6 +7,7 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
 import com.wuliangit.shopos.model.StoreUser;
@@ -98,5 +99,15 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
         goods.setDelFlag(true);
         return goodsMapper.updateByPrimaryKeySelective(goods);
+    }
+
+    @Override
+    public List<StoreGoodsDetailDTO> getStoreGoods(Integer storeId) {
+        return goodsMapper.getStoreGoods(storeId);
+    }
+
+    @Override
+    public StoreGoodsDetailDTO getSimplGoodsInfo(Integer goodsId) {
+        return goodsMapper.getSimplGoodsInfo(goodsId);
     }
 }

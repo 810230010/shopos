@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.GoodsAdMapper" >
+
+    <!--获取商品广告-->
+    <select id="getGoodsAdImg" resultType="java.lang.String">
+        SELECT img
+        FROM t_store_goods_ad
+        WHERE goods_id = #{goodsId} and store_id = #{storeId}
+    </select>
+
+    <!--更新商品广告-->
+    <update id="updateGoodsAd">
+        UPDATE t_store_goods_ad
+        SET img = #{img}
+        WHERE goods_id = #{goodsId} and store_id = #{storeId}
+    </update>
+</mapper>

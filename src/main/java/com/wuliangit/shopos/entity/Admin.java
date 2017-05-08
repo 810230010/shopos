@@ -19,6 +19,21 @@ public class Admin {
 
     private Boolean delFlag;
 
+    public Admin(Integer adminId, String username, String password, Date loginTime, Integer loginNum, String salt, Date createTime, Boolean delFlag) {
+        this.adminId = adminId;
+        this.username = username;
+        this.password = password;
+        this.loginTime = loginTime;
+        this.loginNum = loginNum;
+        this.salt = salt;
+        this.createTime = createTime;
+        this.delFlag = delFlag;
+    }
+
+    public Admin() {
+        super();
+    }
+
     public Integer getAdminId() {
         return adminId;
     }

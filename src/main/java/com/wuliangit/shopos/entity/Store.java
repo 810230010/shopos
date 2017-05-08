@@ -114,6 +114,68 @@ public class Store {
 
     private String liveStoreBus;
 
+    public Store(Integer storeId, String name, Integer gradeId, Integer memberId, String sellerNikename, Integer scId, String type, String storeCompanyName, Integer provinceId, String areaInfo, String address, String zip, String state, String closeInfo, Integer sort, Date createTime, String endTime, String label, String banner, String logo, String keywords, String description, String qq, String ww, String phone, String domain, Integer domainTimes, Boolean isRecommend, String theme, Integer credit, Float desccredit, Float servicecredit, Float deliverycredit, Integer collect, String slideUrl, String stamp, String printdesc, Integer sales, String presales, String aftersales, String workingtime, BigDecimal freePrice, Boolean decorationSwitch, Boolean decorationOnly, Boolean sevenDayReturn, Boolean realGoods, Boolean salesReturn, Boolean live, Boolean payAfter, String storeFreeTime, String liveStoreName, String liveStoreAddress, String liveStoreTel, String liveStoreGps, String liveStoreBus) {
+        this.storeId = storeId;
+        this.name = name;
+        this.gradeId = gradeId;
+        this.memberId = memberId;
+        this.sellerNikename = sellerNikename;
+        this.scId = scId;
+        this.type = type;
+        this.storeCompanyName = storeCompanyName;
+        this.provinceId = provinceId;
+        this.areaInfo = areaInfo;
+        this.address = address;
+        this.zip = zip;
+        this.state = state;
+        this.closeInfo = closeInfo;
+        this.sort = sort;
+        this.createTime = createTime;
+        this.endTime = endTime;
+        this.label = label;
+        this.banner = banner;
+        this.logo = logo;
+        this.keywords = keywords;
+        this.description = description;
+        this.qq = qq;
+        this.ww = ww;
+        this.phone = phone;
+        this.domain = domain;
+        this.domainTimes = domainTimes;
+        this.isRecommend = isRecommend;
+        this.theme = theme;
+        this.credit = credit;
+        this.desccredit = desccredit;
+        this.servicecredit = servicecredit;
+        this.deliverycredit = deliverycredit;
+        this.collect = collect;
+        this.slideUrl = slideUrl;
+        this.stamp = stamp;
+        this.printdesc = printdesc;
+        this.sales = sales;
+        this.presales = presales;
+        this.aftersales = aftersales;
+        this.workingtime = workingtime;
+        this.freePrice = freePrice;
+        this.decorationSwitch = decorationSwitch;
+        this.decorationOnly = decorationOnly;
+        this.sevenDayReturn = sevenDayReturn;
+        this.realGoods = realGoods;
+        this.salesReturn = salesReturn;
+        this.live = live;
+        this.payAfter = payAfter;
+        this.storeFreeTime = storeFreeTime;
+        this.liveStoreName = liveStoreName;
+        this.liveStoreAddress = liveStoreAddress;
+        this.liveStoreTel = liveStoreTel;
+        this.liveStoreGps = liveStoreGps;
+        this.liveStoreBus = liveStoreBus;
+    }
+
+    public Store() {
+        super();
+    }
+
     public Integer getStoreId() {
         return storeId;
     }

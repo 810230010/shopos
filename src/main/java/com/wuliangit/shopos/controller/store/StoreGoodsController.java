@@ -10,9 +10,7 @@ import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.entity.GoodsSku;
-import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.model.StoreUser;
-import com.wuliangit.shopos.service.GoodsAdService;
 import com.wuliangit.shopos.service.GoodsCategoryService;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.GoodsSkuService;
@@ -20,7 +18,6 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,8 +39,7 @@ public class StoreGoodsController {
     private GoodsCategoryService goodsCategoryService;
     @Autowired
     private GoodsSkuService goodsSkuService;
-    @Autowired
-    private GoodsAdService goodsAdService;
+
 
     /**
      * 商品列表页面
@@ -209,43 +205,6 @@ public class StoreGoodsController {
         return result;
     }
 
-    /**
-     * 获取商铺商品信息
-     * @return
-     */
-    @RequestMapping("/getStoreGoods")
-    @ResponseBody
-    public Object getStoreGoods(){
-        RestResult result = new RestResult();
-        StoreUser storeUser = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute("SESSION_CURRENT_STORE");
-        Integer storeId = storeUser.getStoreId();
-        List<StoreGoodsDetailDTO> info = goodsService.getStoreGoods(storeId);
-        List<StoreGoodsDetailDTO> fina = new ArrayList<StoreGoodsDetailDTO>();
-        for(StoreGoodsDetailDTO storeGoodsDetailDTO : info){
-            String img = "";
-            img = goodsAdService.getGoodsAdImg(storeGoodsDetailDTO.getGoodsId(),storeId);
-            storeGoodsDetailDTO.setImg(img);
-            fina.add(storeGoodsDetailDTO);
-        }
-        result.put("data",fina);
-        return result;
-    }
-
-    /**
-     * 更新商品广告
-     * @param goodsId
-     * @param img
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("updateGoodsAd")
-    @ResponseBody
-    public Object updateGoodsAd(Integer goodsId, String img) throws Exception{
-        RestResult result = new RestResult();
-        StoreUser storeUser = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute("SESSION_CURRENT_STORE");
-        Integer info = goodsAdService.updateGoodsAd(goodsId,storeUser.getStoreId(),img);
-        return result;
-    }
 
     /**
      * 获取商品的简要信息
@@ -261,34 +220,6 @@ public class StoreGoodsController {
         return result;
     }
 
-    /**
-     * 插入商品广告
-     * @param goodsId
-     * @param img
-     * @return
-     */
-    @RequestMapping("/insertGoodsAd")
-    @ResponseBody
-    public Object insertGoodsAd(Integer goodsId, String img) throws Exception{
-        RestResult result = new RestResult();
-        StoreUser storeUser = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute("SESSION_CURRENT_STORE");
-        Integer info = goodsAdService.insertGoodsAd(storeUser.getStoreId(),goodsId,img);
-        return result;
-    }
 
-    /**
-     * 验证商品是否有图片
-     * @param goodsId
-     * @return
-     */
-    @RequestMapping("/verifyImg")
-    @ResponseBody
-    public Object verifyImg(Integer goodsId){
-        RestResult result = new RestResult();
-        StoreUser storeUser = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute("SESSION_CURRENT_STORE");
-        String info = goodsAdService.getGoodsAdImg(goodsId,storeUser.getStoreId());
-        result.put("data",info);
-        return result;
-    }
 
 }

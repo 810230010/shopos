@@ -6,6 +6,7 @@ import com.wuliangit.shopos.entity.Address;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,7 +47,7 @@ public class MAddressController {
      * @param addressId 要设置成默认地址的地址id
      * @return
      */
-    @RequestMapping("/default/{addressId}")
+    @RequestMapping("/default")
     public Object setDefaultAddress(Integer addressId){
         RestResult result = new RestResult();
         int res = addressService.setDefaultAddress(addressId);
@@ -58,7 +59,7 @@ public class MAddressController {
      * @param addressId
      * @return
      */
-    @RequestMapping("/delete/{addressId}")
+    @RequestMapping("/delete")
     public Object deleteAddress(Integer addressId){
         RestResult result = new RestResult();
         int res = addressService.deleteAddress(addressId);
@@ -70,8 +71,8 @@ public class MAddressController {
      * @param address
      * @return
      */
-    @RequestMapping("/update/{addressId}")
-    public Object updateAddress(Address address){
+    @RequestMapping("/update")
+    public Object updateAddress( Address address){
         RestResult result = new RestResult();
 
         int res = addressService.updateAddress(address);

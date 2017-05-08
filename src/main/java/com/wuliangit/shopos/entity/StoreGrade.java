@@ -25,6 +25,24 @@ public class StoreGrade {
 
     private String description;
 
+    public StoreGrade(Integer storeGradeId, String name, Integer goodsLimit, Integer albumLimit, Integer spaceLimit, Integer templateNumber, String template, BigDecimal price, String function, Integer sort, String description) {
+        this.storeGradeId = storeGradeId;
+        this.name = name;
+        this.goodsLimit = goodsLimit;
+        this.albumLimit = albumLimit;
+        this.spaceLimit = spaceLimit;
+        this.templateNumber = templateNumber;
+        this.template = template;
+        this.price = price;
+        this.function = function;
+        this.sort = sort;
+        this.description = description;
+    }
+
+    public StoreGrade() {
+        super();
+    }
+
     public Integer getStoreGradeId() {
         return storeGradeId;
     }

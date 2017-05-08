@@ -27,6 +27,25 @@ public class Address {
 
     private Date createTime;
 
+    public Address(Integer addressId, Integer memberId, String reciverName, String provinceId, Integer cityId, Integer areaId, String areaInfo, String address, String telPhone, String mobPhone, Boolean isDefault, Date createTime) {
+        this.addressId = addressId;
+        this.memberId = memberId;
+        this.reciverName = reciverName;
+        this.provinceId = provinceId;
+        this.cityId = cityId;
+        this.areaId = areaId;
+        this.areaInfo = areaInfo;
+        this.address = address;
+        this.telPhone = telPhone;
+        this.mobPhone = mobPhone;
+        this.isDefault = isDefault;
+        this.createTime = createTime;
+    }
+
+    public Address() {
+        super();
+    }
+
     public Integer getAddressId() {
         return addressId;
     }

@@ -20,6 +20,21 @@ public class FavoritesGoods {
 
     private String logMsg;
 
+    public FavoritesGoods(Integer favoritesGoodsId, Integer memberId, String memberName, Date favTime, Integer goodsId, String goodsName, BigDecimal logPrice, String logMsg) {
+        this.favoritesGoodsId = favoritesGoodsId;
+        this.memberId = memberId;
+        this.memberName = memberName;
+        this.favTime = favTime;
+        this.goodsId = goodsId;
+        this.goodsName = goodsName;
+        this.logPrice = logPrice;
+        this.logMsg = logMsg;
+    }
+
+    public FavoritesGoods() {
+        super();
+    }
+
     public Integer getFavoritesGoodsId() {
         return favoritesGoodsId;
     }

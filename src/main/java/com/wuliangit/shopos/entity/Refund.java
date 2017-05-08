@@ -70,6 +70,46 @@ public class Refund {
 
     private Date receiveTime;
 
+    public Refund(Integer refundId, Integer orderId, String orderSn, String refundSn, Integer storeId, String storeName, Integer memberId, String memberName, Integer goodsId, Integer orderGoodsId, String goodsName, Integer goodsNum, BigDecimal refundAmount, String goodsImage, String orderGoodsType, String refundType, String sellerState, String refundState, Boolean isLock, String goodsState, Date createTime, Date sellerHandleTime, Date adminTime, String reasonInfo, String picsInfo, String buyerMessage, String sellerMessage, String adminMessage, Integer expressId, String invoiceNo, Date shipTime, Date delayTime, Date receiveTime) {
+        this.refundId = refundId;
+        this.orderId = orderId;
+        this.orderSn = orderSn;
+        this.refundSn = refundSn;
+        this.storeId = storeId;
+        this.storeName = storeName;
+        this.memberId = memberId;
+        this.memberName = memberName;
+        this.goodsId = goodsId;
+        this.orderGoodsId = orderGoodsId;
+        this.goodsName = goodsName;
+        this.goodsNum = goodsNum;
+        this.refundAmount = refundAmount;
+        this.goodsImage = goodsImage;
+        this.orderGoodsType = orderGoodsType;
+        this.refundType = refundType;
+        this.sellerState = sellerState;
+        this.refundState = refundState;
+        this.isLock = isLock;
+        this.goodsState = goodsState;
+        this.createTime = createTime;
+        this.sellerHandleTime = sellerHandleTime;
+        this.adminTime = adminTime;
+        this.reasonInfo = reasonInfo;
+        this.picsInfo = picsInfo;
+        this.buyerMessage = buyerMessage;
+        this.sellerMessage = sellerMessage;
+        this.adminMessage = adminMessage;
+        this.expressId = expressId;
+        this.invoiceNo = invoiceNo;
+        this.shipTime = shipTime;
+        this.delayTime = delayTime;
+        this.receiveTime = receiveTime;
+    }
+
+    public Refund() {
+        super();
+    }
+
     public Integer getRefundId() {
         return refundId;
     }

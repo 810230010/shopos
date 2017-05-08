@@ -57,6 +57,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public int createAddress(Address address) {
+        Member currentMember = WebUtil.getCurrentMember();
+        address.setMemberId(currentMember.getMemberId());
         return addressMapper.insertSelective(address);
     }
 

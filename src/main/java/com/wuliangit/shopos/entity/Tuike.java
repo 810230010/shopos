@@ -29,6 +29,26 @@ public class Tuike {
 
     private String bankCard;
 
+    public Tuike(Integer tuikeId, Integer memberId, String state, Boolean isCheck, Date createTime, Date updateTime, Long availableBalance, Long freezeBalance, String code, String shareCount, String buyCount, String alipayAccount, String bankCard) {
+        this.tuikeId = tuikeId;
+        this.memberId = memberId;
+        this.state = state;
+        this.isCheck = isCheck;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.availableBalance = availableBalance;
+        this.freezeBalance = freezeBalance;
+        this.code = code;
+        this.shareCount = shareCount;
+        this.buyCount = buyCount;
+        this.alipayAccount = alipayAccount;
+        this.bankCard = bankCard;
+    }
+
+    public Tuike() {
+        super();
+    }
+
     public Integer getTuikeId() {
         return tuikeId;
     }

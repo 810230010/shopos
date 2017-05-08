@@ -2,35 +2,38 @@ package com.wuliangit.shopos.entity;
 
 import java.util.Date;
 
-/**
- * created by JangJanPing
- */
 public class MemberAdvice {
-    private Integer adviceId;
+    private Integer memberAdviceId;
 
     private Integer memberId;
 
     private String memberName;
-    private Integer status;
+
+    private Byte status;
 
     private Date createTime;
 
     private String adviceContent;
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
+    public MemberAdvice(Integer memberAdviceId, Integer memberId, String memberName, Byte status, Date createTime, String adviceContent) {
+        this.memberAdviceId = memberAdviceId;
+        this.memberId = memberId;
+        this.memberName = memberName;
         this.status = status;
+        this.createTime = createTime;
+        this.adviceContent = adviceContent;
     }
 
-    public Integer getAdviceId() {
-        return adviceId;
+    public MemberAdvice() {
+        super();
     }
 
-    public void setAdviceId(Integer adviceId) {
-        this.adviceId = adviceId;
+    public Integer getMemberAdviceId() {
+        return memberAdviceId;
+    }
+
+    public void setMemberAdviceId(Integer memberAdviceId) {
+        this.memberAdviceId = memberAdviceId;
     }
 
     public Integer getMemberId() {
@@ -47,6 +50,14 @@ public class MemberAdvice {
 
     public void setMemberName(String memberName) {
         this.memberName = memberName == null ? null : memberName.trim();
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {

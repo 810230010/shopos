@@ -84,6 +84,53 @@ public class Member {
 
     private String idcardNum;
 
+    public Member(Integer memberId, String username, String nikename, String truename, String passwd, String paypwd, String salt, String photo, String sex, Date birthday, String type, String email, String mobile, String qq, String openid, String wxPhoto, String wxNickname, Integer loginNum, Date createTime, Date loginTime, String loginIp, String qqopenid, String qqinfo, String sinaopenid, String sinainfo, Integer points, BigDecimal availableBalance, BigDecimal freezeBalance, String state, Integer credit, Integer areaid, Integer cityid, Integer provinceid, String areainfo, Integer exppoints, Integer inviterId, Boolean delFlag, Date updateTime, String authState, String idcardNum) {
+        this.memberId = memberId;
+        this.username = username;
+        this.nikename = nikename;
+        this.truename = truename;
+        this.passwd = passwd;
+        this.paypwd = paypwd;
+        this.salt = salt;
+        this.photo = photo;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.type = type;
+        this.email = email;
+        this.mobile = mobile;
+        this.qq = qq;
+        this.openid = openid;
+        this.wxPhoto = wxPhoto;
+        this.wxNickname = wxNickname;
+        this.loginNum = loginNum;
+        this.createTime = createTime;
+        this.loginTime = loginTime;
+        this.loginIp = loginIp;
+        this.qqopenid = qqopenid;
+        this.qqinfo = qqinfo;
+        this.sinaopenid = sinaopenid;
+        this.sinainfo = sinainfo;
+        this.points = points;
+        this.availableBalance = availableBalance;
+        this.freezeBalance = freezeBalance;
+        this.state = state;
+        this.credit = credit;
+        this.areaid = areaid;
+        this.cityid = cityid;
+        this.provinceid = provinceid;
+        this.areainfo = areainfo;
+        this.exppoints = exppoints;
+        this.inviterId = inviterId;
+        this.delFlag = delFlag;
+        this.updateTime = updateTime;
+        this.authState = authState;
+        this.idcardNum = idcardNum;
+    }
+
+    public Member() {
+        super();
+    }
+
     public Integer getMemberId() {
         return memberId;
     }

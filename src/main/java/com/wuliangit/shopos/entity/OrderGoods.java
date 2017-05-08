@@ -31,6 +31,27 @@ public class OrderGoods {
 
     private BigDecimal commission;
 
+    public OrderGoods(Integer orderGoodsId, Integer orderCommonId, Integer goodsSkuId, Integer orderId, Integer goodsId, String skuName, String goodsName, Integer goodsNum, String goodsImage, BigDecimal goodsPayPrice, Integer storeId, Integer memberId, String goodsType, BigDecimal commission) {
+        this.orderGoodsId = orderGoodsId;
+        this.orderCommonId = orderCommonId;
+        this.goodsSkuId = goodsSkuId;
+        this.orderId = orderId;
+        this.goodsId = goodsId;
+        this.skuName = skuName;
+        this.goodsName = goodsName;
+        this.goodsNum = goodsNum;
+        this.goodsImage = goodsImage;
+        this.goodsPayPrice = goodsPayPrice;
+        this.storeId = storeId;
+        this.memberId = memberId;
+        this.goodsType = goodsType;
+        this.commission = commission;
+    }
+
+    public OrderGoods() {
+        super();
+    }
+
     public Integer getOrderGoodsId() {
         return orderGoodsId;
     }

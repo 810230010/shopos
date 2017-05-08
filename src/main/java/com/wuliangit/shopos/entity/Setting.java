@@ -9,6 +9,17 @@ public class Setting {
 
     private String value;
 
+    public Setting(Integer settingId, String name, String key, String value) {
+        this.settingId = settingId;
+        this.name = name;
+        this.key = key;
+        this.value = value;
+    }
+
+    public Setting() {
+        super();
+    }
+
     public Integer getSettingId() {
         return settingId;
     }

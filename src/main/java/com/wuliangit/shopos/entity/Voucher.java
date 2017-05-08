@@ -36,6 +36,29 @@ public class Voucher {
 
     private Date createTime;
 
+    public Voucher(Integer voucherId, String voucherCode, String title, String desc, Date startTime, Date endTime, BigDecimal price, BigDecimal limit, Integer storeId, String state, Date activeTime, String type, Integer ownerId, String ownerName, Integer orderId, Date createTime) {
+        this.voucherId = voucherId;
+        this.voucherCode = voucherCode;
+        this.title = title;
+        this.desc = desc;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.price = price;
+        this.limit = limit;
+        this.storeId = storeId;
+        this.state = state;
+        this.activeTime = activeTime;
+        this.type = type;
+        this.ownerId = ownerId;
+        this.ownerName = ownerName;
+        this.orderId = orderId;
+        this.createTime = createTime;
+    }
+
+    public Voucher() {
+        super();
+    }
+
     public Integer getVoucherId() {
         return voucherId;
     }

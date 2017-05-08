@@ -44,6 +44,33 @@ public class EvaluateGoods {
 
     private String images;
 
+    public EvaluateGoods(Integer evaluateGoodsId, Integer orderId, String orderSn, Integer orderGoodsId, Integer goodsId, String goodsName, BigDecimal goodsPrice, String goodsImages, Integer scores, String content, Boolean isAnonymous, Date createTime, Integer storeId, String storeName, Integer fromMemberId, String fromMemberName, Boolean isShow, String remark, String explain, String images) {
+        this.evaluateGoodsId = evaluateGoodsId;
+        this.orderId = orderId;
+        this.orderSn = orderSn;
+        this.orderGoodsId = orderGoodsId;
+        this.goodsId = goodsId;
+        this.goodsName = goodsName;
+        this.goodsPrice = goodsPrice;
+        this.goodsImages = goodsImages;
+        this.scores = scores;
+        this.content = content;
+        this.isAnonymous = isAnonymous;
+        this.createTime = createTime;
+        this.storeId = storeId;
+        this.storeName = storeName;
+        this.fromMemberId = fromMemberId;
+        this.fromMemberName = fromMemberName;
+        this.isShow = isShow;
+        this.remark = remark;
+        this.explain = explain;
+        this.images = images;
+    }
+
+    public EvaluateGoods() {
+        super();
+    }
+
     public Integer getEvaluateGoodsId() {
         return evaluateGoodsId;
     }

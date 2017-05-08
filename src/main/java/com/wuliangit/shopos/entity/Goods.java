@@ -98,6 +98,60 @@ public class Goods {
 
     private String goodsBody;
 
+    public Goods(Integer goodsId, String name, String unit, String adWord, Integer storeId, String storeName, Integer goodsCategoryId, Integer brandId, BigDecimal price, BigDecimal carriage, BigDecimal commission, BigDecimal promotionPrice, String promotionType, BigDecimal marketprice, Integer storageAlarm, Integer click, Integer salenum, Integer collect, Integer storage, String images, String titleImg, String state, String verify, Date createTime, Date editTime, Boolean isNew, String type, Boolean secondHand, Integer activityId, String activityType, Boolean isVirtual, Boolean virtualInvalidRefund, Boolean isAppoint, Boolean isPresell, Boolean isOwnShop, Boolean vat, Boolean commend, Integer evaluationGoodStar, Integer evaluationCount, Boolean delFlag, String attrs, Boolean isPlatform, String area, Boolean isCheck, Date sellTimeBegin, Date sellTimeEnd, String goodsBody) {
+        this.goodsId = goodsId;
+        this.name = name;
+        this.unit = unit;
+        this.adWord = adWord;
+        this.storeId = storeId;
+        this.storeName = storeName;
+        this.goodsCategoryId = goodsCategoryId;
+        this.brandId = brandId;
+        this.price = price;
+        this.carriage = carriage;
+        this.commission = commission;
+        this.promotionPrice = promotionPrice;
+        this.promotionType = promotionType;
+        this.marketprice = marketprice;
+        this.storageAlarm = storageAlarm;
+        this.click = click;
+        this.salenum = salenum;
+        this.collect = collect;
+        this.storage = storage;
+        this.images = images;
+        this.titleImg = titleImg;
+        this.state = state;
+        this.verify = verify;
+        this.createTime = createTime;
+        this.editTime = editTime;
+        this.isNew = isNew;
+        this.type = type;
+        this.secondHand = secondHand;
+        this.activityId = activityId;
+        this.activityType = activityType;
+        this.isVirtual = isVirtual;
+        this.virtualInvalidRefund = virtualInvalidRefund;
+        this.isAppoint = isAppoint;
+        this.isPresell = isPresell;
+        this.isOwnShop = isOwnShop;
+        this.vat = vat;
+        this.commend = commend;
+        this.evaluationGoodStar = evaluationGoodStar;
+        this.evaluationCount = evaluationCount;
+        this.delFlag = delFlag;
+        this.attrs = attrs;
+        this.isPlatform = isPlatform;
+        this.area = area;
+        this.isCheck = isCheck;
+        this.sellTimeBegin = sellTimeBegin;
+        this.sellTimeEnd = sellTimeEnd;
+        this.goodsBody = goodsBody;
+    }
+
+    public Goods() {
+        super();
+    }
+
     public Integer getGoodsId() {
         return goodsId;
     }

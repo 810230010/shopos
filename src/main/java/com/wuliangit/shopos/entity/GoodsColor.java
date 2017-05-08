@@ -19,6 +19,21 @@ public class GoodsColor {
 
     private String colorSort;
 
+    public GoodsColor(Integer goodsColorId, Integer goodsId, String colorImage, BigDecimal colorPrice, BigDecimal colorCommission, BigDecimal commissionPercent, String colorName, String colorSort) {
+        this.goodsColorId = goodsColorId;
+        this.goodsId = goodsId;
+        this.colorImage = colorImage;
+        this.colorPrice = colorPrice;
+        this.colorCommission = colorCommission;
+        this.commissionPercent = commissionPercent;
+        this.colorName = colorName;
+        this.colorSort = colorSort;
+    }
+
+    public GoodsColor() {
+        super();
+    }
+
     public Integer getGoodsColorId() {
         return goodsColorId;
     }

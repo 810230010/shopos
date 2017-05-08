@@ -51,6 +51,37 @@ public class OrderCommon {
 
     private String promotionInfo;
 
+    public OrderCommon(Integer orderCommonId, Integer orderId, Integer storeId, Integer shippingTime, Integer shippingExpressId, Date evaluationTime, String evalsellerState, Integer evalsellerTime, String orderMessage, Integer orderPointscount, Integer voucherPrice, String voucherCode, String deliverExplain, Integer areaId, Integer cityId, String areaInfo, String address, String telPhone, String mobPhone, String reciverName, String reciverInfo, Integer reciverProvinceId, String invoiceInfo, String promotionInfo) {
+        this.orderCommonId = orderCommonId;
+        this.orderId = orderId;
+        this.storeId = storeId;
+        this.shippingTime = shippingTime;
+        this.shippingExpressId = shippingExpressId;
+        this.evaluationTime = evaluationTime;
+        this.evalsellerState = evalsellerState;
+        this.evalsellerTime = evalsellerTime;
+        this.orderMessage = orderMessage;
+        this.orderPointscount = orderPointscount;
+        this.voucherPrice = voucherPrice;
+        this.voucherCode = voucherCode;
+        this.deliverExplain = deliverExplain;
+        this.areaId = areaId;
+        this.cityId = cityId;
+        this.areaInfo = areaInfo;
+        this.address = address;
+        this.telPhone = telPhone;
+        this.mobPhone = mobPhone;
+        this.reciverName = reciverName;
+        this.reciverInfo = reciverInfo;
+        this.reciverProvinceId = reciverProvinceId;
+        this.invoiceInfo = invoiceInfo;
+        this.promotionInfo = promotionInfo;
+    }
+
+    public OrderCommon() {
+        super();
+    }
+
     public Integer getOrderCommonId() {
         return orderCommonId;
     }

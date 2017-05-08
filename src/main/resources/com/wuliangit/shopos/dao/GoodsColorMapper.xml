@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.GoodsColorMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.GoodsColor" >
+    <constructor >
+      <idArg column="goods_color_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="color_image" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="color_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="color_commission" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="commission_percent" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="color_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="color_sort" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_color_id, goods_id, color_image, color_price, color_commission, commission_percent, 
+    color_name, color_sort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods_color
+    where goods_color_id = #{goodsColorId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_goods_color
+    where goods_color_id = #{goodsColorId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.GoodsColor" >
+    <selectKey resultType="java.lang.Integer" keyProperty="goodsColorId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_goods_color (goods_id, color_image, color_price, 
+      color_commission, commission_percent, color_name, 
+      color_sort)
+    values (#{goodsId,jdbcType=INTEGER}, #{colorImage,jdbcType=VARCHAR}, #{colorPrice,jdbcType=DECIMAL}, 
+      #{colorCommission,jdbcType=DECIMAL}, #{commissionPercent,jdbcType=DECIMAL}, #{colorName,jdbcType=VARCHAR}, 
+      #{colorSort,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.GoodsColor" >
+    <selectKey resultType="java.lang.Integer" keyProperty="goodsColorId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_goods_color
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="colorImage != null" >
+        color_image,
+      </if>
+      <if test="colorPrice != null" >
+        color_price,
+      </if>
+      <if test="colorCommission != null" >
+        color_commission,
+      </if>
+      <if test="commissionPercent != null" >
+        commission_percent,
+      </if>
+      <if test="colorName != null" >
+        color_name,
+      </if>
+      <if test="colorSort != null" >
+        color_sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="colorImage != null" >
+        #{colorImage,jdbcType=VARCHAR},
+      </if>
+      <if test="colorPrice != null" >
+        #{colorPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="colorCommission != null" >
+        #{colorCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="commissionPercent != null" >
+        #{commissionPercent,jdbcType=DECIMAL},
+      </if>
+      <if test="colorName != null" >
+        #{colorName,jdbcType=VARCHAR},
+      </if>
+      <if test="colorSort != null" >
+        #{colorSort,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.GoodsColor" >
+    update t_goods_color
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="colorImage != null" >
+        color_image = #{colorImage,jdbcType=VARCHAR},
+      </if>
+      <if test="colorPrice != null" >
+        color_price = #{colorPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="colorCommission != null" >
+        color_commission = #{colorCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="commissionPercent != null" >
+        commission_percent = #{commissionPercent,jdbcType=DECIMAL},
+      </if>
+      <if test="colorName != null" >
+        color_name = #{colorName,jdbcType=VARCHAR},
+      </if>
+      <if test="colorSort != null" >
+        color_sort = #{colorSort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goods_color_id = #{goodsColorId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.GoodsColor" >
+    update t_goods_color
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      color_image = #{colorImage,jdbcType=VARCHAR},
+      color_price = #{colorPrice,jdbcType=DECIMAL},
+      color_commission = #{colorCommission,jdbcType=DECIMAL},
+      commission_percent = #{commissionPercent,jdbcType=DECIMAL},
+      color_name = #{colorName,jdbcType=VARCHAR},
+      color_sort = #{colorSort,jdbcType=VARCHAR}
+    where goods_color_id = #{goodsColorId,jdbcType=INTEGER}
+  </update>
+</mapper>

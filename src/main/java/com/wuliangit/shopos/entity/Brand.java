@@ -21,6 +21,23 @@ public class Brand {
 
     private Integer goodsCategoryId;
 
+    public Brand(Integer brandId, String name, String initial, String categoryName, String pic, Integer sort, Boolean isRecommend, Integer storeId, String brandApply, Integer goodsCategoryId) {
+        this.brandId = brandId;
+        this.name = name;
+        this.initial = initial;
+        this.categoryName = categoryName;
+        this.pic = pic;
+        this.sort = sort;
+        this.isRecommend = isRecommend;
+        this.storeId = storeId;
+        this.brandApply = brandApply;
+        this.goodsCategoryId = goodsCategoryId;
+    }
+
+    public Brand() {
+        super();
+    }
+
     public Integer getBrandId() {
         return brandId;
     }

@@ -5,10 +5,9 @@ import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.dto.StoreUpdateDTO;
-import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreUser;
-import com.wuliangit.shopos.service.GoodsAdService;
+import com.wuliangit.shopos.service.StoreGoodsAdService;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.SecurityUtils;
@@ -18,9 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by nilme on 2017/4/28.
@@ -37,7 +33,7 @@ public class StoreSettingController {
     @Autowired
     private GoodsService goodsService;
     @Autowired
-    private GoodsAdService goodsAdService;
+    private StoreGoodsAdService goodsAdService;
 
     /**
      * 店铺信息修改页面

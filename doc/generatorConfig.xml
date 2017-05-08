@@ -6,29 +6,48 @@
 <!-- 数据库驱动-->
     <classPathEntry  location="mysql-connector-java-5.0.8.jar"/>
     <context id="DB2Tables"  targetRuntime="MyBatis3">
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
+
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://rm-uf6y7ofoac1ao1d7xo.mysql.rds.aliyuncs.com:3306/shopos" userId="root" password="">
         </jdbcConnection>
+
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
+
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.wuliangit.shopos.entity" targetProject="shopos">
+        <javaModelGenerator targetPackage="com.wuliangit.shopos.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
+            <property name="constructorBased" value="true"/>
         </javaModelGenerator>
+
         <!-- 生成映射文件的包名和位置-->
-        <sqlMapGenerator targetPackage="mapping" targetProject="shopos">
+        <sqlMapGenerator targetPackage="mappings.generate" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
+
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wuliangit.shopos.dao" targetProject="shopos">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wuliangit.shopos.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
+            <!-- 可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查-->
+            <property name="rootInterface" value="com.wuliangit.shopos.common.dao.BaseMapper"/>
         </javaClientGenerator>
 
 

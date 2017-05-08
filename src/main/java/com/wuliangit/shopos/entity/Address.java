@@ -9,9 +9,11 @@ public class Address {
 
     private String reciverName;
 
-    private Integer areaId;
+    private String provinceId;
 
     private Integer cityId;
+
+    private Integer areaId;
 
     private String areaInfo;
 
@@ -49,12 +51,12 @@ public class Address {
         this.reciverName = reciverName == null ? null : reciverName.trim();
     }
 
-    public Integer getAreaId() {
-        return areaId;
+    public String getProvinceId() {
+        return provinceId;
     }
 
-    public void setAreaId(Integer areaId) {
-        this.areaId = areaId;
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId == null ? null : provinceId.trim();
     }
 
     public Integer getCityId() {
@@ -63,6 +65,14 @@ public class Address {
 
     public void setCityId(Integer cityId) {
         this.cityId = cityId;
+    }
+
+    public Integer getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
     }
 
     public String getAreaInfo() {

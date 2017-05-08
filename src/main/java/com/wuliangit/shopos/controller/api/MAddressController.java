@@ -1,7 +1,9 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.entity.Address;
+import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,6 +73,7 @@ public class MAddressController {
     @RequestMapping("/update/{addressId}")
     public Object updateAddress(Address address){
         RestResult result = new RestResult();
+
         int res = addressService.updateAddress(address);
         return result;
     }

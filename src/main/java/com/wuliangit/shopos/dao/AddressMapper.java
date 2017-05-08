@@ -15,7 +15,7 @@ public interface AddressMapper extends BaseMapper<Address, Integer> {
     ArrayList<Address> getMemberAddressList(Integer memberId);
 
     /**
-     * 设置默认收货地址
+     * 清空默认收货地址
      * @param memberId
      * @return
      */
@@ -27,4 +27,5 @@ public interface AddressMapper extends BaseMapper<Address, Integer> {
      * @return
      */
     Address getDefaultAddress(Integer memberId);
+
 }

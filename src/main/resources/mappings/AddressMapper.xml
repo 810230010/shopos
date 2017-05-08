@@ -23,8 +23,4 @@
     where member_id = #{memberId}
   </update>
 
-
-
-
-
 </mapper>

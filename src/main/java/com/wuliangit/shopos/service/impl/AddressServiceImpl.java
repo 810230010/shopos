@@ -48,6 +48,10 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public int updateAddress(Address address) {
+        if (address.getIsDefault()){
+            Member currentMember = WebUtil.getCurrentMember();
+            addressMapper.cleanDefaultAddress(currentMember.getMemberId());
+        }
         return addressMapper.updateByPrimaryKeySelective(address);
     }
 
@@ -61,4 +65,5 @@ public class AddressServiceImpl implements AddressService {
         Member user = WebUtil.getCurrentMember();
         return addressMapper.getDefaultAddress(user.getMemberId());
     }
+
 }

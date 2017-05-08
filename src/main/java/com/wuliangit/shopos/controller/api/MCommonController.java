@@ -5,6 +5,7 @@ import com.wuliangit.shopos.entity.Area;
 import com.wuliangit.shopos.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class MCommonController {
      * @return
      */
     @RequestMapping("/area")
-    public Object getArea(Integer parentId){
+    public Object getArea(@RequestParam(defaultValue = "0") Integer parentId){
         RestResult result = new RestResult();
         List<Area> areas = areaService.getArea(parentId);
         result.add("areas",areas);

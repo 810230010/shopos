@@ -13,18 +13,6 @@ public class GoodsSku {
 
     private Integer goodsId;
 
-    public GoodsSku(Integer goodsSkuId, String skuValue, BigDecimal skuPrice, Integer skuStock, Integer goodsId) {
-        this.goodsSkuId = goodsSkuId;
-        this.skuValue = skuValue;
-        this.skuPrice = skuPrice;
-        this.skuStock = skuStock;
-        this.goodsId = goodsId;
-    }
-
-    public GoodsSku() {
-        super();
-    }
-
     public Integer getGoodsSkuId() {
         return goodsSkuId;
     }

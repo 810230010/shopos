@@ -22,22 +22,6 @@ public class BalanceLog {
 
     private String desc;
 
-    public BalanceLog(Integer balanceLogId, Integer memberId, String memberName, String adminName, String type, BigDecimal avAmount, BigDecimal freezeAmount, Date createTime, String desc) {
-        this.balanceLogId = balanceLogId;
-        this.memberId = memberId;
-        this.memberName = memberName;
-        this.adminName = adminName;
-        this.type = type;
-        this.avAmount = avAmount;
-        this.freezeAmount = freezeAmount;
-        this.createTime = createTime;
-        this.desc = desc;
-    }
-
-    public BalanceLog() {
-        super();
-    }
-
     public Integer getBalanceLogId() {
         return balanceLogId;
     }

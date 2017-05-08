@@ -2,20 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.BalanceCashMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.BalanceCash" >
-    <constructor >
-      <idArg column="balance_cash_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="balance_cash_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="member_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="member_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="bank_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="bank_no" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="bank_user" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="payment_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="is_payment" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="payment_admin" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="balance_cash_id" property="balanceCashId" jdbcType="INTEGER" />
+    <result column="balance_cash_sn" property="balanceCashSn" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+    <result column="bank_user" property="bankUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="is_payment" property="isPayment" jdbcType="BIT" />
+    <result column="payment_admin" property="paymentAdmin" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     balance_cash_id, balance_cash_sn, member_id, member_name, amount, bank_name, bank_no, 

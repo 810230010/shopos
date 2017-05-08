@@ -2,23 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.MemberAdviceMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.MemberAdvice" >
-    <constructor >
-      <idArg column="member_advice_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="member_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="member_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    </constructor>
+    <id column="member_advice_id" property="memberAdviceId" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.MemberAdvice" >
-    <constructor >
-      <idArg column="member_advice_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="member_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="member_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="advice_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-    </constructor>
+  <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.MemberAdvice" extends="BaseResultMap" >
+    <result column="advice_content" property="adviceContent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     member_advice_id, member_id, member_name, status, create_time

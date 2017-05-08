@@ -2,14 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.AreaMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Area" >
-    <constructor >
-      <idArg column="area_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="parent_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="sort" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="deep" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="region" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="deep" property="deep" jdbcType="INTEGER" />
+    <result column="region" property="region" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     area_id, name, parent_id, sort, deep, region

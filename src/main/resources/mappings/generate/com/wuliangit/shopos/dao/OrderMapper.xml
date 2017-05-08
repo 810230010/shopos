@@ -2,32 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.OrderMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Order" >
-    <constructor >
-      <idArg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="out_trade_no" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="trade_no" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="store_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="store_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="member_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="member_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="member_email" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="payment_code" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="payment_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="finnshed_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="goods_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="order_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="pd_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="carriage" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="evaluation_state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="order_state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="refund_state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="is_lock" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="delete_state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="refund_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="order_from" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="carriage_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    </constructor>
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="member_email" property="memberEmail" jdbcType="VARCHAR" />
+    <result column="payment_code" property="paymentCode" jdbcType="VARCHAR" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="finnshed_time" property="finnshedTime" jdbcType="TIMESTAMP" />
+    <result column="goods_amount" property="goodsAmount" jdbcType="DECIMAL" />
+    <result column="order_amount" property="orderAmount" jdbcType="DECIMAL" />
+    <result column="pd_amount" property="pdAmount" jdbcType="DECIMAL" />
+    <result column="carriage" property="carriage" jdbcType="DECIMAL" />
+    <result column="evaluation_state" property="evaluationState" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="VARCHAR" />
+    <result column="refund_state" property="refundState" jdbcType="VARCHAR" />
+    <result column="is_lock" property="isLock" jdbcType="BIT" />
+    <result column="delete_state" property="deleteState" jdbcType="VARCHAR" />
+    <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
+    <result column="order_from" property="orderFrom" jdbcType="VARCHAR" />
+    <result column="carriage_name" property="carriageName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     order_id, out_trade_no, trade_no, store_id, store_name, member_id, member_name, member_email, 

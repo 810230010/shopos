@@ -2,28 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.EvaluateGoodsMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.EvaluateGoods" >
-    <constructor >
-      <idArg column="evaluate_goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="order_goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="goods_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="goods_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="goods_images" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="scores" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="is_anonymous" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="store_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="store_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="from_member_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="from_member_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="is_show" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="explain" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="images" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="evaluate_goods_id" property="evaluateGoodsId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="order_goods_id" property="orderGoodsId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
+    <result column="goods_images" property="goodsImages" jdbcType="VARCHAR" />
+    <result column="scores" property="scores" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="is_anonymous" property="isAnonymous" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="from_member_id" property="fromMemberId" jdbcType="INTEGER" />
+    <result column="from_member_name" property="fromMemberName" jdbcType="VARCHAR" />
+    <result column="is_show" property="isShow" jdbcType="BIT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="explain" property="explain" jdbcType="VARCHAR" />
+    <result column="images" property="images" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     evaluate_goods_id, order_id, order_sn, order_goods_id, goods_id, goods_name, goods_price, 

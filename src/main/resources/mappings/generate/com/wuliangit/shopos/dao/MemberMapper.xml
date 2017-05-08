@@ -2,48 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.MemberMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Member" >
-    <constructor >
-      <idArg column="member_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="nikename" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="truename" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="passwd" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="paypwd" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="salt" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="photo" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sex" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="birthday" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="type" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="mobile" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="qq" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="openid" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="wx_photo" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="wx_nickname" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="login_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="login_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="login_ip" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="qqopenid" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="qqinfo" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sinaopenid" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sinainfo" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="points" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="available_balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="freeze_balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="credit" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="areaid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="cityid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="provinceid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="areainfo" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="exppoints" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="inviter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="del_flag" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="auth_state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="idcard_num" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="nikename" property="nikename" jdbcType="VARCHAR" />
+    <result column="truename" property="truename" jdbcType="VARCHAR" />
+    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
+    <result column="paypwd" property="paypwd" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="wx_photo" property="wxPhoto" jdbcType="VARCHAR" />
+    <result column="wx_nickname" property="wxNickname" jdbcType="VARCHAR" />
+    <result column="login_num" property="loginNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
+    <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+    <result column="qqopenid" property="qqopenid" jdbcType="VARCHAR" />
+    <result column="qqinfo" property="qqinfo" jdbcType="VARCHAR" />
+    <result column="sinaopenid" property="sinaopenid" jdbcType="VARCHAR" />
+    <result column="sinainfo" property="sinainfo" jdbcType="VARCHAR" />
+    <result column="points" property="points" jdbcType="INTEGER" />
+    <result column="available_balance" property="availableBalance" jdbcType="DECIMAL" />
+    <result column="freeze_balance" property="freezeBalance" jdbcType="DECIMAL" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="credit" property="credit" jdbcType="INTEGER" />
+    <result column="areaid" property="areaid" jdbcType="INTEGER" />
+    <result column="cityid" property="cityid" jdbcType="INTEGER" />
+    <result column="provinceid" property="provinceid" jdbcType="INTEGER" />
+    <result column="areainfo" property="areainfo" jdbcType="VARCHAR" />
+    <result column="exppoints" property="exppoints" jdbcType="INTEGER" />
+    <result column="inviter_id" property="inviterId" jdbcType="INTEGER" />
+    <result column="del_flag" property="delFlag" jdbcType="BIT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="auth_state" property="authState" jdbcType="VARCHAR" />
+    <result column="idcard_num" property="idcardNum" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     member_id, username, nikename, truename, passwd, paypwd, salt, photo, sex, birthday, 

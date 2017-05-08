@@ -25,24 +25,6 @@ public class EvaluateStore {
 
     private Integer deliveryCredit;
 
-    public EvaluateStore(Integer evaluateStoreId, Integer orderId, String orderNo, Date createTime, Integer storeId, String storeName, Integer memberId, String memberName, Integer descCredit, Integer serviceCredit, Integer deliveryCredit) {
-        this.evaluateStoreId = evaluateStoreId;
-        this.orderId = orderId;
-        this.orderNo = orderNo;
-        this.createTime = createTime;
-        this.storeId = storeId;
-        this.storeName = storeName;
-        this.memberId = memberId;
-        this.memberName = memberName;
-        this.descCredit = descCredit;
-        this.serviceCredit = serviceCredit;
-        this.deliveryCredit = deliveryCredit;
-    }
-
-    public EvaluateStore() {
-        super();
-    }
-
     public Integer getEvaluateStoreId() {
         return evaluateStoreId;
     }

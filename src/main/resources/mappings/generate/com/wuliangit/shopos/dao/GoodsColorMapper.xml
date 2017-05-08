@@ -2,16 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.GoodsColorMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.GoodsColor" >
-    <constructor >
-      <idArg column="goods_color_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="color_image" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="color_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="color_commission" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="commission_percent" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="color_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="color_sort" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="goods_color_id" property="goodsColorId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="color_image" property="colorImage" jdbcType="VARCHAR" />
+    <result column="color_price" property="colorPrice" jdbcType="DECIMAL" />
+    <result column="color_commission" property="colorCommission" jdbcType="DECIMAL" />
+    <result column="commission_percent" property="commissionPercent" jdbcType="DECIMAL" />
+    <result column="color_name" property="colorName" jdbcType="VARCHAR" />
+    <result column="color_sort" property="colorSort" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     goods_color_id, goods_id, color_image, color_price, color_commission, commission_percent, 

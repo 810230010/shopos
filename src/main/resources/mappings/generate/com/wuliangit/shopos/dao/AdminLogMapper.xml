@@ -2,14 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.AdminLogMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.AdminLog" >
-    <constructor >
-      <idArg column="admin_log_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="admin_username" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="admin_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ip" jdbcType="CHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="admin_log_id" property="adminLogId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="admin_username" property="adminUsername" jdbcType="CHAR" />
+    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="CHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     admin_log_id, content, create_time, admin_username, admin_id, ip

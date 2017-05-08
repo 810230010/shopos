@@ -108,65 +108,6 @@ public class StoreJoinin {
 
     private Date createTime;
 
-    public StoreJoinin(Integer storeJoininId, Integer memberId, String memberName, String companyName, Integer companyProvinceId, String companyAddress, String companyAddressDetail, String companyPhone, Integer companyEmployeeCount, Integer companyRegisteredCapital, String contactsName, String contactsPhone, String contactsEmail, String businessLicenceNumber, String businessLicenceAddress, Date businessLicenceStart, Date businessLicenceEnd, String businessSphere, String businessLicenceNumberElectronic, String organizationCode, String organizationCodeElectronic, String generalTaxpayer, String bankAccountName, String bankAccountNumber, String bankName, String bankCode, String bankAddress, String bankLicenceElectronic, Boolean isSettlementAccount, String settlementBankAccountName, String settlementBankAccountNumber, String settlementBankName, String settlementBankCode, String settlementBankAddress, String taxRegistrationCertificate, String taxpayerId, String taxRegistrationCertificateElectronic, String storeName, String storeClassIds, String storeClassNames, String joininState, String joininMessage, Integer joininYear, String sgName, Integer sgId, String scName, Integer scId, String storeClassCommisRates, String payingMoneyCertificate, String payingMoneyCertificateExplain, BigDecimal payingAmount, Date createTime) {
-        this.storeJoininId = storeJoininId;
-        this.memberId = memberId;
-        this.memberName = memberName;
-        this.companyName = companyName;
-        this.companyProvinceId = companyProvinceId;
-        this.companyAddress = companyAddress;
-        this.companyAddressDetail = companyAddressDetail;
-        this.companyPhone = companyPhone;
-        this.companyEmployeeCount = companyEmployeeCount;
-        this.companyRegisteredCapital = companyRegisteredCapital;
-        this.contactsName = contactsName;
-        this.contactsPhone = contactsPhone;
-        this.contactsEmail = contactsEmail;
-        this.businessLicenceNumber = businessLicenceNumber;
-        this.businessLicenceAddress = businessLicenceAddress;
-        this.businessLicenceStart = businessLicenceStart;
-        this.businessLicenceEnd = businessLicenceEnd;
-        this.businessSphere = businessSphere;
-        this.businessLicenceNumberElectronic = businessLicenceNumberElectronic;
-        this.organizationCode = organizationCode;
-        this.organizationCodeElectronic = organizationCodeElectronic;
-        this.generalTaxpayer = generalTaxpayer;
-        this.bankAccountName = bankAccountName;
-        this.bankAccountNumber = bankAccountNumber;
-        this.bankName = bankName;
-        this.bankCode = bankCode;
-        this.bankAddress = bankAddress;
-        this.bankLicenceElectronic = bankLicenceElectronic;
-        this.isSettlementAccount = isSettlementAccount;
-        this.settlementBankAccountName = settlementBankAccountName;
-        this.settlementBankAccountNumber = settlementBankAccountNumber;
-        this.settlementBankName = settlementBankName;
-        this.settlementBankCode = settlementBankCode;
-        this.settlementBankAddress = settlementBankAddress;
-        this.taxRegistrationCertificate = taxRegistrationCertificate;
-        this.taxpayerId = taxpayerId;
-        this.taxRegistrationCertificateElectronic = taxRegistrationCertificateElectronic;
-        this.storeName = storeName;
-        this.storeClassIds = storeClassIds;
-        this.storeClassNames = storeClassNames;
-        this.joininState = joininState;
-        this.joininMessage = joininMessage;
-        this.joininYear = joininYear;
-        this.sgName = sgName;
-        this.sgId = sgId;
-        this.scName = scName;
-        this.scId = scId;
-        this.storeClassCommisRates = storeClassCommisRates;
-        this.payingMoneyCertificate = payingMoneyCertificate;
-        this.payingMoneyCertificateExplain = payingMoneyCertificateExplain;
-        this.payingAmount = payingAmount;
-        this.createTime = createTime;
-    }
-
-    public StoreJoinin() {
-        super();
-    }
-
     public Integer getStoreJoininId() {
         return storeJoininId;
     }

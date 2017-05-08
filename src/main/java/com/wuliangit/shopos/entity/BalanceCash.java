@@ -28,25 +28,6 @@ public class BalanceCash {
 
     private String paymentAdmin;
 
-    public BalanceCash(Integer balanceCashId, String balanceCashSn, Integer memberId, String memberName, BigDecimal amount, String bankName, String bankNo, String bankUser, Date createTime, Date paymentTime, Boolean isPayment, String paymentAdmin) {
-        this.balanceCashId = balanceCashId;
-        this.balanceCashSn = balanceCashSn;
-        this.memberId = memberId;
-        this.memberName = memberName;
-        this.amount = amount;
-        this.bankName = bankName;
-        this.bankNo = bankNo;
-        this.bankUser = bankUser;
-        this.createTime = createTime;
-        this.paymentTime = paymentTime;
-        this.isPayment = isPayment;
-        this.paymentAdmin = paymentAdmin;
-    }
-
-    public BalanceCash() {
-        super();
-    }
-
     public Integer getBalanceCashId() {
         return balanceCashId;
     }

@@ -2,15 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.FavoritesStoreMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.FavoritesStore" >
-    <constructor >
-      <idArg column="favorites_store_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="member_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="member_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="fav_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="store_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="store_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="log_msg" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="favorites_store_id" property="favoritesStoreId" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="fav_time" property="favTime" jdbcType="TIMESTAMP" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="log_msg" property="logMsg" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     favorites_store_id, member_id, member_name, fav_time, store_id, store_name, log_msg

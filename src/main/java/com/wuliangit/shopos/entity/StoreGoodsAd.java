@@ -9,17 +9,6 @@ public class StoreGoodsAd {
 
     private String img;
 
-    public StoreGoodsAd(Integer storeGoodsAdId, Integer goodsId, Integer storeId, String img) {
-        this.storeGoodsAdId = storeGoodsAdId;
-        this.goodsId = goodsId;
-        this.storeId = storeId;
-        this.img = img;
-    }
-
-    public StoreGoodsAd() {
-        super();
-    }
-
     public Integer getStoreGoodsAdId() {
         return storeGoodsAdId;
     }

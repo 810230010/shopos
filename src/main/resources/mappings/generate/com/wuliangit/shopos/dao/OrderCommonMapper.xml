@@ -2,32 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.OrderCommonMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.OrderCommon" >
-    <constructor >
-      <idArg column="order_common_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="store_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="shipping_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="shipping_express_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="evaluation_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="evalseller_state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="evalseller_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_message" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="order_pointscount" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="voucher_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="voucher_code" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="deliver_explain" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="area_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="area_info" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="tel_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="mob_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="reciver_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="reciver_info" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="reciver_province_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="invoice_info" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="promotion_info" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="order_common_id" property="orderCommonId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="shipping_time" property="shippingTime" jdbcType="INTEGER" />
+    <result column="shipping_express_id" property="shippingExpressId" jdbcType="INTEGER" />
+    <result column="evaluation_time" property="evaluationTime" jdbcType="TIMESTAMP" />
+    <result column="evalseller_state" property="evalsellerState" jdbcType="VARCHAR" />
+    <result column="evalseller_time" property="evalsellerTime" jdbcType="INTEGER" />
+    <result column="order_message" property="orderMessage" jdbcType="VARCHAR" />
+    <result column="order_pointscount" property="orderPointscount" jdbcType="INTEGER" />
+    <result column="voucher_price" property="voucherPrice" jdbcType="INTEGER" />
+    <result column="voucher_code" property="voucherCode" jdbcType="VARCHAR" />
+    <result column="deliver_explain" property="deliverExplain" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="area_info" property="areaInfo" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="tel_phone" property="telPhone" jdbcType="VARCHAR" />
+    <result column="mob_phone" property="mobPhone" jdbcType="VARCHAR" />
+    <result column="reciver_name" property="reciverName" jdbcType="VARCHAR" />
+    <result column="reciver_info" property="reciverInfo" jdbcType="VARCHAR" />
+    <result column="reciver_province_id" property="reciverProvinceId" jdbcType="INTEGER" />
+    <result column="invoice_info" property="invoiceInfo" jdbcType="VARCHAR" />
+    <result column="promotion_info" property="promotionInfo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     order_common_id, order_id, store_id, shipping_time, shipping_express_id, evaluation_time, 

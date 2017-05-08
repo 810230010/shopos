@@ -17,21 +17,6 @@ public class GoodsCategory {
 
     private String img;
 
-    public GoodsCategory(Integer goodsCategoryId, String name, Integer parentId, Integer sort, String keywords, String description, Boolean isShow, String img) {
-        this.goodsCategoryId = goodsCategoryId;
-        this.name = name;
-        this.parentId = parentId;
-        this.sort = sort;
-        this.keywords = keywords;
-        this.description = description;
-        this.isShow = isShow;
-        this.img = img;
-    }
-
-    public GoodsCategory() {
-        super();
-    }
-
     public Integer getGoodsCategoryId() {
         return goodsCategoryId;
     }

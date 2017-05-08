@@ -52,37 +52,6 @@ public class Order {
 
     private Date createTime;
 
-    public Order(Integer orderId, String outTradeNo, String tradeNo, Integer storeId, String storeName, Integer memberId, String memberName, String memberEmail, String paymentCode, Date paymentTime, Date finnshedTime, BigDecimal goodsAmount, BigDecimal orderAmount, BigDecimal pdAmount, BigDecimal carriage, String evaluationState, String orderState, String refundState, Boolean isLock, String deleteState, BigDecimal refundAmount, String orderFrom, String carriageName, Date createTime) {
-        this.orderId = orderId;
-        this.outTradeNo = outTradeNo;
-        this.tradeNo = tradeNo;
-        this.storeId = storeId;
-        this.storeName = storeName;
-        this.memberId = memberId;
-        this.memberName = memberName;
-        this.memberEmail = memberEmail;
-        this.paymentCode = paymentCode;
-        this.paymentTime = paymentTime;
-        this.finnshedTime = finnshedTime;
-        this.goodsAmount = goodsAmount;
-        this.orderAmount = orderAmount;
-        this.pdAmount = pdAmount;
-        this.carriage = carriage;
-        this.evaluationState = evaluationState;
-        this.orderState = orderState;
-        this.refundState = refundState;
-        this.isLock = isLock;
-        this.deleteState = deleteState;
-        this.refundAmount = refundAmount;
-        this.orderFrom = orderFrom;
-        this.carriageName = carriageName;
-        this.createTime = createTime;
-    }
-
-    public Order() {
-        super();
-    }
-
     public Integer getOrderId() {
         return orderId;
     }

@@ -24,23 +24,6 @@ public class Cart {
 
     private Date createTime;
 
-    public Cart(Integer cartId, Integer memberId, Integer storeId, String storeName, Integer goodsId, String goodsName, BigDecimal goodsPrice, Integer goodsNum, String goodsTitleImg, Date createTime) {
-        this.cartId = cartId;
-        this.memberId = memberId;
-        this.storeId = storeId;
-        this.storeName = storeName;
-        this.goodsId = goodsId;
-        this.goodsName = goodsName;
-        this.goodsPrice = goodsPrice;
-        this.goodsNum = goodsNum;
-        this.goodsTitleImg = goodsTitleImg;
-        this.createTime = createTime;
-    }
-
-    public Cart() {
-        super();
-    }
-
     public Integer getCartId() {
         return cartId;
     }

@@ -11,18 +11,6 @@ public class StoreGoodsCategory {
 
     private Integer sort;
 
-    public StoreGoodsCategory(Integer storeGoodsCategoryId, String name, Integer parentId, Boolean state, Integer sort) {
-        this.storeGoodsCategoryId = storeGoodsCategoryId;
-        this.name = name;
-        this.parentId = parentId;
-        this.state = state;
-        this.sort = sort;
-    }
-
-    public StoreGoodsCategory() {
-        super();
-    }
-
     public Integer getStoreGoodsCategoryId() {
         return storeGoodsCategoryId;
     }

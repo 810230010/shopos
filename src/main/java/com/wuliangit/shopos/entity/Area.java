@@ -13,19 +13,6 @@ public class Area {
 
     private String region;
 
-    public Area(Integer areaId, String name, Integer parentId, Integer sort, Integer deep, String region) {
-        this.areaId = areaId;
-        this.name = name;
-        this.parentId = parentId;
-        this.sort = sort;
-        this.deep = deep;
-        this.region = region;
-    }
-
-    public Area() {
-        super();
-    }
-
     public Integer getAreaId() {
         return areaId;
     }

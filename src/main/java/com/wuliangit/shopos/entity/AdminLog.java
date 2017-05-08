@@ -15,19 +15,6 @@ public class AdminLog {
 
     private String ip;
 
-    public AdminLog(Integer adminLogId, String content, Date createTime, String adminUsername, Integer adminId, String ip) {
-        this.adminLogId = adminLogId;
-        this.content = content;
-        this.createTime = createTime;
-        this.adminUsername = adminUsername;
-        this.adminId = adminId;
-        this.ip = ip;
-    }
-
-    public AdminLog() {
-        super();
-    }
-
     public Integer getAdminLogId() {
         return adminLogId;
     }

@@ -15,19 +15,6 @@ public class MemberAdvice {
 
     private String adviceContent;
 
-    public MemberAdvice(Integer memberAdviceId, Integer memberId, String memberName, Byte status, Date createTime, String adviceContent) {
-        this.memberAdviceId = memberAdviceId;
-        this.memberId = memberId;
-        this.memberName = memberName;
-        this.status = status;
-        this.createTime = createTime;
-        this.adviceContent = adviceContent;
-    }
-
-    public MemberAdvice() {
-        super();
-    }
-
     public Integer getMemberAdviceId() {
         return memberAdviceId;
     }

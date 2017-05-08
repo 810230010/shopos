@@ -17,20 +17,6 @@ public class FavoritesStore {
 
     private String logMsg;
 
-    public FavoritesStore(Integer favoritesStoreId, Integer memberId, String memberName, Date favTime, Integer storeId, String storeName, String logMsg) {
-        this.favoritesStoreId = favoritesStoreId;
-        this.memberId = memberId;
-        this.memberName = memberName;
-        this.favTime = favTime;
-        this.storeId = storeId;
-        this.storeName = storeName;
-        this.logMsg = logMsg;
-    }
-
-    public FavoritesStore() {
-        super();
-    }
-
     public Integer getFavoritesStoreId() {
         return favoritesStoreId;
     }

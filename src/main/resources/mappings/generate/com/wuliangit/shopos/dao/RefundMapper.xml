@@ -2,41 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.RefundMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Refund" >
-    <constructor >
-      <idArg column="refund_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="refund_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="store_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="store_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="member_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="member_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="goods_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="goods_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="refund_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="goods_image" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="order_goods_type" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="refund_type" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="seller_state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="refund_state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="is_lock" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="goods_state" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="seller_handle_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="admin_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="reason_info" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pics_info" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="buyer_message" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="seller_message" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="admin_message" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="express_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="invoice_no" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="ship_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="delay_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="receive_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-    </constructor>
+    <id column="refund_id" property="refundId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="refund_sn" property="refundSn" jdbcType="VARCHAR" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="order_goods_id" property="orderGoodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+    <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
+    <result column="goods_image" property="goodsImage" jdbcType="VARCHAR" />
+    <result column="order_goods_type" property="orderGoodsType" jdbcType="VARCHAR" />
+    <result column="refund_type" property="refundType" jdbcType="VARCHAR" />
+    <result column="seller_state" property="sellerState" jdbcType="VARCHAR" />
+    <result column="refund_state" property="refundState" jdbcType="VARCHAR" />
+    <result column="is_lock" property="isLock" jdbcType="BIT" />
+    <result column="goods_state" property="goodsState" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="seller_handle_time" property="sellerHandleTime" jdbcType="TIMESTAMP" />
+    <result column="admin_time" property="adminTime" jdbcType="TIMESTAMP" />
+    <result column="reason_info" property="reasonInfo" jdbcType="VARCHAR" />
+    <result column="pics_info" property="picsInfo" jdbcType="VARCHAR" />
+    <result column="buyer_message" property="buyerMessage" jdbcType="VARCHAR" />
+    <result column="seller_message" property="sellerMessage" jdbcType="VARCHAR" />
+    <result column="admin_message" property="adminMessage" jdbcType="VARCHAR" />
+    <result column="express_id" property="expressId" jdbcType="INTEGER" />
+    <result column="invoice_no" property="invoiceNo" jdbcType="VARCHAR" />
+    <result column="ship_time" property="shipTime" jdbcType="TIMESTAMP" />
+    <result column="delay_time" property="delayTime" jdbcType="TIMESTAMP" />
+    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     refund_id, order_id, order_sn, refund_sn, store_id, store_name, member_id, member_name, 

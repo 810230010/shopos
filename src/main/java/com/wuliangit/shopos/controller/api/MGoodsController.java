@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 商品相关接口
  * Created by nilme on 2017/3/30.
  */
 

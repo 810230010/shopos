@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 支付相关
  * Created by nilme on 2017/5/3.
  */
 

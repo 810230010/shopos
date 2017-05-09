@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 移动端接口异常捕获
  */
 @RestControllerAdvice(basePackages = "com.wuliangit.shopos.controller.api")
-public class RestExceptionHandler {
+public class ApiGlobalHandler {
 
     @ExceptionHandler(value = Exception.class)
     public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
@@ -23,7 +23,6 @@ public class RestExceptionHandler {
         result.setMsg(exception.getMessage());
         return result;
     }
-
 
     /**
      * 处理Http method使用不正确的错误, 例如: 新增产品应该使用POST, 但实际使用了GET

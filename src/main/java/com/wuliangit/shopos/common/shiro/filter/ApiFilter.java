@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.entity.Member;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.session.Session;
@@ -104,12 +105,10 @@ public class ApiFilter extends AccessControlFilter {
 
         String sign = request.getParameter(SIGN);
         String timestamp = request.getParameter(TIMESTAMP);
-        String userId = request.getParameter(USERID);
+        String userIdStr = request.getParameter(USERID);
 
-        // 判断用户是否已经登录
-        String serverToken = tokenManager.getToken(Integer.parseInt(userId));
 
-        if (sign == null || timestamp == null || userId == null) {
+        if (sign == null || timestamp == null || userIdStr == null) {
             result.setCode(403);
             result.setMsg("parameter of \'sign\' and \'timestamp\' and \'userId\' could not be null, please check it again!");
         }else{
@@ -117,9 +116,13 @@ public class ApiFilter extends AccessControlFilter {
             result.setMsg("unauthentication request! pelease login before request the api");
         }
 
-        if(serverToken == null){//未登录
-            result.setCode(401);
-            result.setMsg("please login first!!!");
+        if (!StringUtils.isEmpty(userIdStr)){
+            // 判断用户是否已经登录
+            String serverToken = tokenManager.getToken(Integer.parseInt(userIdStr));
+            if(serverToken == null){//未登录
+                result.setCode(401);
+                result.setMsg("please login first!!!");
+            }
         }
 
         Gson gson = new Gson();

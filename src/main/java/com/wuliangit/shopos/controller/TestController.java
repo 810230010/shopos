@@ -25,8 +25,7 @@ public class TestController {
 
     @RequestMapping("/exception")
     public String exception(Integer a) throws Exception {
-        logger.debug("测试错误");
-        System.out.println("测试错误");
+        logger.error("测试错误error");
         if (a==null){
             throw new Exception("测试错误");
         }

@@ -12,6 +12,8 @@ public class Cart {
 
     private String storeName;
 
+    private Integer goodsSkuId;
+
     private Integer goodsId;
 
     private String goodsName;
@@ -54,6 +56,14 @@ public class Cart {
 
     public void setStoreName(String storeName) {
         this.storeName = storeName == null ? null : storeName.trim();
+    }
+
+    public Integer getGoodsSkuId() {
+        return goodsSkuId;
+    }
+
+    public void setGoodsSkuId(Integer goodsSkuId) {
+        this.goodsSkuId = goodsSkuId;
     }
 
     public Integer getGoodsId() {

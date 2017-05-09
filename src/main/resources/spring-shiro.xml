@@ -234,8 +234,12 @@
                 <!--静态资源-->
                 /assets/** = anon
 
+                <!--测试-->
+                /test/** = anon
+
                 <!--接口api-->
                 /api/v1/member/login = anon
+                /api/v1/member/logout = anon
                 /api/v1/member/register/getCode = anon
                 /api/v1/member/register/codeCheck = anon
                 /api/v1/member/register = anon

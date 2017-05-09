@@ -62,9 +62,10 @@ public class MCartController {
      */
     @RequestMapping("/cart/add")
     public Object addCartGoods(@RequestParam(value = "goodsId", required = true) Integer goodsId,
+                               @RequestParam(value = "goodsSkuId", required = true) Integer goodsSkuId,
                                @RequestParam(value = "goodsNum", required = false, defaultValue = "1") Integer goodsNum) {
         RestResult result = new RestResult();
-        int res = cartService.addCartGoods(goodsId,goodsNum);
+        int res = cartService.addCartGoods(goodsId,goodsSkuId,goodsNum);
         return result;
     }
 

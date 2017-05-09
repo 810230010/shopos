@@ -1,8 +1,12 @@
-package com.wuliangit.shopos.controller.admin;
+package com.wuliangit.shopos.controller;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.entity.GoodsSku;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
+import org.apache.log4j.net.SMTPAppender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("/admin/test")
-public class AdminTestController {
+@RequestMapping("/test")
+public class TestController {
+
+    private static Log logger = LogFactory.getLog(TestController.class);
 
     @RequestMapping("/exception")
-    public String login(Integer a) throws Exception {
+    public String exception(Integer a) throws Exception {
+        logger.debug("测试错误");
+        System.out.println("测试错误");
         if (a==null){
             throw new Exception("测试错误");
         }
@@ -39,4 +47,6 @@ public class AdminTestController {
         System.out.println(skus);
         return result;
     }
+
+
 }

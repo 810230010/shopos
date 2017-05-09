@@ -6,6 +6,7 @@
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="goods_sku_id" property="goodsSkuId" jdbcType="INTEGER" />
     <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
     <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
@@ -14,8 +15,8 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    cart_id, member_id, store_id, store_name, goods_id, goods_name, goods_price, goods_num, 
-    goods_title_img, create_time
+    cart_id, member_id, store_id, store_name, goods_sku_id, goods_id, goods_name, goods_price, 
+    goods_num, goods_title_img, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,13 +33,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_cart (member_id, store_id, store_name, 
-      goods_id, goods_name, goods_price, 
-      goods_num, goods_title_img, create_time
-      )
+      goods_sku_id, goods_id, goods_name, 
+      goods_price, goods_num, goods_title_img, 
+      create_time)
     values (#{memberId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
-      #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, 
-      #{goodsNum,jdbcType=INTEGER}, #{goodsTitleImg,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{goodsSkuId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
+      #{goodsPrice,jdbcType=DECIMAL}, #{goodsNum,jdbcType=INTEGER}, #{goodsTitleImg,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Cart" >
     <selectKey resultType="java.lang.Integer" keyProperty="cartId" order="AFTER" >
@@ -54,6 +55,9 @@
       </if>
       <if test="storeName != null" >
         store_name,
+      </if>
+      <if test="goodsSkuId != null" >
+        goods_sku_id,
       </if>
       <if test="goodsId != null" >
         goods_id,
@@ -83,6 +87,9 @@
       </if>
       <if test="storeName != null" >
         #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSkuId != null" >
+        #{goodsSkuId,jdbcType=INTEGER},
       </if>
       <if test="goodsId != null" >
         #{goodsId,jdbcType=INTEGER},
@@ -116,6 +123,9 @@
       <if test="storeName != null" >
         store_name = #{storeName,jdbcType=VARCHAR},
       </if>
+      <if test="goodsSkuId != null" >
+        goods_sku_id = #{goodsSkuId,jdbcType=INTEGER},
+      </if>
       <if test="goodsId != null" >
         goods_id = #{goodsId,jdbcType=INTEGER},
       </if>
@@ -142,6 +152,7 @@
     set member_id = #{memberId,jdbcType=INTEGER},
       store_id = #{storeId,jdbcType=INTEGER},
       store_name = #{storeName,jdbcType=VARCHAR},
+      goods_sku_id = #{goodsSkuId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_price = #{goodsPrice,jdbcType=DECIMAL},

@@ -32,7 +32,6 @@ public class StoreGlobalHandler {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        System.out.println("============应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器");
         DateFormat defaultFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
         CustomDateEditor defaultFormatEditor = new CustomDateEditor(defaultFormat, true);
 

@@ -126,7 +126,7 @@
                 $("#sku_attribute").append(temp.replace(new RegExp('{id}', 'gm'), id));
                 $("#sku_attribute_item_name"+ id).val(item.name);
                 $.each(item.values, function(index,item){
-                    $("#sku_attribute_item_value"+ id).append('<span class="label label-primary" style="margin-right: 10px;">'+item+'</span>');
+                    $("#sku_attribute_item_value"+ id).append('<span class="label label-primary" style="margin-right: 10px;">'+item.name+'</span>');
                 });
                 id++;
             }

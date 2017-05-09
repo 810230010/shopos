@@ -15,8 +15,6 @@ public class Address {
 
     private Integer areaId;
 
-    private String areaInfo;
-
     private String address;
 
     private String telPhone;
@@ -73,14 +71,6 @@ public class Address {
 
     public void setAreaId(Integer areaId) {
         this.areaId = areaId;
-    }
-
-    public String getAreaInfo() {
-        return areaInfo;
-    }
-
-    public void setAreaInfo(String areaInfo) {
-        this.areaInfo = areaInfo == null ? null : areaInfo.trim();
     }
 
     public String getAddress() {

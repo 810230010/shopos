@@ -8,7 +8,6 @@
     <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
     <result column="city_id" property="cityId" jdbcType="INTEGER" />
     <result column="area_id" property="areaId" jdbcType="INTEGER" />
-    <result column="area_info" property="areaInfo" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="tel_phone" property="telPhone" jdbcType="VARCHAR" />
     <result column="mob_phone" property="mobPhone" jdbcType="VARCHAR" />
@@ -16,8 +15,8 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    address_id, member_id, reciver_name, province_id, city_id, area_id, area_info, address, 
-    tel_phone, mob_phone, is_default, create_time
+    address_id, member_id, reciver_name, province_id, city_id, area_id, address, tel_phone, 
+    mob_phone, is_default, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -34,13 +33,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_address (member_id, reciver_name, province_id, 
-      city_id, area_id, area_info, 
-      address, tel_phone, mob_phone, 
-      is_default, create_time)
+      city_id, area_id, address, 
+      tel_phone, mob_phone, is_default, 
+      create_time)
     values (#{memberId,jdbcType=INTEGER}, #{reciverName,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, 
-      #{cityId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{areaInfo,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{telPhone,jdbcType=VARCHAR}, #{mobPhone,jdbcType=VARCHAR}, 
-      #{isDefault,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+      #{cityId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{telPhone,jdbcType=VARCHAR}, #{mobPhone,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Address" >
     <selectKey resultType="java.lang.Integer" keyProperty="addressId" order="AFTER" >
@@ -62,9 +61,6 @@
       </if>
       <if test="areaId != null" >
         area_id,
-      </if>
-      <if test="areaInfo != null" >
-        area_info,
       </if>
       <if test="address != null" >
         address,
@@ -97,9 +93,6 @@
       </if>
       <if test="areaId != null" >
         #{areaId,jdbcType=INTEGER},
-      </if>
-      <if test="areaInfo != null" >
-        #{areaInfo,jdbcType=VARCHAR},
       </if>
       <if test="address != null" >
         #{address,jdbcType=VARCHAR},
@@ -136,9 +129,6 @@
       <if test="areaId != null" >
         area_id = #{areaId,jdbcType=INTEGER},
       </if>
-      <if test="areaInfo != null" >
-        area_info = #{areaInfo,jdbcType=VARCHAR},
-      </if>
       <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
       </if>
@@ -164,7 +154,6 @@
       province_id = #{provinceId,jdbcType=VARCHAR},
       city_id = #{cityId,jdbcType=INTEGER},
       area_id = #{areaId,jdbcType=INTEGER},
-      area_info = #{areaInfo,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       tel_phone = #{telPhone,jdbcType=VARCHAR},
       mob_phone = #{mobPhone,jdbcType=VARCHAR},

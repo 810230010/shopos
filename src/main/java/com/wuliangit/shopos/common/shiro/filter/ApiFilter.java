@@ -30,12 +30,16 @@ public class ApiFilter extends AccessControlFilter {
 
     private TokenManager<Integer, Member> tokenManager;
 
+
+
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
 
         String sign = request.getParameter(SIGN);
         String timestamp = request.getParameter(TIMESTAMP);
         String userIdStr = request.getParameter(USERID);
+
+
 
         //判断必须参数是否为空
         if (sign == null || timestamp == null || userIdStr == null) {

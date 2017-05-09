@@ -68,6 +68,7 @@ public class AddressServiceImpl implements AddressService {
         address.setMemberId(currentMember.getMemberId());
         address.setCreateTime(new Date());
         address.setAreaInfo(address.getProvince()+address.getCity()+address.getArea()+address.getAddress());
+        addressMapper.cleanDefaultAddress(currentMember.getMemberId());
         return addressMapper.insertSelective(address);
     }
 

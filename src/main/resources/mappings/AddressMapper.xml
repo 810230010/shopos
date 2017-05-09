@@ -7,7 +7,7 @@
     select
     <include refid="Base_Column_List" />
     from t_address
-    where member_id = #{memberId}
+    where member_id = #{memberId} order by create_time desc
   </select>
   <!--获取默认收货地址-->
   <select id="getDefaultAddress" resultType="com.wuliangit.shopos.entity.Address">
@@ -15,6 +15,13 @@
     <include refid="Base_Column_List" />
     from t_address
     where member_id = #{memberId} and is_default = 1
+  </select>
+  <!--通过id获取地址-->
+  <select id="getApiAddressListDTOById" resultType="com.wuliangit.shopos.dto.ApiAddressListDTO">
+    select
+    <include refid="Base_Column_List" />
+    from t_address
+    where address_id = #{addressId,jdbcType=INTEGER}
   </select>
   <!--清空默认收货地址-->
   <update id="cleanDefaultAddress">

@@ -57,5 +57,5 @@ public interface AddressService {
      * @param addressId
      * @return
      */
-    Address getAddressById(Integer addressId);
+    ApiAddressListDTO getAddressById(Integer addressId);
 }

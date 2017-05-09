@@ -29,4 +29,10 @@ public interface AddressMapper extends BaseMapper<Address, Integer> {
      */
     Address getDefaultAddress(Integer memberId);
 
+    /**
+     * 通过id获取地址
+     * @param addressId
+     * @return
+     */
+    ApiAddressListDTO getApiAddressListDTOById(Integer addressId);
 }

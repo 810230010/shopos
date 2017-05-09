@@ -49,7 +49,7 @@ public class MAddressController {
     @RequestMapping("/get")
     public Object getAddress(Integer addressId){
         RestResult result = new RestResult();
-        Address address = addressService.getAddressById(addressId);
+        ApiAddressListDTO address = addressService.getAddressById(addressId);
         result.add("address",address);
         return result;
     }
@@ -68,7 +68,7 @@ public class MAddressController {
 
     /**
      * 删除收货地址
-     * @param addressId
+     * @param addressId 地址id
      * @return
      */
     @RequestMapping("/delete")
@@ -80,7 +80,7 @@ public class MAddressController {
 
     /**
      * 更新收货地址
-     * @param address
+     * @param address 地址信息
      * @return
      */
     @RequestMapping("/update")

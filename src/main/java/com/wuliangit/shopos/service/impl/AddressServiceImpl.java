@@ -78,7 +78,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address getAddressById(Integer addressId) {
-        return addressMapper.selectByPrimaryKey(addressId);
+    public ApiAddressListDTO getAddressById(Integer addressId) {
+        return addressMapper.getApiAddressListDTOById(addressId);
     }
 }

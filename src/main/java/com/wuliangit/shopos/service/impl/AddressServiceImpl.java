@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by nilme on 2017/3/27.
@@ -59,6 +60,7 @@ public class AddressServiceImpl implements AddressService {
     public int createAddress(Address address) {
         Member currentMember = WebUtil.getCurrentMember();
         address.setMemberId(currentMember.getMemberId());
+        address.setCreateTime(new Date());
         return addressMapper.insertSelective(address);
     }
 

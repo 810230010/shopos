@@ -3,6 +3,7 @@ package com.wuliangit.shopos.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.AddressMapper;
+import com.wuliangit.shopos.dto.ApiAddressListDTO;
 import com.wuliangit.shopos.entity.Address;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.AddressService;
@@ -24,10 +25,10 @@ public class AddressServiceImpl implements AddressService {
     private AddressMapper addressMapper;
 
     @Override
-    public ArrayList<Address> getAddressList(Integer page, Integer pageSize) {
+    public ArrayList<ApiAddressListDTO> getAddressList(Integer page, Integer pageSize) {
         Member member = WebUtil.getCurrentMember();
         PageHelper.startPage(page,pageSize);
-        ArrayList<Address> addresses = addressMapper.getMemberAddressList(member.getMemberId());
+        ArrayList<ApiAddressListDTO> addresses = addressMapper.getMemberAddressList(member.getMemberId());
         return addresses;
     }
 
@@ -44,6 +45,10 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public int deleteAddress(Integer addressId) {
+        Address address = addressMapper.selectByPrimaryKey(addressId);
+        if (address.getIsDefault()){
+
+        }
         return addressMapper.deleteByPrimaryKey(addressId);
     }
 

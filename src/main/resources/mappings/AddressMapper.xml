@@ -3,7 +3,7 @@
 <mapper namespace="com.wuliangit.shopos.dao.AddressMapper" >
 
   <!--获取用户地址列表-->
-  <select id="getMemberAddressList" resultType="com.wuliangit.shopos.entity.Address">
+  <select id="getMemberAddressList" resultType="com.wuliangit.shopos.dto.ApiAddressListDTO">
     select
     <include refid="Base_Column_List" />
     from t_address

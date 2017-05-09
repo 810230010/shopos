@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.dto.ApiAddressListDTO;
 import com.wuliangit.shopos.entity.Address;
 import com.wuliangit.shopos.service.AddressService;
 import org.dozer.Mapper;
@@ -25,7 +26,6 @@ public class MAddressController {
     @Autowired
     private Mapper mapper;
 
-
     /**
      * 我的收货地址
      * @param page
@@ -36,7 +36,7 @@ public class MAddressController {
     public Object addressList(@RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
                               @RequestParam(value = "pageSize",required = false,defaultValue = "10") Integer pageSize){
         RestResult result = new RestResult();
-        ArrayList<Address> address = addressService.getAddressList(page,pageSize);
+        ArrayList<ApiAddressListDTO> address = addressService.getAddressList(page,pageSize);
         result.add("addresses",address);
         return result;
     }

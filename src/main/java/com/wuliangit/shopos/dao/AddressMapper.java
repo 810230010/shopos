@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.ApiAddressListDTO;
 import com.wuliangit.shopos.entity.Address;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public interface AddressMapper extends BaseMapper<Address, Integer> {
      * @param memberId
      * @return
      */
-    ArrayList<Address> getMemberAddressList(Integer memberId);
+    ArrayList<ApiAddressListDTO> getMemberAddressList(Integer memberId);
 
     /**
      * 清空默认收货地址

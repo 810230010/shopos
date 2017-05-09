@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.ApiAddressListDTO;
 import com.wuliangit.shopos.entity.Address;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public interface AddressService {
      * @param pageSize
      * @return
      */
-    ArrayList<Address> getAddressList(Integer page, Integer pageSize);
+    ArrayList<ApiAddressListDTO> getAddressList(Integer page, Integer pageSize);
 
     /**
      * 设置默认地址

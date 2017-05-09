@@ -70,4 +70,8 @@ public class AddressServiceImpl implements AddressService {
         return addressMapper.getDefaultAddress(user.getMemberId());
     }
 
+    @Override
+    public Address getAddressById(Integer addressId) {
+        return addressMapper.selectByPrimaryKey(addressId);
+    }
 }

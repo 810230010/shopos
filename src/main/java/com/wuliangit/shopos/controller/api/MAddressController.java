@@ -43,6 +43,19 @@ public class MAddressController {
     }
 
     /**
+     * 获取地址
+     * @param addressId
+     * @return
+     */
+    @RequestMapping("/get")
+    public Object getAddress(Integer addressId){
+        RestResult result = new RestResult();
+        Address address = addressService.getAddressById(addressId);
+        result.add("address",address);
+        return result;
+    }
+
+    /**
      * 设置默认收货地址
      * @param addressId 要设置成默认地址的地址id
      * @return

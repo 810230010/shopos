@@ -51,4 +51,10 @@ public interface AddressService {
      */
     Address getDefaultAddress();
 
+    /**
+     * 通过id获取地址
+     * @param addressId
+     * @return
+     */
+    Address getAddressById(Integer addressId);
 }

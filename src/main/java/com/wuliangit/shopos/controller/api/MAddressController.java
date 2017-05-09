@@ -1,12 +1,10 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.entity.Address;
-import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.AddressService;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 /**
+ * 用户地址相关
  * Created by nilme on 2017/3/27.
  */
 
@@ -21,9 +20,11 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1/member/address")
 public class MAddressController {
 
-
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private Mapper mapper;
+
 
     /**
      * 我的收货地址
@@ -36,9 +37,7 @@ public class MAddressController {
                               @RequestParam(value = "pageSize",required = false,defaultValue = "10") Integer pageSize){
         RestResult result = new RestResult();
         ArrayList<Address> address = addressService.getAddressList(page,pageSize);
-
         result.add("addresses",address);
-
         return result;
     }
 
@@ -87,7 +86,6 @@ public class MAddressController {
     @RequestMapping("/update")
     public Object updateAddress( Address address){
         RestResult result = new RestResult();
-
         int res = addressService.updateAddress(address);
         return result;
     }

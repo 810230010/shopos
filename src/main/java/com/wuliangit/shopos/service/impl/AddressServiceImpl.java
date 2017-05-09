@@ -53,6 +53,7 @@ public class AddressServiceImpl implements AddressService {
             Member currentMember = WebUtil.getCurrentMember();
             addressMapper.cleanDefaultAddress(currentMember.getMemberId());
         }
+        address.setAreaInfo(address.getProvince()+address.getCity()+address.getArea()+address.getAddress());
         return addressMapper.updateByPrimaryKeySelective(address);
     }
 
@@ -61,6 +62,7 @@ public class AddressServiceImpl implements AddressService {
         Member currentMember = WebUtil.getCurrentMember();
         address.setMemberId(currentMember.getMemberId());
         address.setCreateTime(new Date());
+        address.setAreaInfo(address.getProvince()+address.getCity()+address.getArea()+address.getAddress());
         return addressMapper.insertSelective(address);
     }
 

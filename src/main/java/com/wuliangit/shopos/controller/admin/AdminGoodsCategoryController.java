@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 商品分类相关
  * Created by nilme on 2017/4/10.
  */
 
@@ -150,7 +151,7 @@ public class AdminGoodsCategoryController {
                          @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
                          @RequestParam(value = "parentId", required = false, defaultValue = "0") Integer parentId) {
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        ArrayList<GoodsCategory> goodsCategories = goodsCategoryService.search(page, pageSize, searchKey, orderColumn, orderType,parentId);
+        ArrayList<GoodsCategory> goodsCategories = goodsCategoryService.AdminSearch(page, pageSize, searchKey, orderColumn, orderType,parentId);
         return new PageResult<GoodsCategory>(goodsCategories, draw);
     }
 }

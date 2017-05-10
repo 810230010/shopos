@@ -67,25 +67,20 @@
                 {"data":"keywords","width": "20%","title":"关键词","orderable": false},
                 {"data":"description","width": "20%","title":"描述","orderable": false},
                 {"data":"isShow","width": "10%","title":"是否显示","orderable": true},
-                {"data":"id","width": "20%","title":"操作","orderable": false},
+                {"data":"id","width": "20%","title":"操作","orderable": false,
+                    "render": function (data, type, row) {
+                        return [
+                            '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
+                            '删除 <i class="fa fa-trash-o"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
+                            '编辑 <i class="fa fa-edit"></i>',
+                            '</a>',
+                            rank > 2?"":'<a class="table-button btn btn-primary btn-xs table-action getsub" href="javascript:void(0)">下级 <i class="fa fa-code-fork"></i></a>',
+                        ].join('');
+                    }
+                },
             ],
-            "columnDefs" : [{
-                "targets": 7,
-                "data": "goodsCategoryId",
-                "render": function (data, type, row) {
-                    return [
-                        '<a class="btn btn-danger btn-xs table-action view" href="javascript:void(0)">',
-                        '删除 <i class="fa fa-trash-o"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
-                        '编辑 <i class="fa fa-edit"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action getsub" href="javascript:void(0)">',
-                        '下级 <i class="fa fa-code-fork"></i>',
-                        '</a>'
-                    ].join('');
-                }
-            } ],
             "searching": true,
             "ordering":true,
             "serverSide": true,
@@ -143,6 +138,41 @@
             parentId = data.goodsCategoryId;
             upParentId[rank] = data.parentId;
             table = $('#datatables').DataTable().ajax.reload();
+        });
+
+        $("#back").on('click', function () {
+            rank = rank - 1;
+            if (rank > 1){
+                $('#back').show();
+            }else{
+                $('#back').hide();
+            }
+            parentId = upParentId[rank];
+            $('#rank').html("商品分类列表("+rank+"级)")
+            table = $('#datatables').DataTable().ajax.reload();
+        });
+
+        table.on( 'click', '.delete', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            $.get("/admin/goodsCategory/delete",
+                    {
+                        goodsCategoryId:data.goodsCategoryId,
+                    },
+                    function (data, status) {
+                        if (data.code == 200) {
+                            swal({
+                                title: "成功!",
+                                text: "商品分类删除成功!",
+                                type: "success",
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                            setTimeout(function () {
+                                table = $('#datatables').DataTable().ajax.reload();
+                            }, 2000);
+                        }
+                    });
         });
 
     });

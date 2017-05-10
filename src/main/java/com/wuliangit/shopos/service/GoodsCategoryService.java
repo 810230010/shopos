@@ -33,7 +33,7 @@ public interface GoodsCategoryService {
      * @param parentId
      * @return
      */
-    ArrayList<GoodsCategory> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId);
+    ArrayList<GoodsCategory> AdminSearch(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId);
 
     /**
      * 通过id获取商品分类

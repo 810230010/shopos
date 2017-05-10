@@ -27,10 +27,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
-    private OrderCommonMapper orderCommonMapper;
-    @Autowired
     private OrderGoodsMapper orderGoodsMapper;
-
     @Autowired
     private GoodsSkuMapper goodsSkuMapper;
     @Autowired
@@ -112,12 +109,13 @@ public class OrderServiceImpl implements OrderService {
             order.setMemberEvaluationState(POJOConstants.ORDER_EVALUATION_STATE_NO);
             order.setSellerEvaluationState(POJOConstants.ORDER_EVALUATION_STATE_NO);
             order.setIsLock(false);
-            order.setOutTradeNo(UUID.randomUUID().toString().replaceAll("-", ""));
             order.setOrderFrom(orderInfo.getOrderFrom());
             order.setRefundState(POJOConstants.ORDER_REFUND_STATE_NO_REFUND);
             order.setOrderState(POJOConstants.ORDER_STATE_INIT);
             order.setStoreName(storeMin.getName());
             order.setOrderMessage(orderInfo.getOrderMessage());
+            //设置订单id
+            order.setOutTradeNo(UUID.randomUUID().toString().replaceAll("-", ""));
 
             //设置收件人信息
             order.setReciverName(address.getReciverName());
@@ -151,5 +149,15 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orders;
+    }
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+        return orderMapper.selectByPrimaryKey(orderId);
+    }
+
+    @Override
+    public int updateOrder(Order order) {
+        return orderMapper.updateByPrimaryKeySelective(order);
     }
 }

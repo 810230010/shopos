@@ -3,10 +3,10 @@ package com.wuliangit.shopos.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Order {
-    private Integer orderId;
-
+public class Order extends OrderKey {
     private String outTradeNo;
+
+    private String outTradeNoMerge;
 
     private String tradeNo;
 
@@ -58,8 +58,6 @@ public class Order {
 
     private String orderMessage;
 
-    private Integer orderPointscount;
-
     private Long voucherPrice;
 
     private String voucherCode;
@@ -72,20 +70,20 @@ public class Order {
 
     private String invoiceInfo;
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
     public String getOutTradeNo() {
         return outTradeNo;
     }
 
     public void setOutTradeNo(String outTradeNo) {
         this.outTradeNo = outTradeNo == null ? null : outTradeNo.trim();
+    }
+
+    public String getOutTradeNoMerge() {
+        return outTradeNoMerge;
+    }
+
+    public void setOutTradeNoMerge(String outTradeNoMerge) {
+        this.outTradeNoMerge = outTradeNoMerge == null ? null : outTradeNoMerge.trim();
     }
 
     public String getTradeNo() {
@@ -286,14 +284,6 @@ public class Order {
 
     public void setOrderMessage(String orderMessage) {
         this.orderMessage = orderMessage == null ? null : orderMessage.trim();
-    }
-
-    public Integer getOrderPointscount() {
-        return orderPointscount;
-    }
-
-    public void setOrderPointscount(Integer orderPointscount) {
-        this.orderPointscount = orderPointscount;
     }
 
     public Long getVoucherPrice() {

@@ -15,7 +15,7 @@ public class ApiGoodsListDTO {
 
     private BigDecimal price;
 
-    private Long carriage;
+    private BigDecimal carriage;
 
     private String titleImg;
 
@@ -55,11 +55,11 @@ public class ApiGoodsListDTO {
         this.price = price;
     }
 
-    public Long getCarriage() {
+    public BigDecimal getCarriage() {
         return carriage;
     }
 
-    public void setCarriage(Long carriage) {
+    public void setCarriage(BigDecimal carriage) {
         this.carriage = carriage;
     }
 

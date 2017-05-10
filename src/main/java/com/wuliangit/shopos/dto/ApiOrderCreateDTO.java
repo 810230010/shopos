@@ -14,7 +14,6 @@ public class ApiOrderCreateDTO {
     private String orderFrom;
     private String orderMessage;
 
-
     public List<OrderGoodsInfo> getOrderGoodsInfoList() {
         return orderGoodsInfoList;
     }

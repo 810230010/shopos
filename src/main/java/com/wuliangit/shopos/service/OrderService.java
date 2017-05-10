@@ -20,4 +20,17 @@ public interface OrderService {
      */
     List<Order> ApiCreateOrder(ApiOrderCreateDTO orderInfo) throws OrderException;
 
+    /**
+     * 通过id获取订单
+     * @param orderId
+     * @return
+     */
+    Order getOrderById(Integer orderId);
+
+    /**
+     * 更新订单信息
+     * @param order
+     * @return
+     */
+    int updateOrder(Order order);
 }

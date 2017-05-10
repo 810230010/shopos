@@ -3,7 +3,9 @@
 <mapper namespace="com.wuliangit.shopos.dao.OrderMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Order" >
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <id column="order_pointscount" property="orderPointscount" jdbcType="INTEGER" />
     <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="out_trade_no_ merge" property="outTradeNoMerge" jdbcType="VARCHAR" />
     <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="store_name" property="storeName" jdbcType="VARCHAR" />
@@ -29,7 +31,6 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="deliver_time" property="deliverTime" jdbcType="TIMESTAMP" />
     <result column="order_message" property="orderMessage" jdbcType="VARCHAR" />
-    <result column="order_pointscount" property="orderPointscount" jdbcType="INTEGER" />
     <result column="voucher_price" property="voucherPrice" jdbcType="DECIMAL" />
     <result column="voucher_code" property="voucherCode" jdbcType="VARCHAR" />
     <result column="reciver_address" property="reciverAddress" jdbcType="VARCHAR" />
@@ -38,51 +39,53 @@
     <result column="invoice_info" property="invoiceInfo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, out_trade_no, trade_no, store_id, store_name, member_id, member_name, member_email, 
-    payment_code, payment_time, finnshed_time, goods_amount, order_amount, pd_amount, 
-    carriage, member_evaluation_state, seller_evaluation_state, order_state, refund_state, 
-    is_lock, delete_state, refund_amount, order_from, carriage_name, create_time, deliver_time, 
-    order_message, order_pointscount, voucher_price, voucher_code, reciver_address, reciver_phone, 
-    reciver_name, invoice_info
+    order_id, order_pointscount, out_trade_no, `out_trade_no_ merge`, trade_no, store_id, 
+    store_name, member_id, member_name, member_email, payment_code, payment_time, finnshed_time, 
+    goods_amount, order_amount, pd_amount, carriage, member_evaluation_state, seller_evaluation_state, 
+    order_state, refund_state, is_lock, delete_state, refund_amount, order_from, carriage_name, 
+    create_time, deliver_time, order_message, voucher_price, voucher_code, reciver_address, 
+    reciver_phone, reciver_name, invoice_info
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.wuliangit.shopos.entity.OrderKey" >
     select 
     <include refid="Base_Column_List" />
     from t_order
     where order_id = #{orderId,jdbcType=INTEGER}
+      and order_pointscount = #{orderPointscount,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="com.wuliangit.shopos.entity.OrderKey" >
     delete from t_order
     where order_id = #{orderId,jdbcType=INTEGER}
+      and order_pointscount = #{orderPointscount,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.Order" >
     <selectKey resultType="java.lang.Integer" keyProperty="orderId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_order (out_trade_no, trade_no, store_id, 
-      store_name, member_id, member_name, 
-      member_email, payment_code, payment_time, 
-      finnshed_time, goods_amount, order_amount, 
-      pd_amount, carriage, member_evaluation_state, 
-      seller_evaluation_state, order_state, refund_state, 
-      is_lock, delete_state, refund_amount, 
-      order_from, carriage_name, create_time, 
-      deliver_time, order_message, order_pointscount, 
-      voucher_price, voucher_code, reciver_address, 
-      reciver_phone, reciver_name, invoice_info
-      )
-    values (#{outTradeNo,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
-      #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
-      #{memberEmail,jdbcType=VARCHAR}, #{paymentCode,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, 
-      #{finnshedTime,jdbcType=TIMESTAMP}, #{goodsAmount,jdbcType=DECIMAL}, #{orderAmount,jdbcType=DECIMAL}, 
-      #{pdAmount,jdbcType=DECIMAL}, #{carriage,jdbcType=DECIMAL}, #{memberEvaluationState,jdbcType=VARCHAR}, 
-      #{sellerEvaluationState,jdbcType=VARCHAR}, #{orderState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, 
-      #{isLock,jdbcType=BIT}, #{deleteState,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DECIMAL}, 
-      #{orderFrom,jdbcType=VARCHAR}, #{carriageName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{deliverTime,jdbcType=TIMESTAMP}, #{orderMessage,jdbcType=VARCHAR}, #{orderPointscount,jdbcType=INTEGER}, 
-      #{voucherPrice,jdbcType=DECIMAL}, #{voucherCode,jdbcType=VARCHAR}, #{reciverAddress,jdbcType=VARCHAR}, 
-      #{reciverPhone,jdbcType=VARCHAR}, #{reciverName,jdbcType=VARCHAR}, #{invoiceInfo,jdbcType=VARCHAR}
-      )
+    insert into t_order (order_pointscount, out_trade_no, `out_trade_no_ merge`, 
+      trade_no, store_id, store_name, 
+      member_id, member_name, member_email, 
+      payment_code, payment_time, finnshed_time, 
+      goods_amount, order_amount, pd_amount, 
+      carriage, member_evaluation_state, seller_evaluation_state, 
+      order_state, refund_state, is_lock, 
+      delete_state, refund_amount, order_from, 
+      carriage_name, create_time, deliver_time, 
+      order_message, voucher_price, voucher_code, 
+      reciver_address, reciver_phone, reciver_name, 
+      invoice_info)
+    values (#{orderPointscount,jdbcType=INTEGER}, #{outTradeNo,jdbcType=VARCHAR}, #{outTradeNoMerge,jdbcType=VARCHAR}, 
+      #{tradeNo,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, 
+      #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{memberEmail,jdbcType=VARCHAR}, 
+      #{paymentCode,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, #{finnshedTime,jdbcType=TIMESTAMP}, 
+      #{goodsAmount,jdbcType=DECIMAL}, #{orderAmount,jdbcType=DECIMAL}, #{pdAmount,jdbcType=DECIMAL}, 
+      #{carriage,jdbcType=DECIMAL}, #{memberEvaluationState,jdbcType=VARCHAR}, #{sellerEvaluationState,jdbcType=VARCHAR}, 
+      #{orderState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
+      #{deleteState,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DECIMAL}, #{orderFrom,jdbcType=VARCHAR}, 
+      #{carriageName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{deliverTime,jdbcType=TIMESTAMP}, 
+      #{orderMessage,jdbcType=VARCHAR}, #{voucherPrice,jdbcType=DECIMAL}, #{voucherCode,jdbcType=VARCHAR}, 
+      #{reciverAddress,jdbcType=VARCHAR}, #{reciverPhone,jdbcType=VARCHAR}, #{reciverName,jdbcType=VARCHAR}, 
+      #{invoiceInfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Order" >
     <selectKey resultType="java.lang.Integer" keyProperty="orderId" order="AFTER" >
@@ -90,8 +93,14 @@
     </selectKey>
     insert into t_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderPointscount != null" >
+        order_pointscount,
+      </if>
       <if test="outTradeNo != null" >
         out_trade_no,
+      </if>
+      <if test="outTradeNoMerge != null" >
+        `out_trade_no_ merge`,
       </if>
       <if test="tradeNo != null" >
         trade_no,
@@ -168,9 +177,6 @@
       <if test="orderMessage != null" >
         order_message,
       </if>
-      <if test="orderPointscount != null" >
-        order_pointscount,
-      </if>
       <if test="voucherPrice != null" >
         voucher_price,
       </if>
@@ -191,8 +197,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderPointscount != null" >
+        #{orderPointscount,jdbcType=INTEGER},
+      </if>
       <if test="outTradeNo != null" >
         #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNoMerge != null" >
+        #{outTradeNoMerge,jdbcType=VARCHAR},
       </if>
       <if test="tradeNo != null" >
         #{tradeNo,jdbcType=VARCHAR},
@@ -269,9 +281,6 @@
       <if test="orderMessage != null" >
         #{orderMessage,jdbcType=VARCHAR},
       </if>
-      <if test="orderPointscount != null" >
-        #{orderPointscount,jdbcType=INTEGER},
-      </if>
       <if test="voucherPrice != null" >
         #{voucherPrice,jdbcType=DECIMAL},
       </if>
@@ -297,6 +306,9 @@
     <set >
       <if test="outTradeNo != null" >
         out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNoMerge != null" >
+        `out_trade_no_ merge` = #{outTradeNoMerge,jdbcType=VARCHAR},
       </if>
       <if test="tradeNo != null" >
         trade_no = #{tradeNo,jdbcType=VARCHAR},
@@ -373,9 +385,6 @@
       <if test="orderMessage != null" >
         order_message = #{orderMessage,jdbcType=VARCHAR},
       </if>
-      <if test="orderPointscount != null" >
-        order_pointscount = #{orderPointscount,jdbcType=INTEGER},
-      </if>
       <if test="voucherPrice != null" >
         voucher_price = #{voucherPrice,jdbcType=DECIMAL},
       </if>
@@ -396,10 +405,12 @@
       </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
+      and order_pointscount = #{orderPointscount,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Order" >
     update t_order
     set out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      `out_trade_no_ merge` = #{outTradeNoMerge,jdbcType=VARCHAR},
       trade_no = #{tradeNo,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=INTEGER},
       store_name = #{storeName,jdbcType=VARCHAR},
@@ -425,7 +436,6 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       deliver_time = #{deliverTime,jdbcType=TIMESTAMP},
       order_message = #{orderMessage,jdbcType=VARCHAR},
-      order_pointscount = #{orderPointscount,jdbcType=INTEGER},
       voucher_price = #{voucherPrice,jdbcType=DECIMAL},
       voucher_code = #{voucherCode,jdbcType=VARCHAR},
       reciver_address = #{reciverAddress,jdbcType=VARCHAR},
@@ -433,5 +443,6 @@
       reciver_name = #{reciverName,jdbcType=VARCHAR},
       invoice_info = #{invoiceInfo,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
+      and order_pointscount = #{orderPointscount,jdbcType=INTEGER}
   </update>
 </mapper>

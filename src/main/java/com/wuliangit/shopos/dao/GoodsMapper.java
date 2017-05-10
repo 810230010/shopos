@@ -39,7 +39,8 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @param parentId
      * @return
      */
-    ArrayList<Goods> search(@Param("searchKey")String searchKey,
+    ArrayList<Goods> StoreSearch(@Param("storeId")Integer storeId,
+                                 @Param("searchKey")String searchKey,
                             @Param("orderColumn")String orderColumn,
                             @Param("orderType")String orderType,
                             @Param("parentId")Integer parentId);

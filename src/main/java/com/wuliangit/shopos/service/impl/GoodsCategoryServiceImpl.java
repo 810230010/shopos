@@ -31,9 +31,9 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
     }
 
     @Override
-    public ArrayList<GoodsCategory> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId) {
+    public ArrayList<GoodsCategory> AdminSearch(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId) {
         PageHelper.startPage(page, pageSize);
-        ArrayList<GoodsCategory> goodsCategories = goodsCategoryMapper.search(searchKey, orderColumn, orderType, parentId);
+        ArrayList<GoodsCategory> goodsCategories = goodsCategoryMapper.AdminSearch(searchKey, orderColumn, orderType, parentId);
         return goodsCategories;
     }
 

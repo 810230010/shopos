@@ -8,10 +8,11 @@
     </select>
 
     <!--后台列表搜索-->
-    <select id="search" resultType="com.wuliangit.shopos.entity.GoodsCategory">
+    <select id="AdminSearch" resultType="com.wuliangit.shopos.entity.GoodsCategory">
         select * from t_goods_category
         <where>
             parent_id = #{parentId}
+            and is_show = 1
             <if test="searchKey != null and searchKey != '' ">
                 and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
                 or keywords like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
@@ -19,10 +20,10 @@
             </if>
         </where>
         order by
-        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
-            ${orderColumn} ${orderType},
-        </if>
         sort asc
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            , ${orderColumn} ${orderType}
+        </if>
     </select>
 
     <!--通过父类获取商品分类-->

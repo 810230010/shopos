@@ -79,6 +79,15 @@ public class MPayController {
         model.setTotalAmount(totalAmount.toString());
         model.setProductCode(AliPay.PRODUCTCODE);
 
+
+        model.setBody("mybody");
+        model.setGoodsType("mygoodstype");
+        model.setPassbackParams("myPassbackParams");
+        model.setPromoParams("myPromoParams");
+        model.setSellerId("mySellerId");
+        model.setStoreId("myStoreId");
+        
+
         request.setBizModel(model);
         request.setNotifyUrl(notifyUrl);
         try {
@@ -98,6 +107,7 @@ public class MPayController {
     public void alipayNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, IOException {
         //获取支付宝POST过来反馈信息
         Map<String,String> params = new HashMap<String,String>();
+
         Map requestParams = request.getParameterMap();
         for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
             String name = (String) iter.next();
@@ -114,6 +124,12 @@ public class MPayController {
         //切记alipaypublickey是支付宝的公钥，请去open.alipay.com对应应用下查看。
         //boolean AlipaySignature.rsaCheckV1(Map<String, String> params, String publicKey, String charset, String sign_type)
         boolean flag = AlipaySignature.rsaCheckV1(params, AliPay.getAlipayPublicKey(), AlipayConstants.CHARSET_UTF8, AlipayConstants.SIGN_TYPE_RSA2);
+
+        for (String s : params.keySet()) {
+            logger.debug("支付宝异步通知参数:");
+            logger.debug(s+"="+params.get(s));
+        }
+
 
         //验证通过，处理业务逻辑
         if (flag){

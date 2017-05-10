@@ -3,12 +3,9 @@ package com.wuliangit.shopos.controller.api;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.AlipayConstants;
-import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.domain.AlipayTradeWapPayModel;
 import com.alipay.api.internal.util.AlipaySignature;
-import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
-import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.alipay.api.response.AlipayTradeWapPayResponse;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.pay.AliPay;
@@ -34,7 +31,7 @@ import java.util.*;
  */
 
 @Controller
-@RequestMapping(value = "/api/v1/pay")
+@RequestMapping(value = "/api/v1/order")
 public class MPayController {
 
     private String notifyUrl = "http://shop.wuliangit.com/api/v1/pay/alipay/notify";
@@ -47,7 +44,7 @@ public class MPayController {
      *
      * @return
      */
-    @RequestMapping(value = "/order/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     public Object createOrder(ApiOrderCreateDTO orderInfo) throws OrderException {
         RestResult result = new RestResult();
@@ -74,8 +71,6 @@ public class MPayController {
             }
             orderIds.add(order.getOrderId());
         }
-
-
 
         result.add("goodsAmount",goodsAmount);
         result.add("orderAmount",goodsAmount.add(carriage));

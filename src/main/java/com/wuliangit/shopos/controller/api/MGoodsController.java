@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商品相关接口
@@ -68,8 +70,15 @@ public class MGoodsController {
         RestResult result = new RestResult();
         Goods goods = goodsService.getGoodsById(goodsId);
         List<GoodsSku> goodsSku = goodsService.getGoodsSkuByGoodsId(goodsId);
+
+        //转化为字典型，方便前段处理
+        Map<String ,GoodsSku> goodsSkuMap = new HashMap<String ,GoodsSku>();
+        for (GoodsSku sku : goodsSku) {
+            goodsSkuMap.put(sku.getSkuValue(),sku);
+        }
+
         result.add("goods", goods);
-        result.add("goodsSku", goodsSku);
+        result.add("goodsSku", goodsSkuMap);
         return result;
     }
 

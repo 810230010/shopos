@@ -26,10 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 支付相关
@@ -54,15 +51,15 @@ public class MPayController {
     @ResponseBody
     public Object createOrder(ApiOrderCreateDTO orderInfo) throws OrderException {
         RestResult result = new RestResult();
-
         List<Order> orders = orderService.ApiCreateOrder(orderInfo);
+
+        List<Integer> orderIds = new ArrayList<>();
 
         //设置订单价格
         //商品总价
         BigDecimal goodsAmount = new BigDecimal(0);
         //邮费总价
         BigDecimal carriage = new BigDecimal(0);
-
         String carriageInfo = "";
 
         int flag = 0;
@@ -75,11 +72,15 @@ public class MPayController {
             }else{
                 carriageInfo += "+"+order.getCarriage().toString();
             }
+            orderIds.add(order.getOrderId());
         }
+
+
 
         result.add("goodsAmount",goodsAmount);
         result.add("orderAmount",goodsAmount.add(carriage));
         result.add("carriageInfo",carriageInfo);
+        result.add("orderIds",orderIds);
 
         //////////////
 //        AlipayClient alipayClient = AliPay.getAlipayClient();

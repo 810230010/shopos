@@ -116,6 +116,10 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public boolean isCollectGoods(Integer goodsId) {
         Member member = WebUtil.getCurrentMember();
+        //未登录直接处理为未收藏
+        if (member == null) {
+            return false;
+        }
         FavoritesGoods favoritesGoods = favoritesGoodsMapper.getFavoritesGoodsByUserIdAndGoodsId(member.getMemberId(), goodsId);
         if (favoritesGoods != null) {
             return true;
@@ -126,6 +130,10 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public boolean isCollectStore(Integer storeId) {
         Member member = WebUtil.getCurrentMember();
+        //未登录直接处理为未收藏
+        if (member == null) {
+            return false;
+        }
         FavoritesStore favoritesStore = favoritesStoreMapper.getFavoritesStoreByUserIdAndStoreId(member.getMemberId(), storeId);
         if (favoritesStore != null) {
             return true;

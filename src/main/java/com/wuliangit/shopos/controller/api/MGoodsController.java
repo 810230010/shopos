@@ -1,10 +1,11 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
-import com.wuliangit.shopos.entity.FavoritesGoods;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
+import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.CollectService;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.GoodsSearchService;

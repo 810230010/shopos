@@ -3,9 +3,7 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.entity.Cart;
 import com.wuliangit.shopos.service.CartService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,7 +58,7 @@ public class MCartController {
      * @param goodsNum
      * @return
      */
-    @RequestMapping("/cart/add")
+    @RequestMapping("/add")
     public Object addCartGoods(@RequestParam(value = "goodsId", required = true) Integer goodsId,
                                @RequestParam(value = "goodsSkuId", required = true) Integer goodsSkuId,
                                @RequestParam(value = "goodsNum", required = false, defaultValue = "1") Integer goodsNum) {

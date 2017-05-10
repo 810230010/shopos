@@ -3,7 +3,6 @@
 <mapper namespace="com.wuliangit.shopos.dao.OrderGoodsMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.OrderGoods" >
     <id column="order_goods_id" property="orderGoodsId" jdbcType="INTEGER" />
-    <result column="order_common_id" property="orderCommonId" jdbcType="INTEGER" />
     <result column="goods_sku_id" property="goodsSkuId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
@@ -16,10 +15,11 @@
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
     <result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
     <result column="commission" property="commission" jdbcType="DECIMAL" />
+    <result column="carriage" property="carriage" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_goods_id, order_common_id, goods_sku_id, order_id, goods_id, sku_name, goods_name, 
-    goods_num, goods_image, goods_pay_price, store_id, member_id, goods_type, commission
+    order_goods_id, goods_sku_id, order_id, goods_id, sku_name, goods_name, goods_num, 
+    goods_image, goods_pay_price, store_id, member_id, goods_type, commission, carriage
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -35,16 +35,16 @@
     <selectKey resultType="java.lang.Integer" keyProperty="orderGoodsId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_order_goods (order_common_id, goods_sku_id, order_id, 
-      goods_id, sku_name, goods_name, 
-      goods_num, goods_image, goods_pay_price, 
-      store_id, member_id, goods_type, 
-      commission)
-    values (#{orderCommonId,jdbcType=INTEGER}, #{goodsSkuId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
-      #{goodsId,jdbcType=INTEGER}, #{skuName,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
-      #{goodsNum,jdbcType=INTEGER}, #{goodsImage,jdbcType=VARCHAR}, #{goodsPayPrice,jdbcType=DECIMAL}, 
-      #{storeId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{goodsType,jdbcType=VARCHAR}, 
-      #{commission,jdbcType=DECIMAL})
+    insert into t_order_goods (goods_sku_id, order_id, goods_id, 
+      sku_name, goods_name, goods_num, 
+      goods_image, goods_pay_price, store_id, 
+      member_id, goods_type, commission, 
+      carriage)
+    values (#{goodsSkuId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
+      #{skuName,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, 
+      #{goodsImage,jdbcType=VARCHAR}, #{goodsPayPrice,jdbcType=DECIMAL}, #{storeId,jdbcType=INTEGER}, 
+      #{memberId,jdbcType=INTEGER}, #{goodsType,jdbcType=VARCHAR}, #{commission,jdbcType=DECIMAL}, 
+      #{carriage,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.OrderGoods" >
     <selectKey resultType="java.lang.Integer" keyProperty="orderGoodsId" order="AFTER" >
@@ -52,9 +52,6 @@
     </selectKey>
     insert into t_order_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderCommonId != null" >
-        order_common_id,
-      </if>
       <if test="goodsSkuId != null" >
         goods_sku_id,
       </if>
@@ -91,11 +88,11 @@
       <if test="commission != null" >
         commission,
       </if>
+      <if test="carriage != null" >
+        carriage,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderCommonId != null" >
-        #{orderCommonId,jdbcType=INTEGER},
-      </if>
       <if test="goodsSkuId != null" >
         #{goodsSkuId,jdbcType=INTEGER},
       </if>
@@ -132,14 +129,14 @@
       <if test="commission != null" >
         #{commission,jdbcType=DECIMAL},
       </if>
+      <if test="carriage != null" >
+        #{carriage,jdbcType=DECIMAL},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.OrderGoods" >
     update t_order_goods
     <set >
-      <if test="orderCommonId != null" >
-        order_common_id = #{orderCommonId,jdbcType=INTEGER},
-      </if>
       <if test="goodsSkuId != null" >
         goods_sku_id = #{goodsSkuId,jdbcType=INTEGER},
       </if>
@@ -176,13 +173,15 @@
       <if test="commission != null" >
         commission = #{commission,jdbcType=DECIMAL},
       </if>
+      <if test="carriage != null" >
+        carriage = #{carriage,jdbcType=DECIMAL},
+      </if>
     </set>
     where order_goods_id = #{orderGoodsId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.OrderGoods" >
     update t_order_goods
-    set order_common_id = #{orderCommonId,jdbcType=INTEGER},
-      goods_sku_id = #{goodsSkuId,jdbcType=INTEGER},
+    set goods_sku_id = #{goodsSkuId,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},
       sku_name = #{skuName,jdbcType=VARCHAR},
@@ -193,7 +192,8 @@
       store_id = #{storeId,jdbcType=INTEGER},
       member_id = #{memberId,jdbcType=INTEGER},
       goods_type = #{goodsType,jdbcType=VARCHAR},
-      commission = #{commission,jdbcType=DECIMAL}
+      commission = #{commission,jdbcType=DECIMAL},
+      carriage = #{carriage,jdbcType=DECIMAL}
     where order_goods_id = #{orderGoodsId,jdbcType=INTEGER}
   </update>
 </mapper>

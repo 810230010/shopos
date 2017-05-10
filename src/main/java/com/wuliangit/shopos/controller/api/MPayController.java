@@ -10,19 +10,17 @@ import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.alipay.api.response.AlipayTradeWapPayResponse;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.pay.AliPay;
+import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
+import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OrderException;
-import com.wuliangit.shopos.model.OrderGoodsNum1;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -54,29 +52,52 @@ public class MPayController {
      */
     @RequestMapping(value = "/order/new", method = RequestMethod.POST)
     @ResponseBody
-    public Object createOrder(String orderInfos, Integer addressId, String orderFrom, BigDecimal goodsAmount) throws OrderException {
+    public Object createOrder(ApiOrderCreateDTO orderInfo) throws OrderException {
         RestResult result = new RestResult();
 
-        Gson gson = new Gson();
-        List<OrderGoodsNum1> orderInfoList = gson.fromJson(orderInfos, new TypeToken<List<OrderGoodsNum1>>() {
-        }.getType());
+        List<Order> orders = orderService.ApiCreateOrder(orderInfo);
 
-        AlipayTradeAppPayModel model = orderService.createOrder(orderInfoList, addressId, orderFrom, goodsAmount);
+        //设置订单价格
+        //商品总价
+        BigDecimal goodsAmount = new BigDecimal(0);
+        //邮费总价
+        BigDecimal carriage = new BigDecimal(0);
 
-        AlipayClient alipayClient = AliPay.getAlipayClient();
-        AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
+        String carriageInfo = "";
 
-        //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
-
-        request.setBizModel(model);
-        request.setNotifyUrl(notifyUrl);
-        try {
-            AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
-            result.add("payInfo", response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
-            System.out.println(response.getBody());
-        } catch (AlipayApiException e) {
-            e.printStackTrace();
+        int flag = 0;
+        for (Order order : orders) {
+            carriage.add(order.getCarriage());
+            goodsAmount.add(order.getGoodsAmount());
+            if (flag == 0 ){
+                carriageInfo += order.getCarriage().toString();
+                flag= 1;
+            }else{
+                carriageInfo += "+"+order.getCarriage().toString();
+            }
         }
+
+        result.add("goodsAmount",goodsAmount);
+        result.add("orderAmount",goodsAmount.add(carriage));
+        result.add("carriageInfo",carriageInfo);
+
+        //////////////
+//        AlipayClient alipayClient = AliPay.getAlipayClient();
+//        AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
+//
+//        //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
+//
+//        request.setBizModel(model);
+//        request.setNotifyUrl(notifyUrl);
+//        try {
+//            AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
+//            result.add("payInfo", response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
+//            System.out.println(response.getBody());
+//        } catch (AlipayApiException e) {
+//            e.printStackTrace();
+//        }
+
+        //////////////
         return result;
     }
 

@@ -10,14 +10,13 @@
     <result column="area" property="area" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="area_info" property="areaInfo" jdbcType="VARCHAR" />
-    <result column="tel_phone" property="telPhone" jdbcType="VARCHAR" />
     <result column="mob_phone" property="mobPhone" jdbcType="VARCHAR" />
     <result column="is_default" property="isDefault" jdbcType="BIT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    address_id, member_id, reciver_name, province, city, area, address, area_info, tel_phone, 
-    mob_phone, is_default, create_time
+    address_id, member_id, reciver_name, province, city, area, address, area_info, mob_phone, 
+    is_default, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -35,12 +34,12 @@
     </selectKey>
     insert into t_address (member_id, reciver_name, province, 
       city, area, address, 
-      area_info, tel_phone, mob_phone, 
-      is_default, create_time)
+      area_info, mob_phone, is_default, 
+      create_time)
     values (#{memberId,jdbcType=INTEGER}, #{reciverName,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{areaInfo,jdbcType=VARCHAR}, #{telPhone,jdbcType=VARCHAR}, #{mobPhone,jdbcType=VARCHAR}, 
-      #{isDefault,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+      #{areaInfo,jdbcType=VARCHAR}, #{mobPhone,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Address" >
     <selectKey resultType="java.lang.Integer" keyProperty="addressId" order="AFTER" >
@@ -68,9 +67,6 @@
       </if>
       <if test="areaInfo != null" >
         area_info,
-      </if>
-      <if test="telPhone != null" >
-        tel_phone,
       </if>
       <if test="mobPhone != null" >
         mob_phone,
@@ -103,9 +99,6 @@
       </if>
       <if test="areaInfo != null" >
         #{areaInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="telPhone != null" >
-        #{telPhone,jdbcType=VARCHAR},
       </if>
       <if test="mobPhone != null" >
         #{mobPhone,jdbcType=VARCHAR},
@@ -142,9 +135,6 @@
       <if test="areaInfo != null" >
         area_info = #{areaInfo,jdbcType=VARCHAR},
       </if>
-      <if test="telPhone != null" >
-        tel_phone = #{telPhone,jdbcType=VARCHAR},
-      </if>
       <if test="mobPhone != null" >
         mob_phone = #{mobPhone,jdbcType=VARCHAR},
       </if>
@@ -166,7 +156,6 @@
       area = #{area,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       area_info = #{areaInfo,jdbcType=VARCHAR},
-      tel_phone = #{telPhone,jdbcType=VARCHAR},
       mob_phone = #{mobPhone,jdbcType=VARCHAR},
       is_default = #{isDefault,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP}

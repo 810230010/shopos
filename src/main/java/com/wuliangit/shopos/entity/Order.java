@@ -34,7 +34,9 @@ public class Order {
 
     private BigDecimal carriage;
 
-    private String evaluationState;
+    private String memberEvaluationState;
+
+    private String sellerEvaluationState;
 
     private String orderState;
 
@@ -51,6 +53,24 @@ public class Order {
     private String carriageName;
 
     private Date createTime;
+
+    private Date deliverTime;
+
+    private String orderMessage;
+
+    private Integer orderPointscount;
+
+    private Long voucherPrice;
+
+    private String voucherCode;
+
+    private String reciverAddress;
+
+    private String reciverPhone;
+
+    private String reciverName;
+
+    private String invoiceInfo;
 
     public Integer getOrderId() {
         return orderId;
@@ -172,12 +192,20 @@ public class Order {
         this.carriage = carriage;
     }
 
-    public String getEvaluationState() {
-        return evaluationState;
+    public String getMemberEvaluationState() {
+        return memberEvaluationState;
     }
 
-    public void setEvaluationState(String evaluationState) {
-        this.evaluationState = evaluationState == null ? null : evaluationState.trim();
+    public void setMemberEvaluationState(String memberEvaluationState) {
+        this.memberEvaluationState = memberEvaluationState == null ? null : memberEvaluationState.trim();
+    }
+
+    public String getSellerEvaluationState() {
+        return sellerEvaluationState;
+    }
+
+    public void setSellerEvaluationState(String sellerEvaluationState) {
+        this.sellerEvaluationState = sellerEvaluationState == null ? null : sellerEvaluationState.trim();
     }
 
     public String getOrderState() {
@@ -242,5 +270,77 @@ public class Order {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Date getDeliverTime() {
+        return deliverTime;
+    }
+
+    public void setDeliverTime(Date deliverTime) {
+        this.deliverTime = deliverTime;
+    }
+
+    public String getOrderMessage() {
+        return orderMessage;
+    }
+
+    public void setOrderMessage(String orderMessage) {
+        this.orderMessage = orderMessage == null ? null : orderMessage.trim();
+    }
+
+    public Integer getOrderPointscount() {
+        return orderPointscount;
+    }
+
+    public void setOrderPointscount(Integer orderPointscount) {
+        this.orderPointscount = orderPointscount;
+    }
+
+    public Long getVoucherPrice() {
+        return voucherPrice;
+    }
+
+    public void setVoucherPrice(Long voucherPrice) {
+        this.voucherPrice = voucherPrice;
+    }
+
+    public String getVoucherCode() {
+        return voucherCode;
+    }
+
+    public void setVoucherCode(String voucherCode) {
+        this.voucherCode = voucherCode == null ? null : voucherCode.trim();
+    }
+
+    public String getReciverAddress() {
+        return reciverAddress;
+    }
+
+    public void setReciverAddress(String reciverAddress) {
+        this.reciverAddress = reciverAddress == null ? null : reciverAddress.trim();
+    }
+
+    public String getReciverPhone() {
+        return reciverPhone;
+    }
+
+    public void setReciverPhone(String reciverPhone) {
+        this.reciverPhone = reciverPhone == null ? null : reciverPhone.trim();
+    }
+
+    public String getReciverName() {
+        return reciverName;
+    }
+
+    public void setReciverName(String reciverName) {
+        this.reciverName = reciverName == null ? null : reciverName.trim();
+    }
+
+    public String getInvoiceInfo() {
+        return invoiceInfo;
+    }
+
+    public void setInvoiceInfo(String invoiceInfo) {
+        this.invoiceInfo = invoiceInfo == null ? null : invoiceInfo.trim();
     }
 }

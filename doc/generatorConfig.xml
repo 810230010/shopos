@@ -95,9 +95,6 @@
         <table tableName="t_order" domainObjectName="Order" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="order_id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="t_order_common" domainObjectName="OrderCommon" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="order_common_id" sqlStatement="MySql" identity="true"/>
-        </table>
         <table tableName="t_order_goods" domainObjectName="OrderGoods" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="order_goods_id" sqlStatement="MySql" identity="true"/>
         </table>

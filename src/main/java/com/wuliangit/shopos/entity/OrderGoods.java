@@ -5,8 +5,6 @@ import java.math.BigDecimal;
 public class OrderGoods {
     private Integer orderGoodsId;
 
-    private Integer orderCommonId;
-
     private Integer goodsSkuId;
 
     private Integer orderId;
@@ -31,20 +29,14 @@ public class OrderGoods {
 
     private BigDecimal commission;
 
+    private BigDecimal carriage;
+
     public Integer getOrderGoodsId() {
         return orderGoodsId;
     }
 
     public void setOrderGoodsId(Integer orderGoodsId) {
         this.orderGoodsId = orderGoodsId;
-    }
-
-    public Integer getOrderCommonId() {
-        return orderCommonId;
-    }
-
-    public void setOrderCommonId(Integer orderCommonId) {
-        this.orderCommonId = orderCommonId;
     }
 
     public Integer getGoodsSkuId() {
@@ -141,5 +133,13 @@ public class OrderGoods {
 
     public void setCommission(BigDecimal commission) {
         this.commission = commission;
+    }
+
+    public BigDecimal getCarriage() {
+        return carriage;
+    }
+
+    public void setCarriage(BigDecimal carriage) {
+        this.carriage = carriage;
     }
 }

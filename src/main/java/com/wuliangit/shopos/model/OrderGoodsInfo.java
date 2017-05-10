@@ -3,7 +3,7 @@ package com.wuliangit.shopos.model;
 /**
  * Created by nilme on 2017/5/5.
  */
-public class OrderGoodsNum {
+public class OrderGoodsInfo {
 
     private Integer goodsSkuId;
 
@@ -11,10 +11,11 @@ public class OrderGoodsNum {
 
     private Integer goodsId;
 
-    public OrderGoodsNum() {
+
+    public OrderGoodsInfo() {
     }
 
-    public OrderGoodsNum(Integer goodsSkuId, Integer goodsNum, Integer goodsId) {
+    public OrderGoodsInfo(Integer goodsSkuId, Integer goodsNum, Integer goodsId) {
         this.goodsSkuId = goodsSkuId;
         this.goodsNum = goodsNum;
         this.goodsId = goodsId;

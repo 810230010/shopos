@@ -19,8 +19,6 @@ public class Address {
 
     private String areaInfo;
 
-    private String telPhone;
-
     private String mobPhone;
 
     private Boolean isDefault;
@@ -89,14 +87,6 @@ public class Address {
 
     public void setAreaInfo(String areaInfo) {
         this.areaInfo = areaInfo == null ? null : areaInfo.trim();
-    }
-
-    public String getTelPhone() {
-        return telPhone;
-    }
-
-    public void setTelPhone(String telPhone) {
-        this.telPhone = telPhone == null ? null : telPhone.trim();
     }
 
     public String getMobPhone() {

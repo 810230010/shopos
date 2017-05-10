@@ -2,7 +2,7 @@ package com.wuliangit.shopos.test;
 
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.google.gson.Gson;
-import com.wuliangit.shopos.model.OrderGoodsInfo;
+import com.wuliangit.shopos.model.OrderGoodsNum;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +14,9 @@ public class Test {
 
     public static void main(String[] args) {
 
-        Map<Integer,OrderGoodsInfo> orderInfo = new HashMap<>();
+        Map<Integer,OrderGoodsNum> orderInfo = new HashMap<>();
 
-        OrderGoodsInfo info = new OrderGoodsInfo(35,2);
+        OrderGoodsNum info = new OrderGoodsNum(35,2,1);
 
 
         Gson gson = new Gson();

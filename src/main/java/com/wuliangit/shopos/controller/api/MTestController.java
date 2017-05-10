@@ -1,11 +1,10 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.controller.TestController;
 import com.wuliangit.shopos.model.OrderGoodsNum;
+import com.wuliangit.shopos.model.OrderGoodsNum1;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,8 +33,10 @@ public class MTestController {
     }
 
     @RequestMapping("/p")
-    public Object api2(List<OrderGoodsNum> srderGoodsNums)  {
+    public Object api2(OrderGoodsNum1 orderGoodsNum1,Integer storeId)  {
         RestResult result = new RestResult();
+
+
 
         return result;
     }

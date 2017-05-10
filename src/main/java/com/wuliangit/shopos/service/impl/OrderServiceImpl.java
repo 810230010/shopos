@@ -8,8 +8,8 @@ import com.wuliangit.shopos.dao.*;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.GoodsWithoutBody;
-import com.wuliangit.shopos.model.OrderGoodsInfo;
 import com.wuliangit.shopos.model.OrderGoodsNum;
+import com.wuliangit.shopos.model.OrderGoodsNum1;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +46,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public AlipayTradeAppPayModel createOrder(List<OrderGoodsNum> orderInfos, Integer addressId, String orderFrom, BigDecimal goodsAmount) throws OrderException {
+    public AlipayTradeAppPayModel createOrder(List<OrderGoodsNum1> orderInfos, Integer addressId, String orderFrom, BigDecimal goodsAmount) throws OrderException {
         Member member = WebUtil.getCurrentMember();
 
         String outTradeNo = UUID.randomUUID().toString().replaceAll("-", "");
 
         BigDecimal totalAmount = new BigDecimal(0);
 
-        for (OrderGoodsNum orderInfo : orderInfos) {
+        for (OrderGoodsNum1 orderInfo : orderInfos) {
             ArrayList<OrderGoods> orderGoodses = new ArrayList<OrderGoods>();
 
             StoreMin storeMin = storeMapper.getStoreMinByStoreId(orderInfo.getStoreId());
@@ -81,17 +81,17 @@ public class OrderServiceImpl implements OrderService {
             order.setStoreName(storeMin.getName());
 
 
-            List<OrderGoodsInfo> orderGoodsInfoList = orderInfo.getOrderGoodsInfoList();
+            List<OrderGoodsNum> orderGoodsNumList = orderInfo.getOrderGoodsNumList();
 
-            for (OrderGoodsInfo orderGoodsInfo : orderGoodsInfoList) {
-                GoodsSku goodsSku = goodsSkuMapper.selectByPrimaryKey(orderGoodsInfo.getGoodsSkuId());
+            for (OrderGoodsNum orderGoodsNum : orderGoodsNumList) {
+                GoodsSku goodsSku = goodsSkuMapper.selectByPrimaryKey(orderGoodsNum.getGoodsSkuId());
 
                 //检查商品库存
                 if (goodsSku.getSkuStock() < 1) {
                     throw new OrderException("商品已经售空");
                 }
                 //检查商品数量是否充足
-                if (goodsSku.getSkuStock() < orderGoodsInfo.getGoodsNum()) {
+                if (goodsSku.getSkuStock() < orderGoodsNum.getGoodsNum()) {
                     throw new OrderException("商品数量不足,缺货");
                 }
                 GoodsWithoutBody goodsWithoutBody = goodsMapper.selectGoodsWithoutBodyByPrimaryKey(goodsSku.getGoodsId());
@@ -102,7 +102,7 @@ public class OrderServiceImpl implements OrderService {
                 orderGoods.setCommission(goodsWithoutBody.getCommission());
                 orderGoods.setGoodsImage(goodsWithoutBody.getTitleImg());
                 orderGoods.setGoodsName(goodsWithoutBody.getName());
-                orderGoods.setGoodsNum(orderGoodsInfo.getGoodsNum());
+                orderGoods.setGoodsNum(orderGoodsNum.getGoodsNum());
                 orderGoods.setGoodsPayPrice(goodsSku.getSkuPrice());
                 orderGoods.setGoodsType(goodsWithoutBody.getType());
                 orderGoods.setMemberId(member.getMemberId());

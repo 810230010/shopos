@@ -15,7 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.exception.OrderException;
-import com.wuliangit.shopos.model.OrderGoodsNum;
+import com.wuliangit.shopos.model.OrderGoodsNum1;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,7 +58,7 @@ public class MPayController {
         RestResult result = new RestResult();
 
         Gson gson = new Gson();
-        List<OrderGoodsNum> orderInfoList = gson.fromJson(orderInfos, new TypeToken<List<OrderGoodsNum>>() {
+        List<OrderGoodsNum1> orderInfoList = gson.fromJson(orderInfos, new TypeToken<List<OrderGoodsNum1>>() {
         }.getType());
 
         AlipayTradeAppPayModel model = orderService.createOrder(orderInfoList, addressId, orderFrom, goodsAmount);

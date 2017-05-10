@@ -54,4 +54,18 @@ public interface CollectService {
      * @return
      */
     int deleteCollectStore(Integer storeId);
+
+    /**
+     * 是否收藏商品
+     * @param goodsId
+     * @return
+     */
+    boolean isCollectGoods(Integer goodsId);
+
+    /**
+     * 是否收藏商品
+     * @param storeId
+     * @return
+     */
+    boolean isCollectStore(Integer storeId);
 }

@@ -86,9 +86,6 @@
         <table tableName="t_goods" domainObjectName="Goods" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="goods_id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="t_goods_color" domainObjectName="GoodsColor" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="goods_color_id" sqlStatement="MySql" identity="true"/>
-        </table>
         <table tableName="t_goods_category" domainObjectName="GoodsCategory" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="goods_category_id" sqlStatement="MySql" identity="true"/>
         </table>

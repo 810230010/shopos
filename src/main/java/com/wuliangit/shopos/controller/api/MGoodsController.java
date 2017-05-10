@@ -2,8 +2,10 @@ package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.entity.FavoritesGoods;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
+import com.wuliangit.shopos.service.CollectService;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.GoodsSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class MGoodsController {
     private GoodsService goodsService;
     @Autowired
     private GoodsSearchService goodsSearchService;
+    @Autowired
+    private CollectService collectService;
 
 
     /**
@@ -77,6 +81,9 @@ public class MGoodsController {
             goodsSkuMap.put(sku.getSkuValue(),sku);
         }
 
+        boolean isCollect = collectService.isCollectGoods(goodsId);
+
+        result.add("isCollect",isCollect);
         result.add("goods", goods);
         result.add("goodsSku", goodsSkuMap);
         return result;

@@ -9,6 +9,14 @@ public class OrderGoodsInfo {
 
     private Integer goodsNum;
 
+    public OrderGoodsInfo() {
+    }
+
+    public OrderGoodsInfo(Integer goodsSkuId, Integer goodsNum) {
+        this.goodsSkuId = goodsSkuId;
+        this.goodsNum = goodsNum;
+    }
+
     public Integer getGoodsSkuId() {
         return goodsSkuId;
     }

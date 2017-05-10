@@ -9,7 +9,7 @@ import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.GoodsWithoutBody;
 import com.wuliangit.shopos.model.OrderGoodsInfo;
-import com.wuliangit.shopos.model.OrderInfo;
+import com.wuliangit.shopos.model.OrderGoodsNum;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +46,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public AlipayTradeAppPayModel createOrder(List<OrderInfo> orderInfos, Integer addressId, String orderFrom, BigDecimal goodsAmount) throws OrderException {
+    public AlipayTradeAppPayModel createOrder(List<OrderGoodsNum> orderInfos, Integer addressId, String orderFrom, BigDecimal goodsAmount) throws OrderException {
         Member member = WebUtil.getCurrentMember();
 
         String outTradeNo = UUID.randomUUID().toString().replaceAll("-", "");
 
         BigDecimal totalAmount = new BigDecimal(0);
 
-        for (OrderInfo orderInfo : orderInfos) {
+        for (OrderGoodsNum orderInfo : orderInfos) {
             ArrayList<OrderGoods> orderGoodses = new ArrayList<OrderGoods>();
 
             StoreMin storeMin = storeMapper.getStoreMinByStoreId(orderInfo.getStoreId());

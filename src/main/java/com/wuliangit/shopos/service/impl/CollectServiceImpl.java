@@ -37,24 +37,24 @@ public class CollectServiceImpl implements CollectService {
     @Override
     public ArrayList<ApiCollectGoodsDTO> getCollectGoodsList(Integer page, Integer pageSize) {
         Member user = WebUtil.getCurrentMember();
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         ArrayList<ApiCollectGoodsDTO> collectGoods = favoritesGoodsMapper.getCollectGoodsList(user.getMemberId());
         return collectGoods;
     }
 
     @Override
     public int addCollectGoods(Integer goodsId) throws Exception {
-        Member user = WebUtil.getCurrentMember();
+        Member member = WebUtil.getCurrentMember();
 
-        FavoritesGoods oldFavoritesGoods = favoritesGoodsMapper.getFavoritesGoodsByUserIdAndGoodsId(user.getMemberId(),goodsId);
+        FavoritesGoods oldFavoritesGoods = favoritesGoodsMapper.getFavoritesGoodsByUserIdAndGoodsId(member.getMemberId(), goodsId);
 
-        if (oldFavoritesGoods != null){
+        if (oldFavoritesGoods != null) {
             throw new OptionException("重复收藏");
         }
 
         Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
 
-        if (goods == null){
+        if (goods == null) {
             throw new OptionException("商品不存在");
         }
 
@@ -63,43 +63,43 @@ public class CollectServiceImpl implements CollectService {
         favoritesGoods.setGoodsId(goods.getGoodsId());
         favoritesGoods.setGoodsName(goods.getName());
         favoritesGoods.setLogPrice(goods.getPrice());
-        favoritesGoods.setMemberId(user.getMemberId());
-        favoritesGoods.setMemberName(user.getNikename());
+        favoritesGoods.setMemberId(member.getMemberId());
+        favoritesGoods.setMemberName(member.getNikename());
         return favoritesGoodsMapper.insertSelective(favoritesGoods);
     }
 
     @Override
     public int deleteCollectGoods(Integer goodsId) {
         Member user = WebUtil.getCurrentMember();
-        return favoritesGoodsMapper.deleteCollectGoods(goodsId,user.getMemberId());
+        return favoritesGoodsMapper.deleteCollectGoods(goodsId, user.getMemberId());
     }
 
     @Override
     public ArrayList<ApiCollectStoreDTO> getCollectStireList(Integer page, Integer pageSize) {
         Member user = WebUtil.getCurrentMember();
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         ArrayList<ApiCollectStoreDTO> collectStores = favoritesStoreMapper.getCollectGoodsList(user.getMemberId());
         return collectStores;
     }
 
     @Override
-    public int addCollectStore(Integer storeId) throws Exception{
-        Member user = WebUtil.getCurrentMember();
-        FavoritesStore oldFavoritesStore = favoritesStoreMapper.getFavoritesStoreByUserIdAndStoreId(user.getMemberId(),storeId);
+    public int addCollectStore(Integer storeId) throws Exception {
+        Member member = WebUtil.getCurrentMember();
+        FavoritesStore oldFavoritesStore = favoritesStoreMapper.getFavoritesStoreByUserIdAndStoreId(member.getMemberId(), storeId);
 
-        if (oldFavoritesStore != null){
+        if (oldFavoritesStore != null) {
             throw new OptionException("重复收藏");
         }
 
         Store store = storeMapper.selectByPrimaryKey(storeId);
 
-        if (store == null){
+        if (store == null) {
             throw new OptionException("店铺不存在");
         }
 
         FavoritesStore favoritesStore = new FavoritesStore();
-        favoritesStore.setMemberName(user.getNikename());
-        favoritesStore.setMemberId(user.getMemberId());
+        favoritesStore.setMemberName(member.getNikename());
+        favoritesStore.setMemberId(member.getMemberId());
         favoritesStore.setLogMsg("app collect");
         favoritesStore.setFavTime(new Date());
         favoritesStore.setStoreName(store.getName());
@@ -109,7 +109,27 @@ public class CollectServiceImpl implements CollectService {
 
     @Override
     public int deleteCollectStore(Integer storeId) {
-        Member user = WebUtil.getCurrentMember();
-        return favoritesStoreMapper.deleteCollectGoods(storeId,user.getMemberId());
+        Member member = WebUtil.getCurrentMember();
+        return favoritesStoreMapper.deleteCollectGoods(storeId, member.getMemberId());
+    }
+
+    @Override
+    public boolean isCollectGoods(Integer goodsId) {
+        Member member = WebUtil.getCurrentMember();
+        FavoritesGoods favoritesGoods = favoritesGoodsMapper.getFavoritesGoodsByUserIdAndGoodsId(member.getMemberId(), goodsId);
+        if (favoritesGoods != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isCollectStore(Integer storeId) {
+        Member member = WebUtil.getCurrentMember();
+        FavoritesStore favoritesStore = favoritesStoreMapper.getFavoritesStoreByUserIdAndStoreId(member.getMemberId(), storeId);
+        if (favoritesStore != null) {
+            return true;
+        }
+        return false;
     }
 }

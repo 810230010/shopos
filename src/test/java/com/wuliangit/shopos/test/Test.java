@@ -3,10 +3,9 @@ package com.wuliangit.shopos.test;
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.google.gson.Gson;
 import com.wuliangit.shopos.model.OrderGoodsInfo;
-import com.wuliangit.shopos.model.OrderInfo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by nilme on 2017/5/6.
@@ -15,25 +14,14 @@ public class Test {
 
     public static void main(String[] args) {
 
-        List<OrderInfo> orderInfos = new ArrayList<>();
+        Map<Integer,OrderGoodsInfo> orderInfo = new HashMap<>();
 
-        OrderInfo orderInfo = new OrderInfo();
-        List<OrderGoodsInfo> orderGoodsInfos = new ArrayList<>();
+        OrderGoodsInfo info = new OrderGoodsInfo(35,2);
 
-        OrderGoodsInfo goods1 = new OrderGoodsInfo();
-        goods1.setGoodsNum(2);
-        goods1.setGoodsSkuId(1);
-        orderGoodsInfos.add(goods1);
-
-        orderInfo.setOrderGoodsInfoList(orderGoodsInfos);
-        orderInfo.setStoreId(3);
 
         Gson gson = new Gson();
 
-
-        orderInfos.add(orderInfo);
-
-        String s = gson.toJson(orderInfos);
+        String s = gson.toJson(orderInfo);
 
         System.out.println(s);
 

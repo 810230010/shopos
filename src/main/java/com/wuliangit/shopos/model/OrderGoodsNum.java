@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by nilme on 2017/5/5.
  */
-public class OrderInfo {
+public class OrderGoodsNum {
 
     private Integer storeId;
 

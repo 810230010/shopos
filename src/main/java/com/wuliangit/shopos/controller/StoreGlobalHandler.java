@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 后台管理界面异常捕获
+ * 后台管理界面全局前置设置
  */
 @ControllerAdvice(basePackages = "com.wuliangit.shopos.controller.store")
 public class StoreGlobalHandler {

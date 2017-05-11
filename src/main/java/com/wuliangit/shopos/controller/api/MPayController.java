@@ -9,7 +9,6 @@ import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.pay.AliPay;
-import com.wuliangit.shopos.controller.TestController;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.service.OrderService;
 import org.apache.commons.logging.Log;
@@ -18,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by nilme on 2017/5/10.
@@ -45,7 +42,7 @@ public class MPayController {
 
     @RequestMapping(value = "/alipay/prepare", method = RequestMethod.POST)
     @ResponseBody
-    public Object alipayPrepare(Integer[] orderIds) throws AlipayApiException {
+    public Object alipayPrepare(@RequestParam("orderIds[]") List<Integer> orderIds) throws AlipayApiException {
         RestResult result = new RestResult();
 
         AlipayClient alipayClient = AliPay.getAlipayClient();
@@ -59,7 +56,7 @@ public class MPayController {
         for (Integer orderId : orderIds) {
             Order order = orderService.getOrderById(orderId);
             totalAmount.add(order.getOrderAmount());
-            if (orderIds.length > 1) {
+            if (orderIds.size() > 1) {
                 order.setOutTradeNoMerge(outTradeNoMerge);
                 int res = orderService.updateOrder(order);
             }
@@ -68,7 +65,7 @@ public class MPayController {
 
         //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
         AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
-        if (orderIds.length > 1) {
+        if (orderIds.size() > 1) {
             model.setOutTradeNo(outTradeNoMerge);
             model.setBody("合并订单");
         } else {
@@ -86,7 +83,7 @@ public class MPayController {
         model.setPromoParams("myPromoParams");
         model.setSellerId("mySellerId");
         model.setStoreId("myStoreId");
-        
+
 
         request.setBizModel(model);
         request.setNotifyUrl(notifyUrl);

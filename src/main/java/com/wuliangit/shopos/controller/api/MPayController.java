@@ -55,7 +55,7 @@ public class MPayController {
 
         for (Integer orderId : orderIds) {
             Order order = orderService.getOrderById(orderId);
-            totalAmount.add(order.getOrderAmount());
+            totalAmount = totalAmount.add(order.getOrderAmount());
             if (orderIds.size() > 1) {
                 order.setOutTradeNoMerge(outTradeNoMerge);
                 int res = orderService.updateOrder(order);

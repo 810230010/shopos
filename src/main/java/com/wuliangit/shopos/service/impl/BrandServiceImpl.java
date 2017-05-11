@@ -58,7 +58,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public ArrayList<Brand> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
+    public ArrayList<Brand> adminSearchValidatedBrands(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
         PageHelper.startPage(page, pageSize);
         return brandMapper.search(searchKey, orderColumn, orderType);
     }
@@ -69,7 +69,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public int updateBrand(Brand brand) {
+    public int adminUpdateBrand(Brand brand) {
         return brandMapper.updateByPrimaryKeySelective(brand);
     }
 
@@ -82,29 +82,29 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public int deleteBrandByID(Integer brandId) {
+    public int adminDeleteBrandByID(Integer brandId) {
         return brandMapper.deleteByPrimaryKey(brandId);
     }
 
     @Override
-    public ArrayList<StoreAddBrand> searchBrands(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
+    public ArrayList<StoreAddBrand> adminSearchNewAddBrands(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
         PageHelper.startPage(page, pageSize);
         return brandMapper.searchBrands(searchKey, orderColumn, orderType);
 
     }
 
     @Override
-    public int updateAddBrandStatus(Integer brandId, String status) {
+    public int adminUpdateAddBrandStatus(Integer brandId, String status) {
         return brandMapper.updateBrandStatus(brandId, status);
     }
 
     @Override
-    public int updateStoreJoinBrand(Integer id, String status) {
+    public int adminUpdateStoreJoinBrand(Integer id, String status) {
         return brandMapper.updateStoreJoinBrandStatus(id, status);
     }
 
     @Override
-    public ArrayList<StoreAddBrand> getStoreJoinBrands(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
+    public ArrayList<StoreAddBrand> adminGetStoreJoinBrands(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
         PageHelper.startPage(page, pageSize);
         return brandMapper.getStoreJoinBrands(searchKey, orderColumn, orderType);
     }

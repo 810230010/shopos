@@ -48,7 +48,7 @@
     $(document).ready(function () {
         var t = $('#brandTable').DataTable({
             "ajax": {
-                'url': '/admin/brand/search',
+                'url': '/admin/brand/searchValidatedBrands',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;

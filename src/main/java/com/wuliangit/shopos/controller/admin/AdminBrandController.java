@@ -61,7 +61,7 @@ public class AdminBrandController {
     }
 
     /**
-     * 添加品牌
+     * 管理员添加品牌
      * @param brand
      * @return
      */
@@ -75,7 +75,7 @@ public class AdminBrandController {
     }
 
     /**
-     * 查询品牌列表
+     * 根据条件查询所有审核通过的品牌(管理员)
      * @param draw
      * @param searchKey
      * @param orderColumn
@@ -84,7 +84,7 @@ public class AdminBrandController {
      * @param pageSize
      * @return
      */
-    @RequestMapping("/search")
+    @RequestMapping("/searchValidatedBrands")
     @ResponseBody
     public Object search(@RequestParam("draw") int draw,
                          @RequestParam(value = "searchKey", required = false) String searchKey,
@@ -93,12 +93,12 @@ public class AdminBrandController {
                          @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                          @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        ArrayList<Brand> brands = brandService.search(page, pageSize, searchKey, orderColumn, orderType);
+        ArrayList<Brand> brands = brandService.adminSearchValidatedBrands(page, pageSize, searchKey, orderColumn, orderType);
         return new PageResult<Brand>(brands, draw);
     }
 
     /**
-     * 修改品牌
+     * 管理员修改品牌
      * @param brand
      * @return
      */
@@ -111,12 +111,12 @@ public class AdminBrandController {
         } else {
             brand.setPic(null);
         }
-        brandService.updateBrand(brand);
+        brandService.adminUpdateBrand(brand);
         return result;
     }
 
     /**
-     * 验证品牌名是否存在
+     * 验证品牌名是否存在(管理员)
      * @param brandName
      * @return
      */
@@ -133,7 +133,7 @@ public class AdminBrandController {
     }
 
     /**
-     * 删除品牌
+     * 管理员删除品牌
      * @param brandId
      * @return
      */
@@ -141,12 +141,12 @@ public class AdminBrandController {
     @ResponseBody
     public Object deleteBrand(Integer brandId) {
         RestResult result = new RestResult();
-        brandService.deleteBrandByID(brandId);
+        brandService.adminDeleteBrandByID(brandId);
         return result;
     }
 
     /**
-     * 跳转到validate_brand.vm
+     * 跳转到管理员审核品牌页面
      * @return
      */
     @RequestMapping("/validateBrandPage")
@@ -155,7 +155,7 @@ public class AdminBrandController {
     }
 
     /**
-     * 跳转到validate_store_brand.vm
+     * 跳转到管理员审核店铺品牌页面
      * @return
      */
     @RequestMapping("/validateStoreBrandPage")
@@ -164,7 +164,7 @@ public class AdminBrandController {
     }
 
     /**
-     * 查询品牌列表
+     * 根据条件查询所有店铺申请新加的品牌(管理员)
      * @param draw
      * @param searchKey
      * @param orderColumn
@@ -173,7 +173,7 @@ public class AdminBrandController {
      * @param pageSize
      * @return
      */
-    @RequestMapping("/searchBrands")
+    @RequestMapping("/searchNewAddBrands")
     @ResponseBody
     public Object searchBrands(@RequestParam("draw") int draw,
                          @RequestParam(value = "searchKey", required = false) String searchKey,
@@ -182,36 +182,38 @@ public class AdminBrandController {
                          @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                          @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        ArrayList<StoreAddBrand> brands = brandService.searchBrands(page, pageSize, searchKey, orderColumn, orderType);
+        ArrayList<StoreAddBrand> brands = brandService.adminSearchNewAddBrands(page, pageSize, searchKey, orderColumn, orderType);
         return new PageResult<StoreAddBrand>(brands, draw);
     }
 
     /**
-     * 更改店铺申请品牌的申请状态
+     * 管理员更改店铺申请品牌的申请状态
      * @return
      */
     @RequestMapping("/updateStatus")
     @ResponseBody
-    public String updateBrandStatus(Integer brandId, String status){
-        brandService.updateAddBrandStatus(brandId, status);
-        return "ok";
+    public Object updateBrandStatus(Integer brandId, String status){
+        RestResult result = new RestResult();
+        brandService.adminUpdateAddBrandStatus(brandId, status);
+        return result;
     }
 
     /**
-     * 更改店铺入驻品牌状态
+     * 管理员更改店铺入驻品牌状态
      * @param id
      * @param status
      * @return
      */
     @RequestMapping("/updateStoreJoinBrandStatus")
     @ResponseBody
-    public String updateStoreJoinBrandStatus(Integer id, String status){
-        brandService.updateStoreJoinBrand(id, status);
-        return "ok";
+    public Object updateStoreJoinBrandStatus(Integer id, String status){
+        RestResult result = new RestResult();
+        brandService.adminUpdateStoreJoinBrand(id, status);
+        return result;
     }
 
     /**
-     * 查询店铺申请入驻品牌列表
+     * 查询店铺申请入驻品牌列表(管理员)
      * @param draw
      * @param searchKey
      * @param orderColumn
@@ -229,7 +231,7 @@ public class AdminBrandController {
                                @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        ArrayList<StoreAddBrand> brands = brandService.getStoreJoinBrands(page, pageSize, searchKey, orderColumn, orderType);
+        ArrayList<StoreAddBrand> brands = brandService.adminGetStoreJoinBrands(page, pageSize, searchKey, orderColumn, orderType);
         return new PageResult<StoreAddBrand>(brands, draw);
     }
 }

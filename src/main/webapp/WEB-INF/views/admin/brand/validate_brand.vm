@@ -41,7 +41,7 @@
     $(document).ready(function () {
         var t = $('#brandTable').DataTable({
             "ajax": {
-                'url': '/admin/brand/searchBrands',
+                'url': '/admin/brand/searchNewAddBrands',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -152,7 +152,7 @@
                             type: "get",
                             data: {"brandId": data.brandId, "status":"NOTPASS"},
                             success:function(result) {
-                                if(result == "ok"){
+                                if(result.code == 200){
                                     swal("拒绝申请", "已拒绝该店铺的添加品牌申请", "success");
                                     setTimeout(function () {
                                         window.location.href = "/admin/brand/validateBrandPage";
@@ -176,7 +176,7 @@
                     type: "get",
                     data: {"brandId": data.brandId, "status":"PASS"},
                     success:function(result) {
-                        if (result == "ok") {
+                        if (result.code == 200) {
                             swal("通过申请", "已通过该店铺的添加品牌申请", "success");
                             setTimeout(function () {
                                 window.location.href = "/admin/brand/brandListPage";

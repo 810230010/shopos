@@ -32,39 +32,9 @@
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
-                        <div class="form-group"><label class="col-sm-2 control-label">商品价格</label>
-                            <div class="col-sm-8">
-                                <span class="form-control">
-                                    #if($goods.price)
-                                    $goods.price
-                                    #end
-                                </span>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group"><label class="col-sm-2 control-label">商品规格</label>
-                            <div class="col-sm-8">
-                                <span class="form-control">
-                                    #if($goods.unit)
-                                    $goods.unit
-                                    #end
-                                </span>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
                         <div class="form-group" id="store-logo-div"><label class="col-sm-2 control-label">商品广告:</label>
                             <div class="col-sm-4">
                                 <input id="store-logo" class="file" name="file" type="file" multiple>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group"><label class="col-lg-2 control-label">商品介绍</label>
-                            <div class="col-sm-8">
-                                <span class="form-control">
-                                    #if($goods.adWord)
-                                    $goods.adWord
-                                    #end
-                                </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -134,7 +104,7 @@
             var logo_dom = $("#store-logo-div .kv-zoom-cache .kv-file-content img");
             var logo_img = logo_dom.attr("src");
 
-            $.post("/store/goods/updateGoodsAd",
+            $.post("/store/goodsAd/updateGoodsAd",
                     {
                         goodsId: $goods.goodsId,
                         img: logo_img
@@ -149,7 +119,7 @@
                         timer: 2000,
                     });
                     setTimeout(function () {
-                        window.location.href = "/store/setting/updateAdPage?goodsId="+ $goods.goodsId +"";
+                        window.location.href = "/store/setting/showAdPage";
                     }, 2000);
                 }
             }

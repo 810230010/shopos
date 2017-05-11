@@ -103,11 +103,6 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<StoreGoodsDetailDTO> getStoreGoods(Integer storeId) {
-        return goodsMapper.getStoreGoods(storeId);
-    }
-
-    @Override
     public StoreGoodsDetailDTO getSimplGoodsInfo(Integer goodsId) {
         return goodsMapper.getSimplGoodsInfo(goodsId);
     }

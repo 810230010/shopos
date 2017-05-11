@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/store/goods")
-public class AdminStoreGoodsAdController {
+public class StoreGoodsAdController {
 
     @Autowired
     private StoreGoodsAdService storeGoodsAdService;
@@ -51,7 +51,7 @@ public class AdminStoreGoodsAdController {
     @ResponseBody
     public Object getStoreGoods(){
         RestResult result = new RestResult();
-        StoreUser storeUser = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute("SESSION_CURRENT_STORE");
+        StoreUser storeUser = WebUtil.getCurrentStore();
         Integer storeId = storeUser.getStoreId();
         List<StoreGoodsDetailDTO> info = goodsService.getStoreGoods(storeId);
         List<StoreGoodsDetailDTO> fina = new ArrayList<StoreGoodsDetailDTO>();
@@ -74,7 +74,7 @@ public class AdminStoreGoodsAdController {
     @ResponseBody
     public Object insertGoodsAd(StoreGoodsAd storeGoodsAd) throws Exception{
         RestResult result = new RestResult();
-        StoreUser storeUser = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute("SESSION_CURRENT_STORE");
+        StoreUser storeUser = WebUtil.getCurrentStore();
         Integer info = storeGoodsAdService.insertGoodsAd(storeGoodsAd);
         return result;
     }
@@ -88,7 +88,7 @@ public class AdminStoreGoodsAdController {
     @ResponseBody
     public Object verifyImg(Integer goodsId){
         RestResult result = new RestResult();
-        StoreUser storeUser = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute("SESSION_CURRENT_STORE");
+        StoreUser storeUser = WebUtil.getCurrentStore();
         String info = storeGoodsAdService.getGoodsAdImg(goodsId,storeUser.getStoreId());
         result.put("data",info);
         return result;

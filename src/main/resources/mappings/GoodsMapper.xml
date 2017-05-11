@@ -49,7 +49,7 @@
     <select id="StoreSearch" resultType="com.wuliangit.shopos.entity.Goods">
         select * from t_goods
         <where>
-            sotre_id = #{storeId}
+            store_id = #{storeId}
             <if test="searchKey != null and searchKey != '' ">
                 and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
                 or ad_word like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')

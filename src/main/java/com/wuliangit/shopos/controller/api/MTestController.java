@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Created by nilme on 2017/3/21.
  */
@@ -31,6 +33,14 @@ public class MTestController {
 
     @RequestMapping("/p")
     public Object api2(OrderGoodsInfo orderGoodsNum1, Integer storeId) {
+        RestResult result = new RestResult();
+
+
+        return result;
+    }
+
+    @RequestMapping("/p2")
+    public Object api3(@RequestParam("orderIds[]") List<Integer> orderIds) {
         RestResult result = new RestResult();
 
 

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
@@ -38,7 +39,10 @@ public class MOrderController {
      */
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
-    public Object createOrder(String orderGoodsInfoList, Integer addressId, String orderFrom, String orderMessage) throws OrderException {
+    public Object createOrder(@RequestParam(required = true) String orderGoodsInfoList,
+                              @RequestParam(required = true) Integer addressId,
+                              @RequestParam(required = true) String orderFrom,
+                              @RequestParam(required = true) String orderMessage) throws OrderException {
         RestResult result = new RestResult();
 
         Gson gson = new Gson();

@@ -103,6 +103,7 @@ public class MPayController {
     @RequestMapping("/alipay/notify")
     public void alipayNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, IOException {
         //获取支付宝POST过来反馈信息
+        logger.debug("支付宝异步通知");
         Map<String,String> params = new HashMap<String,String>();
 
         Map requestParams = request.getParameterMap();

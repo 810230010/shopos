@@ -241,6 +241,9 @@
                 <!--测试-->
                 /test/** = anon
 
+                <!--支付异步通知-->
+                /api/v1/pay/alipay/notify = anon
+
                 <!--接口api-->
                 /api/v1/member/login = anon
                 /api/v1/member/logout = anon
@@ -249,6 +252,7 @@
                 /api/v1/member/register = anon
                 /api/v1/public/** = apiPublic
                 /api/** = api
+
 
                 <!--总后台用户-->
                 /admin/login = authc

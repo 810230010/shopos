@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.ApiCartDTO;
 import com.wuliangit.shopos.entity.Cart;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public interface CartService {
      * @param pageSize
      * @return
      */
-    ArrayList<Cart> getCartList(Integer page, Integer pageSize);
+    ArrayList<ApiCartDTO> getCartList(Integer page, Integer pageSize);
 
     /**
      * 购物车移除商品

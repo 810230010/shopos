@@ -35,6 +35,7 @@ import java.util.*;
 @RequestMapping(value = "/api/v1/pay")
 public class MPayController {
     private static Log logger = LogFactory.getLog(MPayController.class);
+
     private String notifyUrl = "http://shopos.wuliangit.com/api/v1/pay/alipay/notify";
 
     @Autowired
@@ -75,15 +76,6 @@ public class MPayController {
         model.setTimeoutExpress("30m");
         model.setTotalAmount(totalAmount.toString());
         model.setProductCode(AliPay.PRODUCTCODE);
-
-
-//        model.setBody("mybody");
-//        model.setGoodsType("mygoodstype");
-//        model.setPassbackParams("myPassbackParams");
-//        model.setPromoParams("myPromoParams");
-//        model.setSellerId("mySellerId");
-//        model.setStoreId("myStoreId");
-
 
         request.setBizModel(model);
         request.setNotifyUrl(notifyUrl);
@@ -131,6 +123,16 @@ public class MPayController {
 
         //验证通过，处理业务逻辑
         if (flag){
+             String tradeStatus = params.get("trade_status");
+             if (tradeStatus != null&&tradeStatus.endsWith("TRADE_SUCCESS")){
+                 String tradeNo = params.get("trade_no");
+                 String outTradeNo = params.get("out_trade_no");
+
+//                 orderService.get
+
+
+             }
+
 
         }
 

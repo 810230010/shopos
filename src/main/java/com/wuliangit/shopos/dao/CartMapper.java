@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.ApiCartDTO;
 import com.wuliangit.shopos.entity.Cart;
 
 import java.util.ArrayList;
@@ -11,5 +12,5 @@ public interface CartMapper extends BaseMapper<Cart, Integer> {
      * @param memberId
      * @return
      */
-    ArrayList<Cart> getCartList(Integer memberId);
+    ArrayList<ApiCartDTO> getCartList(Integer memberId);
 }

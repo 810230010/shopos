@@ -3,7 +3,7 @@
 <mapper namespace="com.wuliangit.shopos.dao.CartMapper" >
 
   <!--购物车商品列表-->
-  <select id="getCartList" resultType="com.wuliangit.shopos.entity.Cart">
+  <select id="getCartList" resultType="com.wuliangit.shopos.dto.ApiCartDTO">
     select
     <include refid="Base_Column_List" />
     from t_cart

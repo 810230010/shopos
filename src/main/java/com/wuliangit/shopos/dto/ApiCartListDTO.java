@@ -11,8 +11,16 @@ public class ApiCartListDTO {
 
     private String storeName;
     private Integer storeId;
+    private boolean checked;
+    private List<ApiCartDTO> carts;
 
-    private List<Cart> carts;
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 
     public Integer getStoreId() {
         return storeId;
@@ -30,11 +38,11 @@ public class ApiCartListDTO {
         this.storeName = storeName;
     }
 
-    public List<Cart> getCarts() {
+    public List<ApiCartDTO> getCarts() {
         return carts;
     }
 
-    public void setCarts(List<Cart> carts) {
+    public void setCarts(List<ApiCartDTO> carts) {
         this.carts = carts;
     }
 }

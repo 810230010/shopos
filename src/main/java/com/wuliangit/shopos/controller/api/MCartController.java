@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.dto.ApiCartDTO;
 import com.wuliangit.shopos.dto.ApiCartListDTO;
 import com.wuliangit.shopos.entity.Cart;
 import com.wuliangit.shopos.service.CartService;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 购物车相关
  * Created by nilme on 2017/3/29.
  */
 
@@ -22,7 +24,6 @@ public class MCartController {
 
     @Autowired
     private CartService cartService;
-
 
     /**
      * 购物车商品列表
@@ -35,11 +36,11 @@ public class MCartController {
     public Object getCartList(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                               @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize) {
         RestResult result = new RestResult();
-        ArrayList<Cart> carts = cartService.getCartList(page, pageSize);
+        ArrayList<ApiCartDTO> carts = cartService.getCartList(page, pageSize);
 
         List<ApiCartListDTO> apiCartListDTOS = new ArrayList<>();
 
-        for (Cart cart : carts) {
+        for (ApiCartDTO cart : carts) {
             Integer storeId = cart.getStoreId();
             ApiCartListDTO sotore = null;
             for (ApiCartListDTO apiCartListDTO : apiCartListDTOS) {
@@ -52,7 +53,7 @@ public class MCartController {
                 sotore = new ApiCartListDTO();
                 sotore.setStoreId(storeId);
                 sotore.setStoreName(cart.getStoreName());
-                List<Cart> newCarts = new ArrayList<>();
+                List<ApiCartDTO> newCarts = new ArrayList<>();
                 newCarts.add(cart);
                 sotore.setCarts(newCarts);
                 apiCartListDTOS.add(sotore);

@@ -55,15 +55,17 @@ public class MOrderController {
 
         //设置订单价格
         //商品总价
-        BigDecimal goodsAmount = new BigDecimal(0);
+        BigDecimal goodsAmount = new BigDecimal("0");
+        BigDecimal orderAmount = new BigDecimal("0");
         //邮费总价
-        BigDecimal carriage = new BigDecimal(0);
+        BigDecimal carriageAmount = new BigDecimal("0");
         String carriageInfo = "";
 
         int flag = 0;
         for (Order order : orders) {
-            carriage.add(order.getCarriage());
-            goodsAmount.add(order.getGoodsAmount());
+            carriageAmount = carriageAmount.add(order.getCarriage());
+            goodsAmount = goodsAmount.add(order.getGoodsAmount());
+            orderAmount = orderAmount.add(order.getOrderAmount());
             if (flag == 0) {
                 carriageInfo += order.getCarriage().toString();
                 flag = 1;
@@ -74,8 +76,8 @@ public class MOrderController {
         }
 
         result.add("goodsAmount", goodsAmount);
-        result.add("carriageAmount", carriage);
-        result.add("orderAmount", goodsAmount.add(carriage));
+        result.add("carriageAmount", carriageAmount);
+        result.add("orderAmount", orderAmount);
         result.add("carriageInfo", carriageInfo);
         result.add("orderIds", orderIds);
 

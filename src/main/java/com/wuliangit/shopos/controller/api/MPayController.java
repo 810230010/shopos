@@ -50,21 +50,21 @@ public class MPayController {
 
         //合并的订单id
         String outTradeNoMerge = UUID.randomUUID().toString().replaceAll("-", "");
-
+        AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
         BigDecimal totalAmount = new BigDecimal(0);
 
         for (Integer orderId : orderIds) {
             Order order = orderService.getOrderById(orderId);
             totalAmount = totalAmount.add(order.getOrderAmount());
+            model.setOutTradeNo(order.getOutTradeNo());
             if (orderIds.size() > 1) {
                 order.setOutTradeNoMerge(outTradeNoMerge);
                 int res = orderService.updateOrder(order);
             }
         }
 
-
         //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
-        AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
+
         if (orderIds.size() > 1) {
             model.setOutTradeNo(outTradeNoMerge);
             model.setBody("合并订单");
@@ -90,7 +90,7 @@ public class MPayController {
         try {
             AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
             result.add("payInfo", response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
-            System.out.println(response.getBody());
+            logger.debug("payInfo----->"+ response.getBody());
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }

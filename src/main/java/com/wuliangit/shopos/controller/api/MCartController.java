@@ -55,10 +55,10 @@ public class MCartController {
                 sotore.setStoreName(cart.getStoreName());
                 List<ApiCartDTO> newCarts = new ArrayList<>();
                 newCarts.add(cart);
-                sotore.setCarts(newCarts);
+                sotore.setData(newCarts);
                 apiCartListDTOS.add(sotore);
             }else{
-                sotore.getCarts().add(cart);
+                sotore.getData().add(cart);
             }
         }
 

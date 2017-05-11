@@ -4,6 +4,7 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.AlipayConstants;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
+import com.alipay.api.domain.ExtendParams;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
@@ -69,6 +70,7 @@ public class MPayController {
         if (orderIds.size() > 1) {
             model.setOutTradeNo(outTradeNoMerge);
             model.setBody("合并订单");
+            model.setPassbackParams("myPassbackParams");
         } else {
             model.setBody("商品订单");
         }
@@ -76,6 +78,8 @@ public class MPayController {
         model.setTimeoutExpress("30m");
         model.setTotalAmount(totalAmount.toString());
         model.setProductCode(AliPay.PRODUCTCODE);
+
+        model.setPassbackParams("xxxxxx");
 
         request.setBizModel(model);
         request.setNotifyUrl(notifyUrl);
@@ -127,10 +131,7 @@ public class MPayController {
              if (tradeStatus != null&&tradeStatus.endsWith("TRADE_SUCCESS")){
                  String tradeNo = params.get("trade_no");
                  String outTradeNo = params.get("out_trade_no");
-
 //                 orderService.get
-
-
              }
 
 

@@ -65,13 +65,13 @@ public class StoreSettingController {
     }
 
     /**
-     * 获取商品广告设置的展示界面
+     * 获取商品广告设置列表页面
      * @param model
      * @return
      */
     @RequestMapping("/showAdPage")
     public String showAdPage(Model model){
-       return "/store/setting/showadpage";
+       return "/store/storeGoodsAd/adlist";
     }
 
     /**
@@ -81,16 +81,12 @@ public class StoreSettingController {
      * @return
      */
     @RequestMapping("/updateAdPage")
-    public String updateAdPage(Model model,Integer goodsId){
-        StoreUser storeUser = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute("SESSION_CURRENT_STORE");
-        StoreGoodsDetailDTO result = goodsService.getSimplGoodsInfo(goodsId);
-        String img = "";
-        img = goodsAdService.getGoodsAdImg(goodsId,storeUser.getStoreId());
-        result.setImg(img);
+    public String updateAdPage(Model model,Integer goodsId, String name, String img){
+        StoreGoodsDetailDTO result = new StoreGoodsDetailDTO(goodsId,name,img);
         model.addAttribute("goods",result);
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("domain",QiNiuUtils.BASE_URL);
-        return "/store/setting/updateadpage";
+        return "/store/storeGoodsAd/updateadpage";
     }
 
     /**
@@ -102,7 +98,7 @@ public class StoreSettingController {
     public String addadpage(Model model){
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("domain",QiNiuUtils.BASE_URL);
-        return "/store/setting/addadpage";
+        return "/store/storeGoodsAd/addadpage";
     }
 
 }

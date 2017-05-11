@@ -9,10 +9,32 @@
     WHERE goods_id = #{goodsId} and store_id = #{storeId}
   </select>
   <!--更新商品广告-->
-  <update id="updateStoreGoodsAd">
+  <update id="updateGoodsAd" parameterType="com.wuliangit.shopos.entity.StoreGoodsAd">
     UPDATE t_store_goods_ad
     SET img = #{img}
     WHERE goods_id = #{goodsId} and store_id = #{storeId}
   </update>
+  <!--获取已有广告的商品信息-->
+  <select id="getStoreGoodsWithAd" resultType="com.wuliangit.shopos.dto.StoreGoodsDetailDTO">
+    SELECT g.goods_id,g.name,a.img
+    FROM t_goods g, t_store_goods_ad a
+    <where>
+      g.store_id = #{storeId} and g.goods_id = a.goods_id
+      <if test="searchKey != null and searchKey != '' ">
+        and ( g.name like '%${searchKey}%')
+      </if>
+    </where>
+    order by
+    <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+      ${orderColumn} ${orderType},
+    </if>
+    g.create_time desc
+  </select>
+  <!--获取没有广告的商品信息-->
+  <select id="getStoreGoodsWithoutAd" resultType="com.wuliangit.shopos.dto.StoreGoodsDetailDTO">
+    SELECT goods_id,name
+    FROM t_goods
+    WHERE store_id = #{storeId} and goods_id not in (SELECT goods_id from t_store_goods_ad)
+  </select>
 
 </mapper>

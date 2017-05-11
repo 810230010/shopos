@@ -1,7 +1,5 @@
 package com.wuliangit.shopos.service;
 
-import com.alipay.api.domain.AlipayTradeAppPayModel;
-import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.OrderGoodsInfo;
@@ -38,4 +36,18 @@ public interface OrderService {
      * @return
      */
     int updateOrder(Order order);
+
+    /**
+     * 获取合并的订单
+     * @param outTradeNo
+     * @return
+     */
+    List<Order> getOrderByOutTradeNoMerge(String outTradeNo);
+
+    /**
+     * 获取当个订单
+     * @param outTradeNo
+     * @return
+     */
+    Order getOrderByOutTradeNo(String outTradeNo);
 }

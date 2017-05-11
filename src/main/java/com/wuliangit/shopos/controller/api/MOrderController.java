@@ -1,14 +1,6 @@
 package com.wuliangit.shopos.controller.api;
 
-import com.alipay.api.AlipayApiException;
-import com.alipay.api.AlipayClient;
-import com.alipay.api.AlipayConstants;
-import com.alipay.api.domain.AlipayTradeWapPayModel;
-import com.alipay.api.internal.util.AlipaySignature;
-import com.alipay.api.request.AlipayTradeWapPayRequest;
-import com.alipay.api.response.AlipayTradeWapPayResponse;
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OrderException;
@@ -18,10 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.*;
 

@@ -77,12 +77,12 @@ public class MPayController {
         model.setProductCode(AliPay.PRODUCTCODE);
 
 
-        model.setBody("mybody");
-        model.setGoodsType("mygoodstype");
-        model.setPassbackParams("myPassbackParams");
-        model.setPromoParams("myPromoParams");
-        model.setSellerId("mySellerId");
-        model.setStoreId("myStoreId");
+//        model.setBody("mybody");
+//        model.setGoodsType("mygoodstype");
+//        model.setPassbackParams("myPassbackParams");
+//        model.setPromoParams("myPromoParams");
+//        model.setSellerId("mySellerId");
+//        model.setStoreId("myStoreId");
 
 
         request.setBizModel(model);

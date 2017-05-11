@@ -35,7 +35,7 @@ import java.util.*;
 @RequestMapping(value = "/api/v1/pay")
 public class MPayController {
     private static Log logger = LogFactory.getLog(MPayController.class);
-    private String notifyUrl = "http://shop.wuliangit.com/api/v1/pay/alipay/notify";
+    private String notifyUrl = "http://shopos.wuliangit.com/api/v1/pay/alipay/notify";
 
     @Autowired
     private OrderService orderService;

@@ -19,16 +19,16 @@
                     <h5>添加商品品牌</small></h5>
                 </div>
                 <div class="ibox-content">
-                    <form class="form-horizontal">
+                    <form id="brandForm" class="form-horizontal">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">品牌名称</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" class="form-control" onblur="check(this.value)"><label id="msg"></label>
+                                <input id="name" name="name" type="text" class="form-control" onblur="check(this.value)">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">分类</label>
+                            <label for class="col-sm-3 control-label">分类</label>
                             <div class="col-sm-2">
                                    一级分类:<select id="category1" name="category1" class="category1_select form-control">
                                    </select>
@@ -40,13 +40,16 @@
                             <div class="col-sm-2">
                                 三级分类:<select id="category3" name="category3" class="category3_select form-control">
                                 </select>
+                                <label id="msg2"></label>
                             </div>
+
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">品牌ＬＯＧＯ</label>
                             <div class="col-sm-3" id="brand-logo-div">
                                 <input id="upload-image" class="file" name="file" type="file" multiple>
+                                <label id="msg3"></label>
                             </div>
                         </div>
 
@@ -56,6 +59,7 @@
                             <label class="col-sm-3 control-label">首字母</label>
                             <div class="col-sm-7">
                                 <input id="initial" name="initial" type="text" class="form-control">
+                                <label id="msg4"></label>
                             </div>
                         </div>
 
@@ -89,6 +93,7 @@
      function check(brandName) {
          var flag = false;
          if (brandName == "" || brandName == null){
+             $("#msg").html("<font color='red'>品牌名不得为空!</font>");
              return flag;
          }
          $.ajax({
@@ -145,7 +150,7 @@
      var category1par = 0;
      var category2par = "";
      var category3par = "";
-
+     var select1Text;
     $(".category1_select").select2({
         minimumResultsForSearch: -1,
         minimumInputLength: 0,
@@ -297,7 +302,18 @@
      })
 
     $("#submit").on('click', function () {
-        if(check($("#name").val()) == true){
+        if($("#name").val() == null || $("#name").val() == ''){
+            $("#msg").html("<font color='red'>品牌名不得为空!</font>");
+        }
+        else if($(".category3_select").val() == null) {
+            $("#msg2").html("<font color='red'>至少选择一个三级分类!</font>");
+        }else if(logo_img == undefined) {
+            $("#msg3").html("<font color='red'>品牌图片不得为空!</font>");
+        }else if($("#initial").val().length > 1 || $("#initial").val().length > 1){
+            $("#msg4").html("<font color='red'>首字母长度只能为1且英文字母</font>");
+            return;
+        }
+        else{
             //////////////图片//////////////
             var logo_dom = $("#brand-logo-div .kv-zoom-cache .kv-file-content img");
             var logo_img = logo_dom.attr("src");
@@ -323,11 +339,10 @@
                             }, 2000);
                         }
                     });
-        }else{
-            sweetAlert("Oops...", "请先解决错误再提交", "error");
         }
 
     });
-   
+
+
 </script>
 #parse("/store/models/end.vm")

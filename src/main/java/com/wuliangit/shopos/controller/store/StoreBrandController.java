@@ -101,7 +101,7 @@ public class StoreBrandController {
      */
     @RequestMapping("/joinPage")
     public String jumpToDetailPage(Model model) {
-        return "/store/brand/joinBrand";
+        return "store/brand/join_brand";
     }
 
     /**

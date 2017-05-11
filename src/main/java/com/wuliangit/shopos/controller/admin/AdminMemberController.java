@@ -111,13 +111,14 @@ public class AdminMemberController {
      */
     @RequestMapping("/updateAdviceStatus")
     @ResponseBody
-    public String updateAdviceScanStatus(Integer adviceId, String type) {
+    public Object updateAdviceScanStatus(Integer adviceId, String type) {
+        RestResult result = new RestResult();
         if ("0".equals(type)) {
             memberService.updateAdviceLookStatus(adviceId);
         } else {
             memberService.deleteAdvice(adviceId);
         }
-        return "ok";
+        return result;
     }
 
      /** 更改会员状态

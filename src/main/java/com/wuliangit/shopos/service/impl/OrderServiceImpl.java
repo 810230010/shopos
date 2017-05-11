@@ -1,22 +1,21 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.alipay.api.domain.AlipayTradeAppPayModel;
+import com.wuliangit.shopos.common.POJOConstants;
+import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.*;
-import com.wuliangit.shopos.entity.GoodsSku;
-import com.wuliangit.shopos.entity.Member;
-import com.wuliangit.shopos.entity.Order;
-import com.wuliangit.shopos.entity.OrderGoods;
+import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
+import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OrderException;
-import com.wuliangit.shopos.model.GoodsWithoutBody;
-import com.wuliangit.shopos.model.OrderInfo;
+import com.wuliangit.shopos.model.*;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by nilme on 2017/5/5.
@@ -28,69 +27,137 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
-    private OrderCommonMapper orderCommonMapper;
-    @Autowired
     private OrderGoodsMapper orderGoodsMapper;
-
     @Autowired
     private GoodsSkuMapper goodsSkuMapper;
     @Autowired
     private GoodsMapper goodsMapper;
+    @Autowired
+    private StoreMapper storeMapper;
+    @Autowired
+    private AddressMapper addressMapper;
 
 
     @Override
     @Transactional
-    public Order createOrder(OrderInfo[] orderInfos, Integer addressId, String orderFrom, BigDecimal goodsAmount) throws OrderException {
-
+    public List<Order> ApiCreateOrder(ApiOrderCreateDTO orderInfo) throws OrderException {
+        //当前用户
         Member member = WebUtil.getCurrentMember();
+        //邮寄地址
+        Address address = addressMapper.selectByPrimaryKey(orderInfo.getAddressId());
+        //临时存放商品信息
+        Map<Integer, List<OrderGoods>> orderCreateTemp = new HashMap<>();
+        //返回订单列表
+        List<Order> orders = new ArrayList<>();
 
-        BigDecimal trueGoodsAmount = new BigDecimal(0);
-
-        Order order = new Order();
-
-//        order.set
-//        order.set
-//        order.set
-//        order.set
-//        order.set
-//        order.set
-//        order.set
-//        order.set
-//        order.set
-//        order.set
-
-        ArrayList<OrderGoods> orderGoodses = new ArrayList<OrderGoods>();
-
-        for (OrderInfo orderInfo : orderInfos) {
-            GoodsSku goodsSku = goodsSkuMapper.selectByPrimaryKey(orderInfo.getGoodsSkuId());
+        //合成预处理数据
+        List<OrderGoodsInfo> orderGoodsNumList = orderInfo.getOrderGoodsInfoList();
+        for (OrderGoodsInfo orderGoodsInfo : orderGoodsNumList) {
+            GoodsSku goodsSku = goodsSkuMapper.selectByPrimaryKey(orderGoodsInfo.getGoodsSkuId());
 
             //检查商品库存
             if (goodsSku.getSkuStock() < 1) {
                 throw new OrderException("商品已经售空");
             }
             //检查商品数量是否充足
-            if (goodsSku.getSkuStock() < orderInfo.getGoodsNum()) {
+            if (goodsSku.getSkuStock() < orderGoodsInfo.getGoodsNum()) {
                 throw new OrderException("商品数量不足,缺货");
             }
+
             GoodsWithoutBody goodsWithoutBody = goodsMapper.selectGoodsWithoutBodyByPrimaryKey(goodsSku.getGoodsId());
 
             OrderGoods orderGoods = new OrderGoods();
-
             orderGoods.setGoodsId(goodsWithoutBody.getGoodsId());
-            orderGoods.setCommission(goodsWithoutBody.getCommission());
-            orderGoods.setGoodsImage(goodsWithoutBody.getTitleImg());
-            orderGoods.setGoodsName(goodsWithoutBody.getName());
-            orderGoods.setGoodsNum(orderInfo.getGoodsNum());
-            orderGoods.setGoodsPayPrice(goodsSku.getSkuPrice());
-            orderGoods.setGoodsType(goodsWithoutBody.getType());
             orderGoods.setMemberId(member.getMemberId());
-            orderGoods.setStoreId(goodsWithoutBody.getStoreId());
-            orderGoods.setSkuName(goodsSku.getSkuValue());
             orderGoods.setGoodsSkuId(goodsSku.getGoodsSkuId());
+            orderGoods.setSkuName(goodsSku.getSkuValue());
+            orderGoods.setStoreId(goodsWithoutBody.getStoreId());
+            orderGoods.setGoodsImage(goodsWithoutBody.getTitleImg());
+            orderGoods.setGoodsType(goodsWithoutBody.getType());
+            orderGoods.setGoodsName(goodsWithoutBody.getName());
+            orderGoods.setGoodsNum(orderGoodsInfo.getGoodsNum());
+            orderGoods.setCommission(goodsWithoutBody.getCommission());
+            orderGoods.setGoodsPayPrice(goodsSku.getSkuPrice());
+            orderGoods.setCarriage(goodsWithoutBody.getCarriage());
 
-            trueGoodsAmount  = trueGoodsAmount.add(goodsSku.getSkuPrice());
+            List<OrderGoods> goodsGoodsSkuMap = orderCreateTemp.get(goodsWithoutBody.getStoreId());
+
+            if (goodsGoodsSkuMap == null) {
+                List<OrderGoods> orderGoodses = new ArrayList<>();
+                orderGoodses.add(orderGoods);
+                orderCreateTemp.put(goodsWithoutBody.getStoreId(), orderGoodses);
+            } else {
+                goodsGoodsSkuMap.add(orderGoods);
+            }
+
+            goodsSku.setSkuStock(goodsSku.getSkuStock()-orderGoodsInfo.getGoodsNum());
+            goodsSkuMapper.updateByPrimaryKeySelective(goodsSku);
         }
 
-        return order;
+        //生成订单
+        for (Integer integer : orderCreateTemp.keySet()) {
+            List<OrderGoods> orderGoodses = orderCreateTemp.get(integer);
+            StoreMin storeMin = storeMapper.getStoreMinByStoreId(integer);
+
+            Order order = new Order();
+            order.setStoreId(integer);
+            order.setMemberId(member.getMemberId());
+            order.setMemberEmail(member.getEmail());
+            order.setMemberName(member.getNikename());
+            order.setCreateTime(new Date());
+            order.setDeleteState(POJOConstants.ORDER_DELETE_STATE_NO);
+            order.setMemberEvaluationState(POJOConstants.ORDER_EVALUATION_STATE_NO);
+            order.setSellerEvaluationState(POJOConstants.ORDER_EVALUATION_STATE_NO);
+            order.setIsLock(false);
+            order.setOrderFrom(orderInfo.getOrderFrom());
+            order.setRefundState(POJOConstants.ORDER_REFUND_STATE_NO_REFUND);
+            order.setOrderState(POJOConstants.ORDER_STATE_INIT);
+            order.setStoreName(storeMin.getName());
+            order.setOrderMessage(orderInfo.getOrderMessage());
+            //设置订单id
+            order.setOutTradeNo(UUID.randomUUID().toString().replaceAll("-", ""));
+
+            //设置收件人信息
+            order.setReciverName(address.getReciverName());
+            order.setReciverAddress(address.getAddress());
+            order.setReciverPhone(address.getMobPhone());
+
+            //设置订单价格
+            //商品总价
+            BigDecimal goodsAmount = new BigDecimal(0);
+            //最贵邮费
+            BigDecimal carriage = new BigDecimal(0);
+            for (OrderGoods orderGoods : orderGoodses) {
+                //计算商品总价
+                goodsAmount = goodsAmount.add(orderGoods.getGoodsPayPrice().multiply(new BigDecimal(orderGoods.getGoodsNum())));
+                if (orderGoods.getCarriage().compareTo(carriage)>0){
+                    //取最大邮费
+                    carriage = orderGoods.getCarriage();
+                }
+            }
+            order.setGoodsAmount(goodsAmount);
+            order.setCarriage(carriage);
+            order.setOrderAmount(goodsAmount.add(carriage));
+
+            orderMapper.insertSelective(order);
+            orders.add(order);
+
+            for (OrderGoods orderGoods : orderGoodses) {
+                orderGoods.setOrderId(order.getOrderId());
+                orderGoodsMapper.insertSelective(orderGoods);
+            }
+        }
+
+        return orders;
+    }
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+        return orderMapper.selectByPrimaryKey(orderId);
+    }
+
+    @Override
+    public int updateOrder(Order order) {
+        return orderMapper.updateByPrimaryKeySelective(order);
     }
 }

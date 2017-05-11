@@ -8,7 +8,7 @@
                 <span class="m-r-sm text-muted welcome-message">欢迎管使用SHOPOS</span>
             </li>
             <li>
-                <a href="/admin/logout">
+                <a href="/admin/logout" style="color: red">
                     <i class="fa fa-sign-out">注销</i>
                 </a>
             </li>

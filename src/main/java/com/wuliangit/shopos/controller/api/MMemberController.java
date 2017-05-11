@@ -7,6 +7,7 @@ import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.dto.ApiMemberDTO;
 import com.wuliangit.shopos.dto.ApiMemberUpdateDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 
 /**
+ * 用户相关接口
  * Created by nilme on 2017/3/15.
  */
 
@@ -36,16 +38,12 @@ public class MMemberController {
 
     @Autowired
     private MemberService memberService;
-
     @Autowired
     private SMSService smsService;
-
     @Autowired
     private SpringCacheManager springCacheManager;
-
     @Autowired
     private Mapper mapper;
-
     @Autowired
     private TokenManager tokenManager;
 
@@ -63,7 +61,7 @@ public class MMemberController {
             SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.MEMBER, UserToken.LoginType.TOKEN));
             Member user = memberService.getByUsername(username);
             String token = tokenManager.createToken(user.getMemberId());
-            tokenManager.createTokenData(token,user);
+            tokenManager.createTokenData(token, user);
 
             restResult.add("token", token);
             restResult.add("userId", user.getMemberId());
@@ -196,7 +194,7 @@ public class MMemberController {
      * @return
      */
     @RequestMapping("/repass")
-    public Object repass(String newpass, String code,Integer userId) {
+    public Object repass(String newpass, String code, Integer userId) {
         RestResult result = new RestResult();
         Member member = WebUtil.getCurrentMember();
         Cache<Object, Object> cache = springCacheManager.getCache("sms-session");
@@ -242,7 +240,8 @@ public class MMemberController {
     public Object getUserInfo() {
         RestResult result = new RestResult();
         Member member = WebUtil.getCurrentMember();
-        result.put("memberInfo", member);
+        ApiMemberDTO memberDTO = mapper.map(member, ApiMemberDTO.class);
+        result.put("memberInfo", memberDTO);
         return result;
     }
 
@@ -269,7 +268,7 @@ public class MMemberController {
      * @return
      */
     @RequestMapping("authenticate")
-    public Object Authenticate(String truename, String idcardNum,Integer userId) {
+    public Object Authenticate(String truename, String idcardNum, Integer userId) {
         RestResult result = new RestResult();
 
         Member memberUpdate = WebUtil.getCurrentMember();

@@ -3,10 +3,10 @@ package com.wuliangit.shopos.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Order {
-    private Integer orderId;
-
+public class Order extends OrderKey {
     private String outTradeNo;
+
+    private String outTradeNoMerge;
 
     private String tradeNo;
 
@@ -32,9 +32,11 @@ public class Order {
 
     private BigDecimal pdAmount;
 
-    private BigDecimal shippingFee;
+    private BigDecimal carriage;
 
-    private String evaluationState;
+    private String memberEvaluationState;
+
+    private String sellerEvaluationState;
 
     private String orderState;
 
@@ -48,21 +50,25 @@ public class Order {
 
     private String orderFrom;
 
-    private String shippingCode;
+    private String carriageName;
 
     private Date createTime;
 
-    private Boolean delFlag;
+    private Date deliverTime;
 
-    private String orderName;
+    private String orderMessage;
 
-    public Integer getOrderId() {
-        return orderId;
-    }
+    private Long voucherPrice;
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
+    private String voucherCode;
+
+    private String reciverAddress;
+
+    private String reciverPhone;
+
+    private String reciverName;
+
+    private String invoiceInfo;
 
     public String getOutTradeNo() {
         return outTradeNo;
@@ -70,6 +76,14 @@ public class Order {
 
     public void setOutTradeNo(String outTradeNo) {
         this.outTradeNo = outTradeNo == null ? null : outTradeNo.trim();
+    }
+
+    public String getOutTradeNoMerge() {
+        return outTradeNoMerge;
+    }
+
+    public void setOutTradeNoMerge(String outTradeNoMerge) {
+        this.outTradeNoMerge = outTradeNoMerge == null ? null : outTradeNoMerge.trim();
     }
 
     public String getTradeNo() {
@@ -168,20 +182,28 @@ public class Order {
         this.pdAmount = pdAmount;
     }
 
-    public BigDecimal getShippingFee() {
-        return shippingFee;
+    public BigDecimal getCarriage() {
+        return carriage;
     }
 
-    public void setShippingFee(BigDecimal shippingFee) {
-        this.shippingFee = shippingFee;
+    public void setCarriage(BigDecimal carriage) {
+        this.carriage = carriage;
     }
 
-    public String getEvaluationState() {
-        return evaluationState;
+    public String getMemberEvaluationState() {
+        return memberEvaluationState;
     }
 
-    public void setEvaluationState(String evaluationState) {
-        this.evaluationState = evaluationState == null ? null : evaluationState.trim();
+    public void setMemberEvaluationState(String memberEvaluationState) {
+        this.memberEvaluationState = memberEvaluationState == null ? null : memberEvaluationState.trim();
+    }
+
+    public String getSellerEvaluationState() {
+        return sellerEvaluationState;
+    }
+
+    public void setSellerEvaluationState(String sellerEvaluationState) {
+        this.sellerEvaluationState = sellerEvaluationState == null ? null : sellerEvaluationState.trim();
     }
 
     public String getOrderState() {
@@ -232,12 +254,12 @@ public class Order {
         this.orderFrom = orderFrom == null ? null : orderFrom.trim();
     }
 
-    public String getShippingCode() {
-        return shippingCode;
+    public String getCarriageName() {
+        return carriageName;
     }
 
-    public void setShippingCode(String shippingCode) {
-        this.shippingCode = shippingCode == null ? null : shippingCode.trim();
+    public void setCarriageName(String carriageName) {
+        this.carriageName = carriageName == null ? null : carriageName.trim();
     }
 
     public Date getCreateTime() {
@@ -248,19 +270,67 @@ public class Order {
         this.createTime = createTime;
     }
 
-    public Boolean getDelFlag() {
-        return delFlag;
+    public Date getDeliverTime() {
+        return deliverTime;
     }
 
-    public void setDelFlag(Boolean delFlag) {
-        this.delFlag = delFlag;
+    public void setDeliverTime(Date deliverTime) {
+        this.deliverTime = deliverTime;
     }
 
-    public String getOrderName() {
-        return orderName;
+    public String getOrderMessage() {
+        return orderMessage;
     }
 
-    public void setOrderName(String orderName) {
-        this.orderName = orderName == null ? null : orderName.trim();
+    public void setOrderMessage(String orderMessage) {
+        this.orderMessage = orderMessage == null ? null : orderMessage.trim();
+    }
+
+    public Long getVoucherPrice() {
+        return voucherPrice;
+    }
+
+    public void setVoucherPrice(Long voucherPrice) {
+        this.voucherPrice = voucherPrice;
+    }
+
+    public String getVoucherCode() {
+        return voucherCode;
+    }
+
+    public void setVoucherCode(String voucherCode) {
+        this.voucherCode = voucherCode == null ? null : voucherCode.trim();
+    }
+
+    public String getReciverAddress() {
+        return reciverAddress;
+    }
+
+    public void setReciverAddress(String reciverAddress) {
+        this.reciverAddress = reciverAddress == null ? null : reciverAddress.trim();
+    }
+
+    public String getReciverPhone() {
+        return reciverPhone;
+    }
+
+    public void setReciverPhone(String reciverPhone) {
+        this.reciverPhone = reciverPhone == null ? null : reciverPhone.trim();
+    }
+
+    public String getReciverName() {
+        return reciverName;
+    }
+
+    public void setReciverName(String reciverName) {
+        this.reciverName = reciverName == null ? null : reciverName.trim();
+    }
+
+    public String getInvoiceInfo() {
+        return invoiceInfo;
+    }
+
+    public void setInvoiceInfo(String invoiceInfo) {
+        this.invoiceInfo = invoiceInfo == null ? null : invoiceInfo.trim();
     }
 }

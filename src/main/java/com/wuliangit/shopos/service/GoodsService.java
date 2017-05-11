@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
 
@@ -71,4 +72,18 @@ public interface GoodsService {
      * @return
      */
     int deleteGoods(Integer goodsId);
+
+    /**
+     * 获取商铺商品
+     * @param storeId
+     * @return
+     */
+    List<StoreGoodsDetailDTO> getStoreGoods(Integer storeId);
+
+    /**
+     * 获取商品的简要信息
+     * @param goodsId
+     * @return
+     */
+    StoreGoodsDetailDTO getSimplGoodsInfo(Integer goodsId);
 }

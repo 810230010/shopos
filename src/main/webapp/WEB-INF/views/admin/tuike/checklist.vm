@@ -67,7 +67,7 @@
                         '<a class="btn btn-danger btn-xs table-action unpass" href="javascript:void(0)">',
                         '不通过 <i class="fa fa-times"></i>',
                         '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)" style="margin-left: 10px;">',
+                        '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)">',
                         '通过 <i class="fa fa-check"></i>',
                         '</a>'
                     ].join('');

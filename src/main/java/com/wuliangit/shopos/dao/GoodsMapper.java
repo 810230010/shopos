@@ -2,11 +2,13 @@ package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.model.GoodsWithoutBody;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface GoodsMapper extends BaseMapper<Goods, Integer> {
 
@@ -37,7 +39,8 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @param parentId
      * @return
      */
-    ArrayList<Goods> search(@Param("searchKey")String searchKey,
+    ArrayList<Goods> StoreSearch(@Param("storeId")Integer storeId,
+                                 @Param("searchKey")String searchKey,
                             @Param("orderColumn")String orderColumn,
                             @Param("orderType")String orderType,
                             @Param("parentId")Integer parentId);
@@ -48,4 +51,18 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @return
      */
     GoodsWithoutBody selectGoodsWithoutBodyByPrimaryKey(Integer goodsId);
+
+    /**
+     * 获取商铺商品
+     * @param storeId
+     * @return
+     */
+    List<StoreGoodsDetailDTO> getStoreGoods(Integer storeId);
+
+    /**
+     * 获取商品的简要信息
+     * @param goodsId
+     * @return
+     */
+    StoreGoodsDetailDTO getSimplGoodsInfo(Integer goodsId);
 }

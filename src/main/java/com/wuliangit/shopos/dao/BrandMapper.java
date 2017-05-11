@@ -1,9 +1,7 @@
 package com.wuliangit.shopos.dao;
 
-import com.sun.xml.internal.txw2.annotation.XmlNamespace;
 import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.entity.Brand;
-import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.model.StoreAddBrand;
 import com.wuliangit.shopos.model.StoreBrand;
 import org.apache.ibatis.annotations.Param;

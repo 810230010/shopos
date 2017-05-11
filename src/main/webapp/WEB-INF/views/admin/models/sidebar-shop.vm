@@ -27,7 +27,7 @@
                 </div>
             </li>
             <li class="active">
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">设置</span> <span class="fa arrow"></span></a>
+                <a href="index.html"><i class="fa fa-cogs"></i> <span class="nav-label">设置</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="/admin/goods/listPage">系统设置</a></li>
                     <li><a href="/admin/setting/mailSettingPage">邮件服务设置</a></li>
@@ -37,14 +37,14 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-edit"></i> <span class="nav-label">广告</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-spotify"></i> <span class="nav-label">广告</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="form_basic.html">广告列表</a></li>
                     <li><a href="form_advanced.html">广告位置列表</a></li>
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-globe"></i> <span class="nav-label">统计</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-pie-chart"></i> <span class="nav-label">统计</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="toastr_notifications.html">客户统计</a></li>
                     <li><a href="nestable_list.html">订单统计</a></li>
@@ -53,7 +53,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">会员管理</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-user-circle-o"></i> <span class="nav-label">会员管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/admin/member/memberList">会员列表</a></li>
                     <li><a href="icons.html">充值提现申请</a></li>
@@ -63,14 +63,14 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">推客管理</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-users"></i> <span class="nav-label">推客管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/admin/tuike/tuikeListPage">推客列表</a></li>
                     <li><a href="/admin/tuike/checkListPage">申请列表</a></li>
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">商家管理</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-home"></i> <span class="nav-label">商家管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/admin/store/storeListPage">商家列表</a></li>
                     <li><a href="/admin/store/applyListPage">申请列表</a></li>
@@ -81,13 +81,13 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-edit"></i> <span class="nav-label">商品分类管理</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-code-fork"></i> <span class="nav-label">商品分类管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/admin/goodsCategory/listPage">商品分类列表</a></li>
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-flask"></i> <span class="nav-label">品牌管理</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-ticket"></i> <span class="nav-label">品牌管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/admin/brand/brandListPage">品牌列表</a></li>
                     <li>
@@ -104,7 +104,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-unlock-alt"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="ecommerce_products_grid.html">管理员列表</a></li>
                     <li><a href="ecommerce_product_list.html">管理员日志</a></li>
@@ -112,7 +112,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">邮件管理</span><span class="fa arrow"></span></a>
+                <a href="index.html#"><i class="fa fa-envelope-open"></i> <span class="nav-label">邮件管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="ecommerce_products_grid.html">发送邮件</a></li>
                 </ul>

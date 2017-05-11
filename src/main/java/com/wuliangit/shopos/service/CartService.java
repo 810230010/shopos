@@ -27,11 +27,13 @@ public interface CartService {
 
     /**
      * 添加购物车商品
+     *
      * @param goodsId
+     * @param goodsSkuId
      * @param goodsNum
      * @return
      */
-    int addCartGoods(Integer goodsId, Integer goodsNum);
+    int addCartGoods(Integer goodsId, Integer goodsSkuId, Integer goodsNum);
 
     /**
      * 购物车更新商品数量

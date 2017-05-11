@@ -1,8 +1,10 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.dto.ApiAddressListDTO;
 import com.wuliangit.shopos.entity.Address;
 import com.wuliangit.shopos.service.AddressService;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 /**
+ * 用户地址相关
  * Created by nilme on 2017/3/27.
  */
 
@@ -18,9 +21,10 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1/member/address")
 public class MAddressController {
 
-
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private Mapper mapper;
 
     /**
      * 我的收货地址
@@ -32,10 +36,21 @@ public class MAddressController {
     public Object addressList(@RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
                               @RequestParam(value = "pageSize",required = false,defaultValue = "10") Integer pageSize){
         RestResult result = new RestResult();
-        ArrayList<Address> address = addressService.getAddressList(page,pageSize);
-
+        ArrayList<ApiAddressListDTO> address = addressService.getAddressList(page,pageSize);
         result.add("addresses",address);
+        return result;
+    }
 
+    /**
+     * 获取地址
+     * @param addressId
+     * @return
+     */
+    @RequestMapping("/get")
+    public Object getAddress(Integer addressId){
+        RestResult result = new RestResult();
+        ApiAddressListDTO address = addressService.getAddressById(addressId);
+        result.add("address",address);
         return result;
     }
 
@@ -44,7 +59,7 @@ public class MAddressController {
      * @param addressId 要设置成默认地址的地址id
      * @return
      */
-    @RequestMapping("/default/{addressId}")
+    @RequestMapping("/default")
     public Object setDefaultAddress(Integer addressId){
         RestResult result = new RestResult();
         int res = addressService.setDefaultAddress(addressId);
@@ -53,10 +68,10 @@ public class MAddressController {
 
     /**
      * 删除收货地址
-     * @param addressId
+     * @param addressId 地址id
      * @return
      */
-    @RequestMapping("/delete/{addressId}")
+    @RequestMapping("/delete")
     public Object deleteAddress(Integer addressId){
         RestResult result = new RestResult();
         int res = addressService.deleteAddress(addressId);
@@ -65,11 +80,11 @@ public class MAddressController {
 
     /**
      * 更新收货地址
-     * @param address
+     * @param address 地址信息
      * @return
      */
-    @RequestMapping("/update/{addressId}")
-    public Object updateAddress(Address address){
+    @RequestMapping("/update")
+    public Object updateAddress( Address address){
         RestResult result = new RestResult();
         int res = addressService.updateAddress(address);
         return result;
@@ -77,7 +92,7 @@ public class MAddressController {
 
     /**
      * 添加收货地址
-     * @param address
+     * @param address 地址信息
      * @return
      */
     @RequestMapping("/add")

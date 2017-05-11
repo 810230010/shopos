@@ -6,12 +6,15 @@ import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.entity.GoodsSku;
+import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.GoodsCategoryService;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.GoodsSkuService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +39,7 @@ public class StoreGoodsController {
     private GoodsCategoryService goodsCategoryService;
     @Autowired
     private GoodsSkuService goodsSkuService;
+
 
     /**
      * 商品列表页面
@@ -200,5 +204,22 @@ public class StoreGoodsController {
         int res = goodsSkuService.updateSku(skus);
         return result;
     }
+
+
+    /**
+     * 获取商品的简要信息
+     * @param goodsId
+     * @return
+     */
+    @RequestMapping("/getSimplGoodsInfo")
+    @ResponseBody
+    public Object getSimplGoodsInfo(Integer goodsId){
+        RestResult result = new RestResult();
+        StoreGoodsDetailDTO info = goodsService.getSimplGoodsInfo(goodsId);
+        result.put("data",info);
+        return result;
+    }
+
+
 
 }

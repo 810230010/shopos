@@ -39,4 +39,11 @@
         from t_store
         where store_id = #{storeId}
     </select>
+
+    <!--获取店铺简要信息-->
+    <select id="getStoreMinByStoreId" resultType="com.wuliangit.shopos.model.StoreMin">
+        select store_id, name, logo, type
+        from t_store
+        where store_id = #{storeId}
+    </select>
 </mapper>

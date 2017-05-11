@@ -3,6 +3,7 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
 import com.wuliangit.shopos.dto.ApiCollectStoreDTO;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ public class MCollectController {
      * @return
      */
     @RequestMapping("/goods/add")
-    public Object addCollectGoods(Integer goodsId) {
+    public Object addCollectGoods(Integer goodsId) throws Exception {
         RestResult result = new RestResult();
         int res = collectService.addCollectGoods(goodsId);
         return result;
@@ -81,7 +82,7 @@ public class MCollectController {
      * @return
      */
     @RequestMapping("/store/add")
-    public Object addCollectStore(Integer storeId) {
+    public Object addCollectStore(Integer storeId) throws Exception{
         RestResult result = new RestResult();
         int res = collectService.addCollectStore(storeId);
         return result;
@@ -95,9 +96,7 @@ public class MCollectController {
     @RequestMapping("/store/delete")
     public Object deleteCollectStore(Integer storeId){
         RestResult result = new RestResult();
-
         int res = collectService.deleteCollectStore(storeId);
-
         return result;
     }
 

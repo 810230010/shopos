@@ -39,7 +39,7 @@
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">分类页菜单图标</label>
-                            <div class="col-sm-7">
+                            <div class="col-sm-4">
                                 <input id="upload-image" class="file" name="file" type="file" multiple>
                                 <input id="img" name="img" type="text" class="hidden">
                             </div>

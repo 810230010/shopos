@@ -132,7 +132,15 @@ $("#wizard").steps({
 
                 var id = element.id.replace("sku_attribute_item_name", "");
                 var values = $("#sku_attribute_item_value" + id).tagsinput('items');
-                obj.values = values;
+
+                var name_values = new Array();
+                for (var i=0;i<values.length;i++){
+                    var v = {};
+                    v.name = values[i];
+                    name_values.push(v);
+                }
+
+                obj.values = name_values;
                 attr_data.push(obj);
             }
         });

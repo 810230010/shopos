@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.entity.Member;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.session.Session;
@@ -14,6 +15,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.util.*;
 
@@ -29,6 +31,8 @@ public class ApiFilter extends AccessControlFilter {
     static final String USERID = "userId";
 
     private TokenManager<Integer, Member> tokenManager;
+
+
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
@@ -49,6 +53,10 @@ public class ApiFilter extends AccessControlFilter {
 
         // 判断用户是否已经登录
         String serverToken = tokenManager.getToken(userId);
+
+        if(serverToken == null){
+            return false;
+        }
 
         //获取参数
         Enumeration<String> enumeration = request.getParameterNames();
@@ -97,18 +105,30 @@ public class ApiFilter extends AccessControlFilter {
 
         String sign = request.getParameter(SIGN);
         String timestamp = request.getParameter(TIMESTAMP);
-        String userId = request.getParameter(USERID);
+        String userIdStr = request.getParameter(USERID);
 
-        if (sign == null || timestamp == null || userId == null) {
-            result.setCode(402);
-            result.setMsg("parameter of 'sign' and 'timestamp' and 'userId' could not be null, please check it again!");
+
+        if (sign == null || timestamp == null || userIdStr == null) {
+            result.setCode(403);
+            result.setMsg("parameter of \'sign\' and \'timestamp\' and \'userId\' could not be null, please check it again!");
         }else{
-            result.setCode(401);
+            result.setCode(402);
             result.setMsg("unauthentication request! pelease login before request the api");
         }
 
+        if (!StringUtils.isEmpty(userIdStr)){
+            // 判断用户是否已经登录
+            String serverToken = tokenManager.getToken(Integer.parseInt(userIdStr));
+            if(serverToken == null){//未登录
+                result.setCode(401);
+                result.setMsg("please login first!!!");
+            }
+        }
+
         Gson gson = new Gson();
-        httpResponse.getWriter().write(gson.toJson(result));
+        PrintWriter writer = httpResponse.getWriter();
+        writer.write(gson.toJson(result));
+        writer.flush();
         return false;
     }
 

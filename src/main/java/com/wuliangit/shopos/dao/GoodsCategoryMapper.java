@@ -23,7 +23,7 @@ public interface GoodsCategoryMapper extends BaseMapper<GoodsCategory, Integer> 
      * @param parentId
      * @return
      */
-    ArrayList<GoodsCategory> search(@Param("searchKey") String searchKey,
+    ArrayList<GoodsCategory> AdminSearch(@Param("searchKey") String searchKey,
                                     @Param("orderColumn") String orderColumn,
                                     @Param("orderType")String orderType,
                                     @Param("parentId")Integer parentId);

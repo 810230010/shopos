@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
-  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-<!-- 数据库驱动-->
-    <classPathEntry  location="mysql-connector-java-5.0.8.jar"/>
+    <!-- 数据库驱动-->
+    <!--<classPathEntry  location="mysql-connector-java-5.0.8.jar"/>-->
     <context id="DB2Tables"  targetRuntime="MyBatis3">
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
+
         <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://rm-uf6y7ofoac1ao1d7xo.mysql.rds.aliyuncs.com:3306/shopos" userId="root" password="">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://rm-uf6y7ofoac1ao1d7xo.mysql.rds.aliyuncs.com:3306/shopos" userId="shopos" password="23SSg7Uir9sqG4Wd">
         </jdbcConnection>
+
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
+
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.wuliangit.shopos.entity" targetProject="shopos">
+        <javaModelGenerator targetPackage="com.wuliangit.shopos.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
+            <!--<property name="constructorBased" value="true"/>-->
         </javaModelGenerator>
+
         <!-- 生成映射文件的包名和位置-->
-        <sqlMapGenerator targetPackage="mapping" targetProject="shopos">
+        <sqlMapGenerator targetPackage="com.wuliangit.shopos.dao" targetProject="src/main/resources/mappings/generate">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
+
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wuliangit.shopos.dao" targetProject="shopos">
-            <property name="enableSubPackages" value="true"/>
-        </javaClientGenerator>
+        <!--第一次的时候启用,后面就不用了-->
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.wuliangit.shopos.dao" targetProject="src/main/java">-->
+        <!--<property name="enableSubPackages" value="true"/>-->
+        <!--&lt;!&ndash; 可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查&ndash;&gt;-->
+        <!--<property name="rootInterface" value="com.wuliangit.shopos.common.dao.BaseMapper"/>-->
+        <!--</javaClientGenerator>-->
 
 
         <!-- 要生成哪些表-->
@@ -66,9 +86,6 @@
         <table tableName="t_goods" domainObjectName="Goods" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="goods_id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="t_goods_color" domainObjectName="GoodsColor" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="goods_color_id" sqlStatement="MySql" identity="true"/>
-        </table>
         <table tableName="t_goods_category" domainObjectName="GoodsCategory" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="goods_category_id" sqlStatement="MySql" identity="true"/>
         </table>
@@ -77,9 +94,6 @@
         </table>
         <table tableName="t_order" domainObjectName="Order" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="order_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_order_common" domainObjectName="OrderCommon" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="order_common_id" sqlStatement="MySql" identity="true"/>
         </table>
         <table tableName="t_order_goods" domainObjectName="OrderGoods" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="order_goods_id" sqlStatement="MySql" identity="true"/>
@@ -120,7 +134,12 @@
             <generatedKey column="tuike_id" sqlStatement="MySql" identity="true"/>
         </table>
 
-       
+        <table tableName="t_member_advice" domainObjectName="MemberAdvice" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="member_advice_id" sqlStatement="MySql" identity="true"/>
+        </table>
 
+        <table tableName="t_store_goods_ad" domainObjectName="StoreGoodsAd" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="store_goods_ad_id" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>

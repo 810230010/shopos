@@ -1,9 +1,12 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
+import com.wuliangit.shopos.entity.Member;
+import com.wuliangit.shopos.service.CollectService;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.GoodsSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
+ * 商品相关接口
  * Created by nilme on 2017/3/30.
  */
 
@@ -26,6 +32,8 @@ public class MGoodsController {
     private GoodsService goodsService;
     @Autowired
     private GoodsSearchService goodsSearchService;
+    @Autowired
+    private CollectService collectService;
 
 
     /**
@@ -67,8 +75,18 @@ public class MGoodsController {
         RestResult result = new RestResult();
         Goods goods = goodsService.getGoodsById(goodsId);
         List<GoodsSku> goodsSku = goodsService.getGoodsSkuByGoodsId(goodsId);
+
+        //转化为字典型，方便前段处理
+        Map<String ,GoodsSku> goodsSkuMap = new HashMap<String ,GoodsSku>();
+        for (GoodsSku sku : goodsSku) {
+            goodsSkuMap.put(sku.getSkuValue(),sku);
+        }
+
+        boolean isCollect = collectService.isCollectGoods(goodsId);
+
+        result.add("isCollect",isCollect);
         result.add("goods", goods);
-        result.add("goodsSku", goodsSku);
+        result.add("goodsSku", goodsSkuMap);
         return result;
     }
 

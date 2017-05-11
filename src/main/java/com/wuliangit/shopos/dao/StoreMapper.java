@@ -6,6 +6,7 @@ import com.wuliangit.shopos.dto.StorePageListDTO;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreBrand;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.model.StoreUser;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,6 +37,13 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return
      */
     Integer updateStoreState(@Param("storeId") Integer storeId,@Param("state") String state);
+
+    /**
+     * 获取店铺简要信息
+     * @param storeId
+     * @return
+     */
+    StoreMin getStoreMinByStoreId(Integer storeId);
 
     /**
      * 获取商家详情

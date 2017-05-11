@@ -9,15 +9,15 @@ public class Address {
 
     private String reciverName;
 
-    private Integer areaId;
+    private String province;
 
-    private Integer cityId;
+    private String city;
 
-    private String areaInfo;
+    private String area;
 
     private String address;
 
-    private String telPhone;
+    private String areaInfo;
 
     private String mobPhone;
 
@@ -49,28 +49,28 @@ public class Address {
         this.reciverName = reciverName == null ? null : reciverName.trim();
     }
 
-    public Integer getAreaId() {
-        return areaId;
+    public String getProvince() {
+        return province;
     }
 
-    public void setAreaId(Integer areaId) {
-        this.areaId = areaId;
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
     }
 
-    public Integer getCityId() {
-        return cityId;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
-    public String getAreaInfo() {
-        return areaInfo;
+    public String getArea() {
+        return area;
     }
 
-    public void setAreaInfo(String areaInfo) {
-        this.areaInfo = areaInfo == null ? null : areaInfo.trim();
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
     }
 
     public String getAddress() {
@@ -81,12 +81,12 @@ public class Address {
         this.address = address == null ? null : address.trim();
     }
 
-    public String getTelPhone() {
-        return telPhone;
+    public String getAreaInfo() {
+        return areaInfo;
     }
 
-    public void setTelPhone(String telPhone) {
-        this.telPhone = telPhone == null ? null : telPhone.trim();
+    public void setAreaInfo(String areaInfo) {
+        this.areaInfo = areaInfo == null ? null : areaInfo.trim();
     }
 
     public String getMobPhone() {

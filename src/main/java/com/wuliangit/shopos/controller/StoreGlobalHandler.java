@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 后台管理界面异常捕获
+ * 后台管理界面全局前置设置
  */
 @ControllerAdvice(basePackages = "com.wuliangit.shopos.controller.store")
 public class StoreGlobalHandler {
@@ -32,7 +32,6 @@ public class StoreGlobalHandler {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        System.out.println("============应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器");
         DateFormat defaultFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
         CustomDateEditor defaultFormatEditor = new CustomDateEditor(defaultFormat, true);
 

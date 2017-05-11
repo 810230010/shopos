@@ -40,11 +40,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public int addCartGoods(Integer goodsId, Integer goodsNum) {
+    public int addCartGoods(Integer goodsId, Integer goodsSkuId, Integer goodsNum) {
         Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
         Member user = WebUtil.getCurrentMember();
         Cart cart = new Cart();
 
+        cart.setGoodsSkuId(goodsSkuId);
         cart.setStoreId(goods.getStoreId());
         cart.setStoreName(goods.getStoreName());
         cart.setMemberId(user.getMemberId());

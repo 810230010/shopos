@@ -7,8 +7,6 @@
         values (#{storeId}, #{brandId})
     </insert>
 
-
-
     <!-- 获得某个店铺品牌-->
     <select id="getStoreBrands" resultType="com.wuliangit.shopos.model.StoreBrand">
         select a.brand_id as brandId,a.`name` as brandName,a.category_name as categoryName,a.pic,b.id,b.is_onshelf as isOnshelf,b.passed
@@ -40,10 +38,10 @@
     </delete>
 
     <!--查询所有品牌-->
-    <select id="queryAllBrands" resultType="com.wuliangit.shopos.entity.Brand">
+    <select id="getAllAvailableBrands" resultType="com.wuliangit.shopos.entity.Brand">
         select brand_id,name,category_name,pic
         from t_brand
-        where brand_apply="PASS"
+        where state="PASS"
     </select>
 
     <!--查询品牌列表-->
@@ -54,7 +52,7 @@
                 ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
                 or keywords like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
             </if>
-            and brand_apply="PASS"
+            and state="PASS"
         </where>
         order by
         <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
@@ -80,7 +78,7 @@
                 or a.category_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
                 or b.name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
             </if>
-            and a.store_id=b.store_id and a.brand_apply="APPLYING"
+            and a.store_id=b.store_id and a.state="APPLYING"
         </where>
         order by
         <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
@@ -92,7 +90,7 @@
     <!--更改品牌的审核状态-->
     <update id="updateBrandStatus">
         update t_brand
-        set brand_apply=#{status}
+        set state=#{status}
         where brand_id=#{brandId}
     </update>
 

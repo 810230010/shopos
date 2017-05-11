@@ -66,7 +66,14 @@
                 {"data":"sort","width": "10%","title":"排序","orderable": true},
                 {"data":"keywords","width": "20%","title":"关键词","orderable": false},
                 {"data":"description","width": "20%","title":"描述","orderable": false},
-                {"data":"isShow","width": "10%","title":"是否显示","orderable": true},
+                {"data":"isShow","width": "10%","title":"是否显示","orderable": true,
+                    "render": function (data, type, row) {
+                       if(data == true){
+                           return "是";
+                       } else{
+                           return "否"
+                       }
+                    }},
                 {"data":"id","width": "20%","title":"操作","orderable": false,
                     "render": function (data, type, row) {
                         return [
@@ -77,6 +84,7 @@
                             '编辑 <i class="fa fa-edit"></i>',
                             '</a>',
                             rank > 2?"":'<a class="table-button btn btn-primary btn-xs table-action getsub" href="javascript:void(0)">下级 <i class="fa fa-code-fork"></i></a>',
+                            rank > 2?"":'<a class="table-button btn btn-primary btn-xs table-action addsub" href="javascript:void(0)">添加下级 <i class="fa fa-code-fork"></i></a>',
                         ].join('');
                     }
                 },
@@ -138,6 +146,12 @@
             parentId = data.goodsCategoryId;
             upParentId[rank] = data.parentId;
             table = $('#datatables').DataTable().ajax.reload();
+        });
+
+        table.on( 'click', '.addsub', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            window.location.href = "/admin/goodsCategory/addPage?parentId="+data.goodsCategoryId;
         });
 
         $("#back").on('click', function () {

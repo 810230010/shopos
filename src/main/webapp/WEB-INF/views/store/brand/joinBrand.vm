@@ -85,16 +85,12 @@
     $(".parent_select").select2({
         allowClear:true,
         minimumResultsForSearch: -1,
+        minimumInputLength: 0,
+        language: "zh-CN",
         ajax: {
-            url: "/store/brand/allBrands",
+            url: "/store/brand/getAllAvailableBrands",
             dataType: 'json',
             delay: 200,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                    page: params.page
-                };
-            },
             processResults: function (data, params) {
                 var results = [];
                 $.each(data.data.brands, function (i, v) {
@@ -120,14 +116,13 @@
         escapeMarkup: function (markup) {
             return markup;
         }, // let our custom formatter work
-        minimumInputLength: 0,
+
         templateResult: function formatRepo(repo) {
             return repo.name
         },
         templateSelection: function formatRepo(repo) {
             return repo.name
         },
-        language: "zh-CN",
         initSelection: function (element, callback) {
             var data = { id:0, name: "请选择分类" };
             callback(data);
@@ -137,13 +132,11 @@
         $("#pic").attr('src',$("#parentId").select2('data')[0].pic);
         $("#categoryName").val($("#parentId").select2('data')[0].categoryName);
          brandId = $("#parentId").select2('data')[0].id;
-        //this.value
     }).on('select', function (e) {
         console.log("select");
-
     });
 
-##  申请入驻
+    //申请入驻
     $("#submit").on('click', function () {
         $.post("/store/brand/applyForJoinBrand",
                 {

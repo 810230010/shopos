@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.controller.store;
 
 import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
@@ -28,19 +29,22 @@ import java.util.List;
 
 /**
  * Created by JangJanPing on 2017/5/1.
+ *
  * @description 店铺用户的品牌操作controller
  */
 @Controller
 @RequestMapping("/store/brand")
 public class StoreBrandController {
-     @Autowired
-     private StoreService storeService;
-     @Autowired
-     private BrandService brandService;
-     @Autowired
-     private GoodsCategoryService goodsCategoryService;
+    @Autowired
+    private StoreService storeService;
+    @Autowired
+    private BrandService brandService;
+    @Autowired
+    private GoodsCategoryService goodsCategoryService;
+
     /**
      * 跳转到店铺品牌页面
+     *
      * @return
      */
     @RequestMapping("/listPage")
@@ -50,6 +54,7 @@ public class StoreBrandController {
 
     /**
      * 查询店铺品牌列表
+     *
      * @param draw
      * @param searchKey
      * @param page
@@ -67,21 +72,24 @@ public class StoreBrandController {
         List<StoreBrand> storeBrands = brandService.getStoreBrands(page, pageSize, searchKey, storeId);
         return new PageResult<StoreBrand>(storeBrands, draw);
     }
+
     /**
      * 更改店铺某品牌上下架状态
+     *
      * @param id
      * @param status
      * @return
      */
     @RequestMapping("/updateBrandStatus")
     @ResponseBody
-    public String changOnshelfStatus(Integer id, String status){
+    public String changOnshelfStatus(Integer id, String status) {
         brandService.updateBrandStatus(id, status);
         return "ok";
     }
 
     /**
      * 删除某个店铺的品牌
+     *
      * @param id
      * @return
      */
@@ -94,52 +102,58 @@ public class StoreBrandController {
 
     /**
      * 跳转到申请入驻页面
+     *
      * @return
      */
     @RequestMapping("/joinPage")
-    public String jumpToDetailPage() {
+    public String jumpToDetailPage(Model model) {
         return "/store/brand/joinBrand";
     }
 
     /**
      * 获取所有品牌
+     *
      * @return
      */
-    @RequestMapping("/allBrands")
+    @RequestMapping("/getAllAvailableBrands")
     @ResponseBody
-   public Object getAllBrands(){
+    public Object getAllAvailableBrands() {
         RestResult result = new RestResult();
-        List<Brand> brands = brandService.getAllBrands();
+        List<Brand> brands = brandService.getAllAvailableBrands();
         result.add("brands", brands);
         return result;
-   }
+    }
 
     /**
      * 店铺申请入驻品牌
+     *
      * @return
      */
     @RequestMapping("/applyForJoinBrand")
     @ResponseBody
-    public Object applyForJoinBrand(Integer brandId){
-       RestResult result = new RestResult();
-       StoreUser store = WebUtil.getCurrentStore();
-       Integer storeId = store.getStoreId();
-       brandService.addStoreBrand(storeId, brandId);
-       return result;
-   }
+    public Object applyForJoinBrand(Integer brandId) {
+        RestResult result = new RestResult();
+        StoreUser store = WebUtil.getCurrentStore();
+        Integer storeId = store.getStoreId();
+        brandService.addStoreBrand(storeId, brandId);
+        return result;
+    }
 
     /**
      * 跳转到店铺添加品牌页面
+     *
      * @return
      */
     @RequestMapping("/addPage")
-   public String jumpToAddBrandPage(Model model) {
-       model.addAttribute("uploadToken", QiNiuUtils.getToken());
-       return "/store/brand/add";
-   }
+    public String jumpToAddBrandPage(Model model) {
+        model.addAttribute("uploadToken", QiNiuUtils.getToken());
+        model.addAttribute("domain", QiNiuUtils.BASE_URL);
+        return "/store/brand/add";
+    }
 
     /**
      * 验证品牌名是否存在
+     *
      * @param brandName
      * @return
      */
@@ -157,6 +171,7 @@ public class StoreBrandController {
 
     /**
      * 获取所有分类
+     *
      * @return
      */
     @RequestMapping("/get/all")
@@ -170,17 +185,17 @@ public class StoreBrandController {
 
     /**
      * 店铺添加品牌
+     *
      * @param brand
      * @return
      */
     @RequestMapping("/addBrand")
     @ResponseBody
-    public Object addBrand(Brand brand){
+    public Object addBrand(Brand brand) {
         RestResult result = new RestResult();
         StoreUser store = WebUtil.getCurrentStore();
-        Integer storeId = store.getStoreId();
-        brand.setStoreId(storeId);
-        brand.setPic(QiNiuUtils.getRealUrl(brand.getPic()));
+        brand.setStoreId(store.getStoreId());
+        brand.setState(POJOConstants.BRAND_STATE_APPLYING);
         brandService.addBrand(brand);
         return result;
     }

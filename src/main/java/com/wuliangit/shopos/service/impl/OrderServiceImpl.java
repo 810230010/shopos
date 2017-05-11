@@ -40,19 +40,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public List<Order> ApiCreateOrder(ApiOrderCreateDTO orderInfo) throws OrderException {
+    public List<Order> ApiCreateOrder(List<OrderGoodsInfo> orderGoodsInfoList,Integer addressId, String orderFrom, String orderMessage) throws OrderException {
         //当前用户
         Member member = WebUtil.getCurrentMember();
         //邮寄地址
-        Address address = addressMapper.selectByPrimaryKey(orderInfo.getAddressId());
+        Address address = addressMapper.selectByPrimaryKey(addressId);
         //临时存放商品信息
         Map<Integer, List<OrderGoods>> orderCreateTemp = new HashMap<>();
         //返回订单列表
         List<Order> orders = new ArrayList<>();
 
         //合成预处理数据
-        List<OrderGoodsInfo> orderGoodsNumList = orderInfo.getOrderGoodsInfoList();
-        for (OrderGoodsInfo orderGoodsInfo : orderGoodsNumList) {
+        for (OrderGoodsInfo orderGoodsInfo : orderGoodsInfoList) {
             GoodsSku goodsSku = goodsSkuMapper.selectByPrimaryKey(orderGoodsInfo.getGoodsSkuId());
 
             //检查商品库存
@@ -109,11 +108,11 @@ public class OrderServiceImpl implements OrderService {
             order.setMemberEvaluationState(POJOConstants.ORDER_EVALUATION_STATE_NO);
             order.setSellerEvaluationState(POJOConstants.ORDER_EVALUATION_STATE_NO);
             order.setIsLock(false);
-            order.setOrderFrom(orderInfo.getOrderFrom());
+            order.setOrderFrom(orderFrom);
             order.setRefundState(POJOConstants.ORDER_REFUND_STATE_NO_REFUND);
             order.setOrderState(POJOConstants.ORDER_STATE_INIT);
             order.setStoreName(storeMin.getName());
-            order.setOrderMessage(orderInfo.getOrderMessage());
+            order.setOrderMessage(orderMessage);
             //设置订单id
             order.setOutTradeNo(UUID.randomUUID().toString().replaceAll("-", ""));
 

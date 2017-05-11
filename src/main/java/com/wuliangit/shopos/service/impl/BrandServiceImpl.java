@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,8 +43,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public ArrayList<Brand> getAllBrands() {
-        return brandMapper.queryAllBrands();
+    public ArrayList<Brand> getAllAvailableBrands() {
+        return brandMapper.getAllAvailableBrands();
     }
 
     @Override
@@ -54,6 +55,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public int addBrand(Brand brand) {
+        brand.setCreateTime(new Date());
         return brandMapper.insertSelective(brand);
     }
 

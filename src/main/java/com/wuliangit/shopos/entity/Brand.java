@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.entity;
 
+import java.util.Date;
+
 public class Brand {
     private Integer brandId;
 
@@ -17,9 +19,11 @@ public class Brand {
 
     private Integer storeId;
 
-    private String brandApply;
+    private String state;
 
     private Integer goodsCategoryId;
+
+    private Date createTime;
 
     public Integer getBrandId() {
         return brandId;
@@ -85,12 +89,12 @@ public class Brand {
         this.storeId = storeId;
     }
 
-    public String getBrandApply() {
-        return brandApply;
+    public String getState() {
+        return state;
     }
 
-    public void setBrandApply(String brandApply) {
-        this.brandApply = brandApply == null ? null : brandApply.trim();
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
     }
 
     public Integer getGoodsCategoryId() {
@@ -99,5 +103,13 @@ public class Brand {
 
     public void setGoodsCategoryId(Integer goodsCategoryId) {
         this.goodsCategoryId = goodsCategoryId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

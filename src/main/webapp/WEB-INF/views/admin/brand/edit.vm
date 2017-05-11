@@ -133,16 +133,12 @@
     $(".parent_select").select2({
         allowClear:true,
         minimumResultsForSearch: -1,
+        minimumInputLength: 0,
+        language: "zh-CN",
         ajax: {
             url: "/admin/goodsCategory/get/all",
             dataType: 'json',
             delay: 200,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                    page: params.page
-                };
-            },
             processResults: function (data, params) {
                 var results = [];
                 $.each(data.data.goodsCategories, function (i, v) {
@@ -166,14 +162,12 @@
         escapeMarkup: function (markup) {
             return markup;
         }, // let our custom formatter work
-        minimumInputLength: 0,
         templateResult: function formatRepo(repo) {
             return repo.name
         },
         templateSelection: function formatRepo(repo) {
             return repo.name
         },
-        language: "zh-CN",
         initSelection: function (element, callback) {
             var data = { id: $brand.brandId, name: "$brand.categoryName" };
             callback(data);

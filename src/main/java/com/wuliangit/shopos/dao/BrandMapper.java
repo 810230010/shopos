@@ -41,7 +41,7 @@ public interface BrandMapper extends BaseMapper<Brand, Integer> {
      * 查询所有品牌
      * @return
      */
-    ArrayList<Brand> queryAllBrands();
+    ArrayList<Brand> getAllAvailableBrands();
 
     /**
      * 店铺入驻品牌

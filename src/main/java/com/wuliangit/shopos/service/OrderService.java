@@ -4,6 +4,7 @@ import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OrderException;
+import com.wuliangit.shopos.model.OrderGoodsInfo;
 
 import java.util.List;
 
@@ -15,10 +16,14 @@ public interface OrderService {
 
     /**
      * 创建订单
-     * @param orderInfo
+     * @param orderGoodsInfoList
+     * @param addressId
+     * @param orderFrom
+     * @param orderMessage
      * @return
+     * @throws OrderException
      */
-    List<Order> ApiCreateOrder(ApiOrderCreateDTO orderInfo) throws OrderException;
+    List<Order> ApiCreateOrder(List<OrderGoodsInfo> orderGoodsInfoList,Integer addressId, String orderFrom, String orderMessage) throws OrderException;
 
     /**
      * 通过id获取订单

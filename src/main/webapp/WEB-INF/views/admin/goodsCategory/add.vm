@@ -38,7 +38,7 @@
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">分类页菜单图标</label>
-                            <div class="col-sm-7">
+                            <div class="col-sm-4">
                                 <input id="upload-image" class="file" name="file" type="file" multiple>
                             </div>
                         </div>
@@ -118,22 +118,26 @@
     var img = "";
 
     $('#upload-image').fileinput({
-//        theme: 'mytheme',
         language: 'zh',
         uploadUrl: "http://up.qiniu.com",
-        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
+        uploadExtraData: {
+            token: "$uploadToken"
+        },
+        overwriteInitial: true,
+        autoReplace: true,
+        showUploadedThumbs: false,
+        uploadAsync: true,
+        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{1}！",
+        maxFileCount: 1,
+        layoutTemplates: {actionDelete: '',actionZoom:''},
+        initialPreviewShowDelete: false,
         showUpload: false, //是否显示上传按钮
         showRemove: false,
-        browseClass: "btn btn-primary", //按钮样式
-        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{6}！",
-        uploadExtraData: {
-            token: '$uploadToken'
-        },
-        maxFileCount: 6,
-        deleteUrl: "/utils/donothing",
+        showClose: false,
         initialPreviewAsData: true,
         initialPreview: [],
         initialPreviewConfig: [],
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
     }).on("fileuploaded", function (event, data, previewId, index) {
         img = data.response.key;
         console.log(img);
@@ -167,6 +171,8 @@
                 });
     });
     $(".parent_select").select2({
+        minimumResultsForSearch: -1,
+        minimumInputLength: 0,
         ajax: {
             url: "/admin/goodsCategory/get/all",
             dataType: 'json',
@@ -200,7 +206,6 @@
         escapeMarkup: function (markup) {
             return markup;
         }, // let our custom formatter work
-        minimumInputLength: 1,
         templateResult: function formatRepo(repo) {
             return repo.name
         },

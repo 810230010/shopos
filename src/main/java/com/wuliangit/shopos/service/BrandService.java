@@ -40,7 +40,7 @@ public interface BrandService {
      * 店铺查询所有品牌
      * @return
      */
-    ArrayList<Brand> getAllBrands();
+    ArrayList<Brand> getAllAvailableBrands();
 
     /**
      * 添加店铺申请入驻品牌记录

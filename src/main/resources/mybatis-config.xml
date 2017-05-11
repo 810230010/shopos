@@ -43,11 +43,6 @@
 
 	</settings>
 
-	<!-- 类型别名 -->
-	<typeAliases>
-		<!-- <typeAlias alias="Page" type="com.hibabydance.suweb.mo.Page" /> -->
-	</typeAliases>
-
 	<plugins>
 		<!-- com.github.pagehelper为PageHelper类所在包名 -->
 		<plugin interceptor="com.github.pagehelper.PageHelper">

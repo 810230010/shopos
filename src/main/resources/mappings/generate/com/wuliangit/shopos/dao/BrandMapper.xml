@@ -10,12 +10,13 @@
     <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
-    <result column="brand_apply" property="brandApply" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="goods_category_id" property="goodsCategoryId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    brand_id, name, initial, category_name, pic, sort, is_recommend, store_id, brand_apply, 
-    goods_category_id
+    brand_id, name, initial, category_name, pic, sort, is_recommend, store_id, state, 
+    goods_category_id, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -33,12 +34,12 @@
     </selectKey>
     insert into t_brand (name, initial, category_name, 
       pic, sort, is_recommend, 
-      store_id, brand_apply, goods_category_id
-      )
+      store_id, state, goods_category_id, 
+      create_time)
     values (#{name,jdbcType=VARCHAR}, #{initial,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, 
       #{pic,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{isRecommend,jdbcType=BIT}, 
-      #{storeId,jdbcType=INTEGER}, #{brandApply,jdbcType=VARCHAR}, #{goodsCategoryId,jdbcType=INTEGER}
-      )
+      #{storeId,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{goodsCategoryId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Brand" >
     <selectKey resultType="java.lang.Integer" keyProperty="brandId" order="AFTER" >
@@ -67,11 +68,14 @@
       <if test="storeId != null" >
         store_id,
       </if>
-      <if test="brandApply != null" >
-        brand_apply,
+      <if test="state != null" >
+        state,
       </if>
       <if test="goodsCategoryId != null" >
         goods_category_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -96,11 +100,14 @@
       <if test="storeId != null" >
         #{storeId,jdbcType=INTEGER},
       </if>
-      <if test="brandApply != null" >
-        #{brandApply,jdbcType=VARCHAR},
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
       </if>
       <if test="goodsCategoryId != null" >
         #{goodsCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -128,11 +135,14 @@
       <if test="storeId != null" >
         store_id = #{storeId,jdbcType=INTEGER},
       </if>
-      <if test="brandApply != null" >
-        brand_apply = #{brandApply,jdbcType=VARCHAR},
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
       </if>
       <if test="goodsCategoryId != null" >
         goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where brand_id = #{brandId,jdbcType=INTEGER}
@@ -146,8 +156,9 @@
       sort = #{sort,jdbcType=INTEGER},
       is_recommend = #{isRecommend,jdbcType=BIT},
       store_id = #{storeId,jdbcType=INTEGER},
-      brand_apply = #{brandApply,jdbcType=VARCHAR},
-      goods_category_id = #{goodsCategoryId,jdbcType=INTEGER}
+      state = #{state,jdbcType=VARCHAR},
+      goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where brand_id = #{brandId,jdbcType=INTEGER}
   </update>
 </mapper>

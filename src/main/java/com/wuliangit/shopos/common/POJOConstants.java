@@ -71,4 +71,12 @@ public class POJOConstants {
     //已收货
     public final static String ORDER_STATE_RECEIVE = "RECEIVE";
 
+
+    //品牌申请状态
+    //申请中
+    public final static String BRAND_STATE_APPLYING = "APPLYING";
+    //未通过
+    public final static String BRAND_STATE_NOTPASS = "NOTPASS";
+    //申请通过
+    public final static String BRAND_STATE_PASS = "PASS";
 }

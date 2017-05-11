@@ -44,8 +44,14 @@ public class AdminGoodsCategoryController {
      * @return
      */
     @RequestMapping("/addPage")
-    public String addPage(Model model) {
+    public String addPage(Integer parentId,Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
+
+        if (parentId != null){
+            GoodsCategory goodsCategory = goodsCategoryService.getById(parentId);
+        }
+
+        model.addAttribute("parentId", parentId);
         return "admin/goodsCategory/add";
     }
 
@@ -143,7 +149,7 @@ public class AdminGoodsCategoryController {
      */
     @RequestMapping("/search")
     @ResponseBody
-    public Object search(@RequestParam("draw") int draw,
+    public Object AdminSearch(@RequestParam("draw") int draw,
                          @RequestParam(value = "searchKey", required = false) String searchKey,
                          @RequestParam(value = "orderColumn", required = false) String orderColumn,
                          @RequestParam(value = "orderType", required = false) String orderType,

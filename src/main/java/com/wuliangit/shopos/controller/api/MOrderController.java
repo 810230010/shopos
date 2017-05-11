@@ -1,15 +1,20 @@
 package com.wuliangit.shopos.controller.api;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
+import com.wuliangit.shopos.entity.GoodsSku;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OrderException;
+import com.wuliangit.shopos.model.OrderGoodsInfo;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -33,9 +38,14 @@ public class MOrderController {
      */
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
-    public Object createOrder(ApiOrderCreateDTO orderInfo) throws OrderException {
+    public Object createOrder(String orderGoodsInfoList, Integer addressId, String orderFrom, String orderMessage) throws OrderException {
         RestResult result = new RestResult();
-        List<Order> orders = orderService.ApiCreateOrder(orderInfo);
+
+        Gson gson = new Gson();
+        List<OrderGoodsInfo> orderGoodsInfoListObj = gson.fromJson(orderGoodsInfoList, new TypeToken<List<OrderGoodsInfo>>() {
+        }.getType());
+
+        List<Order> orders = orderService.ApiCreateOrder(orderGoodsInfoListObj, addressId, orderFrom, orderMessage);
 
         List<Integer> orderIds = new ArrayList<>();
 
@@ -50,20 +60,20 @@ public class MOrderController {
         for (Order order : orders) {
             carriage.add(order.getCarriage());
             goodsAmount.add(order.getGoodsAmount());
-            if (flag == 0 ){
+            if (flag == 0) {
                 carriageInfo += order.getCarriage().toString();
-                flag= 1;
-            }else{
-                carriageInfo += "+"+order.getCarriage().toString();
+                flag = 1;
+            } else {
+                carriageInfo += "+" + order.getCarriage().toString();
             }
             orderIds.add(order.getOrderId());
         }
 
-        result.add("goodsAmount",goodsAmount);
-        result.add("carriageAmount",carriage);
-        result.add("orderAmount",goodsAmount.add(carriage));
-        result.add("carriageInfo",carriageInfo);
-        result.add("orderIds",orderIds);
+        result.add("goodsAmount", goodsAmount);
+        result.add("carriageAmount", carriage);
+        result.add("orderAmount", goodsAmount.add(carriage));
+        result.add("carriageInfo", carriageInfo);
+        result.add("orderIds", orderIds);
 
         return result;
     }

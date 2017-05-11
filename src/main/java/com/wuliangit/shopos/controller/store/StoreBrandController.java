@@ -1,6 +1,5 @@
 package com.wuliangit.shopos.controller.store;
 
-import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
@@ -8,23 +7,18 @@ import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.GoodsCategory;
-import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreBrand;
 import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.BrandService;
 import com.wuliangit.shopos.service.GoodsCategoryService;
 import com.wuliangit.shopos.service.StoreService;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -174,11 +168,11 @@ public class StoreBrandController {
      *
      * @return
      */
-    @RequestMapping("/get/all")
+    @RequestMapping("/get/category")
     @ResponseBody
-    public Object getAll() {
+    public Object getAll(@RequestParam(required = true,defaultValue = "0") Integer parentId) {
         RestResult result = new RestResult();
-        List<GoodsCategory> goodsCategories = goodsCategoryService.getAllGoodsCategoryList();
+        List<GoodsCategory> goodsCategories = goodsCategoryService.getGoodsCategoryListByParentId(parentId);
         result.add("goodsCategories", goodsCategories);
         return result;
     }

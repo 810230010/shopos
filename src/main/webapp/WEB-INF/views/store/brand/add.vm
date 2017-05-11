@@ -30,15 +30,15 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">分类</label>
                             <div class="col-sm-2">
-                                   一级分类:<select id="category1" name="category1" class="category_select form-control">
+                                   一级分类:<select id="category1" name="category1" class="category1_select form-control">
                                    </select>
                             </div>
                             <div class="col-sm-2">
-                                二级分类:<select id="category2" name="category2" class="category_select form-control">
+                                二级分类:<select id="category2" name="category2" class="category2_select form-control">
                                 </select>
                             </div>
                             <div class="col-sm-2">
-                                三级分类:<select id="category3" name="category3" class="category_select form-control">
+                                三级分类:<select id="category3" name="category3" class="category3_select form-control">
                                 </select>
                             </div>
                         </div>
@@ -139,15 +139,26 @@
     }).on("filebatchselected", function (event, files) {
         $(this).fileinput("upload");
     });
+
+
     //分类列表下拉框
-    $(".category_select").select2({
+     var category1par = 0;
+     var category2par = "";
+     var category3par = "";
+
+    $(".category1_select").select2({
         minimumResultsForSearch: -1,
         minimumInputLength: 0,
         language: "zh-CN",
         ajax: {
-            url: "/store/brand/get/all",
+            url: "/store/brand/get/category",
             dataType: 'json',
             delay: 250,
+            data: function (params) {
+                return {
+                    parentId: category1par,
+                };
+            },
             processResults: function (data, params) {
                 var results = [];
                 $.each(data.data.goodsCategories, function (i, v) {
@@ -178,17 +189,112 @@
             return repo.name
         },
         initSelection: function (element, callback) {
-            var xxx = $(this);
             var data = { id:0, name: "请选择分类" };
             callback(data);
         },
     }).on('change', function (e) {
-
-
-        var name = $(this).select2('data')[0].name;
         var id = $(this).select2('data')[0].id;
-        console.log(name+":"+id);
+        category2par = id;
     });
+
+     $(".category2_select").select2({
+         minimumResultsForSearch: -1,
+         minimumInputLength: 0,
+         language: "zh-CN",
+         ajax: {
+             url: "/store/brand/get/category",
+             dataType: 'json',
+             delay: 250,
+             data: function (params) {
+                 return {
+                     parentId: category2par,
+                 };
+             },
+             processResults: function (data, params) {
+                 var results = [];
+                 $.each(data.data.goodsCategories, function (i, v) {
+                     var o = {};
+                     o.id = v.goodsCategoryId;
+                     o.name = v.name;
+                     results.push(o);
+                 })
+                 return {
+                     results: results
+                 };
+             },
+             cache: true
+         },
+         formatSelection: function (item) {
+             return item.name;
+         },  // 选择结果中的显示
+         formatResult: function (item) {
+             return item.name;
+         },  // 搜索列表中的显示
+         escapeMarkup: function (markup) {
+             return markup;
+         }, // let our custom formatter work
+         templateResult: function formatRepo(repo) {
+             return repo.name
+         },
+         templateSelection: function formatRepo(repo) {
+             return repo.name
+         },
+         initSelection: function (element, callback) {
+             var data = { id:0, name: "请选择分类" };
+             callback(data);
+         },
+     }).on('change', function (e) {
+         var id = $(this).select2('data')[0].id;
+         category3par = id;
+     });
+
+     $(".category3_select").select2({
+         minimumResultsForSearch: -1,
+         minimumInputLength: 0,
+         language: "zh-CN",
+         ajax: {
+             url: "/store/brand/get/category",
+             dataType: 'json',
+             delay: 250,
+             data: function (params) {
+                 return {
+                     parentId: category3par,
+                 };
+             },
+             processResults: function (data, params) {
+                 var results = [];
+                 $.each(data.data.goodsCategories, function (i, v) {
+                     var o = {};
+                     o.id = v.goodsCategoryId;
+                     o.name = v.name;
+                     results.push(o);
+                 })
+                 return {
+                     results: results
+                 };
+             },
+             cache: true
+         },
+         formatSelection: function (item) {
+             return item.name;
+         },  // 选择结果中的显示
+         formatResult: function (item) {
+             return item.name;
+         },  // 搜索列表中的显示
+         escapeMarkup: function (markup) {
+             return markup;
+         }, // let our custom formatter work
+         templateResult: function formatRepo(repo) {
+             return repo.name
+         },
+         templateSelection: function formatRepo(repo) {
+             return repo.name
+         },
+         initSelection: function (element, callback) {
+             var data = { id:0, name: "请选择分类" };
+             callback(data);
+         },
+     })
 
     $("#submit").on('click', function () {
         if(check($("#name").val()) == true){

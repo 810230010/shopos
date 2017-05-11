@@ -142,7 +142,7 @@
                             type: "get",
                             data: {"id": data.id, "status":"不通过"},
                             success:function(result) {
-                                if(result == "ok"){
+                                if(result.code == 200){
                                     swal("拒绝申请", "已拒绝该店铺的入驻品牌申请", "success");
                                     setTimeout(function () {
                                         window.location.href = "/admin/brand/validateStoreBrandPage";
@@ -166,7 +166,7 @@
                     type: "get",
                     data: {"id": data.id, "status":"通过"},
                     success:function(result) {
-                        if (result == "ok") {
+                        if (result.code == 200) {
                             swal("通过申请", "已通过该店铺的入驻品牌申请", "success");
                             setTimeout(function () {
                                 window.location.href = "/admin/brand/validateStoreBrandPage";

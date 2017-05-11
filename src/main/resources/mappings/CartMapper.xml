@@ -7,7 +7,7 @@
     select
     <include refid="Base_Column_List" />
     from t_cart
-    where member_id = #{memberId} order by store_id
+    where member_id = #{memberId} order by store_id asc ,create_time desc
   </select>
 
 </mapper>

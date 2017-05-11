@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.dto.ApiCartListDTO;
 import com.wuliangit.shopos.entity.Cart;
 import com.wuliangit.shopos.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nilme on 2017/3/29.
@@ -31,10 +33,35 @@ public class MCartController {
      */
     @RequestMapping("/list")
     public Object getCartList(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize) {
         RestResult result = new RestResult();
         ArrayList<Cart> carts = cartService.getCartList(page, pageSize);
-        result.add("carts", carts);
+
+        List<ApiCartListDTO> apiCartListDTOS = new ArrayList<>();
+
+        for (Cart cart : carts) {
+            Integer storeId = cart.getStoreId();
+            ApiCartListDTO sotore = null;
+            for (ApiCartListDTO apiCartListDTO : apiCartListDTOS) {
+                if (apiCartListDTO.getStoreId() == storeId){
+                    sotore = apiCartListDTO;
+                    break;
+                }
+            }
+            if (sotore == null){
+                sotore = new ApiCartListDTO();
+                sotore.setStoreId(storeId);
+                sotore.setStoreName(cart.getStoreName());
+                List<Cart> newCarts = new ArrayList<>();
+                newCarts.add(cart);
+                sotore.setCarts(newCarts);
+                apiCartListDTOS.add(sotore);
+            }else{
+                sotore.getCarts().add(cart);
+            }
+        }
+
+        result.add("carts", apiCartListDTOS);
         return result;
     }
 
@@ -75,7 +102,7 @@ public class MCartController {
      * @return
      */
     @RequestMapping("/update")
-    public Object updateCartGoods(@RequestParam(value = "goodsId", required = true) Integer cartId,
+    public Object updateCartGoods(@RequestParam(value = "cartId", required = true) Integer cartId,
                                   @RequestParam(value = "goodsNum", required = false, defaultValue = "1") Integer goodsNum){
         RestResult result = new RestResult();
         int res = cartService.updateCartGoods(cartId,goodsNum);

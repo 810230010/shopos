@@ -129,10 +129,12 @@ public class MPayController {
                  if (passbackParams.endsWith("merge")){
                      List<Order> orders = orderService.getOrderByOutTradeNoMerge(outTradeNo);
                      for (Order order : orders) {
+                         order.setTradeNo(tradeNo);
                          orderPayed(order);
                      }
                  }else{
                      Order order = orderService.getOrderByOutTradeNo(outTradeNo);
+                     order.setTradeNo(tradeNo);
                      orderPayed(order);
                  }
              }

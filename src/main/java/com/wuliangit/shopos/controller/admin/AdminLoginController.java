@@ -2,9 +2,11 @@ package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
+import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.AdminService;
+import com.wuliangit.shopos.service.PerminssionService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * 管理员后台登录
@@ -27,6 +31,9 @@ public class AdminLoginController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private PerminssionService perminssionService;
 
     @RequestMapping("/index")
     public String viewToIndex(Model model) {
@@ -46,6 +53,8 @@ public class AdminLoginController {
             storeUser.setName("自营");
             SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeUser);
 
+            List<MenuDTO> menus = perminssionService.getAdminMenus();
+
             return "redirect:/admin/index";
         } catch (UnknownAccountException e) {
             error = "用户不存在";
@@ -53,7 +62,7 @@ public class AdminLoginController {
             error = "用户名/密码错误";
         } catch (ExcessiveAttemptsException e) {
             e.printStackTrace();
-            error = "重试此时过多，请稍候再试";
+            error = "重试次数过多，请稍候再试";
         } catch (AuthenticationException e) {
             e.printStackTrace();
             error = "用户名/密码错误";

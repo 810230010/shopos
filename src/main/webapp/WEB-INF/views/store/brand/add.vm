@@ -19,11 +19,11 @@
                     <h5>添加商品品牌</small></h5>
                 </div>
                 <div class="ibox-content">
-                    <form class="form-horizontal">
+                    <form id="brandForm" class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">品牌名称</label>
+                            <label for="name" class="col-sm-3 control-label"><font color="red">*</font>品牌名称</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" class="form-control" onblur="check(this.value)"><label id="msg"></label>
+                                <input id="name" name="name" type="text" class="form-control" onblur="check(this.value)" required><label id="msg"></label>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -38,31 +38,34 @@
                                 </select>
                             </div>
                             <div class="col-sm-2">
-                                三级分类:<select id="category3" name="category3" class="category3_select form-control">
+                                <font color="red">*</font>三级分类:<select id="category3" name="category3" class="category3_select form-control">
                                 </select>
                             </div>
+
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">品牌ＬＯＧＯ</label>
+                            <label for="file" class="col-sm-3 control-label"><font color="red">*</font>品牌ＬＯＧＯ</label>
                             <div class="col-sm-3" id="brand-logo-div">
                                 <input id="upload-image" class="file" name="file" type="file" multiple>
+                                <label id="msg3"></label>
                             </div>
                         </div>
 
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">首字母</label>
+                            <label class="col-sm-3 control-label" for="initial"><font color="red">*</font>首字母</label>
                             <div class="col-sm-7">
-                                <input id="initial" name="initial" type="text" class="form-control">
+                                <input id="initial" name="initial" type="text" class="form-control" required maxlength="1">
+                                <label id="msg4"></label>
                             </div>
                         </div>
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-3">
-                                <div class="btn btn-primary" type="submit" id="submit">提交申请</div>
+                                <input class="btn btn-primary" type="submit" id="submit" value="提交申请">
                                 <input type="reset" class="btn btn-success" value="重置"/>
                             </div>
                         </div>
@@ -84,26 +87,22 @@
 
 <!-- Jquery Validate -->
 <script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/admin/js/plugins/validate/jquery.validate.messages_cn.js"></script>
 <script>
      //检验输入的品牌是否添加过
+     var flag;
      function check(brandName) {
-         var flag = false;
-         if (brandName == "" || brandName == null){
-             return flag;
-         }
          $.ajax({
              url: "/store/brand/checkBrandName",
              type: "post",
              async: false,
              data:{"brandName": brandName},
              success:function(data) {
-                 if(data == "可以添加该品牌名"){
-                     $("#msg").html("<font color='green'>可以添加该品牌名!</font>");
-                     flag = true;
-                 }else{
-                     $("#msg").html("<font color='red'>该品牌名已存在,请勿重复添加!</font>");
-                     flag = false;
-                 }
+                     if(data == "品牌名已存在"){
+                         flag = false;
+                     }else{
+                         flag = true;
+                     }
              },
              error:function(data) {
                  alert("系统出错")
@@ -145,7 +144,7 @@
      var category1par = 0;
      var category2par = "";
      var category3par = "";
-
+     var select1Text;
     $(".category1_select").select2({
         minimumResultsForSearch: -1,
         minimumInputLength: 0,
@@ -197,7 +196,7 @@
         category2par = id;
     });
 
-     $(".category2_select").select2({
+    $(".category2_select").select2({
          minimumResultsForSearch: -1,
          minimumInputLength: 0,
          language: "zh-CN",
@@ -246,6 +245,7 @@
      }).on('change', function (e) {
          var id = $(this).select2('data')[0].id;
          category3par = id;
+
      });
 
      $(".category3_select").select2({
@@ -296,8 +296,19 @@
          },
      })
 
+
     $("#submit").on('click', function () {
-        if(check($("#name").val()) == true){
+
+            $("#brandForm").validate({
+                debug: true
+            })
+            if($("#name").val() == ""){
+                return;
+            }
+            if(flag == false){
+                $("#msg").html("<font color='red'>该品牌名已存在,请勿重复添加!</font>");
+                return;
+            }
             //////////////图片//////////////
             var logo_dom = $("#brand-logo-div .kv-zoom-cache .kv-file-content img");
             var logo_img = logo_dom.attr("src");
@@ -323,11 +334,11 @@
                             }, 2000);
                         }
                     });
-        }else{
-            sweetAlert("Oops...", "请先解决错误再提交", "error");
-        }
+
 
     });
-   
+
+
+
 </script>
 #parse("/store/models/end.vm")

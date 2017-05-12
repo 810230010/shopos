@@ -1,9 +1,6 @@
 #parse("/store/models/begin.vm")
 <link href="/assets/admin/css/plugins/select2/select2.min.css" rel="stylesheet">
 <link href="/assets/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-<link href="/assets/admin/css/plugins/magiccheck/magic-check.css" rel="stylesheet" type="text/css">
-<!-- 文件上传 -->
-<link href="/assets/admin/css/plugins/fileinput/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
 
 #parse("/store/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -22,12 +19,12 @@
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">品牌列表</label>
-                            <div class="col-sm-7">
+                            <div class="col-sm-7" style="position:relative; margin-left: -12px">
                                 <div class="col-sm-8" style="margin-left:0">
                                 <select id="parentId" name="parentId" class="parent_select form-control">
                                 </select>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                 <div class="btn btn-danger" type="submit" id="add">没有我想要的品牌?</div>
                                 </div>
                             </div>
@@ -44,7 +41,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">品牌Logo</label>
                             <div class="col-sm-3">
-                                <img id="pic" src="" alt="品牌logo"/>
+                                <img id="pic" src="http://ooa95t7wi.bkt.clouddn.com/FuoNLvsjafqutwsgO4VJdIwRrFv0" style="width:150px; height:150px" alt="品牌logo"/>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -71,11 +68,6 @@
 <!-- Select2 -->
 <script src="/assets/admin/js/plugins/select2/select2.full.min.js"></script>
 <script src="/assets/admin/js/plugins/select2/zh-CN.js"></script>
-
-<!-- 文件上传 -->
-<script src="/assets/admin/js/plugins/fileinput/fileinput.min.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
 
 <!-- Jquery Validate -->
 <script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
@@ -128,7 +120,7 @@
             callback(data);
         },
     }).on('change', function (e) {
-         $("#name").val($("#parentId").select2('data')[0].name);
+        $("#name").val($("#parentId").select2('data')[0].name);
         $("#pic").attr('src',$("#parentId").select2('data')[0].pic);
         $("#categoryName").val($("#parentId").select2('data')[0].categoryName);
          brandId = $("#parentId").select2('data')[0].id;
@@ -138,6 +130,10 @@
 
     //申请入驻
     $("#submit").on('click', function () {
+        if(brandId == undefined){
+            sweetAlert("Oops...", "请选择品牌名!", "error");
+            return;
+        }
         $.post("/store/brand/applyForJoinBrand",
                 {
                     "brandId": brandId,

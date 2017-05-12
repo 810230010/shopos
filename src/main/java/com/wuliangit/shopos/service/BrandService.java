@@ -135,4 +135,30 @@ public interface BrandService {
      * @return
      */
     ArrayList<StoreAddBrand> adminGetStoreJoinBrands(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType);
+
+    /**
+     * 店铺查询自己申请添加的品牌列表
+     * @param storeId
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @return
+     */
+    ArrayList<Brand> storeGetApplyAddBrands(Integer storeId, Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType);
+
+    /**
+     * 店铺删除申请添加的品牌
+     * @param brandId
+     * @return
+     */
+    int storeDeleteApplyAddBrand(Integer brandId);
+
+    /**
+     * 店铺保存重新编辑品牌信息
+     * @param brand
+     * @return
+     */
+    int storeSaveReeditBrandInfo(Brand brand);
 }

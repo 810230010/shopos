@@ -37,6 +37,7 @@
         where id=#{id}
     </delete>
 
+
     <!--查询所有品牌-->
     <select id="getAllAvailableBrands" resultType="com.wuliangit.shopos.entity.Brand">
         select brand_id,name,category_name,pic
@@ -118,4 +119,25 @@
             ${orderColumn} ${orderType}
         </if>
     </select>
+
+    <!--店铺查询自己申请添加的品牌列表-->
+    <select id="storeGetApplyAddBrands" resultType="com.wuliangit.shopos.entity.Brand">
+        select * from t_brand
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                (name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or category_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+            and store_id=#{storeId}
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType}
+        </if>
+    </select>
+
+    <!--店铺删除申请添加的品牌-->
+    <delete id="storeDeleteApplyAddBrand">
+        delete from t_brand where brand_id=#{brandId}
+    </delete>
 </mapper>

@@ -39,6 +39,7 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/store/brand/listPage">品牌列表</a></li>
                     <li><a href="/store/brand/joinPage">申请入驻品牌</a></li>
+                    <li><a href="/store/brand/storeAddBrandListPage">申请添加的品牌状态</a></li>
                 </ul>
             </li>
             <li>

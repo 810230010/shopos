@@ -153,7 +153,7 @@
                             type: "get",
                             data: {"adviceId": data.adviceId, "type":"0"},
                             success:function(result) {
-                                if(result == "ok"){
+                                if(result.code == 200){
                                     swal("已标记为已读留言!");
                                     setTimeout(function () {
                                         window.location.href = "/admin/member/adviceListPage";
@@ -186,7 +186,7 @@
                             type: "get",
                             data: {"adviceId": data.adviceId, "type":"1"},
                             success:function(result) {
-                                if(result == "ok"){
+                                if(result.code == 200{
                                     swal("删除留言", "已删除该留言", "success");
                                     setTimeout(function () {
                                         window.location.href = "/admin/member/adviceListPage";

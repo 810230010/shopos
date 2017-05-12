@@ -79,4 +79,13 @@ public class POJOConstants {
     public final static String BRAND_STATE_NOTPASS = "NOTPASS";
     //申请通过
     public final static String BRAND_STATE_PASS = "PASS";
+
+    //申请退换货类型
+    //退款
+    public final static String APPLY_REFUND_MOMEY = "REFUND_MOMEY";
+    //换货
+    public final static String APPLY_CHANGE_GOODS = "CHANGE_GOODS";
+    //退款退货
+    public final static String APPLY_REFUND_ALL = "REFUND_ALL";
+
 }

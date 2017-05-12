@@ -1,11 +1,10 @@
 package com.wuliangit.shopos.service.impl;
 
-import com.alipay.api.domain.AlipayTradeAppPayModel;
+import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.POJOConstants;
-import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.*;
-import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
+import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.*;
@@ -168,5 +167,17 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getOrderByOutTradeNo(String outTradeNo) {
         return orderMapper.getOrderByOutTradeNo(outTradeNo);
+    }
+
+    @Override
+    public List<StoreOrderListDTO> getStoreOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String type) {
+        PageHelper.startPage(page,pageSize);
+        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getStoreOrderList(searchKey,orderColumn,orderType,type);
+        return storeOrderListDTOS;
+    }
+
+    @Override
+    public Order getOrderDetail(Integer orderId) {
+        return orderMapper.selectByPrimaryKey(orderId);
     }
 }

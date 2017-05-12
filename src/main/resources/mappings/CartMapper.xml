@@ -10,4 +10,12 @@
     where member_id = #{memberId} order by store_id asc ,create_time desc
   </select>
 
+  <!--获取用户加如过购物车的商品-->
+  <select id="getCartByMemberIdAndGoodsSkuId" resultType="com.wuliangit.shopos.entity.Cart">
+    select
+    <include refid="Base_Column_List" />
+    from t_cart
+    where member_id = #{memberId} and goods_sku_id = #{goodsSkuId}
+  </select>
+
 </mapper>

@@ -80,7 +80,6 @@ public class MOrderController {
         result.add("orderAmount", orderAmount);
         result.add("carriageInfo", carriageInfo);
         result.add("orderIds", orderIds);
-
         return result;
     }
 

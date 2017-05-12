@@ -5,22 +5,7 @@
 #parse("/store/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>订单-订单管理</h2>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type=''">全部</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='INIT'">未付款</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='PAYED'">已付款未发货</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='DELIVE'">已发货未签收</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='RECEIVE'">已签收</a>
-        </p>
+        <h2>订单-退换货申请列表</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -28,7 +13,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">订单管理 </h5>
+                    <h5 id="rank">退换货申请列表 </h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -55,7 +40,7 @@
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': '/store/order/getStoreOrderList',
+                'url': '/store/refund/getApplyRefundList',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -64,30 +49,30 @@
                     param.orderColumn = d.columns[d.order[0]['column']]['data'];
                     param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
-                    param.type = $type;
                     return param;
                 },
             },
             "columns": [
-                {"data":"outTradeNo","width": "10%","title":"订单编号","orderable": false},
-                {"data":"memberName","width": "10%","title":"买家姓名","orderable": false},
-                {"data":"memberEmail","width": "10%","title":"买家邮箱","orderable": false},
-                {"data":"orderAmount","width": "10%","title":"订单金额","orderable": true},
-                {"data":"orderState","width": "10%","title":"订单状态","orderable": false,"render":function(data, type, row){
-                    if(data == "CANCEL")return "已取消";
-                    else if(data == "INIT")return "未付款";
-                    else if(data == "PAYED")return "已付款";
-                    else if(data == "DELIVE")return "已发货";
-                    else if(data == "RECEIVE")return "已收货";
+                {"data":"orderSn","width": "10%","title":"订单编号","orderable": false},
+                {"data":"refundSn","width": "10%","title":"申请编号","orderable": false},
+                {"data":"memberName","width": "10%","title":"买家会员名","orderable": false},
+                {"data":"goodsName","width": "10%","title":"商品名","orderable": false},
+                {"data":"refundType","width": "10%","title":"申请类型","orderable": false,"render":function(data, type, row){
+                    if(data == "REFUND_MOMEY")return "退款";
+                    else if(data == "CHANGE_GOODS")return "换货";
+                    else if(data == "REFUND_ALL")return "退款退货";
                 }},
-                {"data":"carriageName","width": "10%","title":"物流单号","orderable": true},
-                {"data":"orderId","width": "10%","title":"操作","orderable": false,"render": function(data, type, row){
+                {"data":"reasonInfo","width": "10%","title":"申请原因","orderable": false},
+                {"data":"refundId","width": "10%","title":"操作","orderable": false,"render":function(data, type, row){
                     return [
-                        '<a class="table-button btn btn-info btn-xs table-action detail" href="javascript:void(0)" style="margin-left: 10px;">',
-                        '查看详情 <i class="fa fa-info"></i>',
+                        '<a class="table-button btn btn-danger btn-xs table-action unpass" href="javascript:void(0)" style="margin-left: 10px;">',
+                        '不同意 <i class="fa fa-minus-circle"></i>',
+                        '</a>',
+                        '<a class="table-button btn btn-info btn-xs table-action pass" href="javascript:void(0)" style="margin-left: 10px;">',
+                        '同意 <i class="fa fa-check"></i>',
                         '</a>'
                     ].join('');
-                }},
+                }}
             ],
             "searching": true,
             "ordering":true,
@@ -126,12 +111,52 @@
         });
         var table = $('#datatables').DataTable();
 
-        table.on( 'click', '.detail', function () {
+        table.on( 'click', '.unpass', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/store/order/detail?orderId="+data.orderId;
+            $.operation(data,"NOT_CONSENT");
+        });
+
+        table.on( 'click', '.pass', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            $.operation(data,"CONSENT");
         });
     });
+
+    $.operation = function(data,flag){
+        $.ajax({
+            type: "post",
+            url: "/store/refund/checkRefundApply",
+            data: "refundId=" + data.refundId + "&sellerState=" + flag,
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    swal({
+                        title: "成功!",
+                        text: "操作成功!",
+                        type: "success",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                    setTimeout(function () {
+                        $('#datatables').DataTable().ajax.reload();
+                    }, 2000);
+                }else if(data.code == 500){
+                    swal({
+                        title: "失败!",
+                        text: "操作失败!",
+                        type: "error",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                    setTimeout(function () {
+                        $('#datatables').DataTable().ajax.reload();
+                    }, 2000);
+                }
+            }
+        });
+    }
 </script>
 
 #parse("/store/models/end.vm")

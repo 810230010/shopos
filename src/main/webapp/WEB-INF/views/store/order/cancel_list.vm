@@ -5,22 +5,7 @@
 #parse("/store/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>订单-订单管理</h2>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type=''">全部</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='INIT'">未付款</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='PAYED'">已付款未发货</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='DELIVE'">已发货未签收</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='RECEIVE'">已签收</a>
-        </p>
+        <h2>订单-已取消订单管理</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -28,7 +13,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">订单管理 </h5>
+                    <h5 id="rank">已取消订单管理 </h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -69,25 +54,10 @@
                 },
             },
             "columns": [
-                {"data":"outTradeNo","width": "10%","title":"订单编号","orderable": false},
+                {"data":"outTradeNo","width": "10%","title":"订单编号","orderable": true},
                 {"data":"memberName","width": "10%","title":"买家姓名","orderable": false},
                 {"data":"memberEmail","width": "10%","title":"买家邮箱","orderable": false},
-                {"data":"orderAmount","width": "10%","title":"订单金额","orderable": true},
-                {"data":"orderState","width": "10%","title":"订单状态","orderable": false,"render":function(data, type, row){
-                    if(data == "CANCEL")return "已取消";
-                    else if(data == "INIT")return "未付款";
-                    else if(data == "PAYED")return "已付款";
-                    else if(data == "DELIVE")return "已发货";
-                    else if(data == "RECEIVE")return "已收货";
-                }},
-                {"data":"carriageName","width": "10%","title":"物流单号","orderable": true},
-                {"data":"orderId","width": "10%","title":"操作","orderable": false,"render": function(data, type, row){
-                    return [
-                        '<a class="table-button btn btn-info btn-xs table-action detail" href="javascript:void(0)" style="margin-left: 10px;">',
-                        '查看详情 <i class="fa fa-info"></i>',
-                        '</a>'
-                    ].join('');
-                }},
+                {"data":"orderAmount","width": "10%","title":"订单金额","orderable": true}
             ],
             "searching": true,
             "ordering":true,
@@ -125,12 +95,6 @@
             },
         });
         var table = $('#datatables').DataTable();
-
-        table.on( 'click', '.detail', function () {
-            var tr = $(this).closest('tr');
-            var data = table.row(tr).data();
-            window.location.href = "/store/order/detail?orderId="+data.orderId;
-        });
     });
 </script>
 

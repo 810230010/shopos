@@ -58,12 +58,13 @@
             <li>
                 <a href="index.html#"><i class="fa fa-book"></i> <span class="nav-label">订单</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="ecommerce_products_grid.html">订单列表</a></li>
+                    <li><a href="/store/order/list?type=''">订单列表</a></li>
+                    <li><a href="/store/order/cancellist?type='CANCEL'">已取消订单列表</a></li>
                     <li><a href="ecommerce_product_list.html">缺货登记</a></li>
                     <li><a href="ecommerce_product_list.html">添加订单</a></li>
                     <li><a href="ecommerce_product.html">发货单列表</a></li>
-                    <li><a href="ecommerce_product_detail.html">退货单列表</a></li>
-                    <li><a href="ecommerce-cart.html">退换货申请列表</a></li>
+                    <li><a href="/store/refund/successRefundList?type=''">退换货单列表</a></li>
+                    <li><a href="/store/refund/refundList">退换货申请列表</a></li>
                 </ul>
             </li>
             <li>

@@ -54,7 +54,6 @@
                 },
             },
             "columns": [
-                {"data":"orderId","width":"8%","title":"序号","orderable": false},
                 {"data":"outTradeNo","width": "10%","title":"订单编号","orderable": true},
                 {"data":"memberName","width": "10%","title":"买家姓名","orderable": false},
                 {"data":"memberEmail","width": "10%","title":"买家邮箱","orderable": false},

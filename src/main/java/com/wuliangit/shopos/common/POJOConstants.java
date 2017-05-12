@@ -83,8 +83,6 @@ public class POJOConstants {
     //申请退换货类型
     //退款
     public final static String APPLY_REFUND_MOMEY = "REFUND_MOMEY";
-    //退货
-    public final static String APPLY_REGUND_GOODS = "REFUND_GOODS";
     //换货
     public final static String APPLY_CHANGE_GOODS = "CHANGE_GOODS";
     //退款退货

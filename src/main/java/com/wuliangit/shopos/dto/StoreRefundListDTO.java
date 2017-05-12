@@ -19,16 +19,19 @@ public class StoreRefundListDTO {
 
     private String buyerMessage;
 
+    private String refundType;
+
     public StoreRefundListDTO() {
     }
 
-    public StoreRefundListDTO(Integer refundId, String orderSn, String refundSn, String memberName, String goodsName, String buyerMessage) {
+    public StoreRefundListDTO(Integer refundId, String orderSn, String refundSn, String memberName, String goodsName, String buyerMessage, String refundType) {
         this.refundId = refundId;
         this.orderSn = orderSn;
         this.refundSn = refundSn;
         this.memberName = memberName;
         this.goodsName = goodsName;
         this.buyerMessage = buyerMessage;
+        this.refundType = refundType;
     }
 
     public Integer getRefundId() {
@@ -77,5 +80,13 @@ public class StoreRefundListDTO {
 
     public void setBuyerMessage(String buyerMessage) {
         this.buyerMessage = buyerMessage;
+    }
+
+    public String getRefundType() {
+        return refundType;
+    }
+
+    public void setRefundType(String refundType) {
+        this.refundType = refundType;
     }
 }

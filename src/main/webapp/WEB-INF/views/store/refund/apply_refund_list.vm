@@ -53,12 +53,16 @@
                 },
             },
             "columns": [
-                {"data":"refundId","width":"8%","title":"序号","orderable": false},
-                {"data":"orderSn","width": "10%","title":"订单编号","orderable": true},
+                {"data":"orderSn","width": "10%","title":"订单编号","orderable": false},
                 {"data":"refundSn","width": "10%","title":"申请编号","orderable": false},
                 {"data":"memberName","width": "10%","title":"买家会员名","orderable": false},
                 {"data":"goodsName","width": "10%","title":"商品名","orderable": false},
-                {"data":"buyerMessage","width": "10%","title":"申请原因","orderable": false},
+                {"data":"refundType","width": "10%","title":"申请类型","orderable": false,"render":function(data, type, row){
+                    if(data == "REFUND_MOMEY")return "退款";
+                    else if(data == "CHANGE_GOODS")return "换货";
+                    else if(data == "REFUND_ALL")return "退款退货";
+                }},
+                {"data":"reasonInfo","width": "10%","title":"申请原因","orderable": false},
                 {"data":"refundId","width": "10%","title":"操作","orderable": false,"render":function(data, type, row){
                     return [
                         '<a class="table-button btn btn-danger btn-xs table-action unpass" href="javascript:void(0)" style="margin-left: 10px;">',

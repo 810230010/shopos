@@ -27,4 +27,13 @@ public interface RefundMapper extends BaseMapper<Refund, Integer> {
      */
     Integer checkRefundApply(@Param("refundId") Integer refundId,@Param("sellerState") String sellerState);
 
+    /**
+     * @Description: 获取成功申请退换货的数据
+     * @Author: pangweichao
+     * @Date: 11:42 2017/5/12
+     * @Param: [searchKey, orderColumn, orderType, type]
+     * @return: java.util.List<com.wuliangit.shopos.dto.StoreRefundListDTO>
+     */
+    List<StoreRefundListDTO> getSuccessRefundList(@Param("searchKey") String searchKey,@Param("orderColumn") String orderColumn,@Param("orderType") String orderType,@Param("type") String type);
+
 }

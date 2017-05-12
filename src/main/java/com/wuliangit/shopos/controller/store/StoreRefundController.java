@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dto.StoreRefundListDTO;
+import com.wuliangit.shopos.entity.Refund;
 import com.wuliangit.shopos.service.StoreRefundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,20 @@ public class StoreRefundController {
      */
     @RequestMapping("/refundList")
     public String refundList(Model model){
-        return "/store/refund/applyrefundlist";
+        return "/store/refund/apply_refund_list";
+    }
+
+    /**
+     * @Description:
+     * @Author: pangweichao
+     * @Date: 11:33 2017/5/12
+     * @Param: [model, type]
+     * @return: java.lang.String
+     */
+    @RequestMapping("/successRefundList")
+    public String successRefundList(Model model,@RequestParam(value = "type",required = false) String type){
+        model.addAttribute("type",type);
+        return "/store/refund/success_refund_list";
     }
 
     /**
@@ -71,6 +85,41 @@ public class StoreRefundController {
         RestResult result = new RestResult();
         Integer info = storeRefundService.checkRefundApply(refundId,sellerState);
         return result;
+    }
+
+    /**
+     * @Description: 获取成功申请退换货的数据
+     * @Author: pangweichao
+     * @Date: 11:39 2017/5/12
+     * @Param: [draw, searchKey, orderColumn, orderType, page, pageSize, type]
+     * @return: java.lang.Object
+     */
+    @RequestMapping("getSuccessRefundList")
+    @ResponseBody
+    public Object getSuccessRefundList(@RequestParam("draw") int draw,
+                                       @RequestParam(value = "searchKey", required = false) String searchKey,
+                                       @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                                       @RequestParam(value = "orderType", required = false) String orderType,
+                                       @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                       @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                       @RequestParam(value = "type", required = false) String type){
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
+        List<StoreRefundListDTO> storeRefundListDTOS = storeRefundService.getSuccessRefundList(searchKey,orderColumn,orderType,page,pageSize,type);
+        return new PageResult<StoreRefundListDTO>(storeRefundListDTOS,draw);
+    }
+
+    /**
+     * @Description: 获取某条退换货的具体信息
+     * @Author: pangweichao
+     * @Date: 11:57 2017/5/12
+     * @Param: [model, refundId]
+     * @return: java.lang.String
+     */
+    @RequestMapping("/getRefundDetailInfo")
+    public String getRefundDetailInfo(Model model,Integer refundId) throws Exception{
+        Refund refund = storeRefundService.getRefundDetailInfo(refundId);
+        model.addAttribute("info",refund);
+        return "/store/refund/refund_detail_page";
     }
 
 }

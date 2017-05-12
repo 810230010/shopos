@@ -1,0 +1,271 @@
+#parse("/store/models/begin.vm")
+
+#parse("/store/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>订单-订单详情</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>订单详情</h5>
+                    <p align="right">
+                        <a type="button" class="btn btn-w-m btn-primary btn-small" href="/store/order/list?type=0">返回</a>
+                    </p>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">订单编号</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.outTradeNo)
+                                    $order.outTradeNo
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">第三方支付订单号</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.tradeNo)
+                                    $order.tradeNo
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">买家姓名</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.memberName)
+                                    $order.memberName
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">买家邮箱</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.memberEmail)
+                                    $order.memberEmail
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">支付方式</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.paymentCode == "WX")
+                                    微信
+                                    #elseif($order.paymentCode == "ALIPAY")
+                                    支付宝
+                                    #elseif($order.paymentCode == "CARD")
+                                    银行卡
+                                    #elseif($order.paymentCode)
+                                    $order.paymentCode
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">支付(付款)时间</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.paymentTime)
+                                    $order.paymentTime
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">订单完成时间</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.finnshedTime)
+                                    $order.finnshedTime
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品总价格</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.goodsAmount)
+                                    $order.goodsAmount
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">订单总价格</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.orderAmount)
+                                    $order.orderAmount
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">运费</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.carriage)
+                                    $order.carriage
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">买家评价状态</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.memberEvaluationState == "NO")
+                                    未评价
+                                    #elseif($order.memberEvaluationState == "YES")
+                                    已评价
+                                    #elseif($order.memberEvaluationState)
+                                        $order.memberEvaluationState
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">订单状态</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.orderState == "CANCEL")
+                                    已取消
+                                    #elseif($order.orderState == "INIT")
+                                    未付款
+                                    #elseif($order.orderState == "PAYED")
+                                    已付款
+                                    #elseif($order.orderState == "DELIVE")
+                                    已发货
+                                    #elseif($order.orderState == "RECEIVE")
+                                    已收货
+                                    #elseif($order.orderState == "RECEIVE")
+                                    $order.orderState
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">物流单号</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.carriageName)
+                                    $order.carriageName
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">创建时间</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.createTime)
+                                    $order.createTime
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">配送时间</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.deliverTime)
+                                    $order.deliverTime
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">买家订单留言</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.orderMessage)
+                                    $order.orderMessage
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">订单赠送积分</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.orderPointscount)
+                                    $order.orderPointscount
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">收货人地址</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.reciverAddress)
+                                    $order.reciverAddress
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">收货人手机电话</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.reciverPhone)
+                                    $order.reciverPhone
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">收货人姓名</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($order.reciverName)
+                                    $order.reciverName
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+#parse("/admin/models/end.vm")

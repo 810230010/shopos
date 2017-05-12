@@ -11,4 +11,24 @@
     <select id="getOrderByOutTradeNo" resultType="com.wuliangit.shopos.entity.Order">
         select * from t_order where out_trade_no = #{outTradeNo}
     </select>
+
+    <!--商铺获取订单列表数据-->
+    <select id="getStoreOrderList" resultType="com.wuliangit.shopos.dto.StoreOrderListDTO">
+        SELECT order_id,out_trade_no,member_name,member_email,order_amount,order_state,carriage_name
+        FROM t_order
+        <where>
+            delete_state = "NO"
+            <if test="type != null and type != '' ">
+                and ( order_state = #{type})
+            </if>
+            <if test="searchKey != null and searchKey != '' ">
+                and ( out_trade_no like '%${searchKey}%')
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        create_time desc
+    </select>
 </mapper>

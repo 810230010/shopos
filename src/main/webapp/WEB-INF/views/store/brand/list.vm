@@ -48,7 +48,6 @@
             "columns": [
                 {"data":"brandId","width":"7%","title":"品牌序号","visible": false},
                 {"data":"brandName","width": "10%","title":"品牌名称","orderable": false},
-                {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
                 {
                     "data":"pic",
                     "width": "10%",
@@ -59,6 +58,7 @@
                         return html;
                     }
                 },
+                {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
                 {"data":"passed","width": "10%","title":"是否入驻成功","orderable": false},
                 {"data":"isOnshelf","width": "10%","title":"上下架状态","orderable": false},
                 {
@@ -133,7 +133,7 @@
                 url: "/store/brand/updateBrandStatus",
                 data : {"id":data.id, "status":"已"+$(".edit").text()},
                 success:function(result) {
-                    if(result == "ok"){
+                    if(result.code == 200){
                         swal({
                             title: "成功!",
                             text: "商品分类修改成功!",
@@ -171,7 +171,7 @@
                             type: "get",
                             data: {"id": data.id},
                             success:function(result) {
-                                if(result == "ok"){
+                                if(result.code == 200){
                                     swal("Deleted!", "Your brand has been deleted.", "success");
                                 }
                             },

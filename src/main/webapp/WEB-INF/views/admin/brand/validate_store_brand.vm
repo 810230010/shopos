@@ -69,7 +69,7 @@
                     }
                 },
                 {
-                    "data":"memberId",
+                    "data":"storeId",
                     "width": "20%",
                     "title":"操作",
                     "orderable": false,
@@ -183,7 +183,7 @@
         table.on( 'click', '.detail', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/admin/store/detailPage?memberId="+data.memberId;
+            window.location.href = "/admin/store/storeDetailPage?storeId="+data.storeId;
         });
 
 

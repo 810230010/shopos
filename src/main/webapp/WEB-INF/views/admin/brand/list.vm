@@ -63,9 +63,6 @@
             "columns": [
                 {"data":"brandId","width":"7%","title":"品牌序号","visible": false},
                 {"data":"name","width": "10%","title":"品牌名称","orderable": false},
-                {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
-                {"data":"sort","width": "10%","title":"排序","orderable": true},
-                {"data":"isRecommend","width": "10%","title":"是否推荐","orderable": true},
                 {
                     "data":"pic",
                     "width": "10%",
@@ -74,6 +71,20 @@
                     "render": function (data, type, row) {
                         var html = '<div class="pull-left"><img src="' + row.pic + '" style="width: 60px;height: 60px;"></div>';
                         return html;
+                    }
+                },
+                {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
+                {"data":"sort","width": "10%","title":"排序","orderable": true},
+                {
+                    "data":"isRecommend",
+                    "width": "10%",
+                    "title":"是否推荐",
+                    "orderable": false,
+                    "render": function (data, type, row) {
+                        if(row.isRecommend == 0){
+                            return "不推荐";
+                        }
+                        return "推荐";
                     }
                 },
                 {

@@ -78,9 +78,10 @@ public class StoreBrandController {
      */
     @RequestMapping("/updateBrandStatus")
     @ResponseBody
-    public String changOnshelfStatus(Integer id, String status) {
+    public Object changOnshelfStatus(Integer id, String status) {
+        RestResult result = new RestResult();
         brandService.updateBrandStatus(id, status);
-        return "ok";
+        return result;
     }
 
     /**
@@ -91,9 +92,10 @@ public class StoreBrandController {
      */
     @RequestMapping("/deleteBrand")
     @ResponseBody
-    public String deleteStoreBrand(Integer id) {
+    public Object deleteStoreBrand(Integer id) {
+        RestResult result = new RestResult();
         brandService.deleteStoreBrand(id);
-        return "ok";
+        return result;
     }
 
     /**

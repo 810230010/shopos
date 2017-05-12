@@ -118,11 +118,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">店铺横幅</label>
                             <div class="col-sm-7">
-                                <span class="form-control">
-                                    #if($store.banner)
-                                    $store.banner
-                                    #end
-                                </span>
+                                <img src="$store.banner" style="width:200px; height:200px">
                             </div>
                         </div>
 

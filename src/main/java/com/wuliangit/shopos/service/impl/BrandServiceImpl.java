@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.dao.BrandMapper;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.model.StoreAddBrand;
@@ -109,6 +110,25 @@ public class BrandServiceImpl implements BrandService {
     public ArrayList<StoreAddBrand> adminGetStoreJoinBrands(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
         PageHelper.startPage(page, pageSize);
         return brandMapper.getStoreJoinBrands(searchKey, orderColumn, orderType);
+    }
+
+    @Override
+    public ArrayList<Brand> storeGetApplyAddBrands(Integer storeId, Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
+        PageHelper.startPage(page, pageSize);
+        return brandMapper.storeGetApplyAddBrands(storeId, searchKey, orderColumn, orderType);
+    }
+
+    @Override
+    public int storeDeleteApplyAddBrand(Integer brandId) {
+        return brandMapper.storeDeleteApplyAddBrand(brandId);
+    }
+
+
+    @Override
+    @Transactional
+    public int storeSaveReeditBrandInfo(Brand brand) {
+        brandMapper.updateBrandStatus(brand.getBrandId(), POJOConstants.BRAND_STATE_APPLYING);
+        return brandMapper.updateByPrimaryKeySelective(brand);
     }
 
 

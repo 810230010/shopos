@@ -4,7 +4,9 @@ import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
+import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.model.StoreBrand;
@@ -191,6 +193,83 @@ public class StoreBrandController {
         brand.setStoreId(store.getStoreId());
         brand.setState(POJOConstants.BRAND_STATE_APPLYING);
         brandService.addBrand(brand);
+        return result;
+    }
+
+    /**
+     * 跳转到店铺申请添加的品牌列表页面
+     * @return
+     */
+    @RequestMapping("/storeAddBrandListPage")
+    public String jumpToStoreAddBrandListPage(){
+         return "store/brand/apply_add_brand_list";
+    }
+    /**
+     * 店铺申请添加的品牌列表
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/getStoreAddBransList")
+    @ResponseBody
+    public Object getStoreGoodsWithAd(@RequestParam("draw") int draw,
+                                      @RequestParam(value = "searchKey", required = false) String searchKey,
+                                      @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                                      @RequestParam(value = "orderType", required = false) String orderType,
+                                      @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                      @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
+        Integer storeId = WebUtil.getCurrentStore().getStoreId();
+        List<Brand> brands = brandService.storeGetApplyAddBrands(storeId, page, pageSize, searchKey, orderColumn, orderType);
+        return new PageResult<Brand>(brands,draw);
+    }
+
+    /**
+     * 店铺删除申请添加的品牌
+     * @param brandId
+     * @return
+     */
+    @RequestMapping("/deleteApplyAddBrand")
+    @ResponseBody
+    public Object storeDeleteApplyAddBrand(Integer brandId){
+         RestResult result = new RestResult();
+         int res = brandService.storeDeleteApplyAddBrand(brandId);
+         return result;
+    }
+
+    /**
+     * 跳转到店铺重新编辑品牌页面
+     * @param brandId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/storeReeditApplyAddBrandPage")
+    public String jumpToReeditApplyBrandPage(Integer brandId, Model model){
+         Brand brand = brandService.getBrandById(brandId);
+         model.addAttribute("brand", brand);
+         model.addAttribute("uploadToken", QiNiuUtils.getToken());
+         return "store/brand/reedit_apply_add_brand";
+    }
+
+    /**
+     * 保存店铺提交重新编辑品牌信息
+     * @param brand
+     * @return
+     */
+    @RequestMapping("/storeSaveReeditInfo")
+    @ResponseBody
+    public Object storeSaveEditInfo(Brand brand){
+        RestResult result = new RestResult();
+        if (brand.getPic().length() > 0) {
+            brand.setPic(QiNiuUtils.getRealUrl(brand.getPic()));
+        } else {
+            brand.setPic(null);
+        }
+        int res = brandService.storeSaveReeditBrandInfo(brand);
         return result;
     }
 }

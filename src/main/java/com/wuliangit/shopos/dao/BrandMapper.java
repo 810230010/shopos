@@ -101,4 +101,22 @@ public interface BrandMapper extends BaseMapper<Brand, Integer> {
     ArrayList<StoreAddBrand> getStoreJoinBrands(@Param("searchKey") String searchKey,
                                                 @Param("orderColumn") String orderColumn,
                                                 @Param("orderType")String orderType);
+
+    /**
+     * 店铺查询自己申请添加的品牌列表
+     * @param storeId
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @return
+     */
+    ArrayList<Brand> storeGetApplyAddBrands(@Param("storeId") Integer storeId, @Param("searchKey") String searchKey, @Param("orderColumn") String orderColumn, @Param("orderType")String orderType);
+
+    /**
+     * 店铺删除申请添加的品牌
+     * @param brandId
+     * @return
+     */
+    int storeDeleteApplyAddBrand(Integer brandId);
 }
+

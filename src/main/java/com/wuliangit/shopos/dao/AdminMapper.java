@@ -11,4 +11,6 @@ public interface AdminMapper extends BaseMapper<Admin, Integer> {
      * @return
      */
     Admin getByUsername(String username);
+
+
 }

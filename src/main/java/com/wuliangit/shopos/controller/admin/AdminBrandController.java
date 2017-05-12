@@ -176,11 +176,11 @@ public class AdminBrandController {
     @RequestMapping("/searchNewAddBrands")
     @ResponseBody
     public Object searchBrands(@RequestParam("draw") int draw,
-                         @RequestParam(value = "searchKey", required = false) String searchKey,
-                         @RequestParam(value = "orderColumn", required = false) String orderColumn,
-                         @RequestParam(value = "orderType", required = false) String orderType,
-                         @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                         @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+                             @RequestParam(value = "searchKey", required = false) String searchKey,
+                             @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                             @RequestParam(value = "orderType", required = false) String orderType,
+                             @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                             @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         orderColumn = StringUtils.camelToUnderline(orderColumn);
         ArrayList<StoreAddBrand> brands = brandService.adminSearchNewAddBrands(page, pageSize, searchKey, orderColumn, orderType);
         return new PageResult<StoreAddBrand>(brands, draw);

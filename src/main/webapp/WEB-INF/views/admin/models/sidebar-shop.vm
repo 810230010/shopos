@@ -89,24 +89,15 @@
             <li>
                 <a href="index.html#"><i class="fa fa-ticket"></i> <span class="nav-label">品牌管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="/admin/brand/brandListPage">品牌列表</a></li>
-                    <li>
-                        <a href="widgets.html#">待审核列表<span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="/admin/brand/validateBrandPage">店铺申请添加品牌列表</a>
-                            </li>
-                            <li>
-                                <a href="/admin/brand/validateStoreBrandPage">店铺申请入驻品牌列表</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <li><a href="/admin/brand/brandListPage">所有审核通过品牌列表</a></li>
+                    <li><a href="/admin/brand/validateBrandPage">店铺申请添加品牌列表</a></li>
+                    <li><a href="/admin/brand/validateStoreBrandPage">店铺申请入驻品牌列表</a></li>
                 </ul>
             </li>
             <li>
                 <a href="index.html#"><i class="fa fa-unlock-alt"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="ecommerce_products_grid.html">管理员列表</a></li>
+                    <li><a href="/admin/authority/allAdminListPge">管理员列表</a></li>
                     <li><a href="ecommerce_product_list.html">管理员日志</a></li>
                     <li><a href="ecommerce_product.html">角色管理</a></li>
                 </ul>

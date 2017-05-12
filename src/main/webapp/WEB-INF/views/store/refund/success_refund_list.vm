@@ -73,7 +73,7 @@
                     else if(data == "CHANGE_GOODS")return "换货";
                     else if(data == "REFUND_ALL")return "退款退货";
                 }},
-                {"data":"buyerMessage","width": "10%","title":"申请原因","orderable": false},
+                {"data":"reasonInfo","width": "10%","title":"申请原因","orderable": false},
                 {"data":"refundId","width": "10%","title":"操作","orderable": false,"render":function(data, type, row){
                     return [
                         '<a class="table-button btn btn-info btn-xs table-action detail" href="javascript:void(0)" style="margin-left: 10px;">',

@@ -10,7 +10,7 @@
 
     <!--获取退换货申请列表的数据-->
     <select id="getApplyRefundList" resultType="com.wuliangit.shopos.dto.StoreRefundListDTO">
-        SELECT refund_id,order_sn,refund_sn,member_name,goods_name,buyer_message,refund_type
+        SELECT refund_id,order_sn,refund_sn,member_name,goods_name,reason_info,refund_type
         FROM t_refund
         <where>
             seller_state = "CHECKING" AND refund_state = "ING"
@@ -27,7 +27,7 @@
 
     <!--获取成功申请退换货的数据-->
     <select id="getSuccessRefundList" resultType="com.wuliangit.shopos.dto.StoreRefundListDTO">
-        SELECT refund_id,order_sn,refund_sn,member_name,goods_name,buyer_message,refund_type
+        SELECT refund_id,order_sn,refund_sn,member_name,goods_name,reason_info,refund_type
         FROM t_refund
         <where>
             seller_state = "CONSENT"

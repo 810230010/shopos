@@ -207,6 +207,9 @@
     <bean id="apiFilter" class="com.wuliangit.shopos.common.shiro.filter.ApiFilter">
         <property name="tokenManager" ref="tokenManager"/>
     </bean>
+    <bean id="apiPublicFilter" class="com.wuliangit.shopos.common.shiro.filter.ApiPublicFilter">
+        <property name="tokenManager" ref="tokenManager"/>
+    </bean>
 
     <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
         <property name="redirectUrl" value="/admin/login"/>
@@ -227,6 +230,7 @@
                 <entry key="logout" value-ref="logoutFilter"/>
                 <entry key="weixin" value-ref="weixinFilter"/>
                 <entry key="api" value-ref="apiFilter"/>
+                <entry key="apiPublic" value-ref="apiPublicFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
@@ -237,14 +241,18 @@
                 <!--测试-->
                 /test/** = anon
 
+                <!--支付异步通知-->
+                /api/v1/pay/alipay/notify = anon
+
                 <!--接口api-->
                 /api/v1/member/login = anon
                 /api/v1/member/logout = anon
                 /api/v1/member/register/getCode = anon
                 /api/v1/member/register/codeCheck = anon
                 /api/v1/member/register = anon
-                /api/v1/public/** = anon
+                /api/v1/public/** = apiPublic
                 /api/** = api
+
 
                 <!--总后台用户-->
                 /admin/login = authc

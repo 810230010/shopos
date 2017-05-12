@@ -159,4 +159,14 @@ public class OrderServiceImpl implements OrderService {
     public int updateOrder(Order order) {
         return orderMapper.updateByPrimaryKeySelective(order);
     }
+
+    @Override
+    public List<Order> getOrderByOutTradeNoMerge(String outTradeNo) {
+        return orderMapper.getOrderByOutTradeNoMerge(outTradeNo);
+    }
+
+    @Override
+    public Order getOrderByOutTradeNo(String outTradeNo) {
+        return orderMapper.getOrderByOutTradeNo(outTradeNo);
+    }
 }

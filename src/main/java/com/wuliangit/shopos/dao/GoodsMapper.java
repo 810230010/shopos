@@ -53,13 +53,6 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
     GoodsWithoutBody selectGoodsWithoutBodyByPrimaryKey(Integer goodsId);
 
     /**
-     * 获取商铺商品
-     * @param storeId
-     * @return
-     */
-    List<StoreGoodsDetailDTO> getStoreGoods(Integer storeId);
-
-    /**
      * 获取商品的简要信息
      * @param goodsId
      * @return

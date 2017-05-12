@@ -8,7 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.util.AntPathMatcher;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import sun.misc.BASE64Encoder;
 
 import javax.servlet.ServletRequest;
@@ -32,11 +34,8 @@ public class ApiFilter extends AccessControlFilter {
 
     private TokenManager<Integer, Member> tokenManager;
 
-
-
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-
         String sign = request.getParameter(SIGN);
         String timestamp = request.getParameter(TIMESTAMP);
         String userIdStr = request.getParameter(USERID);
@@ -49,12 +48,12 @@ public class ApiFilter extends AccessControlFilter {
         Integer userId = Integer.parseInt(userIdStr);
 
         Session session = SecurityUtils.getSubject().getSession();
-        session.setAttribute(SESSION_CURRENT_USERID,userId);
+        session.setAttribute(SESSION_CURRENT_USERID, userId);
 
         // 判断用户是否已经登录
         String serverToken = tokenManager.getToken(userId);
 
-        if(serverToken == null){
+        if (serverToken == null) {
             return false;
         }
 
@@ -111,15 +110,15 @@ public class ApiFilter extends AccessControlFilter {
         if (sign == null || timestamp == null || userIdStr == null) {
             result.setCode(403);
             result.setMsg("parameter of \'sign\' and \'timestamp\' and \'userId\' could not be null, please check it again!");
-        }else{
+        } else {
             result.setCode(402);
             result.setMsg("unauthentication request! pelease login before request the api");
         }
 
-        if (!StringUtils.isEmpty(userIdStr)){
+        if (!StringUtils.isEmpty(userIdStr)) {
             // 判断用户是否已经登录
             String serverToken = tokenManager.getToken(Integer.parseInt(userIdStr));
-            if(serverToken == null){//未登录
+            if (serverToken == null) {//未登录
                 result.setCode(401);
                 result.setMsg("please login first!!!");
             }
@@ -138,6 +137,7 @@ public class ApiFilter extends AccessControlFilter {
 
     /**
      * 对参数字典序排序，并拼接成url参数
+     *
      * @param maptest
      * @return
      */

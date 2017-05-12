@@ -1,13 +1,17 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreGoodsAdMapper;
+import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.StoreGoodsAd;
 import com.wuliangit.shopos.exception.BaseException;
 import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.StoreGoodsAdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by 26229 on 2017/5/6.
@@ -27,7 +31,7 @@ public class StoreGoodsAdServiceImpl implements StoreGoodsAdService {
     public Integer updateGoodsAd(StoreGoodsAd storeGoodsAd) throws Exception {
         StoreUser currentStore = WebUtil.getCurrentStore();
         storeGoodsAd.setStoreId(currentStore.getStoreId());
-        Integer result = storeGoodsAdMapper.updateByPrimaryKeySelective(storeGoodsAd);
+        Integer result = storeGoodsAdMapper.updateGoodsAd(storeGoodsAd);
         if(result != 1){
             throw new BaseException("设置失败");
         }
@@ -43,5 +47,17 @@ public class StoreGoodsAdServiceImpl implements StoreGoodsAdService {
             throw new BaseException("插入失败");
         }
         return info;
+    }
+
+    @Override
+    public List<StoreGoodsDetailDTO> getStoreGoodsWithAd(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, Integer storeId) {
+        PageHelper.startPage(page,pageSize);
+        List<StoreGoodsDetailDTO> storeGoodsDetailDTOS = storeGoodsAdMapper.getStoreGoodsWithAd(searchKey,orderColumn,orderType,storeId);
+        return storeGoodsDetailDTOS;
+    }
+
+    @Override
+    public List<StoreGoodsDetailDTO> getStoreGoodsWithoutAd(Integer storeId) {
+        return storeGoodsAdMapper.getStoreGoodsWithoutAd(storeId);
     }
 }

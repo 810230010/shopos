@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.OrderMapper" >
 
+    <!--获取合并的订单-->
+    <select id="getOrderByOutTradeNoMerge" resultType="com.wuliangit.shopos.entity.Order">
+        select * from t_order where out_trade_no_merge = #{outTradeNo}
+    </select>
+
+    <!--获取当个订单-->
+    <select id="getOrderByOutTradeNo" resultType="com.wuliangit.shopos.entity.Order">
+        select * from t_order where out_trade_no = #{outTradeNo}
+    </select>
 </mapper>

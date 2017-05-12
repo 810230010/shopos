@@ -169,15 +169,10 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getOrderByOutTradeNo(outTradeNo);
     }
 
-    public List<StoreOrderListDTO> getStoreOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, Integer type) {
+    @Override
+    public List<StoreOrderListDTO> getStoreOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String type) {
         PageHelper.startPage(page,pageSize);
-        String state = null;
-        if (type == 1)state = POJOConstants.ORDER_STATE_INIT;
-        else if(type == 2)state = POJOConstants.ORDER_STATE_PAYED;
-        else if(type == 3)state = POJOConstants.ORDER_STATE_DELIVE;
-        else if (type == 4)state = POJOConstants.ORDER_STATE_RECEIVE;
-        else if (type == 5)state = POJOConstants.ORDER_STATE_CANCEL;
-        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getStoreOrderList(searchKey,orderColumn,orderType,state);
+        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getStoreOrderList(searchKey,orderColumn,orderType,type);
         return storeOrderListDTOS;
     }
 

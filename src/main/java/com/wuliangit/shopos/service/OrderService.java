@@ -59,7 +59,7 @@ public interface OrderService {
      * @Param: [searchKey, orderColumn, orderType, page, pageSize, type]
      * @return: java.lang.Object
      */
-    List<StoreOrderListDTO> getStoreOrderList(String searchKey,String orderColumn,String orderType,Integer page,Integer pageSize,Integer type);
+    List<StoreOrderListDTO> getStoreOrderList(String searchKey,String orderColumn,String orderType,Integer page,Integer pageSize,String type);
 
     /**
      * @Description: 获取订单详情

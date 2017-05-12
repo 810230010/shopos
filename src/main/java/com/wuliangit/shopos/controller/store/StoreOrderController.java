@@ -34,7 +34,7 @@ public class StoreOrderController {
      * @return: java.lang.String
      */
     @RequestMapping("/list")
-    public String list(Model model, @RequestParam(value = "type", required = false) Integer type){
+    public String list(Model model, @RequestParam(value = "type", required = false) String type){
         model.addAttribute("type",type);
         return "/store/order/list";
     }
@@ -61,7 +61,7 @@ public class StoreOrderController {
      * @return: java.lang.String
      */
     @RequestMapping("/cancellist")
-    public String cancellist(Model model,@RequestParam(value = "type", required = false) Integer type){
+    public String cancellist(Model model,@RequestParam(value = "type", required = false) String type){
         model.addAttribute("type",type);
         return "/store/order/cancel_list";
     }
@@ -81,7 +81,7 @@ public class StoreOrderController {
                                @RequestParam(value = "orderType", required = false) String orderType,
                                @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                               @RequestParam(value = "type", required = false) Integer type){
+                               @RequestParam(value = "type", required = false) String type){
         orderColumn = StringUtils.camelToUnderline(orderColumn);
         List<StoreOrderListDTO> storeOrderListDTOS = orderService.getStoreOrderList(searchKey,orderColumn,orderType,page,pageSize,type);
         return new PageResult<StoreOrderListDTO>(storeOrderListDTOS,draw);

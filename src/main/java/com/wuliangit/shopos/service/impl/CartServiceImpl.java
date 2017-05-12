@@ -30,7 +30,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public ArrayList<ApiCartDTO> getCartList(Integer page, Integer pageSize) {
         Member user = WebUtil.getCurrentMember();
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         ArrayList<ApiCartDTO> carts = cartMapper.getCartList(user.getMemberId());
         return carts;
     }
@@ -42,22 +42,28 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int addCartGoods(Integer goodsId, Integer goodsSkuId, Integer goodsNum) {
-        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
-        Member user = WebUtil.getCurrentMember();
-        Cart cart = new Cart();
+        Member member = WebUtil.getCurrentMember();
 
-        cart.setGoodsSkuId(goodsSkuId);
-        cart.setStoreId(goods.getStoreId());
-        cart.setStoreName(goods.getStoreName());
-        cart.setMemberId(user.getMemberId());
-        cart.setCreateTime(new Date());
-        cart.setGoodsId(goodsId);
-        cart.setGoodsName(goods.getName());
-        cart.setGoodsNum(goodsNum);
-        cart.setGoodsPrice(goods.getPrice());
-        cart.setGoodsTitleImg(goods.getTitleImg());
+        Cart oldCart = cartMapper.getCartByMemberIdAndGoodsSkuId(member.getMemberId(), goodsSkuId);
 
-        return cartMapper.insertSelective(cart);
+        if (oldCart != null) {//之前有加如果购物车
+            oldCart.setGoodsNum(oldCart.getGoodsNum() + goodsNum);
+            return cartMapper.updateByPrimaryKeySelective(oldCart);
+        } else {//之前没有加如果购物车
+            Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+            Cart cart = new Cart();
+            cart.setGoodsSkuId(goodsSkuId);
+            cart.setStoreId(goods.getStoreId());
+            cart.setStoreName(goods.getStoreName());
+            cart.setMemberId(member.getMemberId());
+            cart.setCreateTime(new Date());
+            cart.setGoodsId(goodsId);
+            cart.setGoodsName(goods.getName());
+            cart.setGoodsNum(goodsNum);
+            cart.setGoodsPrice(goods.getPrice());
+            cart.setGoodsTitleImg(goods.getTitleImg());
+            return cartMapper.insertSelective(cart);
+        }
     }
 
     @Override

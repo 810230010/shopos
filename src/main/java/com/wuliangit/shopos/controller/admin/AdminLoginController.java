@@ -2,6 +2,7 @@ package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.model.StoreUser;
@@ -47,13 +48,14 @@ public class AdminLoginController {
             SecurityUtils.getSubject().login(new UserToken(username, password, UserToken.UserType.ADMIN, UserToken.LoginType.ADMIN));
 
             Admin admin = adminService.getByUsername(username);
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_ADMIN, admin);
+            WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_ADMIN, admin);
             StoreUser storeUser = new StoreUser();
             storeUser.setStoreId(0);
             storeUser.setName("自营");
-            SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeUser);
+            WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeUser);
 
             List<MenuDTO> menus = perminssionService.getAdminMenus();
+            WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_MENU, menus);
 
             return "redirect:/admin/index";
         } catch (UnknownAccountException e) {

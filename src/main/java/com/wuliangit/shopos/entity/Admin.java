@@ -19,6 +19,8 @@ public class Admin {
 
     private Boolean delFlag;
 
+    private String email;
+
     public Integer getAdminId() {
         return adminId;
     }
@@ -81,5 +83,13 @@ public class Admin {
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 }

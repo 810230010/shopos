@@ -9,10 +9,10 @@
     <result column="href" property="href" jdbcType="VARCHAR" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
     <result column="permission" property="permission" jdbcType="VARCHAR" />
-    <result column="tpye" property="tpye" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    permission_id, parent_id, name, sort, href, icon, permission, tpye
+    permission_id, parent_id, name, sort, href, icon, permission, type
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,10 +30,10 @@
     </selectKey>
     insert into t_permission (parent_id, name, sort, 
       href, icon, permission, 
-      tpye)
+      type)
     values (#{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{href,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, 
-      #{tpye,jdbcType=VARCHAR})
+      #{type,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Permission" >
     <selectKey resultType="java.lang.Integer" keyProperty="permissionId" order="AFTER" >
@@ -59,8 +59,8 @@
       <if test="permission != null" >
         permission,
       </if>
-      <if test="tpye != null" >
-        tpye,
+      <if test="type != null" >
+        type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -82,8 +82,8 @@
       <if test="permission != null" >
         #{permission,jdbcType=VARCHAR},
       </if>
-      <if test="tpye != null" >
-        #{tpye,jdbcType=VARCHAR},
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -108,8 +108,8 @@
       <if test="permission != null" >
         permission = #{permission,jdbcType=VARCHAR},
       </if>
-      <if test="tpye != null" >
-        tpye = #{tpye,jdbcType=VARCHAR},
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
       </if>
     </set>
     where permission_id = #{permissionId,jdbcType=INTEGER}
@@ -122,7 +122,7 @@
       href = #{href,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
       permission = #{permission,jdbcType=VARCHAR},
-      tpye = #{tpye,jdbcType=VARCHAR}
+      type = #{type,jdbcType=VARCHAR}
     where permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
 </mapper>

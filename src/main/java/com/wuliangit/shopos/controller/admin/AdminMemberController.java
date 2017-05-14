@@ -29,7 +29,7 @@ public class AdminMemberController {
      * @param model
      * @return
      */
-    @RequestMapping("/memberList")
+    @RequestMapping("/memberListPage")
     public String memberList(Model model){
         return "/admin/member/list";
     }

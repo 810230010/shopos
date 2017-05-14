@@ -11,6 +11,8 @@ public class UserRole {
 
     private Date createTime;
 
+    private String userType;
+
     public Integer getUserRoleId() {
         return userRoleId;
     }
@@ -41,5 +43,13 @@ public class UserRole {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType == null ? null : userType.trim();
     }
 }

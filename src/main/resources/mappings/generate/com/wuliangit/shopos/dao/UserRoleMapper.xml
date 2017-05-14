@@ -6,9 +6,10 @@
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_role_id, role_id, user_id, create_time
+    user_role_id, role_id, user_id, create_time, user_type
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,10 +25,10 @@
     <selectKey resultType="java.lang.Integer" keyProperty="userRoleId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_user_role (role_id, user_id, create_time
-      )
-    values (#{roleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
-      )
+    insert into t_user_role (role_id, user_id, create_time, 
+      user_type)
+    values (#{roleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{userType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.UserRole" >
     <selectKey resultType="java.lang.Integer" keyProperty="userRoleId" order="AFTER" >
@@ -44,6 +45,9 @@
       <if test="createTime != null" >
         create_time,
       </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >
@@ -54,6 +58,9 @@
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_role_id = #{userRoleId,jdbcType=INTEGER}
   </update>
@@ -76,7 +86,8 @@
     update t_user_role
     set role_id = #{roleId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_type = #{userType,jdbcType=VARCHAR}
     where user_role_id = #{userRoleId,jdbcType=INTEGER}
   </update>
 </mapper>

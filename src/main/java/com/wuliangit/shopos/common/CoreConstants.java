@@ -14,14 +14,15 @@ public class CoreConstants {
     //当前管理员session索引
     public static final String SESSION_CURRENT_ADMIN = "SESSION_CURRENT_ADMIN";
 
+    //当前管理员session索引
+    public static final String SESSION_CURRENT_MENU = "SESSION_CURRENT_MENU";
+
 
 
     public static final String PARAM_DIGEST = "digest";
     public static final String PARAM_USERNAME = "username";
 
     public static final String CURRENT_NAME = "CURRENT_NAME";
-
-    public static final String SESSION_CURRENT_MENU = "SESSION_CURRENT_MENU";
 
     public static final String USER_ID = "ID";
     

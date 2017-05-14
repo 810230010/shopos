@@ -15,7 +15,7 @@ public class Permission {
 
     private String permission;
 
-    private String tpye;
+    private String type;
 
     public Integer getPermissionId() {
         return permissionId;
@@ -73,11 +73,11 @@ public class Permission {
         this.permission = permission == null ? null : permission.trim();
     }
 
-    public String getTpye() {
-        return tpye;
+    public String getType() {
+        return type;
     }
 
-    public void setTpye(String tpye) {
-        this.tpye = tpye == null ? null : tpye.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 }

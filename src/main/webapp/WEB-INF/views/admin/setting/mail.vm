@@ -57,6 +57,10 @@
 <script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
 
 <script>
+    // MetisMenu
+    $("#邮件服务设置").addClass("active");
+    $("#设置").addClass("active");
+    $('#side-menu').metisMenu();
 
     $(document).ready(function () {
         $.ajax({

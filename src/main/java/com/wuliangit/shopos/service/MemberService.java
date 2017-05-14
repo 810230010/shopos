@@ -79,31 +79,6 @@ public interface MemberService {
      */
     Integer deleteMember(Integer memberId);
 
-    /**
-     * 查询会员留言列表
-     * @param page
-     * @param pageSize
-     * @param orderColumn
-     * @param orderType
-     * @param searchKey
-     * @return
-     */
-    ArrayList<MemberAdvice> getMemberAdviceList(Integer page,Integer pageSize,String orderColumn,String orderType,String searchKey);
-
-    /**
-     * 更改留言查看状态
-     * @param adviceId
-     * @return
-     */
-    int updateAdviceLookStatus(Integer adviceId);
-
-    /**
-     * 删除留言
-     * @param adviceId
-     * @return
-     */
-    int deleteAdvice(Integer adviceId);
-
      /** 更改会员状态
      * @param memberId
      * @param state

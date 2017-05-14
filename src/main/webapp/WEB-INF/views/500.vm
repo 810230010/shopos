@@ -8,11 +8,11 @@
     <link rel="icon" type="image/png" href="/assets/admin/img/favicon.ico">
     <title>SHOPOS | 500 Error</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/admin/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/assets/admin/css/animate.css" rel="stylesheet">
+    <link href="/assets/admin/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -21,17 +21,16 @@
 
     <div class="middle-box text-center animated fadeInDown">
         <h1>500</h1>
-        <h3 class="font-bold">Internal Server Error</h3>
+        <h3 class="font-bold">服务器出错啦</h3>
 
         <div class="error-desc">
-            The server encountered something unexpected that didn't allow it to complete the request. We apologize.<br/>
-            You can go back to main page: <br/><a href="index.html" class="btn btn-primary m-t">Dashboard</a>
+            非常抱歉，服务器出现了不可预知的错误
         </div>
     </div>
 
     <!-- Mainly scripts -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/assets/admin/js/jquery-3.1.1.min.js"></script>
+    <script src="/assets/admin/js/bootstrap.min.js"></script>
 
 </body>
 

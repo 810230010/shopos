@@ -62,6 +62,12 @@
 <script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
 
 <script>
+
+    // MetisMenu
+    $("#文件存储设置").addClass("active");
+    $("#设置").addClass("active");
+    $('#side-menu').metisMenu();
+
     $("#submit").on('click', function () {
         var form = $("#form");
         if(!form.valid()){

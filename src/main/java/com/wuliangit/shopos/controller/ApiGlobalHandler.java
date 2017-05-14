@@ -1,6 +1,8 @@
 package com.wuliangit.shopos.controller;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,8 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice(basePackages = "com.wuliangit.shopos.controller.api")
 public class ApiGlobalHandler {
 
+    private static Log logger = LogFactory.getLog(ApiGlobalHandler.class);
+
     @ExceptionHandler(value = Exception.class)
     public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
+        logger.error(exception.getMessage());
         RestResult result = new RestResult();
         result.setCode(500);
         exception.printStackTrace();

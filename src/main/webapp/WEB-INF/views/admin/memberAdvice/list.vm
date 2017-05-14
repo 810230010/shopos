@@ -37,10 +37,15 @@
 
 <script>
 
+    // MetisMenu
+    $("#会员管理").addClass("active");
+    $("#会员留言").addClass("active");
+    $('#side-menu').metisMenu();
+
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': '/admin/member/adviceList',
+                'url': '/admin/memberAdvice/adviceList',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -53,7 +58,7 @@
                 },
             },
             "columns": [
-                {"data":"adviceId","width":"7%","title":"序号","orderable": false},
+                {"data":"memberAdviceId","width":"7%","title":"序号","orderable": false},
                 {"data":"memberName","width": "10%","title":"会员昵称","orderable": false},
                 {
                     "data":"adviceContent",
@@ -65,13 +70,9 @@
                         if(row.adviceContent.length < 20){
                             advice = row.adviceContent;
                         }else {
-                            advice = row.adviceContent.substr(0, 20) + "<font style='color:black;'>...更多</font>";
+                            advice = row.adviceContent.substr(0, 20) + "<a class='status'> ...更多</a>";
                         }
-                            return [
-                                '<a class="btn-xs table-action status" style="outline: none" href="javascript:void(0)">',
-                                advice,
-                                '</a>',
-                            ].join('');
+                        return advice;
 
                     }
                 },
@@ -88,7 +89,7 @@
                         return "未读";
                     }
                 },
-                {"data":"adviceId","width": "5%","title":"操作","orderable": false,"render": function(data, type, row){
+                {"data":"memberAdviceId","width": "5%","title":"操作","orderable": false,"render": function(data, type, row){
                     return [
                         '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
                         '删除 <i class="fa fa-times"></i>',
@@ -123,12 +124,7 @@
             ],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
         //浏览留言
@@ -149,15 +145,13 @@
                             return;
                         }
                         $.ajax({
-                            url: "/admin/member/updateAdviceStatus",
+                            url: "/admin/memberAdvice/updateAdviceStatus",
                             type: "get",
                             data: {"adviceId": data.adviceId, "type":"0"},
                             success:function(result) {
                                 if(result.code == 200){
                                     swal("已标记为已读留言!");
-                                    setTimeout(function () {
-                                        window.location.href = "/admin/member/adviceListPage";
-                                    }, 2000);
+                                    table = $('#datatables').DataTable().ajax.reload();
                                 }
                             },
                             error:function(result) {
@@ -182,15 +176,13 @@
                     },
                     function(){
                         $.ajax({
-                            url: "/admin/member/updateAdviceStatus",
+                            url: "/admin/memberAdvice/updateAdviceStatus",
                             type: "get",
                             data: {"adviceId": data.adviceId, "type":"1"},
                             success:function(result) {
-                                if(result.code == 200{
+                                if(result.code == 200){
                                     swal("删除留言", "已删除该留言", "success");
-                                    setTimeout(function () {
-                                        window.location.href = "/admin/member/adviceListPage";
-                                    }, 2000);
+                                    table = $('#datatables').DataTable().ajax.reload();
                                 }
                             },
                             error:function(result) {

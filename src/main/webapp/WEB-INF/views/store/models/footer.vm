@@ -1,24 +1,23 @@
 #parse("/store/models/copyright.vm")
 </div>
-##    #parse("/admin/models/chat_box.vm")
-##    #parse("/admin/models/chat_icon.vm")
+##    #parse("/store/models/chat_box.vm")
+##    #parse("/store/models/chat_icon.vm")
 ###parse("/store/models/right_sidebar.vm")
 </div>
 
 <!-- Mainly scripts -->
-<script src="/assets/admin/js/jquery-3.1.1.min.js" type="text/javascript"></script>
-<script src="/assets/admin/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/metisMenu/jquery.metisMenu.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-
-<script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<script src="/assets/admin/js/jquery-3.1.1.min.js"></script>
+<script src="/assets/admin/js/bootstrap.min.js"></script>
+<script src="/assets/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/assets/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="/assets/admin/js/inspinia.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/pace/pace.min.js" type="text/javascript"></script>
-
+<script src="/assets/admin/js/shopos.js"></script>
+<script src="/assets/admin/js/plugins/pace/pace.min.js"></script>
+<!--sweetalert-->
+<script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
 <!-- Toastr -->
-<script src="/assets/admin/js/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/toastr/toastr.min.js"></script>
 
 
 

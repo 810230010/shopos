@@ -48,7 +48,7 @@ public class AdminMemberController {
     @ResponseBody
     public PageResult getMemberList(@RequestParam(value = "page", required = false, defaultValue = "1")Integer page,
                                     @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                                    @RequestParam("draw") Integer draw,
+                                    @RequestParam(value = "draw",required = false) Integer draw,
                                     @RequestParam(value = "orderColumn", required = false) String orderColumn,
                                     @RequestParam(value = "orderType", required = false) String orderType,
                                     @RequestParam(value = "searchKey", required = false) String searchKey){
@@ -73,53 +73,7 @@ public class AdminMemberController {
         return result;
     }
 
-    /**
-     * 跳转到会员留言列表
-     * @return
-     */
-    @RequestMapping("/adviceListPage")
-    public String adviceListPage() {
-        return "/admin/member/advice_list";
-    }
-    /**
-     * 会员留言列表
-     * @param page
-     * @param pageSize
-     * @param draw
-     * @param orderColumn
-     * @param orderType
-     * @param searchKey
-     * @return
-     */
-    @RequestMapping("/adviceList")
-    @ResponseBody
-    public Object getAdviceList(@RequestParam(value = "page", required = false, defaultValue = "1")Integer page,
-                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                                @RequestParam("draw") Integer draw,
-                                @RequestParam(value = "orderColumn", required = false) String orderColumn,
-                                @RequestParam(value = "orderType", required = false) String orderType,
-                                @RequestParam(value = "searchKey", required = false) String searchKey) {
-        List<MemberAdvice> advices = memberService.getMemberAdviceList(page, pageSize, orderColumn, orderType, searchKey);
-        return new PageResult<MemberAdvice>(advices, draw);
-    }
 
-    /**
-     * 更改留言状态
-     * @param adviceId
-     * @param type 0表示修改为已读  1表示删除标志
-     * @return
-     */
-    @RequestMapping("/updateAdviceStatus")
-    @ResponseBody
-    public Object updateAdviceScanStatus(Integer adviceId, String type) {
-        RestResult result = new RestResult();
-        if ("0".equals(type)) {
-            memberService.updateAdviceLookStatus(adviceId);
-        } else {
-            memberService.deleteAdvice(adviceId);
-        }
-        return result;
-    }
 
      /** 更改会员状态
      * @param memberId

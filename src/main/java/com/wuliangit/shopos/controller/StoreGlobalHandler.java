@@ -4,6 +4,8 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.StoreService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -20,6 +22,8 @@ import java.util.Date;
  */
 @ControllerAdvice(basePackages = "com.wuliangit.shopos.controller.store")
 public class StoreGlobalHandler {
+
+    private static Log logger = LogFactory.getLog(StoreGlobalHandler.class);
 
     @Autowired
     private StoreService storeService;
@@ -55,6 +59,7 @@ public class StoreGlobalHandler {
         exception.printStackTrace();
         result.setCode(500);
         result.setMsg(exception.getMessage());
+        logger.error(exception.toString());
         return result;
     }
 

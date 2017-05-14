@@ -28,12 +28,12 @@
             </li>
 
             #foreach( $menu in $menus)
-            <li class="active">
-                <a href="index.html"><i class="fa $menu.icon"></i> <span class="nav-label">$menu.name</span> <span class="fa arrow"></span></a>
+            <li id="$menu.name">
+                <a href="#"><i class="fa $menu.icon"></i> <span class="nav-label">$menu.name</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     #if ($menu.childMenus)
                         #foreach( $item in $menu.childMenus)
-                        <li><a href="$item.href">$item.name</a></li>
+                        <li id="$item.name"><a href="$item.href">$item.name</a></li>
                         #end
                     #end
                 </ul>

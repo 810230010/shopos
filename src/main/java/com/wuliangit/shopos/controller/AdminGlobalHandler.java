@@ -5,7 +5,8 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Admin;
-import com.wuliangit.shopos.model.StoreUser;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +21,8 @@ import java.util.List;
  */
 @ControllerAdvice(basePackages = "com.wuliangit.shopos.controller.admin")
 public class AdminGlobalHandler {
+
+    private static Log logger = LogFactory.getLog(AdminGlobalHandler.class);
 
     @ModelAttribute("admin")
     public Admin setUser() {
@@ -39,13 +42,10 @@ public class AdminGlobalHandler {
     }
 
     @ExceptionHandler(value = Exception.class)
-    @ResponseBody
-    public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
-        RestResult result = new RestResult();
+    public String errorHandlerOverJson(HttpServletRequest request, Exception exception) {
+        logger.error(exception.getMessage());
         exception.printStackTrace();
-        result.setCode(500);
-        result.setMsg(exception.getMessage());
-        return result;
+        return "500";
     }
 
 }

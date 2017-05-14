@@ -12,13 +12,13 @@
             </if>
         </where>
         order by
-        advice_id desc
+        create_time desc
     </select>
 
     <!--更改留言浏览状态-->
     <update id="updateAdviceLookStatus">
         update t_member_advice
         set status=1
-        where advice_id=#{adviceId}
+        where member_advice_id=#{adviceId}
     </update>
 </mapper>

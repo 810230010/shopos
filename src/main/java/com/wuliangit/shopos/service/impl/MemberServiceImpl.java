@@ -26,9 +26,6 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberMapper memberMapper;
 
-    @Autowired
-    private MemberAdviceMapper memberAdviceMapper;
-
     @Override
     public Set<String> getRoles(String username) {
         Set<String> roles = new HashSet<>();
@@ -83,22 +80,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Integer deleteMember(Integer memberId) {
         return memberMapper.deleteMember(memberId);
-    }
-
-    @Override
-    public ArrayList<MemberAdvice> getMemberAdviceList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
-        PageHelper.startPage(page, pageSize);
-        return memberAdviceMapper.queryMemberAdviceList(orderColumn, orderType, searchKey);
-    }
-
-    @Override
-    public int updateAdviceLookStatus(Integer adviceId) {
-        return memberAdviceMapper.updateAdviceLookStatus(adviceId);
-    }
-
-    @Override
-    public int deleteAdvice(Integer adviceId) {
-        return memberAdviceMapper.deleteByPrimaryKey(adviceId);
     }
 
     public Integer updateMemberState(@Param("memberId") Integer memberId,@Param("state") String state) {

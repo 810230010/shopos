@@ -1,6 +1,8 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.ApiGoodsCategoryDOT;
+import com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import org.apache.ibatis.annotations.Param;
 
@@ -35,4 +37,17 @@ public interface GoodsCategoryMapper extends BaseMapper<GoodsCategory, Integer> 
      * @return
      */
     List<GoodsCategory> getGoodsCategoryListByParentId(Integer parentId);
+
+    /**
+     * 移动端接口获取一级分类
+     * @return
+     */
+    List<ApiGoodsCategoryDOT> getGoodsCategoryDTOByParentId(Integer parentId);
+
+    /**
+     * 获取二级分类
+     * @param parentId
+     * @return
+     */
+    List<ApiGoodsCategoryWithChildDTO> getGoodsCategoryLevelSecond(Integer parentId);
 }

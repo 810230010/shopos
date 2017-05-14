@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.ApiGoodsCategoryDOT;
+import com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO;
 import com.wuliangit.shopos.entity.GoodsCategory;
 
 import java.util.ArrayList;
@@ -62,4 +64,16 @@ public interface GoodsCategoryService {
      * @return
      */
     List<GoodsCategory> getGoodsCategoryListByParentId(Integer parentId);
+
+    /**
+     * 移动端接口获取一级分类
+     * @return
+     */
+    List<ApiGoodsCategoryDOT> getGoodsCategoryLevelOne();
+
+    /**
+     * 移动端接口获取二级、三级分类
+     * @return
+     */
+    List<ApiGoodsCategoryWithChildDTO> getGoodsCategoryLevelSecond(Integer parentId);
 }

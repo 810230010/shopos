@@ -30,4 +30,13 @@
     <select id="getGoodsCategoryListByParentId" resultType="com.wuliangit.shopos.entity.GoodsCategory">
         select * from t_goods_category where parent_id = #{parentId}
     </select>
+
+    <!--移动端接口获取一级分类-->
+    <select id="getGoodsCategoryDTOByParentId" resultType="com.wuliangit.shopos.dto.ApiGoodsCategoryDOT">
+        select goods_category_id, name, img from t_goods_category where parent_id = #{parentId}
+    </select>
+    <select id="getGoodsCategoryLevelSecond" resultType="com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO">
+        select goods_category_id, name, img from t_goods_category where parent_id = #{parentId}
+    </select>
+
 </mapper>

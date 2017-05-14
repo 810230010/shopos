@@ -2,6 +2,8 @@ package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.dao.GoodsCategoryMapper;
+import com.wuliangit.shopos.dto.ApiGoodsCategoryDOT;
+import com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.service.GoodsCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +57,22 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
     @Override
     public List<GoodsCategory> getGoodsCategoryListByParentId(Integer parentId) {
         return goodsCategoryMapper.getGoodsCategoryListByParentId(parentId);
+    }
+
+    @Override
+    public List<ApiGoodsCategoryDOT> getGoodsCategoryLevelOne() {
+        return goodsCategoryMapper.getGoodsCategoryDTOByParentId(0);
+    }
+
+    @Override
+    public List<ApiGoodsCategoryWithChildDTO> getGoodsCategoryLevelSecond(Integer parentId) {
+        List<ApiGoodsCategoryWithChildDTO> categories = goodsCategoryMapper.getGoodsCategoryLevelSecond(parentId);
+
+        for (ApiGoodsCategoryWithChildDTO category : categories) {
+            List<ApiGoodsCategoryDOT> dtoByParentId = goodsCategoryMapper.getGoodsCategoryDTOByParentId(category.getGoodsCategoryId());
+            category.setCategories(dtoByParentId);
+        }
+
+        return categories;
     }
 }

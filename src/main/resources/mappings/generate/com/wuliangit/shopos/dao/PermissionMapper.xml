@@ -10,9 +10,10 @@
     <result column="icon" property="icon" jdbcType="VARCHAR" />
     <result column="permission" property="permission" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="useable" property="useable" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    permission_id, parent_id, name, sort, href, icon, permission, type
+    permission_id, parent_id, name, sort, href, icon, permission, type, useable
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,10 +31,10 @@
     </selectKey>
     insert into t_permission (parent_id, name, sort, 
       href, icon, permission, 
-      type)
+      type, useable)
     values (#{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{href,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR})
+      #{type,jdbcType=VARCHAR}, #{useable,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Permission" >
     <selectKey resultType="java.lang.Integer" keyProperty="permissionId" order="AFTER" >
@@ -62,6 +63,9 @@
       <if test="type != null" >
         type,
       </if>
+      <if test="useable != null" >
+        useable,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="parentId != null" >
@@ -84,6 +88,9 @@
       </if>
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="useable != null" >
+        #{useable,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -111,6 +118,9 @@
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
       </if>
+      <if test="useable != null" >
+        useable = #{useable,jdbcType=BIT},
+      </if>
     </set>
     where permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
@@ -122,7 +132,8 @@
       href = #{href,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
       permission = #{permission,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR}
+      type = #{type,jdbcType=VARCHAR},
+      useable = #{useable,jdbcType=BIT}
     where permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
 </mapper>

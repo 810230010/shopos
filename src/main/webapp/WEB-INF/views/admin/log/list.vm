@@ -5,7 +5,10 @@
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>会员-会员列表</h2>
+        <h2>权限管理-管理员日志</h2>
+    </div>
+    <div class="col-lg-2">
+
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -13,7 +16,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">会员列表</h5>
+                    <h5 id="rank">管理员日志</h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -44,7 +47,7 @@
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': '/admin/member/getMemberList',
+                'url': '/admin/log/adminLogList',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -75,14 +78,7 @@
                     else if(data == "AUTHED")return "已认证";
                     else if(data == "WAIT_AUTH")return "等待认证";
                     else return "未认证";
-                }},
-                {"data":"memberId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
-                    return [
-                        '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
-                        '删除 <i class="fa fa-times"></i>',
-                        '</a>'
-                    ].join('');
-                }},
+                }}
             ],
             "searching": true,
             "ordering":true,
@@ -111,12 +107,7 @@
             ],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
 
@@ -133,7 +124,7 @@
             },function(isConfirm){
                 if (isConfirm){
                     $.post("/admin/member/deleteMember/",{
-                        memberId:data.memberId
+                                memberId:data.memberId
                             },
                             function (data, status) {
                                 if(data.code==200){

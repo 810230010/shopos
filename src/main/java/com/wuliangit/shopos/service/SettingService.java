@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.SettingDTO;
+import com.wuliangit.shopos.model.SysSetting;
 
 import java.util.List;
 
@@ -51,4 +52,16 @@ public interface SettingService {
      * @return
      */
     List<SettingDTO> getMailSetting();
+
+    /**
+     * 获取系统设置
+     * @return
+     */
+    SysSetting getSysSetting();
+
+    /**
+     * 更新系统设置
+     * @param sysSetting
+     */
+    void updateSysSetting(SysSetting sysSetting);
 }

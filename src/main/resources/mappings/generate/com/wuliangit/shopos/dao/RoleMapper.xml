@@ -3,16 +3,16 @@
 <mapper namespace="com.wuliangit.shopos.dao.RoleMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Role" >
     <id column="role_id" property="roleId" jdbcType="INTEGER" />
-    <result column="office_id" property="officeId" jdbcType="VARCHAR" />
+    <result column="office" property="office" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="role" property="role" jdbcType="VARCHAR" />
     <result column="role_type" property="roleType" jdbcType="VARCHAR" />
-    <result column="is_default" property="isDefault" jdbcType="VARCHAR" />
-    <result column="useable" property="useable" jdbcType="VARCHAR" />
+    <result column="is_default" property="isDefault" jdbcType="BIT" />
+    <result column="useable" property="useable" jdbcType="BIT" />
     <result column="create_by" property="createBy" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    role_id, office_id, name, role, role_type, is_default, useable, create_by
+    role_id, office, name, role, role_type, is_default, useable, create_by
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,11 +28,11 @@
     <selectKey resultType="java.lang.Integer" keyProperty="roleId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_role (office_id, name, role, 
+    insert into t_role (office, name, role, 
       role_type, is_default, useable, 
       create_by)
-    values (#{officeId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
-      #{roleType,jdbcType=VARCHAR}, #{isDefault,jdbcType=VARCHAR}, #{useable,jdbcType=VARCHAR}, 
+    values (#{office,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
+      #{roleType,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, #{useable,jdbcType=BIT}, 
       #{createBy,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Role" >
@@ -41,8 +41,8 @@
     </selectKey>
     insert into t_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="officeId != null" >
-        office_id,
+      <if test="office != null" >
+        office,
       </if>
       <if test="name != null" >
         name,
@@ -64,8 +64,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="officeId != null" >
-        #{officeId,jdbcType=VARCHAR},
+      <if test="office != null" >
+        #{office,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -77,10 +77,10 @@
         #{roleType,jdbcType=VARCHAR},
       </if>
       <if test="isDefault != null" >
-        #{isDefault,jdbcType=VARCHAR},
+        #{isDefault,jdbcType=BIT},
       </if>
       <if test="useable != null" >
-        #{useable,jdbcType=VARCHAR},
+        #{useable,jdbcType=BIT},
       </if>
       <if test="createBy != null" >
         #{createBy,jdbcType=INTEGER},
@@ -90,8 +90,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Role" >
     update t_role
     <set >
-      <if test="officeId != null" >
-        office_id = #{officeId,jdbcType=VARCHAR},
+      <if test="office != null" >
+        office = #{office,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -103,10 +103,10 @@
         role_type = #{roleType,jdbcType=VARCHAR},
       </if>
       <if test="isDefault != null" >
-        is_default = #{isDefault,jdbcType=VARCHAR},
+        is_default = #{isDefault,jdbcType=BIT},
       </if>
       <if test="useable != null" >
-        useable = #{useable,jdbcType=VARCHAR},
+        useable = #{useable,jdbcType=BIT},
       </if>
       <if test="createBy != null" >
         create_by = #{createBy,jdbcType=INTEGER},
@@ -116,12 +116,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Role" >
     update t_role
-    set office_id = #{officeId,jdbcType=VARCHAR},
+    set office = #{office,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       role = #{role,jdbcType=VARCHAR},
       role_type = #{roleType,jdbcType=VARCHAR},
-      is_default = #{isDefault,jdbcType=VARCHAR},
-      useable = #{useable,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=BIT},
+      useable = #{useable,jdbcType=BIT},
       create_by = #{createBy,jdbcType=INTEGER}
     where role_id = #{roleId,jdbcType=INTEGER}
   </update>

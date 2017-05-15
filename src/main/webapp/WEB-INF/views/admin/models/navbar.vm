@@ -5,6 +5,9 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
+                <a href="/admin/index" class="m-r-sm text-muted welcome-message">首页</a>
+            </li>
+            <li>
                 <span class="m-r-sm text-muted welcome-message">欢迎管使用SHOPOS</span>
             </li>
             <li>

@@ -4,15 +4,16 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.dto.SettingDTO;
+import com.wuliangit.shopos.model.SysSetting;
 import com.wuliangit.shopos.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+
 
 /**
  * Created by pangweichao on 2017/4/30.
@@ -128,6 +129,36 @@ public class AdminSettingController {
         }else{
             result.put("data",info);
         }
+        return result;
+    }
+
+    /**
+     * 获取邮箱设置的各项参数
+     * @return
+     */
+    @RequestMapping("/sysSettingPage")
+    public String sysSettingPage(Model model){
+        SysSetting sysSetting = settingService.getSysSetting();
+        model.addAttribute("name",sysSetting.getName());
+        model.addAttribute("title",sysSetting.getTitle());
+        model.addAttribute("key",sysSetting.getKey());
+        model.addAttribute("description",sysSetting.getDescription());
+        model.addAttribute("qq",sysSetting.getQq());
+
+        return "admin/setting/sys";
+    }
+
+
+    /**
+     * 更新系统设置
+     * @param sysSetting
+     * @return
+     */
+    @RequestMapping("/updateSysSetting")
+    @ResponseBody
+    public Object updateAliPaySetting(SysSetting sysSetting) {
+        RestResult result = new RestResult();
+        settingService.updateSysSetting(sysSetting);
         return result;
     }
 

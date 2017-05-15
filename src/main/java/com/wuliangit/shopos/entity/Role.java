@@ -3,7 +3,7 @@ package com.wuliangit.shopos.entity;
 public class Role {
     private Integer roleId;
 
-    private String officeId;
+    private String office;
 
     private String name;
 
@@ -11,9 +11,9 @@ public class Role {
 
     private String roleType;
 
-    private String isDefault;
+    private Boolean isDefault;
 
-    private String useable;
+    private Boolean useable;
 
     private Integer createBy;
 
@@ -25,12 +25,12 @@ public class Role {
         this.roleId = roleId;
     }
 
-    public String getOfficeId() {
-        return officeId;
+    public String getOffice() {
+        return office;
     }
 
-    public void setOfficeId(String officeId) {
-        this.officeId = officeId == null ? null : officeId.trim();
+    public void setOffice(String office) {
+        this.office = office == null ? null : office.trim();
     }
 
     public String getName() {
@@ -57,20 +57,20 @@ public class Role {
         this.roleType = roleType == null ? null : roleType.trim();
     }
 
-    public String getIsDefault() {
+    public Boolean getIsDefault() {
         return isDefault;
     }
 
-    public void setIsDefault(String isDefault) {
-        this.isDefault = isDefault == null ? null : isDefault.trim();
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
     }
 
-    public String getUseable() {
+    public Boolean getUseable() {
         return useable;
     }
 
-    public void setUseable(String useable) {
-        this.useable = useable == null ? null : useable.trim();
+    public void setUseable(Boolean useable) {
+        this.useable = useable;
     }
 
     public Integer getCreateBy() {

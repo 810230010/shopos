@@ -29,14 +29,8 @@ public class PerminssionServiceImpl implements PerminssionService {
 
         List<MenuDTO> menus = permissionMapper.getAdminMenus(admin.getAdminId());
 
-        try {
-            List<MenuDTO> menuList = handleSubType(menus, 0);
-            return menuList;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        List<MenuDTO> menuList = handleSubType(menus, 0);
+        return menuList;
 
     }
 
@@ -45,7 +39,7 @@ public class PerminssionServiceImpl implements PerminssionService {
      * 生成多级菜单
      *
      * @param menus 要整理的分类项
-     * @param id 根节点
+     * @param id    根节点
      * @return
      */
     private static List<MenuDTO> handleSubType(List<MenuDTO> menus, Integer id) {

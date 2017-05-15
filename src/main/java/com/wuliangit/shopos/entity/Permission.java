@@ -17,6 +17,8 @@ public class Permission {
 
     private String type;
 
+    private Boolean useable;
+
     public Integer getPermissionId() {
         return permissionId;
     }
@@ -79,5 +81,13 @@ public class Permission {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
+    }
+
+    public Boolean getUseable() {
+        return useable;
+    }
+
+    public void setUseable(Boolean useable) {
+        this.useable = useable;
     }
 }

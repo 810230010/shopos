@@ -8,6 +8,8 @@ import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.model.StoreUser;
 import com.wuliangit.shopos.service.AdminService;
 import com.wuliangit.shopos.service.PerminssionService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -30,9 +32,10 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminLoginController {
 
+    private static Log logger = LogFactory.getLog(AdminLoginController.class);
+
     @Autowired
     private AdminService adminService;
-
     @Autowired
     private PerminssionService perminssionService;
 
@@ -69,7 +72,9 @@ public class AdminLoginController {
             e.printStackTrace();
             error = "用户名/密码错误";
         } catch (Exception e) {
-            error = "其他错误：" + e.getMessage();
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            error = "系统错误";
         }
         model.addAttribute("error", error);
         return "admin/login";

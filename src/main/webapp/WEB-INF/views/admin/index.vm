@@ -154,6 +154,9 @@
 #parse("/admin/models/footer.vm")
 
 <script>
+    // MetisMenu
+    $('#side-menu').metisMenu();
+
     $(document).ready(function() {
         setTimeout(function () {
             toastr.options = {

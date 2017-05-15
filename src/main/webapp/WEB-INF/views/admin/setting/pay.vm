@@ -105,6 +105,12 @@
 <script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
 
 <script>
+
+    // MetisMenu
+    $("#支付设置").addClass("active");
+    $("#设置").addClass("active");
+    $('#side-menu').metisMenu();
+
     $("#zhifubao-submit").on('click', function () {
         var form = $("#zhifubao-form");
         if(!form.valid()){

@@ -1,35 +1,45 @@
 package com.wuliangit.shopos.controller.admin;
 
-import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.common.controller.PageResult;
+import com.wuliangit.shopos.entity.AdminLog;
+import com.wuliangit.shopos.service.AdminLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
- * Created by 江建平 on 2017/5/12.
- * @description 管理员权限控制器
+ * 管理员日志
+ * Created by nilme on 2017/5/15.
  */
+
 @Controller
-@RequestMapping("/admin/authority")
-public class AdminAuthorityController {
+@RequestMapping("/admin/log")
+public class AdminLogController {
+
+    @Autowired
+    private AdminLogService adminLogService;
 
     /**
-     * 管理员列表页面
+     * 跳转到所有管理员页面
      * @return
      */
-    @RequestMapping("/adminListPage")
+    @RequestMapping("/adminLogPage")
     public String allAdminListPage(){
-        return "admin/authority/admin_list";
+        return "admin/log/list";
     }
 
-    @RequestMapping("/searchAdminList")
+    @RequestMapping("/adminLogList")
     public Object searchAdminList(@RequestParam("draw") int draw,
                                   @RequestParam(value = "searchKey", required = false) String searchKey,
                                   @RequestParam(value = "orderColumn", required = false) String orderColumn,
                                   @RequestParam(value = "orderType", required = false) String orderType,
                                   @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
-        orderColumn = StringUtils.camelToUnderline(orderColumn);
-        return null;
+        List<AdminLog> info = adminLogService.getAdminLogList(page, pageSize, orderColumn, orderType, searchKey);
+        return new PageResult<AdminLog>(info,draw);
     }
+
 }

@@ -6,11 +6,10 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.dto.StoreUpdateDTO;
 import com.wuliangit.shopos.entity.Store;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreGoodsAdService;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.StoreService;
-import org.apache.shiro.SecurityUtils;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,8 +44,8 @@ public class StoreSettingController {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("domain",QiNiuUtils.BASE_URL);
 
-        StoreUser currentStore = WebUtil.getCurrentStore();
-        Store store = storeService.getStoreByStoreId(currentStore.getStoreId());
+        StoreMin storeMin = WebUtil.getCurrentStore();
+        Store store = storeService.getStoreByStoreId(storeMin.getStoreId());
         model.addAttribute("store",store);
         return "/store/setting/index";
     }

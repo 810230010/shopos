@@ -14,4 +14,10 @@ public interface PerminssionService {
      * @return
      */
     List<MenuDTO> getAdminMenus();
+
+    /**
+     * 获取店铺菜单
+     * @return
+     */
+    List<MenuDTO> getStoreMenus();
 }

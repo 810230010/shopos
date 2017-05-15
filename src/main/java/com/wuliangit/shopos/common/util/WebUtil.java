@@ -4,7 +4,8 @@ import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.entity.Seller;
+import com.wuliangit.shopos.model.StoreMin;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 
@@ -32,11 +33,20 @@ public class WebUtil {
     }
 
     /**
-     * 获取当前店铺
+     * 获取当前店铺卖家
      * @return
      */
-    public static StoreUser getCurrentStore(){
-        StoreUser store = (StoreUser) SecurityUtils.getSubject().getSession().getAttribute(CoreConstants.SESSION_CURRENT_STORE);
+    public static Seller getCurrentSeller(){
+        Seller seller = (Seller) SecurityUtils.getSubject().getSession().getAttribute(CoreConstants.SESSION_CURRENT_SELLER);
+        return seller;
+    }
+
+    /**
+     * 获取当前店铺卖家
+     * @return
+     */
+    public static StoreMin getCurrentStore(){
+        StoreMin store = (StoreMin) SecurityUtils.getSubject().getSession().getAttribute(CoreConstants.SESSION_CURRENT_STORE);
         return store;
     }
 

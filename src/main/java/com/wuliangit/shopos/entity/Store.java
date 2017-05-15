@@ -10,8 +10,6 @@ public class Store {
 
     private Integer gradeId;
 
-    private Integer memberId;
-
     private String sellerNikename;
 
     private Integer scId;
@@ -136,14 +134,6 @@ public class Store {
 
     public void setGradeId(Integer gradeId) {
         this.gradeId = gradeId;
-    }
-
-    public Integer getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Integer memberId) {
-        this.memberId = memberId;
     }
 
     public String getSellerNikename() {

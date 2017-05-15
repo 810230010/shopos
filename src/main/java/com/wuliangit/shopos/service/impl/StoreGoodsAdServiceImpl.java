@@ -6,7 +6,7 @@ import com.wuliangit.shopos.dao.StoreGoodsAdMapper;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.StoreGoodsAd;
 import com.wuliangit.shopos.exception.BaseException;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreGoodsAdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +29,8 @@ public class StoreGoodsAdServiceImpl implements StoreGoodsAdService {
 
     @Override
     public Integer updateGoodsAd(StoreGoodsAd storeGoodsAd) throws Exception {
-        StoreUser currentStore = WebUtil.getCurrentStore();
-        storeGoodsAd.setStoreId(currentStore.getStoreId());
+        StoreMin storeMin = WebUtil.getCurrentStore();
+        storeGoodsAd.setStoreId(storeMin.getStoreId());
         Integer result = storeGoodsAdMapper.updateGoodsAd(storeGoodsAd);
         if(result != 1){
             throw new BaseException("设置失败");
@@ -40,8 +40,8 @@ public class StoreGoodsAdServiceImpl implements StoreGoodsAdService {
 
     @Override
     public Integer insertGoodsAd(StoreGoodsAd storeGoodsAd) throws Exception {
-        StoreUser currentStore = WebUtil.getCurrentStore();
-        storeGoodsAd.setStoreId(currentStore.getStoreId());
+        StoreMin storeMin = WebUtil.getCurrentStore();
+        storeGoodsAd.setStoreId(storeMin.getStoreId());
         Integer info = storeGoodsAdMapper.insertSelective(storeGoodsAd);
         if(info != 1){
             throw new BaseException("插入失败");

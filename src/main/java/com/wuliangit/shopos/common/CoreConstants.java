@@ -8,6 +8,9 @@ public class CoreConstants {
     //当前用户session索引
     public static final String SESSION_CURRENT_USERID = "SESSION_CURRENT_USERID";
 
+    //当前店铺卖家session索引
+    public static final String SESSION_CURRENT_SELLER = "SESSION_CURRENT_SELLER";
+
     //当前店铺session索引
     public static final String SESSION_CURRENT_STORE = "SESSION_CURRENT_STORE";
 

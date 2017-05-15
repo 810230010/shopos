@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.SellerLogMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.SellerLog" >
+    <id column="seller_log_id" property="sellerLogId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="store_username" property="storeUsername" jdbcType="CHAR" />
+    <result column="seller_id" property="sellerId" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    seller_log_id, content, create_time, store_username, seller_id, ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_seller_log
+    where seller_log_id = #{sellerLogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_seller_log
+    where seller_log_id = #{sellerLogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.SellerLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="sellerLogId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_seller_log (content, create_time, store_username, 
+      seller_id, ip)
+    values (#{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{storeUsername,jdbcType=CHAR}, 
+      #{sellerId,jdbcType=INTEGER}, #{ip,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.SellerLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="sellerLogId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_seller_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="storeUsername != null" >
+        store_username,
+      </if>
+      <if test="sellerId != null" >
+        seller_id,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeUsername != null" >
+        #{storeUsername,jdbcType=CHAR},
+      </if>
+      <if test="sellerId != null" >
+        #{sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.SellerLog" >
+    update t_seller_log
+    <set >
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeUsername != null" >
+        store_username = #{storeUsername,jdbcType=CHAR},
+      </if>
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=CHAR},
+      </if>
+    </set>
+    where seller_log_id = #{sellerLogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.SellerLog" >
+    update t_seller_log
+    set content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      store_username = #{storeUsername,jdbcType=CHAR},
+      seller_id = #{sellerId,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=CHAR}
+    where seller_log_id = #{sellerLogId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -6,11 +6,10 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.model.StoreBrand;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.BrandService;
 import com.wuliangit.shopos.service.GoodsCategoryService;
 import com.wuliangit.shopos.service.StoreService;
@@ -63,8 +62,8 @@ public class StoreBrandController {
                                @RequestParam(value = "searchKey", required = false) String searchKey,
                                @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        StoreUser store = WebUtil.getCurrentStore();
-        Integer storeId = store.getStoreId();
+        StoreMin storeMin = WebUtil.getCurrentStore();
+        Integer storeId = storeMin.getStoreId();
         List<StoreBrand> storeBrands = brandService.getStoreBrands(page, pageSize, searchKey, storeId);
         return new PageResult<StoreBrand>(storeBrands, draw);
     }
@@ -131,7 +130,7 @@ public class StoreBrandController {
     @ResponseBody
     public Object applyForJoinBrand(Integer brandId) {
         RestResult result = new RestResult();
-        StoreUser store = WebUtil.getCurrentStore();
+        StoreMin store = WebUtil.getCurrentStore();
         Integer storeId = store.getStoreId();
         brandService.addStoreBrand(storeId, brandId);
         return result;
@@ -191,7 +190,7 @@ public class StoreBrandController {
     @ResponseBody
     public Object addBrand(Brand brand) {
         RestResult result = new RestResult();
-        StoreUser store = WebUtil.getCurrentStore();
+        StoreMin store = WebUtil.getCurrentStore();
         brand.setStoreId(store.getStoreId());
         brand.setState(POJOConstants.BRAND_STATE_APPLYING);
         brandService.addBrand(brand);

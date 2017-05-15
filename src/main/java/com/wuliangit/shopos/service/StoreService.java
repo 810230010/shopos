@@ -2,13 +2,10 @@ package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.StoreDetailDTO;
 import com.wuliangit.shopos.dto.StorePageListDTO;
-import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
-import com.wuliangit.shopos.model.StoreBrand;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.model.StoreMin;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -24,13 +21,6 @@ public interface StoreService {
      * @return
      */
     int createStoreJoinin(StoreJoinin storeJoinin);
-
-    /**
-     * 通过用户名获取店铺简要信息
-     * @param memberId
-     * @return
-     */
-    StoreUser getStoreUser(Integer memberId);
 
     /**
      * 店铺角色
@@ -86,4 +76,10 @@ public interface StoreService {
      */
     StoreDetailDTO storeDetailPage(Integer storeId);
 
+    /**
+     * 通过店铺id获取店铺简要信息
+     * @param storeId
+     * @return
+     */
+    StoreMin getStoreMinByStoreId(Integer storeId);
 }

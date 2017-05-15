@@ -10,7 +10,7 @@ import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional
     public int createGoods(Goods goods, String skuStr) {
-        StoreUser store = WebUtil.getCurrentStore();
+        StoreMin store = WebUtil.getCurrentStore();
 
         goods.setStoreId(store.getStoreId());
         goods.setCreateTime(new Date());
@@ -83,7 +83,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public ArrayList<Goods> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId) {
         PageHelper.startPage(page, pageSize);
-        StoreUser currentStore = WebUtil.getCurrentStore();
+        StoreMin currentStore = WebUtil.getCurrentStore();
         ArrayList<Goods> goodses = goodsMapper.StoreSearch(currentStore.getStoreId(), searchKey, orderColumn, orderType, parentId);
         return goodses;
     }

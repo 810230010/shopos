@@ -157,5 +157,11 @@
         <table tableName="t_user_role" domainObjectName="UserRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="user_role_id" sqlStatement="MySql" identity="true"/>
         </table>
+        <table tableName="t_seller" domainObjectName="Seller" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="seller_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="t_seller_log" domainObjectName="SellerLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="seller_log_id" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>

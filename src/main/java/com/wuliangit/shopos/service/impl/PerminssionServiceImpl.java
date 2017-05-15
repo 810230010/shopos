@@ -4,12 +4,12 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.PermissionMapper;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Admin;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.PerminssionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,7 +24,6 @@ public class PerminssionServiceImpl implements PerminssionService {
 
     @Override
     public List<MenuDTO> getAdminMenus() {
-
         Admin admin = WebUtil.getCurrentAdmin();
 
         List<MenuDTO> menus = permissionMapper.getAdminMenus(admin.getAdminId());
@@ -32,6 +31,14 @@ public class PerminssionServiceImpl implements PerminssionService {
         List<MenuDTO> menuList = handleSubType(menus, 0);
         return menuList;
 
+    }
+
+    @Override
+    public List<MenuDTO> getStoreMenus() {
+        StoreMin storeMin = WebUtil.getCurrentStore();
+        List<MenuDTO> menus = permissionMapper.getStoreMenus(storeMin.getStoreId());
+        List<MenuDTO> menuList = handleSubType(menus, 0);
+        return menuList;
     }
 
 

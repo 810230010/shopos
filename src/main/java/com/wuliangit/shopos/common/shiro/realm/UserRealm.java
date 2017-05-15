@@ -2,10 +2,10 @@ package com.wuliangit.shopos.common.shiro.realm;
 
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.service.AdminService;
 import com.wuliangit.shopos.service.MemberService;
-import com.wuliangit.shopos.service.StoreService;
+import com.wuliangit.shopos.service.SellerService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -23,7 +23,7 @@ public class UserRealm extends AuthorizingRealm {
     @Autowired
     private MemberService memberService;
     @Autowired
-    private StoreService storeService;
+    private SellerService sellerService;
     @Autowired
     private AdminService adminService;
 
@@ -43,17 +43,17 @@ public class UserRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         Object principal = principals.getPrimaryPrincipal();
 
-        if (principal instanceof Admin){
-            authorizationInfo.setRoles(adminService.getRoles(((Admin)principal).getUsername()));
-            authorizationInfo.setStringPermissions(adminService.getPermissions(((Admin)principal).getUsername()));
+        if (principal instanceof Admin) {
+            authorizationInfo.setRoles(adminService.getRoles(((Admin) principal).getUsername()));
+            authorizationInfo.setStringPermissions(adminService.getPermissions(((Admin) principal).getUsername()));
             return authorizationInfo;
-        }else if(principal instanceof Member){
-            authorizationInfo.setRoles(memberService.getRoles(((Member)principal).getUsername()));
-            authorizationInfo.setStringPermissions(memberService.getPermissions(((Member)principal).getUsername()));
+        } else if (principal instanceof Member) {
+            authorizationInfo.setRoles(memberService.getRoles(((Member) principal).getUsername()));
+            authorizationInfo.setStringPermissions(memberService.getPermissions(((Member) principal).getUsername()));
             return authorizationInfo;
-        }else if(principal instanceof StoreUser){
-            authorizationInfo.setRoles(storeService.getRoles(((StoreUser)principal).getName()));
-            authorizationInfo.setStringPermissions(storeService.getPermissions(((StoreUser)principal).getName()));
+        } else if (principal instanceof Seller) {
+            authorizationInfo.setRoles(sellerService.getRoles(((Seller) principal).getUsername()));
+            authorizationInfo.setStringPermissions(sellerService.getPermissions(((Seller) principal).getUsername()));
             return authorizationInfo;
         }
         return null;
@@ -92,18 +92,14 @@ public class UserRealm extends AuthorizingRealm {
                     getName()
             );
         } else if (userToken.getUserType() == UserToken.UserType.STORE) {
-            Member member = memberService.getByUsername(userToken.getUsername());
-            if (member == null) {
-                throw new UnknownAccountException();
-            }
-            StoreUser storeUser = storeService.getStoreUser(member.getMemberId());
-            if (storeUser == null) {
+            Seller seller = sellerService.getByUsername(userToken.getUsername());
+            if (seller == null) {
                 throw new UnknownAccountException();
             }
             authenticationInfo = new SimpleAuthenticationInfo(
-                    storeUser,
-                    member.getPasswd(),
-                    ByteSource.Util.bytes(member.getSalt()),
+                    seller,
+                    seller.getPassword(),
+                    ByteSource.Util.bytes(seller.getSalt()),
                     getName()
             );
         }

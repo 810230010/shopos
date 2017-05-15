@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.SellerMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Seller" >
+    <id column="seller_id" property="sellerId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="is_admin" property="isAdmin" jdbcType="BIT" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    seller_id, username, store_id, is_admin, last_login_time, password, salt, photo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_seller
+    where seller_id = #{sellerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_seller
+    where seller_id = #{sellerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Seller" >
+    <selectKey resultType="java.lang.Integer" keyProperty="sellerId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_seller (username, store_id, is_admin, 
+      last_login_time, password, salt, 
+      photo)
+    values (#{username,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{isAdmin,jdbcType=BIT}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Seller" >
+    <selectKey resultType="java.lang.Integer" keyProperty="sellerId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_seller
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="isAdmin != null" >
+        is_admin,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="isAdmin != null" >
+        #{isAdmin,jdbcType=BIT},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Seller" >
+    update t_seller
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="isAdmin != null" >
+        is_admin = #{isAdmin,jdbcType=BIT},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seller_id = #{sellerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Seller" >
+    update t_seller
+    set username = #{username,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=INTEGER},
+      is_admin = #{isAdmin,jdbcType=BIT},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR}
+    where seller_id = #{sellerId,jdbcType=INTEGER}
+  </update>
+</mapper>

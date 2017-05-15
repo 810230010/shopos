@@ -3,22 +3,18 @@ package com.wuliangit.shopos.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.util.StringUtils;
-import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.dto.StoreDetailDTO;
 import com.wuliangit.shopos.dto.StorePageListDTO;
-import com.wuliangit.shopos.entity.Brand;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
-import com.wuliangit.shopos.model.StoreBrand;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,11 +38,6 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public StoreUser getStoreUser(Integer memberId) {
-        return storeMapper.getStoreUser(memberId);
-    }
-
-    @Override
     public Set<String> getRoles(String username) {
         Set<String> roles = new HashSet<>();
         roles.add("store");
@@ -66,20 +57,16 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public int updateStore(Store store) {
         int res = storeMapper.updateByPrimaryKeySelective(store);
-
-        StoreUser currentStore = WebUtil.getCurrentStore();
-        StoreUser storeUser = storeMapper.getStoreUser(currentStore.getMemberId());
-
-        SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE,storeUser);
+        StoreMin storeMin = storeMapper.getStoreMinByStoreId(store.getStoreId());
+        SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE,storeMin);
         return res;
     }
 
     @Override
     public List<StorePageListDTO> getStoreList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        List<StorePageListDTO> result = new ArrayList<StorePageListDTO>();
         PageHelper.startPage(page,pageSize);
-        result = storeMapper.getStoreList(orderColumn, orderType, searchKey);
+        List<StorePageListDTO> result = storeMapper.getStoreList(orderColumn, orderType, searchKey);
         return result;
     }
 
@@ -91,5 +78,10 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreDetailDTO storeDetailPage(Integer storeId) {
         return storeMapper.storeDetailPage(storeId);
+    }
+
+    @Override
+    public StoreMin getStoreMinByStoreId(Integer storeId) {
+        return storeMapper.getStoreMinByStoreId(storeId);
     }
 }

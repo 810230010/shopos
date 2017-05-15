@@ -2,7 +2,7 @@ package com.wuliangit.shopos.controller;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,9 +29,9 @@ public class StoreGlobalHandler {
     private StoreService storeService;
 
     @ModelAttribute("storeUser")
-    public StoreUser newUser() {
-        StoreUser storeUser = WebUtil.getCurrentStore();
-        return storeUser;
+    public StoreMin newUser() {
+        StoreMin storeMin = WebUtil.getCurrentStore();
+        return storeMin;
     }
 
     @InitBinder

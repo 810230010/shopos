@@ -5,9 +5,10 @@ import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Admin;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.service.AdminService;
 import com.wuliangit.shopos.service.PerminssionService;
+import com.wuliangit.shopos.service.SellerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.SecurityUtils;
@@ -37,6 +38,8 @@ public class AdminLoginController {
     @Autowired
     private AdminService adminService;
     @Autowired
+    private SellerService sellerService;
+    @Autowired
     private PerminssionService perminssionService;
 
     @RequestMapping("/index")
@@ -52,10 +55,9 @@ public class AdminLoginController {
 
             Admin admin = adminService.getByUsername(username);
             WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_ADMIN, admin);
-            StoreUser storeUser = new StoreUser();
-            storeUser.setStoreId(0);
-            storeUser.setName("自营");
-            WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeUser);
+
+            Seller seller = sellerService.getById(0);
+            WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_SELLER, seller);
 
             List<MenuDTO> menus = perminssionService.getAdminMenus();
             WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_MENU, menus);

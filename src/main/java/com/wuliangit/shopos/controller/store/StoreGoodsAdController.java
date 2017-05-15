@@ -5,19 +5,16 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
-import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.entity.StoreGoodsAd;
-import com.wuliangit.shopos.model.StoreUser;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.StoreGoodsAdService;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,8 +60,8 @@ public class StoreGoodsAdController {
                                 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        StoreUser storeUser = WebUtil.getCurrentStore();
-        List<StoreGoodsDetailDTO> storeGoodsDetailDTOS = storeGoodsAdService.getStoreGoodsWithAd(searchKey,orderColumn,orderType,page,pageSize,storeUser.getStoreId());
+        StoreMin storeMin = WebUtil.getCurrentStore();
+        List<StoreGoodsDetailDTO> storeGoodsDetailDTOS = storeGoodsAdService.getStoreGoodsWithAd(searchKey,orderColumn,orderType,page,pageSize,storeMin.getStoreId());
         return new PageResult<StoreGoodsDetailDTO>(storeGoodsDetailDTOS,draw);
     }
 
@@ -77,7 +74,6 @@ public class StoreGoodsAdController {
     @ResponseBody
     public Object insertGoodsAd(StoreGoodsAd storeGoodsAd) throws Exception{
         RestResult result = new RestResult();
-        StoreUser storeUser = WebUtil.getCurrentStore();
         Integer info = storeGoodsAdService.insertGoodsAd(storeGoodsAd);
         return result;
     }
@@ -93,8 +89,8 @@ public class StoreGoodsAdController {
     @ResponseBody
     public Object getStoreGoodsWithoutAd(){
         RestResult result = new RestResult();
-        StoreUser storeUser = WebUtil.getCurrentStore();
-        List<StoreGoodsDetailDTO> info = storeGoodsAdService.getStoreGoodsWithoutAd(storeUser.getStoreId());
+        StoreMin storeMin = WebUtil.getCurrentStore();
+        List<StoreGoodsDetailDTO> info = storeGoodsAdService.getStoreGoodsWithoutAd(storeMin.getStoreId());
         result.put("data",info);
         return result;
     }

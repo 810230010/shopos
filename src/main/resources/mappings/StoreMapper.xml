@@ -2,13 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.StoreMapper">
 
-    <!--通过用户名获取店铺简要信息-->
-    <select id="getStoreUser" resultType="com.wuliangit.shopos.model.StoreUser">
-        select s.store_id, s.name, s.logo, s.seller_nikename, s.member_id ,m.username, m.nikename, m.photo
-        from t_store s left join t_member m on s.member_id = m.member_id
-        where s.member_id = #{memberId}
-    </select>
-
     <!--获取商家列表数据-->
     <select id="getStoreList" resultType="com.wuliangit.shopos.dto.StorePageListDTO">
         select store_id,name,state,create_time,seller_nikename,type

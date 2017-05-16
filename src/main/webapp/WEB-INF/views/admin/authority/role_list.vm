@@ -5,9 +5,9 @@
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>权限管理-管理员列表</h2>
+        <h2>权限管理-角色列表</h2>
         <p>
-            <a type="button" class="btn btn-w-m btn-primary" href="/admin/authority/addAdminPage">添加管理员</a>
+            <a type="button" class="btn btn-w-m btn-primary" href="/admin/authority/addRolePage">添加角色</a>
         </p>
     </div>
 </div>
@@ -16,7 +16,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">管理员列表</h5>
+                    <h5 id="rank">角色管理</h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -36,9 +36,6 @@
 #parse("/admin/models/footer.vm")
 
 <script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
-<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/layUI/layer.js"></script>
 <script>
 
     $("#权限管理").addClass("active");
@@ -63,24 +60,18 @@
                 },
             },
             "columns": [
-                {"data":"brandId","width":"7%","title":"管理员序号","visible": false},
-                {"data":"name","width": "10%","title":"用户名","orderable": false},
-                {"data":"name","width": "10%","title":"Email地址","orderable": false},
-                {"data":"name","width": "10%","title":"创建时间","orderable": false},
-                {"data":"name","width": "10%","title":"最后登入时间","orderable": false},
-                {"data":"categoryName","width": "10%","title":"所属分类","orderable": false},
+                {"data":"roleId","width":"7%","title":"角色序号","visible": false},
+                {"data":"name","width": "10%","title":"角色名","orderable": false},
+                {"data":"name","width": "10%","title":"角色描述","orderable": false},
                 {
-                    "data":"brandId",
+                    "data":"roleId",
                     "width": "15%",
                     "title":"操作",
                     "orderable": false,
                     "render": function (data, type, row) {
                         return [
-                            '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
-                            '分配权限 <i class="fa fa-tasks"></i>',
-                            '</a>',
                             '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
-                            '查看日志 <i class="fa fa-eye"></i>',
+                            '查看 <i class="fa fa-eye"></i>',
                             '</a>',
                             '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
                             '编辑 <i class="fa fa-edit"></i>',

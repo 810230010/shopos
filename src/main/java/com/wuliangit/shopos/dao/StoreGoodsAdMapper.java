@@ -43,4 +43,11 @@ public interface StoreGoodsAdMapper extends BaseMapper<StoreGoodsAd, Integer> {
      * @return: java.lang.Integer
      */
     Integer updateGoodsAd(StoreGoodsAd storeGoodsAd);
+
+    /**
+     * api接口获取店铺商品广告
+     * @param storeId
+     * @return
+     */
+    List<StoreGoodsAd> apiGetStoreGoodsAd(Integer storeId);
 }

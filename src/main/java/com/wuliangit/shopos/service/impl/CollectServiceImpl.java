@@ -140,4 +140,9 @@ public class CollectServiceImpl implements CollectService {
         }
         return false;
     }
+
+    @Override
+    public int getStoreCollectCount(Integer storeId) {
+        return favoritesStoreMapper.getStoreCollectCount(storeId);
+    }
 }

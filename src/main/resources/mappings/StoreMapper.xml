@@ -28,7 +28,7 @@
 
     <!--获取商家详情-->
     <select id="storeDetailPage" resultType="com.wuliangit.shopos.dto.StoreDetailDTO">
-        select name,grade_id,member_id,type,store_company_name,address,state,create_time,banner,phone,credit,live_store_name,live_store_address
+        select store_id, name,grade_id,type,store_company_name,address,state,create_time,banner,phone,credit,live_store_name,live_store_address
         from t_store
         where store_id = #{storeId}
     </select>
@@ -63,4 +63,12 @@
             </otherwise>
         </choose>
     </select>
+
+    <!--api获取店铺详情-->
+    <select id="getApiStoreDTOById" resultType="com.wuliangit.shopos.dto.ApiStoreDTO">
+      select store_id, name, type, address, banner, logo, sales, province_id
+        from t_store
+        where store_id = #{storeId}
+    </select>
+
 </mapper>

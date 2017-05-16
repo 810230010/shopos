@@ -17,6 +17,11 @@
         where member_id = #{memberId} and store_id =  #{storeId}
     </select>
 
+    <!--获取店铺收藏数量-->
+    <select id="getStoreCollectCount" resultType="java.lang.Integer">
+        select count(*) from t_favorites_store where store_id =  #{storeId}
+    </select>
+
     <!--删除收藏店铺-->
     <delete id="deleteCollectGoods">
         delete from t_favorites_store

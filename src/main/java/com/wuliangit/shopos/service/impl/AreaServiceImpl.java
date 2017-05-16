@@ -23,4 +23,9 @@ public class AreaServiceImpl implements AreaService {
     public List<Area> getArea(Integer parentId) {
         return areaMapper.getAreaByParentId(parentId);
     }
+
+    @Override
+    public Area getById(Integer areaId) {
+        return areaMapper.selectByPrimaryKey(areaId);
+    }
 }

@@ -52,4 +52,10 @@ public interface StoreGoodsAdService {
      */
     List<StoreGoodsDetailDTO> getStoreGoodsWithoutAd(Integer storeId);
 
+    /**
+     * api接口获取店铺商品广告
+     * @param storeId
+     * @return
+     */
+    List<StoreGoodsAd> apiGetStoreGoodsAd(Integer storeId);
 }

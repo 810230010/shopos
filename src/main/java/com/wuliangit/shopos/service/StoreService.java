@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.ApiStoreDTO;
 import com.wuliangit.shopos.dto.ApiStoreListDTO;
 import com.wuliangit.shopos.dto.StoreDetailDTO;
 import com.wuliangit.shopos.dto.StorePageListDTO;
@@ -95,4 +96,11 @@ public interface StoreService {
      * @return
      */
     List<ApiStoreListDTO> apiStoreSearch(Integer page, Integer pageSize, String searchKey, String order, String type);
+
+    /**
+     * 获取店铺详情
+     * @param storeId
+     * @return
+     */
+    ApiStoreDTO apiGetStoreDTO(Integer storeId);
 }

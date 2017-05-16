@@ -60,4 +60,9 @@ public class StoreGoodsAdServiceImpl implements StoreGoodsAdService {
     public List<StoreGoodsDetailDTO> getStoreGoodsWithoutAd(Integer storeId) {
         return storeGoodsAdMapper.getStoreGoodsWithoutAd(storeId);
     }
+
+    @Override
+    public List<StoreGoodsAd> apiGetStoreGoodsAd(Integer storeId) {
+        return storeGoodsAdMapper.apiGetStoreGoodsAd(storeId);
+    }
 }

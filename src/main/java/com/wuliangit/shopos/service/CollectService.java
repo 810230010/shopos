@@ -63,9 +63,16 @@ public interface CollectService {
     boolean isCollectGoods(Integer goodsId);
 
     /**
-     * 是否收藏商品
+     * 是否收藏店铺
      * @param storeId
      * @return
      */
     boolean isCollectStore(Integer storeId);
+
+    /**
+     * 获取店铺收藏数量
+     * @param storeId
+     * @return
+     */
+    int getStoreCollectCount(Integer storeId);
 }

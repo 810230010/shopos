@@ -15,4 +15,12 @@ public interface AreaService {
      * @return
      */
     List<Area> getArea(Integer parentId);
+
+    /**
+     * 通过id获取
+     * @param areaId
+     * @return
+     */
+    Area getById(Integer areaId);
+
 }

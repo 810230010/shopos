@@ -11,7 +11,7 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12" style="height:1500px">
             <div class="ibox">
                 <div class="ibox-title">
                     <form class="form-horizontal">
@@ -25,36 +25,71 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">角色描述:</label>
                             <div class="col-sm-7">
-                                <textarea class="col-sm-5" style="height:150px"></textarea>
+                                <textarea class="col-sm-5" style="height:150px;outline-color: green"></textarea>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i> &nbsp;&nbsp;商品添加/编辑</label></div>
+                <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input id="text_box1" type="checkbox" value=""> <i></i> &nbsp;&nbsp;商品管理</label></div>
                 <div class="col-lg-12" style="background-color:white;margin-top:10px">
-                    <div class="col-lg-2">
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品删除/恢复</label></div>
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类添加/编辑</label></div>
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类转移/删除</label></div>
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品属性管理</label></div>
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品审核</label></div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son1" style="padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品删除/恢复</label></div>
+                        <div class="i-checks son1" style="padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类添加/编辑</label></div>
+                        <div class="i-checks son1" style="padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类转移/删除</label></div>
+                        <div class="i-checks son1" style="padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品属性管理</label></div>
+                        <div class="i-checks son1" style="padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品审核</label></div>
                     </div>
-                    <div class="col-lg-2">
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类添加/编辑</label></div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son1" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类添加/编辑</label></div>
                     </div>
-                    <div class="col-lg-2">
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类转移/删除</label></div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son1" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类转移/删除</label></div>
                     </div>
-                    <div class="col-lg-2">
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品属性管理</label></div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品审核</label></div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品管理</label></div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son1" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品属性管理</label></div>
                     </div>
                 </div>
+
+                <div class="i-checks" style="height:50px;line-height: 50px;"><label> <input id="text_box2" type="checkbox" value="" > <i></i> &nbsp;&nbsp;文章管理</label></div>
+                <div class="col-lg-12" style="background-color:white;margin-top:50px">
+                    <div class="col-lg-3">
+                        <div class="i-checks son2" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品删除/恢复</label></div>
+                        <div class="i-checks son2" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类添加/编辑</label></div>
+                        <div class="i-checks son2" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类转移/删除</label></div>
+                        <div class="i-checks son2" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品属性管理</label></div>
+                        <div class="i-checks son2" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品审核</label></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son2" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类添加/编辑</label></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son2" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类转移/删除</label></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son2" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品属性管理</label></div>
+                    </div>
+                </div>
+##
+                <div class="i-checks" style="height:50px;line-height: 50px;"><label> <input id="text_box3" type="checkbox" value=""> <i></i> &nbsp;&nbsp;会员管理</label></div>
+                <div class="col-lg-12" style="background-color:white;margin-top:50px">
+                    <div class="col-lg-3">
+                        <div class="i-checks son3" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品删除/恢复</label></div>
+                        <div class="i-checks son3" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类添加/编辑</label></div>
+                        <div class="i-checks son3" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类转移/删除</label></div>
+                        <div class="i-checks son3" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品属性管理</label></div>
+                        <div class="i-checks son3" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品审核</label></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son3" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类添加/编辑</label></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son3" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>分类转移/删除</label></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="i-checks son3" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input type="checkbox" value=""> <i></i>商品属性管理</label></div>
+                    </div>
+                </div>
+                <div style="margin-top: 60px" class="col-lg-6 col-lg-offset-6"><button class="btn btn-success">提交</button></div>
             </div>
         </div>
     </div>
@@ -75,11 +110,33 @@
     var rank = 1;
 
     $(document).ready(function () {
+        //复选框的配置
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $('#text_box1').on('ifChecked', function(event){
+            $('.son1').iCheck('check');
+        });
+        $('#text_box1').on('ifUnchecked', function(event){
+            $('.son1').iCheck('uncheck');
+        });
+        $('#text_box2').on('ifChecked', function(event){
+            $('.son2').iCheck('check');
+        });
+        $('#text_box2').on('ifUnchecked', function(event){
+            $('.son2').iCheck('uncheck');
+        });
 
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
+        $('#text_box3').on('ifChecked', function(event){
+            $('.son3').iCheck('check');
+        });
+        $('#text_box3').on('ifUnchecked', function(event){
+            $('.son3').iCheck('uncheck');
+        });
+
+
+
 
         //分类列表下拉框
         $(".parent_select").select2({

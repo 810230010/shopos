@@ -19,9 +19,15 @@
                     <h5>添加商品品牌</small></h5>
                 </div>
                 <div class="ibox-content">
+<<<<<<< Updated upstream
                     <form id="brandForm" class="form-horizontal">
                         <div class="form-group">
                             <label for="name" class="col-sm-3 control-label"><font color="red">*</font>品牌名称</label>
+=======
+                    <form class="form-horizontal" id="brandForm">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">品牌名称</label>
+>>>>>>> Stashed changes
                             <div class="col-sm-7">
                                 <input id="name" name="name" type="text" class="form-control" onblur="check(this.value)" required><label id="msg"></label>
                             </div>
@@ -298,6 +304,7 @@
 
 
     $("#submit").on('click', function () {
+<<<<<<< Updated upstream
 
             $("#brandForm").validate({
                 debug: true
@@ -309,6 +316,10 @@
                 $("#msg").html("<font color='red'>该品牌名已存在,请勿重复添加!</font>");
                 return;
             }
+=======
+        if(check($("#name").val()) == true){
+
+>>>>>>> Stashed changes
             //////////////图片//////////////
             var logo_dom = $("#brand-logo-div .kv-zoom-cache .kv-file-content img");
             var logo_img = logo_dom.attr("src");

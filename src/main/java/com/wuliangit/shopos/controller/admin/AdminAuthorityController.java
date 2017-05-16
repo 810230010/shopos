@@ -22,6 +22,42 @@ public class AdminAuthorityController {
         return "admin/authority/admin_list";
     }
 
+    /**
+     * 管理员添加页面
+     * @return
+     */
+    @RequestMapping("/addAdminPage")
+    public String addAdminPage(){
+        return "/admin/authority/add_admin";
+    }
+
+    /**
+     * 角色列表页面
+     * @return
+     */
+    @RequestMapping("/roleListPage")
+    public String roleListPage(){
+        return "/admin/authority/role_list";
+    }
+
+    /**
+     * 添加角色页面
+     * @return
+     */
+    @RequestMapping("/addRolePage")
+    public String addRolePage(){
+        return "/admin/authority/add_role";
+    }
+    /**
+     *
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("/searchAdminList")
     public Object searchAdminList(@RequestParam("draw") int draw,
                                   @RequestParam(value = "searchKey", required = false) String searchKey,

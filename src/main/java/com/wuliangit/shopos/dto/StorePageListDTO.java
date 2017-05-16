@@ -15,19 +15,16 @@ public class StorePageListDTO {
 
     private Date createTime;
 
-    private String sellerNikename;
-
     private String type;
 
     public StorePageListDTO() {
     }
 
-    public StorePageListDTO(Integer storeId, String name, String state, Date createTime, String sellerNikename, String type) {
+    public StorePageListDTO(Integer storeId, String name, String state, Date createTime, String type) {
         this.storeId = storeId;
         this.name = name;
         this.state = state;
         this.createTime = createTime;
-        this.sellerNikename = sellerNikename;
         this.type = type;
     }
 
@@ -61,14 +58,6 @@ public class StorePageListDTO {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public String getSellerNikename() {
-        return sellerNikename;
-    }
-
-    public void setSellerNikename(String sellerNikename) {
-        this.sellerNikename = sellerNikename;
     }
 
     public String getType() {

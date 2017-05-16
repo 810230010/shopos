@@ -129,6 +129,7 @@ public class AdminStoreController {
                                    @RequestParam(value = "orderColumn", required = false) String orderColumn,
                                    @RequestParam(value = "orderType", required = false) String orderType,
                                    @RequestParam(value = "searchKey", required = false) String searchKey){
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
         List<StorePageListDTO> result = storeService.getStoreList(page, pageSize, orderColumn,orderType,searchKey);
         return new PageResult<StorePageListDTO>(result,draw);
     }

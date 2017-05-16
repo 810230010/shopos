@@ -4,12 +4,12 @@
 
     <!--获取商家列表数据-->
     <select id="getStoreList" resultType="com.wuliangit.shopos.dto.StorePageListDTO">
-        select store_id,name,state,create_time,seller_nikename,type
+        select store_id, name, state, create_time, type
         from t_store
         <where>
             state = "OPEN" OR state = "CLOSE"
             <if test="searchKey != null and searchKey != '' ">
-                and ( q.title like '%${searchKey}%')
+                and ( name like '%${searchKey}%')
             </if>
         </where>
         order by
@@ -38,5 +38,29 @@
         select store_id, name, logo, type
         from t_store
         where store_id = #{storeId}
+    </select>
+
+    <!--接口搜索店铺-->
+    <select id="apiStoreSearch" resultType="com.wuliangit.shopos.dto.ApiStoreListDTO">
+        select store_id, name, type, logo, sales
+        from t_store
+        <where>
+            state = "OPEN"
+            <if test="searchKey != null and searchKey != '' ">
+                and ( name like '%${searchKey}%')
+            </if>
+            <if test="type != null and type != '' ">
+                and type = #{type}
+            </if>
+        </where>
+        order by
+        <choose>
+            <when test="order != null and order !=''">
+                ${order} desc
+            </when>
+            <otherwise>
+                sales desc, desccredit desc, servicecredit desc, deliverycredit desc
+            </otherwise>
+        </choose>
     </select>
 </mapper>

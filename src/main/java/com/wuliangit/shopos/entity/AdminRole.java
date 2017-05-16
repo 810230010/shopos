@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.entity;
 
-public class Role {
-    private Integer roleId;
+public class AdminRole {
+    private Integer adminRoleId;
 
     private String office;
 
@@ -9,20 +9,20 @@ public class Role {
 
     private String role;
 
-    private String roleType;
-
     private Boolean isDefault;
 
     private Boolean useable;
 
     private Integer createBy;
 
-    public Integer getRoleId() {
-        return roleId;
+    private String permissionList;
+
+    public Integer getAdminRoleId() {
+        return adminRoleId;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setAdminRoleId(Integer adminRoleId) {
+        this.adminRoleId = adminRoleId;
     }
 
     public String getOffice() {
@@ -49,14 +49,6 @@ public class Role {
         this.role = role == null ? null : role.trim();
     }
 
-    public String getRoleType() {
-        return roleType;
-    }
-
-    public void setRoleType(String roleType) {
-        this.roleType = roleType == null ? null : roleType.trim();
-    }
-
     public Boolean getIsDefault() {
         return isDefault;
     }
@@ -79,5 +71,13 @@ public class Role {
 
     public void setCreateBy(Integer createBy) {
         this.createBy = createBy;
+    }
+
+    public String getPermissionList() {
+        return permissionList;
+    }
+
+    public void setPermissionList(String permissionList) {
+        this.permissionList = permissionList == null ? null : permissionList.trim();
     }
 }

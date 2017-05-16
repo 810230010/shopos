@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.entity;
 
-public class Permission {
-    private Integer permissionId;
+public class SellerPermission {
+    private Integer sellerPermissionId;
 
     private Integer parentId;
 
@@ -19,12 +19,12 @@ public class Permission {
 
     private Boolean useable;
 
-    public Integer getPermissionId() {
-        return permissionId;
+    public Integer getSellerPermissionId() {
+        return sellerPermissionId;
     }
 
-    public void setPermissionId(Integer permissionId) {
-        this.permissionId = permissionId;
+    public void setSellerPermissionId(Integer sellerPermissionId) {
+        this.sellerPermissionId = sellerPermissionId;
     }
 
     public Integer getParentId() {

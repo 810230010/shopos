@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.SellerRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.SellerRole" >
+    <id column="seller_role_id" property="sellerRoleId" jdbcType="INTEGER" />
+    <result column="office" property="office" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="is_default" property="isDefault" jdbcType="BIT" />
+    <result column="useable" property="useable" jdbcType="BIT" />
+    <result column="create_by" property="createBy" jdbcType="INTEGER" />
+    <result column="permission_list" property="permissionList" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    seller_role_id, office, name, role, is_default, useable, create_by, permission_list
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_seller_role
+    where seller_role_id = #{sellerRoleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_seller_role
+    where seller_role_id = #{sellerRoleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.SellerRole" >
+    <selectKey resultType="java.lang.Integer" keyProperty="sellerRoleId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_seller_role (office, name, role, 
+      is_default, useable, create_by, 
+      permission_list)
+    values (#{office,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
+      #{isDefault,jdbcType=BIT}, #{useable,jdbcType=BIT}, #{createBy,jdbcType=INTEGER}, 
+      #{permissionList,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.SellerRole" >
+    <selectKey resultType="java.lang.Integer" keyProperty="sellerRoleId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_seller_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="office != null" >
+        office,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="isDefault != null" >
+        is_default,
+      </if>
+      <if test="useable != null" >
+        useable,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="permissionList != null" >
+        permission_list,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="office != null" >
+        #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="useable != null" >
+        #{useable,jdbcType=BIT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="permissionList != null" >
+        #{permissionList,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.SellerRole" >
+    update t_seller_role
+    <set >
+      <if test="office != null" >
+        office = #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        is_default = #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="useable != null" >
+        useable = #{useable,jdbcType=BIT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="permissionList != null" >
+        permission_list = #{permissionList,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seller_role_id = #{sellerRoleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.SellerRole" >
+    update t_seller_role
+    set office = #{office,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=BIT},
+      useable = #{useable,jdbcType=BIT},
+      create_by = #{createBy,jdbcType=INTEGER},
+      permission_list = #{permissionList,jdbcType=VARCHAR}
+    where seller_role_id = #{sellerRoleId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -76,4 +76,10 @@
         FROM t_goods
         WHERE goods_id = #{goodsId}
     </select>
+
+    <!--通过店铺id获取店铺商品数量-->
+    <select id="getGoodsCountByStoreId" resultType="java.lang.Integer">
+        select count(*) from t_goods where store_id = #{storeId}
+    </select>
+
 </mapper>

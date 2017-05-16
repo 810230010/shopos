@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.ApiStoreListDTO;
 import com.wuliangit.shopos.dto.StoreDetailDTO;
 import com.wuliangit.shopos.dto.StorePageListDTO;
 import com.wuliangit.shopos.entity.Store;
@@ -41,4 +42,15 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return
      */
     StoreDetailDTO storeDetailPage(Integer storeId);
+
+    /**
+     * 接口搜索店铺
+     * @param searchKey
+     * @param order
+     * @param type
+     * @return
+     */
+    List<ApiStoreListDTO> apiStoreSearch(@Param("searchKey")String searchKey,
+                                         @Param("order")String order,
+                                         @Param("type")String type);
 }

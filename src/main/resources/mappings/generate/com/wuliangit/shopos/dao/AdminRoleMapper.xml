@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wuliangit.shopos.dao.RoleMapper" >
-  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Role" >
-    <id column="role_id" property="roleId" jdbcType="INTEGER" />
+<mapper namespace="com.wuliangit.shopos.dao.AdminRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.AdminRole" >
+    <id column="admin_role_id" property="adminRoleId" jdbcType="INTEGER" />
     <result column="office" property="office" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="role" property="role" jdbcType="VARCHAR" />
-    <result column="role_type" property="roleType" jdbcType="VARCHAR" />
     <result column="is_default" property="isDefault" jdbcType="BIT" />
     <result column="useable" property="useable" jdbcType="BIT" />
     <result column="create_by" property="createBy" jdbcType="INTEGER" />
+    <result column="permission_list" property="permissionList" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    role_id, office, name, role, role_type, is_default, useable, create_by
+    admin_role_id, office, name, role, is_default, useable, create_by, permission_list
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from t_role
-    where role_id = #{roleId,jdbcType=INTEGER}
+    from t_admin_role
+    where admin_role_id = #{adminRoleId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_role
-    where role_id = #{roleId,jdbcType=INTEGER}
+    delete from t_admin_role
+    where admin_role_id = #{adminRoleId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Role" >
-    <selectKey resultType="java.lang.Integer" keyProperty="roleId" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into t_role (office, name, role, 
-      role_type, is_default, useable, 
-      create_by)
-    values (#{office,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
-      #{roleType,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, #{useable,jdbcType=BIT}, 
-      #{createBy,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.AdminRole" >
+    insert into t_admin_role (admin_role_id, office, name, 
+      role, is_default, useable, create_by, 
+      permission_list)
+    values (#{adminRoleId,jdbcType=INTEGER}, #{office,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, #{useable,jdbcType=BIT}, #{createBy,jdbcType=INTEGER}, 
+      #{permissionList,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Role" >
-    <selectKey resultType="java.lang.Integer" keyProperty="roleId" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into t_role
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.AdminRole" >
+    insert into t_admin_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminRoleId != null" >
+        admin_role_id,
+      </if>
       <if test="office != null" >
         office,
       </if>
@@ -49,9 +46,6 @@
       </if>
       <if test="role != null" >
         role,
-      </if>
-      <if test="roleType != null" >
-        role_type,
       </if>
       <if test="isDefault != null" >
         is_default,
@@ -62,8 +56,14 @@
       <if test="createBy != null" >
         create_by,
       </if>
+      <if test="permissionList != null" >
+        permission_list,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminRoleId != null" >
+        #{adminRoleId,jdbcType=INTEGER},
+      </if>
       <if test="office != null" >
         #{office,jdbcType=VARCHAR},
       </if>
@@ -72,9 +72,6 @@
       </if>
       <if test="role != null" >
         #{role,jdbcType=VARCHAR},
-      </if>
-      <if test="roleType != null" >
-        #{roleType,jdbcType=VARCHAR},
       </if>
       <if test="isDefault != null" >
         #{isDefault,jdbcType=BIT},
@@ -85,10 +82,13 @@
       <if test="createBy != null" >
         #{createBy,jdbcType=INTEGER},
       </if>
+      <if test="permissionList != null" >
+        #{permissionList,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Role" >
-    update t_role
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.AdminRole" >
+    update t_admin_role
     <set >
       <if test="office != null" >
         office = #{office,jdbcType=VARCHAR},
@@ -99,9 +99,6 @@
       <if test="role != null" >
         role = #{role,jdbcType=VARCHAR},
       </if>
-      <if test="roleType != null" >
-        role_type = #{roleType,jdbcType=VARCHAR},
-      </if>
       <if test="isDefault != null" >
         is_default = #{isDefault,jdbcType=BIT},
       </if>
@@ -111,18 +108,21 @@
       <if test="createBy != null" >
         create_by = #{createBy,jdbcType=INTEGER},
       </if>
+      <if test="permissionList != null" >
+        permission_list = #{permissionList,jdbcType=VARCHAR},
+      </if>
     </set>
-    where role_id = #{roleId,jdbcType=INTEGER}
+    where admin_role_id = #{adminRoleId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Role" >
-    update t_role
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.AdminRole" >
+    update t_admin_role
     set office = #{office,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       role = #{role,jdbcType=VARCHAR},
-      role_type = #{roleType,jdbcType=VARCHAR},
       is_default = #{isDefault,jdbcType=BIT},
       useable = #{useable,jdbcType=BIT},
-      create_by = #{createBy,jdbcType=INTEGER}
-    where role_id = #{roleId,jdbcType=INTEGER}
+      create_by = #{createBy,jdbcType=INTEGER},
+      permission_list = #{permissionList,jdbcType=VARCHAR}
+    where admin_role_id = #{adminRoleId,jdbcType=INTEGER}
   </update>
 </mapper>

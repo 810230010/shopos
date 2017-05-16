@@ -1,7 +1,9 @@
 package com.wuliangit.shopos.controller;
 
+import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.logging.Log;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 后台管理界面全局前置设置
@@ -32,6 +35,12 @@ public class StoreGlobalHandler {
     public StoreMin newUser() {
         StoreMin storeMin = WebUtil.getCurrentStore();
         return storeMin;
+    }
+
+    @ModelAttribute("menus")
+    public List<MenuDTO> setMenus() {
+        List<MenuDTO> menus = (List<MenuDTO>)WebUtil.getSession().getAttribute(CoreConstants.SESSION_CURRENT_MENU);
+        return menus;
     }
 
     @InitBinder

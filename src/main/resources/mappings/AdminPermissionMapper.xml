@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.AdminPermissionMapper" >
+
+    <!--获取管理员菜单-->
+    <select id="getAdminMenus" resultType="com.wuliangit.shopos.dto.MenuDTO">
+        select admin_permission_id permission_id, parent_id, name, sort, href, icon, permission, type, useable from t_admin_permission
+        where admin_permission_id in(${permissionList})
+        and ( type = 'PMENU' or  type = 'MENU') and useable = 1;
+    </select>
+
+</mapper>

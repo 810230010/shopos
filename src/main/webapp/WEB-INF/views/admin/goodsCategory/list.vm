@@ -7,7 +7,7 @@
     <div class="col-lg-10">
         <h2>商品-商品类型</h2>
         <p>
-            <a type="button" class="btn btn-w-m btn-primary" href="/admin/goodsCategory/addPage">添加商品类型</a>
+            <a type="button" class="btn btn-w-m btn-primary" href="/admin/goodsCategory/addPage">添加一级商品类型</a>
         </p>
     </div>
 </div>
@@ -39,6 +39,10 @@
 
 <script>
 
+    $("#商品分类列表").addClass("active");
+    $("#商品分类管理").addClass("active");
+    $('#side-menu').metisMenu();
+
     var rank = 1;
     var upParentId = [];
     var parentId = 0;
@@ -60,11 +64,10 @@
                 },
             },
             "columns": [
-                {"data":"goodsCategoryId","width":"7%","title":"序号","visible": false},
-                {"data":"name","width": "20%","title":"分类","orderable": false},
+                {"data":"name","width": "15%","title":"分类名称","orderable": false, "orderable": true},
                 {"data":"parentId","width": "10%","title":"父id","visible": false},
                 {"data":"sort","width": "10%","title":"排序","orderable": true},
-                {"data":"keywords","width": "20%","title":"关键词","orderable": false},
+                {"data":"keywords","width": "15%","title":"关键词","orderable": false},
                 {"data":"description","width": "20%","title":"描述","orderable": false},
                 {"data":"isShow","width": "10%","title":"是否显示","orderable": true,
                     "render": function (data, type, row) {
@@ -74,10 +77,10 @@
                            return "否"
                        }
                     }},
-                {"data":"id","width": "20%","title":"操作","orderable": false,
+                {"data":"id","width": "30%","title":"操作","orderable": false,
                     "render": function (data, type, row) {
                         return [
-                            '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
+                            '<a class="table-button btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
                             '删除 <i class="fa fa-trash-o"></i>',
                             '</a>',
                             '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
@@ -117,12 +120,7 @@
             ],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
 
@@ -161,7 +159,7 @@
             }else{
                 $('#back').hide();
             }
-            parentId = upParentId[rank];
+            parentId = upParentId[rank+1];
             $('#rank').html("商品分类列表("+rank+"级)")
             table = $('#datatables').DataTable().ajax.reload();
         });

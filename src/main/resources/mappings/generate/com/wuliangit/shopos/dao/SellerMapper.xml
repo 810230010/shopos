@@ -10,9 +10,12 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="salt" property="salt" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="seller_role_id" property="sellerRoleId" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    seller_id, username, store_id, is_admin, last_login_time, password, salt, photo
+    seller_id, username, store_id, is_admin, last_login_time, password, salt, photo, 
+    seller_role_id, email
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,10 +33,12 @@
     </selectKey>
     insert into t_seller (username, store_id, is_admin, 
       last_login_time, password, salt, 
-      photo)
+      photo, seller_role_id, email
+      )
     values (#{username,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{isAdmin,jdbcType=BIT}, 
       #{lastLoginTime,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
-      #{photo,jdbcType=VARCHAR})
+      #{photo,jdbcType=VARCHAR}, #{sellerRoleId,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Seller" >
     <selectKey resultType="java.lang.Integer" keyProperty="sellerId" order="AFTER" >
@@ -62,6 +67,12 @@
       <if test="photo != null" >
         photo,
       </if>
+      <if test="sellerRoleId != null" >
+        seller_role_id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="username != null" >
@@ -84,6 +95,12 @@
       </if>
       <if test="photo != null" >
         #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerRoleId != null" >
+        #{sellerRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -111,6 +128,12 @@
       <if test="photo != null" >
         photo = #{photo,jdbcType=VARCHAR},
       </if>
+      <if test="sellerRoleId != null" >
+        seller_role_id = #{sellerRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
     </set>
     where seller_id = #{sellerId,jdbcType=INTEGER}
   </update>
@@ -122,7 +145,9 @@
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       password = #{password,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR}
+      photo = #{photo,jdbcType=VARCHAR},
+      seller_role_id = #{sellerRoleId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR}
     where seller_id = #{sellerId,jdbcType=INTEGER}
   </update>
 </mapper>

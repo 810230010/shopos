@@ -40,8 +40,8 @@
 
 <script>
 
-    $("#会员列表").addClass("active");
-    $("#会员管理").addClass("active");
+    $("#管理员日志").addClass("active");
+    $("#权限管理").addClass("active");
     $('#side-menu').metisMenu();
 
     $(document).ready(function () {

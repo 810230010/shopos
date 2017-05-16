@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wuliangit.shopos.dao.PermissionMapper" >
-  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Permission" >
-    <id column="permission_id" property="permissionId" jdbcType="INTEGER" />
+<mapper namespace="com.wuliangit.shopos.dao.AdminPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.AdminPermission" >
+    <id column="admin_permission_id" property="adminPermissionId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
@@ -13,34 +13,34 @@
     <result column="useable" property="useable" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    permission_id, parent_id, name, sort, href, icon, permission, type, useable
+    admin_permission_id, parent_id, name, sort, href, icon, permission, type, useable
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from t_permission
-    where permission_id = #{permissionId,jdbcType=INTEGER}
+    from t_admin_permission
+    where admin_permission_id = #{adminPermissionId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_permission
-    where permission_id = #{permissionId,jdbcType=INTEGER}
+    delete from t_admin_permission
+    where admin_permission_id = #{adminPermissionId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Permission" >
-    <selectKey resultType="java.lang.Integer" keyProperty="permissionId" order="AFTER" >
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.AdminPermission" >
+    <selectKey resultType="java.lang.Integer" keyProperty="adminPermissionId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_permission (parent_id, name, sort, 
+    insert into t_admin_permission (parent_id, name, sort, 
       href, icon, permission, 
       type, useable)
     values (#{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{href,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR}, #{useable,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Permission" >
-    <selectKey resultType="java.lang.Integer" keyProperty="permissionId" order="AFTER" >
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.AdminPermission" >
+    <selectKey resultType="java.lang.Integer" keyProperty="adminPermissionId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_permission
+    insert into t_admin_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="parentId != null" >
         parent_id,
@@ -94,8 +94,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Permission" >
-    update t_permission
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.AdminPermission" >
+    update t_admin_permission
     <set >
       <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=INTEGER},
@@ -122,10 +122,10 @@
         useable = #{useable,jdbcType=BIT},
       </if>
     </set>
-    where permission_id = #{permissionId,jdbcType=INTEGER}
+    where admin_permission_id = #{adminPermissionId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Permission" >
-    update t_permission
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.AdminPermission" >
+    update t_admin_permission
     set parent_id = #{parentId,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
@@ -134,6 +134,6 @@
       permission = #{permission,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
       useable = #{useable,jdbcType=BIT}
-    where permission_id = #{permissionId,jdbcType=INTEGER}
+    where admin_permission_id = #{adminPermissionId,jdbcType=INTEGER}
   </update>
 </mapper>

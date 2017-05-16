@@ -27,52 +27,18 @@
                     OS+
                 </div>
             </li>
-            <li class="active">
-                <a href="index.html"><i class="fa fa-archive"></i> <span class="nav-label">商品</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="/store/goods/listPage">商品列表</a></li>
-                    <li><a href="/store/goods/addPage">添加商品</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="index.html#"><i class="fa fa-ticket"></i> <span class="nav-label">品牌管理</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="/store/brand/listPage">品牌列表</a></li>
-                    <li><a href="/store/brand/joinPage">申请入驻品牌</a></li>
-                    <li><a href="/store/brand/storeAddBrandListPage">申请添加的品牌状态</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="index.html#"><i class="fa fa-twitch"></i> <span class="nav-label">评论管理</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="toastr_notifications.html">评论列表</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="index.html#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">促销</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="ecommerce_products_grid.html">促销1</a></li>
-                    <li><a href="ecommerce_product_list.html">促销2</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="index.html#"><i class="fa fa-book"></i> <span class="nav-label">订单</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="/store/order/list?type=''">订单列表</a></li>
-                    <li><a href="/store/order/cancellist?type='CANCEL'">已取消订单列表</a></li>
-                    <li><a href="ecommerce_product_list.html">缺货登记</a></li>
-                    <li><a href="ecommerce_product_list.html">添加订单</a></li>
-                    <li><a href="ecommerce_product.html">发货单列表</a></li>
-                    <li><a href="/store/refund/successRefundList?type=''">退换货单列表</a></li>
-                    <li><a href="/store/refund/refundList">退换货申请列表</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-spotify"></i> <span class="nav-label">设置</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="/store/setting/showAdPage">广告设置</a></li>
-                </ul>
-            </li>
+            #foreach( $menu in $menus)
+                <li id="$menu.name">
+                    <a href="#"><i class="fa $menu.icon"></i> <span class="nav-label">$menu.name</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        #if ($menu.childMenus)
+                            #foreach( $item in $menu.childMenus)
+                                <li id="$item.name"><a href="$item.href">$item.name</a></li>
+                            #end
+                        #end
+                    </ul>
+                </li>
+            #end
         </ul>
 
     </div>

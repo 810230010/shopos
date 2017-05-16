@@ -20,8 +20,8 @@ public interface PermissionMapper extends BaseMapper<Permission, Integer> {
 
     /**
      * 获取店铺菜单
-     * @param storeId
+     * @param sellerId
      * @return
      */
-    List<MenuDTO> getStoreMenus(Integer storeId);
+    List<MenuDTO> getStoreMenus(Integer sellerId);
 }

@@ -45,7 +45,7 @@ public interface GoodsCategoryMapper extends BaseMapper<GoodsCategory, Integer> 
     List<ApiGoodsCategoryDOT> getGoodsCategoryDTOByParentId(Integer parentId);
 
     /**
-     * 获取二级分类
+     * 移动端接口获取二级分类
      * @param parentId
      * @return
      */

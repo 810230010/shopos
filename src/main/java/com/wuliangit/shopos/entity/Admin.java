@@ -21,6 +21,8 @@ public class Admin {
 
     private String email;
 
+    private Integer adminRoleId;
+
     public Integer getAdminId() {
         return adminId;
     }
@@ -91,5 +93,13 @@ public class Admin {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
+    }
+
+    public Integer getAdminRoleId() {
+        return adminRoleId;
+    }
+
+    public void setAdminRoleId(Integer adminRoleId) {
+        this.adminRoleId = adminRoleId;
     }
 }

@@ -16,7 +16,9 @@
         SELECT p.* FROM t_permission p
         LEFT JOIN t_role_permission rp ON p.permission_id = rp.permission_id
         LEFT JOIN t_role r ON r.role_id = rp.role_id
-        LEFT JOIN t_user_role ur on ur.user_id = #{storeId}
+        LEFT JOIN t_user_role ur on ur.user_id = #{sellerId}
         where ur.user_type = 'STORE' and ( p.type = 'PMENU' or  p.type = 'MENU') and p.useable = 1
     </select>
+
+
 </mapper>

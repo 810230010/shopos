@@ -46,11 +46,11 @@ public class AdminGoodsCategoryController {
     @RequestMapping("/addPage")
     public String addPage(Integer parentId,Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-
+        model.addAttribute("domain",QiNiuUtils.BASE_URL);
         if (parentId != null){
             GoodsCategory goodsCategory = goodsCategoryService.getById(parentId);
+            model.addAttribute("goodsCategory",goodsCategory);
         }
-
         model.addAttribute("parentId", parentId);
         return "admin/goodsCategory/add";
     }
@@ -66,6 +66,7 @@ public class AdminGoodsCategoryController {
         GoodsCategory goodsCategory = goodsCategoryService.getById(goodsCategoryId);
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("goodsCategory",goodsCategory);
+        model.addAttribute("domain",QiNiuUtils.BASE_URL);
         return "admin/goodsCategory/edit";
     }
 
@@ -105,7 +106,6 @@ public class AdminGoodsCategoryController {
     @ResponseBody
     public Object add(GoodsCategory goodsCategory) {
         RestResult result = new RestResult();
-        goodsCategory.setImg(QiNiuUtils.BASE_URL + goodsCategory.getImg());
         int res = goodsCategoryService.createGoodsCategory(goodsCategory);
         return result;
     }
@@ -119,7 +119,6 @@ public class AdminGoodsCategoryController {
     @ResponseBody
     public Object edit(GoodsCategory goodsCategory) {
         RestResult result = new RestResult();
-        goodsCategory.setImg(QiNiuUtils.getRealUrl(goodsCategory.getImg()));
         int res = goodsCategoryService.updateGoodsCategory(goodsCategory);
         return result;
     }

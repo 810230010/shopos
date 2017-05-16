@@ -19,6 +19,10 @@ public class Seller {
 
     private String photo;
 
+    private Integer sellerRoleId;
+
+    private String email;
+
     public Integer getSellerId() {
         return sellerId;
     }
@@ -81,5 +85,21 @@ public class Seller {
 
     public void setPhoto(String photo) {
         this.photo = photo == null ? null : photo.trim();
+    }
+
+    public Integer getSellerRoleId() {
+        return sellerRoleId;
+    }
+
+    public void setSellerRoleId(Integer sellerRoleId) {
+        this.sellerRoleId = sellerRoleId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 }

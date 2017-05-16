@@ -63,41 +63,4 @@ public class StoreSettingController {
         return result;
     }
 
-    /**
-     * 获取商品广告设置列表页面
-     * @param model
-     * @return
-     */
-    @RequestMapping("/showAdPage")
-    public String showAdPage(Model model){
-       return "/store/storeGoodsAd/adlist";
-    }
-
-    /**
-     * 获取修改商品广告的修改界面
-     * @param model
-     * @param goodsId
-     * @return
-     */
-    @RequestMapping("/updateAdPage")
-    public String updateAdPage(Model model,Integer goodsId, String name, String img){
-        StoreGoodsDetailDTO result = new StoreGoodsDetailDTO(goodsId,name,img);
-        model.addAttribute("goods",result);
-        model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
-        return "/store/storeGoodsAd/updateadpage";
-    }
-
-    /**
-     * 获取修改商品广告的添加广告页面
-     * @param model
-     * @return
-     */
-    @RequestMapping("/addadpage")
-    public String addadpage(Model model){
-        model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
-        return "/store/storeGoodsAd/addadpage";
-    }
-
 }

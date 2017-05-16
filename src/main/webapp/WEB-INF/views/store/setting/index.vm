@@ -169,11 +169,7 @@
         ],
         allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
     }).on("fileuploaded", function (event, data, previewId, index) {
-        console.log("自动上传成功index:"+index);
-        console.log("fileuploaded-filenames--for"+index+"="+data.filenames[index]);
-
         var img_dom = $(".kv-file-content img[title='"+data.filenames[index]+"']");
-
         img_dom.attr('src', '$domain'+data.response.key);
     }).on("filebatchselected", function (event, files) {
         $(this).fileinput("upload");
@@ -181,7 +177,6 @@
 
 
     $("#submit").on('click', function () {
-
         var form = $("#form");
         form.valid();
 

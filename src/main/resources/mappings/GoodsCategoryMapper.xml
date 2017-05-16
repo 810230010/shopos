@@ -12,7 +12,6 @@
         select * from t_goods_category
         <where>
             parent_id = #{parentId}
-            and is_show = 1
             <if test="searchKey != null and searchKey != '' ">
                 and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
                 or keywords like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
@@ -33,10 +32,12 @@
 
     <!--移动端接口获取一级分类-->
     <select id="getGoodsCategoryDTOByParentId" resultType="com.wuliangit.shopos.dto.ApiGoodsCategoryDOT">
-        select goods_category_id, name, img from t_goods_category where parent_id = #{parentId}
+        select goods_category_id, name, img from t_goods_category where parent_id = #{parentId} and is_show = 1
     </select>
+
+    <!--移动端接口获取二级分类-->
     <select id="getGoodsCategoryLevelSecond" resultType="com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO">
-        select goods_category_id, name, img from t_goods_category where parent_id = #{parentId}
+        select goods_category_id, name, img from t_goods_category where parent_id = #{parentId} and is_show = 1
     </select>
 
 </mapper>

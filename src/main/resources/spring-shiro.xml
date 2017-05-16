@@ -150,10 +150,6 @@
         <property name="loginUrl" value="/store/login"/>
     </bean>
 
-    <!--后台管理员和店铺公共拦截器-->
-    <bean id="dashFilter" class="com.wuliangit.shopos.common.shiro.filter.DashFilter">
-    </bean>
-
     <bean id="tokenManager" class="com.wuliangit.shopos.common.shiro.token.EhcacheTokenManager">
         <property name="cacheManager" ref="cacheManager"/>
         <property name="cacheName" value="tokenCache"/>

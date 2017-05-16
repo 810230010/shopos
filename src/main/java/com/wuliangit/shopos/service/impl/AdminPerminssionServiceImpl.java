@@ -1,12 +1,12 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.dao.PermissionMapper;
+import com.wuliangit.shopos.dao.AdminPermissionMapper;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Admin;
-import com.wuliangit.shopos.entity.Seller;
-import com.wuliangit.shopos.model.StoreMin;
-import com.wuliangit.shopos.service.PerminssionService;
+import com.wuliangit.shopos.entity.AdminRole;
+import com.wuliangit.shopos.service.AdminPerminssionService;
+import com.wuliangit.shopos.service.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,33 +18,24 @@ import java.util.List;
  */
 
 @Service
-public class PerminssionServiceImpl implements PerminssionService {
+public class AdminPerminssionServiceImpl implements AdminPerminssionService {
 
     @Autowired
-    private PermissionMapper permissionMapper;
+    private AdminPermissionMapper adminPermissionMapper;
+    @Autowired
+    private AdminRoleService adminRoleService;
 
     @Override
     public List<MenuDTO> getAdminMenus() {
         Admin admin = WebUtil.getCurrentAdmin();
 
-        List<MenuDTO> menus = permissionMapper.getAdminMenus(admin.getAdminId());
+        AdminRole adminRole = adminRoleService.getRoleById(admin.getAdminRoleId());
+
+        List<MenuDTO> menus = adminPermissionMapper.getAdminMenus(adminRole.getPermissionList());
 
         List<MenuDTO> menuList = handleSubType(menus, 0);
         return menuList;
-
     }
-
-    @Override
-    public List<MenuDTO> getStoreMenus() {
-        StoreMin storeMin = WebUtil.getCurrentStore();
-
-        Seller seller = WebUtil.getCurrentSeller();
-
-        List<MenuDTO> menus = permissionMapper.getStoreMenus(seller.getSellerId());
-        List<MenuDTO> menuList = handleSubType(menus, 0);
-        return menuList;
-    }
-
 
     /**
      * 生成多级菜单

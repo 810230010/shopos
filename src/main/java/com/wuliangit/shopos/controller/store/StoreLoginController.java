@@ -6,7 +6,8 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.model.StoreMin;
-import com.wuliangit.shopos.service.PerminssionService;
+import com.wuliangit.shopos.service.AdminPerminssionService;
+import com.wuliangit.shopos.service.SellerPerminssionService;
 import com.wuliangit.shopos.service.SellerService;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.logging.Log;
@@ -40,7 +41,7 @@ public class StoreLoginController {
     @Autowired
     private StoreService storeService;
     @Autowired
-    private PerminssionService perminssionService;
+    private SellerPerminssionService sellerPerminssionService;
 
     @RequestMapping("/index")
     public String viewToIndex(Model model) {
@@ -59,7 +60,7 @@ public class StoreLoginController {
             StoreMin storeMin = storeService.getStoreMinByStoreId(seller.getStoreId());
             SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeMin);
 
-            List<MenuDTO> menus = perminssionService.getStoreMenus();
+            List<MenuDTO> menus = sellerPerminssionService.getStoreMenus();
             WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_MENU, menus);
 
             return "redirect:/store/index";

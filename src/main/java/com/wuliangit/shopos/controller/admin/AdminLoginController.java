@@ -7,7 +7,7 @@ import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.service.AdminService;
-import com.wuliangit.shopos.service.PerminssionService;
+import com.wuliangit.shopos.service.AdminPerminssionService;
 import com.wuliangit.shopos.service.SellerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,7 +40,7 @@ public class AdminLoginController {
     @Autowired
     private SellerService sellerService;
     @Autowired
-    private PerminssionService perminssionService;
+    private AdminPerminssionService adminPerminssionService;
 
     @RequestMapping("/index")
     public String viewToIndex(Model model) {
@@ -59,7 +59,7 @@ public class AdminLoginController {
             Seller seller = sellerService.getById(0);
             WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_SELLER, seller);
 
-            List<MenuDTO> menus = perminssionService.getAdminMenus();
+            List<MenuDTO> menus = adminPerminssionService.getAdminMenus();
             WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_MENU, menus);
 
             return "redirect:/admin/index";

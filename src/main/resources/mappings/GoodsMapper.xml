@@ -27,6 +27,7 @@
                 or store_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
             </if>
         </where>
+        order by ${order}
     </select>
 
     <!--管理员商品搜索-->

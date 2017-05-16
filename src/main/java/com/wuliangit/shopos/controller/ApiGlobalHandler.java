@@ -8,6 +8,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +26,17 @@ public class ApiGlobalHandler {
         RestResult result = new RestResult();
         result.setCode(500);
         exception.printStackTrace();
-        result.setMsg(exception.getMessage());
+        result.setMsg("异常 >>>> "+exception.getMessage());
+        return result;
+    }
+
+    @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
+    public Object methodArgumentTypeMismatchException(HttpServletRequest request, Exception exception) {
+        logger.error(exception.getMessage());
+        RestResult result = new RestResult();
+        result.setCode(500);
+        exception.printStackTrace();
+        result.setMsg("参数不匹配");
         return result;
     }
 
@@ -45,6 +56,8 @@ public class ApiGlobalHandler {
         return result;
 
     }
+
+
 
 
 

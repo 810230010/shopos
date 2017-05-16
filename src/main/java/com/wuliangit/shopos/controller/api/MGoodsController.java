@@ -1,11 +1,9 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
-import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.CollectService;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.GoodsSearchService;
@@ -42,24 +40,25 @@ public class MGoodsController {
      * @param page            页码
      * @param pageSize        页大小
      * @param searchKey       搜索值
-     * @param order           排序类型
+     * @param orderType       排序类型
      * @param brandId         品牌类型id
      * @param goodsCategoryId 商品分类id
-     * @param type            商品类型 GOODS_TYPE_ACTIVITY(活动商品);GOODS_TYPE_NORMAL(普通商品)
+     * @param storeId         店铺id
+     * @param type            商品类型 GOODS_TYPE_ACTIVITY(活动商品); GOODS_TYPE_NORMAL(普通商品)
      * @return
      */
     @RequestMapping("/search")
     public Object goodsSearch(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
                               @RequestParam(value = "searchKey", required = false) String searchKey,
-                              @RequestParam(value = "orderType", required = false) String order,
+                              @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType,
                               @RequestParam(value = "brandId", required = false) Integer brandId,
                               @RequestParam(value = "goodsCategoryId", required = false) Integer goodsCategoryId,
                               @RequestParam(value = "storeId", required = false) Integer storeId,
                               @RequestParam(value = "type", required = false) String type,
                               @RequestParam(value = "storeGoodsCategoryId", required = false) Integer storeGoodsCategoryId) {
         RestResult result = new RestResult();
-        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.apiGoodsSearch(page, pageSize, searchKey, order, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type);
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.apiGoodsSearch(page, pageSize, searchKey, orderType, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type);
         result.add("goods", goods);
         return result;
     }
@@ -77,14 +76,14 @@ public class MGoodsController {
         List<GoodsSku> goodsSku = goodsService.getGoodsSkuByGoodsId(goodsId);
 
         //转化为字典型，方便前段处理
-        Map<String ,GoodsSku> goodsSkuMap = new HashMap<String ,GoodsSku>();
+        Map<String, GoodsSku> goodsSkuMap = new HashMap<String, GoodsSku>();
         for (GoodsSku sku : goodsSku) {
-            goodsSkuMap.put(sku.getSkuValue(),sku);
+            goodsSkuMap.put(sku.getSkuValue(), sku);
         }
 
         boolean isCollect = collectService.isCollectGoods(goodsId);
 
-        result.add("isCollect",isCollect);
+        result.add("isCollect", isCollect);
         result.add("goods", goods);
         result.add("goodsSku", goodsSkuMap);
         return result;

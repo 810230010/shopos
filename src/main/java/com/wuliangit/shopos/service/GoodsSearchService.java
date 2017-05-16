@@ -14,7 +14,7 @@ public interface GoodsSearchService {
      * @param page                 页码
      * @param pageSize             页大小
      * @param searchKey            搜索树关键词
-     * @param order                排序
+     * @param orderType                排序
      * @param brandId              品牌id
      * @param goodsCategoryId      商品分类id
      * @param storeId              店铺id
@@ -25,7 +25,7 @@ public interface GoodsSearchService {
     ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page,
                                               Integer pageSize,
                                               String searchKey,
-                                              String order,
+                                              String orderType,
                                               Integer brandId,
                                               Integer goodsCategoryId,
                                               Integer storeId,

@@ -79,4 +79,11 @@ public interface GoodsService {
      * @return
      */
     StoreGoodsDetailDTO getSimplGoodsInfo(Integer goodsId);
+
+    /**
+     * 通过店铺id获取店铺商品数量
+     * @param storeId
+     * @return
+     */
+    Integer getGoodsCountByStoreId(Integer storeId);
 }

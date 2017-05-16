@@ -1,11 +1,13 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.ApiStoreListDTO;
 import com.wuliangit.shopos.dto.StoreDetailDTO;
 import com.wuliangit.shopos.dto.StorePageListDTO;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.model.StoreMin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -82,4 +84,15 @@ public interface StoreService {
      * @return
      */
     StoreMin getStoreMinByStoreId(Integer storeId);
+
+    /**
+     * 接口搜索店铺
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param order
+     * @param type
+     * @return
+     */
+    List<ApiStoreListDTO> apiStoreSearch(Integer page, Integer pageSize, String searchKey, String order, String type);
 }

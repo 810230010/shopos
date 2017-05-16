@@ -106,4 +106,9 @@ public class GoodsServiceImpl implements GoodsService {
     public StoreGoodsDetailDTO getSimplGoodsInfo(Integer goodsId) {
         return goodsMapper.getSimplGoodsInfo(goodsId);
     }
+
+    @Override
+    public Integer getGoodsCountByStoreId(Integer storeId) {
+        return goodsMapper.getGoodsCountByStoreId(storeId);
+    }
 }

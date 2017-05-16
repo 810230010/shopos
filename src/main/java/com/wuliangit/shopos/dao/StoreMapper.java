@@ -37,11 +37,13 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
     StoreMin getStoreMinByStoreId(Integer storeId);
 
     /**
-     * 获取商家详情
-     * @param storeId
-     * @return
+     * @Description: 获取商家详情
+     * @Author: pangweichao
+     * @Date: 16:15 2017/5/16
+     * @Param: [storeId]
+     * @return: StoreDetailDTO
      */
-    StoreDetailDTO storeDetailPage(Integer storeId);
+    StoreDetailDTO getStoreDetailInfo(Integer storeId);
 
     /**
      * 接口搜索店铺

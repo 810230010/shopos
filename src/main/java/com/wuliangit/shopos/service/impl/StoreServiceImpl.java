@@ -80,8 +80,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public StoreDetailDTO storeDetailPage(Integer storeId) {
-        return storeMapper.storeDetailPage(storeId);
+    public StoreDetailDTO getStoreDetailInfo(Integer storeId) {
+        return storeMapper.getStoreDetailInfo(storeId);
     }
 
     @Override

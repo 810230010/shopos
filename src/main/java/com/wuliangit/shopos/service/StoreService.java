@@ -72,11 +72,13 @@ public interface StoreService {
     Integer updateStoreState(Integer storeId, String state);
 
     /**
-     * 获取商家详情
-     * @param storeId
-     * @return
+     * @Description: 获取商家详情
+     * @Author: pangweichao
+     * @Date: 16:15 2017/5/16
+     * @Param: [storeId]
+     * @return: StoreDetailDTO
      */
-    StoreDetailDTO storeDetailPage(Integer storeId);
+    StoreDetailDTO getStoreDetailInfo(Integer storeId);
 
     /**
      * 通过店铺id获取店铺简要信息

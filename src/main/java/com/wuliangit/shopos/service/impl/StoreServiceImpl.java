@@ -4,14 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
+import com.wuliangit.shopos.dto.ApiStoreDTO;
 import com.wuliangit.shopos.dto.ApiStoreListDTO;
 import com.wuliangit.shopos.dto.StoreDetailDTO;
 import com.wuliangit.shopos.dto.StorePageListDTO;
+import com.wuliangit.shopos.entity.Area;
 import com.wuliangit.shopos.entity.Store;
+import com.wuliangit.shopos.entity.StoreGoodsAd;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.model.StoreMin;
-import com.wuliangit.shopos.service.GoodsService;
-import com.wuliangit.shopos.service.StoreService;
+import com.wuliangit.shopos.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +32,17 @@ public class StoreServiceImpl implements StoreService {
 
     @Autowired
     private StoreJoininMapper storeJoininMapper;
-
     @Autowired
     private StoreMapper storeMapper;
-
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private CollectService collectService;
+    @Autowired
+    private StoreGoodsAdService storeGoodsAdService;
+    @Autowired
+    private AreaService areaService;
+
 
     @Override
     public int createStoreJoinin(StoreJoinin storeJoinin) {
@@ -80,8 +87,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public StoreDetailDTO storeDetailPage(Integer storeId) {
-        return storeMapper.storeDetailPage(storeId);
+    public StoreDetailDTO getStoreDetailInfo(Integer storeId) {
+        return storeMapper.getStoreDetailInfo(storeId);
     }
 
     @Override
@@ -100,7 +107,24 @@ public class StoreServiceImpl implements StoreService {
         List<ApiStoreListDTO> stores = storeMapper.apiStoreSearch(searchKey, order, type);
         for (ApiStoreListDTO store : stores) {
             store.setGoodsCount(goodsService.getGoodsCountByStoreId(store.getStoreId()));
+            store.setCollectCount(collectService.getStoreCollectCount(store.getStoreId()));
         }
         return stores;
+    }
+
+    @Override
+    public ApiStoreDTO apiGetStoreDTO(Integer storeId) {
+        ApiStoreDTO apiStore = storeMapper.getApiStoreDTOById(storeId);
+        apiStore.setCollectCount(collectService.getStoreCollectCount(apiStore.getStoreId()));
+        apiStore.setGoodsCount(goodsService.getGoodsCountByStoreId(apiStore.getStoreId()));
+        apiStore.setGoodsAds(storeGoodsAdService.apiGetStoreGoodsAd(apiStore.getStoreId()));
+
+        Area area = areaService.getById(apiStore.getProvinceId());
+
+        if (area!=null){
+            apiStore.setProvince(area.getName());
+        }
+
+        return apiStore;
     }
 }

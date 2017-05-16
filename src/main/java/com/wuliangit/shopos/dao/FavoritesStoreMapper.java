@@ -33,4 +33,11 @@ public interface FavoritesStoreMapper extends BaseMapper<FavoritesStore, Integer
      * @return
      */
     FavoritesStore getFavoritesStoreByUserIdAndStoreId(@Param("memberId")Integer memberId, @Param("storeId")Integer storeId);
+
+    /**
+     * 获取店铺收藏数量
+     * @param storeId
+     * @return
+     */
+    int getStoreCollectCount(Integer storeId);
 }

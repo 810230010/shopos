@@ -195,7 +195,7 @@
         table.on( 'click', '.detail', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/admin/store/storeDetailPage?storeId="+data.storeId;
+            window.location.href = "/admin/store/getStoreDetailInfo?storeId="+data.storeId;
         });
 
 

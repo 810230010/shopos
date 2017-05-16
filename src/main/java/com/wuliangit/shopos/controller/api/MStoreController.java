@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.ApiStoreDTO;
 import com.wuliangit.shopos.dto.ApiStoreListDTO;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.service.StoreService;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,7 +39,7 @@ public class MStoreController {
      * @param page 页码
      * @param pageSize 页大小
      * @param searchKey  搜索关键词
-     * @param order SALES 销量排序, GRADE 店铺登记排序
+     * @param order SALES 销量排序, GRADE 店铺等级排序
      * @param type 店铺类型；STORE:普通商家；ENTERPRISE：企业
      * @return
      */
@@ -54,6 +52,20 @@ public class MStoreController {
         RestResult result = new RestResult();
         List<ApiStoreListDTO> stores = storeService.apiStoreSearch(page, pageSize, searchKey, order, type);
         result.add("stores", stores);
+        return result;
+    }
+
+
+    /**
+     * 获取店铺详情
+     * @param storeId
+     * @return
+     */
+    @RequestMapping("/get")
+    public Object getStore(Integer storeId){
+        RestResult result = new RestResult();
+        ApiStoreDTO store = storeService.apiGetStoreDTO(storeId);
+        result.add("store",store);
         return result;
     }
 

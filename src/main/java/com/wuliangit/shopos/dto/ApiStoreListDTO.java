@@ -17,7 +17,17 @@ public class ApiStoreListDTO {
 
     private Integer goodsCount;
 
+    private Integer collectCount;
+
     private Integer grade;
+
+    public Integer getCollectCount() {
+        return collectCount;
+    }
+
+    public void setCollectCount(Integer collectCount) {
+        this.collectCount = collectCount;
+    }
 
     public Integer getStoreId() {
         return storeId;

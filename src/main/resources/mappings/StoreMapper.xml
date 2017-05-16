@@ -27,7 +27,7 @@
     </update>
 
     <!--获取商家详情-->
-    <select id="storeDetailPage" resultType="com.wuliangit.shopos.dto.StoreDetailDTO">
+    <select id="getStoreDetailInfo" resultType="com.wuliangit.shopos.dto.StoreDetailDTO">
         select store_id, name,grade_id,type,store_company_name,address,state,create_time,banner,phone,credit,live_store_name,live_store_address
         from t_store
         where store_id = #{storeId}

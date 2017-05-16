@@ -153,14 +153,15 @@ public class AdminStoreController {
     }
 
     /**
-     * 获取商家详情
-     * @param storeId
-     * @param model
-     * @return
+     * @Description: 获取商家详情
+     * @Author: pangweichao
+     * @Date: 16:15 2017/5/16
+     * @Param: [storeId, model]
+     * @return: java.lang.String
      */
-    @RequestMapping("/storeDetailPage")
-    public String storeDetailPage(Integer storeId,Model model){
-        StoreDetailDTO info = storeService.storeDetailPage(storeId);
+    @RequestMapping("/getStoreDetailInfo")
+    public String getStoreDetailInfo(Integer storeId,Model model){
+        StoreDetailDTO info = storeService.getStoreDetailInfo(storeId);
         model.addAttribute("store",info);
         return "/admin/store/storedetail";
     }

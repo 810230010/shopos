@@ -64,7 +64,7 @@ public class CollectServiceImpl implements CollectService {
         favoritesGoods.setGoodsName(goods.getName());
         favoritesGoods.setLogPrice(goods.getPrice());
         favoritesGoods.setMemberId(member.getMemberId());
-        favoritesGoods.setMemberName(member.getNikename());
+        favoritesGoods.setMemberName(member.getNickname());
         return favoritesGoodsMapper.insertSelective(favoritesGoods);
     }
 
@@ -98,7 +98,7 @@ public class CollectServiceImpl implements CollectService {
         }
 
         FavoritesStore favoritesStore = new FavoritesStore();
-        favoritesStore.setMemberName(member.getNikename());
+        favoritesStore.setMemberName(member.getNickname());
         favoritesStore.setMemberId(member.getMemberId());
         favoritesStore.setLogMsg("app collect");
         favoritesStore.setFavTime(new Date());

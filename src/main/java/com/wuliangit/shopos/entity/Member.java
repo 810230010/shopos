@@ -8,7 +8,7 @@ public class Member {
 
     private String username;
 
-    private String nikename;
+    private String nickname;
 
     private String truename;
 
@@ -100,12 +100,12 @@ public class Member {
         this.username = username == null ? null : username.trim();
     }
 
-    public String getNikename() {
-        return nikename;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNikename(String nikename) {
-        this.nikename = nikename == null ? null : nikename.trim();
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
     public String getTruename() {

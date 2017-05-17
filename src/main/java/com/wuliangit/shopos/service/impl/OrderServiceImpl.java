@@ -105,7 +105,7 @@ public class OrderServiceImpl implements OrderService {
             order.setStoreId(integer);
             order.setMemberId(member.getMemberId());
             order.setMemberEmail(member.getEmail());
-            order.setMemberName(member.getNikename());
+            order.setMemberName(member.getNickname());
             order.setCreateTime(new Date());
             order.setDeleteState(POJOConstants.ORDER_DELETE_STATE_NO);
             order.setMemberEvaluationState(POJOConstants.ORDER_EVALUATION_STATE_NO);

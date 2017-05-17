@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Member" >
     <id column="member_id" property="memberId" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="nikename" property="nikename" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="truename" property="truename" jdbcType="VARCHAR" />
     <result column="passwd" property="passwd" jdbcType="VARCHAR" />
     <result column="paypwd" property="paypwd" jdbcType="VARCHAR" />
@@ -44,7 +44,7 @@
     <result column="idcard_num" property="idcardNum" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    member_id, username, nikename, truename, passwd, paypwd, salt, photo, sex, birthday, 
+    member_id, username, nickname, truename, passwd, paypwd, salt, photo, sex, birthday, 
     type, email, mobile, qq, openid, wx_photo, wx_nickname, login_num, create_time, login_time, 
     login_ip, qqopenid, qqinfo, sinaopenid, sinainfo, points, available_balance, freeze_balance, 
     state, credit, areaid, cityid, provinceid, areainfo, exppoints, inviter_id, del_flag, 
@@ -64,7 +64,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="memberId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_member (username, nikename, truename, 
+    insert into t_member (username, nickname, truename, 
       passwd, paypwd, salt, 
       photo, sex, birthday, 
       type, email, mobile, 
@@ -78,7 +78,7 @@
       exppoints, inviter_id, del_flag, 
       update_time, auth_state, idcard_num
       )
-    values (#{username,jdbcType=VARCHAR}, #{nikename,jdbcType=VARCHAR}, #{truename,jdbcType=VARCHAR}, 
+    values (#{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{truename,jdbcType=VARCHAR}, 
       #{passwd,jdbcType=VARCHAR}, #{paypwd,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
       #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
       #{type,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
@@ -102,8 +102,8 @@
       <if test="username != null" >
         username,
       </if>
-      <if test="nikename != null" >
-        nikename,
+      <if test="nickname != null" >
+        nickname,
       </if>
       <if test="truename != null" >
         truename,
@@ -221,8 +221,8 @@
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="nikename != null" >
-        #{nikename,jdbcType=VARCHAR},
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="truename != null" >
         #{truename,jdbcType=VARCHAR},
@@ -343,8 +343,8 @@
       <if test="username != null" >
         username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="nikename != null" >
-        nikename = #{nikename,jdbcType=VARCHAR},
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="truename != null" >
         truename = #{truename,jdbcType=VARCHAR},
@@ -463,7 +463,7 @@
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Member" >
     update t_member
     set username = #{username,jdbcType=VARCHAR},
-      nikename = #{nikename,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
       truename = #{truename,jdbcType=VARCHAR},
       passwd = #{passwd,jdbcType=VARCHAR},
       paypwd = #{paypwd,jdbcType=VARCHAR},

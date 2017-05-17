@@ -26,7 +26,7 @@ public class ApiGlobalHandler {
         RestResult result = new RestResult();
         result.setCode(500);
         exception.printStackTrace();
-        result.setMsg("异常 >>>> "+exception.getMessage());
+        result.setMsg(exception.getMessage());
         return result;
     }
 

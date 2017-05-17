@@ -8,7 +8,7 @@ public class ApiMemberDTO {
 
     private String username;
 
-    private String nikename;
+    private String nickname;
 
     private String truename;
 
@@ -92,12 +92,12 @@ public class ApiMemberDTO {
         this.username = username;
     }
 
-    public String getNikename() {
-        return nikename;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNikename(String nikename) {
-        this.nikename = nikename;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getTruename() {

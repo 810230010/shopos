@@ -1,8 +1,14 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.util.PasswordHelper;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.SellerMapper;
+import com.wuliangit.shopos.dto.SellerDTO;
 import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.service.SellerService;
+import org.apache.commons.lang3.StringUtils;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +24,8 @@ public class SellerServiceImpl implements SellerService {
 
     @Autowired
     private SellerMapper sellerMapper;
+    @Autowired
+    private Mapper mapper;
 
     @Override
     public Seller getByUsername(String username) {
@@ -39,5 +47,30 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public Set<String> getPermissions(String username) {
         return null;
+    }
+
+    @Override
+    public int update(SellerDTO seller, String newPass) {
+        Seller currentSeller = WebUtil.getCurrentSeller();
+
+        if (!StringUtils.isEmpty(seller.getEmail())){
+            currentSeller.setEmail(seller.getEmail());
+        }
+
+        if (!StringUtils.isEmpty(seller.getPhoto())){
+            currentSeller.setPhoto(seller.getPhoto());
+        }
+
+        //更新密码
+        if (!StringUtils.isEmpty(newPass)){
+            currentSeller.setPassword(PasswordHelper.generatePassword(newPass,currentSeller.getSalt()));
+        }
+        int res = sellerMapper.updateByPrimaryKeySelective(currentSeller);
+
+        //更新缓存
+        WebUtil.getSession().removeAttribute(CoreConstants.SESSION_CURRENT_SELLER);
+        WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_SELLER, currentSeller);
+
+        return res;
     }
 }

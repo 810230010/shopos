@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.SellerDTO;
 import com.wuliangit.shopos.entity.Seller;
 
 import java.util.Set;
@@ -35,4 +36,12 @@ public interface SellerService {
      * @return
      */
     Set<String> getPermissions(String username);
+
+    /**
+     * 更新用户信息
+     * @param seller
+     * @param newPass
+     * @return
+     */
+    int update(SellerDTO seller, String newPass);
 }

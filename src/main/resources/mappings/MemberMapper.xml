@@ -18,7 +18,7 @@
 
   <!--获取会员列表的数据-->
   <select id="getMemberList" resultType="com.wuliangit.shopos.dto.MemberListDTO">
-    select member_id,nikename,sex,birthday,type,mobile,points,auth_state
+    select member_id,nickname,sex,birthday,type,mobile,points,auth_state
     from t_member
     where del_flag = 0
   </select>

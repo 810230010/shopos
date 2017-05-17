@@ -9,7 +9,7 @@ public class TuikePageListDTO {
 
     private Integer tuikeId;
 
-    private String nikename;
+    private String nickname;
 
     private Date createTime;
 
@@ -23,9 +23,9 @@ public class TuikePageListDTO {
 
     private String buyCount;
 
-    public TuikePageListDTO(Integer tuikeId, String nikename, Date createTime, Long availableBalance, Long freezeBalance, String code, String shareCount, String buyCount) {
+    public TuikePageListDTO(Integer tuikeId, String nickname, Date createTime, Long availableBalance, Long freezeBalance, String code, String shareCount, String buyCount) {
         this.tuikeId = tuikeId;
-        this.nikename = nikename;
+        this.nickname = nickname;
         this.createTime = createTime;
         this.availableBalance = availableBalance;
         this.freezeBalance = freezeBalance;
@@ -37,12 +37,12 @@ public class TuikePageListDTO {
     public TuikePageListDTO() {
     }
 
-    public String getNikename() {
-        return nikename;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNikename(String nikename) {
-        this.nikename = nikename;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Date getCreateTime() {

@@ -10,8 +10,6 @@ public class Store {
 
     private Integer gradeId;
 
-    private String sellerNikename;
-
     private Integer scId;
 
     private String type;
@@ -134,14 +132,6 @@ public class Store {
 
     public void setGradeId(Integer gradeId) {
         this.gradeId = gradeId;
-    }
-
-    public String getSellerNikename() {
-        return sellerNikename;
-    }
-
-    public void setSellerNikename(String sellerNikename) {
-        this.sellerNikename = sellerNikename == null ? null : sellerNikename.trim();
     }
 
     public Integer getScId() {

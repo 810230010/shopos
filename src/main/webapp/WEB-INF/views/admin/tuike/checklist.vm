@@ -54,7 +54,7 @@
             },
             "columns": [
                 {"data":"memberId","width":"7%","title":"序号","orderable": false},
-                {"data":"nikename","width": "10%","title":"会员名称","orderable": false},
+                {"data":"nickname","width": "10%","title":"会员名称","orderable": false},
                 {"data":"sex","width": "10%","title":"性别","orderable": false,"render": function(data, type,row){
                     if(data == "MAN")return "男";
                     else return "女";

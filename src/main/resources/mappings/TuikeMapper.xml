@@ -11,7 +11,7 @@
 
     <!--获取推客审核列表-->
     <select id="getCheckList" resultType="com.wuliangit.shopos.dto.TuikeCheckListDTO">
-        select m.member_id,m.nikename,m.sex,m.email,m.create_time,m.points
+        select m.member_id,m.nickname,m.sex,m.email,m.create_time,m.points
         from t_member m,t_tuike k
         <where>
             k.is_check = 0 AND k.member_id = m.member_id AND k.state = "INIT"
@@ -28,7 +28,7 @@
 
     <!--获取推客管理列表-->
     <select id="getTuikeList" resultType="com.wuliangit.shopos.dto.TuikePageListDTO">
-        select k.tuike_id,m.nikename,k.create_time,k.available_balance,k.freeze_balance,k.code,k.share_count,k.buy_count
+        select k.tuike_id,m.nickname,k.create_time,k.available_balance,k.freeze_balance,k.code,k.share_count,k.buy_count
         from t_member m,t_tuike k
         <where>
             k.is_check = 1 AND k.member_id = m.member_id AND k.state = "CHECKED"

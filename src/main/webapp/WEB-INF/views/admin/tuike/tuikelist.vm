@@ -54,7 +54,7 @@
             },
             "columns": [
                 {"data":"tuikeId","width":"5%","title":"序号","orderable": false},
-                {"data":"nikename","width": "10%","title":"会员名称","orderable": false},
+                {"data":"nickname","width": "10%","title":"会员名称","orderable": false},
                 {"data":"createTime","width": "15%","title":"创建时间","orderable": true},
                 {"data":"availableBalance","width": "10%","title":"可用余额","orderable": true},
                 {"data":"freezeBalance","width": "10%","title":"冻结金额","orderable": true},

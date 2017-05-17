@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.util.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by 江建平 on 2017/5/12.
@@ -59,6 +60,7 @@ public class AdminAuthorityController {
      * @return
      */
     @RequestMapping("/searchAdminList")
+    @ResponseBody
     public Object searchAdminList(@RequestParam("draw") int draw,
                                   @RequestParam(value = "searchKey", required = false) String searchKey,
                                   @RequestParam(value = "orderColumn", required = false) String orderColumn,

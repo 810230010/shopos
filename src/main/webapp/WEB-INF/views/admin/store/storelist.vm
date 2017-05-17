@@ -61,7 +61,6 @@
                     else return "开启";
                 }},
                 {"data":"createTime","width": "10%","title":"创建时间","orderable": true},
-                {"data":"sellerNikename","width": "10%","title":"店主商家用户名","orderable": false},
                 {"data":"storeId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
                     return [
                         '<a class="btn btn-danger btn-xs table-action state" href="javascript:void(0)">',

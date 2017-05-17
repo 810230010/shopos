@@ -9,7 +9,7 @@ public class TuikeCheckListDTO {
 
     private Integer memberId;
 
-    private String nikename;
+    private String nickname;
 
     private String sex;
 
@@ -22,9 +22,9 @@ public class TuikeCheckListDTO {
     public TuikeCheckListDTO() {
     }
 
-    public TuikeCheckListDTO(Integer memberId, String nikename, String sex, String email, Date createTime, Integer points) {
+    public TuikeCheckListDTO(Integer memberId, String nickname, String sex, String email, Date createTime, Integer points) {
         this.memberId = memberId;
-        this.nikename = nikename;
+        this.nickname = nickname;
         this.sex = sex;
         this.email = email;
         this.createTime = createTime;
@@ -39,12 +39,12 @@ public class TuikeCheckListDTO {
         this.memberId = memberId;
     }
 
-    public String getNikename() {
-        return nikename;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNikename(String nikename) {
-        this.nikename = nikename;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getSex() {

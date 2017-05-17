@@ -9,7 +9,7 @@ public class MemberListDTO {
 
     private Integer memberId;
 
-    private String nikename;
+    private String nickname;
 
     private String sex;
 
@@ -26,9 +26,9 @@ public class MemberListDTO {
     public MemberListDTO() {
     }
 
-    public MemberListDTO(Integer memberId, String nikename, String sex, Date birthday, String type, String mobile, Integer points, String authState) {
+    public MemberListDTO(Integer memberId, String nickname, String sex, Date birthday, String type, String mobile, Integer points, String authState) {
         this.memberId = memberId;
-        this.nikename = nikename;
+        this.nickname = nickname;
         this.sex = sex;
         this.birthday = birthday;
         this.type = type;
@@ -45,12 +45,12 @@ public class MemberListDTO {
         this.memberId = memberId;
     }
 
-    public String getNikename() {
-        return nikename;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNikename(String nikename) {
-        this.nikename = nikename;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getSex() {

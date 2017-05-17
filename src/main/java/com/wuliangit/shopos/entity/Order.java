@@ -52,7 +52,9 @@ public class Order {
 
     private String orderFrom;
 
-    private String carriageName;
+    private String expressId;
+
+    private String expressNo;
 
     private Date createTime;
 
@@ -266,12 +268,20 @@ public class Order {
         this.orderFrom = orderFrom == null ? null : orderFrom.trim();
     }
 
-    public String getCarriageName() {
-        return carriageName;
+    public String getExpressId() {
+        return expressId;
     }
 
-    public void setCarriageName(String carriageName) {
-        this.carriageName = carriageName == null ? null : carriageName.trim();
+    public void setExpressId(String expressId) {
+        this.expressId = expressId == null ? null : expressId.trim();
+    }
+
+    public String getExpressNo() {
+        return expressNo;
+    }
+
+    public void setExpressNo(String expressNo) {
+        this.expressNo = expressNo == null ? null : expressNo.trim();
     }
 
     public Date getCreateTime() {

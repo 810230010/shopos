@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
 import com.wuliangit.shopos.dto.ApiOrderDTO;
+import com.wuliangit.shopos.dto.ApiRefundDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OrderException;
@@ -17,6 +17,7 @@ public interface OrderService {
 
     /**
      * 创建订单
+     *
      * @param orderGoodsInfoList
      * @param addressId
      * @param orderFrom
@@ -24,10 +25,11 @@ public interface OrderService {
      * @return
      * @throws OrderException
      */
-    List<Order> ApiCreateOrder(List<OrderGoodsInfo> orderGoodsInfoList,Integer addressId, String orderFrom, String orderMessage) throws OrderException;
+    List<Order> ApiCreateOrder(List<OrderGoodsInfo> orderGoodsInfoList, Integer addressId, String orderFrom, String orderMessage) throws OrderException;
 
     /**
      * 通过id获取订单
+     *
      * @param orderId
      * @return
      */
@@ -35,6 +37,7 @@ public interface OrderService {
 
     /**
      * 更新订单信息
+     *
      * @param order
      * @return
      */
@@ -42,6 +45,7 @@ public interface OrderService {
 
     /**
      * 获取合并的订单
+     *
      * @param outTradeNo
      * @return
      */
@@ -49,6 +53,7 @@ public interface OrderService {
 
     /**
      * 获取当个订单
+     *
      * @param outTradeNo
      * @return
      */
@@ -61,7 +66,7 @@ public interface OrderService {
      * @Param: [searchKey, orderColumn, orderType, page, pageSize, type]
      * @return: java.lang.Object
      */
-    List<StoreOrderListDTO> getStoreOrderList(String searchKey,String orderColumn,String orderType,Integer page,Integer pageSize,String type);
+    List<StoreOrderListDTO> getStoreOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String type);
 
     /**
      * @Description: 获取订单详情
@@ -73,10 +78,45 @@ public interface OrderService {
     Order getOrderDetail(Integer orderId);
 
     /**
+     * 获取未付款订单
      *
      * @param page
      * @param pageSize
      * @return
      */
-    List<ApiOrderDTO> getUnpayOrders(Integer page, Integer pageSize);
+    List<ApiOrderDTO> apiGetUnpayOrders(Integer page, Integer pageSize);
+
+
+    /**
+     * 待发货订单
+     *
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    List<ApiOrderDTO> apiGetPayedOrders(Integer page, Integer pageSize);
+
+    /**
+     * 待收货订单
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    List<ApiOrderDTO> apiGetDelivedOrders(Integer page, Integer pageSize);
+
+    /**
+     * 待评价订单
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    List<ApiOrderDTO> apiGetReceivedOrders(Integer page, Integer pageSize);
+
+    /**
+     * 所有订单
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    List<ApiOrderDTO> apiGetAllOrders(Integer page, Integer pageSize);
 }

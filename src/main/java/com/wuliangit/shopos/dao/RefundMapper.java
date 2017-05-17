@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.ApiRefundDTO;
 import com.wuliangit.shopos.dto.StoreRefundListDTO;
 import com.wuliangit.shopos.entity.Refund;
 import org.apache.ibatis.annotations.Param;
@@ -36,4 +37,10 @@ public interface RefundMapper extends BaseMapper<Refund, Integer> {
      */
     List<StoreRefundListDTO> getSuccessRefundList(@Param("searchKey") String searchKey,@Param("orderColumn") String orderColumn,@Param("orderType") String orderType,@Param("type") String type);
 
+    /**
+     * 接口获取退款列表
+     * @param memberId
+     * @return
+     */
+    List<ApiRefundDTO> apiGetRefunds(Integer memberId);
 }

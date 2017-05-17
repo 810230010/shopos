@@ -34,6 +34,11 @@
 
     <!--api接口获取订单-->
     <select id="apiGetOrderByStateAndMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
-        select * from t_order where order_state = #{orderState} and member_id = #{memberId}
+        select * from t_order where order_state = #{orderState} and member_id = #{memberId} order by create_time desc
+    </select>
+
+    <!--api接口获取所有订单-->
+    <select id="apiGetOrderByMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
+        select * from t_order where member_id = #{memberId} order by create_time desc
     </select>
 </mapper>

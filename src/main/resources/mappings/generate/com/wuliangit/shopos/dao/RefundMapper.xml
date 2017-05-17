@@ -31,7 +31,7 @@
     <result column="seller_message" property="sellerMessage" jdbcType="VARCHAR" />
     <result column="admin_message" property="adminMessage" jdbcType="VARCHAR" />
     <result column="express_id" property="expressId" jdbcType="INTEGER" />
-    <result column="invoice_no" property="invoiceNo" jdbcType="VARCHAR" />
+    <result column="express_no" property="expressNo" jdbcType="VARCHAR" />
     <result column="ship_time" property="shipTime" jdbcType="TIMESTAMP" />
     <result column="delay_time" property="delayTime" jdbcType="TIMESTAMP" />
     <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
@@ -41,7 +41,7 @@
     goods_id, order_goods_id, goods_name, goods_num, refund_amount, goods_image, order_goods_type, 
     refund_type, seller_state, refund_state, is_lock, goods_state, create_time, seller_handle_time, 
     admin_time, reason_info, pics_info, buyer_message, seller_message, admin_message, 
-    express_id, invoice_no, ship_time, delay_time, receive_time
+    express_id, express_no, ship_time, delay_time, receive_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -66,7 +66,7 @@
       goods_state, create_time, seller_handle_time, 
       admin_time, reason_info, pics_info, 
       buyer_message, seller_message, admin_message, 
-      express_id, invoice_no, ship_time, 
+      express_id, express_no, ship_time, 
       delay_time, receive_time)
     values (#{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{refundSn,jdbcType=VARCHAR}, 
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
@@ -77,7 +77,7 @@
       #{goodsState,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{sellerHandleTime,jdbcType=TIMESTAMP}, 
       #{adminTime,jdbcType=TIMESTAMP}, #{reasonInfo,jdbcType=VARCHAR}, #{picsInfo,jdbcType=VARCHAR}, 
       #{buyerMessage,jdbcType=VARCHAR}, #{sellerMessage,jdbcType=VARCHAR}, #{adminMessage,jdbcType=VARCHAR}, 
-      #{expressId,jdbcType=INTEGER}, #{invoiceNo,jdbcType=VARCHAR}, #{shipTime,jdbcType=TIMESTAMP}, 
+      #{expressId,jdbcType=INTEGER}, #{expressNo,jdbcType=VARCHAR}, #{shipTime,jdbcType=TIMESTAMP}, 
       #{delayTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Refund" >
@@ -170,8 +170,8 @@
       <if test="expressId != null" >
         express_id,
       </if>
-      <if test="invoiceNo != null" >
-        invoice_no,
+      <if test="expressNo != null" >
+        express_no,
       </if>
       <if test="shipTime != null" >
         ship_time,
@@ -268,8 +268,8 @@
       <if test="expressId != null" >
         #{expressId,jdbcType=INTEGER},
       </if>
-      <if test="invoiceNo != null" >
-        #{invoiceNo,jdbcType=VARCHAR},
+      <if test="expressNo != null" >
+        #{expressNo,jdbcType=VARCHAR},
       </if>
       <if test="shipTime != null" >
         #{shipTime,jdbcType=TIMESTAMP},
@@ -369,8 +369,8 @@
       <if test="expressId != null" >
         express_id = #{expressId,jdbcType=INTEGER},
       </if>
-      <if test="invoiceNo != null" >
-        invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      <if test="expressNo != null" >
+        express_no = #{expressNo,jdbcType=VARCHAR},
       </if>
       <if test="shipTime != null" >
         ship_time = #{shipTime,jdbcType=TIMESTAMP},
@@ -414,7 +414,7 @@
       seller_message = #{sellerMessage,jdbcType=VARCHAR},
       admin_message = #{adminMessage,jdbcType=VARCHAR},
       express_id = #{expressId,jdbcType=INTEGER},
-      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      express_no = #{expressNo,jdbcType=VARCHAR},
       ship_time = #{shipTime,jdbcType=TIMESTAMP},
       delay_time = #{delayTime,jdbcType=TIMESTAMP},
       receive_time = #{receiveTime,jdbcType=TIMESTAMP}

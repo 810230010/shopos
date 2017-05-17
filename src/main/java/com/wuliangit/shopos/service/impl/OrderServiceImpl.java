@@ -4,13 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.*;
-import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
 import com.wuliangit.shopos.dto.ApiOrderDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.*;
 import com.wuliangit.shopos.service.OrderService;
+import com.wuliangit.shopos.service.RefundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +37,8 @@ public class OrderServiceImpl implements OrderService {
     private StoreMapper storeMapper;
     @Autowired
     private AddressMapper addressMapper;
+    @Autowired
+    private RefundService refundService;
 
 
     @Override
@@ -184,16 +186,63 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<ApiOrderDTO> getUnpayOrders(Integer page, Integer pageSize) {
+    public List<ApiOrderDTO> apiGetUnpayOrders(Integer page, Integer pageSize) {
         PageHelper.startPage(page,pageSize);
-
         Member currentMember = WebUtil.getCurrentMember();
         List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_INIT, currentMember.getMemberId());
 
         for (ApiOrderDTO order : orders) {
             order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
         }
-
         return orders;
     }
+
+    @Override
+    public List<ApiOrderDTO> apiGetPayedOrders(Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
+        Member currentMember = WebUtil.getCurrentMember();
+        List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_PAYED, currentMember.getMemberId());
+
+        for (ApiOrderDTO order : orders) {
+            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+        }
+        return orders;
+    }
+
+    @Override
+    public List<ApiOrderDTO> apiGetDelivedOrders(Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
+        Member currentMember = WebUtil.getCurrentMember();
+        List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_DELIVE, currentMember.getMemberId());
+
+        for (ApiOrderDTO order : orders) {
+            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+        }
+        return orders;
+    }
+
+    @Override
+    public List<ApiOrderDTO> apiGetReceivedOrders(Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
+        Member currentMember = WebUtil.getCurrentMember();
+        List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_RECEIVE, currentMember.getMemberId());
+
+        for (ApiOrderDTO order : orders) {
+            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+        }
+        return orders;
+    }
+
+    @Override
+    public List<ApiOrderDTO> apiGetAllOrders(Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
+        Member currentMember = WebUtil.getCurrentMember();
+        List<ApiOrderDTO> orders = orderMapper.apiGetOrderByMemberId(currentMember.getMemberId());
+
+        for (ApiOrderDTO order : orders) {
+            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+        }
+        return orders;
+    }
+
 }

@@ -3,6 +3,7 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.cache.SpringCacheManager;
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.common.util.PasswordHelper;
@@ -254,6 +255,12 @@ public class MMemberController {
     @RequestMapping("/info/update")
     public Object updateUserInfo(ApiMemberUpdateDTO member) {
         RestResult result = new RestResult();
+
+        //头像更新处理
+        if (member.getPhoto()!=null&&!member.getPhoto().equals("")){
+            member.setPhoto(QiNiuUtils.BASE_URL+member.getPhoto());
+        }
+
         Member memberUpdate = WebUtil.getCurrentMember();
         mapper.map(member, memberUpdate);
         memberService.updateMember(memberUpdate);

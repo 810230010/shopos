@@ -5,11 +5,14 @@ import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
 import com.wuliangit.shopos.dto.ApiOrderDTO;
+import com.wuliangit.shopos.dto.ApiRefundDTO;
 import com.wuliangit.shopos.entity.GoodsSku;
 import com.wuliangit.shopos.entity.Order;
+import com.wuliangit.shopos.entity.Refund;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.OrderGoodsInfo;
 import com.wuliangit.shopos.service.OrderService;
+import com.wuliangit.shopos.service.RefundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +32,8 @@ public class MOrderController {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private RefundService refundService;
 
     /**
      * 创建订单
@@ -81,7 +86,7 @@ public class MOrderController {
     }
 
     /**
-     * 获取未付款订单
+     * 待付款订单
      * @param page
      * @param pageSize
      * @return
@@ -90,12 +95,85 @@ public class MOrderController {
     public Object getUnpayOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
         RestResult result = new RestResult();
-        List<ApiOrderDTO> orders = orderService.getUnpayOrders(page,pageSize);
+        List<ApiOrderDTO> orders = orderService.apiGetUnpayOrders(page,pageSize);
+        result.add("orders",orders);
+        return result;
+    }
+
+    /**
+     * 待发货订单
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/payed")
+    public Object getPayedOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        RestResult result = new RestResult();
+        List<ApiOrderDTO> orders = orderService.apiGetPayedOrders(page,pageSize);
+        result.add("orders",orders);
+        return result;
+    }
+
+    /**
+     * 待收货订单
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/delived")
+    public Object getDelivedOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        RestResult result = new RestResult();
+        List<ApiOrderDTO> orders = orderService.apiGetDelivedOrders(page,pageSize);
+        result.add("orders",orders);
+        return result;
+    }
+
+    /**
+     * 待评价订单
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/received")
+    public Object getReceivedOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        RestResult result = new RestResult();
+        List<ApiOrderDTO> orders = orderService.apiGetReceivedOrders(page,pageSize);
         result.add("orders",orders);
         return result;
     }
 
 
+    /**
+     * 退款退货订单
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/refund")
+    public Object getRefundOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                    @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        RestResult result = new RestResult();
+        List<ApiRefundDTO> refunds = refundService.apiGetRefundOrders(page,pageSize);
+        result.add("refunds",refunds);
+        return result;
+    }
 
+    /**
+     * 所有订单
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/all")
+    public Object getAllOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        RestResult result = new RestResult();
+        List<ApiOrderDTO> orders = orderService.apiGetAllOrders(page,pageSize);
+        result.add("orders",orders);
+        return result;
+    }
 
 }

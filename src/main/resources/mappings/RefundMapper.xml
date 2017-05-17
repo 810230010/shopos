@@ -47,4 +47,12 @@
         </if>
         create_time desc
     </select>
+
+    <!--退款退货订单-->
+    <select id="apiGetRefunds" resultType="com.wuliangit.shopos.dto.ApiRefundDTO">
+        select
+        <include refid="Base_Column_List" />
+        from t_refund
+        where member_id = #{memberId}
+    </select>
 </mapper>

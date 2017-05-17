@@ -44,4 +44,11 @@ public interface OrderMapper extends BaseMapper<Order, Integer> {
      */
     List<ApiOrderDTO> apiGetOrderByStateAndMemberId(@Param("orderState")String orderState,
                                                     @Param("memberId")Integer memberId);
+
+    /**
+     * api接口获取所有订单
+     * @param memberId 用户id
+     * @return
+     */
+    List<ApiOrderDTO> apiGetOrderByMemberId(Integer memberId);
 }

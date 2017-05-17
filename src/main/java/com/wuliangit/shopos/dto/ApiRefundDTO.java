@@ -1,9 +1,13 @@
-package com.wuliangit.shopos.entity;
+package com.wuliangit.shopos.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Refund {
+/**
+ * Created by nilme on 2017/5/17.
+ */
+public class ApiRefundDTO {
+
     private Integer refundId;
 
     private Integer orderId;
@@ -62,13 +66,14 @@ public class Refund {
 
     private Integer expressId;
 
-    private String expressNo;
+    private String invoiceNo;
 
     private Date shipTime;
 
     private Date delayTime;
 
     private Date receiveTime;
+
 
     public Integer getRefundId() {
         return refundId;
@@ -91,7 +96,7 @@ public class Refund {
     }
 
     public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn == null ? null : orderSn.trim();
+        this.orderSn = orderSn;
     }
 
     public String getRefundSn() {
@@ -99,7 +104,7 @@ public class Refund {
     }
 
     public void setRefundSn(String refundSn) {
-        this.refundSn = refundSn == null ? null : refundSn.trim();
+        this.refundSn = refundSn;
     }
 
     public Integer getStoreId() {
@@ -115,7 +120,7 @@ public class Refund {
     }
 
     public void setStoreName(String storeName) {
-        this.storeName = storeName == null ? null : storeName.trim();
+        this.storeName = storeName;
     }
 
     public Integer getMemberId() {
@@ -131,7 +136,7 @@ public class Refund {
     }
 
     public void setMemberName(String memberName) {
-        this.memberName = memberName == null ? null : memberName.trim();
+        this.memberName = memberName;
     }
 
     public Integer getGoodsId() {
@@ -155,7 +160,7 @@ public class Refund {
     }
 
     public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
+        this.goodsName = goodsName;
     }
 
     public Integer getGoodsNum() {
@@ -179,7 +184,7 @@ public class Refund {
     }
 
     public void setGoodsImage(String goodsImage) {
-        this.goodsImage = goodsImage == null ? null : goodsImage.trim();
+        this.goodsImage = goodsImage;
     }
 
     public String getOrderGoodsType() {
@@ -187,7 +192,7 @@ public class Refund {
     }
 
     public void setOrderGoodsType(String orderGoodsType) {
-        this.orderGoodsType = orderGoodsType == null ? null : orderGoodsType.trim();
+        this.orderGoodsType = orderGoodsType;
     }
 
     public String getRefundType() {
@@ -195,7 +200,7 @@ public class Refund {
     }
 
     public void setRefundType(String refundType) {
-        this.refundType = refundType == null ? null : refundType.trim();
+        this.refundType = refundType;
     }
 
     public String getSellerState() {
@@ -203,7 +208,7 @@ public class Refund {
     }
 
     public void setSellerState(String sellerState) {
-        this.sellerState = sellerState == null ? null : sellerState.trim();
+        this.sellerState = sellerState;
     }
 
     public String getRefundState() {
@@ -211,15 +216,15 @@ public class Refund {
     }
 
     public void setRefundState(String refundState) {
-        this.refundState = refundState == null ? null : refundState.trim();
+        this.refundState = refundState;
     }
 
-    public Boolean getIsLock() {
+    public Boolean getLock() {
         return isLock;
     }
 
-    public void setIsLock(Boolean isLock) {
-        this.isLock = isLock;
+    public void setLock(Boolean lock) {
+        isLock = lock;
     }
 
     public String getGoodsState() {
@@ -227,7 +232,7 @@ public class Refund {
     }
 
     public void setGoodsState(String goodsState) {
-        this.goodsState = goodsState == null ? null : goodsState.trim();
+        this.goodsState = goodsState;
     }
 
     public Date getCreateTime() {
@@ -259,7 +264,7 @@ public class Refund {
     }
 
     public void setReasonInfo(String reasonInfo) {
-        this.reasonInfo = reasonInfo == null ? null : reasonInfo.trim();
+        this.reasonInfo = reasonInfo;
     }
 
     public String getPicsInfo() {
@@ -267,7 +272,7 @@ public class Refund {
     }
 
     public void setPicsInfo(String picsInfo) {
-        this.picsInfo = picsInfo == null ? null : picsInfo.trim();
+        this.picsInfo = picsInfo;
     }
 
     public String getBuyerMessage() {
@@ -275,7 +280,7 @@ public class Refund {
     }
 
     public void setBuyerMessage(String buyerMessage) {
-        this.buyerMessage = buyerMessage == null ? null : buyerMessage.trim();
+        this.buyerMessage = buyerMessage;
     }
 
     public String getSellerMessage() {
@@ -283,7 +288,7 @@ public class Refund {
     }
 
     public void setSellerMessage(String sellerMessage) {
-        this.sellerMessage = sellerMessage == null ? null : sellerMessage.trim();
+        this.sellerMessage = sellerMessage;
     }
 
     public String getAdminMessage() {
@@ -291,7 +296,7 @@ public class Refund {
     }
 
     public void setAdminMessage(String adminMessage) {
-        this.adminMessage = adminMessage == null ? null : adminMessage.trim();
+        this.adminMessage = adminMessage;
     }
 
     public Integer getExpressId() {
@@ -302,12 +307,12 @@ public class Refund {
         this.expressId = expressId;
     }
 
-    public String getExpressNo() {
-        return expressNo;
+    public String getInvoiceNo() {
+        return invoiceNo;
     }
 
-    public void setExpressNo(String expressNo) {
-        this.expressNo = expressNo == null ? null : expressNo.trim();
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
     }
 
     public Date getShipTime() {

@@ -168,7 +168,7 @@
                 });
     });
     //分类列表下拉框
-    $(".parent_select").select2({
+        $(".parent_select").select2({
         minimumResultsForSearch: -1,
         ajax: {
             url: "/admin/goodsCategory/get/all",

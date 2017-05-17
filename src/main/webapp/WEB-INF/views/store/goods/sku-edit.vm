@@ -83,6 +83,9 @@
 
 <script>
 
+    $("#商品").addClass("active");
+    $("#side-menu").metisMenu();
+
     ///////////////////添加属性//////////////////////
 
     var temp = '<div id="sku_attribute_item{id}">' +

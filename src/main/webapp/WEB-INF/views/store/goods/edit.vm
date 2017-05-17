@@ -189,6 +189,10 @@
 
 
 <script>
+    $("#商品").addClass("active");
+    $("#side-menu").metisMenu();
+
+
     var uploadToken = '$uploadToken';
     var domain = '$domain';
 

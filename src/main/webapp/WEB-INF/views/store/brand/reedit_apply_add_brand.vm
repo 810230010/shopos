@@ -78,6 +78,10 @@
 <!-- Jquery Validate -->
 <script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
 <script>
+
+    $("#品牌审核状态").addClass("active");
+    $("#品牌管理").addClass("active");
+    $('#side-menu').metisMenu();
  
     $('#upload-image').fileinput({
         language: 'zh',

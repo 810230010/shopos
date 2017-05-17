@@ -34,7 +34,7 @@ public class StoreGoodsAdController {
      * @param model
      * @return
      */
-    @RequestMapping("/adPage")
+    @RequestMapping("/list")
     public String showAdPage(Model model){
         return "/store/storeGoodsAd/ad_list";
     }
@@ -51,7 +51,7 @@ public class StoreGoodsAdController {
         model.addAttribute("goods",result);
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("domain",QiNiuUtils.BASE_URL);
-        return "/store/storeGoodsAd/updateadpage";
+        return "/store/storeGoodsAd/ad_update_page";
     }
 
     /**
@@ -59,11 +59,11 @@ public class StoreGoodsAdController {
      * @param model
      * @return
      */
-    @RequestMapping("/addadpage")
+    @RequestMapping("/addAdPage")
     public String addadpage(Model model){
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("domain",QiNiuUtils.BASE_URL);
-        return "/store/storeGoodsAd/addadpage";
+        return "/store/storeGoodsAd/ad_add_page";
     }
 
 

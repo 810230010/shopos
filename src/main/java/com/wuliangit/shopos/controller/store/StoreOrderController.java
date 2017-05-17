@@ -34,8 +34,7 @@ public class StoreOrderController {
      * @return: java.lang.String
      */
     @RequestMapping("/list")
-    public String list(Model model, @RequestParam(value = "type", required = false) String type){
-        model.addAttribute("type",type);
+    public String list(Model model){
         return "/store/order/list";
     }
 

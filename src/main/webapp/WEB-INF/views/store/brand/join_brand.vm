@@ -72,7 +72,12 @@
 <!-- Jquery Validate -->
 <script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
 <script>
-## 下拉框品牌列表显示
+
+    $("#申请入驻品牌").addClass("active");
+    $("#品牌管理").addClass("active");
+    $('#side-menu').metisMenu();
+
+    //下拉框品牌列表显示
     var brandId;
     $(".parent_select").select2({
         allowClear:true,

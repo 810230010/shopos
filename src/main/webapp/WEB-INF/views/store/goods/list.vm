@@ -44,9 +44,9 @@
 
 <script>
 
-    var rank = 1;
-    var upParentId = [];
-    var parentId = 0;
+    $("#商品列表").addClass("active");
+    $("#商品").addClass("active");
+    $("#side-menu").metisMenu();
 
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
@@ -60,7 +60,6 @@
                     param.orderColumn = d.columns[d.order[0]['column']]['data'];
                     param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
-                    param.parentId = parentId;
                     return param;
                 },
             },
@@ -86,7 +85,13 @@
                     }
                 },
                 {"data":"storeName","width": "10%","title":"商家名称"},
-                {"data":"state","width": "10%","title":"审核状态"},
+                {"data":"state","width": "10%","title":"审核状态",
+                    "render": function (data, type, row) {
+                        if(data == "DOWN")return "下架";
+                        else if(data == "ONSELL")return "在售";
+                        else if(data == "VIOLATION")return "禁售";
+                    }
+                },
                 {"data":null,"width": "10%","title":"操作","render": function (data, type, row) {
                     return [
                         '<div><a class="table-button-vertical btn btn-danger btn-xs table-action view" href="javascript:void(0)">',
@@ -119,7 +124,6 @@
                     customize: function (win){
                         $(win.document.body).addClass('white-bg');
                         $(win.document.body).css('font-size', '10px');
-
                         $(win.document.body).find('table')
                                 .addClass('compact')
                                 .css('font-size', 'inherit');
@@ -128,12 +132,7 @@
             ],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
 
@@ -143,33 +142,7 @@
             window.location.href = "/store/goods/editPage?goodsId="+data.goodsId;
         });
 
-        table.on( 'click', '.getsub', function () {
-            rank = rank +1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            $('#rank').html("商品分类列表("+rank+"级)")
-            var tr = $(this).closest('tr');
-            var data = table.row(tr).data();
 
-            parentId = data.goodsCategoryId;
-            upParentId[rank] = data.parentId;
-            table = $('#datatables').DataTable().ajax.reload();
-        });
-
-        $("#back").on('click', function () {
-            rank = rank - 1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            parentId = upParentId[rank];
-            $('#rank').html("商品分类列表("+rank+"级)")
-            table = $('#datatables').DataTable().ajax.reload();
-        });
     });
 </script>
 

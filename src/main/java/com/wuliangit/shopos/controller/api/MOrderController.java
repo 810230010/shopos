@@ -11,10 +11,7 @@ import com.wuliangit.shopos.model.OrderGoodsInfo;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -24,7 +21,7 @@ import java.util.*;
  * Created by nilme on 2017/5/3.
  */
 
-@Controller
+@RestController
 @RequestMapping(value = "/api/v1/order")
 public class MOrderController {
 
@@ -38,7 +35,6 @@ public class MOrderController {
      * @return
      */
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    @ResponseBody
     public Object createOrder(@RequestParam(required = true) String orderGoodsInfoList,
                               @RequestParam(required = true) Integer addressId,
                               @RequestParam(required = true) String orderFrom,
@@ -82,6 +78,21 @@ public class MOrderController {
         result.add("orderIds", orderIds);
         return result;
     }
+
+    @RequestMapping("/unpay")
+    public Object getUnpayOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        RestResult result = new RestResult();
+
+
+        List<ApiOrderCreateDTO> orders = orderService.getUnpayOrders(page,pageSize);
+
+        result.add("orders",orders);
+
+        return result;
+    }
+
+
 
 
 }

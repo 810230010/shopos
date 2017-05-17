@@ -174,9 +174,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<StoreOrderListDTO> getStoreOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String type) {
+    public List<StoreOrderListDTO> getStoreOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String state) {
         PageHelper.startPage(page, pageSize);
-        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getStoreOrderList(searchKey, orderColumn, orderType, type);
+        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getStoreOrderList(searchKey, orderColumn, orderType, state);
         return storeOrderListDTOS;
     }
 

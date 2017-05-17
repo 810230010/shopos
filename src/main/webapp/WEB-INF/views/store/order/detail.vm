@@ -13,7 +13,7 @@
                 <div class="ibox-title">
                     <h5>订单详情</h5>
                     <p align="right">
-                        <a type="button" class="btn btn-w-m btn-primary btn-small" href="/store/order/list?type=''">返回</a>
+                        <a type="button" class="btn btn-w-m btn-primary btn-small" href="/store/order/list">返回</a>
                     </p>
                 </div>
                 <div class="ibox-content">
@@ -268,4 +268,14 @@
     </div>
 </div>
 #parse("/admin/models/footer.vm")
+
+<script>
+
+    $("#订单").addClass("active");
+    $('#side-menu').metisMenu();
+
+</script>
+
+
+
 #parse("/admin/models/end.vm")

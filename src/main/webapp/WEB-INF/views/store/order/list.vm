@@ -6,21 +6,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>订单-订单管理</h2>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type=''">全部</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='INIT'">未付款</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='PAYED'">已付款未发货</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='DELIVE'">已发货未签收</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/order/list?type='RECEIVE'">已签收</a>
-        </p>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -29,7 +14,17 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h5 id="rank">订单管理 </h5>
-                    <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
+
+                    <div class="ibox-tools">
+                        <div id="btn-group" class="btn-group" role="group" aria-label="退款操作">
+                            <button type="button" class="btn btn-primary" onclick="getOrderList(this,'ALL')">全部</button>
+                            <button type="button" class="btn btn-white" onclick="getOrderList(this,'INIT')">未付款</button>
+                            <button type="button" class="btn btn-white" onclick="getOrderList(this,'PAYED')">已付款未发货</button>
+                            <button type="button" class="btn btn-white" onclick="getOrderList(this,'DELIVE')">已发货未签收</button>
+                            <button type="button" class="btn btn-white" onclick="getOrderList(this,'RECEIVE')">已签收</button>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
@@ -52,6 +47,12 @@
 
 <script>
 
+    $("#订单列表").addClass("active");
+    $("#订单").addClass("active");
+    $('#side-menu').metisMenu();
+
+    var nowState = '';
+
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
@@ -64,7 +65,7 @@
                     param.orderColumn = d.columns[d.order[0]['column']]['data'];
                     param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
-                    param.type = $type;
+                    param.state = nowState;
                     return param;
                 },
             },
@@ -117,12 +118,7 @@
             ],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
 
@@ -131,7 +127,24 @@
             var data = table.row(tr).data();
             window.location.href = "/store/order/detail?orderId="+data.orderId;
         });
+
+
     });
+
+    function getOrderList(button,state) {
+        //改变按钮颜色
+        var buttons = $('#btn-group').children();
+        buttons.each(function (index, element) {
+            $(element).removeClass("btn-primary");
+            $(element).addClass("btn-white");
+        });
+        $(button).removeClass("btn-white");
+        $(button).addClass("btn-primary");
+        nowState = state;
+
+        $('#datatables').DataTable().ajax.reload();
+    }
+
 </script>
 
 #parse("/store/models/end.vm")

@@ -1,15 +1,12 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
-import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
 import com.wuliangit.shopos.dto.ApiOrderDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.Order;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
-import java.util.List;
 
 public interface OrderMapper extends BaseMapper<Order, Integer> {
 
@@ -31,10 +28,13 @@ public interface OrderMapper extends BaseMapper<Order, Integer> {
      * @Description: 商铺获取订单列表数据
      * @Author: pangweichao
      * @Date: 20:48 2017/5/11
-     * @Param: [searchKey, orderColumn, orderType, type]
+     * @Param: [searchKey, orderColumn, orderType, state]
      * @return: java.lang.Object
      */
-    List<StoreOrderListDTO> getStoreOrderList(@Param("searchKey") String searchKey,@Param("orderColumn") String orderColumn,@Param("orderType") String orderType,@Param("type") String type);
+    List<StoreOrderListDTO> getStoreOrderList(@Param("searchKey") String searchKey,
+                                              @Param("orderColumn") String orderColumn,
+                                              @Param("orderType") String orderType,
+                                              @Param("state") String state);
 
     /**
      * api接口获取订单

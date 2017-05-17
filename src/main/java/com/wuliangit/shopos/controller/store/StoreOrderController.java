@@ -81,9 +81,9 @@ public class StoreOrderController {
                                @RequestParam(value = "orderType", required = false) String orderType,
                                @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                               @RequestParam(value = "type", required = false) String type){
+                               @RequestParam(value = "state", required = false) String state){
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        List<StoreOrderListDTO> storeOrderListDTOS = orderService.getStoreOrderList(searchKey,orderColumn,orderType,page,pageSize,type);
+        List<StoreOrderListDTO> storeOrderListDTOS = orderService.getStoreOrderList(searchKey,orderColumn,orderType,page,pageSize,state);
         return new PageResult<StoreOrderListDTO>(storeOrderListDTOS,draw);
     }
 

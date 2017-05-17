@@ -14,15 +14,14 @@
 
     <!--商铺获取订单列表数据-->
     <select id="getStoreOrderList" resultType="com.wuliangit.shopos.dto.StoreOrderListDTO">
-        SELECT order_id,out_trade_no,member_name,member_email,order_amount,order_state,carriage_name
+        SELECT order_id,out_trade_no,member_name,member_email,order_amount,order_state, express_id
         FROM t_order
         <where>
-            delete_state = "NO"
-            <if test="type != null and type != '' ">
-                and ( order_state = #{type})
+            <if test="state != null and state != '' ">
+                and order_state = #{state}
             </if>
             <if test="searchKey != null and searchKey != '' ">
-                and ( out_trade_no like '%${searchKey}%')
+                and out_trade_no like '%${searchKey}%'
             </if>
         </where>
         order by
@@ -34,11 +33,11 @@
 
     <!--api接口获取订单-->
     <select id="apiGetOrderByStateAndMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
-        select * from t_order where order_state = #{orderState} and member_id = #{memberId} order by create_time desc
+        select * from t_order where order_state = #{orderState} and member_id = #{memberId} and delete_state = 'NO' order by create_time desc
     </select>
 
     <!--api接口获取所有订单-->
     <select id="apiGetOrderByMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
-        select * from t_order where member_id = #{memberId} order by create_time desc
+        select * from t_order where member_id = #{memberId} and delete_state = 'NO' order by create_time desc
     </select>
 </mapper>

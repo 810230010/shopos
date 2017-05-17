@@ -14,7 +14,6 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h5 id="rank">已取消订单管理 </h5>
-                    <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
@@ -37,6 +36,10 @@
 
 <script>
 
+    $("#已取消订单").addClass("active");
+    $("#订单").addClass("active");
+    $('#side-menu').metisMenu();
+
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
@@ -49,7 +52,7 @@
                     param.orderColumn = d.columns[d.order[0]['column']]['data'];
                     param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
-                    param.type = $type;
+                    param.state = 'CANCEL';
                     return param;
                 },
             },
@@ -87,12 +90,7 @@
             ],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
     });

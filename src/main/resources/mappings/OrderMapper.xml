@@ -31,4 +31,9 @@
         </if>
         create_time desc
     </select>
+
+    <!--api接口获取订单-->
+    <select id="apiGetOrderByStateAndMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
+        select * from t_order where order_state = #{orderState} and member_id = #{memberId}
+    </select>
 </mapper>

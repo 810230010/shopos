@@ -1,6 +1,8 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
+import com.wuliangit.shopos.dto.ApiOrderDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.Order;
 import org.apache.ibatis.annotations.Param;
@@ -34,4 +36,12 @@ public interface OrderMapper extends BaseMapper<Order, Integer> {
      */
     List<StoreOrderListDTO> getStoreOrderList(@Param("searchKey") String searchKey,@Param("orderColumn") String orderColumn,@Param("orderType") String orderType,@Param("type") String type);
 
+    /**
+     * api接口获取订单
+     * @param orderState  订单状态
+     * @param memberId 用户id
+     * @return
+     */
+    List<ApiOrderDTO> apiGetOrderByStateAndMemberId(@Param("orderState")String orderState,
+                                                    @Param("memberId")Integer memberId);
 }

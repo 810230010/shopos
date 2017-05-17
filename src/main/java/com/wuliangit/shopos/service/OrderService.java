@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
+import com.wuliangit.shopos.dto.ApiOrderDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OrderException;
@@ -77,5 +78,5 @@ public interface OrderService {
      * @param pageSize
      * @return
      */
-    List<ApiOrderCreateDTO> getUnpayOrders(Integer page, Integer pageSize);
+    List<ApiOrderDTO> getUnpayOrders(Integer page, Integer pageSize);
 }

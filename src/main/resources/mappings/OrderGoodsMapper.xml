@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.OrderGoodsMapper" >
 
+    <!--通过订单id获取订单商品信息-->
+    <select id="getByOrderId" resultType="com.wuliangit.shopos.dto.ApiOrderGoodsDTO">
+        select
+        <include refid="Base_Column_List" />
+        from t_order_goods
+        where order_id = #{orderId}
+    </select>
+
+
 </mapper>

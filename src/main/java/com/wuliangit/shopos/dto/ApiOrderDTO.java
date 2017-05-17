@@ -1,7 +1,10 @@
 package com.wuliangit.shopos.dto;
 
+import com.wuliangit.shopos.entity.OrderGoods;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nilme on 2017/5/17.
@@ -77,6 +80,16 @@ public class ApiOrderDTO {
     private String reciverName;
 
     private String invoiceInfo;
+
+    private List<ApiOrderGoodsDTO> orderGoodses;
+
+    public List<ApiOrderGoodsDTO> getOrderGoodses() {
+        return orderGoodses;
+    }
+
+    public void setOrderGoodses(List<ApiOrderGoodsDTO> orderGoodses) {
+        this.orderGoodses = orderGoodses;
+    }
 
     public Integer getOrderId() {
         return orderId;

@@ -26,9 +26,7 @@ public class ExpUtil {
         querys.put("nu", nu);
         try {
             HttpResponse response = HttpUtils.doGet(host, path, method, headers, querys);
-
             String result = EntityUtils.toString(response.getEntity());
-            System.out.println(result);
             return result;
         } catch (Exception e) {
             e.printStackTrace();

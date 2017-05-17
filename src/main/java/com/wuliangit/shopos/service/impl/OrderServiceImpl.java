@@ -5,6 +5,7 @@ import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.*;
 import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
+import com.wuliangit.shopos.dto.ApiOrderDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OrderException;
@@ -40,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public List<Order> ApiCreateOrder(List<OrderGoodsInfo> orderGoodsInfoList,Integer addressId, String orderFrom, String orderMessage) throws OrderException {
+    public List<Order> ApiCreateOrder(List<OrderGoodsInfo> orderGoodsInfoList, Integer addressId, String orderFrom, String orderMessage) throws OrderException {
         //当前用户
         Member member = WebUtil.getCurrentMember();
         //邮寄地址
@@ -89,7 +90,7 @@ public class OrderServiceImpl implements OrderService {
                 goodsGoodsSkuMap.add(orderGoods);
             }
 
-            goodsSku.setSkuStock(goodsSku.getSkuStock()-orderGoodsInfo.getGoodsNum());
+            goodsSku.setSkuStock(goodsSku.getSkuStock() - orderGoodsInfo.getGoodsNum());
             goodsSkuMapper.updateByPrimaryKeySelective(goodsSku);
         }
 
@@ -129,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
             for (OrderGoods orderGoods : orderGoodses) {
                 //计算商品总价
                 goodsAmount = goodsAmount.add(orderGoods.getGoodsPayPrice().multiply(new BigDecimal(orderGoods.getGoodsNum())));
-                if (orderGoods.getCarriage().compareTo(carriage)>0){
+                if (orderGoods.getCarriage().compareTo(carriage) > 0) {
                     //取最大邮费
                     carriage = orderGoods.getCarriage();
                 }
@@ -172,8 +173,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<StoreOrderListDTO> getStoreOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String type) {
-        PageHelper.startPage(page,pageSize);
-        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getStoreOrderList(searchKey,orderColumn,orderType,type);
+        PageHelper.startPage(page, pageSize);
+        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getStoreOrderList(searchKey, orderColumn, orderType, type);
         return storeOrderListDTOS;
     }
 
@@ -183,8 +184,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<ApiOrderCreateDTO> getUnpayOrders(Integer page, Integer pageSize) {
+    public List<ApiOrderDTO> getUnpayOrders(Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
 
-        return null;
+        Member currentMember = WebUtil.getCurrentMember();
+        List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_INIT, currentMember.getMemberId());
+
+        for (ApiOrderDTO order : orders) {
+            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+        }
+
+        return orders;
     }
 }

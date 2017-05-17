@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
+import com.wuliangit.shopos.dto.ApiOrderDTO;
 import com.wuliangit.shopos.entity.GoodsSku;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OrderException;
@@ -79,16 +80,18 @@ public class MOrderController {
         return result;
     }
 
+    /**
+     * 获取未付款订单
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("/unpay")
     public Object getUnpayOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
         RestResult result = new RestResult();
-
-
-        List<ApiOrderCreateDTO> orders = orderService.getUnpayOrders(page,pageSize);
-
+        List<ApiOrderDTO> orders = orderService.getUnpayOrders(page,pageSize);
         result.add("orders",orders);
-
         return result;
     }
 

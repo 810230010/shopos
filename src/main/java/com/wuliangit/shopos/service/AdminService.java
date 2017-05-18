@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.AdminDTO;
 import com.wuliangit.shopos.entity.Admin;
 
 import java.util.Set;
@@ -28,4 +29,12 @@ public interface AdminService {
      * @return
      */
     Admin getByUsername(String username);
+
+    /**
+     * 更新用户信息
+     * @param admin
+     * @param newPass
+     * @return
+     */
+    int update(AdminDTO admin, String newPass);
 }

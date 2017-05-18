@@ -153,6 +153,7 @@
         <table tableName="t_seller" domainObjectName="Seller" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="seller_id" sqlStatement="MySql" identity="true"/>
         </table>
+
         <table tableName="t_seller_log" domainObjectName="SellerLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="seller_log_id" sqlStatement="MySql" identity="true"/>
         </table>
@@ -164,6 +165,11 @@
         <table tableName="t_admin_permission" domainObjectName="AdminPermission" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="admin_permission_id" sqlStatement="MySql" identity="true"/>
         </table>
+
+        <table tableName="t_express" domainObjectName="Express" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="express_id" sqlStatement="MySql" identity="true"/>
+        </table>
+
 
     </context>
 </generatorConfiguration>

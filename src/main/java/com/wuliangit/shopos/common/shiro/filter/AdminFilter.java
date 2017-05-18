@@ -13,14 +13,12 @@ public class AdminFilter extends AccessControlFilter {
             return true;
         }
         if(SecurityUtils.getSubject().isAuthenticated()){
-
             if (SecurityUtils.getSubject().hasRole("admin")){
                 return true;
             }else{
                 System.out.println("没有管理员角色，被拦截！！！");
                 return false;
             }
-
         }
         return false;
     }

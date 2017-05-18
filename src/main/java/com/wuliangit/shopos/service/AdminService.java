@@ -1,7 +1,11 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.AdminDTO;
+import com.wuliangit.shopos.dto.AdminRoleDTO;
 import com.wuliangit.shopos.entity.Admin;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,4 +32,30 @@ public interface AdminService {
      * @return
      */
     Admin getByUsername(String username);
+
+    /**
+     * 查找所有管理员
+     * @param page
+     * @param pageSize
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    List<AdminDTO> searchAdminList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
+
+    /**
+     * 获得所有可用管理员角色列表
+     * @return
+     */
+    ArrayList<AdminRoleDTO> getAllAdminRoles();
+
+    /**
+     * 添加管理员
+     * @param admin
+     * @return
+     */
+    int createAdmin(Admin admin);
+
+    AdminDTO getAdminById(Integer adminId);
 }

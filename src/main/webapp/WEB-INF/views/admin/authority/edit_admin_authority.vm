@@ -17,36 +17,21 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><font color="red">*</font>用户名:</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" class="form-control" onblur="check(this.value)">
+                                <input id="username" name="name" type="text" class="form-control" value="$adminInfo.username">
                             </div>
                         </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"><font color="red">*</font>Email地址</label>
-                            <div class="col-sm-7">
-                                <input id="name" name="name" type="text" class="form-control">
-                            </div>
-                        </div>
-
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><font color="red">*</font>旧密码</label>
                             <div class="col-sm-7">
-                                <input id="initial" name="initial" type="text" class="form-control">
+                                <input id="oldpass" name="initial" type="text" class="form-control" value="$adminInfo.password">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><font color="red">*</font>新密码</label>
                             <div class="col-sm-7">
-                                <input id="initial" name="initial" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"><font color="red">*</font>确认密码密码</label>
-                            <div class="col-sm-7">
-                                <input id="initial" name="initial" type="text" class="form-control">
+                                <input id="newpass" name="initial" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -83,24 +68,20 @@
     var rank = 1;
 
     $(document).ready(function () {
-        //分类列表下拉框
         $(".parent_select").select2({
+            allowClear:true,
             minimumResultsForSearch: -1,
+            minimumInputLength: 0,
+            language: "zh-CN",
             ajax: {
-                url: "/admin/goodsCategory/get/all",
+                url: "/admin/authority/getAllRoles",
                 dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        q: params.term, // search term
-                        page: params.page
-                    };
-                },
+                delay: 200,
                 processResults: function (data, params) {
                     var results = [];
-                    $.each(data.data.goodsCategories, function (i, v) {
+                    $.each(data.data.roleList, function (i, v) {
                         var o = {};
-                        o.id = v.goodsCategoryId;
+                        o.id = v.adminRoleId;
                         o.name = v.name;
                         results.push(o);
                     })
@@ -119,21 +100,23 @@
             escapeMarkup: function (markup) {
                 return markup;
             }, // let our custom formatter work
-            minimumInputLength: 0,
             templateResult: function formatRepo(repo) {
                 return repo.name
             },
             templateSelection: function formatRepo(repo) {
                 return repo.name
             },
-            language: "zh-CN",
             initSelection: function (element, callback) {
-                var data = { id:0, name: "请选择分类" };
+                var data = { name: "$adminInfo.adminRole"};
                 callback(data);
             },
         });
 
-    });
+        //提交按钮点击
+        $("#submit").click(function(){
+
+        })
+    })
 </script>
 
 #parse("/admin/models/end.vm")

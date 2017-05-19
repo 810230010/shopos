@@ -81,18 +81,7 @@ public class AdminAuthorityController {
         return new PageResult<AdminDTO>(list, draw);
     }
 
-    /**
-     * 获得所有角色
-     * @return
-     */
-    @RequestMapping("/getAllRoles")
-    @ResponseBody
-    public Object getAllRoles(){
-        RestResult result = new RestResult();
-        ArrayList<AdminRoleDTO> roleList = adminService.getAllAdminRoles();
-        result.add("roleList",roleList);
-        return result;
-    }
+
 
     /**
      * 添加管理员

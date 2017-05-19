@@ -63,7 +63,7 @@
         minimumInputLength: 0,
         language: "zh-CN",
         ajax: {
-            url: "/admin/authority/getAllRoles",
+            url: "/admin/role/getAllRoles",
             dataType: 'json',
             delay: 200,
             processResults: function (data, params) {

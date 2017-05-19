@@ -68,7 +68,7 @@
         $(".parent_select").select2({
             minimumResultsForSearch: -1,
             ajax: {
-                url: "/admin/authority/getAllRoles",
+                url: "/admin/role/getAllRoles",
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {

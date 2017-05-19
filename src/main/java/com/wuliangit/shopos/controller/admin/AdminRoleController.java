@@ -6,12 +6,14 @@ import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dto.AdminDTO;
 import com.wuliangit.shopos.dto.AdminRoleDTO;
 import com.wuliangit.shopos.service.AdminRoleService;
+import com.wuliangit.shopos.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +24,8 @@ import java.util.List;
 public class AdminRoleController {
     @Autowired
     private AdminRoleService adminRoleService;
+    @Autowired
+    private AdminService adminService;
 
     /**
      * 角色列表页面
@@ -64,6 +68,11 @@ public class AdminRoleController {
         return new PageResult<AdminRoleDTO>(list, draw);
     }
 
+    /**
+     * 删除管理员
+     * @param adminRoleId
+     * @return
+     */
     @RequestMapping("/deleteRole")
     @ResponseBody
     public Object deleteRole(Integer adminRoleId){
@@ -72,6 +81,19 @@ public class AdminRoleController {
             result = new RestResult("未知错误", 502);
             return result;
         }
+        return result;
+    }
+
+    /**
+     * 获得所有角色
+     * @return
+     */
+    @RequestMapping("/getAllRoles")
+    @ResponseBody
+    public Object getAllRoles(){
+        RestResult result = new RestResult();
+        ArrayList<AdminRoleDTO> roleList = adminService.getAllAdminRoles();
+        result.add("roleList",roleList);
         return result;
     }
 }

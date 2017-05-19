@@ -17,7 +17,7 @@
 
                     <div class="ibox-tools">
                         <div id="btn-group" class="btn-group" role="group" aria-label="退款操作">
-                            <button type="button" class="btn btn-primary" onclick="getOrderList(this,'ALL')">全部</button>
+                            <button type="button" class="btn btn-primary" onclick="getOrderList(this,'')">全部</button>
                             <button type="button" class="btn btn-white" onclick="getOrderList(this,'INIT')">未付款</button>
                             <button type="button" class="btn btn-white" onclick="getOrderList(this,'PAYED')">已付款未发货</button>
                             <button type="button" class="btn btn-white" onclick="getOrderList(this,'DELIVE')">已发货未签收</button>

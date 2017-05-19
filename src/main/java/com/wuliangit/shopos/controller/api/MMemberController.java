@@ -257,8 +257,8 @@ public class MMemberController {
         RestResult result = new RestResult();
 
         //头像更新处理
-        if (member.getPhoto()!=null&&!member.getPhoto().equals("")){
-            member.setPhoto(QiNiuUtils.BASE_URL+member.getPhoto());
+        if (member.getPhoto() != null && !member.getPhoto().equals("")) {
+            member.setPhoto(QiNiuUtils.getBaseUrl() + member.getPhoto());
         }
 
         Member memberUpdate = WebUtil.getCurrentMember();

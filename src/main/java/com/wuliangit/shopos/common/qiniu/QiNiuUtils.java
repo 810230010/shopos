@@ -50,6 +50,13 @@ public class QiNiuUtils {
         return QiNiuUtils.getAuth();
     }
 
+    public static String getBaseUrl(){
+        if (auth == null){
+            getAuth();
+        }
+        return BASE_URL;
+    }
+
     public static String getRealUrl(String url) {
         if (url.contains("http://")){
             return url;

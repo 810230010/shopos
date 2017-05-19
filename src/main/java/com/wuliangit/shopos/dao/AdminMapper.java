@@ -42,6 +42,11 @@ public interface AdminMapper extends BaseMapper<Admin, Integer> {
      */
     Admin getAdminByUsername(@Param("username") String username);
 
+    /**
+     * 通过主键查询管理员
+     * @param adminId
+     * @return
+     */
     AdminDTO getAdminById(@Param("adminId") Integer adminId);
 
 }

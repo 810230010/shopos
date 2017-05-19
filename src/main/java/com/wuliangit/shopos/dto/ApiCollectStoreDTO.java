@@ -7,6 +7,8 @@ import java.util.Date;
  */
 public class ApiCollectStoreDTO {
 
+    private Integer storeId;
+
     private String name;
 
     private String logo;
@@ -14,6 +16,14 @@ public class ApiCollectStoreDTO {
     private String label;
 
     private Date favTime;
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
 
     public Date getFavTime() {
         return favTime;

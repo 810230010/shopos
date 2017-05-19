@@ -56,7 +56,7 @@
            timeToLiveSeconds="600">
     </cache>
 
-    <!--token缓存-->
+    <!--token缓存 30天-->
     <cache name="tokenCache"
            maxBytesLocalHeap="20M"
            eternal="false"

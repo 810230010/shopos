@@ -35,7 +35,7 @@
   </select>
   <!--根据主键查询管理员-->
   <select id="getAdminById" resultType="com.wuliangit.shopos.dto.AdminDTO">
-          select a.admin_id as adminId,a.username,a.password,b.name as adminRole from t_admin a,t_admin_role b
+          select a.admin_id as adminId,a.admin_role_id as adminRoleId,a.username,a.password,b.name as adminRole from t_admin a,t_admin_role b
           where a.admin_role_id=b.admin_role_id and a.admin_id=#{adminId}
   </select>
 

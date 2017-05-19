@@ -107,7 +107,7 @@
                 return repo.name
             },
             initSelection: function (element, callback) {
-                var data = { name: "$adminInfo.adminRole"};
+                var data = {id:$adminInfo.adminRole,name: "$adminInfo.adminRole"};
                 callback(data);
             },
         });

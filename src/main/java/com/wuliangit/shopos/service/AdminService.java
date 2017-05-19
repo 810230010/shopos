@@ -3,7 +3,6 @@ package com.wuliangit.shopos.service;
 import com.wuliangit.shopos.dto.AdminDTO;
 import com.wuliangit.shopos.dto.AdminRoleDTO;
 import com.wuliangit.shopos.entity.Admin;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -58,4 +57,11 @@ public interface AdminService {
     int createAdmin(Admin admin);
 
     AdminDTO getAdminById(Integer adminId);
+    /*
+     * 更新用户信息
+     * @param admin
+     * @param newPass
+     * @return
+     */
+    int update(AdminDTO admin, String newPass);
 }

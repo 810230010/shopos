@@ -209,9 +209,9 @@
 
 
                 <!--总后台用户-->
-                /admin/login = authc
-                /admin/logout = logout
-                /admin/** = kickout,sysUser
+                <!--/admin/login = authc-->
+                <!--/admin/logout = logout-->
+                /admin/** = sysUser
 
                 <!--店铺后台用户-->
                 <!--/store/login = authc-->

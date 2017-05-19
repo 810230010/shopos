@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.controller.store;
 
 import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.shiro.realm.UserRealm;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
@@ -17,6 +18,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.mgt.RealmSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,6 +92,11 @@ public class StoreLoginController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout() {
+        //登出清除缓存
+        RealmSecurityManager securityManager = (RealmSecurityManager) SecurityUtils.getSecurityManager();
+        UserRealm userRealm = (UserRealm)securityManager.getRealms().iterator().next();
+        userRealm.clearAllCache();
+        //登出
         SecurityUtils.getSubject().logout();
         return "redirect:store/login";
     }

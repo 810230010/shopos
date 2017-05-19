@@ -1,0 +1,78 @@
+#parse("/admin/models/begin.vm")
+
+#parse("/admin/models/header.vm")
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>系统管理员-信息修改</h2>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>管理员信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" id="form">
+                        <div class="form-group"><label class="col-sm-2 control-label">用户名</label>
+                            <div class="col-sm-8"><input type="text" class="form-control" value="$!{admin.username}" readonly></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group"><label class="col-sm-2 control-label">邮箱</label>
+                            <div class="col-sm-8"><input type="email" class="form-control" name="email" id="email" value="$!{admin.email}"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group"><label class="col-sm-2 control-label">新密码</label>
+                            <div class="col-sm-8"><input type="password" class="form-control" name="newPass1" id="newPass1"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group"><label class="col-sm-2 control-label">确认新密码</label>
+                            <div class="col-sm-8"><input type="password" class="form-control" name="newPass2" id="newPass2"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <div class="btn btn-primary" id="submit">保存</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+<script>
+
+    $('#side-menu').metisMenu();
+
+    $("#submit").on('click', function () {
+
+        $.post("/admin/profile/update",
+                {
+                    email: $("#email").val(),
+                    newPass: $("#newPass2").val(),
+                },
+                function (data, status) {
+                    if (data.code == 200) {
+                        swal({
+                            title: "成功!",
+                            text: "用户信息修改成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2500,
+                        });
+                    }
+                });
+    });
+
+</script>
+
+
+#parse("/store/models/end.vm")

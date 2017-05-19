@@ -3,6 +3,7 @@ package com.wuliangit.shopos.service;
 import com.wuliangit.shopos.dto.SellerDTO;
 import com.wuliangit.shopos.entity.Seller;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -44,4 +45,13 @@ public interface SellerService {
      * @return
      */
     int update(SellerDTO seller, String newPass);
+
+    /**
+     * @Description: 获取所有的卖家
+     * @Author: pangweichao
+     * @Date: 23:23 2017/5/18
+     * @Param: []
+     * @return: java.util.List<com.wuliangit.shopos.entity.Seller>
+     */
+    List<Seller> getAllSeller();
 }

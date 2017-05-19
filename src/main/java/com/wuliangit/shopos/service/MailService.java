@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service;
 
 import org.apache.velocity.VelocityContext;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,14 +11,12 @@ import java.util.Map;
 public interface MailService {
 
     /**
-     * 发送邮件
-     *
-     * @param user     用户邮箱
-     * @param context  模板的动态内容
-     * @param templates  邮件模板
-     *
+     * @Description: 发送邮件
+     * @Author: pangweichao
+     * @Date: 14:45 2017/5/19
+     * @Param: [user, title, content, templates]
+     * @return: java.lang.String
      */
-    void sendMail(String user, VelocityContext context, String templates);
-
+    String sendMail(String username,String id,String mail , String title, String content, String templates);
 
 }

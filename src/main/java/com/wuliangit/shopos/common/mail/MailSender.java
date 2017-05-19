@@ -157,6 +157,12 @@ public class MailSender {
      * @throws MessagingException
      */
     public void send(String recipient, VelocityContext context, String templates) throws MessagingException {
+        String[] to = recipient.split(",");
+        int receiverCount = to.length;
+        InternetAddress[] address = new InternetAddress[receiverCount];
+        for (int i = 0; i < receiverCount; i++) {
+            address[i] = new InternetAddress(to[i]);
+        }
         VelocityEngine engine = new VelocityEngine();
         Properties properties = new Properties();
         StringWriter writer = new StringWriter();
@@ -165,9 +171,9 @@ public class MailSender {
         // 设置发信人
         message.setFrom(new InternetAddress(authenticator.getUsername()));
         // 设置收件人
-        message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+        message.setRecipients(Message.RecipientType.TO, address);
         // 设置主题
-        message.setSubject("注册验证");
+        message.setSubject("群发邮件");
         // 设置邮件内容
         properties.setProperty("resource.loader", "class");
         properties.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
@@ -176,7 +182,8 @@ public class MailSender {
         engine.init(properties);
         Template template = engine.getTemplate(templates);
         template.merge(context,writer);
-        message.setText(writer.toString());
+        message.setContent(writer.toString(),"text/html;charset = utf-8");
+//        message.setText(writer.toString());
         // 发送
         Transport.send(message);
     }

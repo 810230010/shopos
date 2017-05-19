@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.AdminMapper" >
+
   <!--通过用户名获取管理员-->
   <select id="getByUsername" resultType="com.wuliangit.shopos.entity.Admin">
     select
     <include refid="Base_Column_List" />
     from t_admin
     where username = #{username}
+  </select>
+
+  <!--获取所有管理员列表-->
+  <select id="searchAdminList" resultType="com.wuliangit.shopos.dto.AdminDTO">
+        select a.admin_id as adminId,a.create_time as createTime,a.login_num as loginNum,a.login_time as loginTime,a.password,a.username,b.name as adminRole
+        from t_admin a, t_admin_role b
+        <where>
+          <if test="searchKey != null and searchKey != '' ">
+            (a.username like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+          </if>
+          and a.admin_role_id=b.admin_role_id
+        </where>
+        order by
+        admin_id desc
+  </select>
+  <!--获得所有可用管理员角色-->
+  <select id="getAdminRoles" resultType="com.wuliangit.shopos.dto.AdminRoleDTO">
+          select admin_role_id as adminRoleId,name
+          from t_admin_role
+  </select>
+  <!--查询管理员用户名是否存在-->
+  <select id="getAdminByUsername" resultType="com.wuliangit.shopos.entity.Admin">
+          select * from t_admin
+          where username=#{username}
+  </select>
+  <!--根据主键查询管理员-->
+  <select id="getAdminById" resultType="com.wuliangit.shopos.dto.AdminDTO">
+          select a.admin_id as adminId,a.admin_role_id as adminRoleId,a.username,a.password,b.name as adminRole from t_admin a,t_admin_role b
+          where a.admin_role_id=b.admin_role_id and a.admin_id=#{adminId}
   </select>
 
 </mapper>

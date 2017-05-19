@@ -15,26 +15,29 @@
                 <div class="ibox-title">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">用户名:</label>
+                            <label class="col-sm-3 control-label"><font color="red">*</font>用户名:</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" class="form-control" onblur="check(this.value)"><label id="msg"></label>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Email地址</label>
-                            <div class="col-sm-7">
-                                <input id="name" name="name" type="text" class="form-control" onblur="check(this.value)"><label id="msg"></label>
+                                <input id="username" name="name" type="text" class="form-control">
                             </div>
                         </div>
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">密码</label>
+                            <label class="col-sm-3 control-label"><font color="red">*</font>密码</label>
                             <div class="col-sm-7">
-                                <input id="initial" name="initial" type="text" class="form-control">
+                                <input id="password" name="password" type="text" class="form-control">
                             </div>
                         </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><font color="red">*</font>角色选择</label>
+                            <div class="col-sm-7">
+                                <select id="parentId" name="parentId" class="parent_select form-control">
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-6">
@@ -61,11 +64,11 @@
     var rank = 1;
 
     $(document).ready(function () {
-        //分类列表下拉框
+        //角色列表下拉框
         $(".parent_select").select2({
             minimumResultsForSearch: -1,
             ajax: {
-                url: "/admin/goodsCategory/get/all",
+                url: "/admin/authority/getAllRoles",
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {
@@ -76,9 +79,9 @@
                 },
                 processResults: function (data, params) {
                     var results = [];
-                    $.each(data.data.goodsCategories, function (i, v) {
+                    $.each(data.data.roleList, function (i, v) {
                         var o = {};
-                        o.id = v.goodsCategoryId;
+                        o.id = v.adminRoleId;
                         o.name = v.name;
                         results.push(o);
                     })
@@ -106,11 +109,35 @@
             },
             language: "zh-CN",
             initSelection: function (element, callback) {
-                var data = { id:0, name: "请选择分类" };
+                var data = { id:0, name: "请选择角色" };
                 callback(data);
             },
         });
-
+        $("#submit").click(function(){
+             $.ajax({
+                 url:"/admin/authority/addAdmin",
+                 type:"post",
+                 data:{
+                   "username":$("#username").val(),
+                   "password":$("#password").val(),
+                   "adminRoleId":$("#parentId").select2('data')[0].id,
+                 },
+                 success:function(result){
+                     if(result.code == 200) {
+                         swal({
+                             title: "成功!",
+                             text: "管理员添加成功!",
+                             type: "success",
+                             showConfirmButton: false,
+                             timer: 2000,
+                         });
+                         setTimeout(function () {
+                             window.location.href = "/admin/authority/adminListPage";
+                         }, 2000);
+                     }
+                 }
+             })
+        })
     });
 </script>
 

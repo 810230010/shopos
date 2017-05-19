@@ -41,7 +41,7 @@ public class AdminGlobalHandler {
 
     @ExceptionHandler(value = Exception.class)
     public String errorHandlerOverJson(HttpServletRequest request, Exception exception) {
-        logger.error(exception.getMessage());
+        logger.error(exception.getLocalizedMessage());
         exception.printStackTrace();
         return "500";
     }

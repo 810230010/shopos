@@ -57,10 +57,62 @@
                 },
             },
             "columns": [
-                {"data":"outTradeNo","width": "10%","title":"订单编号","orderable": true},
+                {"data":"outTradeNo","width": "10%","title":"订单编号","orderable": false},
+                {"data":"createTime","width": "10%","title":"下单时间"},
                 {"data":"memberName","width": "10%","title":"买家姓名","orderable": false},
-                {"data":"memberEmail","width": "10%","title":"买家邮箱","orderable": false},
-                {"data":"orderAmount","width": "10%","title":"订单金额","orderable": true}
+                {"data":"reciverName","width": "10%","title":"收货人","orderable": false,"render":function(data, type, row){
+                    return '<div>' +
+                            '<p>'+row.reciverName+'['+row.reciverPhone+']'+'</p>' +
+                            '</div>';
+                }},
+                {"data":"orderFrom","width": "10%","title":"信息标签","render":function(data, type, row){
+                    var from = '';
+                    var result = '';
+                    if(row.orderFrom == 'WEB'){
+                        from = "网站";
+                    }else if(row.orderFrom == 'APP'){
+                        from = "APP";
+                    }else if(row.orderFrom == 'WX'){
+                        from = "微信";
+                    }
+                    result += '来源:'+from;
+
+                    var payCode = '';
+                    if(row.paymentCode == 'CARD'){
+                        payCode = "银联";
+                    }else if(row.paymentCode == 'ALIPAY'){
+                        payCode = "支付宝";
+                    }else if(row.paymentCode == 'WX'){
+                        payCode = "微信";
+                    }else{
+                        payCode = "未付款";
+                    }
+                    result += '<br>支付方式:'+payCode;
+                    return result;
+
+                }},
+                {"data":"orderAmount","width": "10%","title":"订单金额","orderable": true,"render":function(data, type, row){
+                    return '<div>' +
+                            '商品:￥'+row.goodsAmount+'<br>' +
+                            '邮费:￥'+row.carriageAmount+'<br>' +
+                            '总额:￥'+row.orderAmount+'<br>' +
+                            '应付:￥'+row.orderAmount+'<br>' +
+                            '</div>';
+                }},
+                {"data":"orderState","width": "8%","title":"订单状态","orderable": false,"render":function(data, type, row){
+                    if(data == "CANCEL") return "已取消";
+                    else if(data == "INIT") return "未付款";
+                    else if(data == "PAYED") return "已付款";
+                    else if(data == "DELIVE") return "已发货";
+                    else if(data == "RECEIVE") return "已收货";
+                }},
+                {"data":"orderId","width": "10%","title":"操作","orderable": false,"render": function(data, type, row){
+                    return [
+                        '<a class="table-button btn btn-success btn-xs table-action detail" href="javascript:void(0)">',
+                        '查看详情 <i class="fa fa-info"></i>',
+                        '</a>'
+                    ].join('');
+                }},
             ],
             "searching": true,
             "ordering":true,
@@ -93,6 +145,11 @@
             }
         });
         var table = $('#datatables').DataTable();
+        table.on( 'click', '.detail', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            window.location.href = "/store/order/detail?orderId="+data.orderId;
+        });
     });
 </script>
 

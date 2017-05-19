@@ -1,8 +1,6 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiOrderDTO;
-import com.wuliangit.shopos.dto.ApiRefundDTO;
-import com.wuliangit.shopos.dto.StoreOrderListDTO;
+import com.wuliangit.shopos.dto.*;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.OrderGoodsInfo;
@@ -119,4 +117,11 @@ public interface OrderService {
      * @return
      */
     List<ApiOrderDTO> apiGetAllOrders(Integer page, Integer pageSize);
+
+    /**
+     * 订单详情获取订单商品信息
+     * @param orderId
+     * @return
+     */
+    List<ApiOrderGoodsDTO> getOrderDetailGoods(Integer orderId);
 }

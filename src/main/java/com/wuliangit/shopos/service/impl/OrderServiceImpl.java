@@ -6,6 +6,7 @@ import com.wuliangit.shopos.common.util.OrderUtil;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.*;
 import com.wuliangit.shopos.dto.ApiOrderDTO;
+import com.wuliangit.shopos.dto.ApiOrderGoodsDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OrderException;
@@ -244,6 +245,11 @@ public class OrderServiceImpl implements OrderService {
             order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
         }
         return orders;
+    }
+
+    @Override
+    public List<ApiOrderGoodsDTO> getOrderDetailGoods(Integer orderId) {
+        return orderGoodsMapper.getByOrderId(orderId);
     }
 
 }

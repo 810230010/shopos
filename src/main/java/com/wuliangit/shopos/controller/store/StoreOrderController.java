@@ -2,8 +2,11 @@ package com.wuliangit.shopos.controller.store;
 
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.dto.ApiOrderGoodsDTO;
+import com.wuliangit.shopos.dto.OrderDetailGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.Order;
+import com.wuliangit.shopos.entity.OrderGoods;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,7 +51,10 @@ public class StoreOrderController {
     @RequestMapping("/detail")
     public String detail(Model model,Integer orderId){
         Order order = orderService.getOrderDetail(orderId);
+        List<ApiOrderGoodsDTO> goodses = orderService.getOrderDetailGoods(orderId);
+
         model.addAttribute("order",order);
+        model.addAttribute("goodses",goodses);
         return "/store/order/detail";
     }
 
@@ -59,7 +65,7 @@ public class StoreOrderController {
      * @Param: [model, type]
      * @return: java.lang.String
      */
-    @RequestMapping("/cancellist")
+    @RequestMapping("/cancelList")
     public String cancellist(Model model,@RequestParam(value = "type", required = false) String type){
         model.addAttribute("type",type);
         return "/store/order/cancel_list";

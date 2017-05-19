@@ -49,4 +49,5 @@ public interface AdminMapper extends BaseMapper<Admin, Integer> {
      */
     AdminDTO getAdminById(@Param("adminId") Integer adminId);
 
+
 }

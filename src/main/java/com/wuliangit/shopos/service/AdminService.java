@@ -64,4 +64,13 @@ public interface AdminService {
      * @return
      */
     int update(AdminDTO admin, String newPass);
+
+    /**
+     * 最大的管理员修改其他管理员信息
+     * @param admin
+     * @return
+     */
+    int updateOtherAdminInfo(Admin admin);
+
+    int deleteAdmin(Integer adminId);
 }

@@ -6,6 +6,15 @@ package com.wuliangit.shopos.dto;
 public class AdminRoleDTO {
     private Integer adminRoleId;
     private String name;
+    private Integer defaultRole;
+
+    public Integer getDefaultRole() {
+        return defaultRole;
+    }
+
+    public void setDefaultRole(Integer defaultRole) {
+        this.defaultRole = defaultRole;
+    }
 
     public Integer getAdminRoleId() {
         return adminRoleId;

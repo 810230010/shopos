@@ -2,7 +2,6 @@
 
 <link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 <link href="/assets/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-<link href="/assets/admin/css/plugins/layui/layer.css" rel="stylesheet">
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -39,7 +38,6 @@
 <script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
 <script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
 <script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/layUI/layer.js"></script>
 <script>
 
     var rank = 1;

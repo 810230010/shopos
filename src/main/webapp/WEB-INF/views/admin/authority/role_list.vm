@@ -7,7 +7,7 @@
     <div class="col-lg-10">
         <h2>权限管理-角色列表</h2>
         <p>
-            <a type="button" class="btn btn-w-m btn-primary" href="/admin/authority/addRolePage">添加角色</a>
+            <a type="button" class="btn btn-w-m btn-primary" href="/admin/role/addRolePage">添加角色</a>
         </p>
     </div>
 </div>
@@ -47,7 +47,7 @@
     $(document).ready(function () {
         var t = $('#brandTable').DataTable({
             "ajax": {
-                'url': '/admin/authority/searchAdminList',
+                'url': '/admin/role/searchRoleList',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -60,28 +60,40 @@
                 },
             },
             "columns": [
-                {"data":"roleId","width":"7%","title":"角色序号","visible": false},
+                {"data":"adminRoleId","width":"7%","title":"角色序号","visible": false},
                 {"data":"name","width": "10%","title":"角色名","orderable": false},
-                {"data":"name","width": "10%","title":"角色描述","orderable": false},
                 {
-                    "data":"roleId",
+                    "data":"defaultRole",
+                    "width": "10%",
+                    "title":"是否系统默认角色",
+                    "orderable": false,
+                    "render": function (data, type, row) {
+                        if(row.defaultRole == 1){
+                             return "是";
+                        }
+                        return "否";
+                    }
+                },
+                {
+                    "data":"adminRoleId",
                     "width": "15%",
                     "title":"操作",
                     "orderable": false,
                     "render": function (data, type, row) {
                         return [
-                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
+                            '<a class="table-button btn btn-info btn-xs table-action scan" href="javascript:void(0)">',
                             '查看 <i class="fa fa-eye"></i>',
                             '</a>',
                             '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
                             '编辑 <i class="fa fa-edit"></i>',
                             '</a>',
-                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
+                            '<a class="table-button btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
                             '移除 <i class="fa fa-trash-o"></i>',
                             '</a>',
                         ].join('');
                     }},
             ],
+            "order": [[1, 'asc']],
             "searching": true,
             "ordering":true,
             "serverSide": true,
@@ -118,7 +130,6 @@
             },
         });
         var table = $('#brandTable').DataTable();
-
         //修改
         table.on( 'click', '.edit', function () {
             var tr = $(this).closest('tr');
@@ -130,29 +141,39 @@
         table.on('click', '.delete', function() {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            layer.confirm('确定删除改品牌?!', {icon: 5,btnAlign:'c',title:'提示'}, function(index){
-                //do something
-                $.ajax({
-                    url: "/admin/brand/deleteBrand",
-                    type: "get",
-                    data: {"brandId": data.brandId},
-                    success:function(result) {
-                        if (result.code == 200) {
-                            layer.open({
-                                title: '提示'
-                                ,content: '删除成功!!'
-                            })
-                            window.location.reload();
-                        }
+            swal({
+                        title: "确定删除该角色?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确认",
+                        closeOnConfirm: true
                     },
-                    error:function(result) {
-                        alert("系统出错!")
-                    }
-                });
-                layer.close(index);
-            });
+                    function(){
+                        $.ajax({
+                            url: "/admin/role/deleteRole",
+                            type: "get",
+                            data: {"adminRoleId": data.adminRoleId},
+                            success:function(result) {
+                                if(result.code == 200) {
+                                    swal({
+                                        title: "成功!",
+                                        text: "角色删除成功!",
+                                        type: "success",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                    });
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 100);
+                                }
+                            },
+                            error:function(result) {
+                                alert("系统出错!")
+                            }
+                        });
 
-
+                    });
         });
 
         table.on( 'click', '.getsub', function () {
@@ -168,18 +189,6 @@
 
             goodsCategoryId = data.goodsCategoryId;
             upParentId[rank] = data.goodsCategoryId;
-            table = $('#brandTable').DataTable().ajax.reload();
-        });
-
-        $("#back").on('click', function () {
-            rank = rank - 1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            parentId = upParentId[rank];
-            $('#rank').html("商品分类列表("+rank+"级)")
             table = $('#brandTable').DataTable().ajax.reload();
         });
     });

@@ -80,7 +80,7 @@
                             '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)" style="margin-left:10px">',
                             '编辑 <i class="fa fa-edit"></i>',
                             '</a>',
-                            '<a class="table-button btn btn-danger btn-xs table-action edit" href="javascript:void(0)" style="margin-left: 10px;">',
+                            '<a class="table-button btn btn-danger btn-xs table-action delete" href="#" style="margin-left: 10px;">',
                             '移除 <i class="fa fa-trash-o"></i>',
                             '</a>',
                         ].join('');
@@ -134,58 +134,41 @@
         table.on('click', '.delete', function() {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            layer.confirm('确定删除改品牌?!', {icon: 5,btnAlign:'c',title:'提示'}, function(index){
-                //do something
-                $.ajax({
-                    url: "/admin/brand/deleteBrand",
-                    type: "get",
-                    data: {"brandId": data.brandId},
-                    success:function(result) {
-                        if (result.code == 200) {
-                            layer.open({
-                                title: '提示'
-                                ,content: '删除成功!!'
-                            })
-                            window.location.reload();
-                        }
+            swal({
+                        title: "确定删除该管理员?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确认",
+                        closeOnConfirm: true
                     },
-                    error:function(result) {
-                        alert("系统出错!")
-                    }
-                });
-                layer.close(index);
-            });
+                    function(){
+                        $.ajax({
+                            url: "/admin/authority/deleteAdmin",
+                            type: "get",
+                            data: {"adminId": data.adminId},
+                            success:function(result) {
+                                if(result.code == 200) {
+                                    swal({
+                                        title: "成功!",
+                                        text: "管理员删除成功!",
+                                        type: "success",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                    });
+                                    setTimeout(function () {
+                                        window.location.href = "/admin/authority/adminListPage";
+                                    }, 100);
+                                }
+                            },
+                            error:function(result) {
+                                alert("系统出错!")
+                            }
+                        });
 
-
+                    });
         });
 
-        table.on( 'click', '.getsub', function () {
-            rank = rank +1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            $('#rank').html("商品分类列表("+rank+"级)")
-            var tr = $(this).closest('tr');
-            var data = table.row(tr).data();
-
-            goodsCategoryId = data.goodsCategoryId;
-            upParentId[rank] = data.goodsCategoryId;
-            table = $('#brandTable').DataTable().ajax.reload();
-        });
-
-        $("#back").on('click', function () {
-            rank = rank - 1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            parentId = upParentId[rank];
-            $('#rank').html("商品分类列表("+rank+"级)")
-            table = $('#brandTable').DataTable().ajax.reload();
-        });
     });
 </script>
 

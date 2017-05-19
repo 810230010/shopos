@@ -88,4 +88,14 @@ public class AdminServiceImpl implements AdminService {
 
         return res;
     }
+
+    @Override
+    public int updateOtherAdminInfo(Admin admin) {
+        return adminMapper.updateByPrimaryKeySelective(admin);
+    }
+
+    @Override
+    public int deleteAdmin(Integer adminId) {
+        return adminMapper.deleteByPrimaryKey(adminId);
+    }
 }

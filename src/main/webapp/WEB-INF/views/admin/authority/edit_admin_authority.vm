@@ -22,13 +22,6 @@
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><font color="red">*</font>旧密码</label>
-                            <div class="col-sm-7">
-                                <input id="oldpass" name="initial" type="text" class="form-control" value="$adminInfo.password">
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
                             <label class="col-sm-3 control-label"><font color="red">*</font>新密码</label>
                             <div class="col-sm-7">
                                 <input id="newpass" name="initial" type="text" class="form-control">
@@ -64,59 +57,72 @@
     $("#权限管理").addClass("active");
     $("#管理员列表").addClass("active");
     $('#side-menu').metisMenu();
-
-    var rank = 1;
-
-    $(document).ready(function () {
-        $(".parent_select").select2({
-            allowClear:true,
-            minimumResultsForSearch: -1,
-            minimumInputLength: 0,
-            language: "zh-CN",
-            ajax: {
-                url: "/admin/authority/getAllRoles",
-                dataType: 'json',
-                delay: 200,
-                processResults: function (data, params) {
-                    var results = [];
-                    $.each(data.data.roleList, function (i, v) {
-                        var o = {};
-                        o.id = v.adminRoleId;
-                        o.name = v.name;
-                        results.push(o);
-                    })
-                    return {
-                        results: results
-                    };
+    $(".parent_select").select2({
+        allowClear:true,
+        minimumResultsForSearch: -1,
+        minimumInputLength: 0,
+        language: "zh-CN",
+        ajax: {
+            url: "/admin/authority/getAllRoles",
+            dataType: 'json',
+            delay: 200,
+            processResults: function (data, params) {
+                var results = [];
+                $.each(data.data.roleList, function (i, v) {
+                    var o = {};
+                    o.id = v.adminRoleId;
+                    o.name = v.name;
+                    results.push(o);
+                })
+                return {
+                    results: results
+                };
+            },
+            cache: true
+        },
+        formatSelection: function (item) {
+            return item.name;
+        },  // 选择结果中的显示
+        formatResult: function (item) {
+            return item.name;
+        },  // 搜索列表中的显示
+        escapeMarkup: function (markup) {
+            return markup;
+        }, // let our custom formatter work
+        templateResult: function formatRepo(repo) {
+            return repo.name
+        },
+        templateSelection: function formatRepo(repo) {
+            return repo.name
+        },
+        initSelection: function (element, callback) {
+            var data = { id:$adminInfo.adminRoleId, name:"$adminInfo.adminRole" };
+            callback(data);
+        },
+    });
+    $("#submit").on('click', function () {
+        $.post("/admin/authority/updateOtherAdminInfo",
+                {
+                    username: $("#username").val(),
+                    password: $("#newpass").val(),
+                    adminId: $adminInfo.adminId,
+                    adminRoleId:$("#parentId").select2('data')[0].id,
                 },
-                cache: true
-            },
-            formatSelection: function (item) {
-                return item.name;
-            },  // 选择结果中的显示
-            formatResult: function (item) {
-                return item.name;
-            },  // 搜索列表中的显示
-            escapeMarkup: function (markup) {
-                return markup;
-            }, // let our custom formatter work
-            templateResult: function formatRepo(repo) {
-                return repo.name
-            },
-            templateSelection: function formatRepo(repo) {
-                return repo.name
-            },
-            initSelection: function (element, callback) {
-                var data = {id:$adminInfo.adminRole,name: "$adminInfo.adminRole"};
-                callback(data);
-            },
-        });
-
-        //提交按钮点击
-        $("#submit").click(function(){
-
-        })
-    })
+                function (data, status) {
+                    if (data.code == 200) {
+                        swal({
+                            title: "成功!",
+                            text: "商品分类修改成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(function () {
+                            window.location.href;
+                        }, 2000);
+                    }
+                });
+    });
 </script>
 
 #parse("/admin/models/end.vm")

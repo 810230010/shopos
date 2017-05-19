@@ -17,7 +17,7 @@
     <result column="goods_amount" property="goodsAmount" jdbcType="DECIMAL" />
     <result column="order_amount" property="orderAmount" jdbcType="DECIMAL" />
     <result column="pd_amount" property="pdAmount" jdbcType="DECIMAL" />
-    <result column="carriage" property="carriage" jdbcType="DECIMAL" />
+    <result column="carriage_amount" property="carriageAmount" jdbcType="DECIMAL" />
     <result column="member_evaluation_state" property="memberEvaluationState" jdbcType="VARCHAR" />
     <result column="seller_evaluation_state" property="sellerEvaluationState" jdbcType="VARCHAR" />
     <result column="order_state" property="orderState" jdbcType="VARCHAR" />
@@ -42,7 +42,7 @@
   <sql id="Base_Column_List" >
     order_id, out_trade_no, out_trade_no_merge, trade_no, store_id, store_name, member_id, 
     member_name, member_email, payment_code, payment_time, finnshed_time, goods_amount, 
-    order_amount, pd_amount, carriage, member_evaluation_state, seller_evaluation_state, 
+    order_amount, pd_amount, carriage_amount, member_evaluation_state, seller_evaluation_state, 
     order_state, refund_state, is_lock, delete_state, refund_amount, order_from, express_id, 
     express_no, create_time, deliver_time, order_message, order_pointscount, voucher_price, 
     voucher_code, reciver_address, reciver_phone, reciver_name, invoice_info
@@ -65,7 +65,7 @@
       store_id, store_name, member_id, 
       member_name, member_email, payment_code, 
       payment_time, finnshed_time, goods_amount, 
-      order_amount, pd_amount, carriage, 
+      order_amount, pd_amount, carriage_amount, 
       member_evaluation_state, seller_evaluation_state, 
       order_state, refund_state, is_lock, 
       delete_state, refund_amount, order_from, 
@@ -78,7 +78,7 @@
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
       #{memberName,jdbcType=VARCHAR}, #{memberEmail,jdbcType=VARCHAR}, #{paymentCode,jdbcType=VARCHAR}, 
       #{paymentTime,jdbcType=TIMESTAMP}, #{finnshedTime,jdbcType=TIMESTAMP}, #{goodsAmount,jdbcType=DECIMAL}, 
-      #{orderAmount,jdbcType=DECIMAL}, #{pdAmount,jdbcType=DECIMAL}, #{carriage,jdbcType=DECIMAL}, 
+      #{orderAmount,jdbcType=DECIMAL}, #{pdAmount,jdbcType=DECIMAL}, #{carriageAmount,jdbcType=DECIMAL}, 
       #{memberEvaluationState,jdbcType=VARCHAR}, #{sellerEvaluationState,jdbcType=VARCHAR}, 
       #{orderState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
       #{deleteState,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DECIMAL}, #{orderFrom,jdbcType=VARCHAR}, 
@@ -136,8 +136,8 @@
       <if test="pdAmount != null" >
         pd_amount,
       </if>
-      <if test="carriage != null" >
-        carriage,
+      <if test="carriageAmount != null" >
+        carriage_amount,
       </if>
       <if test="memberEvaluationState != null" >
         member_evaluation_state,
@@ -243,8 +243,8 @@
       <if test="pdAmount != null" >
         #{pdAmount,jdbcType=DECIMAL},
       </if>
-      <if test="carriage != null" >
-        #{carriage,jdbcType=DECIMAL},
+      <if test="carriageAmount != null" >
+        #{carriageAmount,jdbcType=DECIMAL},
       </if>
       <if test="memberEvaluationState != null" >
         #{memberEvaluationState,jdbcType=VARCHAR},
@@ -353,8 +353,8 @@
       <if test="pdAmount != null" >
         pd_amount = #{pdAmount,jdbcType=DECIMAL},
       </if>
-      <if test="carriage != null" >
-        carriage = #{carriage,jdbcType=DECIMAL},
+      <if test="carriageAmount != null" >
+        carriage_amount = #{carriageAmount,jdbcType=DECIMAL},
       </if>
       <if test="memberEvaluationState != null" >
         member_evaluation_state = #{memberEvaluationState,jdbcType=VARCHAR},
@@ -435,7 +435,7 @@
       goods_amount = #{goodsAmount,jdbcType=DECIMAL},
       order_amount = #{orderAmount,jdbcType=DECIMAL},
       pd_amount = #{pdAmount,jdbcType=DECIMAL},
-      carriage = #{carriage,jdbcType=DECIMAL},
+      carriage_amount = #{carriageAmount,jdbcType=DECIMAL},
       member_evaluation_state = #{memberEvaluationState,jdbcType=VARCHAR},
       seller_evaluation_state = #{sellerEvaluationState,jdbcType=VARCHAR},
       order_state = #{orderState,jdbcType=VARCHAR},

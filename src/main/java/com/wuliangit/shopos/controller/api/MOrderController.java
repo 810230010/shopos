@@ -65,14 +65,14 @@ public class MOrderController {
 
         int flag = 0;
         for (Order order : orders) {
-            carriageAmount = carriageAmount.add(order.getCarriage());
+            carriageAmount = carriageAmount.add(order.getCarriageAmount());
             goodsAmount = goodsAmount.add(order.getGoodsAmount());
             orderAmount = orderAmount.add(order.getOrderAmount());
             if (flag == 0) {
-                carriageInfo += order.getCarriage().toString();
+                carriageInfo += order.getCarriageAmount().toString();
                 flag = 1;
             } else {
-                carriageInfo += "+" + order.getCarriage().toString();
+                carriageInfo += "+" + order.getCarriageAmount().toString();
             }
             orderIds.add(order.getOrderId());
         }

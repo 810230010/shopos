@@ -14,7 +14,9 @@
 
     <!--商铺获取订单列表数据-->
     <select id="getStoreOrderList" resultType="com.wuliangit.shopos.dto.StoreOrderListDTO">
-        SELECT order_id,out_trade_no,member_name,member_email,order_amount,order_state, express_id
+        SELECT order_id,out_trade_no,member_name,member_email,order_amount,order_state,
+        express_id,create_time,reciver_phone,reciver_name,reciver_address,order_from,is_lock,
+        carriage_amount,order_amount,goods_amount,payment_time,payment_code
         FROM t_order
         <where>
             <if test="state != null and state != '' ">

@@ -4,13 +4,13 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.AlipayConstants;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
-import com.alipay.api.domain.ExtendParams;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.pay.AliPay;
+import com.wuliangit.shopos.common.util.OrderUtil;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.service.OrderService;
 import org.apache.commons.logging.Log;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -52,7 +51,7 @@ public class MPayController {
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
 
         //合并的订单id
-        String outTradeNoMerge = UUID.randomUUID().toString().replaceAll("-", "");
+        String outTradeNoMerge = OrderUtil.makeOrderId();
         AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
         BigDecimal totalAmount = new BigDecimal(0);
 
@@ -130,6 +129,7 @@ public class MPayController {
                      List<Order> orders = orderService.getOrderByOutTradeNoMerge(outTradeNo);
                      for (Order order : orders) {
                          order.setTradeNo(tradeNo);
+                         order.setPaymentCode(POJOConstants.ORDER_PAYMENT_ALIPAY);
                          orderPayed(order);
                      }
                  }else{

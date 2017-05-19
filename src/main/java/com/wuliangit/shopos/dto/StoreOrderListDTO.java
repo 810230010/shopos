@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dto;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author pangweichao
@@ -11,17 +12,107 @@ public class StoreOrderListDTO {
 
     private Integer orderId;
 
+    private Date createTime;
+
     private String outTradeNo;
 
     private String memberName;
 
     private String memberEmail;
 
+    private String paymentCode;
+
     private BigDecimal orderAmount;
+
+    private BigDecimal goodsAmount;
+
+    private BigDecimal carriageAmount;
 
     private String orderState;
 
     private String carriageName;
+
+    private String reciverAddress;
+
+    private String reciverPhone;
+
+    private String reciverName;
+
+    private String orderFrom;
+
+    private Boolean isLock;
+
+    public BigDecimal getCarriageAmount() {
+        return carriageAmount;
+    }
+
+    public void setCarriageAmount(BigDecimal carriageAmount) {
+        this.carriageAmount = carriageAmount;
+    }
+
+    public BigDecimal getGoodsAmount() {
+        return goodsAmount;
+    }
+
+    public void setGoodsAmount(BigDecimal goodsAmount) {
+        this.goodsAmount = goodsAmount;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getPaymentCode() {
+        return paymentCode;
+    }
+
+    public void setPaymentCode(String paymentCode) {
+        this.paymentCode = paymentCode;
+    }
+
+    public String getReciverAddress() {
+        return reciverAddress;
+    }
+
+    public void setReciverAddress(String reciverAddress) {
+        this.reciverAddress = reciverAddress;
+    }
+
+    public String getReciverPhone() {
+        return reciverPhone;
+    }
+
+    public void setReciverPhone(String reciverPhone) {
+        this.reciverPhone = reciverPhone;
+    }
+
+    public String getReciverName() {
+        return reciverName;
+    }
+
+    public void setReciverName(String reciverName) {
+        this.reciverName = reciverName;
+    }
+
+    public String getOrderFrom() {
+        return orderFrom;
+    }
+
+    public void setOrderFrom(String orderFrom) {
+        this.orderFrom = orderFrom;
+    }
+
+    public Boolean getLock() {
+        return isLock;
+    }
+
+    public void setLock(Boolean lock) {
+        isLock = lock;
+    }
 
     public StoreOrderListDTO() {
     }

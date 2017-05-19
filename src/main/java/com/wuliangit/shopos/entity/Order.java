@@ -34,7 +34,7 @@ public class Order {
 
     private BigDecimal pdAmount;
 
-    private BigDecimal carriage;
+    private BigDecimal carriageAmount;
 
     private String memberEvaluationState;
 
@@ -196,12 +196,12 @@ public class Order {
         this.pdAmount = pdAmount;
     }
 
-    public BigDecimal getCarriage() {
-        return carriage;
+    public BigDecimal getCarriageAmount() {
+        return carriageAmount;
     }
 
-    public void setCarriage(BigDecimal carriage) {
-        this.carriage = carriage;
+    public void setCarriageAmount(BigDecimal carriageAmount) {
+        this.carriageAmount = carriageAmount;
     }
 
     public String getMemberEvaluationState() {

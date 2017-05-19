@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.POJOConstants;
+import com.wuliangit.shopos.common.util.OrderUtil;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.*;
 import com.wuliangit.shopos.dto.ApiOrderDTO;
@@ -117,7 +118,7 @@ public class OrderServiceImpl implements OrderService {
             order.setStoreName(storeMin.getName());
             order.setOrderMessage(orderMessage);
             //设置订单id
-            order.setOutTradeNo(UUID.randomUUID().toString().replaceAll("-", ""));
+            order.setOutTradeNo(OrderUtil.makeOrderId());
 
             //设置收件人信息
             order.setReciverName(address.getReciverName());
@@ -138,7 +139,7 @@ public class OrderServiceImpl implements OrderService {
                 }
             }
             order.setGoodsAmount(goodsAmount);
-            order.setCarriage(carriage);
+            order.setCarriageAmount(carriage);
             order.setOrderAmount(goodsAmount.add(carriage));
 
             orderMapper.insertSelective(order);

@@ -88,4 +88,12 @@ public class POJOConstants {
     //退款退货
     public final static String APPLY_REFUND_ALL = "REFUND_ALL";
 
+    //订单支付方式
+    //微信
+    public final static String ORDER_PAYMENT_WX = "WX";
+    //支付宝
+    public final static String ORDER_PAYMENT_ALIPAY = "ALIPAY";
+    //银联
+    public final static String ORDER_PAYMENT_CARD = "CARD";
+
 }

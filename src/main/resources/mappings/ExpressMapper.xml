@@ -7,5 +7,12 @@
         select
         <include refid="Base_Column_List" />
         from t_express
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                express_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%') or
+                express_code like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
     </select>
+
 </mapper>

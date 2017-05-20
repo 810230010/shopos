@@ -52,7 +52,7 @@ public class Order {
 
     private String orderFrom;
 
-    private String expressId;
+    private String expressName;
 
     private String expressNo;
 
@@ -268,12 +268,12 @@ public class Order {
         this.orderFrom = orderFrom == null ? null : orderFrom.trim();
     }
 
-    public String getExpressId() {
-        return expressId;
+    public String getExpressName() {
+        return expressName;
     }
 
-    public void setExpressId(String expressId) {
-        this.expressId = expressId == null ? null : expressId.trim();
+    public void setExpressName(String expressName) {
+        this.expressName = expressName == null ? null : expressName.trim();
     }
 
     public String getExpressNo() {

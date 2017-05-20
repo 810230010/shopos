@@ -12,7 +12,6 @@ import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.*;
 import com.wuliangit.shopos.service.OrderService;
-import com.wuliangit.shopos.service.RefundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private AddressMapper addressMapper;
     @Autowired
-    private RefundService refundService;
+    private ExpressMapper expressMapper;
 
 
     @Override
@@ -250,6 +249,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<ApiOrderGoodsDTO> getOrderDetailGoods(Integer orderId) {
         return orderGoodsMapper.getByOrderId(orderId);
+    }
+
+    @Override
+    public int addExpressInfo(Integer expressId, String expressNo, Integer orderId) {
+        Express express = expressMapper.selectByPrimaryKey(expressId);
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+
+        order.setExpressName(express.getExpressName()+"/"+express.getExpressCode());
+        order.setExpressNo(expressNo);
+        order.setOrderState(POJOConstants.ORDER_STATE_DELIVE);
+
+        return orderMapper.updateByPrimaryKeySelective(order);
     }
 
 }

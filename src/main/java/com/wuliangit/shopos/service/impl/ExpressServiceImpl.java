@@ -19,7 +19,7 @@ public class ExpressServiceImpl implements ExpressService {
     private ExpressMapper expressMapper;
 
     @Override
-    public List<Express> getExpressList() {
-        return expressMapper.getExpressList();
+    public List<Express> getExpressList(String searchKey) {
+        return expressMapper.getExpressList(searchKey);
     }
 }

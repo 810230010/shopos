@@ -26,7 +26,7 @@
     <result column="delete_state" property="deleteState" jdbcType="VARCHAR" />
     <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
     <result column="order_from" property="orderFrom" jdbcType="VARCHAR" />
-    <result column="express_id" property="expressId" jdbcType="VARCHAR" />
+    <result column="express_name" property="expressName" jdbcType="VARCHAR" />
     <result column="express_no" property="expressNo" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="deliver_time" property="deliverTime" jdbcType="TIMESTAMP" />
@@ -43,7 +43,7 @@
     order_id, out_trade_no, out_trade_no_merge, trade_no, store_id, store_name, member_id, 
     member_name, member_email, payment_code, payment_time, finnshed_time, goods_amount, 
     order_amount, pd_amount, carriage_amount, member_evaluation_state, seller_evaluation_state, 
-    order_state, refund_state, is_lock, delete_state, refund_amount, order_from, express_id, 
+    order_state, refund_state, is_lock, delete_state, refund_amount, order_from, express_name, 
     express_no, create_time, deliver_time, order_message, order_pointscount, voucher_price, 
     voucher_code, reciver_address, reciver_phone, reciver_name, invoice_info
   </sql>
@@ -69,7 +69,7 @@
       member_evaluation_state, seller_evaluation_state, 
       order_state, refund_state, is_lock, 
       delete_state, refund_amount, order_from, 
-      express_id, express_no, create_time, 
+      express_name, express_no, create_time, 
       deliver_time, order_message, order_pointscount, 
       voucher_price, voucher_code, reciver_address, 
       reciver_phone, reciver_name, invoice_info
@@ -82,7 +82,7 @@
       #{memberEvaluationState,jdbcType=VARCHAR}, #{sellerEvaluationState,jdbcType=VARCHAR}, 
       #{orderState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
       #{deleteState,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DECIMAL}, #{orderFrom,jdbcType=VARCHAR}, 
-      #{expressId,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{expressName,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{deliverTime,jdbcType=TIMESTAMP}, #{orderMessage,jdbcType=VARCHAR}, #{orderPointscount,jdbcType=INTEGER}, 
       #{voucherPrice,jdbcType=DECIMAL}, #{voucherCode,jdbcType=VARCHAR}, #{reciverAddress,jdbcType=VARCHAR}, 
       #{reciverPhone,jdbcType=VARCHAR}, #{reciverName,jdbcType=VARCHAR}, #{invoiceInfo,jdbcType=VARCHAR}
@@ -163,8 +163,8 @@
       <if test="orderFrom != null" >
         order_from,
       </if>
-      <if test="expressId != null" >
-        express_id,
+      <if test="expressName != null" >
+        express_name,
       </if>
       <if test="expressNo != null" >
         express_no,
@@ -270,8 +270,8 @@
       <if test="orderFrom != null" >
         #{orderFrom,jdbcType=VARCHAR},
       </if>
-      <if test="expressId != null" >
-        #{expressId,jdbcType=VARCHAR},
+      <if test="expressName != null" >
+        #{expressName,jdbcType=VARCHAR},
       </if>
       <if test="expressNo != null" >
         #{expressNo,jdbcType=VARCHAR},
@@ -380,8 +380,8 @@
       <if test="orderFrom != null" >
         order_from = #{orderFrom,jdbcType=VARCHAR},
       </if>
-      <if test="expressId != null" >
-        express_id = #{expressId,jdbcType=VARCHAR},
+      <if test="expressName != null" >
+        express_name = #{expressName,jdbcType=VARCHAR},
       </if>
       <if test="expressNo != null" >
         express_no = #{expressNo,jdbcType=VARCHAR},
@@ -444,7 +444,7 @@
       delete_state = #{deleteState,jdbcType=VARCHAR},
       refund_amount = #{refundAmount,jdbcType=DECIMAL},
       order_from = #{orderFrom,jdbcType=VARCHAR},
-      express_id = #{expressId,jdbcType=VARCHAR},
+      express_name = #{expressName,jdbcType=VARCHAR},
       express_no = #{expressNo,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       deliver_time = #{deliverTime,jdbcType=TIMESTAMP},

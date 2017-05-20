@@ -12,6 +12,7 @@ public interface ExpressService {
     /**
      * 获取快递公司信息
      * @return
+     * @param searchkey
      */
-    List<Express> getExpressList();
+    List<Express> getExpressList(String searchkey);
 }

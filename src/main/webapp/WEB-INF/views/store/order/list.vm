@@ -41,45 +41,6 @@
     </div>
 </div>
 
-<!-- 发货模态框 -->
-<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">
-                    提交发货物流信息
-                </h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form id="form" class="form-horizontal">
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">物流公司:</label>
-                                    <div class="col-sm-7">
-                                        <select id="express" name="express" class="express_select form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">物流单号:</label>
-                                <div class="col-sm-7">
-                                    <input id="unit" name="unit" type="text" class="form-control">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="activityId" onclick="deliver()">发货</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 #parse("/store/models/footer.vm")
 
@@ -215,64 +176,13 @@
 
         //view record
         table.on( 'click', '.deliver', function () {
-
-            $.fn.modal.Constructor.prototype.enforceFocus = function() {};
-
-            $('#myModal').modal('show');
-
-
-            $(".express_select").select2({
-                minimumResultsForSearch: -1,
-                minimumInputLength: 0,
-                language: "zh-CN",
-                ajax: {
-                    url: "/common/expressList",
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function (data, params) {
-                        var results = [];
-                        $.each(data.data.expressList, function (i, v) {
-                            var o = {};
-                            o.id = v.expressId;
-                            o.name = v.expressName;
-                            results.push(o);
-                        })
-                        return {
-                            results: results
-                        };
-                    },
-                    cache: true
-                },
-                formatSelection: function (item) {
-                    return item.name;
-                },  // 选择结果中的显示
-                formatResult: function (item) {
-                    return item.name;
-                },  // 搜索列表中的显示
-                escapeMarkup: function (markup) {
-                    return markup;
-                }, // let our custom formatter work
-                templateResult: function formatRepo(repo) {
-                    return repo.name
-                },
-                templateSelection: function formatRepo(repo) {
-                    return repo.name
-                },
-                initSelection: function (element, callback) {
-                    var data = { id:0, name: "请选物流公司" };
-                    callback(data);
-                },
-            });
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            window.location.href = "/store/order/expressPage?orderId="+data.orderId;
         });
 
 
     });
-
-    $("#myModal").on("shown.bs.modal", function(){
-
-    })
-
-
 
     function getOrderList(button,state) {
         //改变按钮颜色

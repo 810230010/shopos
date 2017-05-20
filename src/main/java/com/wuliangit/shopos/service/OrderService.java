@@ -124,4 +124,13 @@ public interface OrderService {
      * @return
      */
     List<ApiOrderGoodsDTO> getOrderDetailGoods(Integer orderId);
+
+    /**
+     * 添加发货信息
+     * @param expressId
+     * @param expressNo
+     * @param orderId
+     * @return
+     */
+    int addExpressInfo(Integer expressId, String expressNo, Integer orderId);
 }

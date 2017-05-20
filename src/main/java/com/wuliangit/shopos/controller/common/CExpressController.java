@@ -38,9 +38,9 @@ public class CExpressController {
      */
     @RequestMapping("/expressList")
     @ResponseBody
-    public Object getExpressList(){
+    public Object getExpressList(String searchkey){
         RestResult result = new RestResult();
-        List<Express> expressList = expressService.getExpressList();
+        List<Express> expressList = expressService.getExpressList(searchkey);
         result.add("expressList",expressList);
         return result;
     }

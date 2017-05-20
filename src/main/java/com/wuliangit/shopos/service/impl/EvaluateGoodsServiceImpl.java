@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.EvaluateGoodsMapper;
 import com.wuliangit.shopos.dao.MemberMapper;
@@ -17,7 +18,7 @@ import com.wuliangit.shopos.service.EvaluateGoodsService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +43,7 @@ public class EvaluateGoodsServiceImpl implements EvaluateGoodsService {
 
 
     @Override
+    @Transactional
     public int createEvaluateGoods(ApiEvaluateGoodsDTO evaluateGoods) throws OptionException {
 
         Order order = orderMapper.selectByPrimaryKey(evaluateGoods.getOrderId());
@@ -66,6 +68,10 @@ public class EvaluateGoodsServiceImpl implements EvaluateGoodsService {
         evaluate.setMemberName(currentMember.getNickname());
         evaluate.setStoreId(order.getStoreId());
         evaluate.setSkuValue(orderGoods.getSkuName());
+
+        order.setMemberEvaluationState(POJOConstants.ORDER_EVALUATION_STATE_YES);
+
+        orderMapper.updateByPrimaryKeySelective(order);
 
         return evaluateGoodsMapper.insertSelective(evaluate);
     }

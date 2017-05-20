@@ -44,7 +44,7 @@ public class AdminPerminssionServiceImpl implements AdminPerminssionService {
      * @param id    根节点
      * @return
      */
-    private static List<MenuDTO> handleSubType(List<MenuDTO> menus, Integer id) {
+     public static List<MenuDTO> handleSubType(List<MenuDTO> menus, Integer id) {
         List<MenuDTO> rtnlist = new ArrayList<MenuDTO>();
         for (MenuDTO menu : menus) {
             if (menu.getParentId().equals(id)) {

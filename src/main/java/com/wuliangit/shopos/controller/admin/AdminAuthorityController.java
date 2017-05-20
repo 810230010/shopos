@@ -5,7 +5,6 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dto.AdminDTO;
-import com.wuliangit.shopos.dto.AdminRoleDTO;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.security.util.Password;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +53,7 @@ public class AdminAuthorityController {
     @RequestMapping("/editAdminPage")
     public String editAdminPage(Integer adminId, Model model){
         model.addAttribute("adminInfo", adminService.getAdminById(adminId));
-        return "/admin/authority/edit_admin_authority";
+        return "admin/authority/edit_admin";
     }
     /**
      * 查询所有管理员

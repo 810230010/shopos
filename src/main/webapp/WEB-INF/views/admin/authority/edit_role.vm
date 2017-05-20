@@ -1,0 +1,128 @@
+#parse("/admin/models/begin.vm")
+
+<link href="/assets/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
+<link href="/assets/admin/css/plugins/select2/select2.min.css" rel="stylesheet">
+#parse("/admin/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>权限管理-添加管理员</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><font color="red">*</font>用户名:</label>
+                            <div class="col-sm-7">
+                                <input id="username" name="name" type="text" class="form-control" value="$adminInfo.username">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><font color="red">*</font>新密码</label>
+                            <div class="col-sm-7">
+                                <input id="newpass" name="initial" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><font color="red">*</font>角色选择</label>
+                            <div class="col-sm-7">
+                                <select id="parentId" name="parentId" class="parent_select form-control">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-6">
+                                <div class="btn btn-success" type="submit" id="submit">确定</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+<!-- Select2 -->
+<script src="/assets/admin/js/plugins/select2/select2.full.min.js"></script>
+<script src="/assets/admin/js/plugins/select2/zh-CN.js"></script>
+<script>
+
+    $("#权限管理").addClass("active");
+    $("#管理员列表").addClass("active");
+    $('#side-menu').metisMenu();
+    $(".parent_select").select2({
+        allowClear:true,
+        minimumResultsForSearch: -1,
+        minimumInputLength: 0,
+        language: "zh-CN",
+        ajax: {
+            url: "/admin/role/getAllRoles",
+            dataType: 'json',
+            delay: 200,
+            processResults: function (data, params) {
+                var results = [];
+                $.each(data.data.roleList, function (i, v) {
+                    var o = {};
+                    o.id = v.adminRoleId;
+                    o.name = v.name;
+                    results.push(o);
+                })
+                return {
+                    results: results
+                };
+            },
+            cache: true
+        },
+        formatSelection: function (item) {
+            return item.name;
+        },  // 选择结果中的显示
+        formatResult: function (item) {
+            return item.name;
+        },  // 搜索列表中的显示
+        escapeMarkup: function (markup) {
+            return markup;
+        }, // let our custom formatter work
+        templateResult: function formatRepo(repo) {
+            return repo.name
+        },
+        templateSelection: function formatRepo(repo) {
+            return repo.name
+        },
+        initSelection: function (element, callback) {
+            var data = { id:$adminInfo.adminRoleId, name:"$adminInfo.adminRole" };
+            callback(data);
+        },
+    });
+    $("#submit").on('click', function () {
+        $.post("/admin/authority/updateOtherAdminInfo",
+                {
+                    username: $("#username").val(),
+                    password: $("#newpass").val(),
+                    adminId: $adminInfo.adminId,
+                    adminRoleId:$("#parentId").select2('data')[0].id,
+                },
+                function (data, status) {
+                    if (data.code == 200) {
+                        swal({
+                            title: "成功!",
+                            text: "商品分类修改成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(function () {
+                            window.location.href;
+                        }, 2000);
+                    }
+                });
+    });
+</script>
+
+#parse("/admin/models/end.vm")

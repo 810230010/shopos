@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.dto;
 
+import java.util.List;
+
 /**
  * Created by JangJanPing on 2017/5/18.
  */
@@ -7,6 +9,15 @@ public class AdminRoleDTO {
     private Integer adminRoleId;
     private String name;
     private Integer defaultRole;
+    private List<MenuDTO> rolePermissions;
+
+    public List<MenuDTO> getRolePermissions() {
+        return rolePermissions;
+    }
+
+    public void setRolePermissions(List<MenuDTO> rolePermissions) {
+        this.rolePermissions = rolePermissions;
+    }
 
     public Integer getDefaultRole() {
         return defaultRole;

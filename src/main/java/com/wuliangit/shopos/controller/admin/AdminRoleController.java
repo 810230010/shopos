@@ -5,10 +5,14 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dto.AdminDTO;
 import com.wuliangit.shopos.dto.AdminRoleDTO;
+import com.wuliangit.shopos.dto.MenuDTO;
+import com.wuliangit.shopos.entity.AdminRole;
+import com.wuliangit.shopos.service.AdminPerminssionService;
 import com.wuliangit.shopos.service.AdminRoleService;
 import com.wuliangit.shopos.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +30,7 @@ public class AdminRoleController {
     private AdminRoleService adminRoleService;
     @Autowired
     private AdminService adminService;
+    private AdminPerminssionService adminPerminssionService;
 
     /**
      * 角色列表页面
@@ -41,7 +46,7 @@ public class AdminRoleController {
      * @return
      */
     @RequestMapping("/addRolePage")
-    public String addRolePage(){
+    public String addRolePage(Model model){
         return "/admin/authority/add_role";
     }
 
@@ -95,5 +100,38 @@ public class AdminRoleController {
         ArrayList<AdminRoleDTO> roleList = adminService.getAllAdminRoles();
         result.add("roleList",roleList);
         return result;
+    }
+
+    /**
+     * 管理员添加角色
+     * @param adminRole
+     * @return
+     */
+    @RequestMapping("/adminAddRole")
+    @ResponseBody
+    public Object addRole(AdminRole adminRole){
+         RestResult result = new RestResult();
+         return result;
+    }
+
+    /**
+     * 管理员角色详情页面
+     * @return
+     */
+    @RequestMapping("/adminRoleDetailPage")
+    public String scanAdminRoleDetailPage(Model model, Integer roleId){
+        AdminRoleDTO adminRoleDTO = adminRoleService.getAdminRoleDetail(roleId);
+        model.addAttribute("adminRoleDetail", adminRoleDTO);
+        return "/admin/authority/role_detail";
+    }
+
+    /**
+     * 管理员编辑管理员角色信息页面
+     * @param adminRoleId
+     * @return
+     */
+    @RequestMapping("/adminEditRolePage")
+    public String editRole(Integer adminRoleId){
+        return "/admin/authority/edit_role";
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.security.util.Password;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,23 +47,7 @@ public class AdminAuthorityController {
         return "/admin/authority/add_admin";
     }
 
-    /**
-     * 角色列表页面
-     * @return
-     */
-    @RequestMapping("/roleListPage")
-    public String roleListPage(){
-        return "/admin/authority/role_list";
-    }
 
-    /**
-     * 添加角色页面
-     * @return
-     */
-    @RequestMapping("/addRolePage")
-    public String addRolePage(){
-        return "/admin/authority/add_role";
-    }
 
     /**
      * 编辑管理员页面
@@ -96,18 +81,7 @@ public class AdminAuthorityController {
         return new PageResult<AdminDTO>(list, draw);
     }
 
-    /**
-     * 获得所有角色
-     * @return
-     */
-    @RequestMapping("/getAllRoles")
-    @ResponseBody
-    public Object getAllRoles(){
-        RestResult result = new RestResult();
-        ArrayList<AdminRoleDTO> roleList = adminService.getAllAdminRoles();
-        result.add("roleList",roleList);
-        return result;
-    }
+
 
     /**
      * 添加管理员
@@ -141,4 +115,40 @@ public class AdminAuthorityController {
         }
         return result;
     }
+
+    /**
+     * 最大的管理员修改其他管理员信息
+     * @param admin
+     * @return
+     */
+    @RequestMapping("/updateOtherAdminInfo")
+    @ResponseBody
+    public Object adminUpdateAdminInfo(Admin admin){
+         RestResult result = new RestResult();
+         admin.setSalt(PasswordHelper.generateSalt());
+         admin.setPassword(PasswordHelper.generatePassword(admin.getPassword(), admin.getSalt()));
+         if(adminService.updateOtherAdminInfo(admin) != 1){
+             result = new RestResult("未知错误, 修改失败", 502 );
+             return result;
+         }
+         return result;
+    }
+
+    /**
+     * 删除管理员
+     * @param adminId
+     * @return
+     */
+    @RequestMapping("/deleteAdmin")
+    @ResponseBody
+    public Object deleteAdmin(Integer adminId){
+        RestResult result = new RestResult();
+        if(adminService.deleteAdmin(adminId) != 1){
+            result = new RestResult("未知错误,删除失败!", 502);
+            return result;
+        }
+        return result;
+    }
+
+
 }

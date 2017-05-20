@@ -9,4 +9,9 @@
     from t_seller
     where username = #{username}
   </select>
+  <!--获取所有的卖家-->
+    <select id="getAllSeller" resultType="com.wuliangit.shopos.entity.Seller">
+      SELECT *
+      FROM t_seller
+    </select>
 </mapper>

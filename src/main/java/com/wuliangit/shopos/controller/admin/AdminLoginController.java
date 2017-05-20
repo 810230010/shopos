@@ -63,7 +63,6 @@ public class AdminLoginController {
 
             List<MenuDTO> menus = adminPerminssionService.getAdminMenus();
             WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_MENU, menus);
-
             return "redirect:/admin/index";
         } catch (UnknownAccountException e) {
             error = "用户不存在";

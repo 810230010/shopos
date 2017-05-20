@@ -1,0 +1,140 @@
+#parse("/admin/models/begin.vm")
+
+<link href="/assets/admin/css/plugins/multiselect/bootstrap-multiselect.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/assets/admin/css/plugins/wangeditor/wangEditor.min.css">
+
+#parse("/admin/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>邮件-商户通知</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="mail-box-header">
+        <h2>
+            邮件通知
+        </h2>
+    </div>
+    <div class="mail-box">
+        <div class="mail-body">
+            <form class="form-horizontal" method="get">
+                <div class="form-group"><label class="col-sm-2 control-label">接收人:</label>
+
+                    <div class="col-sm-10">
+                        <select id="example-dropUp" multiple="multiple">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">主题:</label>
+
+                    <div class="col-sm-10"><input type="text" class="form-control" id="title"/></div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 contorl-label" style="text-align: right">内容:</label>
+                    <div class="col-sm-10">
+                        <div id="editofrm" style="height:300px;max-height:400px;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mail-body text-right tooltip-demo">
+                    <a href="#" class="btn btn-s m btn-primary" data-toggle="tooltip" data-placement="top" title="Send" onclick="$.sub()"><i class="fa fa-reply"></i> 发送</a>
+                    <a href="/admin/mail/sendMessagePage" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> 取消</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+<script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/admin/js/plugins/multiselect/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="/assets/admin/js/plugins/wangeditor/wangEditor.min.js"></script>
+
+<script type="text/javascript">
+
+    var editor = new wangEditor('editofrm');
+    editor.create();
+    editor.$txt.html('<p>请输入邮件内容...</p>');
+
+    $(document).ready(function() {
+
+        $.ajax({
+            type: "post",
+            url: "/admin/seller/getAllSeller",
+            data: {
+
+            },
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    console.log(data);
+                    for(var i=0;i<data.data.length;i++){
+                        $("#example-dropUp").append("<option value='"+ data.data[i].sellerId + "&" + data.data[i].email + "&" + data.data[i].username +"'>"+ data.data[i].username + "&lt"+ data.data[i].email +"&gt" +"</option>")
+                    }
+                }
+            }
+        });
+
+        $('#example-dropUp').multiselect({
+            enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 200,
+            dropUp: false
+        });
+    });
+
+    $.sub = function () {
+        console.log($("#example-dropUp").val());
+        console.log($("#title").val());
+        console.log(editor.$txt.text());
+        if($("#example-dropUp").val() != "[]" || $("#title").val() != "" || editor.$txt.text() != ""){
+            swal({
+                title: "提示!",
+                text: "请补全内容!",
+                type: "error",
+                showConfirmButton: false,
+                timer: 2000,
+            });
+        }else{
+            var str = $("#example-dropUp").val();
+            var name = "";
+            var id = "";
+            var mail = "";
+            for(var i = 0;i<str.length;i++){
+                var rep = str[i].split('&');
+                id += rep[0]+",";
+                mail += rep[1]+",";
+                name += rep[2]+",";
+            }
+            var name=name.substring(0,name.length-1);
+            var id=id.substring(0,id.length-1);
+            var mail=mail.substring(0,mail.length-1);
+
+            $.ajax({
+                type: "post",
+                url: "/admin/mail/sendMail",
+                data: {
+                    "username": name,
+                    "id": id,
+                    "mail": mail,
+                    "title": $("#title").val(),
+                    "content": editor.$txt.text()
+                },
+                async: false,
+                success: function (data) {
+                    if (data.code == 200) {
+                        swal({
+                            title: "成功!",
+                            text: "邮件发送成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+#parse("/admin/models/end.vm")

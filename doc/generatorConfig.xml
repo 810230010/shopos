@@ -170,6 +170,9 @@
             <generatedKey column="express_id" sqlStatement="MySql" identity="true"/>
         </table>
 
+        <table tableName="t_store_message" domainObjectName="StoreMessage" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="store_message_id" sqlStatement="MySql" identity="true"/>
+        </table>
 
     </context>
 </generatorConfiguration>

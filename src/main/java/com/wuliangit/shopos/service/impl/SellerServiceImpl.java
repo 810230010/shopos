@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -72,5 +73,10 @@ public class SellerServiceImpl implements SellerService {
         WebUtil.getSession().setAttribute(CoreConstants.SESSION_CURRENT_SELLER, currentSeller);
 
         return res;
+    }
+
+    @Override
+    public List<Seller> getAllSeller() {
+        return sellerMapper.getAllSeller();
     }
 }

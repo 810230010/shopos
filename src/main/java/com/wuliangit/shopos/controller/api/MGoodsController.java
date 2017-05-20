@@ -44,7 +44,7 @@ public class MGoodsController {
      * @param brandId         品牌类型id
      * @param goodsCategoryId 商品分类id
      * @param storeId         店铺id
-     * @param type            商品类型 GOODS_TYPE_ACTIVITY(活动商品); GOODS_TYPE_NORMAL(普通商品)
+     * @param type            商品类型 GOODS_TYPE_ACTIVITY(活动商品); GOODS_TYPE_NORMAL(普通商品);SECOND_HAND(二手)
      * @return
      */
     @RequestMapping("/search")

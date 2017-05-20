@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.dto.ApiOrderGoodsDTO;
 import com.wuliangit.shopos.dto.OrderDetailGoodsListDTO;
 import com.wuliangit.shopos.entity.OrderGoods;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,10 +18,12 @@ public interface OrderGoodsMapper extends BaseMapper<OrderGoods, Integer> {
      */
     List<ApiOrderGoodsDTO> getByOrderId(Integer orderId);
 
+
     /**
-     * 订单详情获取订单商品信息
+     * 通过商品id和订单id获取订单商品
      * @param orderId
+     * @param goodsId
      * @return
      */
-    List<OrderDetailGoodsListDTO> getOrderDetailGoods(Integer orderId);
+    OrderGoods getByOrderIdAndGoodsId(@Param("orderId") Integer orderId, @Param("goodsId")Integer goodsId);
 }

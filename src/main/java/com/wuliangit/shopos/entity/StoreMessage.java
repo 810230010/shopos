@@ -21,21 +21,6 @@ public class StoreMessage {
 
     private String content;
 
-    public StoreMessage() {
-    }
-
-    public StoreMessage(Integer sendUser, String sendUserName, String createTime, Integer receiveUser, String receiveUserName, Byte readFlag, Byte delFlag, String title, String content) {
-        this.sendUser = sendUser;
-        this.sendUserName = sendUserName;
-        this.createTime = createTime;
-        this.receiveUser = receiveUser;
-        this.receiveUserName = receiveUserName;
-        this.readFlag = readFlag;
-        this.delFlag = delFlag;
-        this.title = title;
-        this.content = content;
-    }
-
     public Integer getStoreMessageId() {
         return storeMessageId;
     }

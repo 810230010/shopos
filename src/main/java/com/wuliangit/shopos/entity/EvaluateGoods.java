@@ -1,48 +1,37 @@
 package com.wuliangit.shopos.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class EvaluateGoods {
     private Integer evaluateGoodsId;
 
-    private Integer orderId;
+    private Integer memberId;
 
-    private String orderSn;
+    private String memberName;
+
+    private Integer storeId;
+
+    private Integer orderId;
 
     private Integer orderGoodsId;
 
     private Integer goodsId;
 
-    private String goodsName;
-
-    private BigDecimal goodsPrice;
-
-    private String goodsImages;
-
-    private Integer scores;
+    private Integer star;
 
     private String content;
+
+    private String images;
 
     private Boolean isAnonymous;
 
     private Date createTime;
-
-    private Integer storeId;
-
-    private String storeName;
-
-    private Integer fromMemberId;
-
-    private String fromMemberName;
 
     private Boolean isShow;
 
     private String remark;
 
     private String explain;
-
-    private String images;
 
     public Integer getEvaluateGoodsId() {
         return evaluateGoodsId;
@@ -52,20 +41,36 @@ public class EvaluateGoods {
         this.evaluateGoodsId = evaluateGoodsId;
     }
 
+    public Integer getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName == null ? null : memberName.trim();
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
     public Integer getOrderId() {
         return orderId;
     }
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
-    }
-
-    public String getOrderSn() {
-        return orderSn;
-    }
-
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn == null ? null : orderSn.trim();
     }
 
     public Integer getOrderGoodsId() {
@@ -84,36 +89,12 @@ public class EvaluateGoods {
         this.goodsId = goodsId;
     }
 
-    public String getGoodsName() {
-        return goodsName;
+    public Integer getStar() {
+        return star;
     }
 
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
-    }
-
-    public BigDecimal getGoodsPrice() {
-        return goodsPrice;
-    }
-
-    public void setGoodsPrice(BigDecimal goodsPrice) {
-        this.goodsPrice = goodsPrice;
-    }
-
-    public String getGoodsImages() {
-        return goodsImages;
-    }
-
-    public void setGoodsImages(String goodsImages) {
-        this.goodsImages = goodsImages == null ? null : goodsImages.trim();
-    }
-
-    public Integer getScores() {
-        return scores;
-    }
-
-    public void setScores(Integer scores) {
-        this.scores = scores;
+    public void setStar(Integer star) {
+        this.star = star;
     }
 
     public String getContent() {
@@ -122,6 +103,14 @@ public class EvaluateGoods {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images == null ? null : images.trim();
     }
 
     public Boolean getIsAnonymous() {
@@ -138,38 +127,6 @@ public class EvaluateGoods {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public Integer getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Integer storeId) {
-        this.storeId = storeId;
-    }
-
-    public String getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(String storeName) {
-        this.storeName = storeName == null ? null : storeName.trim();
-    }
-
-    public Integer getFromMemberId() {
-        return fromMemberId;
-    }
-
-    public void setFromMemberId(Integer fromMemberId) {
-        this.fromMemberId = fromMemberId;
-    }
-
-    public String getFromMemberName() {
-        return fromMemberName;
-    }
-
-    public void setFromMemberName(String fromMemberName) {
-        this.fromMemberName = fromMemberName == null ? null : fromMemberName.trim();
     }
 
     public Boolean getIsShow() {
@@ -194,13 +151,5 @@ public class EvaluateGoods {
 
     public void setExplain(String explain) {
         this.explain = explain == null ? null : explain.trim();
-    }
-
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images == null ? null : images.trim();
     }
 }

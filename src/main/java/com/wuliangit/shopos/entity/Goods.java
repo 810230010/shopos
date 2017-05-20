@@ -58,8 +58,6 @@ public class Goods {
 
     private String type;
 
-    private Boolean secondHand;
-
     private Integer activityId;
 
     private String activityType;
@@ -312,14 +310,6 @@ public class Goods {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
-    }
-
-    public Boolean getSecondHand() {
-        return secondHand;
-    }
-
-    public void setSecondHand(Boolean secondHand) {
-        this.secondHand = secondHand;
     }
 
     public Integer getActivityId() {

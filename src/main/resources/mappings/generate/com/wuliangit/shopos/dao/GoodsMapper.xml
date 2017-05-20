@@ -29,7 +29,6 @@
     <result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
     <result column="is_new" property="isNew" jdbcType="BIT" />
     <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="second_hand" property="secondHand" jdbcType="BIT" />
     <result column="activity_id" property="activityId" jdbcType="INTEGER" />
     <result column="activity_type" property="activityType" jdbcType="VARCHAR" />
     <result column="is_virtual" property="isVirtual" jdbcType="BIT" />
@@ -56,7 +55,7 @@
     goods_id, name, unit, ad_word, store_id, store_name, goods_category_id, brand_id, 
     price, carriage, commission, promotion_price, promotion_type, marketprice, storage_alarm, 
     click, salenum, collect, storage, images, title_img, state, verify, create_time, 
-    edit_time, is_new, type, second_hand, activity_id, activity_type, is_virtual, virtual_invalid_refund, 
+    edit_time, is_new, type, activity_id, activity_type, is_virtual, virtual_invalid_refund, 
     is_appoint, is_presell, is_own_shop, vat, commend, evaluation_good_star, evaluation_count, 
     del_flag, attrs, is_platform, area, is_check, sell_time_begin, sell_time_end
   </sql>
@@ -87,7 +86,7 @@
       salenum, collect, storage, 
       images, title_img, state, 
       verify, create_time, edit_time, 
-      is_new, type, second_hand, activity_id, 
+      is_new, type, activity_id, 
       activity_type, is_virtual, virtual_invalid_refund, 
       is_appoint, is_presell, is_own_shop, 
       vat, commend, evaluation_good_star, 
@@ -103,7 +102,7 @@
       #{salenum,jdbcType=INTEGER}, #{collect,jdbcType=INTEGER}, #{storage,jdbcType=INTEGER}, 
       #{images,jdbcType=VARCHAR}, #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
       #{verify,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP}, 
-      #{isNew,jdbcType=BIT}, #{type,jdbcType=VARCHAR}, #{secondHand,jdbcType=BIT}, #{activityId,jdbcType=INTEGER}, 
+      #{isNew,jdbcType=BIT}, #{type,jdbcType=VARCHAR}, #{activityId,jdbcType=INTEGER}, 
       #{activityType,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, 
       #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, 
       #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
@@ -195,9 +194,6 @@
       </if>
       <if test="type != null" >
         type,
-      </if>
-      <if test="secondHand != null" >
-        second_hand,
       </if>
       <if test="activityId != null" >
         activity_id,
@@ -335,9 +331,6 @@
       </if>
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="secondHand != null" >
-        #{secondHand,jdbcType=BIT},
       </if>
       <if test="activityId != null" >
         #{activityId,jdbcType=INTEGER},
@@ -479,9 +472,6 @@
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
       </if>
-      <if test="secondHand != null" >
-        second_hand = #{secondHand,jdbcType=BIT},
-      </if>
       <if test="activityId != null" >
         activity_id = #{activityId,jdbcType=INTEGER},
       </if>
@@ -570,7 +560,6 @@
       edit_time = #{editTime,jdbcType=TIMESTAMP},
       is_new = #{isNew,jdbcType=BIT},
       type = #{type,jdbcType=VARCHAR},
-      second_hand = #{secondHand,jdbcType=BIT},
       activity_id = #{activityId,jdbcType=INTEGER},
       activity_type = #{activityType,jdbcType=VARCHAR},
       is_virtual = #{isVirtual,jdbcType=BIT},
@@ -620,7 +609,6 @@
       edit_time = #{editTime,jdbcType=TIMESTAMP},
       is_new = #{isNew,jdbcType=BIT},
       type = #{type,jdbcType=VARCHAR},
-      second_hand = #{secondHand,jdbcType=BIT},
       activity_id = #{activityId,jdbcType=INTEGER},
       activity_type = #{activityType,jdbcType=VARCHAR},
       is_virtual = #{isVirtual,jdbcType=BIT},

@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiStoreDTO;
 import com.wuliangit.shopos.dto.ApiStoreListDTO;
 import com.wuliangit.shopos.entity.StoreJoinin;
+import com.wuliangit.shopos.service.CollectService;
 import com.wuliangit.shopos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ public class MStoreController {
 
     @Autowired
     private StoreService storeService;
+    @Autowired
+    private CollectService collectService;
 
     /**
      * 申请成为商家
@@ -65,7 +68,9 @@ public class MStoreController {
     public Object getStore(Integer storeId){
         RestResult result = new RestResult();
         ApiStoreDTO store = storeService.apiGetStoreDTO(storeId);
+        boolean isCollect = collectService.isCollectStore(storeId);
         result.add("store",store);
+        result.add("isCollect", isCollect);
         return result;
     }
 

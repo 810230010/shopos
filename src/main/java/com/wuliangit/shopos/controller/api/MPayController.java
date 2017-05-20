@@ -4,9 +4,12 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.AlipayConstants;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
+import com.alipay.api.domain.AlipayTradePagePayModel;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
+import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
+import com.alipay.api.response.AlipayTradePagePayResponse;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.pay.AliPay;
@@ -157,4 +160,6 @@ public class MPayController {
         order.setPaymentTime(new Date());
         orderService.updateOrder(order);
     }
+
+
 }

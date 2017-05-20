@@ -31,6 +31,8 @@ public class EvaluateGoods {
 
     private String explain;
 
+    private String skuValue;
+
     public Integer getEvaluateGoodsId() {
         return evaluateGoodsId;
     }
@@ -141,5 +143,13 @@ public class EvaluateGoods {
 
     public void setExplain(String explain) {
         this.explain = explain == null ? null : explain.trim();
+    }
+
+    public String getSkuValue() {
+        return skuValue;
+    }
+
+    public void setSkuValue(String skuValue) {
+        this.skuValue = skuValue == null ? null : skuValue.trim();
     }
 }

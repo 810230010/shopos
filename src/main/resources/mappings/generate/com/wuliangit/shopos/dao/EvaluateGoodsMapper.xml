@@ -16,10 +16,11 @@
     <result column="is_show" property="isShow" jdbcType="BIT" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="explain" property="explain" jdbcType="VARCHAR" />
+    <result column="sku_value" property="skuValue" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     evaluate_goods_id, member_id, member_name, store_id, order_id, goods_id, star, content, 
-    images, is_anonymous, create_time, is_show, remark, explain
+    images, is_anonymous, create_time, is_show, remark, explain, sku_value
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -39,12 +40,12 @@
       order_id, goods_id, star, 
       content, images, is_anonymous, 
       create_time, is_show, remark, 
-      explain)
+      explain, sku_value)
     values (#{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
       #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{star,jdbcType=INTEGER}, 
       #{content,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, #{isAnonymous,jdbcType=BIT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{isShow,jdbcType=BIT}, #{remark,jdbcType=VARCHAR}, 
-      #{explain,jdbcType=VARCHAR})
+      #{explain,jdbcType=VARCHAR}, #{skuValue,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.EvaluateGoods" >
     <selectKey resultType="java.lang.Integer" keyProperty="evaluateGoodsId" order="AFTER" >
@@ -91,6 +92,9 @@
       <if test="explain != null" >
         explain,
       </if>
+      <if test="skuValue != null" >
+        sku_value,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="memberId != null" >
@@ -131,6 +135,9 @@
       </if>
       <if test="explain != null" >
         #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="skuValue != null" >
+        #{skuValue,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,6 +183,9 @@
       <if test="explain != null" >
         explain = #{explain,jdbcType=VARCHAR},
       </if>
+      <if test="skuValue != null" >
+        sku_value = #{skuValue,jdbcType=VARCHAR},
+      </if>
     </set>
     where evaluate_goods_id = #{evaluateGoodsId,jdbcType=INTEGER}
   </update>
@@ -193,7 +203,8 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       is_show = #{isShow,jdbcType=BIT},
       remark = #{remark,jdbcType=VARCHAR},
-      explain = #{explain,jdbcType=VARCHAR}
+      explain = #{explain,jdbcType=VARCHAR},
+      sku_value = #{skuValue,jdbcType=VARCHAR}
     where evaluate_goods_id = #{evaluateGoodsId,jdbcType=INTEGER}
   </update>
 </mapper>

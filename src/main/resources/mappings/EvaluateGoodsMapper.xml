@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.EvaluateGoodsMapper" >
 
+    <!--获取商品评价-->
+    <select id="getEvaluateGoodsList" resultType="com.wuliangit.shopos.entity.EvaluateGoods">
+        select *
+        from t_evaluate_goods
+        where goods_id = #{goodsId} order by create_time desc
+    </select>
 </mapper>

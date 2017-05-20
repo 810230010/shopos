@@ -1,8 +1,6 @@
 #parse("/admin/models/begin.vm")
 
-
 #parse("/admin/models/header.vm")
-
         <div class="wrapper wrapper-content" style="height: 1000px">
             <div class="row">
                 <div class="col-lg-3">

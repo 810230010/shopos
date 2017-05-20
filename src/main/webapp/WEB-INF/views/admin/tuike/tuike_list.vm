@@ -37,6 +37,10 @@
 
 <script>
 
+    $("#推客列表").addClass("active");
+    $("#推客管理").addClass("active");
+    $('#side-menu').metisMenu();
+
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {

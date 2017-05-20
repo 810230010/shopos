@@ -1,8 +1,6 @@
 #parse("/admin/models/begin.vm")
 
 <link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-<link href="/assets/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-<link href="/assets/admin/css/plugins/layui/layer.css" rel="stylesheet">
 #parse("/admin/models/header.vm")
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -35,10 +33,13 @@
 #parse("/admin/models/footer.vm")
 
 <script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
-<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/layUI/layer.js"></script>
 <script>
+
+    // MetisMenu
+    $("#商家管理").addClass("active");
+    $("#申请列表").addClass("active");
+    $('#side-menu').metisMenu();
+
 
     var rank = 1;
     var upParentId = [];

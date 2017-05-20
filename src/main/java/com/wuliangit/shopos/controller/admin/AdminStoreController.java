@@ -41,7 +41,7 @@ public class AdminStoreController {
      */
     @RequestMapping("/applyListPage")
     public String applyListPage() {
-        return "admin/store/applylist";
+        return "admin/store/apply_list";
     }
 
     /**
@@ -50,7 +50,7 @@ public class AdminStoreController {
      */
     @RequestMapping("/storeListPage")
     public String storeListPage(){
-        return "admin/store/storelist";
+        return "admin/store/store_list";
     }
 
     /**
@@ -108,7 +108,7 @@ public class AdminStoreController {
     public String jumpToStoreJoininDetail(Integer memberId, Model model) {
         StoreJoinin store = storeJoinService.getStoreJoininDetail(memberId);
         model.addAttribute("store",store);
-        return "/admin/store/applydetail";
+        return "/admin/store/apply_detail";
     }
 
     /**
@@ -163,7 +163,7 @@ public class AdminStoreController {
     public String getStoreDetailInfo(Integer storeId,Model model){
         StoreDetailDTO info = storeService.getStoreDetailInfo(storeId);
         model.addAttribute("store",info);
-        return "/admin/store/storedetail";
+        return "/admin/store/store_detail";
     }
 
 }

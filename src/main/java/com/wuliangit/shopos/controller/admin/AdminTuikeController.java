@@ -31,7 +31,7 @@ public class AdminTuikeController {
      */
     @RequestMapping("/checkListPage")
     public String checkListPage() {
-        return "admin/tuike/checklist";
+        return "admin/tuike/check_list";
     }
 
     /**
@@ -40,7 +40,7 @@ public class AdminTuikeController {
      */
     @RequestMapping("/tuikeListPage")
     public String tuikeListPage() {
-        return "admin/tuike/tuikelist";
+        return "admin/tuike/tuike_list";
     }
 
     /**

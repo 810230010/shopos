@@ -8,7 +8,7 @@
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>商家-申请店铺详细信息</h2>
+        <h2>商家-店铺详细信息</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -17,15 +17,18 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>申请详情</h5>
+                    <p align="right">
+                        <a type="button" class="btn btn-w-m btn-primary btn-small" href="/admin/store/storeListPage">返回</a>
+                    </p>
                 </div>
                 <div class="ibox-content">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">店主用户名</label>
+                            <label class="col-sm-3 control-label">店铺名称</label>
                             <div class="col-sm-7">
                                 <span class="form-control">
-                                    #if($store.memberName)
-                                    $store.memberName
+                                    #if($store.name)
+                                    $store.name
                                     #end
                                 </span>
                             </div>
@@ -33,67 +36,55 @@
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">申请店铺名</label>
+                            <label class="col-sm-3 control-label">店铺等级</label>
                             <div class="col-sm-7">
                                 <span class="form-control">
-                                    #if($store.storeName)
-                                    $store.storeName
+                                    #if($store.gradeId)
+                                    $store.gradeId
                                     #end
                                 </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">公司名</label>
+                            <label class="col-sm-3 control-label">会员ID</label>
                             <div class="col-sm-7">
                                 <span class="form-control">
-                                    #if($store.companyName)
-                                    $store.companyName
+                                    #if($store.memberId)
+                                    $store.memberId
                                     #end
                                 </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">公司详细地址</label>
+                            <label class="col-sm-3 control-label">店铺类型</label>
                             <div class="col-sm-7">
                                 <span class="form-control">
-                                    #if($store.companyAddressDetail)
-                                    $store.companyAddressDetail
+                                    #if($store.type)
+                                    $store.type
                                     #end
                                 </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">公司电话</label>
+                            <label class="col-sm-3 control-label">店铺公司</label>
                             <div class="col-sm-7">
                                 <span class="form-control">
-                                    #if($store.companyPhone)
-                                    $store.companyPhone
+                                    #if($store.storeCompanyName)
+                                    $store.storeCompanyName
                                     #end
                                 </span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">注册总资金</label>
+                            <label class="col-sm-3 control-label">店铺所在地</label>
                             <div class="col-sm-7">
                                 <span class="form-control">
-                                    #if($store.companyRegisteredCapital)
-                                    $store.companyRegisteredCapital
-                                    #end
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">联系人姓名</label>
-                            <div class="col-sm-7">
-                                <span class="form-control">
-                                    #if($store.contactsName)
-                                    $store.contactsName
+                                    #if($store.address)
+                                    $store.address
                                     #end
                                 </span>
                             </div>
@@ -101,11 +92,11 @@
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">联系人电话</label>
+                            <label class="col-sm-3 control-label">店铺状态</label>
                             <div class="col-sm-7">
                                 <span class="form-control">
-                                    #if($store.contactsPhone)
-                                    $store.contactsPhone
+                                    #if($store.state)
+                                    $store.state
                                     #end
                                 </span>
                             </div>
@@ -113,52 +104,11 @@
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">营业执照号</label>
+                            <label class="col-sm-3 control-label">店铺创建时间</label>
                             <div class="col-sm-7">
                                 <span class="form-control">
-                                    #if($store.businessLicenceNumber)
-                                    $store.businessLicenceNumber
-                                    #end
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">法定经营范围</label>
-                            <div class="col-sm-7">
-                                <span class="form-control">
-                                    #if($store.businessSphere)
-                                    $store.businessSphere
-                                    #end
-                                </span>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">营业执照电子版</label>
-                            <div class="col-sm-3">
-                                <img src="$store.businessLicenceNumberElectronic"/>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">税务登记证号</label>
-                            <div class="col-sm-7">
-                                <span class="form-control">
-                                    #if($store.taxRegistrationCertificateElectronic)
-                                    $store.taxRegistrationCertificateElectronic
-                                    #end
-                                </span>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">店铺分类名称</label>
-                            <div class="col-sm-7">
-                                <span class="form-control">
-                                    #if($store.scName)
-                                    $store.scName
+                                    #if($store.createTime)
+                                    $store.createTime
                                     #end
                                 </span>
                             </div>
@@ -166,11 +116,52 @@
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">付款金额</label>
+                            <label class="col-sm-3 control-label">店铺横幅</label>
+                            <div class="col-sm-7">
+                                <img src="$store.banner" style="width:200px; height:200px">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商家电话</label>
                             <div class="col-sm-7">
                                 <span class="form-control">
-                                    #if($store.payingAmount)
-                                    $store.payingAmount
+                                    #if($store.phone)
+                                    $store.phone
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">店铺信誉</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($store.credit)
+                                    $store.credit
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">实体商铺名称</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($store.liveStoreName)
+                                    $store.liveStoreName
+                                    #end
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">实体商铺地址</label>
+                            <div class="col-sm-7">
+                                <span class="form-control">
+                                    #if($store.liveStoreAddress)
+                                    $store.liveStoreAddress
                                     #end
                                 </span>
                             </div>
@@ -182,11 +173,11 @@
     </div>
 </div>
 #parse("/admin/models/footer.vm")
-<!-- 文件上传 -->
-<script src="/assets/admin/js/plugins/fileinput/fileinput.min.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
-<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
 
-<!-- Jquery Validate -->
-<script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script>// MetisMenu
+$("#商家管理").addClass("active");
+$("#商家列表").addClass("active");
+$('#side-menu').metisMenu();
+</script>
+
 #parse("/admin/models/end.vm")

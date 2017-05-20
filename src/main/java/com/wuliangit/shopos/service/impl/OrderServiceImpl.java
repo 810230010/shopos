@@ -123,7 +123,7 @@ public class OrderServiceImpl implements OrderService {
 
             //设置收件人信息
             order.setReciverName(address.getReciverName());
-            order.setReciverAddress(address.getAddress());
+            order.setReciverAddress(address.getAreaInfo());
             order.setReciverPhone(address.getMobPhone());
 
             //设置订单价格

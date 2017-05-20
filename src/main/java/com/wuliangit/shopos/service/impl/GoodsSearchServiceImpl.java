@@ -49,8 +49,6 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     private String createOrder(String primaryOrder) {
         StringBuilder order = new StringBuilder();
 
-
-
         if (primaryOrder.endsWith("priceAsc")) {
             order.append("price").append(" asc");
         } else if (primaryOrder.endsWith("priceDesc")) {

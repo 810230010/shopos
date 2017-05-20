@@ -5,7 +5,7 @@
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>商家-商家列表</h2>
+        <h2>推客-推客审核</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">商家列表</h5>
+                    <h5 id="rank">待审核列表</h5>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -37,10 +37,14 @@
 
 <script>
 
+    $("#申请列表").addClass("active");
+    $("#推客管理").addClass("active");
+    $('#side-menu').metisMenu();
+
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': '/admin/store/getStoreList',
+                'url': '/admin/tuike/getCheckList',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -53,21 +57,22 @@
                 },
             },
             "columns": [
-                {"data":"storeId","width":"7%","title":"序号","orderable": false},
-                {"data":"name","width": "10%","title":"商家名称","orderable": false},
-                {"data":"type","width": "10%","title":"商家类型","orderable": false},
-                {"data":"state","width": "10%","title":"状态","orderable": false,"render": function(data, type, row){
-                    if(data == "CLOSE")return "关闭";
-                    else return "开启";
+                {"data":"memberId","width":"7%","title":"序号","orderable": false},
+                {"data":"nickname","width": "10%","title":"会员名称","orderable": false},
+                {"data":"sex","width": "10%","title":"性别","orderable": false,"render": function(data, type,row){
+                    if(data == "MAN")return "男";
+                    else return "女";
                 }},
+                {"data":"email","width": "10%","title":"邮箱","orderable": false},
                 {"data":"createTime","width": "10%","title":"创建时间","orderable": true},
-                {"data":"storeId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
+                {"data":"points","width": "10%","title":"积分","orderable": true},
+                {"data":"memberId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
                     return [
-                        '<a class="btn btn-danger btn-xs table-action state" href="javascript:void(0)">',
-                        '更改状态 <i class="fa fa-flag"></i>',
+                        '<a class="btn btn-danger btn-xs table-action unpass" href="javascript:void(0)">',
+                        '不通过 <i class="fa fa-times"></i>',
                         '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)" style="margin-left: 10px;">',
-                        '详细信息 <i class="fa fa-tag"></i>',
+                        '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)">',
+                        '通过 <i class="fa fa-check"></i>',
                         '</a>'
                     ].join('');
                 }},
@@ -108,31 +113,28 @@
         });
         var table = $('#datatables').DataTable();
 
-        table.on( 'click', '.state', function () {
+        table.on( 'click', '.unpass', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            $.operation(data);
+            $.operation(data,"UNCHECK");
         });
-        table.on( 'click', '.detail', function () {
+        table.on( 'click', '.pass', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/admin/store/getStoreDetailInfo?storeId="+data.storeId;
+            $.operation(data,"CHECKED");
         });
     });
-    $.operation = function(data){
-        var s;
-        if(data.state == "CLOSE")s = "OPEN";
-        else s = "CLOSE";
+    $.operation = function(data,flag){
         $.ajax({
             type: "post",
-            url: "/admin/store/updateStoreState",
-            data: "storeId=" + data.storeId + "&state=" + s,
+            url: "/admin/tuike/checkOperation",
+            data: "memberId=" + data.memberId + "&state=" + flag,
             async: false,
             success: function (data) {
                 if (data.code == 200) {
                     swal({
                         title: "成功!",
-                        text: "状态更改成功!",
+                        text: "审核成功!",
                         type: "success",
                         showConfirmButton: false,
                         timer: 2000,
@@ -143,7 +145,7 @@
                 }else if(data.code == 500){
                     swal({
                         title: "失败!",
-                        text: "状态更改失败!",
+                        text: "审核失败!",
                         type: "error",
                         showConfirmButton: false,
                         timer: 2000,

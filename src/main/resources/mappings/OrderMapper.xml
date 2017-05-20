@@ -42,4 +42,9 @@
     <select id="apiGetOrderByMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
         select * from t_order where member_id = #{memberId} and delete_state = 'NO' order by create_time desc
     </select>
+
+    <!--待评价订单-->
+    <select id="apiGetUnEvaluateOrderByMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
+        select * from t_order where member_id = #{memberId} and delete_state = 'NO' and member_evaluation_state = 'NO' order by create_time desc
+    </select>
 </mapper>

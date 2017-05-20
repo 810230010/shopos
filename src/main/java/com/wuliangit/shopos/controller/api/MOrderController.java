@@ -136,11 +136,11 @@ public class MOrderController {
      * @param pageSize
      * @return
      */
-    @RequestMapping("/received")
+    @RequestMapping("/unEvaluate")
     public Object getReceivedOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                    @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
         RestResult result = new RestResult();
-        List<ApiOrderDTO> orders = orderService.apiGetReceivedOrders(page,pageSize);
+        List<ApiOrderDTO> orders = orderService.apiGetUnEvaluateOrders(page,pageSize);
         result.add("orders",orders);
         return result;
     }

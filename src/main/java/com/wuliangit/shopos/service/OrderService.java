@@ -108,7 +108,7 @@ public interface OrderService {
      * @param pageSize
      * @return
      */
-    List<ApiOrderDTO> apiGetReceivedOrders(Integer page, Integer pageSize);
+    List<ApiOrderDTO> apiGetUnEvaluateOrders(Integer page, Integer pageSize);
 
     /**
      * 所有订单

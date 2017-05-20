@@ -223,14 +223,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<ApiOrderDTO> apiGetReceivedOrders(Integer page, Integer pageSize) {
+    public List<ApiOrderDTO> apiGetUnEvaluateOrders(Integer page, Integer pageSize) {
         PageHelper.startPage(page,pageSize);
         Member currentMember = WebUtil.getCurrentMember();
-        List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_RECEIVE, currentMember.getMemberId());
+        List<ApiOrderDTO> orders = orderMapper.apiGetUnEvaluateOrderByMemberId(currentMember.getMemberId());
 
         for (ApiOrderDTO order : orders) {
             order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
         }
+
         return orders;
     }
 
@@ -259,6 +260,7 @@ public class OrderServiceImpl implements OrderService {
         order.setExpressName(express.getExpressName()+"/"+express.getExpressCode());
         order.setExpressNo(expressNo);
         order.setOrderState(POJOConstants.ORDER_STATE_DELIVE);
+        order.setDeliverTime(new Date());
 
         return orderMapper.updateByPrimaryKeySelective(order);
     }

@@ -134,6 +134,7 @@ public class MPayController {
                      }
                  }else{
                      Order order = orderService.getOrderByOutTradeNo(outTradeNo);
+                     order.setPaymentCode(POJOConstants.ORDER_PAYMENT_ALIPAY);
                      order.setTradeNo(tradeNo);
                      orderPayed(order);
                  }

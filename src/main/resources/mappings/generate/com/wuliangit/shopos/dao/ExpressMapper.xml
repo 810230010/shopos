@@ -5,9 +5,12 @@
     <id column="express_id" property="expressId" jdbcType="INTEGER" />
     <result column="express_name" property="expressName" jdbcType="VARCHAR" />
     <result column="express_code" property="expressCode" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    express_id, express_name, express_code
+    express_id, express_name, express_code, logo, phone, url
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,8 +26,10 @@
     <selectKey resultType="java.lang.Integer" keyProperty="expressId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_express (express_name, express_code)
-    values (#{expressName,jdbcType=VARCHAR}, #{expressCode,jdbcType=VARCHAR})
+    insert into t_express (express_name, express_code, logo, 
+      phone, url)
+    values (#{expressName,jdbcType=VARCHAR}, #{expressCode,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Express" >
     <selectKey resultType="java.lang.Integer" keyProperty="expressId" order="AFTER" >
@@ -38,6 +43,15 @@
       <if test="expressCode != null" >
         express_code,
       </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="expressName != null" >
@@ -45,6 +59,15 @@
       </if>
       <if test="expressCode != null" >
         #{expressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -57,13 +80,25 @@
       <if test="expressCode != null" >
         express_code = #{expressCode,jdbcType=VARCHAR},
       </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
     </set>
     where express_id = #{expressId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Express" >
     update t_express
     set express_name = #{expressName,jdbcType=VARCHAR},
-      express_code = #{expressCode,jdbcType=VARCHAR}
+      express_code = #{expressCode,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
     where express_id = #{expressId,jdbcType=INTEGER}
   </update>
 </mapper>

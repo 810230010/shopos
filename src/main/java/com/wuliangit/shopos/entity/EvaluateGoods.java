@@ -13,8 +13,6 @@ public class EvaluateGoods {
 
     private Integer orderId;
 
-    private Integer orderGoodsId;
-
     private Integer goodsId;
 
     private Integer star;
@@ -71,14 +69,6 @@ public class EvaluateGoods {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
-    }
-
-    public Integer getOrderGoodsId() {
-        return orderGoodsId;
-    }
-
-    public void setOrderGoodsId(Integer orderGoodsId) {
-        this.orderGoodsId = orderGoodsId;
     }
 
     public Integer getGoodsId() {

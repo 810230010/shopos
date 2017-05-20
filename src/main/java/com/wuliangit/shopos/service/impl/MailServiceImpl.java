@@ -6,6 +6,7 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.SettingMapper;
 import com.wuliangit.shopos.dao.StoreMessageMapper;
 import com.wuliangit.shopos.dto.SettingDTO;
+import com.wuliangit.shopos.dto.StoreMessageDTO;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreMessage;
@@ -28,26 +29,26 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private StoreMessageMapper storeMessageMapper;
 
-    @Override
-    public String sendMail(String username,String id,String mail, String title, String content, String templates) {
-        try {
-            VelocityContext context = new VelocityContext();
-            context.put("title",title);
-            context.put("content",content);
-            MailSender.getSender().send(mail,context,templates);
-            String[] name = username.split(",");
-            String[] userId = id.split(",");
-            Admin admin = (Admin)WebUtil.getSession().getAttribute(CoreConstants.SESSION_CURRENT_ADMIN);
-            List<StoreMessage> storeMessages = new ArrayList<StoreMessage>();
-            for(int i=0;i<name.length;i++){
-                storeMessages.add(new StoreMessage(admin.getAdminId(),admin.getUsername(),new Date().toString(),new Integer(userId[i]),name[i],(byte)0,(byte)0,title,content));
-            }
-            Integer info = storeMessageMapper.insertMessage(storeMessages);
-            if(!(info > 0))return "error";
-            return "ok";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "error";
-        }
-    }
+//    @Override
+//    public String sendMail(StoreMessageDTO storeMessageDTO) {
+//        try {
+//            VelocityContext context = new VelocityContext();
+//            context.put("title",storeMessageDTO.getTitle());
+//            context.put("content",storeMessageDTO.getContent());
+//            MailSender.getSender().send(mail,context,templates);
+//            String[] name = username.split(",");
+//            String[] userId = id.split(",");
+//            Admin admin = (Admin)WebUtil.getSession().getAttribute(CoreConstants.SESSION_CURRENT_ADMIN);
+//            List<StoreMessage> storeMessages = new ArrayList<StoreMessage>();
+//            for(int i=0;i<name.length;i++){
+//                storeMessages.add();
+//            }
+//            Integer info = storeMessageMapper.insertMessage(storeMessages);
+//            if(!(info > 0))return "error";
+//            return "ok";
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return "error";
+//        }
+//    }
 }

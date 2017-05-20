@@ -1,9 +1,6 @@
 package com.wuliangit.shopos.service;
 
-import org.apache.velocity.VelocityContext;
-
-import java.util.List;
-import java.util.Map;
+import com.wuliangit.shopos.dto.StoreMessageDTO;
 
 /**
  * Created by nilme on 2017/4/29.
@@ -17,6 +14,6 @@ public interface MailService {
      * @Param: [user, title, content, templates]
      * @return: java.lang.String
      */
-    String sendMail(String username,String id,String mail , String title, String content, String templates);
+//    String sendMail(StoreMessageDTO storeMessageDTO);
 
 }

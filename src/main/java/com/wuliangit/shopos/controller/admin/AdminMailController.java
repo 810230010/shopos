@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.dto.StoreMessageDTO;
 import com.wuliangit.shopos.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,13 +46,13 @@ public class AdminMailController {
      */
     @RequestMapping("sendMail")
     @ResponseBody
-    public Object sendMail(String username,String id,String mail, String title, String content){
-        String info = mailService.sendMail(username, id,mail,title,content,"/templates/mail/sign.vm");
+    public Object sendMail(StoreMessageDTO storeMessageDTO){
         RestResult result = new RestResult();
-        if(info.equals("error")){
-            result.put("code",RestResult.CODE_SERVERERROR);
-            result.put("msg",RestResult.MSG_ERROR);
-        }
+//        String info = mailService.sendMail(storeMessageDTO);
+//        if(info.equals("error")){
+//            result.put("code",RestResult.CODE_SERVERERROR);
+//            result.put("msg",RestResult.MSG_ERROR);
+//        }
         return result;
     }
 

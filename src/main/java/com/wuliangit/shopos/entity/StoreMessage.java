@@ -3,19 +3,19 @@ package com.wuliangit.shopos.entity;
 public class StoreMessage {
     private Integer storeMessageId;
 
-    private Integer sendUser;
+    private Integer sendUserId;
 
     private String sendUserName;
 
     private String createTime;
 
-    private Integer receiveUser;
+    private Integer receiveUserId;
 
     private String receiveUserName;
 
-    private Byte readFlag;
+    private Boolean readFlag;
 
-    private Byte delFlag;
+    private Boolean delFlag;
 
     private String title;
 
@@ -29,12 +29,12 @@ public class StoreMessage {
         this.storeMessageId = storeMessageId;
     }
 
-    public Integer getSendUser() {
-        return sendUser;
+    public Integer getSendUserId() {
+        return sendUserId;
     }
 
-    public void setSendUser(Integer sendUser) {
-        this.sendUser = sendUser;
+    public void setSendUserId(Integer sendUserId) {
+        this.sendUserId = sendUserId;
     }
 
     public String getSendUserName() {
@@ -53,12 +53,12 @@ public class StoreMessage {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public Integer getReceiveUser() {
-        return receiveUser;
+    public Integer getReceiveUserId() {
+        return receiveUserId;
     }
 
-    public void setReceiveUser(Integer receiveUser) {
-        this.receiveUser = receiveUser;
+    public void setReceiveUserId(Integer receiveUserId) {
+        this.receiveUserId = receiveUserId;
     }
 
     public String getReceiveUserName() {
@@ -69,19 +69,19 @@ public class StoreMessage {
         this.receiveUserName = receiveUserName == null ? null : receiveUserName.trim();
     }
 
-    public Byte getReadFlag() {
+    public Boolean getReadFlag() {
         return readFlag;
     }
 
-    public void setReadFlag(Byte readFlag) {
+    public void setReadFlag(Boolean readFlag) {
         this.readFlag = readFlag;
     }
 
-    public Byte getDelFlag() {
+    public Boolean getDelFlag() {
         return delFlag;
     }
 
-    public void setDelFlag(Byte delFlag) {
+    public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
     }
 

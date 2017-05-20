@@ -3,20 +3,20 @@
 <mapper namespace="com.wuliangit.shopos.dao.StoreMessageMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.StoreMessage" >
     <id column="store_message_id" property="storeMessageId" jdbcType="INTEGER" />
-    <result column="send_user" property="sendUser" jdbcType="INTEGER" />
+    <result column="send_user_id" property="sendUserId" jdbcType="INTEGER" />
     <result column="send_user_name" property="sendUserName" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="VARCHAR" />
-    <result column="receive_user" property="receiveUser" jdbcType="INTEGER" />
+    <result column="receive_user_id" property="receiveUserId" jdbcType="INTEGER" />
     <result column="receive_user_name" property="receiveUserName" jdbcType="VARCHAR" />
-    <result column="read_flag" property="readFlag" jdbcType="TINYINT" />
-    <result column="del_flag" property="delFlag" jdbcType="TINYINT" />
+    <result column="read_flag" property="readFlag" jdbcType="BIT" />
+    <result column="del_flag" property="delFlag" jdbcType="BIT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.StoreMessage" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    store_message_id, send_user, send_user_name, create_time, receive_user, receive_user_name, 
+    store_message_id, send_user_id, send_user_name, create_time, receive_user_id, receive_user_name, 
     read_flag, del_flag, title
   </sql>
   <sql id="Blob_Column_List" >
@@ -38,13 +38,13 @@
     <selectKey resultType="java.lang.Integer" keyProperty="storeMessageId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_store_message (send_user, send_user_name, create_time, 
-      receive_user, receive_user_name, read_flag, 
+    insert into t_store_message (send_user_id, send_user_name, create_time, 
+      receive_user_id, receive_user_name, read_flag, 
       del_flag, title, content
       )
-    values (#{sendUser,jdbcType=INTEGER}, #{sendUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-      #{receiveUser,jdbcType=INTEGER}, #{receiveUserName,jdbcType=VARCHAR}, #{readFlag,jdbcType=TINYINT}, 
-      #{delFlag,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+    values (#{sendUserId,jdbcType=INTEGER}, #{sendUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{receiveUserId,jdbcType=INTEGER}, #{receiveUserName,jdbcType=VARCHAR}, #{readFlag,jdbcType=BIT}, 
+      #{delFlag,jdbcType=BIT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreMessage" >
@@ -53,8 +53,8 @@
     </selectKey>
     insert into t_store_message
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sendUser != null" >
-        send_user,
+      <if test="sendUserId != null" >
+        send_user_id,
       </if>
       <if test="sendUserName != null" >
         send_user_name,
@@ -62,8 +62,8 @@
       <if test="createTime != null" >
         create_time,
       </if>
-      <if test="receiveUser != null" >
-        receive_user,
+      <if test="receiveUserId != null" >
+        receive_user_id,
       </if>
       <if test="receiveUserName != null" >
         receive_user_name,
@@ -82,8 +82,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sendUser != null" >
-        #{sendUser,jdbcType=INTEGER},
+      <if test="sendUserId != null" >
+        #{sendUserId,jdbcType=INTEGER},
       </if>
       <if test="sendUserName != null" >
         #{sendUserName,jdbcType=VARCHAR},
@@ -91,17 +91,17 @@
       <if test="createTime != null" >
         #{createTime,jdbcType=VARCHAR},
       </if>
-      <if test="receiveUser != null" >
-        #{receiveUser,jdbcType=INTEGER},
+      <if test="receiveUserId != null" >
+        #{receiveUserId,jdbcType=INTEGER},
       </if>
       <if test="receiveUserName != null" >
         #{receiveUserName,jdbcType=VARCHAR},
       </if>
       <if test="readFlag != null" >
-        #{readFlag,jdbcType=TINYINT},
+        #{readFlag,jdbcType=BIT},
       </if>
       <if test="delFlag != null" >
-        #{delFlag,jdbcType=TINYINT},
+        #{delFlag,jdbcType=BIT},
       </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
@@ -114,8 +114,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.StoreMessage" >
     update t_store_message
     <set >
-      <if test="sendUser != null" >
-        send_user = #{sendUser,jdbcType=INTEGER},
+      <if test="sendUserId != null" >
+        send_user_id = #{sendUserId,jdbcType=INTEGER},
       </if>
       <if test="sendUserName != null" >
         send_user_name = #{sendUserName,jdbcType=VARCHAR},
@@ -123,17 +123,17 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=VARCHAR},
       </if>
-      <if test="receiveUser != null" >
-        receive_user = #{receiveUser,jdbcType=INTEGER},
+      <if test="receiveUserId != null" >
+        receive_user_id = #{receiveUserId,jdbcType=INTEGER},
       </if>
       <if test="receiveUserName != null" >
         receive_user_name = #{receiveUserName,jdbcType=VARCHAR},
       </if>
       <if test="readFlag != null" >
-        read_flag = #{readFlag,jdbcType=TINYINT},
+        read_flag = #{readFlag,jdbcType=BIT},
       </if>
       <if test="delFlag != null" >
-        del_flag = #{delFlag,jdbcType=TINYINT},
+        del_flag = #{delFlag,jdbcType=BIT},
       </if>
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
@@ -146,26 +146,26 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wuliangit.shopos.entity.StoreMessage" >
     update t_store_message
-    set send_user = #{sendUser,jdbcType=INTEGER},
+    set send_user_id = #{sendUserId,jdbcType=INTEGER},
       send_user_name = #{sendUserName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR},
-      receive_user = #{receiveUser,jdbcType=INTEGER},
+      receive_user_id = #{receiveUserId,jdbcType=INTEGER},
       receive_user_name = #{receiveUserName,jdbcType=VARCHAR},
-      read_flag = #{readFlag,jdbcType=TINYINT},
-      del_flag = #{delFlag,jdbcType=TINYINT},
+      read_flag = #{readFlag,jdbcType=BIT},
+      del_flag = #{delFlag,jdbcType=BIT},
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR}
     where store_message_id = #{storeMessageId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.StoreMessage" >
     update t_store_message
-    set send_user = #{sendUser,jdbcType=INTEGER},
+    set send_user_id = #{sendUserId,jdbcType=INTEGER},
       send_user_name = #{sendUserName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR},
-      receive_user = #{receiveUser,jdbcType=INTEGER},
+      receive_user_id = #{receiveUserId,jdbcType=INTEGER},
       receive_user_name = #{receiveUserName,jdbcType=VARCHAR},
-      read_flag = #{readFlag,jdbcType=TINYINT},
-      del_flag = #{delFlag,jdbcType=TINYINT},
+      read_flag = #{readFlag,jdbcType=BIT},
+      del_flag = #{delFlag,jdbcType=BIT},
       title = #{title,jdbcType=VARCHAR}
     where store_message_id = #{storeMessageId,jdbcType=INTEGER}
   </update>

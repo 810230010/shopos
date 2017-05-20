@@ -7,7 +7,6 @@
     <result column="member_name" property="memberName" jdbcType="VARCHAR" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
-    <result column="order_goods_id" property="orderGoodsId" jdbcType="INTEGER" />
     <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
     <result column="star" property="star" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="VARCHAR" />
@@ -19,8 +18,8 @@
     <result column="explain" property="explain" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    evaluate_goods_id, member_id, member_name, store_id, order_id, order_goods_id, goods_id, 
-    star, content, images, is_anonymous, create_time, is_show, remark, explain
+    evaluate_goods_id, member_id, member_name, store_id, order_id, goods_id, star, content, 
+    images, is_anonymous, create_time, is_show, remark, explain
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -37,15 +36,15 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_evaluate_goods (member_id, member_name, store_id, 
-      order_id, order_goods_id, goods_id, 
-      star, content, images, 
-      is_anonymous, create_time, is_show, 
-      remark, explain)
+      order_id, goods_id, star, 
+      content, images, is_anonymous, 
+      create_time, is_show, remark, 
+      explain)
     values (#{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
-      #{orderId,jdbcType=INTEGER}, #{orderGoodsId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
-      #{star,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, 
-      #{isAnonymous,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{isShow,jdbcType=BIT}, 
-      #{remark,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR})
+      #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{star,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, #{isAnonymous,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{isShow,jdbcType=BIT}, #{remark,jdbcType=VARCHAR}, 
+      #{explain,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.EvaluateGoods" >
     <selectKey resultType="java.lang.Integer" keyProperty="evaluateGoodsId" order="AFTER" >
@@ -64,9 +63,6 @@
       </if>
       <if test="orderId != null" >
         order_id,
-      </if>
-      <if test="orderGoodsId != null" >
-        order_goods_id,
       </if>
       <if test="goodsId != null" >
         goods_id,
@@ -108,9 +104,6 @@
       </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
-      </if>
-      <if test="orderGoodsId != null" >
-        #{orderGoodsId,jdbcType=INTEGER},
       </if>
       <if test="goodsId != null" >
         #{goodsId,jdbcType=INTEGER},
@@ -156,9 +149,6 @@
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="orderGoodsId != null" >
-        order_goods_id = #{orderGoodsId,jdbcType=INTEGER},
-      </if>
       <if test="goodsId != null" >
         goods_id = #{goodsId,jdbcType=INTEGER},
       </if>
@@ -195,7 +185,6 @@
       member_name = #{memberName,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=INTEGER},
-      order_goods_id = #{orderGoodsId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},
       star = #{star,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},

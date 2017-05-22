@@ -9,10 +9,11 @@ import java.util.List;
 
 public interface AdminPermissionMapper extends BaseMapper<AdminPermission, Integer> {
     /**
-     * 获取管理员菜单
+     * 获取当前管理员菜单
      * @param permissionList
      * @return
      */
     List<MenuDTO> getAdminMenus(@Param("permissionList") String permissionList);
+
 
 }

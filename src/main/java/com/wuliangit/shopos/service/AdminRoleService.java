@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.AdminRoleDTO;
+import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.AdminRole;
 
 import java.util.List;
@@ -34,5 +35,18 @@ public interface AdminRoleService {
      */
     List<AdminRoleDTO> searchAdminRoleList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
 
+    /**
+     * 删除管理员角色
+     * @param adminRoleId
+     * @return
+     */
     int deleteRole(Integer adminRoleId);
+
+
+    /**
+     * 得到管理员角色详情
+     * @param roleId
+     * @return
+     */
+    AdminRoleDTO getAdminRoleDetail(Integer roleId);
 }

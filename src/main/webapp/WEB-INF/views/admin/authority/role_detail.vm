@@ -1,0 +1,84 @@
+#parse("/admin/models/begin.vm")
+
+<link href="/assets/admin/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
+<link href="/assets/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+#parse("/admin/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>权限管理-角色详情</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12" style="height:1800px">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">角色名:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" style="outline: green" value="$adminRoleDetail.name" disabled>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">角色描述:</label>
+                            <div class="col-sm-7">
+                                <textarea class="col-sm-12" style="height:150px;outline-color: green"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                #foreach($menu in $adminRoleDetail.rolePermissions)
+
+                <div class="col-lg-12" style="background-color:white;margin-top:20px">
+                    <div class="i-checks" style="height:50px;line-height: 50px;border-bottom: 1px solid silver"><label> <input class="$menu.permissionId" type="checkbox" value="" checked disabled> <i></i> &nbsp;&nbsp;$menu.name</label></div>
+                    #if($menu.childMenus)
+                        #foreach($item in $menu.childMenus)
+                            <div class="col-lg-4">
+                                <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input class="$item.permissionId" type="checkbox" value="" checked disabled> <i></i>$item.name</label></div>
+                            </div>
+                        #end
+                    </div>
+                    #end
+                #end
+
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+
+<!-- iCheck -->
+<script src="/assets/admin/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+
+    $("#权限管理").addClass("active");
+    $("#管理员列表").addClass("active");
+    $('#side-menu').metisMenu();
+
+    var rank = 1;
+
+    $(document).ready(function () {
+        //复选框的配置
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+//
+
+
+
+       
+
+
+
+
+
+
+
+    });
+</script>
+
+#parse("/admin/models/end.vm")

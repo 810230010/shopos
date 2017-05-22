@@ -74,7 +74,7 @@
                     "orderable": false,
                     "render": function (data, type, row) {
                         return [
-                            '<a class="table-button btn btn-info btn-xs table-action edit" href="javascript:void(0)">',
+                            '<a class="table-button btn btn-info btn-xs table-action scan" href="javascript:void(0)">',
                             '查看日志 <i class="fa fa-eye"></i>',
                             '</a>',
                             '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)" style="margin-left:10px">',
@@ -122,6 +122,8 @@
             },
         });
         var table = $('#brandTable').DataTable();
+
+
 
         //编辑
         table.on( 'click', '.edit', function () {

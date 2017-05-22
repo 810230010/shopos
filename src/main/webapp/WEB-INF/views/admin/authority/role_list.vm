@@ -130,11 +130,18 @@
             },
         });
         var table = $('#brandTable').DataTable();
+
+        //查看管理员角色详情
+        table.on( 'click', '.scan', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            window.location.href = "/admin/role/adminRoleDetailPage?roleId="+data.adminRoleId;
+        });
         //修改
         table.on( 'click', '.edit', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/admin/brand/editPage?brandId="+data.brandId;
+            window.location.href = "/admin/authority/adminEditRolePage?adminRoleId="+data.adminRoleId;
         });
 
         //删除一条记录
@@ -176,21 +183,7 @@
                     });
         });
 
-        table.on( 'click', '.getsub', function () {
-            rank = rank +1;
-            if (rank > 1){
-                $('#back').show();
-            }else{
-                $('#back').hide();
-            }
-            $('#rank').html("商品分类列表("+rank+"级)")
-            var tr = $(this).closest('tr');
-            var data = table.row(tr).data();
 
-            goodsCategoryId = data.goodsCategoryId;
-            upParentId[rank] = data.goodsCategoryId;
-            table = $('#brandTable').DataTable().ajax.reload();
-        });
     });
 </script>
 

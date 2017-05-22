@@ -7,7 +7,7 @@
     <div class="col-lg-10">
         <h2>商家-商家列表</h2>
         <p>
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/goods/addPage">添加店铺</a>
+            <a type="button" class="btn btn-w-m btn-primary" href="/admin/store/storeAddPage">添加店铺</a>
         </p>
     </div>
 </div>
@@ -60,7 +60,7 @@
                 },
             },
             "columns": [
-                {"data":"storeId","width":"7%","title":"序号","orderable": false},
+                {"data":"storeId","width":"7%","title":"ID","orderable": false},
                 {"data":"name","width": "10%","title":"商家名称","orderable": false},
                 {"data":"type","width": "10%","title":"商家类型","orderable": false},
                 {"data":"state","width": "10%","title":"状态","orderable": false,"render": function(data, type, row){
@@ -106,12 +106,7 @@
             ],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
 

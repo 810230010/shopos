@@ -54,17 +54,17 @@ public class SellerServiceImpl implements SellerService {
     public int update(SellerDTO seller, String newPass) {
         Seller currentSeller = WebUtil.getCurrentSeller();
 
-        if (!StringUtils.isEmpty(seller.getEmail())){
+        if (!StringUtils.isEmpty(seller.getEmail())) {
             currentSeller.setEmail(seller.getEmail());
         }
 
-        if (!StringUtils.isEmpty(seller.getPhoto())){
+        if (!StringUtils.isEmpty(seller.getPhoto())) {
             currentSeller.setPhoto(seller.getPhoto());
         }
 
         //更新密码
-        if (!StringUtils.isEmpty(newPass)){
-            currentSeller.setPassword(PasswordHelper.generatePassword(newPass,currentSeller.getSalt()));
+        if (!StringUtils.isEmpty(newPass)) {
+            currentSeller.setPassword(PasswordHelper.generatePassword(newPass, currentSeller.getSalt()));
         }
         int res = sellerMapper.updateByPrimaryKeySelective(currentSeller);
 
@@ -78,5 +78,10 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public List<Seller> getAllSeller() {
         return sellerMapper.getAllSeller();
+    }
+
+    @Override
+    public int createSeller(Seller seller) {
+        return sellerMapper.insertSelective(seller);
     }
 }

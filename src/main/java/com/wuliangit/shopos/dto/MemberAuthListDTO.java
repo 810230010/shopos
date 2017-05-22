@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by 26229 on 2017/5/5.
  */
-public class MemberListDTO {
+public class MemberAuthListDTO {
 
     private Integer memberId;
 
@@ -15,15 +15,41 @@ public class MemberListDTO {
 
     private String sex;
 
-    private Date birthday;
-
     private String type;
 
     private String mobile;
 
-    private Integer points;
-
     private String authState;
+
+    private String idcardNum;
+
+    private String idcardFront;
+
+    private String idcardBack;
+
+    public String getIdcardNum() {
+        return idcardNum;
+    }
+
+    public void setIdcardNum(String idcardNum) {
+        this.idcardNum = idcardNum;
+    }
+
+    public String getIdcardFront() {
+        return idcardFront;
+    }
+
+    public void setIdcardFront(String idcardFront) {
+        this.idcardFront = idcardFront;
+    }
+
+    public String getIdcardBack() {
+        return idcardBack;
+    }
+
+    public void setIdcardBack(String idcardBack) {
+        this.idcardBack = idcardBack;
+    }
 
     public String getTruename() {
         return truename;
@@ -57,14 +83,6 @@ public class MemberListDTO {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
     public String getType() {
         return type;
     }
@@ -79,14 +97,6 @@ public class MemberListDTO {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
-    }
-
-    public Integer getPoints() {
-        return points;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
     }
 
     public String getAuthState() {

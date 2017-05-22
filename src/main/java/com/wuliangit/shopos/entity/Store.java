@@ -6,6 +6,8 @@ import java.util.Date;
 public class Store {
     private Integer storeId;
 
+    private String sellerAdminId;
+
     private String name;
 
     private Integer gradeId;
@@ -116,6 +118,14 @@ public class Store {
 
     public void setStoreId(Integer storeId) {
         this.storeId = storeId;
+    }
+
+    public String getSellerAdminId() {
+        return sellerAdminId;
+    }
+
+    public void setSellerAdminId(String sellerAdminId) {
+        this.sellerAdminId = sellerAdminId == null ? null : sellerAdminId.trim();
     }
 
     public String getName() {

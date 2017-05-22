@@ -42,13 +42,15 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="auth_state" property="authState" jdbcType="VARCHAR" />
     <result column="idcard_num" property="idcardNum" jdbcType="VARCHAR" />
+    <result column="idcard_front" property="idcardFront" jdbcType="VARCHAR" />
+    <result column="idcard_back" property="idcardBack" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     member_id, username, nickname, truename, passwd, paypwd, salt, photo, sex, birthday, 
     type, email, mobile, qq, openid, wx_photo, wx_nickname, login_num, create_time, login_time, 
     login_ip, qqopenid, qqinfo, sinaopenid, sinainfo, points, available_balance, freeze_balance, 
     state, credit, areaid, cityid, provinceid, areainfo, exppoints, inviter_id, del_flag, 
-    update_time, auth_state, idcard_num
+    update_time, auth_state, idcard_num, idcard_front, idcard_back
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -76,8 +78,8 @@
       state, credit, areaid, 
       cityid, provinceid, areainfo, 
       exppoints, inviter_id, del_flag, 
-      update_time, auth_state, idcard_num
-      )
+      update_time, auth_state, idcard_num, 
+      idcard_front, idcard_back)
     values (#{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{truename,jdbcType=VARCHAR}, 
       #{passwd,jdbcType=VARCHAR}, #{paypwd,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
       #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
@@ -90,8 +92,8 @@
       #{state,jdbcType=VARCHAR}, #{credit,jdbcType=INTEGER}, #{areaid,jdbcType=INTEGER}, 
       #{cityid,jdbcType=INTEGER}, #{provinceid,jdbcType=INTEGER}, #{areainfo,jdbcType=VARCHAR}, 
       #{exppoints,jdbcType=INTEGER}, #{inviterId,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{authState,jdbcType=VARCHAR}, #{idcardNum,jdbcType=VARCHAR}
-      )
+      #{updateTime,jdbcType=TIMESTAMP}, #{authState,jdbcType=VARCHAR}, #{idcardNum,jdbcType=VARCHAR}, 
+      #{idcardFront,jdbcType=VARCHAR}, #{idcardBack,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Member" >
     <selectKey resultType="java.lang.Integer" keyProperty="memberId" order="AFTER" >
@@ -216,6 +218,12 @@
       <if test="idcardNum != null" >
         idcard_num,
       </if>
+      <if test="idcardFront != null" >
+        idcard_front,
+      </if>
+      <if test="idcardBack != null" >
+        idcard_back,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="username != null" >
@@ -334,6 +342,12 @@
       </if>
       <if test="idcardNum != null" >
         #{idcardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardFront != null" >
+        #{idcardFront,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardBack != null" >
+        #{idcardBack,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -457,6 +471,12 @@
       <if test="idcardNum != null" >
         idcard_num = #{idcardNum,jdbcType=VARCHAR},
       </if>
+      <if test="idcardFront != null" >
+        idcard_front = #{idcardFront,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardBack != null" >
+        idcard_back = #{idcardBack,jdbcType=VARCHAR},
+      </if>
     </set>
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
@@ -500,7 +520,9 @@
       del_flag = #{delFlag,jdbcType=BIT},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       auth_state = #{authState,jdbcType=VARCHAR},
-      idcard_num = #{idcardNum,jdbcType=VARCHAR}
+      idcard_num = #{idcardNum,jdbcType=VARCHAR},
+      idcard_front = #{idcardFront,jdbcType=VARCHAR},
+      idcard_back = #{idcardBack,jdbcType=VARCHAR}
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.MemberMapper" >
-  <!--通过用户名获取用户-->
-  <select id="getByUsername" resultType="com.wuliangit.shopos.entity.Member">
-    select
-    <include refid="Base_Column_List" />
-    from t_member
-    where username = #{username}
-  </select>
-  <!--通过openid获取用户-->
-  <select id="getByOpenid" resultType="com.wuliangit.shopos.entity.Member">
-    select
-    <include refid="Base_Column_List" />
-    from t_member
-    where openid = #{openid}
-  </select>
+    <!--通过用户名获取用户-->
+    <select id="getByUsername" resultType="com.wuliangit.shopos.entity.Member">
+      select
+      <include refid="Base_Column_List" />
+      from t_member
+      where username = #{username}
+    </select>
+    <!--通过openid获取用户-->
+    <select id="getByOpenid" resultType="com.wuliangit.shopos.entity.Member">
+      select
+      <include refid="Base_Column_List" />
+      from t_member
+      where openid = #{openid}
+    </select>
 
-  <!--获取会员列表的数据-->
-  <select id="getMemberList" resultType="com.wuliangit.shopos.dto.MemberListDTO">
-    select member_id,nickname,sex,birthday,type,mobile,points,auth_state
-    from t_member
-    where del_flag = 0
-  </select>
+    <!--获取会员列表的数据-->
+    <select id="getMemberList" resultType="com.wuliangit.shopos.dto.MemberListDTO">
+      select member_id,nickname,sex,birthday,type,mobile,points,auth_state
+      from t_member
+      where del_flag = 0
+    </select>
 
-  <!--删除会员-->
-  <update id="deleteMember">
-    UPDATE t_member
-    SET del_flag = 1
-    WHERE member_id = #{memberId}
-  </update>
+    <select id="getMemberAuthList" resultType="com.wuliangit.shopos.dto.MemberAuthListDTO">
+      select member_id, username, nickname, truename, sex,type,mobile,auth_state,idcard_num,idcard_front,idcard_back
+      from t_member
+      <where>
+        del_flag = 0 and auth_state = 'WAIT_AUTH'
+        <if test="searchKey != null and searchKey != '' ">
+          and ( username like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+          or nickname like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+          or idcard_num like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+          or truename like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+        </if>
+      </where>
+      order by
+      <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+        ${orderColumn} ${orderType},
+      </if>
+      create_time desc
+    </select>
 
-  <!--更改会员状态-->
-  <update id="updateMemberState">
-    UPDATE t_member
-    SET auth_state = #{state}
-    WHERE member_id = #{memberId}
-  </update>
+    <!--删除会员-->
+    <update id="deleteMember">
+      UPDATE t_member
+      SET del_flag = 1
+      WHERE member_id = #{memberId}
+    </update>
+
 </mapper>

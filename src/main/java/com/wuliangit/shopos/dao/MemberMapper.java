@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.MemberAuthListDTO;
 import com.wuliangit.shopos.dto.MemberListDTO;
 import com.wuliangit.shopos.entity.Member;
 import org.apache.ibatis.annotations.Param;
@@ -40,10 +41,13 @@ public interface MemberMapper extends BaseMapper<Member, Integer> {
     Integer deleteMember(Integer memberId);
 
     /**
-     * 更改会员状态
-     * @param memberId
-     * @param state
+     * 获取待认证会员
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
      * @return
      */
-    Integer updateMemberState(Integer memberId, String state);
+    List<MemberAuthListDTO> getMemberAuthList(@Param("orderColumn")String orderColumn,
+                                              @Param("orderType")String orderType,
+                                              @Param("searchKey")String searchKey);
 }

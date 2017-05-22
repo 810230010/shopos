@@ -84,6 +84,10 @@ public class Member {
 
     private String idcardNum;
 
+    private String idcardFront;
+
+    private String idcardBack;
+
     public Integer getMemberId() {
         return memberId;
     }
@@ -402,5 +406,21 @@ public class Member {
 
     public void setIdcardNum(String idcardNum) {
         this.idcardNum = idcardNum == null ? null : idcardNum.trim();
+    }
+
+    public String getIdcardFront() {
+        return idcardFront;
+    }
+
+    public void setIdcardFront(String idcardFront) {
+        this.idcardFront = idcardFront == null ? null : idcardFront.trim();
+    }
+
+    public String getIdcardBack() {
+        return idcardBack;
+    }
+
+    public void setIdcardBack(String idcardBack) {
+        this.idcardBack = idcardBack == null ? null : idcardBack.trim();
     }
 }

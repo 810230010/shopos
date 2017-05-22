@@ -14,13 +14,15 @@ public class POJOConstants {
     //待审核推客
     public final static String USER_TYPE_PRE_TUIKE = "PRE_TUIKE";
 
-    //用户认证
+    //认证
     //未认证
     public final static String NOT_AUTH = "NOT_AUTH";
     //已认证
     public final static String AUTHED = "AUTHED";
     //等待认证
     public final static String WAIT_AUTH = "WAIT_AUTH";
+    //重新认证
+    public final static String REAUTH = "REAUTH";
 
 
     //商品类型

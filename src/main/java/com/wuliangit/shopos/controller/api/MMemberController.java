@@ -275,12 +275,14 @@ public class MMemberController {
      * @return
      */
     @RequestMapping("authenticate")
-    public Object Authenticate(String truename, String idcardNum,String idCardFront,String idCardBack) {
+    public Object Authenticate(String truename, String idcardNum,String idcardFront,String idcardBack) {
         RestResult result = new RestResult();
 
         Member memberUpdate = WebUtil.getCurrentMember();
         memberUpdate.setIdcardNum(idcardNum);
         memberUpdate.setTruename(truename);
+        memberUpdate.setIdcardBack(idcardBack);
+        memberUpdate.setIdcardFront(idcardFront);
         memberUpdate.setAuthState(POJOConstants.WAIT_AUTH);
 
         memberService.updateMember(memberUpdate);

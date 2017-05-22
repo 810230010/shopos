@@ -105,4 +105,10 @@ public interface StoreService {
      * @return
      */
     ApiStoreDTO apiGetStoreDTO(Integer storeId);
+
+    /**
+     * 创建店铺
+     * @param store
+     */
+    int createStore(Store store);
 }

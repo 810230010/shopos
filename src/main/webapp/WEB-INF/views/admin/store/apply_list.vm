@@ -14,7 +14,6 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h5 id="rank">商家申请店铺列表列表 </h5>
-                    <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">

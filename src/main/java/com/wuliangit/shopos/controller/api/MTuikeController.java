@@ -33,9 +33,16 @@ public class MTuikeController {
     @RequestMapping("/tuike/apply")
     public Object tuikeApply(){
         RestResult result = new RestResult();
-        Member memberUpdate = WebUtil.getCurrentMember();
-        memberUpdate.setType(POJOConstants.USER_TYPE_PRE_TUIKE);
-        memberService.updateMember(memberUpdate);
+        Member member = WebUtil.getCurrentMember();
+
+        if (member.getAuthState().equals(POJOConstants.AUTHED) ){
+            member.setType(POJOConstants.USER_TYPE_PRE_TUIKE);
+            memberService.updateMember(member);
+        }else{
+            result.setCode(500);
+            result.setMsg("请先实名认证，在申请成为推客！");
+        }
+
         return result;
     }
 

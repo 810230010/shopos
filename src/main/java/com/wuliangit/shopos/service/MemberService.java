@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.MemberAuthListDTO;
 import com.wuliangit.shopos.dto.MemberListDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.MemberAdvice;
@@ -79,10 +80,21 @@ public interface MemberService {
      */
     Integer deleteMember(Integer memberId);
 
-     /** 更改会员状态
+     /** 更改会员认证状态
      * @param memberId
-     * @param state
+     * @param isCheck
      * @return
      */
-    Integer updateMemberState(Integer memberId, String state);
+    Integer updateMemberAuthState(Integer memberId, boolean isCheck);
+
+    /**
+     * 获取待认证会员
+     * @param page
+     * @param pageSize
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    List<MemberAuthListDTO> getMemberAuthList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
 }

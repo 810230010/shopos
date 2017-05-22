@@ -19,6 +19,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -126,5 +127,11 @@ public class StoreServiceImpl implements StoreService {
         }
 
         return apiStore;
+    }
+
+    @Override
+    public int createStore(Store store) {
+        store.setCreateTime(new Date());
+        return storeMapper.insertSelective(store);
     }
 }

@@ -138,10 +138,10 @@
                             function (data, status) {
                                 if(data.code==200){
                                     swal("删除成功!", "会员已经删除", "success");
-                                    table = $('#datatables').DataTable().ajax.reload();
+                                    $('#datatables').DataTable().ajax.reload();
                                 }else{
                                     swal("删除失败!", "会员未被删除", "error");
-                                    table = $('#datatables').DataTable().ajax.reload();
+                                    $('#datatables').DataTable().ajax.reload();
                                 }
                             });
                 }

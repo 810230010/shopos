@@ -54,4 +54,10 @@ public interface SellerService {
      * @return: java.util.List<com.wuliangit.shopos.entity.Seller>
      */
     List<Seller> getAllSeller();
+
+    /**
+     * 创建店铺管理员
+     * @param seller
+     */
+    int createSeller(Seller seller);
 }

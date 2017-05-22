@@ -76,6 +76,26 @@ public class ApiMemberDTO {
 
     private String authState;
 
+    private String idcardFront;
+
+    private String idcardBack;
+
+    public String getIdcardFront() {
+        return idcardFront;
+    }
+
+    public void setIdcardFront(String idcardFront) {
+        this.idcardFront = idcardFront;
+    }
+
+    public String getIdcardBack() {
+        return idcardBack;
+    }
+
+    public void setIdcardBack(String idcardBack) {
+        this.idcardBack = idcardBack;
+    }
+
     public Integer getMemberId() {
         return memberId;
     }

@@ -275,7 +275,7 @@ public class MMemberController {
      * @return
      */
     @RequestMapping("authenticate")
-    public Object Authenticate(String truename, String idcardNum, Integer userId) {
+    public Object Authenticate(String truename, String idcardNum,String idCardFront,String idCardBack) {
         RestResult result = new RestResult();
 
         Member memberUpdate = WebUtil.getCurrentMember();

@@ -15,7 +15,6 @@ $("#wizard").steps({
         loading: "加载中 ..."
     },
     onStepChanging: function (event, currentIndex, newIndex) {
-        return true;
         if (currentIndex > newIndex) {
             return true;
         }
@@ -71,7 +70,6 @@ $("#wizard").steps({
         return true;
     },
     onFinishing: function (event, currentIndex) {
-        return true;
         var form = $(this);
 
         // Disable validation on fields that are disabled.

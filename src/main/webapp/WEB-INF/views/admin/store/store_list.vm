@@ -6,6 +6,9 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>商家-商家列表</h2>
+        <p>
+            <a type="button" class="btn btn-w-m btn-primary" href="/store/goods/addPage">添加店铺</a>
+        </p>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -14,7 +17,6 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h5 id="rank">商家列表</h5>
-                    <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">

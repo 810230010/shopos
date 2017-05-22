@@ -77,10 +77,14 @@
                 },
                 {"data":"storeName","width": "10%","title":"名称/价格/邮费",
                     "render": function (data, type, row) {
+                        var name = row.name
+                        if(name.length>25){
+                            name = name.substr(0,30)+"...";
+                        }
                         return '<div style="padding-left: 10px;">' +
-                                '<p>名称:'+row.name+'</p>' +
-                                '<p>价格:'+row.price+'</p>' +
-                                '<p>邮费:'+row.carriage+'</p>' +
+                                '<p><span>名称: </span><span class="text-success">'+name+'</span></p>' +
+                                '<p>价格: '+row.price+'</p>' +
+                                '<p>邮费: '+row.carriage+'</p>' +
                                 '</div>';
                     }
                 },

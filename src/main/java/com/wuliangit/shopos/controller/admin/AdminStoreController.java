@@ -36,7 +36,7 @@ public class AdminStoreController {
     private StoreService storeService;
 
     /**
-     * 跳转到申请成为商家页面
+     * 申请成为商家页面
      * @return
      */
     @RequestMapping("/applyListPage")
@@ -45,12 +45,21 @@ public class AdminStoreController {
     }
 
     /**
-     * 跳转到商家列表页面
+     * 商家列表页面
      * @return
      */
     @RequestMapping("/storeListPage")
     public String storeListPage(){
         return "admin/store/store_list";
+    }
+
+    /**
+     * 商家列表页面
+     * @return
+     */
+    @RequestMapping("/storeAddPage")
+    public String storeAddPage(){
+        return "admin/store/store_add";
     }
 
     /**

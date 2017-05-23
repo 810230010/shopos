@@ -67,7 +67,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Object getByMemberId(Integer userId) {
+    public Member getByMemberId(Integer userId) {
         return memberMapper.selectByPrimaryKey(userId);
     }
 

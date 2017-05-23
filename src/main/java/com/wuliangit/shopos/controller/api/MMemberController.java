@@ -240,7 +240,7 @@ public class MMemberController {
     @RequestMapping("/info")
     public Object getUserInfo() {
         RestResult result = new RestResult();
-        Member member = WebUtil.getCurrentMember();
+        Member member = memberService.getByMemberId(WebUtil.getCurrentMember().getMemberId());
         ApiMemberDTO memberDTO = mapper.map(member, ApiMemberDTO.class);
         result.put("memberInfo", memberDTO);
         return result;

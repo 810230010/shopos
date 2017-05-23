@@ -29,14 +29,12 @@
                             <div class="col-sm-8"><input type="text" class="form-control" id="label" name="label" value="$!{store.label}"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
-                        <div class="form-group" id="store-logo-div"><label class="col-sm-2 control-label">店铺logo图片:</label>
+                        <div class="form-group" id="store-logo-div">
+                            <label class="col-sm-2 control-label">店铺logo图片:</label>
                             <div class="col-sm-4">
                                 <input id="store-logo" class="file" name="file" type="file" multiple>
                             </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group" id="store-banner-div"><label class="col-sm-2 control-label">店铺横幅:</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4">
                                 <input id="store-banner" class="file" name="file" type="file" multiple>
                             </div>
                         </div>

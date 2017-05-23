@@ -121,7 +121,7 @@
             return repo.name
         },
         initSelection: function (element, callback) {
-            var data = { id:0, name: "请选择分类" };
+            var data = { id:0, name: "请选择品牌" };
             callback(data);
         },
     }).on('change', function (e) {

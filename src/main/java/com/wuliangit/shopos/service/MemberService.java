@@ -60,7 +60,7 @@ public interface MemberService {
      * @param userId
      * @return
      */
-    Object getByMemberId(Integer userId);
+    Member getByMemberId(Integer userId);
 
     /**
      * 获取会员列表数据

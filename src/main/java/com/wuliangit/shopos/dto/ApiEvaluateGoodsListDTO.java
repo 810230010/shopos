@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.dto;
 
+import java.util.Date;
+
 /**
  * Created by nilme on 2017/5/20.
  */
@@ -19,7 +21,7 @@ public class ApiEvaluateGoodsListDTO {
 
     private String skuValue;
 
-    private String createTime;
+    private Date createTime;
 
     public Integer getEvaluateGoodsId() {
         return evaluateGoodsId;
@@ -77,11 +79,11 @@ public class ApiEvaluateGoodsListDTO {
         this.skuValue = skuValue;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 }

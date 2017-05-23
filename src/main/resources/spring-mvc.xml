@@ -38,8 +38,14 @@
                 <property name="supportedMediaTypes" value="text/html;charset=UTF-8" />
             </bean>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
                 <property name="objectMapper">
-                    <bean class="com.wuliangit.shopos.common.util.ObjectMappingCustomer"></bean>
+                    <bean class="com.wuliangit.shopos.common.util.CustomObjectMapper"></bean>
                 </property>
             </bean>
         </mvc:message-converters>

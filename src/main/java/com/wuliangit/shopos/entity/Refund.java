@@ -8,21 +8,15 @@ public class Refund {
 
     private Integer orderId;
 
-    private String orderSn;
-
-    private String refundSn;
+    private String orderOutTradeNo;
 
     private Integer storeId;
 
-    private String storeName;
-
     private Integer memberId;
 
-    private String memberName;
+    private String memberUsername;
 
     private Integer goodsId;
-
-    private Integer orderGoodsId;
 
     private String goodsName;
 
@@ -60,11 +54,9 @@ public class Refund {
 
     private String adminMessage;
 
-    private Integer expressId;
+    private String expressName;
 
     private String expressNo;
-
-    private Date shipTime;
 
     private Date delayTime;
 
@@ -86,20 +78,12 @@ public class Refund {
         this.orderId = orderId;
     }
 
-    public String getOrderSn() {
-        return orderSn;
+    public String getOrderOutTradeNo() {
+        return orderOutTradeNo;
     }
 
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn == null ? null : orderSn.trim();
-    }
-
-    public String getRefundSn() {
-        return refundSn;
-    }
-
-    public void setRefundSn(String refundSn) {
-        this.refundSn = refundSn == null ? null : refundSn.trim();
+    public void setOrderOutTradeNo(String orderOutTradeNo) {
+        this.orderOutTradeNo = orderOutTradeNo == null ? null : orderOutTradeNo.trim();
     }
 
     public Integer getStoreId() {
@@ -110,14 +94,6 @@ public class Refund {
         this.storeId = storeId;
     }
 
-    public String getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(String storeName) {
-        this.storeName = storeName == null ? null : storeName.trim();
-    }
-
     public Integer getMemberId() {
         return memberId;
     }
@@ -126,12 +102,12 @@ public class Refund {
         this.memberId = memberId;
     }
 
-    public String getMemberName() {
-        return memberName;
+    public String getMemberUsername() {
+        return memberUsername;
     }
 
-    public void setMemberName(String memberName) {
-        this.memberName = memberName == null ? null : memberName.trim();
+    public void setMemberUsername(String memberUsername) {
+        this.memberUsername = memberUsername == null ? null : memberUsername.trim();
     }
 
     public Integer getGoodsId() {
@@ -140,14 +116,6 @@ public class Refund {
 
     public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
-    }
-
-    public Integer getOrderGoodsId() {
-        return orderGoodsId;
-    }
-
-    public void setOrderGoodsId(Integer orderGoodsId) {
-        this.orderGoodsId = orderGoodsId;
     }
 
     public String getGoodsName() {
@@ -294,12 +262,12 @@ public class Refund {
         this.adminMessage = adminMessage == null ? null : adminMessage.trim();
     }
 
-    public Integer getExpressId() {
-        return expressId;
+    public String getExpressName() {
+        return expressName;
     }
 
-    public void setExpressId(Integer expressId) {
-        this.expressId = expressId;
+    public void setExpressName(String expressName) {
+        this.expressName = expressName == null ? null : expressName.trim();
     }
 
     public String getExpressNo() {
@@ -308,14 +276,6 @@ public class Refund {
 
     public void setExpressNo(String expressNo) {
         this.expressNo = expressNo == null ? null : expressNo.trim();
-    }
-
-    public Date getShipTime() {
-        return shipTime;
-    }
-
-    public void setShipTime(Date shipTime) {
-        this.shipTime = shipTime;
     }
 
     public Date getDelayTime() {

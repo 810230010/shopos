@@ -4,14 +4,11 @@
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Refund" >
     <id column="refund_id" property="refundId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
-    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
-    <result column="refund_sn" property="refundSn" jdbcType="VARCHAR" />
+    <result column="order_out_trade_no" property="orderOutTradeNo" jdbcType="VARCHAR" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
-    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
-    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="member_username" property="memberUsername" jdbcType="VARCHAR" />
     <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="order_goods_id" property="orderGoodsId" jdbcType="INTEGER" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
     <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
     <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
@@ -30,18 +27,17 @@
     <result column="buyer_message" property="buyerMessage" jdbcType="VARCHAR" />
     <result column="seller_message" property="sellerMessage" jdbcType="VARCHAR" />
     <result column="admin_message" property="adminMessage" jdbcType="VARCHAR" />
-    <result column="express_id" property="expressId" jdbcType="INTEGER" />
+    <result column="express_name" property="expressName" jdbcType="VARCHAR" />
     <result column="express_no" property="expressNo" jdbcType="VARCHAR" />
-    <result column="ship_time" property="shipTime" jdbcType="TIMESTAMP" />
     <result column="delay_time" property="delayTime" jdbcType="TIMESTAMP" />
     <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    refund_id, order_id, order_sn, refund_sn, store_id, store_name, member_id, member_name, 
-    goods_id, order_goods_id, goods_name, goods_num, refund_amount, goods_image, order_goods_type, 
-    refund_type, seller_state, refund_state, is_lock, goods_state, create_time, seller_handle_time, 
+    refund_id, order_id, order_out_trade_no, store_id, member_id, member_username, goods_id, 
+    goods_name, goods_num, refund_amount, goods_image, order_goods_type, refund_type, 
+    seller_state, refund_state, is_lock, goods_state, create_time, seller_handle_time, 
     admin_time, reason_info, pics_info, buyer_message, seller_message, admin_message, 
-    express_id, express_no, ship_time, delay_time, receive_time
+    express_name, express_no, delay_time, receive_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -57,28 +53,26 @@
     <selectKey resultType="java.lang.Integer" keyProperty="refundId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_refund (order_id, order_sn, refund_sn, 
-      store_id, store_name, member_id, 
-      member_name, goods_id, order_goods_id, 
+    insert into t_refund (order_id, order_out_trade_no, store_id, 
+      member_id, member_username, goods_id, 
       goods_name, goods_num, refund_amount, 
       goods_image, order_goods_type, refund_type, 
       seller_state, refund_state, is_lock, 
       goods_state, create_time, seller_handle_time, 
       admin_time, reason_info, pics_info, 
       buyer_message, seller_message, admin_message, 
-      express_id, express_no, ship_time, 
-      delay_time, receive_time)
-    values (#{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{refundSn,jdbcType=VARCHAR}, 
-      #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
-      #{memberName,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, #{orderGoodsId,jdbcType=INTEGER}, 
+      express_name, express_no, delay_time, 
+      receive_time)
+    values (#{orderId,jdbcType=INTEGER}, #{orderOutTradeNo,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
+      #{memberId,jdbcType=INTEGER}, #{memberUsername,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, 
       #{goodsName,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, #{refundAmount,jdbcType=DECIMAL}, 
       #{goodsImage,jdbcType=VARCHAR}, #{orderGoodsType,jdbcType=VARCHAR}, #{refundType,jdbcType=VARCHAR}, 
       #{sellerState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
       #{goodsState,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{sellerHandleTime,jdbcType=TIMESTAMP}, 
       #{adminTime,jdbcType=TIMESTAMP}, #{reasonInfo,jdbcType=VARCHAR}, #{picsInfo,jdbcType=VARCHAR}, 
       #{buyerMessage,jdbcType=VARCHAR}, #{sellerMessage,jdbcType=VARCHAR}, #{adminMessage,jdbcType=VARCHAR}, 
-      #{expressId,jdbcType=INTEGER}, #{expressNo,jdbcType=VARCHAR}, #{shipTime,jdbcType=TIMESTAMP}, 
-      #{delayTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP})
+      #{expressName,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}, #{delayTime,jdbcType=TIMESTAMP}, 
+      #{receiveTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Refund" >
     <selectKey resultType="java.lang.Integer" keyProperty="refundId" order="AFTER" >
@@ -89,29 +83,20 @@
       <if test="orderId != null" >
         order_id,
       </if>
-      <if test="orderSn != null" >
-        order_sn,
-      </if>
-      <if test="refundSn != null" >
-        refund_sn,
+      <if test="orderOutTradeNo != null" >
+        order_out_trade_no,
       </if>
       <if test="storeId != null" >
         store_id,
       </if>
-      <if test="storeName != null" >
-        store_name,
-      </if>
       <if test="memberId != null" >
         member_id,
       </if>
-      <if test="memberName != null" >
-        member_name,
+      <if test="memberUsername != null" >
+        member_username,
       </if>
       <if test="goodsId != null" >
         goods_id,
-      </if>
-      <if test="orderGoodsId != null" >
-        order_goods_id,
       </if>
       <if test="goodsName != null" >
         goods_name,
@@ -167,14 +152,11 @@
       <if test="adminMessage != null" >
         admin_message,
       </if>
-      <if test="expressId != null" >
-        express_id,
+      <if test="expressName != null" >
+        express_name,
       </if>
       <if test="expressNo != null" >
         express_no,
-      </if>
-      <if test="shipTime != null" >
-        ship_time,
       </if>
       <if test="delayTime != null" >
         delay_time,
@@ -187,29 +169,20 @@
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="orderSn != null" >
-        #{orderSn,jdbcType=VARCHAR},
-      </if>
-      <if test="refundSn != null" >
-        #{refundSn,jdbcType=VARCHAR},
+      <if test="orderOutTradeNo != null" >
+        #{orderOutTradeNo,jdbcType=VARCHAR},
       </if>
       <if test="storeId != null" >
         #{storeId,jdbcType=INTEGER},
       </if>
-      <if test="storeName != null" >
-        #{storeName,jdbcType=VARCHAR},
-      </if>
       <if test="memberId != null" >
         #{memberId,jdbcType=INTEGER},
       </if>
-      <if test="memberName != null" >
-        #{memberName,jdbcType=VARCHAR},
+      <if test="memberUsername != null" >
+        #{memberUsername,jdbcType=VARCHAR},
       </if>
       <if test="goodsId != null" >
         #{goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="orderGoodsId != null" >
-        #{orderGoodsId,jdbcType=INTEGER},
       </if>
       <if test="goodsName != null" >
         #{goodsName,jdbcType=VARCHAR},
@@ -265,14 +238,11 @@
       <if test="adminMessage != null" >
         #{adminMessage,jdbcType=VARCHAR},
       </if>
-      <if test="expressId != null" >
-        #{expressId,jdbcType=INTEGER},
+      <if test="expressName != null" >
+        #{expressName,jdbcType=VARCHAR},
       </if>
       <if test="expressNo != null" >
         #{expressNo,jdbcType=VARCHAR},
-      </if>
-      <if test="shipTime != null" >
-        #{shipTime,jdbcType=TIMESTAMP},
       </if>
       <if test="delayTime != null" >
         #{delayTime,jdbcType=TIMESTAMP},
@@ -288,29 +258,20 @@
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="orderSn != null" >
-        order_sn = #{orderSn,jdbcType=VARCHAR},
-      </if>
-      <if test="refundSn != null" >
-        refund_sn = #{refundSn,jdbcType=VARCHAR},
+      <if test="orderOutTradeNo != null" >
+        order_out_trade_no = #{orderOutTradeNo,jdbcType=VARCHAR},
       </if>
       <if test="storeId != null" >
         store_id = #{storeId,jdbcType=INTEGER},
       </if>
-      <if test="storeName != null" >
-        store_name = #{storeName,jdbcType=VARCHAR},
-      </if>
       <if test="memberId != null" >
         member_id = #{memberId,jdbcType=INTEGER},
       </if>
-      <if test="memberName != null" >
-        member_name = #{memberName,jdbcType=VARCHAR},
+      <if test="memberUsername != null" >
+        member_username = #{memberUsername,jdbcType=VARCHAR},
       </if>
       <if test="goodsId != null" >
         goods_id = #{goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="orderGoodsId != null" >
-        order_goods_id = #{orderGoodsId,jdbcType=INTEGER},
       </if>
       <if test="goodsName != null" >
         goods_name = #{goodsName,jdbcType=VARCHAR},
@@ -366,14 +327,11 @@
       <if test="adminMessage != null" >
         admin_message = #{adminMessage,jdbcType=VARCHAR},
       </if>
-      <if test="expressId != null" >
-        express_id = #{expressId,jdbcType=INTEGER},
+      <if test="expressName != null" >
+        express_name = #{expressName,jdbcType=VARCHAR},
       </if>
       <if test="expressNo != null" >
         express_no = #{expressNo,jdbcType=VARCHAR},
-      </if>
-      <if test="shipTime != null" >
-        ship_time = #{shipTime,jdbcType=TIMESTAMP},
       </if>
       <if test="delayTime != null" >
         delay_time = #{delayTime,jdbcType=TIMESTAMP},
@@ -387,14 +345,11 @@
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Refund" >
     update t_refund
     set order_id = #{orderId,jdbcType=INTEGER},
-      order_sn = #{orderSn,jdbcType=VARCHAR},
-      refund_sn = #{refundSn,jdbcType=VARCHAR},
+      order_out_trade_no = #{orderOutTradeNo,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=INTEGER},
-      store_name = #{storeName,jdbcType=VARCHAR},
       member_id = #{memberId,jdbcType=INTEGER},
-      member_name = #{memberName,jdbcType=VARCHAR},
+      member_username = #{memberUsername,jdbcType=VARCHAR},
       goods_id = #{goodsId,jdbcType=INTEGER},
-      order_goods_id = #{orderGoodsId,jdbcType=INTEGER},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_num = #{goodsNum,jdbcType=INTEGER},
       refund_amount = #{refundAmount,jdbcType=DECIMAL},
@@ -413,9 +368,8 @@
       buyer_message = #{buyerMessage,jdbcType=VARCHAR},
       seller_message = #{sellerMessage,jdbcType=VARCHAR},
       admin_message = #{adminMessage,jdbcType=VARCHAR},
-      express_id = #{expressId,jdbcType=INTEGER},
+      express_name = #{expressName,jdbcType=VARCHAR},
       express_no = #{expressNo,jdbcType=VARCHAR},
-      ship_time = #{shipTime,jdbcType=TIMESTAMP},
       delay_time = #{delayTime,jdbcType=TIMESTAMP},
       receive_time = #{receiveTime,jdbcType=TIMESTAMP}
     where refund_id = #{refundId,jdbcType=INTEGER}

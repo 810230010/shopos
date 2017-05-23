@@ -140,4 +140,23 @@ public interface OrderService {
      * @return
      */
     int receive(Integer orderId);
+
+    /**
+     * 申请退货
+     * @param orderId
+     * @param goodsId
+     * @param refundType
+     * @param goodsState
+     * @param buyerMessage
+     * */
+    int refund(Integer orderId, Integer goodsId, String refundType, String goodsState, String buyerMessage) throws Exception;
+
+    /**
+     * 买家退货填写物流信息
+     * @param refundId
+     * @param expressName
+     * @param expressNo
+     * @return
+     */
+    int refundDelive(Integer refundId, String expressName, String expressNo);
 }

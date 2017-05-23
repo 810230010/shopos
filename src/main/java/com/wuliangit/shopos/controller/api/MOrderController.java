@@ -87,106 +87,137 @@ public class MOrderController {
 
     /**
      * 待付款订单
+     *
      * @param page
      * @param pageSize
      * @return
      */
     @RequestMapping("/unpay")
     public Object getUnpayOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        List<ApiOrderDTO> orders = orderService.apiGetUnpayOrders(page,pageSize);
-        result.add("orders",orders);
+        List<ApiOrderDTO> orders = orderService.apiGetUnpayOrders(page, pageSize);
+        result.add("orders", orders);
         return result;
     }
 
     /**
      * 待发货订单
+     *
      * @param page
      * @param pageSize
      * @return
      */
     @RequestMapping("/payed")
     public Object getPayedOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        List<ApiOrderDTO> orders = orderService.apiGetPayedOrders(page,pageSize);
-        result.add("orders",orders);
+        List<ApiOrderDTO> orders = orderService.apiGetPayedOrders(page, pageSize);
+        result.add("orders", orders);
         return result;
     }
 
     /**
      * 待收货订单
+     *
      * @param page
      * @param pageSize
      * @return
      */
     @RequestMapping("/delived")
     public Object getDelivedOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        List<ApiOrderDTO> orders = orderService.apiGetDelivedOrders(page,pageSize);
-        result.add("orders",orders);
+        List<ApiOrderDTO> orders = orderService.apiGetDelivedOrders(page, pageSize);
+        result.add("orders", orders);
         return result;
     }
 
     /**
      * 待评价订单
+     *
      * @param page
      * @param pageSize
      * @return
      */
     @RequestMapping("/unEvaluate")
     public Object getReceivedOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+                                    @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        List<ApiOrderDTO> orders = orderService.apiGetUnEvaluateOrders(page,pageSize);
-        result.add("orders",orders);
+        List<ApiOrderDTO> orders = orderService.apiGetUnEvaluateOrders(page, pageSize);
+        result.add("orders", orders);
         return result;
     }
 
 
     /**
      * 退款退货订单
+     *
      * @param page
      * @param pageSize
      * @return
      */
     @RequestMapping("/refund")
     public Object getRefundOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                    @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        List<ApiRefundDTO> refunds = refundService.apiGetRefundOrders(page,pageSize);
-        result.add("refunds",refunds);
+        List<ApiRefundDTO> refunds = refundService.apiGetRefundOrders(page, pageSize);
+        result.add("refunds", refunds);
         return result;
     }
 
     /**
      * 所有订单
+     *
      * @param page
      * @param pageSize
      * @return
      */
     @RequestMapping("/all")
     public Object getAllOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        List<ApiOrderDTO> orders = orderService.apiGetAllOrders(page,pageSize);
-        result.add("orders",orders);
+        List<ApiOrderDTO> orders = orderService.apiGetAllOrders(page, pageSize);
+        result.add("orders", orders);
         return result;
     }
 
     /**
      * 确认收货
+     *
      * @param orderId
      * @return
      */
     @RequestMapping("/receive")
-    public Object receive(Integer orderId){
+    public Object receive(Integer orderId) {
         RestResult result = new RestResult();
         int res = orderService.receive(orderId);
         return result;
     }
 
+
+    /**
+     * 申请退货
+     *
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/refund")
+    public Object refund(Integer orderId, Integer goodsId,String refundType, String goodsState, String buyerMessage) throws Exception {
+        RestResult result = new RestResult();
+        int res = orderService.refund(orderId, goodsId, refundType, goodsState, buyerMessage);
+        return result;
+    }
+
+    /**
+     * 买家退货填写物流信息
+     * @return
+     */
+    @RequestMapping("/refund/delive")
+    public Object refundDelive(Integer refundId, String expressName, String expressNo) throws Exception {
+        RestResult result = new RestResult();
+        int res = orderService.refundDelive(refundId, expressName, expressNo);
+        return result;
+    }
 
 }

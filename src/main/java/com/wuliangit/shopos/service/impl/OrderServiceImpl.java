@@ -9,6 +9,7 @@ import com.wuliangit.shopos.dto.ApiOrderDTO;
 import com.wuliangit.shopos.dto.ApiOrderGoodsDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.*;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.*;
 import com.wuliangit.shopos.service.OrderService;
@@ -40,6 +41,8 @@ public class OrderServiceImpl implements OrderService {
     private AddressMapper addressMapper;
     @Autowired
     private ExpressMapper expressMapper;
+    @Autowired
+    private RefundMapper refundMapper;
 
 
     @Override
@@ -193,7 +196,7 @@ public class OrderServiceImpl implements OrderService {
         List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_INIT, currentMember.getMemberId());
 
         for (ApiOrderDTO order : orders) {
-            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+            order.setOrderGoodses(orderGoodsMapper.apiGetByOrderId(order.getOrderId()));
         }
         return orders;
     }
@@ -205,7 +208,7 @@ public class OrderServiceImpl implements OrderService {
         List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_PAYED, currentMember.getMemberId());
 
         for (ApiOrderDTO order : orders) {
-            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+            order.setOrderGoodses(orderGoodsMapper.apiGetByOrderId(order.getOrderId()));
         }
         return orders;
     }
@@ -217,7 +220,7 @@ public class OrderServiceImpl implements OrderService {
         List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_DELIVE, currentMember.getMemberId());
 
         for (ApiOrderDTO order : orders) {
-            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+            order.setOrderGoodses(orderGoodsMapper.apiGetByOrderId(order.getOrderId()));
         }
         return orders;
     }
@@ -229,7 +232,7 @@ public class OrderServiceImpl implements OrderService {
         List<ApiOrderDTO> orders = orderMapper.apiGetUnEvaluateOrderByMemberId(currentMember.getMemberId());
 
         for (ApiOrderDTO order : orders) {
-            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+            order.setOrderGoodses(orderGoodsMapper.apiGetByOrderId(order.getOrderId()));
         }
 
         return orders;
@@ -242,14 +245,14 @@ public class OrderServiceImpl implements OrderService {
         List<ApiOrderDTO> orders = orderMapper.apiGetOrderByMemberId(currentMember.getMemberId());
 
         for (ApiOrderDTO order : orders) {
-            order.setOrderGoodses(orderGoodsMapper.getByOrderId(order.getOrderId()));
+            order.setOrderGoodses(orderGoodsMapper.apiGetByOrderId(order.getOrderId()));
         }
         return orders;
     }
 
     @Override
     public List<ApiOrderGoodsDTO> getOrderDetailGoods(Integer orderId) {
-        return orderGoodsMapper.getByOrderId(orderId);
+        return orderGoodsMapper.apiGetByOrderId(orderId);
     }
 
     @Override
@@ -270,6 +273,55 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderMapper.selectByPrimaryKey(orderId);
         order.setOrderState(POJOConstants.ORDER_STATE_RECEIVE);
         return orderMapper.updateByPrimaryKeySelective(order);
+    }
+
+    @Override
+    public int refund(Integer orderId, Integer goodsId, String refundType, String goodsState, String buyerMessage) throws Exception {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        Member member = WebUtil.getCurrentMember();
+        List<OrderGoods> orderGoodsList = orderGoodsMapper.getByOrderId(orderId);
+        OrderGoods orderGoods = null;
+        for (OrderGoods og : orderGoodsList) {
+            if (og.getGoodsId().equals(goodsId)){
+                orderGoods = og;
+            }else{
+                continue;
+            }
+        }
+
+        if (orderGoods == null){
+            throw new OptionException("您没有购买过这个商品");
+        }
+
+        Refund refund = new Refund();
+        refund.setOrderId(orderId);
+        refund.setOrderOutTradeNo(order.getOutTradeNo());
+        refund.setStoreId(order.getStoreId());
+        refund.setMemberId(member.getMemberId());
+        refund.setMemberUsername(member.getUsername());
+        refund.setGoodsId(orderGoods.getGoodsId());
+        refund.setGoodsName(orderGoods.getGoodsName());
+        refund.setGoodsNum(orderGoods.getGoodsNum());
+        refund.setRefundAmount(orderGoods.getGoodsPayPrice().multiply(new BigDecimal(orderGoods.getGoodsNum())));
+        refund.setGoodsImage(orderGoods.getGoodsImage());
+        refund.setOrderGoodsType(orderGoods.getGoodsType());
+        refund.setRefundType(POJOConstants.APPLY_REFUND_ALL);
+        refund.setRefundType(refundType);
+        refund.setRefundState(POJOConstants.REFUND_STATE_CHECKING);
+        refund.setIsLock(false);
+        refund.setGoodsState(goodsState);
+        refund.setCreateTime(new Date());
+        refund.setBuyerMessage(buyerMessage);
+
+        return refundMapper.insertSelective(refund);
+    }
+
+    @Override
+    public int refundDelive(Integer refundId, String expressName, String expressNo) {
+        Refund refund = refundMapper.selectByPrimaryKey(refundId);
+        refund.setExpressNo(expressNo);
+        refund.setExpressName(expressName);
+        return refundMapper.updateByPrimaryKeySelective(refund);
     }
 
 }

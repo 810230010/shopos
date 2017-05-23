@@ -16,7 +16,14 @@ public interface OrderGoodsMapper extends BaseMapper<OrderGoods, Integer> {
      * @param orderId
      * @return
      */
-    List<ApiOrderGoodsDTO> getByOrderId(Integer orderId);
+    List<ApiOrderGoodsDTO> apiGetByOrderId(Integer orderId);
+
+    /**
+     * 通过订单id获取订单商品信息
+     * @param orderId
+     * @return
+     */
+    List<OrderGoods> getByOrderId(Integer orderId);
 
 
     /**

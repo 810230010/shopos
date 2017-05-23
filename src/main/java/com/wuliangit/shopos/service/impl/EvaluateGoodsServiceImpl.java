@@ -15,6 +15,7 @@ import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.entity.OrderGoods;
 import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.EvaluateGoodsService;
+import org.apache.commons.lang3.StringUtils;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,9 @@ public class EvaluateGoodsServiceImpl implements EvaluateGoodsService {
 
             Member currentMember = WebUtil.getCurrentMember();
 
+            if(StringUtils.isEmpty(evaluate.getContent())){
+                evaluate.setContent("该用户没有评价");
+            }
             evaluate.setCreateTime(new Date());
             evaluate.setIsShow(true);
             evaluate.setMemberId(currentMember.getMemberId());

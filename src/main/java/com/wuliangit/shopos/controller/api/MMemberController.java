@@ -275,14 +275,14 @@ public class MMemberController {
      * @return
      */
     @RequestMapping("authenticate")
-    public Object Authenticate(String truename, String idcardNum,String idcardFront,String idcardBack) {
+    public Object Authenticate(String truename, String idcardNum, String idcardFront, String idcardBack) {
         RestResult result = new RestResult();
 
         Member memberUpdate = WebUtil.getCurrentMember();
         memberUpdate.setIdcardNum(idcardNum);
         memberUpdate.setTruename(truename);
-        memberUpdate.setIdcardBack(idcardBack);
-        memberUpdate.setIdcardFront(idcardFront);
+        memberUpdate.setIdcardBack(QiNiuUtils.getBaseUrl() + idcardBack);
+        memberUpdate.setIdcardFront(QiNiuUtils.getBaseUrl() + idcardFront);
         memberUpdate.setAuthState(POJOConstants.WAIT_AUTH);
 
         memberService.updateMember(memberUpdate);

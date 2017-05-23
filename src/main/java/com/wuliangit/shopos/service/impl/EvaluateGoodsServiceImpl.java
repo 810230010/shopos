@@ -69,6 +69,7 @@ public class EvaluateGoodsServiceImpl implements EvaluateGoodsService {
             evaluate.setMemberName(currentMember.getNickname());
             evaluate.setStoreId(order.getStoreId());
             evaluate.setSkuValue(orderGoods.getSkuName());
+            evaluate.setOrderId(orderId);
             evaluateGoodsMapper.insertSelective(evaluate);
         }
 

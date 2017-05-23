@@ -30,8 +30,6 @@ public class Refund {
 
     private String refundType;
 
-    private String sellerState;
-
     private String refundState;
 
     private Boolean isLock;
@@ -44,8 +42,6 @@ public class Refund {
 
     private Date adminTime;
 
-    private String reasonInfo;
-
     private String picsInfo;
 
     private String buyerMessage;
@@ -57,10 +53,6 @@ public class Refund {
     private String expressName;
 
     private String expressNo;
-
-    private Date delayTime;
-
-    private Date receiveTime;
 
     public Integer getRefundId() {
         return refundId;
@@ -166,14 +158,6 @@ public class Refund {
         this.refundType = refundType == null ? null : refundType.trim();
     }
 
-    public String getSellerState() {
-        return sellerState;
-    }
-
-    public void setSellerState(String sellerState) {
-        this.sellerState = sellerState == null ? null : sellerState.trim();
-    }
-
     public String getRefundState() {
         return refundState;
     }
@@ -222,14 +206,6 @@ public class Refund {
         this.adminTime = adminTime;
     }
 
-    public String getReasonInfo() {
-        return reasonInfo;
-    }
-
-    public void setReasonInfo(String reasonInfo) {
-        this.reasonInfo = reasonInfo == null ? null : reasonInfo.trim();
-    }
-
     public String getPicsInfo() {
         return picsInfo;
     }
@@ -276,21 +252,5 @@ public class Refund {
 
     public void setExpressNo(String expressNo) {
         this.expressNo = expressNo == null ? null : expressNo.trim();
-    }
-
-    public Date getDelayTime() {
-        return delayTime;
-    }
-
-    public void setDelayTime(Date delayTime) {
-        this.delayTime = delayTime;
-    }
-
-    public Date getReceiveTime() {
-        return receiveTime;
-    }
-
-    public void setReceiveTime(Date receiveTime) {
-        this.receiveTime = receiveTime;
     }
 }

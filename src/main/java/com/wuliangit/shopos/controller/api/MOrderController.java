@@ -157,7 +157,7 @@ public class MOrderController {
      * @param pageSize
      * @return
      */
-    @RequestMapping("/refund")
+    @RequestMapping("/refundList")
     public Object getRefundOrders(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();

@@ -15,29 +15,24 @@
     <result column="goods_image" property="goodsImage" jdbcType="VARCHAR" />
     <result column="order_goods_type" property="orderGoodsType" jdbcType="VARCHAR" />
     <result column="refund_type" property="refundType" jdbcType="VARCHAR" />
-    <result column="seller_state" property="sellerState" jdbcType="VARCHAR" />
     <result column="refund_state" property="refundState" jdbcType="VARCHAR" />
     <result column="is_lock" property="isLock" jdbcType="BIT" />
     <result column="goods_state" property="goodsState" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="seller_handle_time" property="sellerHandleTime" jdbcType="TIMESTAMP" />
     <result column="admin_time" property="adminTime" jdbcType="TIMESTAMP" />
-    <result column="reason_info" property="reasonInfo" jdbcType="VARCHAR" />
     <result column="pics_info" property="picsInfo" jdbcType="VARCHAR" />
     <result column="buyer_message" property="buyerMessage" jdbcType="VARCHAR" />
     <result column="seller_message" property="sellerMessage" jdbcType="VARCHAR" />
     <result column="admin_message" property="adminMessage" jdbcType="VARCHAR" />
     <result column="express_name" property="expressName" jdbcType="VARCHAR" />
     <result column="express_no" property="expressNo" jdbcType="VARCHAR" />
-    <result column="delay_time" property="delayTime" jdbcType="TIMESTAMP" />
-    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     refund_id, order_id, order_out_trade_no, store_id, member_id, member_username, goods_id, 
     goods_name, goods_num, refund_amount, goods_image, order_goods_type, refund_type, 
-    seller_state, refund_state, is_lock, goods_state, create_time, seller_handle_time, 
-    admin_time, reason_info, pics_info, buyer_message, seller_message, admin_message, 
-    express_name, express_no, delay_time, receive_time
+    refund_state, is_lock, goods_state, create_time, seller_handle_time, admin_time, 
+    pics_info, buyer_message, seller_message, admin_message, express_name, express_no
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -57,22 +52,20 @@
       member_id, member_username, goods_id, 
       goods_name, goods_num, refund_amount, 
       goods_image, order_goods_type, refund_type, 
-      seller_state, refund_state, is_lock, 
-      goods_state, create_time, seller_handle_time, 
-      admin_time, reason_info, pics_info, 
-      buyer_message, seller_message, admin_message, 
-      express_name, express_no, delay_time, 
-      receive_time)
+      refund_state, is_lock, goods_state, 
+      create_time, seller_handle_time, admin_time, 
+      pics_info, buyer_message, seller_message, 
+      admin_message, express_name, express_no
+      )
     values (#{orderId,jdbcType=INTEGER}, #{orderOutTradeNo,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
       #{memberId,jdbcType=INTEGER}, #{memberUsername,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, 
       #{goodsName,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, #{refundAmount,jdbcType=DECIMAL}, 
       #{goodsImage,jdbcType=VARCHAR}, #{orderGoodsType,jdbcType=VARCHAR}, #{refundType,jdbcType=VARCHAR}, 
-      #{sellerState,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
-      #{goodsState,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{sellerHandleTime,jdbcType=TIMESTAMP}, 
-      #{adminTime,jdbcType=TIMESTAMP}, #{reasonInfo,jdbcType=VARCHAR}, #{picsInfo,jdbcType=VARCHAR}, 
-      #{buyerMessage,jdbcType=VARCHAR}, #{sellerMessage,jdbcType=VARCHAR}, #{adminMessage,jdbcType=VARCHAR}, 
-      #{expressName,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}, #{delayTime,jdbcType=TIMESTAMP}, 
-      #{receiveTime,jdbcType=TIMESTAMP})
+      #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, #{goodsState,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{sellerHandleTime,jdbcType=TIMESTAMP}, #{adminTime,jdbcType=TIMESTAMP}, 
+      #{picsInfo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, #{sellerMessage,jdbcType=VARCHAR}, 
+      #{adminMessage,jdbcType=VARCHAR}, #{expressName,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Refund" >
     <selectKey resultType="java.lang.Integer" keyProperty="refundId" order="AFTER" >
@@ -116,9 +109,6 @@
       <if test="refundType != null" >
         refund_type,
       </if>
-      <if test="sellerState != null" >
-        seller_state,
-      </if>
       <if test="refundState != null" >
         refund_state,
       </if>
@@ -137,9 +127,6 @@
       <if test="adminTime != null" >
         admin_time,
       </if>
-      <if test="reasonInfo != null" >
-        reason_info,
-      </if>
       <if test="picsInfo != null" >
         pics_info,
       </if>
@@ -157,12 +144,6 @@
       </if>
       <if test="expressNo != null" >
         express_no,
-      </if>
-      <if test="delayTime != null" >
-        delay_time,
-      </if>
-      <if test="receiveTime != null" >
-        receive_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -202,9 +183,6 @@
       <if test="refundType != null" >
         #{refundType,jdbcType=VARCHAR},
       </if>
-      <if test="sellerState != null" >
-        #{sellerState,jdbcType=VARCHAR},
-      </if>
       <if test="refundState != null" >
         #{refundState,jdbcType=VARCHAR},
       </if>
@@ -223,9 +201,6 @@
       <if test="adminTime != null" >
         #{adminTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="reasonInfo != null" >
-        #{reasonInfo,jdbcType=VARCHAR},
-      </if>
       <if test="picsInfo != null" >
         #{picsInfo,jdbcType=VARCHAR},
       </if>
@@ -243,12 +218,6 @@
       </if>
       <if test="expressNo != null" >
         #{expressNo,jdbcType=VARCHAR},
-      </if>
-      <if test="delayTime != null" >
-        #{delayTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="receiveTime != null" >
-        #{receiveTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -291,9 +260,6 @@
       <if test="refundType != null" >
         refund_type = #{refundType,jdbcType=VARCHAR},
       </if>
-      <if test="sellerState != null" >
-        seller_state = #{sellerState,jdbcType=VARCHAR},
-      </if>
       <if test="refundState != null" >
         refund_state = #{refundState,jdbcType=VARCHAR},
       </if>
@@ -311,9 +277,6 @@
       </if>
       <if test="adminTime != null" >
         admin_time = #{adminTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="reasonInfo != null" >
-        reason_info = #{reasonInfo,jdbcType=VARCHAR},
       </if>
       <if test="picsInfo != null" >
         pics_info = #{picsInfo,jdbcType=VARCHAR},
@@ -333,12 +296,6 @@
       <if test="expressNo != null" >
         express_no = #{expressNo,jdbcType=VARCHAR},
       </if>
-      <if test="delayTime != null" >
-        delay_time = #{delayTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="receiveTime != null" >
-        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where refund_id = #{refundId,jdbcType=INTEGER}
   </update>
@@ -356,22 +313,18 @@
       goods_image = #{goodsImage,jdbcType=VARCHAR},
       order_goods_type = #{orderGoodsType,jdbcType=VARCHAR},
       refund_type = #{refundType,jdbcType=VARCHAR},
-      seller_state = #{sellerState,jdbcType=VARCHAR},
       refund_state = #{refundState,jdbcType=VARCHAR},
       is_lock = #{isLock,jdbcType=BIT},
       goods_state = #{goodsState,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       seller_handle_time = #{sellerHandleTime,jdbcType=TIMESTAMP},
       admin_time = #{adminTime,jdbcType=TIMESTAMP},
-      reason_info = #{reasonInfo,jdbcType=VARCHAR},
       pics_info = #{picsInfo,jdbcType=VARCHAR},
       buyer_message = #{buyerMessage,jdbcType=VARCHAR},
       seller_message = #{sellerMessage,jdbcType=VARCHAR},
       admin_message = #{adminMessage,jdbcType=VARCHAR},
       express_name = #{expressName,jdbcType=VARCHAR},
-      express_no = #{expressNo,jdbcType=VARCHAR},
-      delay_time = #{delayTime,jdbcType=TIMESTAMP},
-      receive_time = #{receiveTime,jdbcType=TIMESTAMP}
+      express_no = #{expressNo,jdbcType=VARCHAR}
     where refund_id = #{refundId,jdbcType=INTEGER}
   </update>
 </mapper>

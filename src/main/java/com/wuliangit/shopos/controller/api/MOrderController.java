@@ -176,6 +176,17 @@ public class MOrderController {
         return result;
     }
 
+    /**
+     * 确认收货
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/receive")
+    public Object receive(Integer orderId){
+        RestResult result = new RestResult();
+        int res = orderService.receive(orderId);
+        return result;
+    }
 
 
 }

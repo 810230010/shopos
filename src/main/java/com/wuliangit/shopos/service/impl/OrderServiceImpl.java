@@ -265,4 +265,11 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.updateByPrimaryKeySelective(order);
     }
 
+    @Override
+    public int receive(Integer orderId) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        order.setOrderState(POJOConstants.ORDER_STATE_RECEIVE);
+        return orderMapper.updateByPrimaryKeySelective(order);
+    }
+
 }

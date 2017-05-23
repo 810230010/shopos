@@ -133,4 +133,11 @@ public interface OrderService {
      * @return
      */
     int addExpressInfo(Integer expressId, String expressNo, Integer orderId);
+
+    /**
+     * 确认收货
+     * @param orderId
+     * @return
+     */
+    int receive(Integer orderId);
 }

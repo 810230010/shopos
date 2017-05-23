@@ -8,6 +8,10 @@ public class Store {
 
     private String sellerAdminId;
 
+    private Integer bindMemberId;
+
+    private String bindMemberUsername;
+
     private String name;
 
     private Integer gradeId;
@@ -126,6 +130,22 @@ public class Store {
 
     public void setSellerAdminId(String sellerAdminId) {
         this.sellerAdminId = sellerAdminId == null ? null : sellerAdminId.trim();
+    }
+
+    public Integer getBindMemberId() {
+        return bindMemberId;
+    }
+
+    public void setBindMemberId(Integer bindMemberId) {
+        this.bindMemberId = bindMemberId;
+    }
+
+    public String getBindMemberUsername() {
+        return bindMemberUsername;
+    }
+
+    public void setBindMemberUsername(String bindMemberUsername) {
+        this.bindMemberUsername = bindMemberUsername == null ? null : bindMemberUsername.trim();
     }
 
     public String getName() {

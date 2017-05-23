@@ -5,12 +5,6 @@ package com.wuliangit.shopos.dto;
  */
 public class ApiEvaluateGoodsDTO {
 
-    private Integer evaluateGoodsId;
-
-    private Integer storeId;
-
-    private Integer orderId;
-
     private Integer goodsId;
 
     private Integer star;
@@ -20,30 +14,6 @@ public class ApiEvaluateGoodsDTO {
     private String images;
 
     private Boolean isAnonymous;
-
-    public Integer getEvaluateGoodsId() {
-        return evaluateGoodsId;
-    }
-
-    public void setEvaluateGoodsId(Integer evaluateGoodsId) {
-        this.evaluateGoodsId = evaluateGoodsId;
-    }
-
-    public Integer getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Integer storeId) {
-        this.storeId = storeId;
-    }
-
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
 
     public Integer getGoodsId() {
         return goodsId;

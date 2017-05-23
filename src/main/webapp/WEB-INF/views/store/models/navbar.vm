@@ -5,9 +5,11 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
+                <a href="/store/index" class="m-r-sm text-muted welcome-message">首页</a>
+            </li>
+            <li>
                 <span class="m-r-sm text-muted welcome-message">欢迎使用xxx商城</span>
             </li>
-
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
                     <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>

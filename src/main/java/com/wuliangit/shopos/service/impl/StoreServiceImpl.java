@@ -8,10 +8,7 @@ import com.wuliangit.shopos.dto.ApiStoreDTO;
 import com.wuliangit.shopos.dto.ApiStoreListDTO;
 import com.wuliangit.shopos.dto.StoreDetailDTO;
 import com.wuliangit.shopos.dto.StorePageListDTO;
-import com.wuliangit.shopos.entity.Area;
-import com.wuliangit.shopos.entity.Store;
-import com.wuliangit.shopos.entity.StoreGoodsAd;
-import com.wuliangit.shopos.entity.StoreJoinin;
+import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.*;
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +40,8 @@ public class StoreServiceImpl implements StoreService {
     private StoreGoodsAdService storeGoodsAdService;
     @Autowired
     private AreaService areaService;
+    @Autowired
+    private MemberService memberService;
 
 
     @Override
@@ -69,6 +68,10 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public int updateStore(Store store) {
+        if (!StringUtils.isEmpty(store.getBindMemberUsername())){
+            Member member = memberService.getByUsername(store.getBindMemberUsername());
+            store.setBindMemberId(member.getMemberId());
+        }
         int res = storeMapper.updateByPrimaryKeySelective(store);
         StoreMin storeMin = storeMapper.getStoreMinByStoreId(store.getStoreId());
         SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeMin);
@@ -133,5 +136,10 @@ public class StoreServiceImpl implements StoreService {
     public int createStore(Store store) {
         store.setCreateTime(new Date());
         return storeMapper.insertSelective(store);
+    }
+
+    @Override
+    public Store getStoreByBindMemberUsername(String phone) {
+        return storeMapper.getStoreByBindMemberUsername(phone);
     }
 }

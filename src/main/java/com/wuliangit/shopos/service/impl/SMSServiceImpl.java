@@ -57,6 +57,20 @@ public class SMSServiceImpl implements SMSService {
         return cacheCode;
     }
 
+    @Override
+    public boolean sendStoreBindCode(String phone) {
+        String code = this.getRandomCode();
+        String timeout = "10";
+        boolean res = smsSender.send(phone, "1", new String[]{timeout, code});
+        if (res) {
+            Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
+            cache.put(phone, code);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /**
      * 获取6位随机验证码

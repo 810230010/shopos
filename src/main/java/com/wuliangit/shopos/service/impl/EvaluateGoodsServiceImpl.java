@@ -44,36 +44,33 @@ public class EvaluateGoodsServiceImpl implements EvaluateGoodsService {
 
     @Override
     @Transactional
-    public int createEvaluateGoods(ApiEvaluateGoodsDTO evaluateGoods) throws OptionException {
+    public int createEvaluateGoods(List<ApiEvaluateGoodsDTO> evaluateGoodses,Integer orderId) throws OptionException {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
 
-        Order order = orderMapper.selectByPrimaryKey(evaluateGoods.getOrderId());
+        for (ApiEvaluateGoodsDTO evaluateGoods : evaluateGoodses) {
+            if (order == null) {
+                throw new OptionException("订单不存在");
+            }
+            OrderGoods orderGoods = orderGoodsMapper.getByOrderIdAndGoodsId(orderId, evaluateGoods.getGoodsId());
+            if (orderGoods == null) {
+                throw new OptionException("您没有购买过这个商品");
+            }
+            EvaluateGoods evaluate = mapper.map(evaluateGoods, EvaluateGoods.class);
 
-        if (order == null) {
-            throw new OptionException("订单不存在");
+            Member currentMember = WebUtil.getCurrentMember();
+
+            evaluate.setCreateTime(new Date());
+            evaluate.setIsShow(true);
+            evaluate.setMemberId(currentMember.getMemberId());
+            evaluate.setMemberName(currentMember.getNickname());
+            evaluate.setStoreId(order.getStoreId());
+            evaluate.setSkuValue(orderGoods.getSkuName());
+            evaluateGoodsMapper.insertSelective(evaluate);
         }
-
-        OrderGoods orderGoods = orderGoodsMapper.getByOrderIdAndGoodsId(evaluateGoods.getOrderId(), evaluateGoods.getGoodsId());
-
-        if (orderGoods == null) {
-            throw new OptionException("您没有购买过这个商品");
-        }
-
-        EvaluateGoods evaluate = mapper.map(evaluateGoods, EvaluateGoods.class);
-
-        Member currentMember = WebUtil.getCurrentMember();
-
-        evaluate.setCreateTime(new Date());
-        evaluate.setIsShow(true);
-        evaluate.setMemberId(currentMember.getMemberId());
-        evaluate.setMemberName(currentMember.getNickname());
-        evaluate.setStoreId(order.getStoreId());
-        evaluate.setSkuValue(orderGoods.getSkuName());
 
         order.setMemberEvaluationState(POJOConstants.ORDER_EVALUATION_STATE_YES);
+        return orderMapper.updateByPrimaryKeySelective(order);
 
-        orderMapper.updateByPrimaryKeySelective(order);
-
-        return evaluateGoodsMapper.insertSelective(evaluate);
     }
 
     @Override

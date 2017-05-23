@@ -1,6 +1,8 @@
 package com.wuliangit.shopos.controller.api;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiEvaluateGoodsDTO;
 import com.wuliangit.shopos.dto.ApiEvaluateGoodsListDTO;
@@ -27,9 +29,14 @@ public class MEvaluateGoodsController {
      * @return
      */
     @RequestMapping("/evaluate/goods/create")
-    public Object createEvaluateGoods(ApiEvaluateGoodsDTO evaluateGoods) throws OptionException {
+    public Object createEvaluateGoods(String evaluateGoods,Integer orderId) throws OptionException {
         RestResult result = new RestResult();
-        int res = evaluateGoodsService.createEvaluateGoods(evaluateGoods);
+
+        Gson gson = new Gson();
+        List<ApiEvaluateGoodsDTO>  evaluateGoodses = gson.fromJson(evaluateGoods, new TypeToken<List<ApiEvaluateGoodsDTO>>() {
+        }.getType());
+
+        int res = evaluateGoodsService.createEvaluateGoods(evaluateGoodses,orderId);
         return result;
     }
 

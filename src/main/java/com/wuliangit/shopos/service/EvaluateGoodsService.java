@@ -14,10 +14,10 @@ public interface EvaluateGoodsService {
 
     /**
      * 创建评价
-     * @param evaluateGoods
+     * @param evaluateGoodses
      * @return
      */
-    int createEvaluateGoods(ApiEvaluateGoodsDTO evaluateGoods) throws OptionException;
+    int createEvaluateGoods(List<ApiEvaluateGoodsDTO> evaluateGoodses,Integer orderId) throws OptionException;
 
     /**
      * 获取商品评价

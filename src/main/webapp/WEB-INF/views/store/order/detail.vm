@@ -189,8 +189,6 @@
     $('#side-menu').metisMenu();
 
 
-
-
 </script>
 
 #parse("/admin/models/end.vm")

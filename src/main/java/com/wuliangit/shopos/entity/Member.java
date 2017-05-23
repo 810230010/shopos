@@ -88,6 +88,8 @@ public class Member {
 
     private String idcardBack;
 
+    private String tuikeAuth;
+
     public Integer getMemberId() {
         return memberId;
     }
@@ -422,5 +424,13 @@ public class Member {
 
     public void setIdcardBack(String idcardBack) {
         this.idcardBack = idcardBack == null ? null : idcardBack.trim();
+    }
+
+    public String getTuikeAuth() {
+        return tuikeAuth;
+    }
+
+    public void setTuikeAuth(String tuikeAuth) {
+        this.tuikeAuth = tuikeAuth == null ? null : tuikeAuth.trim();
     }
 }

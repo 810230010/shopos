@@ -71,4 +71,11 @@
         where store_id = #{storeId}
     </select>
 
+    <!--通过绑定的会员用户名获取店铺-->
+    <select id="getStoreByBindMemberUsername" resultType="com.wuliangit.shopos.entity.Store">
+        select *
+        from t_store
+        where bind_member_username = #{phone}
+    </select>
+
 </mapper>

@@ -25,4 +25,11 @@ public interface SMSService {
      * @return
      */
     String getCheckCode(String phone);
+
+    /**
+     * 店铺绑定会员验证码
+     * @param phone
+     * @return
+     */
+    boolean sendStoreBindCode(String phone);
 }

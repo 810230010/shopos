@@ -63,4 +63,11 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return
      */
     ApiStoreDTO getApiStoreDTOById(Integer storeId);
+
+    /**
+     * 通过绑定的会员用户名获取店铺
+     * @param phone
+     * @return
+     */
+    Store getStoreByBindMemberUsername(String phone);
 }

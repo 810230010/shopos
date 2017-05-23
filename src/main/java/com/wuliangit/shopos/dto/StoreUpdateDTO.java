@@ -31,6 +31,16 @@ public class StoreUpdateDTO {
 
     private String liveStoreGps;
 
+    private String bindMemberUsername;
+
+    public String getBindMemberUsername() {
+        return bindMemberUsername;
+    }
+
+    public void setBindMemberUsername(String bindMemberUsername) {
+        this.bindMemberUsername = bindMemberUsername;
+    }
+
     public Integer getStoreId() {
         return storeId;
     }

@@ -111,4 +111,11 @@ public interface StoreService {
      * @param store
      */
     int createStore(Store store);
+
+    /**
+     * 通过绑定的会员用户名获取店铺
+     * @param phone
+     * @return
+     */
+    Store getStoreByBindMemberUsername(String phone);
 }

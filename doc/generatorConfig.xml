@@ -174,5 +174,17 @@
             <generatedKey column="store_message_id" sqlStatement="MySql" identity="true"/>
         </table>
 
+        <table tableName="t_store_cash" domainObjectName="StoreCash" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="store_cash_id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table tableName="t_store_account" domainObjectName="StoreAccount" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="store_account_id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table tableName="t_trade_refund" domainObjectName="TradeRefund" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="trade_refund_id" sqlStatement="MySql" identity="true"/>
+        </table>
+
     </context>
 </generatorConfiguration>

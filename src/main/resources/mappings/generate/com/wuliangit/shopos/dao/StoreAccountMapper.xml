@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.StoreAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.StoreAccount" >
+    <id column="store_ account_id" property="storeAccountId" jdbcType="INTEGER" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="available_balance" property="availableBalance" jdbcType="DECIMAL" />
+    <result column="freeze_balance" property="freezeBalance" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    `store_ account_id`, store_id, available_balance, freeze_balance
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_store_account
+    where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_store_account
+    where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreAccount" >
+    insert into t_store_account (`store_ account_id`, store_id, available_balance, 
+      freeze_balance)
+    values (#{storeAccountId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{availableBalance,jdbcType=DECIMAL}, 
+      #{freezeBalance,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreAccount" >
+    insert into t_store_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeAccountId != null" >
+        `store_ account_id`,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="availableBalance != null" >
+        available_balance,
+      </if>
+      <if test="freezeBalance != null" >
+        freeze_balance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeAccountId != null" >
+        #{storeAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="availableBalance != null" >
+        #{availableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBalance != null" >
+        #{freezeBalance,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.StoreAccount" >
+    update t_store_account
+    <set >
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="availableBalance != null" >
+        available_balance = #{availableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBalance != null" >
+        freeze_balance = #{freezeBalance,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.StoreAccount" >
+    update t_store_account
+    set store_id = #{storeId,jdbcType=INTEGER},
+      available_balance = #{availableBalance,jdbcType=DECIMAL},
+      freeze_balance = #{freezeBalance,jdbcType=DECIMAL}
+    where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.*;
 import com.wuliangit.shopos.entity.Order;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.OrderGoodsInfo;
 
@@ -159,4 +160,18 @@ public interface OrderService {
      * @return
      */
     int refundDelive(Integer refundId, String expressName, String expressNo);
+
+    /**
+     * 取消未支付订单（已发货）
+     * @param orderId
+     * @return
+     */
+    int cancelUnpay(Integer orderId) throws Exception;
+
+    /**
+     * 取消已支付订单（未发货）
+     * @param orderId
+     * @return
+     */
+    int cancelPayed(Integer orderId) throws Exception;
 }

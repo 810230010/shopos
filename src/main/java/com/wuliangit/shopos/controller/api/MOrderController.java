@@ -220,4 +220,32 @@ public class MOrderController {
         return result;
     }
 
+
+    /**
+     * 取消已支付订单（未发货）
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/cancel/payed")
+    public Object cancelPayed(Integer orderId) throws Exception {
+        RestResult result = new RestResult();
+
+        int res = orderService.cancelPayed(orderId);
+
+        return result;
+    }
+
+    /**
+     * 取消未支付订单（已发货）
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/cancel/unpay")
+    public Object cancelUnpay(Integer orderId) throws Exception {
+        RestResult result = new RestResult();
+
+        int res = orderService.cancelUnpay(orderId);
+        return result;
+    }
+
 }

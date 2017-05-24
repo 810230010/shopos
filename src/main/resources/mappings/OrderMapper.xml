@@ -19,6 +19,7 @@
         carriage_amount,order_amount,goods_amount,payment_time,payment_code
         FROM t_order
         <where>
+            delete_state = 'NO'
             <if test="state != null and state != '' ">
                 and order_state = #{state}
             </if>
@@ -35,12 +36,12 @@
 
     <!--api接口获取订单-->
     <select id="apiGetOrderByStateAndMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
-        select * from t_order where order_state = #{orderState} and member_id = #{memberId} and delete_state = 'NO' order by create_time desc
+        select * from t_order where delete_state = 'NO' and order_state = #{orderState} and member_id = #{memberId} and delete_state = 'NO' order by create_time desc
     </select>
 
     <!--api接口获取所有订单-->
     <select id="apiGetOrderByMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
-        select * from t_order where member_id = #{memberId} and delete_state = 'NO' order by create_time desc
+        select * from t_order where delete_state = 'NO' and member_id = #{memberId} and delete_state = 'NO' order by create_time desc
     </select>
 
     <!--待评价订单-->

@@ -174,4 +174,11 @@ public interface OrderService {
      * @return
      */
     int cancelPayed(Integer orderId) throws Exception;
+
+    /**
+     * 删除订单
+     * @param orderId
+     * @return
+     */
+    int apiDelete(Integer orderId) throws Exception;
 }

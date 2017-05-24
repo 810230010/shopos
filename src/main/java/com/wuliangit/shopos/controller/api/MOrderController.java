@@ -248,4 +248,18 @@ public class MOrderController {
         return result;
     }
 
+    /**
+     * 删除订单
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/delete")
+    public Object delete(Integer orderId) throws Exception {
+        RestResult result = new RestResult();
+
+        int res = orderService.apiDelete(orderId);
+
+        return result;
+    }
+
 }

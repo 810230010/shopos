@@ -394,4 +394,17 @@ public class OrderServiceImpl implements OrderService {
         }
 
     }
+
+    @Override
+    public int apiDelete(Integer orderId) throws Exception {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+
+        String orderState = order.getOrderState();
+        if (orderState.equals(POJOConstants.ORDER_STATE_PAYED)||orderState.equals(POJOConstants.ORDER_STATE_DELIVE)){
+            throw new OptionException("该订单状态不允许删除");
+        }
+
+        order.setDeleteState(POJOConstants.ORDER_DELETE_STATE_YES);
+        return orderMapper.updateByPrimaryKeySelective(order);
+    }
 }

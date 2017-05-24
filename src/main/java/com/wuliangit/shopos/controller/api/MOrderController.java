@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiOrderCreateDTO;
 import com.wuliangit.shopos.dto.ApiOrderDTO;
+import com.wuliangit.shopos.dto.ApiOrderGoodsDTO;
 import com.wuliangit.shopos.dto.ApiRefundDTO;
 import com.wuliangit.shopos.entity.GoodsSku;
 import com.wuliangit.shopos.entity.Order;
@@ -258,6 +259,24 @@ public class MOrderController {
         RestResult result = new RestResult();
 
         int res = orderService.apiDelete(orderId);
+
+        return result;
+    }
+
+    /**
+     * 订单详情
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/detail")
+    public Object detail(Integer orderId) throws Exception {
+        RestResult result = new RestResult();
+        Order order = orderService.getOrderById(orderId);
+
+        List<ApiOrderGoodsDTO> goodses = orderService.getOrderDetailGoods(orderId);
+
+        result.add("goodses", goodses);
+        result.add("order", order);
 
         return result;
     }

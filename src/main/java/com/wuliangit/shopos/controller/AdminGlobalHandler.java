@@ -36,12 +36,13 @@ public class AdminGlobalHandler {
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public String errorHandlerOverJson(HttpServletRequest request, ResourceNotFoundException exception) {
+        logger.error("",exception);
         return "500";
     }
 
     @ExceptionHandler(value = Exception.class)
     public String errorHandlerOverJson(HttpServletRequest request, Exception exception) {
-        logger.error(exception.getLocalizedMessage());
+        logger.error("",exception);
         exception.printStackTrace();
         return "500";
     }

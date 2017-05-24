@@ -22,17 +22,16 @@ public class ApiGlobalHandler {
 
     @ExceptionHandler(value = Exception.class)
     public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
-        logger.error(exception.getMessage());
+        logger.error("",exception);
         RestResult result = new RestResult();
         result.setCode(500);
-        exception.printStackTrace();
         result.setMsg(exception.getMessage());
         return result;
     }
 
     @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
     public Object methodArgumentTypeMismatchException(HttpServletRequest request, Exception exception) {
-        logger.error(exception.getMessage());
+        logger.error("",exception);
         RestResult result = new RestResult();
         result.setCode(500);
         exception.printStackTrace();
@@ -50,6 +49,7 @@ public class ApiGlobalHandler {
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public Object handleHttp405Exception(HttpServletRequest req, HttpRequestMethodNotSupportedException ex) {
         RestResult result = new RestResult();
+        logger.error("",ex);
         result.setCode(HttpStatus.METHOD_NOT_ALLOWED.value());
         result.setMsg(ex.getMessage());
         ex.printStackTrace();

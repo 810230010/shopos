@@ -58,17 +58,18 @@ public class StoreGlobalHandler {
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public String errorHandlerOverJson(HttpServletRequest request, ResourceNotFoundException exception) {
+        logger.error("",exception);
         return "500";
     }
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
+        logger.error("",exception);
         RestResult result = new RestResult();
         exception.printStackTrace();
         result.setCode(500);
         result.setMsg(exception.getMessage());
-        logger.error(exception.toString());
         return result;
     }
 

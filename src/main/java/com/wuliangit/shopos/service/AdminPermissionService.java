@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by nilme on 2017/5/12.
  */
-public interface AdminPerminssionService {
+public interface AdminPermissionService {
 
     /**
      * 获取管理员菜单
@@ -15,4 +15,5 @@ public interface AdminPerminssionService {
      */
     List<MenuDTO> getAdminMenus();
 
+    String[] getPermissionByRoleId(Integer adminRoleId);
 }

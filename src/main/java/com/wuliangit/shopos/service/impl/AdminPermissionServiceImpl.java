@@ -5,7 +5,7 @@ import com.wuliangit.shopos.dao.AdminPermissionMapper;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.AdminRole;
-import com.wuliangit.shopos.service.AdminPerminssionService;
+import com.wuliangit.shopos.service.AdminPermissionService;
 import com.wuliangit.shopos.service.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 @Service
-public class AdminPerminssionServiceImpl implements AdminPerminssionService {
+public class AdminPermissionServiceImpl implements AdminPermissionService {
 
     @Autowired
     private AdminPermissionMapper adminPermissionMapper;
@@ -35,6 +35,11 @@ public class AdminPerminssionServiceImpl implements AdminPerminssionService {
 
         List<MenuDTO> menuList = handleSubType(menus, 0);
         return menuList;
+    }
+
+    @Override
+    public String[] getPermissionByRoleId(Integer adminRoleId) {
+        return adminPermissionMapper.getAdminPermissionsByRoleId(adminRoleId).split(",");
     }
 
     /**

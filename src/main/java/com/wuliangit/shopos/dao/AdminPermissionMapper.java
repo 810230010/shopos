@@ -15,5 +15,5 @@ public interface AdminPermissionMapper extends BaseMapper<AdminPermission, Integ
      */
     List<MenuDTO> getAdminMenus(@Param("permissionList") String permissionList);
 
-
+    String getAdminPermissionsByRoleId(@Param("adminRoleId") Integer adminRoleId);
 }

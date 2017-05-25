@@ -6,7 +6,7 @@ import com.wuliangit.shopos.dao.AdminRoleMapper;
 import com.wuliangit.shopos.dto.AdminRoleDTO;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.AdminRole;
-import com.wuliangit.shopos.service.AdminPerminssionService;
+import com.wuliangit.shopos.service.AdminPermissionService;
 import com.wuliangit.shopos.service.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +51,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     public AdminRoleDTO getAdminRoleDetail(Integer roleId) {
         AdminRole adminRole = adminRoleMapper.selectByPrimaryKey(roleId);
         List<MenuDTO> adminRolePermissions = adminPermissionMapper.getAdminMenus(adminRole.getPermissionList());
-        List<MenuDTO> menuList = AdminPerminssionServiceImpl.handleSubType(adminRolePermissions, 0);
+        List<MenuDTO> menuList = AdminPermissionServiceImpl.handleSubType(adminRolePermissions, 0);
         AdminRoleDTO adminRoleDTO = new AdminRoleDTO();
         adminRoleDTO.setName(adminRole.getName());
         adminRoleDTO.setRolePermissions(menuList);

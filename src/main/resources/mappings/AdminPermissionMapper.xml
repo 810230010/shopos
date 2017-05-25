@@ -8,5 +8,10 @@
         where admin_permission_id in(${permissionList})
         and ( type = 'PMENU' or  type = 'MENU') and useable = 1;
     </select>
+    <select id="getAdminPermissionsByRoleId" resultType="java.lang.String">
+        select permission_list as permissionList
+        from t_admin_role
+        where admin_role_id=#{adminRoleId};
+    </select>
 
 </mapper>

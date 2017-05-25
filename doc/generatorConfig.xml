@@ -186,5 +186,10 @@
             <generatedKey column="trade_refund_id" sqlStatement="MySql" identity="true"/>
         </table>
 
+        <table tableName="t_store_account_log" domainObjectName="StoreAccountLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="store_account_log_id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+
     </context>
 </generatorConfiguration>

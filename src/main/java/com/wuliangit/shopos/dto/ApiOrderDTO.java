@@ -33,7 +33,7 @@ public class ApiOrderDTO {
 
     private Date paymentTime;
 
-    private Date finnshedTime;
+    private Date finishedTime;
 
     private BigDecimal goodsAmount;
 
@@ -41,7 +41,7 @@ public class ApiOrderDTO {
 
     private BigDecimal pdAmount;
 
-    private BigDecimal carriage;
+    private BigDecimal carriageAmount;
 
     private String memberEvaluationState;
 
@@ -59,7 +59,9 @@ public class ApiOrderDTO {
 
     private String orderFrom;
 
-    private String carriageName;
+    private String expressName;
+
+    private String expressNo;
 
     private Date createTime;
 
@@ -83,13 +85,6 @@ public class ApiOrderDTO {
 
     private List<ApiOrderGoodsDTO> orderGoodses;
 
-    public List<ApiOrderGoodsDTO> getOrderGoodses() {
-        return orderGoodses;
-    }
-
-    public void setOrderGoodses(List<ApiOrderGoodsDTO> orderGoodses) {
-        this.orderGoodses = orderGoodses;
-    }
 
     public Integer getOrderId() {
         return orderId;
@@ -179,12 +174,12 @@ public class ApiOrderDTO {
         this.paymentTime = paymentTime;
     }
 
-    public Date getFinnshedTime() {
-        return finnshedTime;
+    public Date getFinishedTime() {
+        return finishedTime;
     }
 
-    public void setFinnshedTime(Date finnshedTime) {
-        this.finnshedTime = finnshedTime;
+    public void setFinishedTime(Date finishedTime) {
+        this.finishedTime = finishedTime;
     }
 
     public BigDecimal getGoodsAmount() {
@@ -211,12 +206,12 @@ public class ApiOrderDTO {
         this.pdAmount = pdAmount;
     }
 
-    public BigDecimal getCarriage() {
-        return carriage;
+    public BigDecimal getCarriageAmount() {
+        return carriageAmount;
     }
 
-    public void setCarriage(BigDecimal carriage) {
-        this.carriage = carriage;
+    public void setCarriageAmount(BigDecimal carriageAmount) {
+        this.carriageAmount = carriageAmount;
     }
 
     public String getMemberEvaluationState() {
@@ -283,12 +278,20 @@ public class ApiOrderDTO {
         this.orderFrom = orderFrom;
     }
 
-    public String getCarriageName() {
-        return carriageName;
+    public String getExpressName() {
+        return expressName;
     }
 
-    public void setCarriageName(String carriageName) {
-        this.carriageName = carriageName;
+    public void setExpressName(String expressName) {
+        this.expressName = expressName;
+    }
+
+    public String getExpressNo() {
+        return expressNo;
+    }
+
+    public void setExpressNo(String expressNo) {
+        this.expressNo = expressNo;
     }
 
     public Date getCreateTime() {
@@ -369,5 +372,13 @@ public class ApiOrderDTO {
 
     public void setInvoiceInfo(String invoiceInfo) {
         this.invoiceInfo = invoiceInfo;
+    }
+
+    public List<ApiOrderGoodsDTO> getOrderGoodses() {
+        return orderGoodses;
+    }
+
+    public void setOrderGoodses(List<ApiOrderGoodsDTO> orderGoodses) {
+        this.orderGoodses = orderGoodses;
     }
 }

@@ -19,17 +19,6 @@ public class AdminRole {
 
     private String description;
 
-<<<<<<< HEAD
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-=======
->>>>>>> cd24db7d741af77c419c58039ca771cb3226fba8
     public Integer getAdminRoleId() {
         return adminRoleId;
     }

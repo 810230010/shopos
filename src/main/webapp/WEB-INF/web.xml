@@ -6,7 +6,11 @@
         metadata-complete="true">
 
     <display-name>shopos</display-name>
-    
+
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/views/index.html</welcome-file>
+    </welcome-file-list>
+
     <!-- Spring的log4j监听器 动态的改变记录级别和策略，不需要重启Web应用-->
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>

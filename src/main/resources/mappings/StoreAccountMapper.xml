@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.StoreAccountMapper" >
 
+
+    <!--通过店铺id获取店铺账户-->
+    <select id="getByStoreId" resultType="com.wuliangit.shopos.entity.StoreAccount">
+        select * from t_store_acount where store_id  = #{sotreId}
+    </select>
+
 </mapper>

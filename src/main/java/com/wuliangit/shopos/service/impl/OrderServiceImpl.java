@@ -51,7 +51,10 @@ public class OrderServiceImpl implements OrderService {
     private RefundMapper refundMapper;
     @Autowired
     private TradeRefundMapper tradeRefundMapper;
-
+    @Autowired
+    private StoreAccountMapper storeAccountMapper;
+    @Autowired
+    private StoreAccountLogMapper storeAccountLogMapper;
 
     @Override
     @Transactional
@@ -199,7 +202,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<ApiOrderDTO> apiGetUnpayOrders(Integer page, Integer pageSize) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         Member currentMember = WebUtil.getCurrentMember();
         List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_INIT, currentMember.getMemberId());
 
@@ -211,7 +214,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<ApiOrderDTO> apiGetPayedOrders(Integer page, Integer pageSize) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         Member currentMember = WebUtil.getCurrentMember();
         List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_PAYED, currentMember.getMemberId());
 
@@ -223,7 +226,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<ApiOrderDTO> apiGetDelivedOrders(Integer page, Integer pageSize) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         Member currentMember = WebUtil.getCurrentMember();
         List<ApiOrderDTO> orders = orderMapper.apiGetOrderByStateAndMemberId(POJOConstants.ORDER_STATE_DELIVE, currentMember.getMemberId());
 
@@ -235,7 +238,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<ApiOrderDTO> apiGetUnEvaluateOrders(Integer page, Integer pageSize) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         Member currentMember = WebUtil.getCurrentMember();
         List<ApiOrderDTO> orders = orderMapper.apiGetUnEvaluateOrderByMemberId(currentMember.getMemberId());
 
@@ -248,7 +251,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<ApiOrderDTO> apiGetAllOrders(Integer page, Integer pageSize) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         Member currentMember = WebUtil.getCurrentMember();
         List<ApiOrderDTO> orders = orderMapper.apiGetOrderByMemberId(currentMember.getMemberId());
 
@@ -268,7 +271,7 @@ public class OrderServiceImpl implements OrderService {
         Express express = expressMapper.selectByPrimaryKey(expressId);
         Order order = orderMapper.selectByPrimaryKey(orderId);
 
-        order.setExpressName(express.getExpressName()+"/"+express.getExpressCode());
+        order.setExpressName(express.getExpressName() + "/" + express.getExpressCode());
         order.setExpressNo(expressNo);
         order.setOrderState(POJOConstants.ORDER_STATE_DELIVE);
         order.setDeliverTime(new Date());
@@ -277,9 +280,26 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public int receive(Integer orderId) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
         order.setOrderState(POJOConstants.ORDER_STATE_RECEIVE);
+
+        //添加流水日志
+        StoreAccountLog storeAccountLog = new StoreAccountLog();
+        storeAccountLog.setOrderId(orderId);
+        storeAccountLog.setCreateTime(new Date());
+        storeAccountLog.setStoreId(order.getStoreId());
+        storeAccountLog.setAmount(order.getOrderAmount());
+        storeAccountLog.setType(POJOConstants.STORE_ACCOUNT_LOG_ORDER);
+        storeAccountLogMapper.insertSelective(storeAccountLog);
+
+        //修改店铺余额
+        StoreAccount storeAccount = storeAccountMapper.getByStoreId(order.getStoreId());
+        storeAccount.setAvailableBalance(storeAccount.getAvailableBalance().add(order.getOrderAmount()));
+        storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
+
+        //更新订单状态
         return orderMapper.updateByPrimaryKeySelective(order);
     }
 
@@ -290,14 +310,14 @@ public class OrderServiceImpl implements OrderService {
         List<OrderGoods> orderGoodsList = orderGoodsMapper.getByOrderId(orderId);
         OrderGoods orderGoods = null;
         for (OrderGoods og : orderGoodsList) {
-            if (og.getGoodsId().equals(goodsId)){
+            if (og.getGoodsId().equals(goodsId)) {
                 orderGoods = og;
-            }else{
+            } else {
                 continue;
             }
         }
 
-        if (orderGoods == null){
+        if (orderGoods == null) {
             throw new OptionException("您没有购买过这个商品");
         }
 
@@ -335,7 +355,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int cancelUnpay(Integer orderId) throws Exception {
         Order order = orderMapper.selectByPrimaryKey(orderId);
-        if(!order.getOrderState().equals(POJOConstants.ORDER_STATE_INIT)){
+        if (!order.getOrderState().equals(POJOConstants.ORDER_STATE_INIT)) {
             throw new OptionException("你已经付款，请申请退款");
         }
         order.setOrderState(POJOConstants.ORDER_STATE_CANCEL);
@@ -348,7 +368,7 @@ public class OrderServiceImpl implements OrderService {
     public int cancelPayed(Integer orderId) throws Exception {
         Order order = orderMapper.selectByPrimaryKey(orderId);
 
-        if(!order.getOrderState().equals(POJOConstants.ORDER_STATE_PAYED)){
+        if (!order.getOrderState().equals(POJOConstants.ORDER_STATE_PAYED)) {
             throw new OptionException("订单状态不符，不允许该操作");
         }
 
@@ -361,7 +381,7 @@ public class OrderServiceImpl implements OrderService {
 
         boolean isMergeOrder = false;
 
-        if (!StringUtils.isEmpty(order.getOutTradeNoMerge())){
+        if (!StringUtils.isEmpty(order.getOutTradeNoMerge())) {
             outTradeNo = order.getOutTradeNoMerge();
             isMergeOrder = true;
         }
@@ -372,20 +392,20 @@ public class OrderServiceImpl implements OrderService {
         model.setRefundAmount(order.getOrderAmount().toString());
         model.setRefundReason("正常退款");
 
-        if(isMergeOrder){
+        if (isMergeOrder) {
             TradeRefund tradeRefund = new TradeRefund();
             tradeRefund.setOrderId(order.getOrderId());
             tradeRefund.setAmount(order.getOrderAmount());
             tradeRefund.setPaymentCode(POJOConstants.ORDER_PAYMENT_ALIPAY);
             tradeRefund.setCreateTime(new Date());
-            tradeRefund.setOutRequestNo(UUID.randomUUID().toString().replace("-",""));
+            tradeRefund.setOutRequestNo(UUID.randomUUID().toString().replace("-", ""));
             tradeRefundMapper.insertSelective(tradeRefund);
             model.setOutRequestNo(tradeRefund.getOutRequestNo());
         }
 
         AlipayTradeRefundResponse response = alipayClient.execute(request);
 
-        if(response.isSuccess()){
+        if (response.isSuccess()) {
             order.setOrderState(POJOConstants.ORDER_STATE_CANCEL);
             order.setRefundState(POJOConstants.ORDER_REFUND_STATE_ALL_REFUND);
             return orderMapper.updateByPrimaryKeySelective(order);
@@ -400,7 +420,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderMapper.selectByPrimaryKey(orderId);
 
         String orderState = order.getOrderState();
-        if (orderState.equals(POJOConstants.ORDER_STATE_PAYED)||orderState.equals(POJOConstants.ORDER_STATE_DELIVE)){
+        if (orderState.equals(POJOConstants.ORDER_STATE_PAYED) || orderState.equals(POJOConstants.ORDER_STATE_DELIVE)) {
             throw new OptionException("该订单状态不允许删除");
         }
 

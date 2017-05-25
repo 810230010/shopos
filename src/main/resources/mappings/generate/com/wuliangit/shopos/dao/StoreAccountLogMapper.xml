@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.StoreAccountLogMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.StoreAccountLog" >
+    <id column="store_ account_log_id" property="storeAccountLogId" jdbcType="INTEGER" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    `store_ account_log_id`, store_id, amount, type, order_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_store_account_log
+    where `store_ account_log_id` = #{storeAccountLogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_store_account_log
+    where `store_ account_log_id` = #{storeAccountLogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreAccountLog" >
+    insert into t_store_account_log (`store_ account_log_id`, store_id, amount, 
+      type, order_id, create_time
+      )
+    values (#{storeAccountLogId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, 
+      #{type,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreAccountLog" >
+    insert into t_store_account_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeAccountLogId != null" >
+        `store_ account_log_id`,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeAccountLogId != null" >
+        #{storeAccountLogId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.StoreAccountLog" >
+    update t_store_account_log
+    <set >
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where `store_ account_log_id` = #{storeAccountLogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.StoreAccountLog" >
+    update t_store_account_log
+    set store_id = #{storeId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      type = #{type,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where `store_ account_log_id` = #{storeAccountLogId,jdbcType=INTEGER}
+  </update>
+</mapper>

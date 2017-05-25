@@ -77,10 +77,10 @@
                             '<a class="table-button btn btn-info btn-xs table-action scan" href="javascript:void(0)">',
                             '查看日志 <i class="fa fa-eye"></i>',
                             '</a>',
-                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)" style="margin-left:10px">',
+                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="javascript:void(0)">',
                             '编辑 <i class="fa fa-edit"></i>',
                             '</a>',
-                            '<a class="table-button btn btn-danger btn-xs table-action delete" href="#" style="margin-left: 10px;">',
+                            '<a class="table-button btn btn-danger btn-xs table-action delete" href="#">',
                             '移除 <i class="fa fa-trash-o"></i>',
                             '</a>',
                         ].join('');
@@ -95,23 +95,7 @@
             "lengthMenu": [ 10, 15, 20 ],
             "responsive": true,
             "dom": '<"html5buttons"B>lTfgitp',
-            "buttons": [
-                {extend: 'copy'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
-
-                {extend: 'print',
-                    customize: function (win){
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-
-                        $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                    }
-                }
-            ],
+            "buttons": [],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
             },

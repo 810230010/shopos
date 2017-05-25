@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style type="text/css" media="screen">
+        * {  
+            margin: 0;  
+            padding: 0;  
+            font-family: 'microsoft yahei';  
+        }  
+        html,body {  
+            width: 100%;  
+            height: 100%;  
+            background-color: #222;  
+              background-image:url(/assets/admin/img/1.jpg) ;
+              background-size:100%;
+        }  
+        .load-container {  
+            width: 100%;  
+            height: 6px;  
+            margin: 0 auto;  
+            bottom: 100px;  
+            background-image: -webkit-linear-gradient(left,#5bd8ff, #ff0000);  
+            border-radius: 5px;  
+            position: fixed;  
+        }  
+        .run {  
+            position: absolute;  
+            width: 0px;  
+            height: 6px;  
+            right: 0px;  
+            background: #000;  
+            border-radius: 5px;  
+            animation: runnAnimation 4s linear;  
+        }  
+        @keyframes runnAnimation {  
+            0% {  
+                width: 100%;  
+            }  
+            100% {  
+                width: 0px;  
+            }  
+        }  
+        .run:after {  
+            content: "";  
+            display: block;  
+            width: 16px;  
+            height: 16px;  
+            border-radius: 50%;  
+            background-color: #f00;  
+            margin-left: -4px;  
+            margin-top: -4px;  
+            animation: destination 10s linear;  
+        }  
+        @keyframes destination {  
+            0% {  
+                background-color: #5bd8ff;  
+            }  
+            100% {  
+                background-color: red;  
+            }  
+        }  
+        .meter {  
+            float: right;  
+            margin-top: 10px;  
+            font-size: 40px;  
+            color: red;  
+            animation: fontColor 10s linear;  
+        }  
+        @keyframes fontColor {  
+            0% {  
+                color: #5bd8ff;  
+            }  
+            100% {  
+                color: red;  
+            }  
+        }  
+        .meter:after {  
+            content: "%"  
+        }  
+    </style>
+    <body>
+    <div style="position:fixed;top:100px;color:#000;right:20px">
+    <img style="width:300px;height:300px" src="/assets/admin/img/yj.png">
+    </div>
+    <div style="position:fixed;bottom:250px;color:#000;font-size:45px; width: 100%;height:50px;text-align:center">
+       <span style='margin:0 auto;text-align:center'>宁波市江北意境电子商务有限公司欢迎您</span>
+    </div>
+    <div style="position:fixed;bottom:130px;color:white;font-size:45px;margin-left:10px">
+        <span>后悔要APP商家版加载中......</span>
+    </div>
+        <div class="load-container">  
+            <span class="run"></span>  
+            <div class="meter">0</div>  
+        </div>
+    </body>
+    <script type="text/javascript" charset="utf-8">
+        window.onload = function() {  
+            var meter = document.querySelector('.meter');  
+            run(meter,40);  
+            function run(el,time) {  
+                time = time ? time : 100;  
+                el = el ? el : document;      
+                var i = 0;  
+                var timer = setInterval(function() {  
+                    if(i<100) {  
+                        i++;  
+                        el.innerHTML = i;
+                    } else {  
+                        clearInterval(timer);
+                        window.location.href="/store/index"
+                    }
+                },time)
+            }  
+        }  
+    </script>
+</html>

@@ -3,6 +3,7 @@ package com.wuliangit.shopos.controller.admin;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.AdminDTO;
 import com.wuliangit.shopos.dto.AdminRoleDTO;
 import com.wuliangit.shopos.dto.MenuDTO;
@@ -102,17 +103,6 @@ public class AdminRoleController {
         return result;
     }
 
-    /**
-     * 管理员添加角色
-     * @param adminRole
-     * @return
-     */
-    @RequestMapping("/adminAddRole")
-    @ResponseBody
-    public Object addRole(AdminRole adminRole){
-         RestResult result = new RestResult();
-         return result;
-    }
 
     /**
      * 管理员角色详情页面
@@ -126,12 +116,30 @@ public class AdminRoleController {
     }
 
     /**
-     * 管理员编辑管理员角色信息页面
+     * 管理员编辑角色信息页面
      * @param adminRoleId
      * @return
      */
     @RequestMapping("/adminEditRolePage")
-    public String editRole(Integer adminRoleId){
+    public String editRole(Model model, Integer adminRoleId){
+        AdminRoleDTO adminRoleDTO = adminRoleService.getAdminRoleDetail(adminRoleId);
+        model.addAttribute("adminRoleDetail", adminRoleDTO);
         return "/admin/authority/edit_role";
+    }
+
+    /**
+     * 添加管理员角色
+     * @param adminRole
+     * @return
+     */
+    @RequestMapping("/adminAddRole")
+    @ResponseBody
+    public Object addAdminRole(AdminRole adminRole){
+        RestResult result = new RestResult();
+        if(adminRoleService.addAdminRole(adminRole) != 1){
+            result = new RestResult("未知错误,添加失败", 502);
+            return result;
+        }
+        return result;
     }
 }

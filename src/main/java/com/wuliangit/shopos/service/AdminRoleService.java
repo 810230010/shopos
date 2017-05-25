@@ -49,4 +49,6 @@ public interface AdminRoleService {
      * @return
      */
     AdminRoleDTO getAdminRoleDetail(Integer roleId);
+
+    int addAdminRole(AdminRole adminRole);
 }

@@ -62,6 +62,7 @@
             "columns": [
                 {"data":"adminRoleId","width":"7%","title":"角色序号","visible": false},
                 {"data":"name","width": "10%","title":"角色名","orderable": false},
+                {"data":"description","width": "10%","title":"角色描述","orderable": false},
                 {
                     "data":"defaultRole",
                     "width": "10%",
@@ -141,7 +142,7 @@
         table.on( 'click', '.edit', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/admin/authority/adminEditRolePage?adminRoleId="+data.adminRoleId;
+            window.location.href = "/admin/role/adminEditRolePage?adminRoleId="+data.adminRoleId;
         });
 
         //删除一条记录

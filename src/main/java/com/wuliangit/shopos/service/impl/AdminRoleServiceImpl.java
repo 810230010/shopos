@@ -55,6 +55,12 @@ public class AdminRoleServiceImpl implements AdminRoleService {
         AdminRoleDTO adminRoleDTO = new AdminRoleDTO();
         adminRoleDTO.setName(adminRole.getName());
         adminRoleDTO.setRolePermissions(menuList);
+        adminRoleDTO.setDescription(adminRole.getDescription());
         return adminRoleDTO;
+    }
+
+    @Override
+    public int addAdminRole(AdminRole adminRole) {
+        return adminRoleMapper.insertSelective(adminRole);
     }
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.wuliangit.shopos.dao.AdminRoleMapper" >
     <!--获取管理员所有角色列表-->
     <select id="searchAdminRoleList" resultType="com.wuliangit.shopos.dto.AdminRoleDTO">
-        select admin_role_id as adminRoleId,name,is_default as defaultRole from t_admin_role
+        select admin_role_id as adminRoleId,name,description,is_default as defaultRole from t_admin_role
         <where>
             <if test="searchKey != null and searchKey != '' ">
                 (name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))

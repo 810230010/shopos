@@ -26,7 +26,7 @@
   </select>
   <!--获得所有可用管理员角色-->
   <select id="getAdminRoles" resultType="com.wuliangit.shopos.dto.AdminRoleDTO">
-          select admin_role_id as adminRoleId,name
+          select admin_role_id as adminRoleId,name,description
           from t_admin_role
   </select>
   <!--查询管理员用户名是否存在-->

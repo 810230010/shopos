@@ -9,6 +9,16 @@ public class AdminRoleDTO {
     private Integer adminRoleId;
     private String name;
     private Integer defaultRole;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private List<MenuDTO> rolePermissions;
 
     public List<MenuDTO> getRolePermissions() {

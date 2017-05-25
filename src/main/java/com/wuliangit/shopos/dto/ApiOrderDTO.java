@@ -33,7 +33,7 @@ public class ApiOrderDTO {
 
     private Date paymentTime;
 
-    private Date finnshedTime;
+    private Date finishedTime;
 
     private BigDecimal goodsAmount;
 
@@ -41,7 +41,7 @@ public class ApiOrderDTO {
 
     private BigDecimal pdAmount;
 
-    private BigDecimal carriage;
+    private BigDecimal carriageAmount;
 
     private String memberEvaluationState;
 
@@ -59,7 +59,9 @@ public class ApiOrderDTO {
 
     private String orderFrom;
 
-    private String carriageName;
+    private String expressName;
+
+    private String expressNo;
 
     private Date createTime;
 

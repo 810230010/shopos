@@ -271,13 +271,12 @@ public class MOrderController {
     @RequestMapping("/detail")
     public Object detail(Integer orderId) throws Exception {
         RestResult result = new RestResult();
-        Order order = orderService.getOrderById(orderId);
 
+        Order order = orderService.getOrderById(orderId);
         List<ApiOrderGoodsDTO> goodses = orderService.getOrderDetailGoods(orderId);
 
         result.add("goodses", goodses);
         result.add("order", order);
-
         return result;
     }
 

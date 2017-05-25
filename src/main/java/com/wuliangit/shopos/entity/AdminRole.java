@@ -17,6 +17,8 @@ public class AdminRole {
 
     private String permissionList;
 
+    private String description;
+
     public Integer getAdminRoleId() {
         return adminRoleId;
     }
@@ -79,5 +81,13 @@ public class AdminRole {
 
     public void setPermissionList(String permissionList) {
         this.permissionList = permissionList == null ? null : permissionList.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

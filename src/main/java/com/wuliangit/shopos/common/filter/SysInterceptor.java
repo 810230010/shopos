@@ -18,25 +18,7 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
     }
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        Map<String, String[]> parameterMap = request.getParameterMap();
 
-//        String pmenuId = request.getParameter("pmenuId");
-//        String menuId = request.getParameter("menuId");
-
-//        List<MenuDTO> menus = (List<MenuDTO>) SecurityUtils.getSubject().getSession().getAttribute(Constants.SESSION_CURRENT_MENU);
-//
-//        if (modelAndView != null){
-//            modelAndView.addObject("pmenuId",pmenuId);
-//            modelAndView.addObject("menuId",menuId);
-//            modelAndView.addObject("menus",menus);
-//            Object u = SecurityUtils.getSubject().getSession().getAttribute(Constants.SESSION_CURRENT_USER);
-//            if (u instanceof Zhulituan){
-//                modelAndView.addObject("userType","zlt");
-//            }else if(u instanceof SysUser){
-//                modelAndView.addObject("userType","admin");
-//            }
-//            modelAndView.addObject("user",u);
-//        }
 
     }
     @Override

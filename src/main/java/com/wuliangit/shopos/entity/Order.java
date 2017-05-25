@@ -26,7 +26,7 @@ public class Order {
 
     private Date paymentTime;
 
-    private Date finnshedTime;
+    private Date finishedTime;
 
     private BigDecimal goodsAmount;
 
@@ -164,12 +164,12 @@ public class Order {
         this.paymentTime = paymentTime;
     }
 
-    public Date getFinnshedTime() {
-        return finnshedTime;
+    public Date getFinishedTime() {
+        return finishedTime;
     }
 
-    public void setFinnshedTime(Date finnshedTime) {
-        this.finnshedTime = finnshedTime;
+    public void setFinishedTime(Date finishedTime) {
+        this.finishedTime = finishedTime;
     }
 
     public BigDecimal getGoodsAmount() {

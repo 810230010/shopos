@@ -53,6 +53,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
         List<MenuDTO> adminRolePermissions = adminPermissionMapper.getAdminMenus(adminRole.getPermissionList());
         List<MenuDTO> menuList = AdminPermissionServiceImpl.handleSubType(adminRolePermissions, 0);
         AdminRoleDTO adminRoleDTO = new AdminRoleDTO();
+        adminRoleDTO.setAdminRoleId(roleId);
         adminRoleDTO.setName(adminRole.getName());
         adminRoleDTO.setRolePermissions(menuList);
         adminRoleDTO.setDescription(adminRole.getDescription());
@@ -62,5 +63,10 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     @Override
     public int addAdminRole(AdminRole adminRole) {
         return adminRoleMapper.insertSelective(adminRole);
+    }
+
+    @Override
+    public int updateAdminRole(AdminRole adminRole) {
+        return adminRoleMapper.updateByPrimaryKeySelective(adminRole);
     }
 }

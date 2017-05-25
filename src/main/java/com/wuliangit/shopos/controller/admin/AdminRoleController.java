@@ -144,4 +144,20 @@ public class AdminRoleController {
         }
         return result;
     }
+
+    /**
+     * 管理员修改角色信息
+     * @param adminRole
+     * @return
+     */
+    @RequestMapping("/adminEditRole")
+    @ResponseBody
+    public Object editAdminRole(AdminRole adminRole){
+        RestResult result = new RestResult();
+        if(adminRoleService.updateAdminRole(adminRole) != 1){
+            result = new RestResult("未知错误,修改失败", 502);
+            return result;
+        }
+        return result;
+    }
 }

@@ -7,7 +7,6 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.model.StoreMin;
-import com.wuliangit.shopos.service.AdminPerminssionService;
 import com.wuliangit.shopos.service.SellerPerminssionService;
 import com.wuliangit.shopos.service.SellerService;
 import com.wuliangit.shopos.service.StoreService;

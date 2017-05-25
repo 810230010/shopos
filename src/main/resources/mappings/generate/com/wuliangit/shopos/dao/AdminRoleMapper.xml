@@ -5,7 +5,6 @@
     <id column="admin_role_id" property="adminRoleId" jdbcType="INTEGER" />
     <result column="office" property="office" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="role" property="role" jdbcType="VARCHAR" />
     <result column="is_default" property="isDefault" jdbcType="BIT" />
     <result column="useable" property="useable" jdbcType="BIT" />
@@ -16,7 +15,7 @@
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    admin_role_id, office, name,description, role, is_default, useable, create_by, permission_list
+    admin_role_id, office, name, role, is_default, useable, create_by, permission_list
   </sql>
   <sql id="Blob_Column_List" >
     description
@@ -34,15 +33,10 @@
     where admin_role_id = #{adminRoleId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.AdminRole" >
-    insert into t_admin_role (admin_role_id, office, name,description,
+    insert into t_admin_role (admin_role_id, office, name, 
       role, is_default, useable, create_by, 
-<<<<<<< HEAD
-      permission_list)
-    values (#{adminRoleId,jdbcType=INTEGER}, #{office,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},
-=======
       permission_list, description)
     values (#{adminRoleId,jdbcType=INTEGER}, #{office,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
->>>>>>> cd24db7d741af77c419c58039ca771cb3226fba8
       #{role,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, #{useable,jdbcType=BIT}, #{createBy,jdbcType=INTEGER}, 
       #{permissionList,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
   </insert>
@@ -57,9 +51,6 @@
       </if>
       <if test="name != null" >
         name,
-      </if>
-      <if test="description != null" >
-        description,
       </if>
       <if test="role != null" >
         role,
@@ -90,9 +81,6 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
       <if test="role != null" >
         #{role,jdbcType=VARCHAR},
       </if>
@@ -121,9 +109,6 @@
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="role != null" >
         role = #{role,jdbcType=VARCHAR},
@@ -162,7 +147,6 @@
     update t_admin_role
     set office = #{office,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
       role = #{role,jdbcType=VARCHAR},
       is_default = #{isDefault,jdbcType=BIT},
       useable = #{useable,jdbcType=BIT},

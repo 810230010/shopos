@@ -42,6 +42,12 @@ public class StoreOrderController {
         return "/store/order/list";
     }
 
+    /**
+     * 物流信息填写页面
+     * @param model
+     * @param orderId
+     * @return
+     */
     @RequestMapping("/expressPage")
     public String expressPage(Model model, Integer orderId) {
         Order order = orderService.getOrderById(orderId);
@@ -49,6 +55,13 @@ public class StoreOrderController {
         return "/store/order/express";
     }
 
+    /**
+     * 填写物流信息
+     * @param expressId
+     * @param expressNo
+     * @param orderId
+     * @return
+     */
     @RequestMapping("/express")
     @ResponseBody
     public Object addExpressInfo(Integer expressId, String expressNo, Integer orderId) {

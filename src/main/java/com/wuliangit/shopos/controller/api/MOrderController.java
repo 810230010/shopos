@@ -38,8 +38,12 @@ public class MOrderController {
 
     /**
      * 创建订单
-     *
+     * @param orderGoodsInfoList  goodsSkuId:商品skuid goodsNum:商品数量 goodsId:商品id
+     * @param addressId 用户地址id
+     * @param orderFrom 订单来源WEB,APP,WX
+     * @param orderMessage  用户留言
      * @return
+     * @throws OrderException
      */
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public Object createOrder(@RequestParam(required = true) String orderGoodsInfoList,
@@ -223,7 +227,7 @@ public class MOrderController {
 
 
     /**
-     * 取消已支付订单（未发货）
+     * 取消已支付订单
      * @param orderId
      * @return
      */
@@ -237,7 +241,7 @@ public class MOrderController {
     }
 
     /**
-     * 取消未支付订单（已发货）
+     * 取消未支付订单
      * @param orderId
      * @return
      */

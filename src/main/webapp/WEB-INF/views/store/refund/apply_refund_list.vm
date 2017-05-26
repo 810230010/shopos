@@ -93,16 +93,16 @@
                                     '详情 <i class="fa fa-info-circle"></i></a>'+
                                     '<a class="table-button btn btn-danger btn-xs table-action unpass" href="javascript:void(0)">'+
                                     '拒绝 <i class="fa fa-minus-circle"></i></a>'+
-                                    '<a class="table-button btn btn-info btn-xs table-action pass" href="javascript:void(0)">'+
+                                    '<a class="table-button btn btn-success btn-xs table-action pass" href="javascript:void(0)">'+
                                     '同意 <i class="fa fa-check"></i></a>';
                         }else if(data == 'CONSENT'){
                             html = '<a class="table-button btn btn-info btn-xs table-action info" href="javascript:void(0)">'+
                                     '详情 <i class="fa fa-check"></i></a>';
                         }else if(data == 'NOT_CONSENT'){
-                            html = '<a class="table-button btn btn-info btn-xs table-action info" href="javascript:void(0)">'+
+                            html = '<a class="table-button btn btn-default btn-xs table-action info" href="javascript:void(0)">'+
                                     '详情 <i class="fa fa-check"></i></a>'+
                                     '<a class="table-button btn btn-success btn-xs table-action changPass" href="javascript:void(0)">'+
-                                    '改为同意 <i class="fa fa-minus-circle"></i></a>';
+                                    '改为同意 <i class="fa fa-check"></i></a>';
                         }
 
                         return html;

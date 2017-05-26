@@ -121,4 +121,18 @@ public class StoreRefundController {
         return "/store/refund/detail";
     }
 
+    /**
+     * 卖家确认收到退货
+     * @param refundId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/checkReceiveGoods")
+    @ResponseBody
+    public RestResult checkReceiveGoods(Integer refundId) throws Exception{
+        RestResult result = new RestResult();
+        Integer info = storeRefundService.checkReceiveGoods(refundId);
+        return result;
+    }
+
 }

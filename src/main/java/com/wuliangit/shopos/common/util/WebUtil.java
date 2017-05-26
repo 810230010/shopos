@@ -42,7 +42,7 @@ public class WebUtil {
     }
 
     /**
-     * 获取当前店铺卖家
+     * 获取当前店铺
      * @return
      */
     public static StoreMin getCurrentStore(){

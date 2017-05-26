@@ -99,6 +99,8 @@ public class POJOConstants {
     public final static String REFUND_STATE_NOT_CONSENT = "NOT_CONSENT";
     //买家已发货
     public final static String REFUND_STATE_DELIVE = "DELIVE";
+    //卖家已收货
+    public final static String REFUND_STATE_RECEIVE = "RECEIVE";
 
     //订单商品物流状态
     //未发货(待发货)

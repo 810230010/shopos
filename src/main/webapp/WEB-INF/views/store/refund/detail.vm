@@ -13,7 +13,7 @@
                 <div class="ibox-title">
                     <h5><i class="fa text-info fa-archive"></i> 商品信息</h5>
                 </div>
-                <table class="table white-bg table-striped">
+                <table class="table white-bg table-striped table-bordered">
                     <thead>
                     <tr>
                         <th style="width:25%">商品名称</th>
@@ -50,17 +50,17 @@
                     <tbody>
                     <tr>
                         <td><span class="text-muted">收货人：</span></td>
-                        <td><span class="text-primary">$!{refund.refundName}</span></td>
+                        <td class="td_split"><span class="text-primary" >$!{refund.refundName}</span></td>
                         <td><span class="text-muted">手机号码：</span></td>
-                        <td><span class="text-primary">$!{refund.refundPhone}</span></td>
+                        <td class="td_split"><span class="text-primary">$!{refund.refundPhone}</span></td>
                         <td><span class="text-muted">收货人地址</span></td>
                         <td><span class="text-primary">$!{refund.refundAddress}</span></td>
                     </tr>
                     <tr>
                         <td><span class="text-muted">快递名称：</span></td>
-                        <td><span class="text-primary">$!{refund.expressName}</span></td>
+                        <td class="td_split"><span class="text-primary">$!{refund.expressName}</span></td>
                         <td><span class="text-muted">物流单号：</span></td>
-                        <td><span class="text-primary">$!{refund.expressNo}</span></td>
+                        <td class="td_split"><span class="text-primary">$!{refund.expressNo}</span></td>
                         <td><span class="text-muted">配送时间：</span></td>
                         <td><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{refund.refundTime})</span></td>
                     </tr>

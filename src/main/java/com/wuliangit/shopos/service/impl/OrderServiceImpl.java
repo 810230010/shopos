@@ -355,6 +355,7 @@ public class OrderServiceImpl implements OrderService {
         refund.setRefundName(store.getRefundName());
         refund.setRefundAddress(store.getRefundAddress());
         refund.setRefundTime(new Date());
+        refund.setRefundState(POJOConstants.REFUND_STATE_DELIVE);
         return refundMapper.updateByPrimaryKeySelective(refund);
     }
 

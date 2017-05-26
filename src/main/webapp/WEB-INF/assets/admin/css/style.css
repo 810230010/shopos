@@ -8570,3 +8570,7 @@ body.md-skin {
   border: 0px solid #ccc !important;
   display: inline !important;
 }
+
+.td_split{
+  border-right:1px solid #cccccc
+}

@@ -67,20 +67,20 @@
             },
             "columns": [
                 {"data":"refundId","width": "6%","title":"退款号","orderable": false},
-                {"data":"memberUsername","width": "10%","title":"买家会员名","orderable": false},
-                {"data":"goodsName","width": "17%","title":"商品名","orderable": false,"render":function(data, type, row){
+                {"data":"memberUsername","width": "7%","title":"买家会员名","orderable": false},
+                {"data":"goodsName","width": "15%","title":"商品名","orderable": false,"render":function(data, type, row){
                     if(data.length>25){
-                        return data.substr(0,25)+"...";
+                        return data.substr(0,35)+"...";
                     }
                     return data;
                 }},
-                {"data":"refundType","width": "10%","title":"申请类型","orderable": false,"render":function(data, type, row){
+                {"data":"refundType","width": "8%","title":"申请类型","orderable": false,"render":function(data, type, row){
                     if(data == "REFUND_MOMEY")return "退款";
                     else if(data == "CHANGE_GOODS")return "换货";
                     else if(data == "REFUND_ALL")return "退款退货";
                 }},
-                {"data":"buyerMessage","width": "10%","title":"申请原因","orderable": false},
-                {"data":"refundState","width": "10%","title":"状态","orderable": false,
+                {"data":"buyerMessage","width": "8%","title":"申请原因","orderable": false},
+                {"data":"refundState","width": "8%","title":"状态",
                     "render":function(data, type, row)
                     {
                         if (data == 'CHECKING') return '待审核';
@@ -89,14 +89,19 @@
                         else if(data == 'DELIVE') return '买家已发货';
                     }
                 },
-                {"data":"refundAmount","width": "10%","title":"退款金额","orderable": false},
-                {"data":"refundState","width": "10%","title":"操作","orderable": false,
+                {"data":"refundAmount","width": "7%","title":"退款金额","orderable": false},
+                {"data":"refundState","width": "20%","title":"操作","orderable": false,
                     "render":function(data, type, row)
                     {
-                        return  '<a class="table-button btn btn-default btn-xs table-action order-info" href="javascript:void(0)">'+
-                                '订单详情 <i class="fa fa-info-circle"></i></a>'+
-                                '<a class="table-button btn btn-info btn-xs table-action refund-info" href="javascript:void(0)">'+
-                                '退换详情 <i class="fa fa-info-circle"></i></a>';
+                        var html = '<a class="table-button btn btn-default btn-xs table-action order-info" href="javascript:void(0)">'+
+                        '<i class="fa fa-info-circle"></i>订单详情</a>'+
+                        '<a class="table-button btn btn-info btn-xs table-action refund-info" href="javascript:void(0)">'+
+                        '<i class="fa fa-info-circle"></i>退换详情</a>'
+                        if(row.refundState == 'DELIVE'){
+                            html += '<a class="table-button btn btn-danger btn-xs table-action refund-check" href="javascript:void(0)">'+
+                                    '<i class="fa fa-check"></i>确认收货</a>';
+                        }
+                        return  html;
                     }
                 }
             ],
@@ -125,6 +130,37 @@
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
             window.open("/store/order/detailPage?orderId="+data.orderId);
+        });
+        table.on( 'click', '.refund-check', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            $.post("/store/refund/checkReceiveGoods",
+                    {
+                        refundId: data.refundId
+                    },
+                    function (data, status) {
+                        if (data.code == 200) {
+                            swal({
+                                title: "成功!",
+                                text: "收货成功并已退款",
+                                type: "success",
+                                showConfirmButton: false,
+                                timer: 2500,
+                            });
+                            setTimeout(function () {
+
+                            }, 2000);
+                        }else{
+                            swal({
+                                title: "失败!",
+                                text: "发货失败!",
+                                type: "error",
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                        }
+
+                    });
         });
     });
 

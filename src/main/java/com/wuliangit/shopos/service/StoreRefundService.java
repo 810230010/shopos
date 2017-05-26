@@ -3,6 +3,7 @@ package com.wuliangit.shopos.service;
 import com.wuliangit.shopos.dto.StoreRefundListDTO;
 import com.wuliangit.shopos.entity.Refund;
 import com.wuliangit.shopos.exception.BaseException;
+import com.wuliangit.shopos.exception.OptionException;
 
 import java.util.List;
 
@@ -49,4 +50,10 @@ public interface StoreRefundService {
      */
     Refund getRefundDetailInfo(Integer refundId) throws Exception;
 
+    /**
+     * 卖家确认收到退货
+     * @param refundId
+     * @return
+     */
+    Integer checkReceiveGoods(Integer refundId) throws Exception;
 }

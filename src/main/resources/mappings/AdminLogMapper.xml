@@ -3,7 +3,18 @@
 <mapper namespace="com.wuliangit.shopos.dao.AdminLogMapper" >
 
 
-
-
-
+    <select id="selectAdminLogs" resultType="com.wuliangit.shopos.entity.AdminLog">
+        select admin_log_id as adminLogId,content,create_time as createTime,admin_username as adminUsername,ip
+        from t_admin_log
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                ( content like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or admin_username like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType}
+        </if>
+    </select>
 </mapper>

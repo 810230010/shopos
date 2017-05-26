@@ -60,25 +60,11 @@
                 },
             },
             "columns": [
-                {"data":"memberId","width":"7%","title":"序号","orderable": false},
-                {"data":"nickname","width": "10%","title":"会员昵称","orderable": false},
-                {"data":"sex","width": "10%","title":"性别","orderable": false,"render": function(data, type, row){
-                    if(data == "MAN")return "男";
-                    else return "女";
-                }},
-                {"data":"birthday","width": "10%","title":"出生日期","orderable": false},
-                {"data":"type","width": "10%","title":"会员类型","orderable": false,"render": function(data, type, row){
-                    if(data == "DEFAULT")return "普通";
-                    else return "推客";
-                }},
-                {"data":"mobile","width": "10%","title":"联系方式","orderable": false},
-                {"data":"points","width": "10%","title":"积分","orderable": true},
-                {"data":"authState","width": "10%","title":"状态","orderable": false,"render": function(data, type, row){
-                    if(data == "NOT_AUTH")return "未认证";
-                    else if(data == "AUTHED")return "已认证";
-                    else if(data == "WAIT_AUTH")return "等待认证";
-                    else return "未认证";
-                }}
+                {"data":"adminLogId","width":"7%","title":"序号","visiable": false},
+                {"data":"adminUsername","width": "10%","title":"管理员名称","orderable": false},
+                {"data":"content","width": "10%","title":"内容","orderable": false},
+                {"data":"createTime","width": "10%","title":"发生时间","orderable": true},
+                {"data":"ip","width": "10%","title":"ip地址","orderable": false},
             ],
             "searching": true,
             "ordering":true,
@@ -108,35 +94,6 @@
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
             }
-        });
-        var table = $('#datatables').DataTable();
-
-        table.on( 'click', '.delete', function () {
-            var tr = $(this).closest('tr');
-            var data = table.row(tr).data();
-            swal({  title: "确定要删除吗?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonText: "是的，删除",
-                cancelButtonText: "取消",
-                closeOnConfirm: false,
-                closeOnCancel: true
-            },function(isConfirm){
-                if (isConfirm){
-                    $.post("/admin/member/deleteMember/",{
-                                memberId:data.memberId
-                            },
-                            function (data, status) {
-                                if(data.code==200){
-                                    swal("删除成功!", "会员已经删除", "success");
-                                    table = $('#datatables').DataTable().ajax.reload();
-                                }else{
-                                    swal("删除失败!", "会员未被删除", "error");
-                                    table = $('#datatables').DataTable().ajax.reload();
-                                }
-                            });
-                }
-            });
         });
     });
 </script>

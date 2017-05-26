@@ -65,7 +65,7 @@
                 {"data":"adminRole","width": "10%","title":"角色","orderable": false},
                 {"data":"email","width": "10%","title":"Email地址","orderable": false},
                 {"data":"createTime","width": "10%","title":"创建时间","orderable": false},
-                {"data":"loginNum","width": "5%","title":"登录次数","orderable": true},
+                {"data":"loginNum","width": "10%","title":"登录次数","orderable": true},
                 {"data":"loginTime","width": "10%","title":"最后登入时间","orderable": false},
                 {
                     "data":"adminId",
@@ -144,7 +144,7 @@
                                     });
                                     setTimeout(function () {
                                         window.location.href = "/admin/authority/adminListPage";
-                                    }, 100);
+                                    }, 2000);
                                 }
                             },
                             error:function(result) {

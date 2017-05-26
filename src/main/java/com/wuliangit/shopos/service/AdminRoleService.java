@@ -50,5 +50,16 @@ public interface AdminRoleService {
      */
     AdminRoleDTO getAdminRoleDetail(Integer roleId);
 
+    /**
+     * 管理员添加角色
+     * @param adminRole
+     * @return
+     */
     int addAdminRole(AdminRole adminRole);
+
+    /**
+     * 管理员修改
+     * @return
+     */
+    int updateAdminRole(AdminRole adminRole);
 }

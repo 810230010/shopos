@@ -10,7 +10,6 @@ public class AdminRoleDTO {
     private String name;
     private Integer defaultRole;
     private String description;
-
     public String getDescription() {
         return description;
     }

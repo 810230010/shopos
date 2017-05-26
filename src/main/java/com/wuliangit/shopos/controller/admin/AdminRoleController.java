@@ -8,7 +8,7 @@ import com.wuliangit.shopos.dto.AdminDTO;
 import com.wuliangit.shopos.dto.AdminRoleDTO;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.AdminRole;
-import com.wuliangit.shopos.service.AdminPerminssionService;
+import com.wuliangit.shopos.service.AdminPermissionService;
 import com.wuliangit.shopos.service.AdminRoleService;
 import com.wuliangit.shopos.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,8 @@ public class AdminRoleController {
     private AdminRoleService adminRoleService;
     @Autowired
     private AdminService adminService;
-    private AdminPerminssionService adminPerminssionService;
+    @Autowired
+    private AdminPermissionService adminPermissionService;
 
     /**
      * 角色列表页面
@@ -124,6 +125,7 @@ public class AdminRoleController {
     public String editRole(Model model, Integer adminRoleId){
         AdminRoleDTO adminRoleDTO = adminRoleService.getAdminRoleDetail(adminRoleId);
         model.addAttribute("adminRoleDetail", adminRoleDTO);
+        model.addAttribute("permissionList", adminPermissionService.getPermissionByRoleId(adminRoleId));
         return "/admin/authority/edit_role";
     }
 
@@ -138,6 +140,22 @@ public class AdminRoleController {
         RestResult result = new RestResult();
         if(adminRoleService.addAdminRole(adminRole) != 1){
             result = new RestResult("未知错误,添加失败", 502);
+            return result;
+        }
+        return result;
+    }
+
+    /**
+     * 管理员修改角色信息
+     * @param adminRole
+     * @return
+     */
+    @RequestMapping("/adminEditRole")
+    @ResponseBody
+    public Object editAdminRole(AdminRole adminRole){
+        RestResult result = new RestResult();
+        if(adminRoleService.updateAdminRole(adminRole) != 1){
+            result = new RestResult("未知错误,修改失败", 502);
             return result;
         }
         return result;

@@ -77,7 +77,7 @@ public class StoreOrderController {
      * @Param: [model, orderId]
      * @return: java.lang.String
      */
-    @RequestMapping("/detail")
+    @RequestMapping("/detailPage")
     public String detail(Model model, Integer orderId) {
         Order order = orderService.getOrderDetail(orderId);
         List<ApiOrderGoodsDTO> goodses = orderService.getOrderDetailGoods(orderId);

@@ -144,21 +144,21 @@
         table.on( 'click', '.unpass', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            $.operation(data,"NOT_CONSENT");
+            $.operation(data,false);
         });
 
         table.on( 'click', '.pass', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            $.operation(data,"CONSENT");
+            $.operation(data,true);
         });
     });
 
-    $.operation = function(data,flag){
+    $.operation = function(data,isPass){
         $.ajax({
             type: "post",
             url: "/store/refund/checkRefundApply",
-            data: "refundId=" + data.refundId + "&sellerState=" + flag,
+            data: "refundId=" + data.refundId + "&isPass=" + isPass,
             async: false,
             success: function (data) {
                 if (data.code == 200) {

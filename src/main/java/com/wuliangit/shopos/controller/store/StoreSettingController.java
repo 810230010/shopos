@@ -37,50 +37,92 @@ public class StoreSettingController {
 
     /**
      * 店铺信息修改页面
+     *
      * @param model
      * @return
      */
-    @RequestMapping("")
-    public String indexPage(Model model){
+    @RequestMapping("/info")
+    public String infoPage(Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain", QiNiuUtils.BASE_URL);
 
         StoreMin storeMin = WebUtil.getCurrentStore();
         Store store = storeService.getStoreByStoreId(storeMin.getStoreId());
-        model.addAttribute("store",store);
-        return "/store/setting/index";
+        model.addAttribute("store", store);
+        return "/store/setting/info";
+    }
+
+    /**
+     * 店铺收货地址修改页面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/address")
+    public String AddressPage(Model model) {
+        StoreMin storeMin = WebUtil.getCurrentStore();
+        Store store = storeService.getStoreByStoreId(storeMin.getStoreId());
+        model.addAttribute("store", store);
+        return "/store/setting/address";
+    }
+
+    /**
+     * 店铺收货地址修改
+     *
+     * @return
+     */
+    @RequestMapping("/updateAddress")
+    @ResponseBody
+    public Object updateAddressPage(String refundAddress, String refundName, String refundPhone) {
+        RestResult result = new RestResult();
+        Store store = storeService.getStoreByStoreId(WebUtil.getCurrentStore().getStoreId());
+
+        store.setRefundAddress(refundAddress);
+        store.setRefundName(refundName);
+        store.setRefundPhone(refundPhone);
+
+        storeService.updateStore(store);
+
+        return result;
     }
 
     /**
      * 店铺信息修改
+     *
      * @return
      */
     @RequestMapping("/update")
     @ResponseBody
-    public Object setting(StoreUpdateDTO storeDto,String checkCode){
+    public Object setting(StoreUpdateDTO storeDto, String checkCode) {
         RestResult result = new RestResult();
-        if (!StringUtils.isEmpty(storeDto.getBindMemberUsername())){
+        if (!StringUtils.isEmpty(storeDto.getBindMemberUsername())) {
             String checkCode1 = smsService.getCheckCode(storeDto.getBindMemberUsername());
-            if (!checkCode1.equals(checkCode)){
+            if (!checkCode1.equals(checkCode)) {
                 result.setCode(RestResult.CODE_SERVERERROR);
                 result.setMsg("验证码不正确");
                 return result;
             }
         }
 
-        Store store  = mapper.map(storeDto, Store.class);
+        Store store = mapper.map(storeDto, Store.class);
         int res = storeService.updateStore(store);
         return result;
     }
 
+    /**
+     * 获取绑定验证码
+     *
+     * @param phone
+     * @return
+     */
     @RequestMapping("/getBindCode")
     @ResponseBody
-    public Object getBindCode(String phone){
+    public Object getBindCode(String phone) {
         RestResult result = new RestResult();
 
         Member member = memberService.getByUsername(phone);
 
-        if (member==null){
+        if (member == null) {
             result.setCode(RestResult.CODE_SERVERERROR);
             result.setMsg("会员不存在");
             return result;
@@ -88,9 +130,9 @@ public class StoreSettingController {
 
         Store store = storeService.getStoreByBindMemberUsername(phone);
 
-        if(store!=null){
+        if (store != null) {
             StoreMin currentStore = WebUtil.getCurrentStore();
-            if (!currentStore.getStoreId().equals(store.getStoreId())){
+            if (!currentStore.getStoreId().equals(store.getStoreId())) {
                 result.setCode(RestResult.CODE_SERVERERROR);
                 result.setMsg("该会员已经绑定了店铺");
                 return result;
@@ -106,5 +148,6 @@ public class StoreSettingController {
             return result;
         }
     }
+
 
 }

@@ -174,7 +174,7 @@
         table.on( 'click', '.detail', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/store/order/detail?orderId="+data.orderId;
+            window.location.href = "/store/order/detailPage?orderId="+data.orderId;
         });
 
         //view record

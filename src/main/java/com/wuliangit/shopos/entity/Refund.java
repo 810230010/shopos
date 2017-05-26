@@ -22,6 +22,8 @@ public class Refund {
 
     private Integer goodsNum;
 
+    private String skuName;
+
     private BigDecimal refundAmount;
 
     private String goodsImage;
@@ -53,6 +55,14 @@ public class Refund {
     private String expressName;
 
     private String expressNo;
+
+    private String refundAddress;
+
+    private String refundName;
+
+    private String refundPhone;
+
+    private Date refundTime;
 
     public Integer getRefundId() {
         return refundId;
@@ -124,6 +134,14 @@ public class Refund {
 
     public void setGoodsNum(Integer goodsNum) {
         this.goodsNum = goodsNum;
+    }
+
+    public String getSkuName() {
+        return skuName;
+    }
+
+    public void setSkuName(String skuName) {
+        this.skuName = skuName == null ? null : skuName.trim();
     }
 
     public BigDecimal getRefundAmount() {
@@ -252,5 +270,37 @@ public class Refund {
 
     public void setExpressNo(String expressNo) {
         this.expressNo = expressNo == null ? null : expressNo.trim();
+    }
+
+    public String getRefundAddress() {
+        return refundAddress;
+    }
+
+    public void setRefundAddress(String refundAddress) {
+        this.refundAddress = refundAddress == null ? null : refundAddress.trim();
+    }
+
+    public String getRefundName() {
+        return refundName;
+    }
+
+    public void setRefundName(String refundName) {
+        this.refundName = refundName == null ? null : refundName.trim();
+    }
+
+    public String getRefundPhone() {
+        return refundPhone;
+    }
+
+    public void setRefundPhone(String refundPhone) {
+        this.refundPhone = refundPhone == null ? null : refundPhone.trim();
+    }
+
+    public Date getRefundTime() {
+        return refundTime;
+    }
+
+    public void setRefundTime(Date refundTime) {
+        this.refundTime = refundTime;
     }
 }

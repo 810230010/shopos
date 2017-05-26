@@ -90,7 +90,6 @@ public class POJOConstants {
     //退款退货
     public final static String APPLY_REFUND_ALL = "REFUND_ALL";
 
-
     //退款订单状态
     //等待商家审核
     public final static String REFUND_STATE_CHECKING = "CHECKING";
@@ -98,6 +97,8 @@ public class POJOConstants {
     public final static String REFUND_STATE_CONSENT = "CONSENT";
     //商家不同意退款
     public final static String REFUND_STATE_NOT_CONSENT = "NOT_CONSENT";
+    //买家已发货
+    public final static String REFUND_STATE_DELIVE = "DELIVE";
 
     //订单商品物流状态
     //未发货(待发货)

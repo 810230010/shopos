@@ -47,8 +47,7 @@ public class StoreRefundController {
      * @return: java.lang.String
      */
     @RequestMapping("/successRefundList")
-    public String successRefundList(Model model,@RequestParam(value = "type",required = false) String type){
-        model.addAttribute("type",type);
+    public String successRefundList(Model model){
         return "/store/refund/success_refund_list";
     }
 
@@ -81,9 +80,9 @@ public class StoreRefundController {
      */
     @RequestMapping("/checkRefundApply")
     @ResponseBody
-    public RestResult checkRefundApply(Integer refundId,String sellerState) throws Exception{
+    public RestResult checkRefundApply(Integer refundId,Boolean isPass) throws Exception{
         RestResult result = new RestResult();
-        Integer info = storeRefundService.checkRefundApply(refundId,sellerState);
+        Integer info = storeRefundService.checkRefundApply(refundId,isPass);
         return result;
     }
 
@@ -115,11 +114,11 @@ public class StoreRefundController {
      * @Param: [model, refundId]
      * @return: java.lang.String
      */
-    @RequestMapping("/getRefundDetailInfo")
+    @RequestMapping("/detailPage")
     public String getRefundDetailInfo(Model model,Integer refundId) throws Exception{
         Refund refund = storeRefundService.getRefundDetailInfo(refundId);
-        model.addAttribute("info",refund);
-        return "/store/refund/refund_detail_page";
+        model.addAttribute("refund",refund);
+        return "/store/refund/detail";
     }
 
 }

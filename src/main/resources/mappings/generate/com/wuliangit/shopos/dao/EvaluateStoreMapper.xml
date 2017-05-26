@@ -9,14 +9,14 @@
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="store_name" property="storeName" jdbcType="VARCHAR" />
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
-    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="member_username" property="memberUsername" jdbcType="VARCHAR" />
     <result column="desc_credit" property="descCredit" jdbcType="INTEGER" />
     <result column="service_credit" property="serviceCredit" jdbcType="INTEGER" />
     <result column="delivery_credit" property="deliveryCredit" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     evaluate_store_id, order_id, order_no, create_time, store_id, store_name, member_id, 
-    member_name, desc_credit, service_credit, delivery_credit
+    member_username, desc_credit, service_credit, delivery_credit
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -34,11 +34,11 @@
     </selectKey>
     insert into t_evaluate_store (order_id, order_no, create_time, 
       store_id, store_name, member_id, 
-      member_name, desc_credit, service_credit, 
+      member_username, desc_credit, service_credit, 
       delivery_credit)
     values (#{orderId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
-      #{memberName,jdbcType=VARCHAR}, #{descCredit,jdbcType=INTEGER}, #{serviceCredit,jdbcType=INTEGER}, 
+      #{memberUsername,jdbcType=VARCHAR}, #{descCredit,jdbcType=INTEGER}, #{serviceCredit,jdbcType=INTEGER}, 
       #{deliveryCredit,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.EvaluateStore" >
@@ -65,8 +65,8 @@
       <if test="memberId != null" >
         member_id,
       </if>
-      <if test="memberName != null" >
-        member_name,
+      <if test="memberUsername != null" >
+        member_username,
       </if>
       <if test="descCredit != null" >
         desc_credit,
@@ -97,8 +97,8 @@
       <if test="memberId != null" >
         #{memberId,jdbcType=INTEGER},
       </if>
-      <if test="memberName != null" >
-        #{memberName,jdbcType=VARCHAR},
+      <if test="memberUsername != null" >
+        #{memberUsername,jdbcType=VARCHAR},
       </if>
       <if test="descCredit != null" >
         #{descCredit,jdbcType=INTEGER},
@@ -132,8 +132,8 @@
       <if test="memberId != null" >
         member_id = #{memberId,jdbcType=INTEGER},
       </if>
-      <if test="memberName != null" >
-        member_name = #{memberName,jdbcType=VARCHAR},
+      <if test="memberUsername != null" >
+        member_username = #{memberUsername,jdbcType=VARCHAR},
       </if>
       <if test="descCredit != null" >
         desc_credit = #{descCredit,jdbcType=INTEGER},
@@ -155,7 +155,7 @@
       store_id = #{storeId,jdbcType=INTEGER},
       store_name = #{storeName,jdbcType=VARCHAR},
       member_id = #{memberId,jdbcType=INTEGER},
-      member_name = #{memberName,jdbcType=VARCHAR},
+      member_username = #{memberUsername,jdbcType=VARCHAR},
       desc_credit = #{descCredit,jdbcType=INTEGER},
       service_credit = #{serviceCredit,jdbcType=INTEGER},
       delivery_credit = #{deliveryCredit,jdbcType=INTEGER}

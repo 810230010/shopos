@@ -6,15 +6,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>订单-退换货列表</h2>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/refund/successRefundList?type=''">全部</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/refund/successRefundList?type='REFUND_ALL'">退款退货</a>
-        </p>
-        <p style="display: inline-block">
-            <a type="button" class="btn btn-w-m btn-primary" href="/store/refund/successRefundList?type='CHANGE_GOODS'">换货</a>
-        </p>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -23,7 +14,13 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h5 id="rank">退换货列表 </h5>
-                    <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
+                    <div class="ibox-tools">
+                        <div id="btn-group" class="btn-group" role="group" aria-label="退款操作">
+                            <button type="button" class="btn btn-primary" onclick="getRefundList(this,'')">全部</button>
+                            <button type="button" class="btn btn-white" onclick="getRefundList(this,'REFUND_ALL')">退款退货</button>
+                            <button type="button" class="btn btn-white" onclick="getRefundList(this,'CHANGE_GOODS')">换货</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
@@ -46,6 +43,12 @@
 
 <script>
 
+    $("#退换货列表").addClass("active");
+    $("#订单").addClass("active");
+    $('#side-menu').metisMenu();
+
+    var nowType = '';
+
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
@@ -58,29 +61,44 @@
                     param.orderColumn = d.columns[d.order[0]['column']]['data'];
                     param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
-                    param.type = $type;
+                    param.type = nowType;
                     return param;
                 },
             },
             "columns": [
-                {"data":"orderSn","width": "10%","title":"订单编号","orderable": true},
-                {"data":"refundSn","width": "10%","title":"申请编号","orderable": false},
-                {"data":"memberName","width": "10%","title":"买家会员名","orderable": false},
-                {"data":"goodsName","width": "10%","title":"商品名","orderable": false},
+                {"data":"refundId","width": "6%","title":"退款号","orderable": false},
+                {"data":"memberUsername","width": "10%","title":"买家会员名","orderable": false},
+                {"data":"goodsName","width": "17%","title":"商品名","orderable": false,"render":function(data, type, row){
+                    if(data.length>25){
+                        return data.substr(0,25)+"...";
+                    }
+                    return data;
+                }},
                 {"data":"refundType","width": "10%","title":"申请类型","orderable": false,"render":function(data, type, row){
                     if(data == "REFUND_MOMEY")return "退款";
-                    else if(data == "REFUND_GOODS")return "退货";
                     else if(data == "CHANGE_GOODS")return "换货";
                     else if(data == "REFUND_ALL")return "退款退货";
                 }},
-                {"data":"reasonInfo","width": "10%","title":"申请原因","orderable": false},
-                {"data":"refundId","width": "10%","title":"操作","orderable": false,"render":function(data, type, row){
-                    return [
-                        '<a class="table-button btn btn-info btn-xs table-action detail" href="javascript:void(0)" style="margin-left: 10px;">',
-                        '查看详情 <i class="fa fa-info"></i>',
-                        '</a>'
-                    ].join('');
-                }}
+                {"data":"buyerMessage","width": "10%","title":"申请原因","orderable": false},
+                {"data":"refundState","width": "10%","title":"状态","orderable": false,
+                    "render":function(data, type, row)
+                    {
+                        if (data == 'CHECKING') return '待审核';
+                        else if(data == 'CONSENT') return '同意退款';
+                        else if(data == 'NOT_CONSENT') return '拒绝退款';
+                        else if(data == 'DELIVE') return '买家已发货';
+                    }
+                },
+                {"data":"refundAmount","width": "10%","title":"退款金额","orderable": false},
+                {"data":"refundState","width": "10%","title":"操作","orderable": false,
+                    "render":function(data, type, row)
+                    {
+                        return  '<a class="table-button btn btn-default btn-xs table-action order-info" href="javascript:void(0)">'+
+                                '订单详情 <i class="fa fa-info-circle"></i></a>'+
+                                '<a class="table-button btn btn-info btn-xs table-action refund-info" href="javascript:void(0)">'+
+                                '退换详情 <i class="fa fa-info-circle"></i></a>';
+                    }
+                }
             ],
             "searching": true,
             "ordering":true,
@@ -91,40 +109,39 @@
             "lengthMenu": [ 10, 15, 20 ],
             "responsive": true,
             "dom": '<"html5buttons"B>lTfgitp',
-            "buttons": [
-                {extend: 'copy'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
-
-                {extend: 'print',
-                    customize: function (win){
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-
-                        $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                    }
-                }
-            ],
+            "buttons": [],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
 
-        table.on( 'click', '.detail', function () {
+        table.on( 'click', '.refund-info', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/store/refund/getRefundDetailInfo?refundId="+data.refundId;
+            window.open("/store/refund/detailPage?refundId="+data.refundId);
+        });
+        table.on( 'click', '.order-info', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            window.open("/store/order/detailPage?orderId="+data.orderId);
         });
     });
+
+    function getRefundList(button,type) {
+        //改变按钮颜色
+        var buttons = $('#btn-group').children();
+        buttons.each(function (index, element) {
+            $(element).removeClass("btn-primary");
+            $(element).addClass("btn-white");
+        });
+        $(button).removeClass("btn-white");
+        $(button).addClass("btn-primary");
+        nowType = type;
+
+        $('#datatables').DataTable().ajax.reload();
+    }
+
 </script>
 
 #parse("/store/models/end.vm")

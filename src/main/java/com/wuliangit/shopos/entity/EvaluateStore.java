@@ -17,7 +17,7 @@ public class EvaluateStore {
 
     private Integer memberId;
 
-    private String memberName;
+    private String memberUsername;
 
     private Integer descCredit;
 
@@ -81,12 +81,12 @@ public class EvaluateStore {
         this.memberId = memberId;
     }
 
-    public String getMemberName() {
-        return memberName;
+    public String getMemberUsername() {
+        return memberUsername;
     }
 
-    public void setMemberName(String memberName) {
-        this.memberName = memberName == null ? null : memberName.trim();
+    public void setMemberUsername(String memberUsername) {
+        this.memberUsername = memberUsername == null ? null : memberUsername.trim();
     }
 
     public Integer getDescCredit() {

@@ -7,7 +7,7 @@ public class EvaluateGoods {
 
     private Integer memberId;
 
-    private String memberName;
+    private String memberUsername;
 
     private Integer storeId;
 
@@ -15,11 +15,13 @@ public class EvaluateGoods {
 
     private Integer goodsId;
 
+    private String images;
+
+    private String skuValue;
+
     private Integer star;
 
     private String content;
-
-    private String images;
 
     private Boolean isAnonymous;
 
@@ -31,7 +33,7 @@ public class EvaluateGoods {
 
     private String explain;
 
-    private String skuValue;
+    private String goodsName;
 
     public Integer getEvaluateGoodsId() {
         return evaluateGoodsId;
@@ -49,12 +51,12 @@ public class EvaluateGoods {
         this.memberId = memberId;
     }
 
-    public String getMemberName() {
-        return memberName;
+    public String getMemberUsername() {
+        return memberUsername;
     }
 
-    public void setMemberName(String memberName) {
-        this.memberName = memberName == null ? null : memberName.trim();
+    public void setMemberUsername(String memberUsername) {
+        this.memberUsername = memberUsername == null ? null : memberUsername.trim();
     }
 
     public Integer getStoreId() {
@@ -81,6 +83,22 @@ public class EvaluateGoods {
         this.goodsId = goodsId;
     }
 
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images == null ? null : images.trim();
+    }
+
+    public String getSkuValue() {
+        return skuValue;
+    }
+
+    public void setSkuValue(String skuValue) {
+        this.skuValue = skuValue == null ? null : skuValue.trim();
+    }
+
     public Integer getStar() {
         return star;
     }
@@ -95,14 +113,6 @@ public class EvaluateGoods {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
-    }
-
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images == null ? null : images.trim();
     }
 
     public Boolean getIsAnonymous() {
@@ -145,11 +155,11 @@ public class EvaluateGoods {
         this.explain = explain == null ? null : explain.trim();
     }
 
-    public String getSkuValue() {
-        return skuValue;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setSkuValue(String skuValue) {
-        this.skuValue = skuValue == null ? null : skuValue.trim();
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 }

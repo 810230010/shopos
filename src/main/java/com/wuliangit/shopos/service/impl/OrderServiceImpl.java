@@ -330,6 +330,7 @@ public class OrderServiceImpl implements OrderService {
         refund.setGoodsId(orderGoods.getGoodsId());
         refund.setGoodsName(orderGoods.getGoodsName());
         refund.setGoodsNum(orderGoods.getGoodsNum());
+        refund.setSkuName(orderGoods.getSkuName());
         refund.setRefundAmount(orderGoods.getGoodsPayPrice().multiply(new BigDecimal(orderGoods.getGoodsNum())));
         refund.setGoodsImage(orderGoods.getGoodsImage());
         refund.setOrderGoodsType(orderGoods.getGoodsType());
@@ -347,8 +348,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int refundDelive(Integer refundId, String expressName, String expressNo) {
         Refund refund = refundMapper.selectByPrimaryKey(refundId);
+        Store store = storeMapper.selectByPrimaryKey(refund.getStoreId());
         refund.setExpressNo(expressNo);
         refund.setExpressName(expressName);
+        refund.setRefundPhone(store.getRefundPhone());
+        refund.setRefundName(store.getRefundName());
+        refund.setRefundAddress(store.getRefundAddress());
+        refund.setRefundTime(new Date());
         return refundMapper.updateByPrimaryKeySelective(refund);
     }
 

@@ -11,6 +11,7 @@
     <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
     <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+    <result column="sku_name" property="skuName" jdbcType="VARCHAR" />
     <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
     <result column="goods_image" property="goodsImage" jdbcType="VARCHAR" />
     <result column="order_goods_type" property="orderGoodsType" jdbcType="VARCHAR" />
@@ -27,12 +28,17 @@
     <result column="admin_message" property="adminMessage" jdbcType="VARCHAR" />
     <result column="express_name" property="expressName" jdbcType="VARCHAR" />
     <result column="express_no" property="expressNo" jdbcType="VARCHAR" />
+    <result column="refund_address" property="refundAddress" jdbcType="VARCHAR" />
+    <result column="refund_name" property="refundName" jdbcType="VARCHAR" />
+    <result column="refund_phone" property="refundPhone" jdbcType="VARCHAR" />
+    <result column="refund_time" property="refundTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     refund_id, order_id, order_out_trade_no, store_id, member_id, member_username, goods_id, 
-    goods_name, goods_num, refund_amount, goods_image, order_goods_type, refund_type, 
+    goods_name, goods_num, sku_name, refund_amount, goods_image, order_goods_type, refund_type, 
     refund_state, is_lock, goods_state, create_time, seller_handle_time, admin_time, 
-    pics_info, buyer_message, seller_message, admin_message, express_name, express_no
+    pics_info, buyer_message, seller_message, admin_message, express_name, express_no, 
+    refund_address, refund_name, refund_phone, refund_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -50,22 +56,24 @@
     </selectKey>
     insert into t_refund (order_id, order_out_trade_no, store_id, 
       member_id, member_username, goods_id, 
-      goods_name, goods_num, refund_amount, 
-      goods_image, order_goods_type, refund_type, 
-      refund_state, is_lock, goods_state, 
-      create_time, seller_handle_time, admin_time, 
-      pics_info, buyer_message, seller_message, 
-      admin_message, express_name, express_no
-      )
+      goods_name, goods_num, sku_name, 
+      refund_amount, goods_image, order_goods_type, 
+      refund_type, refund_state, is_lock, 
+      goods_state, create_time, seller_handle_time, 
+      admin_time, pics_info, buyer_message, 
+      seller_message, admin_message, express_name, 
+      express_no, refund_address, refund_name, 
+      refund_phone, refund_time)
     values (#{orderId,jdbcType=INTEGER}, #{orderOutTradeNo,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
       #{memberId,jdbcType=INTEGER}, #{memberUsername,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, 
-      #{goodsName,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, #{refundAmount,jdbcType=DECIMAL}, 
-      #{goodsImage,jdbcType=VARCHAR}, #{orderGoodsType,jdbcType=VARCHAR}, #{refundType,jdbcType=VARCHAR}, 
-      #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, #{goodsState,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{sellerHandleTime,jdbcType=TIMESTAMP}, #{adminTime,jdbcType=TIMESTAMP}, 
-      #{picsInfo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, #{sellerMessage,jdbcType=VARCHAR}, 
-      #{adminMessage,jdbcType=VARCHAR}, #{expressName,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}
-      )
+      #{goodsName,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, #{skuName,jdbcType=VARCHAR}, 
+      #{refundAmount,jdbcType=DECIMAL}, #{goodsImage,jdbcType=VARCHAR}, #{orderGoodsType,jdbcType=VARCHAR}, 
+      #{refundType,jdbcType=VARCHAR}, #{refundState,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
+      #{goodsState,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{sellerHandleTime,jdbcType=TIMESTAMP}, 
+      #{adminTime,jdbcType=TIMESTAMP}, #{picsInfo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, 
+      #{sellerMessage,jdbcType=VARCHAR}, #{adminMessage,jdbcType=VARCHAR}, #{expressName,jdbcType=VARCHAR}, 
+      #{expressNo,jdbcType=VARCHAR}, #{refundAddress,jdbcType=VARCHAR}, #{refundName,jdbcType=VARCHAR}, 
+      #{refundPhone,jdbcType=VARCHAR}, #{refundTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Refund" >
     <selectKey resultType="java.lang.Integer" keyProperty="refundId" order="AFTER" >
@@ -96,6 +104,9 @@
       </if>
       <if test="goodsNum != null" >
         goods_num,
+      </if>
+      <if test="skuName != null" >
+        sku_name,
       </if>
       <if test="refundAmount != null" >
         refund_amount,
@@ -145,6 +156,18 @@
       <if test="expressNo != null" >
         express_no,
       </if>
+      <if test="refundAddress != null" >
+        refund_address,
+      </if>
+      <if test="refundName != null" >
+        refund_name,
+      </if>
+      <if test="refundPhone != null" >
+        refund_phone,
+      </if>
+      <if test="refundTime != null" >
+        refund_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -170,6 +193,9 @@
       </if>
       <if test="goodsNum != null" >
         #{goodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="skuName != null" >
+        #{skuName,jdbcType=VARCHAR},
       </if>
       <if test="refundAmount != null" >
         #{refundAmount,jdbcType=DECIMAL},
@@ -219,6 +245,18 @@
       <if test="expressNo != null" >
         #{expressNo,jdbcType=VARCHAR},
       </if>
+      <if test="refundAddress != null" >
+        #{refundAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="refundName != null" >
+        #{refundName,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPhone != null" >
+        #{refundPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="refundTime != null" >
+        #{refundTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Refund" >
@@ -247,6 +285,9 @@
       </if>
       <if test="goodsNum != null" >
         goods_num = #{goodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="skuName != null" >
+        sku_name = #{skuName,jdbcType=VARCHAR},
       </if>
       <if test="refundAmount != null" >
         refund_amount = #{refundAmount,jdbcType=DECIMAL},
@@ -296,6 +337,18 @@
       <if test="expressNo != null" >
         express_no = #{expressNo,jdbcType=VARCHAR},
       </if>
+      <if test="refundAddress != null" >
+        refund_address = #{refundAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="refundName != null" >
+        refund_name = #{refundName,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPhone != null" >
+        refund_phone = #{refundPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="refundTime != null" >
+        refund_time = #{refundTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where refund_id = #{refundId,jdbcType=INTEGER}
   </update>
@@ -309,6 +362,7 @@
       goods_id = #{goodsId,jdbcType=INTEGER},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_num = #{goodsNum,jdbcType=INTEGER},
+      sku_name = #{skuName,jdbcType=VARCHAR},
       refund_amount = #{refundAmount,jdbcType=DECIMAL},
       goods_image = #{goodsImage,jdbcType=VARCHAR},
       order_goods_type = #{orderGoodsType,jdbcType=VARCHAR},
@@ -324,7 +378,11 @@
       seller_message = #{sellerMessage,jdbcType=VARCHAR},
       admin_message = #{adminMessage,jdbcType=VARCHAR},
       express_name = #{expressName,jdbcType=VARCHAR},
-      express_no = #{expressNo,jdbcType=VARCHAR}
+      express_no = #{expressNo,jdbcType=VARCHAR},
+      refund_address = #{refundAddress,jdbcType=VARCHAR},
+      refund_name = #{refundName,jdbcType=VARCHAR},
+      refund_phone = #{refundPhone,jdbcType=VARCHAR},
+      refund_time = #{refundTime,jdbcType=TIMESTAMP}
     where refund_id = #{refundId,jdbcType=INTEGER}
   </update>
 </mapper>

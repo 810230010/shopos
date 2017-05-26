@@ -65,8 +65,9 @@ public class EvaluateGoodsServiceImpl implements EvaluateGoodsService {
             }
             evaluate.setCreateTime(new Date());
             evaluate.setIsShow(true);
+            evaluate.setGoodsName(orderGoods.getGoodsName());
             evaluate.setMemberId(currentMember.getMemberId());
-            evaluate.setMemberName(currentMember.getNickname());
+            evaluate.setMemberUsername(currentMember.getNickname());
             evaluate.setStoreId(order.getStoreId());
             evaluate.setSkuValue(orderGoods.getSkuName());
             evaluate.setOrderId(orderId);

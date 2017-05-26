@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.RefundMapper;
 import com.wuliangit.shopos.dto.StoreRefundListDTO;
@@ -33,18 +34,21 @@ public class StoreRefundServiceImpl implements StoreRefundService {
     }
 
     @Override
-    public Integer checkRefundApply(Integer refundId, String sellerState) throws BaseException {
-        Integer result = refundMapper.checkRefundApply(refundId,sellerState);
-        if(result != 1){
-            throw new BaseException("操作失败");
+    public Integer checkRefundApply(Integer refundId, Boolean isPass) throws BaseException {
+        Refund refund = refundMapper.selectByPrimaryKey(refundId);
+        if (isPass){
+            refund.setRefundState(POJOConstants.REFUND_STATE_CONSENT);
+        }else{
+            refund.setRefundState(POJOConstants.REFUND_STATE_NOT_CONSENT);
         }
-        return result;
+        return refundMapper.updateByPrimaryKeySelective(refund);
     }
 
     @Override
     public List<StoreRefundListDTO> getSuccessRefundList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String type) {
         PageHelper.startPage(page,pageSize);
-        List<StoreRefundListDTO> storeRefundListDTOS = refundMapper.getSuccessRefundList(searchKey,orderColumn,orderType,type);
+        StoreMin store = WebUtil.getCurrentStore();
+        List<StoreRefundListDTO> storeRefundListDTOS = refundMapper.getSuccessRefundList(store.getStoreId(),searchKey,orderColumn,orderType,type);
         return storeRefundListDTOS;
     }
 

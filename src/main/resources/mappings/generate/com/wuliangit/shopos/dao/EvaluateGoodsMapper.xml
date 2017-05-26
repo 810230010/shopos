@@ -4,23 +4,24 @@
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.EvaluateGoods" >
     <id column="evaluate_goods_id" property="evaluateGoodsId" jdbcType="INTEGER" />
     <result column="member_id" property="memberId" jdbcType="INTEGER" />
-    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="member_username" property="memberUsername" jdbcType="VARCHAR" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="images" property="images" jdbcType="VARCHAR" />
+    <result column="sku_value" property="skuValue" jdbcType="VARCHAR" />
     <result column="star" property="star" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="images" property="images" jdbcType="VARCHAR" />
     <result column="is_anonymous" property="isAnonymous" jdbcType="BIT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="is_show" property="isShow" jdbcType="BIT" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="explain" property="explain" jdbcType="VARCHAR" />
-    <result column="sku_value" property="skuValue" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    evaluate_goods_id, member_id, member_name, store_id, order_id, goods_id, star, content, 
-    images, is_anonymous, create_time, is_show, remark, explain, sku_value
+    evaluate_goods_id, member_id, member_username, store_id, order_id, goods_id, images, 
+    sku_value, star, content, is_anonymous, create_time, is_show, remark, explain, goods_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -36,16 +37,18 @@
     <selectKey resultType="java.lang.Integer" keyProperty="evaluateGoodsId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_evaluate_goods (member_id, member_name, store_id, 
-      order_id, goods_id, star, 
-      content, images, is_anonymous, 
-      create_time, is_show, remark, 
-      explain, sku_value)
-    values (#{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
-      #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{star,jdbcType=INTEGER}, 
-      #{content,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, #{isAnonymous,jdbcType=BIT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{isShow,jdbcType=BIT}, #{remark,jdbcType=VARCHAR}, 
-      #{explain,jdbcType=VARCHAR}, #{skuValue,jdbcType=VARCHAR})
+    insert into t_evaluate_goods (member_id, member_username, store_id, 
+      order_id, goods_id, images, 
+      sku_value, star, content, 
+      is_anonymous, create_time, is_show, 
+      remark, explain, goods_name
+      )
+    values (#{memberId,jdbcType=INTEGER}, #{memberUsername,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
+      #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{images,jdbcType=VARCHAR}, 
+      #{skuValue,jdbcType=VARCHAR}, #{star,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{isAnonymous,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{isShow,jdbcType=BIT}, 
+      #{remark,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.EvaluateGoods" >
     <selectKey resultType="java.lang.Integer" keyProperty="evaluateGoodsId" order="AFTER" >
@@ -56,8 +59,8 @@
       <if test="memberId != null" >
         member_id,
       </if>
-      <if test="memberName != null" >
-        member_name,
+      <if test="memberUsername != null" >
+        member_username,
       </if>
       <if test="storeId != null" >
         store_id,
@@ -68,14 +71,17 @@
       <if test="goodsId != null" >
         goods_id,
       </if>
+      <if test="images != null" >
+        images,
+      </if>
+      <if test="skuValue != null" >
+        sku_value,
+      </if>
       <if test="star != null" >
         star,
       </if>
       <if test="content != null" >
         content,
-      </if>
-      <if test="images != null" >
-        images,
       </if>
       <if test="isAnonymous != null" >
         is_anonymous,
@@ -92,16 +98,16 @@
       <if test="explain != null" >
         explain,
       </if>
-      <if test="skuValue != null" >
-        sku_value,
+      <if test="goodsName != null" >
+        goods_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="memberId != null" >
         #{memberId,jdbcType=INTEGER},
       </if>
-      <if test="memberName != null" >
-        #{memberName,jdbcType=VARCHAR},
+      <if test="memberUsername != null" >
+        #{memberUsername,jdbcType=VARCHAR},
       </if>
       <if test="storeId != null" >
         #{storeId,jdbcType=INTEGER},
@@ -112,14 +118,17 @@
       <if test="goodsId != null" >
         #{goodsId,jdbcType=INTEGER},
       </if>
+      <if test="images != null" >
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="skuValue != null" >
+        #{skuValue,jdbcType=VARCHAR},
+      </if>
       <if test="star != null" >
         #{star,jdbcType=INTEGER},
       </if>
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="images != null" >
-        #{images,jdbcType=VARCHAR},
       </if>
       <if test="isAnonymous != null" >
         #{isAnonymous,jdbcType=BIT},
@@ -136,8 +145,8 @@
       <if test="explain != null" >
         #{explain,jdbcType=VARCHAR},
       </if>
-      <if test="skuValue != null" >
-        #{skuValue,jdbcType=VARCHAR},
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -147,8 +156,8 @@
       <if test="memberId != null" >
         member_id = #{memberId,jdbcType=INTEGER},
       </if>
-      <if test="memberName != null" >
-        member_name = #{memberName,jdbcType=VARCHAR},
+      <if test="memberUsername != null" >
+        member_username = #{memberUsername,jdbcType=VARCHAR},
       </if>
       <if test="storeId != null" >
         store_id = #{storeId,jdbcType=INTEGER},
@@ -159,14 +168,17 @@
       <if test="goodsId != null" >
         goods_id = #{goodsId,jdbcType=INTEGER},
       </if>
+      <if test="images != null" >
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="skuValue != null" >
+        sku_value = #{skuValue,jdbcType=VARCHAR},
+      </if>
       <if test="star != null" >
         star = #{star,jdbcType=INTEGER},
       </if>
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="images != null" >
-        images = #{images,jdbcType=VARCHAR},
       </if>
       <if test="isAnonymous != null" >
         is_anonymous = #{isAnonymous,jdbcType=BIT},
@@ -183,8 +195,8 @@
       <if test="explain != null" >
         explain = #{explain,jdbcType=VARCHAR},
       </if>
-      <if test="skuValue != null" >
-        sku_value = #{skuValue,jdbcType=VARCHAR},
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
     </set>
     where evaluate_goods_id = #{evaluateGoodsId,jdbcType=INTEGER}
@@ -192,19 +204,20 @@
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.EvaluateGoods" >
     update t_evaluate_goods
     set member_id = #{memberId,jdbcType=INTEGER},
-      member_name = #{memberName,jdbcType=VARCHAR},
+      member_username = #{memberUsername,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},
+      images = #{images,jdbcType=VARCHAR},
+      sku_value = #{skuValue,jdbcType=VARCHAR},
       star = #{star,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
-      images = #{images,jdbcType=VARCHAR},
       is_anonymous = #{isAnonymous,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       is_show = #{isShow,jdbcType=BIT},
       remark = #{remark,jdbcType=VARCHAR},
       explain = #{explain,jdbcType=VARCHAR},
-      sku_value = #{skuValue,jdbcType=VARCHAR}
+      goods_name = #{goodsName,jdbcType=VARCHAR}
     where evaluate_goods_id = #{evaluateGoodsId,jdbcType=INTEGER}
   </update>
 </mapper>

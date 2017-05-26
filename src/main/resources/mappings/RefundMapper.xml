@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.RefundMapper" >
-    <!--审核退换货的申请-->
-    <update id="checkRefundApply">
-      UPDATE t_refund
-      SET seller_state = #{sellerState}
-      where refund_id = #{refundId}
-    </update>
 
     <!--获取退换货申请列表的数据-->
     <select id="getApplyRefundList" resultType="com.wuliangit.shopos.dto.StoreRefundListDTO">
@@ -31,15 +25,13 @@
         SELECT *
         FROM t_refund
         <where>
-            seller_state = "CONSENT"
+            store_id = #{storeId} and
+            (refund_state = 'DELIVE' or refund_state = 'CONSENT')
             <if test="searchKey != null and searchKey != '' ">
                 and ( member_name like '%${searchKey}%' or goods_name like '%${searchKey}%')
             </if>
-            <if test="type == ''">
-                and ( refund_type = 'CHANGE_GOODS' or refund_type = 'REFUND_ALL')
-            </if>
-            <if test="type != ''">
-                and refund_type = #{type}
+            <if test="type != null and type != ''">
+                and ( refund_type = #{type})
             </if>
         </where>
         order by

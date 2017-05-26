@@ -1,0 +1,83 @@
+#parse("/store/models/begin.vm")
+
+#parse("/store/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>订单-退换货详情</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-archive"></i> 商品信息</h5>
+                </div>
+                <table class="table white-bg table-striped">
+                    <thead>
+                    <tr>
+                        <th style="width:25%">商品名称</th>
+                        <th style="width:10%">图片</th>
+                        <th style="width:10%">数量</th>
+                        <th style="width:20%">属性</th>
+                        <th style="width:20%">价格</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="text-primary">$!{refund.goodsName}</span></td>
+                            <td><img src="$!{refund.goodsImage}" class="img-rounded img-md"/></td>
+                            <td><span class="text-primary">$!{refund.goodsNum}</span></td>
+                            <td><span class="text-primary">
+                                #set ($columnArray = $refund.skuName.split("\#\#"))
+                                #foreach($word in $!{columnArray})
+                                    <span class="label label-primary" style="margin-right: 10px;">$word</span>
+                                #end
+                            </span></td>
+                            <td><span class="text-danger">$!{refund.refundAmount}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-vcard-o"></i> 物流信息</h5>
+                </div>
+                <table class="table white-bg table-striped">
+                    <tbody>
+                    <tr>
+                        <td><span class="text-muted">收货人：</span></td>
+                        <td><span class="text-primary">$!{refund.refundName}</span></td>
+                        <td><span class="text-muted">手机号码：</span></td>
+                        <td><span class="text-primary">$!{refund.refundPhone}</span></td>
+                        <td><span class="text-muted">收货人地址</span></td>
+                        <td><span class="text-primary">$!{refund.refundAddress}</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="text-muted">快递名称：</span></td>
+                        <td><span class="text-primary">$!{refund.expressName}</span></td>
+                        <td><span class="text-muted">物流单号：</span></td>
+                        <td><span class="text-primary">$!{refund.expressNo}</span></td>
+                        <td><span class="text-muted">配送时间：</span></td>
+                        <td><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{refund.refundTime})</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+<script>
+    $("#订单").addClass("active");
+    $('#side-menu').metisMenu();
+
+
+
+</script>
+
+#parse("/admin/models/end.vm")

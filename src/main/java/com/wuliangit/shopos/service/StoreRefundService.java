@@ -29,7 +29,7 @@ public interface StoreRefundService {
      * @Param: [refundId, sellerState]
      * @return: java.lang.Integer
      */
-    Integer checkRefundApply(Integer refundId,String sellerState) throws BaseException;
+    Integer checkRefundApply(Integer refundId,Boolean isPass) throws BaseException;
 
     /**
      * @Description: 获取成功申请退换货的数据

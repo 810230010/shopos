@@ -58,6 +58,9 @@
     <result column="live_store_tel" property="liveStoreTel" jdbcType="VARCHAR" />
     <result column="live_store_gps" property="liveStoreGps" jdbcType="VARCHAR" />
     <result column="live_store_bus" property="liveStoreBus" jdbcType="VARCHAR" />
+    <result column="refund_address" property="refundAddress" jdbcType="VARCHAR" />
+    <result column="refund_name" property="refundName" jdbcType="VARCHAR" />
+    <result column="refund_phone" property="refundPhone" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     store_id, seller_admin_id, bind_member_id, bind_member_username, name, grade_id, 
@@ -67,7 +70,7 @@
     deliverycredit, collect, slide_url, stamp, printdesc, sales, presales, aftersales, 
     workingtime, free_price, decoration_switch, decoration_only, seven_day_return, real_goods, 
     sales_return, live, pay_after, store_free_time, live_store_name, live_store_address, 
-    live_store_tel, live_store_gps, live_store_bus
+    live_store_tel, live_store_gps, live_store_bus, refund_address, refund_name, refund_phone
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -100,7 +103,8 @@
       decoration_switch, decoration_only, seven_day_return, 
       real_goods, sales_return, live, pay_after, 
       store_free_time, live_store_name, live_store_address, 
-      live_store_tel, live_store_gps, live_store_bus
+      live_store_tel, live_store_gps, live_store_bus, 
+      refund_address, refund_name, refund_phone
       )
     values (#{sellerAdminId,jdbcType=VARCHAR}, #{bindMemberId,jdbcType=INTEGER}, #{bindMemberUsername,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{gradeId,jdbcType=INTEGER}, #{scId,jdbcType=INTEGER}, 
@@ -119,7 +123,8 @@
       #{decorationSwitch,jdbcType=BIT}, #{decorationOnly,jdbcType=BIT}, #{sevenDayReturn,jdbcType=BIT}, 
       #{realGoods,jdbcType=BIT}, #{salesReturn,jdbcType=BIT}, #{live,jdbcType=BIT}, #{payAfter,jdbcType=BIT}, 
       #{storeFreeTime,jdbcType=VARCHAR}, #{liveStoreName,jdbcType=VARCHAR}, #{liveStoreAddress,jdbcType=VARCHAR}, 
-      #{liveStoreTel,jdbcType=VARCHAR}, #{liveStoreGps,jdbcType=VARCHAR}, #{liveStoreBus,jdbcType=VARCHAR}
+      #{liveStoreTel,jdbcType=VARCHAR}, #{liveStoreGps,jdbcType=VARCHAR}, #{liveStoreBus,jdbcType=VARCHAR}, 
+      #{refundAddress,jdbcType=VARCHAR}, #{refundName,jdbcType=VARCHAR}, #{refundPhone,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Store" >
@@ -293,6 +298,15 @@
       <if test="liveStoreBus != null" >
         live_store_bus,
       </if>
+      <if test="refundAddress != null" >
+        refund_address,
+      </if>
+      <if test="refundName != null" >
+        refund_name,
+      </if>
+      <if test="refundPhone != null" >
+        refund_phone,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="sellerAdminId != null" >
@@ -459,6 +473,15 @@
       </if>
       <if test="liveStoreBus != null" >
         #{liveStoreBus,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAddress != null" >
+        #{refundAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="refundName != null" >
+        #{refundName,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPhone != null" >
+        #{refundPhone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -630,6 +653,15 @@
       <if test="liveStoreBus != null" >
         live_store_bus = #{liveStoreBus,jdbcType=VARCHAR},
       </if>
+      <if test="refundAddress != null" >
+        refund_address = #{refundAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="refundName != null" >
+        refund_name = #{refundName,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPhone != null" >
+        refund_phone = #{refundPhone,jdbcType=VARCHAR},
+      </if>
     </set>
     where store_id = #{storeId,jdbcType=INTEGER}
   </update>
@@ -689,7 +721,10 @@
       live_store_address = #{liveStoreAddress,jdbcType=VARCHAR},
       live_store_tel = #{liveStoreTel,jdbcType=VARCHAR},
       live_store_gps = #{liveStoreGps,jdbcType=VARCHAR},
-      live_store_bus = #{liveStoreBus,jdbcType=VARCHAR}
+      live_store_bus = #{liveStoreBus,jdbcType=VARCHAR},
+      refund_address = #{refundAddress,jdbcType=VARCHAR},
+      refund_name = #{refundName,jdbcType=VARCHAR},
+      refund_phone = #{refundPhone,jdbcType=VARCHAR}
     where store_id = #{storeId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,10 +1,12 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.RefundMapper;
 import com.wuliangit.shopos.dto.StoreRefundListDTO;
 import com.wuliangit.shopos.entity.Refund;
 import com.wuliangit.shopos.exception.BaseException;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreRefundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +27,8 @@ public class StoreRefundServiceImpl implements StoreRefundService {
     @Override
     public List<StoreRefundListDTO> getApplyRefundList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize) {
         PageHelper.startPage(page,pageSize);
-        List<StoreRefundListDTO> storeRefundListDTOS = refundMapper.getApplyRefundList(searchKey,orderColumn,orderType);
+        StoreMin store = WebUtil.getCurrentStore();
+        List<StoreRefundListDTO> storeRefundListDTOS = refundMapper.getApplyRefundList(store.getStoreId(),searchKey,orderColumn,orderType);
         return storeRefundListDTOS;
     }
 

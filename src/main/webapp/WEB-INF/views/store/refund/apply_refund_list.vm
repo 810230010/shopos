@@ -13,8 +13,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5 id="rank">退换货申请列表 </h5>
-                    <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
+                    <h5 id="rank">退换货申请列表</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
@@ -37,6 +36,10 @@
 
 <script>
 
+    $("#退换货申请列表").addClass("active");
+    $("#订单").addClass("active");
+    $('#side-menu').metisMenu();
+
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
@@ -53,26 +56,58 @@
                 },
             },
             "columns": [
-                {"data":"orderSn","width": "10%","title":"订单编号","orderable": false},
-                {"data":"refundSn","width": "10%","title":"申请编号","orderable": false},
-                {"data":"memberName","width": "10%","title":"买家会员名","orderable": false},
-                {"data":"goodsName","width": "10%","title":"商品名","orderable": false},
+                {"data":"refundId","width": "10%","title":"退款号","orderable": false},
+                {"data":"orderOutTradeNo","width": "10%","title":"订单编号","orderable": false},
+                {"data":"memberUsername","width": "10%","title":"买家会员名","orderable": false},
+                {"data":"goodsName","width": "17%","title":"商品名","orderable": false,"render":function(data, type, row){
+                    if(data.length>25){
+                        return data.substr(0,25)+"...";
+                    }
+                    return data;
+                }},
                 {"data":"refundType","width": "10%","title":"申请类型","orderable": false,"render":function(data, type, row){
                     if(data == "REFUND_MOMEY")return "退款";
                     else if(data == "CHANGE_GOODS")return "换货";
                     else if(data == "REFUND_ALL")return "退款退货";
                 }},
-                {"data":"reasonInfo","width": "10%","title":"申请原因","orderable": false},
-                {"data":"refundId","width": "10%","title":"操作","orderable": false,"render":function(data, type, row){
-                    return [
-                        '<a class="table-button btn btn-danger btn-xs table-action unpass" href="javascript:void(0)" style="margin-left: 10px;">',
-                        '不同意 <i class="fa fa-minus-circle"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-info btn-xs table-action pass" href="javascript:void(0)" style="margin-left: 10px;">',
-                        '同意 <i class="fa fa-check"></i>',
-                        '</a>'
-                    ].join('');
-                }}
+                {"data":"buyerMessage","width": "10%","title":"申请原因","orderable": false},
+                {"data":"refundState","width": "10%","title":"状态","orderable": false,
+                    "render":function(data, type, row)
+                    {
+                        if (data == 'CHECKING'){
+                            return '待审核';
+                        }else if(data == 'CONSENT'){
+                            return '同意退款';
+                        }else if(data == 'NOT_CONSENT'){
+                            return '拒绝退款';
+                        }
+                    }
+                },
+                {"data":"refundAmount","width": "10%","title":"退款金额","orderable": false},
+                {"data":"refundState","width": "10%","title":"操作","orderable": false,
+                    "render":function(data, type, row)
+                    {
+                        var html = '';
+                        if (data == 'CHECKING'){
+                            html = '<a class="table-button btn btn-default btn-xs table-action info" href="javascript:void(0)">'+
+                                    '详情 <i class="fa fa-info-circle"></i></a>'+
+                                    '<a class="table-button btn btn-danger btn-xs table-action unpass" href="javascript:void(0)">'+
+                                    '拒绝 <i class="fa fa-minus-circle"></i></a>'+
+                                    '<a class="table-button btn btn-info btn-xs table-action pass" href="javascript:void(0)">'+
+                                    '同意 <i class="fa fa-check"></i></a>';
+                        }else if(data == 'CONSENT'){
+                            html = '<a class="table-button btn btn-info btn-xs table-action info" href="javascript:void(0)">'+
+                                    '详情 <i class="fa fa-check"></i></a>';
+                        }else if(data == 'NOT_CONSENT'){
+                            html = '<a class="table-button btn btn-info btn-xs table-action info" href="javascript:void(0)">'+
+                                    '详情 <i class="fa fa-check"></i></a>'+
+                                    '<a class="table-button btn btn-success btn-xs table-action changPass" href="javascript:void(0)">'+
+                                    '改为同意 <i class="fa fa-minus-circle"></i></a>';
+                        }
+
+                        return html;
+                    }
+                }
             ],
             "searching": true,
             "ordering":true,
@@ -102,12 +137,7 @@
             ],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
 

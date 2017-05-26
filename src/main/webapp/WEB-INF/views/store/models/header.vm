@@ -1,6 +1,6 @@
 <link href="/assets/admin/css/style.css" rel="stylesheet">
 </head>
-<body>
+<body class="skin-3">
 <div id="wrapper">
     #parse("/store/models/sidebar-shop.vm")
 

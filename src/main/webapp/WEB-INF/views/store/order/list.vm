@@ -125,15 +125,18 @@
                     else if(data == "DELIVE") return "已发货";
                     else if(data == "RECEIVE") return "已收货";
                 }},
-                {"data":"orderId","width": "10%","title":"操作","orderable": false,"render": function(data, type, row){
-                    return [
-                        '<a class="table-button-vertical btn btn-success btn-xs table-action detail" href="javascript:void(0)">',
-                        '查看详情 <i class="fa fa-info-circle"></i>',
-                        '</a>',
-                        '<div><a class="table-button-vertical btn btn-primary btn-xs table-action deliver" href="javascript:void(0)">',
-                        '一件发货 <i class="fa fa-send"></i>',
-                        '</a></div>'
-                    ].join('');
+                {"data":"orderState","width": "10%","title":"操作","orderable": false,"render": function(data, type, row){
+                    var html = '<a class="table-button-vertical btn btn-success btn-xs table-action detail" href="javascript:void(0)">'+
+                            '查看详情 <i class="fa fa-info-circle"></i>'+
+                            '</a>';
+                    if(data == "PAYED") {
+                        html += '<div><a class="table-button-vertical btn btn-primary btn-xs table-action deliver" href="javascript:void(0)">'+
+                                '一件发货 <i class="fa fa-send"></i>'+
+                                '</a></div>';
+                        return html;
+                    }else{
+                        return html;
+                    }
                 }},
             ],
             "searching": true,

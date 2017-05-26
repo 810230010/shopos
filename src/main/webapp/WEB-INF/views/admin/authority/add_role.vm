@@ -31,11 +31,12 @@
                 </div>
                 #foreach($menu in $menus)
                    
-                      <div class="col-lg-12" style="background-color:white;margin-top:20px;padding-bottom: 20px">
+                      <div class="col-lg-12" style="background-color:white;margin-top:20px;padding-bottom: 30px">
                         <div class="i-checks" style="height:50px;line-height: 50px;"><label> <input name="father" class="father" type="checkbox" value="$menu.permissionId"> <i></i> &nbsp;&nbsp;$menu.name</label></div>
-                    #if($menu.childMenus)
+                    <div class="hr-line-dashed"></div>
+                     #if($menu.childMenus)
                             #foreach($item in $menu.childMenus)
-                             <div class="col-lg-4" style="margin-left: 40px">
+                             <div class="col-lg-3 col-lg-offset-1">
                                 <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input name="son" class="$menu.permissionId" type="checkbox" value="$item.permissionId"> <i></i>$item.name</label></div>
                              </div>
                             #end

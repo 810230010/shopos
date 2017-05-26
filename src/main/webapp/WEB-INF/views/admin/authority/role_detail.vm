@@ -10,7 +10,7 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-lg-12" style="height:1800px">
+        <div class="col-lg-12" >
             <div class="ibox">
                 <div class="ibox-title">
                     <form class="form-horizontal">
@@ -31,11 +31,13 @@
                 </div>
                 #foreach($menu in $adminRoleDetail.rolePermissions)
 
-                <div class="col-lg-12" style="background-color:white;margin-top:20px;padding-bottom: 20px">
+                <div class="col-lg-12" style="background-color:white;margin-top:20px;padding-bottom: 3
+                0px">
                     <div class="i-checks" style="height:50px;line-height: 50px;"><label> <input class="$menu.permissionId" type="checkbox" value="" checked disabled> <i></i> &nbsp;&nbsp;$menu.name</label></div>
+                    <div class="hr-line-dashed"></div>
                     #if($menu.childMenus)
                         #foreach($item in $menu.childMenus)
-                            <div class="col-lg-4" style="margin-left: 40px">
+                            <div class="col-lg-3 col-lg-offset-1">
                                 <div class="i-checks" style="height:50px;line-height: 50px;padding-top: 10px"><label> <input class="$item.permissionId" type="checkbox" value="" checked disabled> <i></i>$item.name</label></div>
                             </div>
                         #end

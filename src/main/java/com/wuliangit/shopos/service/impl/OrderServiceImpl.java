@@ -304,7 +304,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int refund(Integer orderId, Integer goodsId, String refundType, String goodsState, String buyerMessage) throws Exception {
+    public int refund(Integer orderId, Integer goodsId, String refundType, String goodsState, String buyerMessage, String picsInfo) throws Exception {
         Order order = orderMapper.selectByPrimaryKey(orderId);
         Member member = WebUtil.getCurrentMember();
         List<OrderGoods> orderGoodsList = orderGoodsMapper.getByOrderId(orderId);
@@ -341,6 +341,7 @@ public class OrderServiceImpl implements OrderService {
         refund.setGoodsState(goodsState);
         refund.setCreateTime(new Date());
         refund.setBuyerMessage(buyerMessage);
+        refund.setPicsInfo(picsInfo);
 
         return refundMapper.insertSelective(refund);
     }

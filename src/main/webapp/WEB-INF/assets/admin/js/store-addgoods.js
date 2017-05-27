@@ -184,7 +184,9 @@ $("#wizard").steps({
         ////////////////提交/////////////
         $.post("/store/goods/add",
             {
-                goodsCategoryId: category3,
+                goodsCategory3Id: category3,
+                goodsCategory2Id: category2,
+                goodsCategory1Id: category1,
                 images: images,
                 titleImg: titleImg,
                 name: $("#name").val(),

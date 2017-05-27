@@ -16,7 +16,11 @@ public class Goods {
 
     private String storeName;
 
-    private Integer goodsCategoryId;
+    private Integer goodsCategory1Id;
+
+    private Integer goodsCategory2Id;
+
+    private Integer goodsCategory3Id;
 
     private Integer brandId;
 
@@ -144,12 +148,28 @@ public class Goods {
         this.storeName = storeName == null ? null : storeName.trim();
     }
 
-    public Integer getGoodsCategoryId() {
-        return goodsCategoryId;
+    public Integer getGoodsCategory1Id() {
+        return goodsCategory1Id;
     }
 
-    public void setGoodsCategoryId(Integer goodsCategoryId) {
-        this.goodsCategoryId = goodsCategoryId;
+    public void setGoodsCategory1Id(Integer goodsCategory1Id) {
+        this.goodsCategory1Id = goodsCategory1Id;
+    }
+
+    public Integer getGoodsCategory2Id() {
+        return goodsCategory2Id;
+    }
+
+    public void setGoodsCategory2Id(Integer goodsCategory2Id) {
+        this.goodsCategory2Id = goodsCategory2Id;
+    }
+
+    public Integer getGoodsCategory3Id() {
+        return goodsCategory3Id;
+    }
+
+    public void setGoodsCategory3Id(Integer goodsCategory3Id) {
+        this.goodsCategory3Id = goodsCategory3Id;
     }
 
     public Integer getBrandId() {

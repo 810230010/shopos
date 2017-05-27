@@ -8,7 +8,9 @@
     <result column="ad_word" property="adWord" jdbcType="VARCHAR" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="store_name" property="storeName" jdbcType="VARCHAR" />
-    <result column="goods_category_id" property="goodsCategoryId" jdbcType="INTEGER" />
+    <result column="goods_category1_id" property="goodsCategory1Id" jdbcType="INTEGER" />
+    <result column="goods_category2_id" property="goodsCategory2Id" jdbcType="INTEGER" />
+    <result column="goods_category3_id" property="goodsCategory3Id" jdbcType="INTEGER" />
     <result column="brand_id" property="brandId" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="carriage" property="carriage" jdbcType="DECIMAL" />
@@ -52,12 +54,13 @@
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    goods_id, name, unit, ad_word, store_id, store_name, goods_category_id, brand_id, 
-    price, carriage, commission, promotion_price, promotion_type, marketprice, storage_alarm, 
-    click, salenum, collect, storage, images, title_img, state, verify, create_time, 
-    edit_time, is_new, type, activity_id, activity_type, is_virtual, virtual_invalid_refund, 
-    is_appoint, is_presell, is_own_shop, vat, commend, evaluation_good_star, evaluation_count, 
-    del_flag, attrs, is_platform, area, is_check, sell_time_begin, sell_time_end
+    goods_id, name, unit, ad_word, store_id, store_name, goods_category1_id, goods_category2_id, 
+    goods_category3_id, brand_id, price, carriage, commission, promotion_price, promotion_type, 
+    marketprice, storage_alarm, click, salenum, collect, storage, images, title_img, 
+    state, verify, create_time, edit_time, is_new, type, activity_id, activity_type, 
+    is_virtual, virtual_invalid_refund, is_appoint, is_presell, is_own_shop, vat, commend, 
+    evaluation_good_star, evaluation_count, del_flag, attrs, is_platform, area, is_check, 
+    sell_time_begin, sell_time_end
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -79,37 +82,37 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_goods (name, unit, ad_word, 
-      store_id, store_name, goods_category_id, 
-      brand_id, price, carriage, 
-      commission, promotion_price, promotion_type, 
-      marketprice, storage_alarm, click, 
-      salenum, collect, storage, 
-      images, title_img, state, 
-      verify, create_time, edit_time, 
-      is_new, type, activity_id, 
-      activity_type, is_virtual, virtual_invalid_refund, 
-      is_appoint, is_presell, is_own_shop, 
-      vat, commend, evaluation_good_star, 
-      evaluation_count, del_flag, attrs, 
-      is_platform, area, is_check, 
-      sell_time_begin, sell_time_end, goods_body
-      )
+      store_id, store_name, goods_category1_id, 
+      goods_category2_id, goods_category3_id, brand_id, 
+      price, carriage, commission, 
+      promotion_price, promotion_type, marketprice, 
+      storage_alarm, click, salenum, 
+      collect, storage, images, 
+      title_img, state, verify, 
+      create_time, edit_time, is_new, 
+      type, activity_id, activity_type, 
+      is_virtual, virtual_invalid_refund, is_appoint, 
+      is_presell, is_own_shop, vat, commend, 
+      evaluation_good_star, evaluation_count, del_flag, 
+      attrs, is_platform, area, 
+      is_check, sell_time_begin, sell_time_end, 
+      goods_body)
     values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{adWord,jdbcType=VARCHAR}, 
-      #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{goodsCategoryId,jdbcType=INTEGER}, 
-      #{brandId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{carriage,jdbcType=DECIMAL}, 
-      #{commission,jdbcType=DECIMAL}, #{promotionPrice,jdbcType=DECIMAL}, #{promotionType,jdbcType=VARCHAR}, 
-      #{marketprice,jdbcType=DECIMAL}, #{storageAlarm,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, 
-      #{salenum,jdbcType=INTEGER}, #{collect,jdbcType=INTEGER}, #{storage,jdbcType=INTEGER}, 
-      #{images,jdbcType=VARCHAR}, #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
-      #{verify,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP}, 
-      #{isNew,jdbcType=BIT}, #{type,jdbcType=VARCHAR}, #{activityId,jdbcType=INTEGER}, 
-      #{activityType,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, 
-      #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, 
-      #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
-      #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{attrs,jdbcType=VARCHAR}, 
-      #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{isCheck,jdbcType=BIT}, 
-      #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, #{goodsBody,jdbcType=LONGVARCHAR}
-      )
+      #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{goodsCategory1Id,jdbcType=INTEGER}, 
+      #{goodsCategory2Id,jdbcType=INTEGER}, #{goodsCategory3Id,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{carriage,jdbcType=DECIMAL}, #{commission,jdbcType=DECIMAL}, 
+      #{promotionPrice,jdbcType=DECIMAL}, #{promotionType,jdbcType=VARCHAR}, #{marketprice,jdbcType=DECIMAL}, 
+      #{storageAlarm,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, #{salenum,jdbcType=INTEGER}, 
+      #{collect,jdbcType=INTEGER}, #{storage,jdbcType=INTEGER}, #{images,jdbcType=VARCHAR}, 
+      #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{verify,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP}, #{isNew,jdbcType=BIT}, 
+      #{type,jdbcType=VARCHAR}, #{activityId,jdbcType=INTEGER}, #{activityType,jdbcType=VARCHAR}, 
+      #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, #{isAppoint,jdbcType=BIT}, 
+      #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, 
+      #{evaluationGoodStar,jdbcType=INTEGER}, #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, 
+      #{attrs,jdbcType=VARCHAR}, #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, 
+      #{isCheck,jdbcType=BIT}, #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, 
+      #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     <selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="AFTER" >
@@ -132,8 +135,14 @@
       <if test="storeName != null" >
         store_name,
       </if>
-      <if test="goodsCategoryId != null" >
-        goods_category_id,
+      <if test="goodsCategory1Id != null" >
+        goods_category1_id,
+      </if>
+      <if test="goodsCategory2Id != null" >
+        goods_category2_id,
+      </if>
+      <if test="goodsCategory3Id != null" >
+        goods_category3_id,
       </if>
       <if test="brandId != null" >
         brand_id,
@@ -269,8 +278,14 @@
       <if test="storeName != null" >
         #{storeName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsCategoryId != null" >
-        #{goodsCategoryId,jdbcType=INTEGER},
+      <if test="goodsCategory1Id != null" >
+        #{goodsCategory1Id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsCategory2Id != null" >
+        #{goodsCategory2Id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsCategory3Id != null" >
+        #{goodsCategory3Id,jdbcType=INTEGER},
       </if>
       <if test="brandId != null" >
         #{brandId,jdbcType=INTEGER},
@@ -409,8 +424,14 @@
       <if test="storeName != null" >
         store_name = #{storeName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsCategoryId != null" >
-        goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
+      <if test="goodsCategory1Id != null" >
+        goods_category1_id = #{goodsCategory1Id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsCategory2Id != null" >
+        goods_category2_id = #{goodsCategory2Id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsCategory3Id != null" >
+        goods_category3_id = #{goodsCategory3Id,jdbcType=INTEGER},
       </if>
       <if test="brandId != null" >
         brand_id = #{brandId,jdbcType=INTEGER},
@@ -539,7 +560,9 @@
       ad_word = #{adWord,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=INTEGER},
       store_name = #{storeName,jdbcType=VARCHAR},
-      goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
+      goods_category1_id = #{goodsCategory1Id,jdbcType=INTEGER},
+      goods_category2_id = #{goodsCategory2Id,jdbcType=INTEGER},
+      goods_category3_id = #{goodsCategory3Id,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
       carriage = #{carriage,jdbcType=DECIMAL},
@@ -588,7 +611,9 @@
       ad_word = #{adWord,jdbcType=VARCHAR},
       store_id = #{storeId,jdbcType=INTEGER},
       store_name = #{storeName,jdbcType=VARCHAR},
-      goods_category_id = #{goodsCategoryId,jdbcType=INTEGER},
+      goods_category1_id = #{goodsCategory1Id,jdbcType=INTEGER},
+      goods_category2_id = #{goodsCategory2Id,jdbcType=INTEGER},
+      goods_category3_id = #{goodsCategory3Id,jdbcType=INTEGER},
       brand_id = #{brandId,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
       carriage = #{carriage,jdbcType=DECIMAL},

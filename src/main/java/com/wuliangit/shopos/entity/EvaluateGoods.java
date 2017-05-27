@@ -17,6 +17,8 @@ public class EvaluateGoods {
 
     private String images;
 
+    private String goodsName;
+
     private String skuValue;
 
     private Integer star;
@@ -32,8 +34,6 @@ public class EvaluateGoods {
     private String remark;
 
     private String explain;
-
-    private String goodsName;
 
     public Integer getEvaluateGoodsId() {
         return evaluateGoodsId;
@@ -89,6 +89,14 @@ public class EvaluateGoods {
 
     public void setImages(String images) {
         this.images = images == null ? null : images.trim();
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
     public String getSkuValue() {
@@ -153,13 +161,5 @@ public class EvaluateGoods {
 
     public void setExplain(String explain) {
         this.explain = explain == null ? null : explain.trim();
-    }
-
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 }

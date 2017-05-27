@@ -73,13 +73,13 @@ public class StoreGoodsController {
         model.addAttribute("domain",QiNiuUtils.BASE_URL);
         model.addAttribute("goods",goods);
 
-        GoodsCategory category3 = goodsCategoryService.getById(goods.getGoodsCategoryId());
-        GoodsCategory category2 = goodsCategoryService.getById(category3.getParentId());
-        GoodsCategory category1 = goodsCategoryService.getById(category2.getParentId());
+        GoodsCategory category3 = goodsCategoryService.getById(goods.getGoodsCategory3Id());
+        GoodsCategory category2 = goodsCategoryService.getById(goods.getGoodsCategory2Id());
+        GoodsCategory category1 = goodsCategoryService.getById(goods.getGoodsCategory1Id());
 
         model.addAttribute("category1",category1.getGoodsCategoryId());
         model.addAttribute("category2",category2.getGoodsCategoryId());
-        model.addAttribute("category3",goods.getGoodsCategoryId());
+        model.addAttribute("category3",category3.getGoodsCategoryId());
         return "store/goods/edit";
     }
 

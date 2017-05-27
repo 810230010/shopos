@@ -3,9 +3,11 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiGoodsCategoryDOT;
 import com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO;
+import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.service.GoodsCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,6 +22,18 @@ public class MGoodsCategoryController {
 
     @Autowired
     private GoodsCategoryService goodsCategoryService;
+
+    /**
+     * 移动端接口获取分类
+     * @return
+     */
+    @RequestMapping("/grade")
+    public Object getGoodsCategory(@RequestParam(value = "parentId", required = false, defaultValue = "0") Integer parentId){
+        RestResult result = new RestResult();
+        List<GoodsCategory> goodsCategories = goodsCategoryService.getGoodsCategoryListByParentId(parentId);
+        result.add("goodsCategories",goodsCategories);
+        return result;
+    }
 
 
     /**

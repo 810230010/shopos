@@ -6,16 +6,21 @@ import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSkuMapper;
+import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
+import com.wuliangit.shopos.entity.Member;
+import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.print.event.PrintJobAttributeEvent;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +37,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsSkuMapper goodsSkuMapper;
+
+    @Autowired
+    private StoreMapper storeMapper;
 
     @Override
     public ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page, Integer pageSize, String searchKey, String order) {
@@ -110,5 +118,58 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Integer getGoodsCountByStoreId(Integer storeId) {
         return goodsMapper.getGoodsCountByStoreId(storeId);
+    }
+
+    @Override
+    @Transactional
+    public int apiCreateGooods(Integer goodsCategory1Id, Integer goodsCategory2Id, Integer goodsCategory3Id,
+                               String name, BigDecimal price, BigDecimal carriage, Integer storage,
+                               String type, String unit, String goodsBody, String images) {
+        Goods goods = new Goods();
+        goods.setGoodsCategory1Id(goodsCategory1Id);
+        goods.setGoodsCategory2Id(goodsCategory2Id);
+        goods.setGoodsCategory3Id(goodsCategory3Id);
+        goods.setName(name);
+        goods.setPrice(price);
+        goods.setCarriage(carriage);
+        goods.setStorage(storage);
+        goods.setType(type);
+        goods.setUnit(unit);
+        goods.setGoodsBody(goodsBody);
+        goods.setAdWord("");
+        goods.setCommission(new BigDecimal(0));
+        goods.setMarketprice(new BigDecimal(0));
+        goods.setAttrs("[]");
+
+        //处理图片
+        String[] split = images.split("##");
+        goods.setTitleImg(split[0]);
+        goods.setImages(images);
+
+        Member member = WebUtil.getCurrentMember();
+
+        Store store = storeMapper.getStoreByBindMemberUsername(member.getUsername());
+
+        goods.setStoreId(store.getStoreId());
+        goods.setCreateTime(new Date());
+        goods.setStoreName(store.getName());
+        goods.setEditTime(new Date());
+
+        if (store.getStoreId().equals(1)) {
+            goods.setIsPlatform(true);
+        } else {
+            goods.setIsPlatform(false);
+        }
+        int res = goodsMapper.insertSelective(goods);
+
+        //添加sku
+        GoodsSku goodsSku = new GoodsSku();
+        goodsSku.setGoodsId(goods.getGoodsId());
+        goodsSku.setSkuPrice(price);
+        goodsSku.setSkuStock(storage);
+        goodsSku.setSkuValue(name);
+        goodsSkuMapper.insertSelective(goodsSku);
+
+        return res;
     }
 }

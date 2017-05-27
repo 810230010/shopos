@@ -5,6 +5,7 @@ import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public interface GoodsService {
     /**
      * 首页获取商品（搜索）
+     *
      * @param page
      * @param pageSize
      * @param searchKey
@@ -24,6 +26,7 @@ public interface GoodsService {
 
     /**
      * 创建商品
+     *
      * @param goods
      * @param skuStr
      * @return
@@ -33,6 +36,7 @@ public interface GoodsService {
 
     /**
      * 获取商品详情
+     *
      * @param goodsId
      * @return
      */
@@ -40,15 +44,16 @@ public interface GoodsService {
 
     /**
      * 获取商品sku信息
+     *
      * @param goodsId
      * @return
      */
     List<GoodsSku> getGoodsSkuByGoodsId(Integer goodsId);
 
 
-
     /**
      * 后台商品搜索
+     *
      * @param page
      * @param pageSize
      * @param searchKey
@@ -61,6 +66,7 @@ public interface GoodsService {
 
     /**
      * 更新商品详情
+     *
      * @param goods
      * @return
      */
@@ -68,6 +74,7 @@ public interface GoodsService {
 
     /**
      * 删除商品
+     *
      * @param goodsId
      * @return
      */
@@ -75,6 +82,7 @@ public interface GoodsService {
 
     /**
      * 获取商品的简要信息
+     *
      * @param goodsId
      * @return
      */
@@ -82,8 +90,29 @@ public interface GoodsService {
 
     /**
      * 通过店铺id获取店铺商品数量
+     *
      * @param storeId
      * @return
      */
     Integer getGoodsCountByStoreId(Integer storeId);
+
+    /**
+     * 移动端创建商品
+     *
+     * @param goodsCategory1Id
+     * @param goodsCategory2Id
+     * @param goodsCategory3Id
+     * @param name
+     * @param price
+     * @param carriage
+     * @param storage
+     * @param type
+     * @param unit
+     * @param goodsBody
+     * @param images
+     * @return
+     */
+    int apiCreateGooods(Integer goodsCategory1Id, Integer goodsCategory2Id,
+                        Integer goodsCategory3Id, String name, BigDecimal price, BigDecimal carriage,
+                        Integer storage, String type, String unit, String goodsBody, String images);
 }

@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.StoreAccountLogMapper" >
 
+    <!--店铺资金流水记录-->
+    <select id="getAccountHistoryList" resultType="com.wuliangit.shopos.entity.StoreAccountLog">
+        select * from t_store_account_log where store_id = #{storeId}
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        create_time desc
+    </select>
 </mapper>

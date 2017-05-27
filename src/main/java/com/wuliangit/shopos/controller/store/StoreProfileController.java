@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/store/profile")
-public class SotreProfileController {
+public class StoreProfileController {
 
     @Autowired
     private SellerService sellerService;

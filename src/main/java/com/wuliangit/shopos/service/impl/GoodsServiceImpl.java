@@ -89,10 +89,10 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public ArrayList<Goods> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId) {
+    public ArrayList<Goods> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
         PageHelper.startPage(page, pageSize);
         StoreMin currentStore = WebUtil.getCurrentStore();
-        ArrayList<Goods> goodses = goodsMapper.StoreSearch(currentStore.getStoreId(), searchKey, orderColumn, orderType, parentId);
+        ArrayList<Goods> goodses = goodsMapper.StoreSearch(currentStore.getStoreId(), searchKey, orderColumn, orderType);
         return goodses;
     }
 

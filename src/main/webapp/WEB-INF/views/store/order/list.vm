@@ -174,14 +174,14 @@
         table.on( 'click', '.detail', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/store/order/detailPage?orderId="+data.orderId;
+            window.open("/store/order/detailPage?orderId="+data.orderId);
         });
 
         //view record
         table.on( 'click', '.deliver', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/store/order/expressPage?orderId="+data.orderId;
+            window.open("/store/order/expressPage?orderId="+data.orderId);
         });
 
 

@@ -158,7 +158,6 @@ public class StoreGoodsController {
      * @param orderType
      * @param page
      * @param pageSize
-     * @param parentId
      * @return
      */
     @RequestMapping("/search")
@@ -168,10 +167,9 @@ public class StoreGoodsController {
                          @RequestParam(value = "orderColumn", required = false) String orderColumn,
                          @RequestParam(value = "orderType", required = false) String orderType,
                          @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                         @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                         @RequestParam(value = "parentId", required = false, defaultValue = "0") Integer parentId){
+                         @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        ArrayList<Goods> goodses = goodsService.search(page, pageSize, searchKey, orderColumn, orderType,parentId);
+        ArrayList<Goods> goodses = goodsService.search(page, pageSize, searchKey, orderColumn, orderType);
         return new PageResult<Goods>(goodses, draw);
     }
 

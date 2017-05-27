@@ -36,14 +36,12 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @param searchKey
      * @param orderColumn
      * @param orderType
-     * @param parentId
      * @return
      */
     ArrayList<Goods> StoreSearch(@Param("storeId")Integer storeId,
                                  @Param("searchKey")String searchKey,
                             @Param("orderColumn")String orderColumn,
-                            @Param("orderType")String orderType,
-                            @Param("parentId")Integer parentId);
+                            @Param("orderType")String orderType);
 
     /**
      * 不包行商品详情的商品对象

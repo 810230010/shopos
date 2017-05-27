@@ -62,7 +62,7 @@ public interface GoodsService {
      * @param parentId
      * @return
      */
-    ArrayList<Goods> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType, Integer parentId);
+    ArrayList<Goods> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType);
 
     /**
      * 更新商品详情

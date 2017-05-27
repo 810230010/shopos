@@ -10,13 +10,10 @@
                 brand_id = #{brandId}
             </if>
             <if test="goodsCategoryId != null and goodsCategoryId !=''">
-                and goods_category_id = #{goodsCategoryId}
+                and goods_category3_id = #{goodsCategoryId}
             </if>
             <if test="storeId != null and storeId !=''">
                 and store_id = #{storeId}
-            </if>
-            <if test="storeGoodsCategoryId != null and storeGoodsCategoryId !=''">
-                and store_goods_category_id = #{storeGoodsCategoryId}
             </if>
             <if test="type != null and type !=''">
                 and type = #{type}

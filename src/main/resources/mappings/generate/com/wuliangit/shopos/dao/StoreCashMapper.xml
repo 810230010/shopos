@@ -3,12 +3,13 @@
 <mapper namespace="com.wuliangit.shopos.dao.StoreCashMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.StoreCash" >
     <id column="store_cash_id" property="storeCashId" jdbcType="INTEGER" />
-    <result column="store_id" property="storeId" jdbcType="VARCHAR" />
-    <result column="amount" property="amount" jdbcType="VARCHAR" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="out_biz_no" property="outBizNo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    store_cash_id, store_id, amount, create_time
+    store_cash_id, store_id, amount, create_time, out_biz_no
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,10 +25,10 @@
     <selectKey resultType="java.lang.Integer" keyProperty="storeCashId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_store_cash (store_id, amount, create_time
-      )
-    values (#{storeId,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+    insert into t_store_cash (store_id, amount, create_time, 
+      out_biz_no)
+    values (#{storeId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{outBizNo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreCash" >
     <selectKey resultType="java.lang.Integer" keyProperty="storeCashId" order="AFTER" >
@@ -44,16 +45,22 @@
       <if test="createTime != null" >
         create_time,
       </if>
+      <if test="outBizNo != null" >
+        out_biz_no,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="storeId != null" >
-        #{storeId,jdbcType=VARCHAR},
+        #{storeId,jdbcType=INTEGER},
       </if>
       <if test="amount != null" >
-        #{amount,jdbcType=VARCHAR},
+        #{amount,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outBizNo != null" >
+        #{outBizNo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -61,22 +68,26 @@
     update t_store_cash
     <set >
       <if test="storeId != null" >
-        store_id = #{storeId,jdbcType=VARCHAR},
+        store_id = #{storeId,jdbcType=INTEGER},
       </if>
       <if test="amount != null" >
-        amount = #{amount,jdbcType=VARCHAR},
+        amount = #{amount,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outBizNo != null" >
+        out_biz_no = #{outBizNo,jdbcType=VARCHAR},
       </if>
     </set>
     where store_cash_id = #{storeCashId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.StoreCash" >
     update t_store_cash
-    set store_id = #{storeId,jdbcType=VARCHAR},
-      amount = #{amount,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+    set store_id = #{storeId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      out_biz_no = #{outBizNo,jdbcType=VARCHAR}
     where store_cash_id = #{storeCashId,jdbcType=INTEGER}
   </update>
 </mapper>

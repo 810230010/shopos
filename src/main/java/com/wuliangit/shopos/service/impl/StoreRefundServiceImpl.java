@@ -121,6 +121,7 @@ public class StoreRefundServiceImpl implements StoreRefundService {
             model.setOutRequestNo(tradeRefund.getOutRequestNo());
         }
 
+        request.setBizModel(model);
         AlipayTradeRefundResponse response = alipayClient.execute(request);
 
         if (response.isSuccess()) {

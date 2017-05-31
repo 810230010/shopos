@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.StoreAccountMapper" >
   <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.StoreAccount" >
-    <id column="store_ account_id" property="storeAccountId" jdbcType="INTEGER" />
+    <id column="store_account_id" property="storeAccountId" jdbcType="INTEGER" />
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="available_balance" property="availableBalance" jdbcType="DECIMAL" />
     <result column="freeze_balance" property="freezeBalance" jdbcType="DECIMAL" />
@@ -11,33 +11,36 @@
     <result column="alipay_account" property="alipayAccount" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    `store_ account_id`, store_id, available_balance, freeze_balance, cash_password, 
-    salt, alipay_account
+    store_account_id, store_id, available_balance, freeze_balance, cash_password, salt, 
+    alipay_account
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from t_store_account
-    where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
+    where store_account_id = #{storeAccountId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_store_account
-    where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
+    where store_account_id = #{storeAccountId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreAccount" >
-    insert into t_store_account (`store_ account_id`, store_id, available_balance, 
-      freeze_balance, cash_password, salt, 
-      alipay_account)
-    values (#{storeAccountId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{availableBalance,jdbcType=DECIMAL}, 
-      #{freezeBalance,jdbcType=DECIMAL}, #{cashPassword,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
-      #{alipayAccount,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="storeAccountId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_store_account (store_id, available_balance, freeze_balance, 
+      cash_password, salt, alipay_account
+      )
+    values (#{storeId,jdbcType=INTEGER}, #{availableBalance,jdbcType=DECIMAL}, #{freezeBalance,jdbcType=DECIMAL}, 
+      #{cashPassword,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{alipayAccount,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreAccount" >
+    <selectKey resultType="java.lang.Integer" keyProperty="storeAccountId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_store_account
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="storeAccountId != null" >
-        `store_ account_id`,
-      </if>
       <if test="storeId != null" >
         store_id,
       </if>
@@ -58,9 +61,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="storeAccountId != null" >
-        #{storeAccountId,jdbcType=INTEGER},
-      </if>
       <if test="storeId != null" >
         #{storeId,jdbcType=INTEGER},
       </if>
@@ -103,7 +103,7 @@
         alipay_account = #{alipayAccount,jdbcType=VARCHAR},
       </if>
     </set>
-    where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
+    where store_account_id = #{storeAccountId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.StoreAccount" >
     update t_store_account
@@ -113,6 +113,6 @@
       cash_password = #{cashPassword,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
       alipay_account = #{alipayAccount,jdbcType=VARCHAR}
-    where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
+    where store_account_id = #{storeAccountId,jdbcType=INTEGER}
   </update>
 </mapper>

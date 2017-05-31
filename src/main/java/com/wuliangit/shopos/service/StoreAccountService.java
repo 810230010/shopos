@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.alipay.api.AlipayApiException;
 import com.wuliangit.shopos.entity.StoreAccount;
 import com.wuliangit.shopos.entity.StoreAccountLog;
 import com.wuliangit.shopos.entity.StoreCash;
@@ -50,7 +51,7 @@ public interface StoreAccountService {
      * @param amount
      * @return
      */
-    int storeDoCash(BigDecimal amount) throws OptionException;
+    int storeDoCash(BigDecimal amount) throws OptionException, AlipayApiException;
 
     /**
      * 设置店铺提现支付宝账户

@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.controller.store;
 
+import com.alipay.api.AlipayApiException;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.StringUtils;
@@ -26,7 +27,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/store/acount")
+@RequestMapping("/store/account")
 public class StoreAccountController {
 
     @Autowired
@@ -107,7 +108,7 @@ public class StoreAccountController {
      * @throws OptionException
      */
     @RequestMapping(value = "/cash",method = RequestMethod.POST)
-    public Object doCash(BigDecimal amount) throws OptionException {
+    public Object doCash(BigDecimal amount) throws OptionException, AlipayApiException {
         RestResult result = new RestResult();
         int res = storeAccountService.storeDoCash(amount);
         return result;
@@ -120,8 +121,8 @@ public class StoreAccountController {
     @RequestMapping(value = "/settingAlipay",method = RequestMethod.POST)
     public String settingAlipay(Model model,String alipayAccount){
         StoreMin store = WebUtil.getCurrentStore();
-        StoreAccount storeAccount = storeAccountService.getStoreAccount();
         int res = storeAccountService.settingStoreAlipay(alipayAccount);
+        StoreAccount storeAccount = storeAccountService.getStoreAccount();
         model.addAttribute("storeAccount",storeAccount);
         model.addAttribute("storeName",store.getName());
         return "store/account/cash";

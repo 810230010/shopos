@@ -40,7 +40,7 @@ public class StoreRefundController {
     }
 
     /**
-     * @Description:
+     * @Description: 同意退款页面
      * @Author: pangweichao
      * @Date: 11:33 2017/5/12
      * @Param: [model, type]

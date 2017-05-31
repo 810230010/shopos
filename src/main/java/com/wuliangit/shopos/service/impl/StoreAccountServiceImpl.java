@@ -1,6 +1,12 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.domain.AlipayFundTransToaccountTransferModel;
+import com.alipay.api.request.AlipayFundTransToaccountTransferRequest;
+import com.alipay.api.response.AlipayFundTransToaccountTransferResponse;
 import com.github.pagehelper.PageHelper;
+import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreAccountLogMapper;
 import com.wuliangit.shopos.dao.StoreAccountMapper;
@@ -19,7 +25,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by nilme on 2017/5/27.
@@ -37,17 +45,17 @@ public class StoreAccountServiceImpl implements StoreAccountService {
 
     @Override
     public List<StoreAccountLog> getAccountHistoryList(Integer page, Integer pageSize, String orderColumn, String orderType) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         StoreMin store = WebUtil.getCurrentStore();
-        List<StoreAccountLog> storeAccountLogs = storeAccountLogMapper.getAccountHistoryList(store.getStoreId(),orderColumn,orderType);
+        List<StoreAccountLog> storeAccountLogs = storeAccountLogMapper.getAccountHistoryList(store.getStoreId(), orderColumn, orderType);
         return storeAccountLogs;
     }
 
     @Override
     public List<StoreCash> getCashHistoryList(Integer page, Integer pageSize, String orderColumn, String orderType) {
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         StoreMin store = WebUtil.getCurrentStore();
-        List<StoreCash> storeCashes = storeCashMapper.getCashHistoryList(store.getStoreId(),orderColumn,orderType);
+        List<StoreCash> storeCashes = storeCashMapper.getCashHistoryList(store.getStoreId(), orderColumn, orderType);
         return storeCashes;
     }
 
@@ -66,17 +74,55 @@ public class StoreAccountServiceImpl implements StoreAccountService {
 
     @Override
     @Transactional
-    public int storeDoCash(BigDecimal amount) throws OptionException {
+    public int storeDoCash(BigDecimal amount) throws OptionException, AlipayApiException {
         StoreMin currentStore = WebUtil.getCurrentStore();
         StoreAccount storeAccount = storeAccountMapper.getByStoreId(currentStore.getStoreId());
 
         //验证是否设置支付宝提现账户
-        if (StringUtils.isEmpty(storeAccount.getAlipayAccount())){
-            throw new OptionException("未设置提现支付宝账户");
+        if (StringUtils.isEmpty(storeAccount.getAlipayAccount())) {
+            throw new OptionException("未设置提现支付宝账户！");
         }
 
+        //验证是否有足够的余额可以提现
+        if (storeAccount.getAvailableBalance().compareTo(amount) < 0) {
+            throw new OptionException("提现金额不足！");
+        }
+
+        StoreCash storeCash = new StoreCash();
+        storeCash.setAmount(amount);
+        storeCash.setCreateTime(new Date());
+        storeCash.setStoreId(currentStore.getStoreId());
+        storeCash.setOutBizNo(UUID.randomUUID().toString().replace("-",""));
 
 
+        AlipayClient alipayClient = AliPay.getAlipayClient();
+        AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
+
+        AlipayFundTransToaccountTransferModel model = new AlipayFundTransToaccountTransferModel();
+        model.setAmount(amount.toString());
+        model.setPayerShowName("商户提现");
+        model.setPayeeAccount(storeAccount.getAlipayAccount());
+        model.setOutBizNo(storeCash.getOutBizNo());
+        /*
+        收款方账户类型。可取值：
+        1、ALIPAY_USERID：支付宝账号对应的支付宝唯一用户号。以2088开头的16位纯数字组成。
+        2、ALIPAY_LOGONID：支付宝登录号，支持邮箱和手机号格式。*/
+        model.setPayeeType("ALIPAY_LOGONID");
+
+        request.setBizModel(model);
+
+        AlipayFundTransToaccountTransferResponse response = alipayClient.execute(request);
+        if(response.isSuccess()){
+
+
+
+            System.out.println("调用成功");
+        } else {
+
+
+
+            System.out.println("调用失败");
+        }
 
         return 0;
     }

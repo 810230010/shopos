@@ -1,15 +1,18 @@
 package com.wuliangit.shopos.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class StoreCash {
     private Integer storeCashId;
 
-    private String storeId;
+    private Integer storeId;
 
-    private String amount;
+    private BigDecimal amount;
 
     private Date createTime;
+
+    private String outBizNo;
 
     public Integer getStoreCashId() {
         return storeCashId;
@@ -19,20 +22,20 @@ public class StoreCash {
         this.storeCashId = storeCashId;
     }
 
-    public String getStoreId() {
+    public Integer getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(String storeId) {
-        this.storeId = storeId == null ? null : storeId.trim();
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount == null ? null : amount.trim();
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public Date getCreateTime() {
@@ -41,5 +44,13 @@ public class StoreCash {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getOutBizNo() {
+        return outBizNo;
+    }
+
+    public void setOutBizNo(String outBizNo) {
+        this.outBizNo = outBizNo == null ? null : outBizNo.trim();
     }
 }

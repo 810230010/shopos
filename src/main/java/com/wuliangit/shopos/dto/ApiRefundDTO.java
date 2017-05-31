@@ -12,25 +12,21 @@ public class ApiRefundDTO {
 
     private Integer orderId;
 
-    private String orderSn;
-
-    private String refundSn;
+    private String orderOutTradeNo;
 
     private Integer storeId;
 
-    private String storeName;
-
     private Integer memberId;
 
-    private String memberName;
+    private String memberUsername;
 
     private Integer goodsId;
-
-    private Integer orderGoodsId;
 
     private String goodsName;
 
     private Integer goodsNum;
+
+    private String skuName;
 
     private BigDecimal refundAmount;
 
@@ -39,8 +35,6 @@ public class ApiRefundDTO {
     private String orderGoodsType;
 
     private String refundType;
-
-    private String sellerState;
 
     private String refundState;
 
@@ -54,8 +48,6 @@ public class ApiRefundDTO {
 
     private Date adminTime;
 
-    private String reasonInfo;
-
     private String picsInfo;
 
     private String buyerMessage;
@@ -64,15 +56,17 @@ public class ApiRefundDTO {
 
     private String adminMessage;
 
-    private Integer expressId;
+    private String expressName;
 
-    private String invoiceNo;
+    private String expressNo;
 
-    private Date shipTime;
+    private String refundAddress;
 
-    private Date delayTime;
+    private String refundName;
 
-    private Date receiveTime;
+    private String refundPhone;
+
+    private Date refundTime;
 
 
     public Integer getRefundId() {
@@ -91,20 +85,12 @@ public class ApiRefundDTO {
         this.orderId = orderId;
     }
 
-    public String getOrderSn() {
-        return orderSn;
+    public String getOrderOutTradeNo() {
+        return orderOutTradeNo;
     }
 
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn;
-    }
-
-    public String getRefundSn() {
-        return refundSn;
-    }
-
-    public void setRefundSn(String refundSn) {
-        this.refundSn = refundSn;
+    public void setOrderOutTradeNo(String orderOutTradeNo) {
+        this.orderOutTradeNo = orderOutTradeNo;
     }
 
     public Integer getStoreId() {
@@ -115,14 +101,6 @@ public class ApiRefundDTO {
         this.storeId = storeId;
     }
 
-    public String getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
-    }
-
     public Integer getMemberId() {
         return memberId;
     }
@@ -131,12 +109,12 @@ public class ApiRefundDTO {
         this.memberId = memberId;
     }
 
-    public String getMemberName() {
-        return memberName;
+    public String getMemberUsername() {
+        return memberUsername;
     }
 
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
+    public void setMemberUsername(String memberUsername) {
+        this.memberUsername = memberUsername;
     }
 
     public Integer getGoodsId() {
@@ -145,14 +123,6 @@ public class ApiRefundDTO {
 
     public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
-    }
-
-    public Integer getOrderGoodsId() {
-        return orderGoodsId;
-    }
-
-    public void setOrderGoodsId(Integer orderGoodsId) {
-        this.orderGoodsId = orderGoodsId;
     }
 
     public String getGoodsName() {
@@ -169,6 +139,14 @@ public class ApiRefundDTO {
 
     public void setGoodsNum(Integer goodsNum) {
         this.goodsNum = goodsNum;
+    }
+
+    public String getSkuName() {
+        return skuName;
+    }
+
+    public void setSkuName(String skuName) {
+        this.skuName = skuName;
     }
 
     public BigDecimal getRefundAmount() {
@@ -201,14 +179,6 @@ public class ApiRefundDTO {
 
     public void setRefundType(String refundType) {
         this.refundType = refundType;
-    }
-
-    public String getSellerState() {
-        return sellerState;
-    }
-
-    public void setSellerState(String sellerState) {
-        this.sellerState = sellerState;
     }
 
     public String getRefundState() {
@@ -259,14 +229,6 @@ public class ApiRefundDTO {
         this.adminTime = adminTime;
     }
 
-    public String getReasonInfo() {
-        return reasonInfo;
-    }
-
-    public void setReasonInfo(String reasonInfo) {
-        this.reasonInfo = reasonInfo;
-    }
-
     public String getPicsInfo() {
         return picsInfo;
     }
@@ -299,43 +261,51 @@ public class ApiRefundDTO {
         this.adminMessage = adminMessage;
     }
 
-    public Integer getExpressId() {
-        return expressId;
+    public String getExpressName() {
+        return expressName;
     }
 
-    public void setExpressId(Integer expressId) {
-        this.expressId = expressId;
+    public void setExpressName(String expressName) {
+        this.expressName = expressName;
     }
 
-    public String getInvoiceNo() {
-        return invoiceNo;
+    public String getExpressNo() {
+        return expressNo;
     }
 
-    public void setInvoiceNo(String invoiceNo) {
-        this.invoiceNo = invoiceNo;
+    public void setExpressNo(String expressNo) {
+        this.expressNo = expressNo;
     }
 
-    public Date getShipTime() {
-        return shipTime;
+    public String getRefundAddress() {
+        return refundAddress;
     }
 
-    public void setShipTime(Date shipTime) {
-        this.shipTime = shipTime;
+    public void setRefundAddress(String refundAddress) {
+        this.refundAddress = refundAddress;
     }
 
-    public Date getDelayTime() {
-        return delayTime;
+    public String getRefundName() {
+        return refundName;
     }
 
-    public void setDelayTime(Date delayTime) {
-        this.delayTime = delayTime;
+    public void setRefundName(String refundName) {
+        this.refundName = refundName;
     }
 
-    public Date getReceiveTime() {
-        return receiveTime;
+    public String getRefundPhone() {
+        return refundPhone;
     }
 
-    public void setReceiveTime(Date receiveTime) {
-        this.receiveTime = receiveTime;
+    public void setRefundPhone(String refundPhone) {
+        this.refundPhone = refundPhone;
+    }
+
+    public Date getRefundTime() {
+        return refundTime;
+    }
+
+    public void setRefundTime(Date refundTime) {
+        this.refundTime = refundTime;
     }
 }

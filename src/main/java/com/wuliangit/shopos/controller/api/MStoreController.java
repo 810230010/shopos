@@ -3,9 +3,11 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiStoreDTO;
 import com.wuliangit.shopos.dto.ApiStoreListDTO;
+import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.service.CollectService;
 import com.wuliangit.shopos.service.StoreService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,6 +76,17 @@ public class MStoreController {
         return result;
     }
 
-
+    /**
+     * 获取店铺联系人
+     * @param storeId
+     * @return
+     */
+    @RequestMapping("/getSeller")
+    public Object getSeller(Integer storeId){
+        RestResult result = new RestResult();
+        Store store = storeService.getStoreByStoreId(storeId);
+        result.add("seller", store.getBindMemberUsername());
+        return result;
+    }
 
 }

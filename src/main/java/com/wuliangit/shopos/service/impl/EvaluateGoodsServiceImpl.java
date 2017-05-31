@@ -9,6 +9,8 @@ import com.wuliangit.shopos.dao.OrderGoodsMapper;
 import com.wuliangit.shopos.dao.OrderMapper;
 import com.wuliangit.shopos.dto.ApiEvaluateGoodsDTO;
 import com.wuliangit.shopos.dto.ApiEvaluateGoodsListDTO;
+import com.wuliangit.shopos.dto.EvaluateGoodsListDTO;
+import com.wuliangit.shopos.dto.StoreEvaluateGoodsDetailDTO;
 import com.wuliangit.shopos.entity.EvaluateGoods;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.Order;
@@ -101,5 +103,17 @@ public class EvaluateGoodsServiceImpl implements EvaluateGoodsService {
         }
 
         return evaluateList;
+    }
+
+    @Override
+    public List<EvaluateGoodsListDTO> getEvaluateGoodsListInfo(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, Integer storeId) {
+        PageHelper.startPage(page,pageSize);
+        List<EvaluateGoodsListDTO> result = evaluateGoodsMapper.getEvaluateGoodsListInfo(searchKey,orderColumn,orderType,storeId);
+        return result;
+    }
+
+    @Override
+    public StoreEvaluateGoodsDetailDTO getEvaluateGoodsDetail(Integer evaluateGoodsId) {
+        return evaluateGoodsMapper.getEvaluateGoodsDetail(evaluateGoodsId);
     }
 }

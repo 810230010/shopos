@@ -8,4 +8,27 @@
         from t_evaluate_goods
         where goods_id = #{goodsId} order by create_time desc
     </select>
+
+    <!--获取商品评价列表页面的数据-->
+    <select id="getEvaluateGoodsListInfo" resultType="com.wuliangit.shopos.dto.EvaluateGoodsListDTO">
+        select evaluate_goods_id,member_username,order_id,star,content,create_time,is_show,goods_name,is_anonymous
+        from t_evaluate_goods
+        <where>
+            store_id = #{storeId}
+            <if test="searchKey != null and searchKey != '' ">
+                and ( goods_name like '%${searchKey}%')
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        create_time desc
+    </select>
+    <!--获取某条商品详情-->
+    <select id="getEvaluateGoodsDetail" resultType="com.wuliangit.shopos.dto.StoreEvaluateGoodsDetailDTO">
+        SELECT evaluate_goods_id,content,images
+        FROM t_evaluate_goods
+        WHERE evaluate_goods_id=#{evaluateGoodsId}
+    </select>
 </mapper>

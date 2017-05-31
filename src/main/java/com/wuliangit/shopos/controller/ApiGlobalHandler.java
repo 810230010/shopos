@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.controller;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.exception.OptionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
@@ -22,10 +23,13 @@ public class ApiGlobalHandler {
 
     @ExceptionHandler(value = Exception.class)
     public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
-        logger.error("",exception);
         RestResult result = new RestResult();
-        result.setCode(500);
         result.setMsg(exception.getMessage());
+        result.setCode(500);
+        if (!(exception instanceof OptionException)){
+            logger.error("",exception);
+            exception.printStackTrace();
+        }
         return result;
     }
 
@@ -54,7 +58,6 @@ public class ApiGlobalHandler {
         result.setMsg(ex.getMessage());
         ex.printStackTrace();
         return result;
-
     }
 
 

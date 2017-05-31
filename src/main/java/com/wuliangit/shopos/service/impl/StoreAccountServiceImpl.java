@@ -6,19 +6,18 @@ import com.alipay.api.domain.AlipayFundTransToaccountTransferModel;
 import com.alipay.api.request.AlipayFundTransToaccountTransferRequest;
 import com.alipay.api.response.AlipayFundTransToaccountTransferResponse;
 import com.github.pagehelper.PageHelper;
+import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreAccountLogMapper;
 import com.wuliangit.shopos.dao.StoreAccountMapper;
 import com.wuliangit.shopos.dao.StoreCashMapper;
-import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreAccount;
 import com.wuliangit.shopos.entity.StoreAccountLog;
 import com.wuliangit.shopos.entity.StoreCash;
 import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreAccountService;
-import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -113,18 +112,24 @@ public class StoreAccountServiceImpl implements StoreAccountService {
 
         AlipayFundTransToaccountTransferResponse response = alipayClient.execute(request);
         if(response.isSuccess()){
-
-
-
             System.out.println("调用成功");
+            storeAccount.setAvailableBalance(storeAccount.getAvailableBalance().subtract(amount));
+
+            //记录提现记录
+            storeCashMapper.insertSelective(storeCash);
+
+            //记录账户流水记录
+            StoreAccountLog storeAccountLog = new StoreAccountLog();
+            storeAccountLog.setAmount(amount);
+            storeAccountLog.setCreateTime(new Date());
+            storeAccountLog.setStoreId(currentStore.getStoreId());
+            storeAccountLog.setType(POJOConstants.STORE_ACCOUNT_LOG_ACASH);
+            storeAccountLogMapper.insertSelective(storeAccountLog);
+            return storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
         } else {
-
-
-
-            System.out.println("调用失败");
+            throw new OptionException("提现失败,原因："+response.getSubMsg());
         }
 
-        return 0;
     }
 
     @Override

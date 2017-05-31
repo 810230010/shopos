@@ -4,6 +4,8 @@ import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Admin;
+import com.wuliangit.shopos.exception.OptionException;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
@@ -42,9 +44,13 @@ public class AdminGlobalHandler {
 
     @ExceptionHandler(value = Exception.class)
     public String errorHandlerOverJson(HttpServletRequest request, Exception exception) {
-        logger.error("",exception);
-        exception.printStackTrace();
-        return "500";
+        if (exception instanceof OptionException){
+            return "500";
+        }else {
+            logger.error("",exception);
+            exception.printStackTrace();
+            return "500";
+        }
     }
 
 }

@@ -108,6 +108,7 @@ public class StoreAccountController {
      * @throws OptionException
      */
     @RequestMapping(value = "/cash",method = RequestMethod.POST)
+    @ResponseBody
     public Object doCash(BigDecimal amount) throws OptionException, AlipayApiException {
         RestResult result = new RestResult();
         int res = storeAccountService.storeDoCash(amount);

@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.logging.Log;
@@ -65,9 +66,11 @@ public class StoreGlobalHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
-        logger.error("",exception);
+        if (!(exception instanceof OptionException)){
+            logger.error("",exception);
+            exception.printStackTrace();
+        }
         RestResult result = new RestResult();
-        exception.printStackTrace();
         result.setCode(500);
         result.setMsg(exception.getMessage());
         return result;

@@ -11,6 +11,12 @@ public class StoreAccount {
 
     private BigDecimal freezeBalance;
 
+    private String cashPassword;
+
+    private String salt;
+
+    private String alipayAccount;
+
     public Integer getStoreAccountId() {
         return storeAccountId;
     }
@@ -41,5 +47,29 @@ public class StoreAccount {
 
     public void setFreezeBalance(BigDecimal freezeBalance) {
         this.freezeBalance = freezeBalance;
+    }
+
+    public String getCashPassword() {
+        return cashPassword;
+    }
+
+    public void setCashPassword(String cashPassword) {
+        this.cashPassword = cashPassword == null ? null : cashPassword.trim();
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
+    }
+
+    public String getAlipayAccount() {
+        return alipayAccount;
+    }
+
+    public void setAlipayAccount(String alipayAccount) {
+        this.alipayAccount = alipayAccount == null ? null : alipayAccount.trim();
     }
 }

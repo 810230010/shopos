@@ -201,7 +201,7 @@ public class MOrderController {
     }
 
     /**
-     *
+     * 申请退货
      * @param orderId
      * @param goodsId 商品id
      * @param refundType REFUND_MOMEY:退款,CHANGE_GOODS:换货,REFUND_ALL:退款退货
@@ -212,7 +212,9 @@ public class MOrderController {
      * @throws Exception
      */
     @RequestMapping("/refund")
-    public Object refund(Integer orderId, Integer goodsId,String refundType, String goodsState, String buyerMessage,String picsInfo) throws Exception {
+    public Object refund(Integer orderId, Integer goodsId,String refundType,
+                         @RequestParam(required = true,defaultValue = "RECEIVE") String goodsState,
+                         String buyerMessage,String picsInfo) throws Exception {
         RestResult result = new RestResult();
         int res = orderService.refund(orderId, goodsId, refundType, goodsState, buyerMessage, picsInfo);
         return result;

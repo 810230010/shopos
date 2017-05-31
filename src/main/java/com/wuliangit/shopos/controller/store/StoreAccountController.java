@@ -1,16 +1,24 @@
 package com.wuliangit.shopos.controller.store;
 
 import com.wuliangit.shopos.common.controller.PageResult;
+import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.entity.StoreAccount;
 import com.wuliangit.shopos.entity.StoreAccountLog;
 import com.wuliangit.shopos.entity.StoreCash;
+import com.wuliangit.shopos.exception.OptionException;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -85,8 +93,37 @@ public class StoreAccountController {
      * 提现页面
      * @return
      */
-    @RequestMapping("/cash")
-    public String cashPage(){
+    @RequestMapping(value = "/cash",method = RequestMethod.GET)
+    public String cashPage(Model model){
+        StoreAccount storeAccount = storeAccountService.getStoreAccount();
+        model.addAttribute("storeAccount",storeAccount);
+        return "store/account/cash";
+    }
+
+    /**
+     * 店铺支付宝提现
+     * @param amount
+     * @return
+     * @throws OptionException
+     */
+    @RequestMapping(value = "/cash",method = RequestMethod.POST)
+    public Object doCash(BigDecimal amount) throws OptionException {
+        RestResult result = new RestResult();
+        int res = storeAccountService.storeDoCash(amount);
+        return result;
+    }
+
+    /**
+     * 提现页面
+     * @return
+     */
+    @RequestMapping(value = "/settingAlipay",method = RequestMethod.POST)
+    public String settingAlipay(Model model,String alipayAccount){
+        StoreMin store = WebUtil.getCurrentStore();
+        StoreAccount storeAccount = storeAccountService.getStoreAccount();
+        int res = storeAccountService.settingStoreAlipay(alipayAccount);
+        model.addAttribute("storeAccount",storeAccount);
+        model.addAttribute("storeName",store.getName());
         return "store/account/cash";
     }
 }

@@ -6,9 +6,13 @@
     <result column="store_id" property="storeId" jdbcType="INTEGER" />
     <result column="available_balance" property="availableBalance" jdbcType="DECIMAL" />
     <result column="freeze_balance" property="freezeBalance" jdbcType="DECIMAL" />
+    <result column="cash_password" property="cashPassword" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="alipay_account" property="alipayAccount" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    `store_ account_id`, store_id, available_balance, freeze_balance
+    `store_ account_id`, store_id, available_balance, freeze_balance, cash_password, 
+    salt, alipay_account
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,9 +26,11 @@
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreAccount" >
     insert into t_store_account (`store_ account_id`, store_id, available_balance, 
-      freeze_balance)
+      freeze_balance, cash_password, salt, 
+      alipay_account)
     values (#{storeAccountId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{availableBalance,jdbcType=DECIMAL}, 
-      #{freezeBalance,jdbcType=DECIMAL})
+      #{freezeBalance,jdbcType=DECIMAL}, #{cashPassword,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{alipayAccount,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreAccount" >
     insert into t_store_account
@@ -41,6 +47,15 @@
       <if test="freezeBalance != null" >
         freeze_balance,
       </if>
+      <if test="cashPassword != null" >
+        cash_password,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="alipayAccount != null" >
+        alipay_account,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="storeAccountId != null" >
@@ -54,6 +69,15 @@
       </if>
       <if test="freezeBalance != null" >
         #{freezeBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="cashPassword != null" >
+        #{cashPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null" >
+        #{alipayAccount,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -69,6 +93,15 @@
       <if test="freezeBalance != null" >
         freeze_balance = #{freezeBalance,jdbcType=DECIMAL},
       </if>
+      <if test="cashPassword != null" >
+        cash_password = #{cashPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null" >
+        alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      </if>
     </set>
     where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
   </update>
@@ -76,7 +109,10 @@
     update t_store_account
     set store_id = #{storeId,jdbcType=INTEGER},
       available_balance = #{availableBalance,jdbcType=DECIMAL},
-      freeze_balance = #{freezeBalance,jdbcType=DECIMAL}
+      freeze_balance = #{freezeBalance,jdbcType=DECIMAL},
+      cash_password = #{cashPassword,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      alipay_account = #{alipayAccount,jdbcType=VARCHAR}
     where `store_ account_id` = #{storeAccountId,jdbcType=INTEGER}
   </update>
 </mapper>

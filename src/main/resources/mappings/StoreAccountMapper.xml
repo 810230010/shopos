@@ -5,7 +5,7 @@
 
     <!--通过店铺id获取店铺账户-->
     <select id="getByStoreId" resultType="com.wuliangit.shopos.entity.StoreAccount">
-        select * from t_store_acount where store_id  = #{sotreId}
+        select * from t_store_account where store_id  = #{sotreId}
     </select>
 
 </mapper>

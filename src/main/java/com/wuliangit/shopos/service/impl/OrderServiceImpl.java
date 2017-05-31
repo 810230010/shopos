@@ -343,6 +343,12 @@ public class OrderServiceImpl implements OrderService {
         refund.setBuyerMessage(buyerMessage);
         refund.setPicsInfo(picsInfo);
 
+        //设置退货收货地址
+        Store store = storeMapper.selectByPrimaryKey(order.getStoreId());
+        refund.setRefundAddress(store.getRefundAddress());
+        refund.setRefundName(store.getRefundName());
+        refund.setRefundPhone(store.getRefundPhone());
+
         return refundMapper.insertSelective(refund);
     }
 

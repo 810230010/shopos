@@ -4,13 +4,54 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>账户-提现申请</h2>
-    </div>
-    <div class="col-lg-2">
-
+        <a href="/store/acount/cashHistory">提现记录</a>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h3 class="m-b-xxs">提现账户：<span></h3>
+                        </div>
+                        <div class="col-lg-4">
+                            <h3 class="m-b-xxs">可提现金额：<span style="color: red">$!{storeAccount.availableBalance}</span> 元</h3>
+                        </div>
+                        <div class="col-lg-4">
+                            <h3 class="m-b-xxs">冻结金额：<span style="color: red">$!{storeAccount.freezeBalance}</span> 元</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>支付宝账户</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="form" class="form-horizontal">
+                        <div class="form-group">
+                            #if($storeAccount.alipayAccount)
+                                <label class="col-lg-3 control-label">修改支付宝账户：</label>
+                            #else
+                                <label class="col-lg-3 control-label">设置支付宝账户：</label>
+                            #end
+                            <div class="col-lg-7">
+                                <input type="number" id="alipayAccount" name="alipayAccount" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-3 col-lg-10">
+                                <div class="btn btn-sm btn-primary" id="setting-alipay">提交</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -19,20 +60,25 @@
                 <div class="ibox-content">
                     <form id="form" class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">可提现金额：</label>
+                            <label class="col-lg-3 control-label">支付宝账户：</label>
                             <div class="col-lg-7">
-                                <label class="control-label" style="color: red">￥300</label>
+                                #if($storeAccount.alipayAccount)
+                                    <label class="control-label">请先设置支付宝提现账户</label>
+                                #else
+                                    <label class="control-label" style="color: red">请先设置支付宝提现账户</label>
+                                #end
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">提现金额：</label>
                             <div class="col-lg-7">
-                                <input type="number" id="amount" name="amount" value="$!{}" required class="form-control">
+                                <input type="number" id="amount" name="amount" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-10">
-                                <div class="btn btn-sm btn-primary" id="submit">提交</div>
+                                <div class="btn btn-sm btn-primary" id="cash">提交</div>
                             </div>
                         </div>
                     </form>
@@ -49,28 +95,25 @@
 <script>
 
     // MetisMenu
-    $("#文件存储设置").addClass("active");
-    $("#设置").addClass("active");
+    $("#提现申请").addClass("active");
+    $("#账户").addClass("active");
     $('#side-menu').metisMenu();
 
     $("#form").validate();
-    $("#submit").on('click', function () {
+    $("#setting-alipay").on('click', function () {
         var form = $("#form");
         if(!form.valid()){
             return ;
         }
-
-        $.post("/store/setting/updateAddress",
+        $.post("/store/acount/settingAlipay",
                 {
-                    refundAddress: $("#refundAddress").val(),
-                    refundName: $('#refundName').val(),
-                    refundPhone: $('#refundPhone').val(),
+                    alipayAccount: $("#alipayAccount").val(),
                 },
                 function (data, status) {
                     if (data.code == 200) {
                         swal({
                             title: "成功!",
-                            text: "发货成功!",
+                            text: "设置成功!",
                             type: "success",
                             showConfirmButton: false,
                             timer: 2000,
@@ -78,7 +121,38 @@
                     }else{
                         swal({
                             title: "失败!",
-                            text: "发货失败!",
+                            text: "设置失败!",
+                            type: "error",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    }
+
+                });
+    });
+
+    $("#cash").on('click', function () {
+        var form = $("#form");
+        if(!form.valid()){
+            return ;
+        }
+        $.post("/store/setting/updateAddress",
+                {
+                    refundAddress: $("#refundAddress").val(),
+                },
+                function (data, status) {
+                    if (data.code == 200) {
+                        swal({
+                            title: "成功!",
+                            text: "设置成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    }else{
+                        swal({
+                            title: "失败!",
+                            text: "设置失败!",
                             type: "error",
                             showConfirmButton: false,
                             timer: 2000,

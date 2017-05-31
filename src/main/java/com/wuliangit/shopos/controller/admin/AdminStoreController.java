@@ -10,6 +10,7 @@ import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.service.SellerService;
+import com.wuliangit.shopos.service.StoreAccountService;
 import com.wuliangit.shopos.service.StoreJoinService;
 import com.wuliangit.shopos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,12 @@ import java.util.List;
 public class AdminStoreController {
     @Autowired
     private StoreJoinService storeJoinService;
-
     @Autowired
     private StoreService storeService;
     @Autowired
     private SellerService sellerService;
+    @Autowired
+    private StoreAccountService storeAccountService;
 
     /**
      * 申请成为商家页面
@@ -192,6 +194,15 @@ public class AdminStoreController {
     }
 
 
+    /**
+     * 添加店铺
+     * @param storeName
+     * @param storeCompanyName
+     * @param storeType
+     * @param sellerUsername
+     * @param password
+     * @return
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
@@ -214,6 +225,8 @@ public class AdminStoreController {
         seller.setStoreId(store.getStoreId());
         seller.setLastLoginTime(new Date());
         sellerService.createSeller(seller);
+
+        storeAccountService.createStoreAccount(store.getStoreId());
 
         return result;
     }

@@ -63,10 +63,10 @@ public class StoreRefundServiceImpl implements StoreRefundService {
     }
 
     @Override
-    public List<StoreRefundListDTO> getSuccessRefundList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String type) {
+    public List<StoreRefundListDTO> getSuccessRefundList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String refundType, String refundState) {
         PageHelper.startPage(page,pageSize);
         StoreMin store = WebUtil.getCurrentStore();
-        List<StoreRefundListDTO> storeRefundListDTOS = refundMapper.getSuccessRefundList(store.getStoreId(),searchKey,orderColumn,orderType,type);
+        List<StoreRefundListDTO> storeRefundListDTOS = refundMapper.getSuccessRefundList(store.getStoreId(),searchKey,orderColumn,orderType,refundType,refundState);
         return storeRefundListDTOS;
     }
 
@@ -137,5 +137,13 @@ public class StoreRefundServiceImpl implements StoreRefundService {
             throw new OptionException("支付宝退款失败");
         }
 
+    }
+
+    @Override
+    public List<StoreRefundListDTO> getRefundDoneList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
+        StoreMin store = WebUtil.getCurrentStore();
+        List<StoreRefundListDTO> storeRefundListDTOS = refundMapper.getRefundDoneList(store.getStoreId(),searchKey,orderColumn,orderType);
+        return storeRefundListDTOS;
     }
 }

@@ -30,8 +30,11 @@
             <if test="searchKey != null and searchKey != '' ">
                 and ( member_name like '%${searchKey}%' or goods_name like '%${searchKey}%')
             </if>
-            <if test="type != null and type != ''">
-                and ( refund_type = #{type})
+            <if test="refundType != null and refundType != ''">
+                and ( refund_type = #{refundType})
+            </if>
+            <if test="refundState != null and refundState != ''">
+                and ( refund_state = #{refundState})
             </if>
         </where>
         order by
@@ -47,5 +50,22 @@
         <include refid="Base_Column_List" />
         from t_refund
         where member_id = #{memberId}
+    </select>
+
+    <!--获取退款完成列表-->
+    <select id="getRefundDoneList" resultType="com.wuliangit.shopos.dto.StoreRefundListDTO">
+        SELECT *
+        FROM t_refund
+        <where>
+            store_id = #{storeId} and refund_state = 'RECEIVE'
+            <if test="searchKey != null and searchKey != '' ">
+                and ( member_name like '%${searchKey}%' or goods_name like '%${searchKey}%')
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        create_time desc
     </select>
 </mapper>

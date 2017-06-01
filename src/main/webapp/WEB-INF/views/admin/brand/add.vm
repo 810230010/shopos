@@ -97,6 +97,10 @@
 <!-- Jquery Validate -->
 <script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
 <script>
+
+    $("#品牌管理").addClass("active");
+    $('#side-menu').metisMenu();
+
      //检验输入的品牌是否添加过
      function check(brandName) {
          var flag = false;

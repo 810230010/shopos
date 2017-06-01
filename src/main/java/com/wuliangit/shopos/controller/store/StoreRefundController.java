@@ -101,11 +101,36 @@ public class StoreRefundController {
                                        @RequestParam(value = "orderType", required = false) String orderType,
                                        @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                        @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                                       @RequestParam(value = "type", required = false) String type){
+                                       @RequestParam(value = "refundType", required = false) String refundType,
+                                       @RequestParam(value = "refundState", required = false) String refundState){
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        List<StoreRefundListDTO> storeRefundListDTOS = storeRefundService.getSuccessRefundList(searchKey,orderColumn,orderType,page,pageSize,type);
+        List<StoreRefundListDTO> storeRefundListDTOS = storeRefundService.getSuccessRefundList(searchKey,orderColumn,orderType,page,pageSize,refundType,refundState);
         return new PageResult<StoreRefundListDTO>(storeRefundListDTOS,draw);
     }
+
+    /**
+     * 获取退款完成列表
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("getRefundDoneList")
+    @ResponseBody
+    public Object getRefundDoneList(@RequestParam("draw") int draw,
+                                       @RequestParam(value = "searchKey", required = false) String searchKey,
+                                       @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                                       @RequestParam(value = "orderType", required = false) String orderType,
+                                       @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                       @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
+        List<StoreRefundListDTO> storeRefundListDTOS = storeRefundService.getRefundDoneList(searchKey,orderColumn,orderType,page,pageSize);
+        return new PageResult<StoreRefundListDTO>(storeRefundListDTOS,draw);
+    }
+
 
     /**
      * @Description: 获取某条退换货的具体信息

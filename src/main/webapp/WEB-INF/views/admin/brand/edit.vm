@@ -100,6 +100,9 @@
 <!-- Jquery Validate -->
 <script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
 <script>
+
+    $("#品牌管理").addClass("active");
+    $('#side-menu').metisMenu();
  
     $('#upload-image').fileinput({
         language: 'zh',
@@ -175,6 +178,7 @@
     });
 
     $("#submit").on('click', function () {
+
         $.post("/admin/brand/editBrand",
                 {
                     brandId: '$brand.brandId',

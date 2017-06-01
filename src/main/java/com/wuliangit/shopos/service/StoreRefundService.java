@@ -3,7 +3,6 @@ package com.wuliangit.shopos.service;
 import com.wuliangit.shopos.dto.StoreRefundListDTO;
 import com.wuliangit.shopos.entity.Refund;
 import com.wuliangit.shopos.exception.BaseException;
-import com.wuliangit.shopos.exception.OptionException;
 
 import java.util.List;
 
@@ -39,7 +38,7 @@ public interface StoreRefundService {
      * @Param: [searchKey, orderColumn, orderType, page, pageSize, type]
      * @return: java.util.List<com.wuliangit.shopos.dto.StoreRefundListDTO>
      */
-    List<StoreRefundListDTO> getSuccessRefundList(String searchKey,String orderColumn,String orderType,Integer page,Integer pageSize,String type);
+    List<StoreRefundListDTO> getSuccessRefundList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String refundType, String refundState);
 
     /**
      * @Description: 获取某条退换货的具体信息
@@ -56,4 +55,15 @@ public interface StoreRefundService {
      * @return
      */
     Integer checkReceiveGoods(Integer refundId) throws Exception;
+
+    /**
+     * 获取退款完成列表
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    List<StoreRefundListDTO> getRefundDoneList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize);
 }

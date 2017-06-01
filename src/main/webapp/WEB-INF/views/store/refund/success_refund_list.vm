@@ -19,6 +19,7 @@
                             <button type="button" class="btn btn-primary" onclick="getRefundList(this,'')">全部</button>
                             <button type="button" class="btn btn-white" onclick="getRefundList(this,'REFUND_ALL')">退款退货</button>
                             <button type="button" class="btn btn-white" onclick="getRefundList(this,'CHANGE_GOODS')">换货</button>
+                            <button type="button" class="btn btn-white" onclick="getRefundList(this,'RECEIVE')">已完成</button>
                         </div>
                     </div>
                 </div>
@@ -48,11 +49,12 @@
     $('#side-menu').metisMenu();
 
     var nowType = '';
+    var nowUrl = '/store/refund/getSuccessRefundList';
 
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': '/store/refund/getSuccessRefundList',
+                'url': nowUrl,
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -61,7 +63,7 @@
                     param.orderColumn = d.columns[d.order[0]['column']]['data'];
                     param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
-                    param.type = nowType;
+                    param.refundType = nowType;
                     return param;
                 },
             },
@@ -87,6 +89,7 @@
                         else if(data == 'CONSENT') return '同意退款';
                         else if(data == 'NOT_CONSENT') return '拒绝退款';
                         else if(data == 'DELIVE') return '买家已发货';
+                        else if(data == 'RECEIVE') return '已完成';
                     }
                 },
                 {"data":"refundAmount","width": "7%","title":"退款金额","orderable": false},
@@ -148,7 +151,7 @@
                                 timer: 2500,
                             });
                             setTimeout(function () {
-
+                                $('#datatables').DataTable().ajax.reload();
                             }, 2000);
                         }else{
                             swal({
@@ -173,9 +176,18 @@
         });
         $(button).removeClass("btn-white");
         $(button).addClass("btn-primary");
-        nowType = type;
 
-        $('#datatables').DataTable().ajax.reload();
+
+        if (type == 'RECEIVE'){
+            nowType = '';
+            nowUrl = '/store/refund/getRefundDoneList'
+            $('#datatables').DataTable().ajax.reload();
+        }else{
+            nowType = type;
+            nowUrl = '/store/refund/getSuccessRefundList'
+            $('#datatables').DataTable().ajax.reload();
+        }
+
     }
 
 </script>

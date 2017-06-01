@@ -26,14 +26,15 @@ public interface RefundMapper extends BaseMapper<Refund, Integer> {
      * @Description: 获取成功申请退换货的数据
      * @Author: pangweichao
      * @Date: 11:42 2017/5/12
-     * @Param: [searchKey, orderColumn, orderType, type]
+     * @Param: [searchKey, orderColumn, orderType, refundType, refundState]
      * @return: java.util.List<com.wuliangit.shopos.dto.StoreRefundListDTO>
      */
     List<StoreRefundListDTO> getSuccessRefundList(@Param("storeId") Integer storeId,
                                                   @Param("searchKey") String searchKey,
                                                   @Param("orderColumn") String orderColumn,
                                                   @Param("orderType") String orderType,
-                                                  @Param("type") String type);
+                                                  @Param("refundType") String refundType,
+                                                  @Param("refundState")String refundState);
 
     /**
      * 接口获取退款列表
@@ -41,4 +42,14 @@ public interface RefundMapper extends BaseMapper<Refund, Integer> {
      * @return
      */
     List<ApiRefundDTO> apiGetRefunds(Integer memberId);
+
+    /**
+     * 获取退款完成列表
+     * @param storeId
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @return
+     */
+    List<StoreRefundListDTO> getRefundDoneList(Integer storeId, String searchKey, String orderColumn, String orderType);
 }

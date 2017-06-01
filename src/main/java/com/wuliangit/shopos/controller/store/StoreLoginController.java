@@ -7,6 +7,7 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
 import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.service.AnalyzeService;
 import com.wuliangit.shopos.service.SellerPerminssionService;
 import com.wuliangit.shopos.service.SellerService;
 import com.wuliangit.shopos.service.StoreService;
@@ -43,9 +44,13 @@ public class StoreLoginController {
     private StoreService storeService;
     @Autowired
     private SellerPerminssionService sellerPerminssionService;
+    @Autowired
+    private AnalyzeService analyzeService;
 
     @RequestMapping("/index")
     public String viewToIndex(Model model) {
+
+
         return "store/index";
     }
 

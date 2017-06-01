@@ -56,7 +56,7 @@
                 },
             },
             "columns": [
-                {"data":"refundId","width": "10%","title":"退款号","orderable": false},
+                {"data":"refundId","width": "5%","title":"退款号","orderable": false},
                 {"data":"orderOutTradeNo","width": "10%","title":"订单编号","orderable": false},
                 {"data":"memberUsername","width": "10%","title":"买家会员名","orderable": false},
                 {"data":"goodsName","width": "17%","title":"商品名","orderable": false,"render":function(data, type, row){
@@ -65,13 +65,18 @@
                     }
                     return data;
                 }},
-                {"data":"refundType","width": "10%","title":"申请类型","orderable": false,"render":function(data, type, row){
+                {"data":"refundType","width": "7%","title":"申请类型","orderable": false,"render":function(data, type, row){
                     if(data == "REFUND_MOMEY")return "退款";
                     else if(data == "CHANGE_GOODS")return "换货";
                     else if(data == "REFUND_ALL")return "退款退货";
                 }},
-                {"data":"buyerMessage","width": "10%","title":"申请原因","orderable": false},
-                {"data":"refundState","width": "10%","title":"状态","orderable": false,
+                {"data":"buyerMessage","width": "8%","title":"申请原因","orderable": false,"render":function(data, type, row){
+                    if(data.length>25){
+                        return data.substr(0,25)+"...";
+                    }
+                    return data;
+                }},
+                {"data":"refundState","width": "8%","title":"状态","orderable": false,
                     "render":function(data, type, row)
                     {
                         if (data == 'CHECKING'){
@@ -83,7 +88,7 @@
                         }
                     }
                 },
-                {"data":"refundAmount","width": "10%","title":"退款金额","orderable": false},
+                {"data":"refundAmount","width": "8%","title":"退款金额","orderable": false},
                 {"data":"refundState","width": "10%","title":"操作","orderable": false,
                     "render":function(data, type, row)
                     {
@@ -115,26 +120,9 @@
             "deferRender": true,
             "processing": true,
             "autoWidth": false,
-            "lengthMenu": [ 10, 15, 20 ],
             "responsive": true,
             "dom": '<"html5buttons"B>lTfgitp',
-            "buttons": [
-                {extend: 'copy'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
-
-                {extend: 'print',
-                    customize: function (win){
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-
-                        $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                    }
-                }
-            ],
+            "buttons": [],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
             }
@@ -151,6 +139,11 @@
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
             $.operation(data,true);
+        });
+        table.on( 'click', '.info', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            window.open("/store/order/detailPage?orderId="+data.orderId);
         });
     });
 

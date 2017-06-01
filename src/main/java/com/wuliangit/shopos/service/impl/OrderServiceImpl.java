@@ -271,7 +271,8 @@ public class OrderServiceImpl implements OrderService {
         Express express = expressMapper.selectByPrimaryKey(expressId);
         Order order = orderMapper.selectByPrimaryKey(orderId);
 
-        order.setExpressName(express.getExpressName() + "/" + express.getExpressCode());
+        order.setExpressCode(express.getExpressCode());
+        order.setExpressName(express.getExpressName());
         order.setExpressNo(expressNo);
         order.setOrderState(POJOConstants.ORDER_STATE_DELIVE);
         order.setDeliverTime(new Date());

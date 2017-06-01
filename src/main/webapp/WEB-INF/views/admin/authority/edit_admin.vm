@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><font color="red">*</font>角色选择</label>
                             <div class="col-sm-7">
-                                <select id="roleId" name="roleId" class="role_select form-control">
+                                <select id="roleSelect" name="roleSelect" class="roleSelect form-control">
                                 </select>
                             </div>
                         </div>
@@ -57,8 +57,7 @@
     $("#权限管理").addClass("active");
     $("#管理员列表").addClass("active");
     $('#side-menu').metisMenu();
-
-    $("#roleId").select2({
+    $(".roleSelect").select2({
         allowClear:true,
         minimumResultsForSearch: -1,
         minimumInputLength: 0,
@@ -101,15 +100,13 @@
             callback(data);
         },
     });
-
     $("#submit").on('click', function () {
-
         $.post("/admin/authority/updateOtherAdminInfo",
                 {
                     username: $("#username").val(),
                     password: $("#newpass").val() == ""?null:$("#newpass").val(),
                     adminId: $adminInfo.adminId,
-                    adminRoleId: $("#roleId").select2('data').id,
+                    adminRoleId:$("#roleSelect").select2('data').id
                 },
                 function (data, status) {
                     if (data.code == 200) {

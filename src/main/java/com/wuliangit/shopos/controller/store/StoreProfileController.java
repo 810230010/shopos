@@ -38,7 +38,7 @@ public class StoreProfileController {
     }
 
     /**
-     * 店铺用户信息修改界面
+     * 店铺用户信息修改
      * @return
      */
     @RequestMapping("/update")

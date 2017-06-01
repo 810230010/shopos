@@ -10,7 +10,7 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-lg-12" style="height:2400px">
+        <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
                     <form class="form-horizontal">

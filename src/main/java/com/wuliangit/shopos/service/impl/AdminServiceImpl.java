@@ -12,6 +12,7 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.AdminMapper;
 import com.wuliangit.shopos.dto.AdminDTO;
 
+import com.wuliangit.shopos.dto.AdminUpdateDTO;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.service.AdminService;
@@ -90,8 +91,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int updateOtherAdminInfo(Admin admin) {
-        return adminMapper.updateByPrimaryKeySelective(admin);
+    public int updateOtherAdminInfo(AdminUpdateDTO admin) {
+        return adminMapper.updateOtherAdminInfo(admin);
     }
 
     @Override

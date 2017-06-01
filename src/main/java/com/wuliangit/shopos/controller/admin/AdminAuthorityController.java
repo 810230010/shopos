@@ -5,6 +5,7 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dto.AdminDTO;
+import com.wuliangit.shopos.dto.AdminUpdateDTO;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,10 +121,14 @@ public class AdminAuthorityController {
      */
     @RequestMapping("/updateOtherAdminInfo")
     @ResponseBody
-    public Object adminUpdateAdminInfo(Admin admin){
+    public Object adminUpdateAdminInfo(AdminUpdateDTO admin){
          RestResult result = new RestResult();
-         admin.setSalt(PasswordHelper.generateSalt());
-         admin.setPassword(PasswordHelper.generatePassword(admin.getPassword(), admin.getSalt()));
+         if(admin.getPassword() != null) {
+             admin.setSalt(PasswordHelper.generateSalt());
+             admin.setPassword(PasswordHelper.generatePassword(admin.getPassword(), admin.getSalt()));
+         }else{
+             admin.setSalt(null);
+         }
          if(adminService.updateOtherAdminInfo(admin) != 1){
              result = new RestResult("未知错误, 修改失败", 502 );
              return result;

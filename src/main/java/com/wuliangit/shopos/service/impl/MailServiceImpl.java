@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service.impl;
 
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.mail.MailSender;
+import com.wuliangit.shopos.common.util.StringArrayUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.SettingMapper;
 import com.wuliangit.shopos.dao.StoreMessageMapper;
@@ -29,26 +30,39 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private StoreMessageMapper storeMessageMapper;
 
-//    @Override
-//    public String sendMail(StoreMessageDTO storeMessageDTO) {
-//        try {
-//            VelocityContext context = new VelocityContext();
-//            context.put("title",storeMessageDTO.getTitle());
-//            context.put("content",storeMessageDTO.getContent());
-//            MailSender.getSender().send(mail,context,templates);
-//            String[] name = username.split(",");
-//            String[] userId = id.split(",");
-//            Admin admin = (Admin)WebUtil.getSession().getAttribute(CoreConstants.SESSION_CURRENT_ADMIN);
-//            List<StoreMessage> storeMessages = new ArrayList<StoreMessage>();
-//            for(int i=0;i<name.length;i++){
-//                storeMessages.add();
-//            }
-//            Integer info = storeMessageMapper.insertMessage(storeMessages);
-//            if(!(info > 0))return "error";
-//            return "ok";
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "error";
-//        }
-//    }
+    @Override
+    public String sendMail(StoreMessageDTO storeMessageDTO) {
+        try {
+            List<String> mail = StringArrayUtils.dissloveQuotation(storeMessageDTO.getReceiveMail());
+            List<String> name = StringArrayUtils.dissloveQuotation(storeMessageDTO.getReceiveUsername());
+            List<String> id = StringArrayUtils.dissloveQuotation(storeMessageDTO.getReceiveUserIds());
+            VelocityContext context = new VelocityContext();
+            context.put("title",storeMessageDTO.getTitle());
+            context.put("content",storeMessageDTO.getContent());
+            MailSender.getSender().send(mail,context,storeMessageDTO.getTemplates());
+            Admin admin = (Admin)WebUtil.getSession().getAttribute(CoreConstants.SESSION_CURRENT_ADMIN);
+            List<StoreMessage> storeMessages = new ArrayList<StoreMessage>();
+            for(int i=0;i<mail.size();i++){
+                StoreMessage storeMessage = new StoreMessage();
+                if(!mail.get(i).equals("") && mail.get(i) != null){
+                    storeMessage.setSendUserId(admin.getAdminId());
+                    storeMessage.setSendUserName(admin.getUsername());
+                    storeMessage.setCreateTime(new Date());
+                    storeMessage.setReceiveUserId(Integer.parseInt(id.get(i)));
+                    storeMessage.setReceiveUserName(name.get(i));
+                    storeMessage.setReadFlag(false);
+                    storeMessage.setDelFlag(false);
+                    storeMessage.setTitle(storeMessageDTO.getTitle());
+                    storeMessage.setContent(storeMessageDTO.getContent());
+                }
+                storeMessages.add(storeMessage);
+            }
+            Integer info = storeMessageMapper.insertMessage(storeMessages);
+            if(!(info > 0))return "error";
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
 }

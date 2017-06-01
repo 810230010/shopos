@@ -4,10 +4,10 @@
 
     <!--批量插入邮件数据-->
     <insert id="insertMessage">
-      INSERT INTO t_store_message(send_user,send_user_name,create_time,receive_user,receive_user_name,read_flag,del_flag,title,content)
+      INSERT INTO t_store_message(send_user_id,send_user_name,create_time,receive_user_id,receive_user_name,read_flag,del_flag,title,content)
       VALUES
         <foreach collection="list" item="storeMessages" index="index" separator=",">
-            (#{storeMessages.sendUser},#{storeMessages.sendUserName},#{storeMessages.createTime},#{storeMessages.receiveUser},#{storeMessages.receiveUserName},
+            (#{storeMessages.sendUserId},#{storeMessages.sendUserName},#{storeMessages.createTime},#{storeMessages.receiveUserId},#{storeMessages.receiveUserName},
             #{storeMessages.readFlag},#{storeMessages.delFlag},#{storeMessages.title},#{storeMessages.content})
         </foreach>
     </insert>

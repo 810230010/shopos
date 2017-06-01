@@ -6,7 +6,6 @@ import com.wuliangit.shopos.entity.StoreMessage;
 import java.util.List;
 
 public interface StoreMessageMapper extends BaseMapper<StoreMessage , Integer> {
-
     /**
      * @Description: 批量插入数据
      * @Author: pangweichao
@@ -15,5 +14,4 @@ public interface StoreMessageMapper extends BaseMapper<StoreMessage , Integer> {
      * @return:
      */
     Integer insertMessage(List<StoreMessage> storeMessages);
-
 }

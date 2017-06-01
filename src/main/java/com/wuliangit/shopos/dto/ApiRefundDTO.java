@@ -58,6 +58,8 @@ public class ApiRefundDTO {
 
     private String expressName;
 
+    private String expressCode;
+
     private String expressNo;
 
     private String refundAddress;
@@ -68,6 +70,13 @@ public class ApiRefundDTO {
 
     private Date refundTime;
 
+    public String getExpressCode() {
+        return expressCode;
+    }
+
+    public void setExpressCode(String expressCode) {
+        this.expressCode = expressCode;
+    }
 
     public Integer getRefundId() {
         return refundId;

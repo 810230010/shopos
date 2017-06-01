@@ -1,7 +1,5 @@
 package com.wuliangit.shopos.dto;
 
-import com.wuliangit.shopos.entity.OrderGoods;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

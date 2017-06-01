@@ -27,6 +27,7 @@
     <result column="seller_message" property="sellerMessage" jdbcType="VARCHAR" />
     <result column="admin_message" property="adminMessage" jdbcType="VARCHAR" />
     <result column="express_name" property="expressName" jdbcType="VARCHAR" />
+    <result column="express_code" property="expressCode" jdbcType="VARCHAR" />
     <result column="express_no" property="expressNo" jdbcType="VARCHAR" />
     <result column="refund_address" property="refundAddress" jdbcType="VARCHAR" />
     <result column="refund_name" property="refundName" jdbcType="VARCHAR" />
@@ -37,8 +38,8 @@
     refund_id, order_id, order_out_trade_no, store_id, member_id, member_username, goods_id, 
     goods_name, goods_num, sku_name, refund_amount, goods_image, order_goods_type, refund_type, 
     refund_state, is_lock, goods_state, create_time, seller_handle_time, admin_time, 
-    pics_info, buyer_message, seller_message, admin_message, express_name, express_no, 
-    refund_address, refund_name, refund_phone, refund_time
+    pics_info, buyer_message, seller_message, admin_message, express_name, express_code, 
+    express_no, refund_address, refund_name, refund_phone, refund_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -62,8 +63,9 @@
       goods_state, create_time, seller_handle_time, 
       admin_time, pics_info, buyer_message, 
       seller_message, admin_message, express_name, 
-      express_no, refund_address, refund_name, 
-      refund_phone, refund_time)
+      express_code, express_no, refund_address, 
+      refund_name, refund_phone, refund_time
+      )
     values (#{orderId,jdbcType=INTEGER}, #{orderOutTradeNo,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
       #{memberId,jdbcType=INTEGER}, #{memberUsername,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, 
       #{goodsName,jdbcType=VARCHAR}, #{goodsNum,jdbcType=INTEGER}, #{skuName,jdbcType=VARCHAR}, 
@@ -72,8 +74,9 @@
       #{goodsState,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{sellerHandleTime,jdbcType=TIMESTAMP}, 
       #{adminTime,jdbcType=TIMESTAMP}, #{picsInfo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, 
       #{sellerMessage,jdbcType=VARCHAR}, #{adminMessage,jdbcType=VARCHAR}, #{expressName,jdbcType=VARCHAR}, 
-      #{expressNo,jdbcType=VARCHAR}, #{refundAddress,jdbcType=VARCHAR}, #{refundName,jdbcType=VARCHAR}, 
-      #{refundPhone,jdbcType=VARCHAR}, #{refundTime,jdbcType=TIMESTAMP})
+      #{expressCode,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}, #{refundAddress,jdbcType=VARCHAR}, 
+      #{refundName,jdbcType=VARCHAR}, #{refundPhone,jdbcType=VARCHAR}, #{refundTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Refund" >
     <selectKey resultType="java.lang.Integer" keyProperty="refundId" order="AFTER" >
@@ -152,6 +155,9 @@
       </if>
       <if test="expressName != null" >
         express_name,
+      </if>
+      <if test="expressCode != null" >
+        express_code,
       </if>
       <if test="expressNo != null" >
         express_no,
@@ -241,6 +247,9 @@
       </if>
       <if test="expressName != null" >
         #{expressName,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCode != null" >
+        #{expressCode,jdbcType=VARCHAR},
       </if>
       <if test="expressNo != null" >
         #{expressNo,jdbcType=VARCHAR},
@@ -334,6 +343,9 @@
       <if test="expressName != null" >
         express_name = #{expressName,jdbcType=VARCHAR},
       </if>
+      <if test="expressCode != null" >
+        express_code = #{expressCode,jdbcType=VARCHAR},
+      </if>
       <if test="expressNo != null" >
         express_no = #{expressNo,jdbcType=VARCHAR},
       </if>
@@ -378,6 +390,7 @@
       seller_message = #{sellerMessage,jdbcType=VARCHAR},
       admin_message = #{adminMessage,jdbcType=VARCHAR},
       express_name = #{expressName,jdbcType=VARCHAR},
+      express_code = #{expressCode,jdbcType=VARCHAR},
       express_no = #{expressNo,jdbcType=VARCHAR},
       refund_address = #{refundAddress,jdbcType=VARCHAR},
       refund_name = #{refundName,jdbcType=VARCHAR},

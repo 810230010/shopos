@@ -156,9 +156,10 @@ public interface OrderService {
      * @param refundId
      * @param expressName
      * @param expressNo
+     * @param expressCode
      * @return
      */
-    int refundDelive(Integer refundId, String expressName, String expressNo);
+    int refundDelive(Integer refundId, String expressName, String expressNo, String expressCode);
 
     /**
      * 取消未支付订单（已发货）

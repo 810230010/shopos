@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping(value = "/api/v1/seller")
-public class MsellerController {
+public class MSellerController {
 
     @Autowired
     private GoodsService goodsService;

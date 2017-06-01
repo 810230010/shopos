@@ -3,6 +3,7 @@ package com.wuliangit.shopos.dao;
 import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.dto.AdminDTO;
 import com.wuliangit.shopos.dto.AdminRoleDTO;
+import com.wuliangit.shopos.dto.AdminUpdateDTO;
 import com.wuliangit.shopos.entity.Admin;
 import org.apache.ibatis.annotations.Param;
 
@@ -49,5 +50,10 @@ public interface AdminMapper extends BaseMapper<Admin, Integer> {
      */
     AdminDTO getAdminById(@Param("adminId") Integer adminId);
 
-
+    /**
+     * 修改管理员信息
+     * @param admin
+     * @return
+     */
+    int updateOtherAdminInfo(AdminUpdateDTO admin);
 }

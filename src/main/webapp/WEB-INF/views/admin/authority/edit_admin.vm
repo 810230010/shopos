@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><font color="red">*</font>新密码</label>
                             <div class="col-sm-7">
-                                <input id="newpass" name="initial" type="text" class="form-control">
+                                <input id="newpass" name="initial" type="password" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -104,7 +104,7 @@
         $.post("/admin/authority/updateOtherAdminInfo",
                 {
                     username: $("#username").val(),
-                    password: $("#newpass").val(),
+                    password: $("#newpass").val() == ""?null:$("#newpass").val(),
                     adminId: $adminInfo.adminId,
                     adminRoleId:$("#parentId").select2('data')[0].id,
                 },
@@ -112,7 +112,7 @@
                     if (data.code == 200) {
                         swal({
                             title: "成功!",
-                            text: "商品分类修改成功!",
+                            text: "管理员信息修改成功!",
                             type: "success",
                             showConfirmButton: false,
                             timer: 2000,

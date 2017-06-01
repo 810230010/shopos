@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.AdminDTO;
 import com.wuliangit.shopos.dto.AdminRoleDTO;
+import com.wuliangit.shopos.dto.AdminUpdateDTO;
 import com.wuliangit.shopos.entity.Admin;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,7 @@ public interface AdminService {
      * @param admin
      * @return
      */
-    int updateOtherAdminInfo(Admin admin);
+    int updateOtherAdminInfo(AdminUpdateDTO admin);
 
     int deleteAdmin(Integer adminId);
 }

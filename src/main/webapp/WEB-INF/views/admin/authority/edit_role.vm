@@ -10,7 +10,7 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-lg-12" style="height:3000px">
+        <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
                     <form class="form-horizontal">
@@ -30,7 +30,7 @@
                     </form>
                 </div>
                 #foreach($menu in $menus)
-                <div class="col-lg-12" style="background-color:white;margin-top:20px;padding-bottom:30px">
+                <div class="col-lg-12" style="background-color:white;margin-top:20px;padding-bottom:30px;padding-top: 20px">
                     #if($permissionList.indexOf("$menu.permissionId") >= 0)
                         <div class="i-checks" style="height:50px;line-height: 50px;"><label> <input name="father" class="father" type="checkbox" value="$menu.permissionId" checked> <i></i> &nbsp;&nbsp;$menu.name</label></div>
                     #else

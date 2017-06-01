@@ -423,7 +423,7 @@
             disabledText: '',
             delimiterText: ', ',
             templates: {
-                button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown" style="width: 1000px;"><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',
+                button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',
                 ul: '<ul class="multiselect-container dropdown-menu"></ul>',
                 filter: '<li class="multiselect-item multiselect-filter"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
                 filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>',

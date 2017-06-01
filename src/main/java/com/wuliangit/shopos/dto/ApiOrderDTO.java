@@ -61,6 +61,8 @@ public class ApiOrderDTO {
 
     private String expressName;
 
+    private String expressCode;
+
     private String expressNo;
 
     private Date createTime;
@@ -85,6 +87,13 @@ public class ApiOrderDTO {
 
     private List<ApiOrderGoodsDTO> orderGoodses;
 
+    public String getExpressCode() {
+        return expressCode;
+    }
+
+    public void setExpressCode(String expressCode) {
+        this.expressCode = expressCode;
+    }
 
     public Integer getOrderId() {
         return orderId;

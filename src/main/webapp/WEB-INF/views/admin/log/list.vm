@@ -60,7 +60,6 @@
                 },
             },
             "columns": [
-                {"data":"adminLogId","width":"7%","title":"序号","visiable": false},
                 {"data":"adminUsername","width": "10%","title":"管理员名称","orderable": false},
                 {"data":"content","width": "10%","title":"内容","orderable": false},
                 {"data":"createTime","width": "10%","title":"发生时间","orderable": true},
@@ -75,22 +74,7 @@
             "lengthMenu": [ 10, 15, 20 ],
             "responsive": true,
             "dom": '<"html5buttons"B>lTfgitp',
-            "buttons": [
-                {extend: 'copy'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
-                {extend: 'print',
-                    customize: function (win){
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-
-                        $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                    }
-                }
-            ],
+            "buttons": [],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
             }

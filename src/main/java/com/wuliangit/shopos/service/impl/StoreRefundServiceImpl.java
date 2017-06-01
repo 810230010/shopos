@@ -103,23 +103,20 @@ public class StoreRefundServiceImpl implements StoreRefundService {
             isMergeOrder = true;
         }
 
+        TradeRefund tradeRefund = new TradeRefund();
+        tradeRefund.setOrderId(order.getOrderId());
+        tradeRefund.setAmount(refund.getRefundAmount());
+        tradeRefund.setPaymentCode(POJOConstants.ORDER_PAYMENT_ALIPAY);
+        tradeRefund.setCreateTime(new Date());
+        tradeRefund.setOutRequestNo(UUID.randomUUID().toString().replace("-", ""));
+        tradeRefundMapper.insertSelective(tradeRefund);
+
         model.setOutTradeNo(outTradeNo);
         model.setTradeNo(order.getTradeNo());
         model.setRefundAmount(refund.getRefundAmount().toString());
         model.setRefundReason("退货退款");
-
-        if (isMergeOrder) {
-            TradeRefund tradeRefund = new TradeRefund();
-            tradeRefund.setOrderId(order.getOrderId());
-            tradeRefund.setAmount(refund.getRefundAmount());
-            tradeRefund.setPaymentCode(POJOConstants.ORDER_PAYMENT_ALIPAY);
-            tradeRefund.setCreateTime(new Date());
-            tradeRefund.setOutRequestNo(UUID.randomUUID().toString().replace("-", ""));
-            tradeRefundMapper.insertSelective(tradeRefund);
-
-            //为支付宝设置退款号
-            model.setOutRequestNo(tradeRefund.getOutRequestNo());
-        }
+        //为支付宝设置退款号
+        model.setOutRequestNo(tradeRefund.getOutRequestNo());
 
         request.setBizModel(model);
         AlipayTradeRefundResponse response = alipayClient.execute(request);

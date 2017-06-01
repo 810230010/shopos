@@ -29,7 +29,7 @@
 
   <!--获取所有管理员列表-->
   <select id="searchAdminList" resultType="com.wuliangit.shopos.dto.AdminDTO">
-        select a.admin_id as adminId,a.create_time as createTime,a.login_num as loginNum,a.login_time as loginTime,a.password,a.username,b.name as adminRole
+        select a.admin_id as adminId,a.create_time as createTime,a.login_num as loginNum,a.login_time as loginTime,a.admin_role_id as adminRoleId,a.username,b.name as adminRole,a.email
         from t_admin a, t_admin_role b
         <where>
           <if test="searchKey != null and searchKey != '' ">

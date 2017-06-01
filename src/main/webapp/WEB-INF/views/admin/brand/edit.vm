@@ -178,10 +178,10 @@
         $.post("/admin/brand/editBrand",
                 {
                     brandId: '$brand.brandId',
-                    goodsCategoryId: $("#parentId").select2('data')[0].id,
+                    goodsCategoryId: $("#parentId").select2('data').id,
                     name: $("#name").val(),
                     sort: $("#sort").val(),
-                    categoryName: $("#parentId").select2('data')[0].name,
+                    categoryName: $("#parentId").select2('data').name,
                     isRecommend: $("input[name='isRec']:checked").val() == 0?false:true,
                     initial:$("#initial").val(),
                     pic: $("#img").val()

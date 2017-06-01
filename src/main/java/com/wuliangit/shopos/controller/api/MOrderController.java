@@ -212,9 +212,11 @@ public class MOrderController {
      * @throws Exception
      */
     @RequestMapping("/refund")
-    public Object refund(Integer orderId, Integer goodsId,String refundType,
+    public Object refund(@RequestParam(required = true)Integer orderId,
+                         @RequestParam(required = true)Integer goodsId,String refundType,
                          @RequestParam(required = true,defaultValue = "RECEIVE") String goodsState,
-                         String buyerMessage,String picsInfo) throws Exception {
+                         @RequestParam(required = true)String buyerMessage,
+                         @RequestParam(required = false)String picsInfo) throws Exception {
         RestResult result = new RestResult();
         int res = orderService.refund(orderId, goodsId, refundType, goodsState, buyerMessage, picsInfo);
         return result;

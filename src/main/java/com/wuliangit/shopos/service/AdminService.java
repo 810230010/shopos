@@ -58,7 +58,8 @@ public interface AdminService {
     int createAdmin(Admin admin);
 
     AdminDTO getAdminById(Integer adminId);
-    /*
+
+    /**
      * 更新用户信息
      * @param admin
      * @param newPass

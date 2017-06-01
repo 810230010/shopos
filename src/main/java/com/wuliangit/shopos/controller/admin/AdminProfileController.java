@@ -27,7 +27,7 @@ public class AdminProfileController {
     private AdminService adminService;
 
     /**
-     * 店铺用户信息界面
+     * 管理员信息界面
      * @param model
      * @return
      */
@@ -39,7 +39,7 @@ public class AdminProfileController {
     }
 
     /**
-     * 店铺用户信息修改界面
+     * 管理员信息修改
      * @return
      */
     @RequestMapping("/update")

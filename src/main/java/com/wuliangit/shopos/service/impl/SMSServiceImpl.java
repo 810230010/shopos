@@ -26,7 +26,7 @@ public class SMSServiceImpl implements SMSService {
     public boolean sendRegisterCode(String phone) {
         String code = this.getRandomCode();
         String timeout = "10";
-        boolean res = smsSender.send(phone, "178889", new String[]{timeout, code});
+        boolean res = smsSender.send(phone, "178889", new String[]{code, timeout});
         if (res) {
             Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
             cache.put(phone, code);

@@ -54,6 +54,8 @@ public class Order {
 
     private String expressName;
 
+    private String expressCode;
+
     private String expressNo;
 
     private Date createTime;
@@ -274,6 +276,14 @@ public class Order {
 
     public void setExpressName(String expressName) {
         this.expressName = expressName == null ? null : expressName.trim();
+    }
+
+    public String getExpressCode() {
+        return expressCode;
+    }
+
+    public void setExpressCode(String expressCode) {
+        this.expressCode = expressCode == null ? null : expressCode.trim();
     }
 
     public String getExpressNo() {

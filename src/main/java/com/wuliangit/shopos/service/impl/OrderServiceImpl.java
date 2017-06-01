@@ -271,7 +271,8 @@ public class OrderServiceImpl implements OrderService {
         Express express = expressMapper.selectByPrimaryKey(expressId);
         Order order = orderMapper.selectByPrimaryKey(orderId);
 
-        order.setExpressName(express.getExpressName() + "/" + express.getExpressCode());
+        order.setExpressCode(express.getExpressCode());
+        order.setExpressName(express.getExpressName());
         order.setExpressNo(expressNo);
         order.setOrderState(POJOConstants.ORDER_STATE_DELIVE);
         order.setDeliverTime(new Date());
@@ -353,13 +354,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int refundDelive(Integer refundId, String expressName, String expressNo) {
+    public int refundDelive(Integer refundId, String expressName, String expressNo, String expressCode) {
         Refund refund = refundMapper.selectByPrimaryKey(refundId);
         Store store = storeMapper.selectByPrimaryKey(refund.getStoreId());
         refund.setExpressNo(expressNo);
         refund.setExpressName(expressName);
         refund.setRefundPhone(store.getRefundPhone());
         refund.setRefundName(store.getRefundName());
+        refund.setExpressCode(expressCode);
         refund.setRefundAddress(store.getRefundAddress());
         refund.setRefundTime(new Date());
         refund.setRefundState(POJOConstants.REFUND_STATE_DELIVE);

@@ -31,8 +31,6 @@ public class YXSMSSender implements SMSSender {
     private String authToken;
     @Value("${sms.appId}")
     private String appId;
-    @Value("${sms.resignId}")
-    private  String resignId;
 
     @Override
     public boolean send(String phone, String templateId, String[] datas) {

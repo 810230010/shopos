@@ -14,6 +14,6 @@ public interface MailService {
      * @Param: [user, title, content, templates]
      * @return: java.lang.String
      */
-//    String sendMail(StoreMessageDTO storeMessageDTO);
+    String sendMail(StoreMessageDTO storeMessageDTO);
 
 }

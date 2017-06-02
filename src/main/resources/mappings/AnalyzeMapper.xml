@@ -2,7 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.AnalyzeMapper" >
 
-
-
+     <!--商铺今日收入-->
+    <select id="getTodayIncome" resultType="java.lang.Double">
+        select SUM(amount) from t_store_account_log
+        where type='ORDER' and create_time between DATE_ADD(CURDATE(), INTERVAL 0 HOUR) and NOW() and store_id=#{storeId}
+    </select>
+    <!--商铺今日订单-->
+    <select id="getTodayOrders" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where create_time between DATE_ADD(CURDATE(), INTERVAL 0 HOUR) and NOW() and store_id=#{storeId}
+    </select>
+    <!--商铺今日评论数-->
+    <select id="getTodayComments" resultType="java.lang.Integer">
+        select COUNT(*) from t_evaluate_goods
+        where create_time between DATE_ADD(CURDATE(), INTERVAL 0 HOUR) and NOW() and store_id=#{storeId}
+    </select>
+    <!--商铺今日未确认订单-->
+    <select id="getUnsuredOrders" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where store_id=#{storeId} and order_state='DELIVE'
+    </select>
+    <!--店铺待支付订单数-->
+    <select id="getWatiToPayOrders" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where store_id=#{storeId} and order_state='INIT'
+    </select>
+    <!--店铺待发货订单数-->
+    <select id="getWaitToSendGoods" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where store_id=#{storeId} and order_state='PAYED'
+    </select>
+    <!--店铺交易成功订单数-->
+    <select id="getDealFinishedOrders" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where store_id=#{storeId} and order_state='RECEIVE'
+    </select>
+    <!--店铺申请退货数-->
+    <select id="getWithdrawGoodsNum" resultType="java.lang.Integer">
+        select COUNT(*) from t_refund
+        where store_id=3
+    </select>
 
 </mapper>

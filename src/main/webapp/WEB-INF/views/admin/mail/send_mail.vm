@@ -91,10 +91,7 @@
     });
 
     $.sub = function () {
-        console.log($("#example-dropUp").val());
-        console.log($("#title").val());
-        console.log(editor.$txt.text());
-        if($("#example-dropUp").val() != "[]" || $("#title").val() != "" || editor.$txt.text() != ""){
+        if($("#example-dropUp").val() == "[]" || $("#title").val() == "" || editor.$txt.text() == ""){
             swal({
                 title: "提示!",
                 text: "请补全内容!",
@@ -104,28 +101,28 @@
             });
         }else{
             var str = $("#example-dropUp").val();
-            var name = "";
-            var id = "";
-            var mail = "";
+            var name = new Array(str.length);
+            var id = new Array(str.length);
+            var mail = new Array(str.length);
             for(var i = 0;i<str.length;i++){
                 var rep = str[i].split('&');
-                id += rep[0]+",";
-                mail += rep[1]+",";
-                name += rep[2]+",";
+                id[i] = rep[0];
+                mail[i] = rep[1];
+                name[i] = rep[2];
             }
-            var name=name.substring(0,name.length-1);
-            var id=id.substring(0,id.length-1);
-            var mail=mail.substring(0,mail.length-1);
+//            var emai = JSON.stringify(mail);
 
             $.ajax({
                 type: "post",
                 url: "/admin/mail/sendMail",
+                dataType: "json",
                 data: {
-                    "username": name,
-                    "id": id,
-                    "mail": mail,
+                    "receiveUserIds": JSON.stringify(id),
+                    "receiveUsername": JSON.stringify(name),
+                    "receiveMail": JSON.stringify(mail),
                     "title": $("#title").val(),
-                    "content": editor.$txt.text()
+                    "content": editor.$txt.text(),
+                    "templates": "/templates/mail/sign.vm"
                 },
                 async: false,
                 success: function (data) {
@@ -137,6 +134,9 @@
                             showConfirmButton: false,
                             timer: 2000,
                         });
+                        setTimeout(function () {
+                            window.location.href = "/admin/mail/sendMessagePage";
+                        }, 2000);
                     }
                 }
             });

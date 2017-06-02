@@ -3,10 +3,12 @@ package com.wuliangit.shopos.controller.admin;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.StoreMessageDTO;
 import com.wuliangit.shopos.service.MailService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -48,11 +50,11 @@ public class AdminMailController {
     @ResponseBody
     public Object sendMail(StoreMessageDTO storeMessageDTO){
         RestResult result = new RestResult();
-//        String info = mailService.sendMail(storeMessageDTO);
-//        if(info.equals("error")){
-//            result.put("code",RestResult.CODE_SERVERERROR);
-//            result.put("msg",RestResult.MSG_ERROR);
-//        }
+        String info = mailService.sendMail(storeMessageDTO);
+        if(info.equals("error")){
+            result.put("code",RestResult.CODE_SERVERERROR);
+            result.put("msg",RestResult.MSG_ERROR);
+        }
         return result;
     }
 

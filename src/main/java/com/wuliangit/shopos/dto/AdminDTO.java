@@ -16,6 +16,16 @@ public class AdminDTO {
     private Integer loginNum;
     private Date loginTime;
 
+
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -47,14 +57,6 @@ public class AdminDTO {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Date getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(Date loginTime) {
-        this.loginTime = loginTime;
     }
 
     public Date getCreateTime() {

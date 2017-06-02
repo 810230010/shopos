@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.entity;
 
+import java.util.Date;
+
 public class StoreMessage {
     private Integer storeMessageId;
 
@@ -7,7 +9,7 @@ public class StoreMessage {
 
     private String sendUserName;
 
-    private String createTime;
+    private Date createTime;
 
     private Integer receiveUserId;
 
@@ -45,12 +47,12 @@ public class StoreMessage {
         this.sendUserName = sendUserName == null ? null : sendUserName.trim();
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getReceiveUserId() {

@@ -49,8 +49,8 @@ public class StoreLoginController {
 
     @RequestMapping("/index")
     public String viewToIndex(Model model) {
-
-
+        Integer storeId = WebUtil.getCurrentStore().getStoreId();
+        model.addAttribute("analysis", analyzeService.getStoreAnalysis(storeId));
         return "store/index";
     }
 

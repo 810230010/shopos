@@ -9,6 +9,7 @@ import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.service.AdminService;
 import com.wuliangit.shopos.service.AdminPermissionService;
+import com.wuliangit.shopos.service.AnalyzeService;
 import com.wuliangit.shopos.service.SellerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,6 +44,8 @@ public class AdminLoginController {
     private SellerService sellerService;
     @Autowired
     private AdminPermissionService adminPermissionService;
+    @Autowired
+    private AnalyzeService analyzeService;
 
     @RequestMapping("/index")
     public String viewToIndex(Model model) {

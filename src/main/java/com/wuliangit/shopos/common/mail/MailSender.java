@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.locks.ReentrantLock;
@@ -156,12 +157,18 @@ public class MailSender {
      * @param templates 模板
      * @throws MessagingException
      */
-    public void send(String recipient, VelocityContext context, String templates) throws MessagingException {
-        String[] to = recipient.split(",");
-        int receiverCount = to.length;
-        InternetAddress[] address = new InternetAddress[receiverCount];
-        for (int i = 0; i < receiverCount; i++) {
-            address[i] = new InternetAddress(to[i]);
+    public void send(List<String> recipient, VelocityContext context, String templates) throws MessagingException {
+        int count = 0;
+        for(int i = 0;i< recipient.size() ; i++){
+            if(!recipient.get(i).equals("") && recipient.get(i) != null){
+                count++;
+            }
+        }
+        InternetAddress[] address = new InternetAddress[count];
+        for (int i = 0; i < count; i++) {
+            if(!recipient.get(i).equals("") && recipient.get(i) != null){
+                address[i] = new InternetAddress(recipient.get(i));
+            }
         }
         VelocityEngine engine = new VelocityEngine();
         Properties properties = new Properties();

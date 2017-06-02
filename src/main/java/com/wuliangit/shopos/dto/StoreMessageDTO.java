@@ -7,18 +7,12 @@ import java.util.List;
  */
 public class StoreMessageDTO {
 
-    List<Integer> receiveUserIds;
+    List<String> receiveUserIds;
+    List<String> receiveUsername;
+    List<String> receiveMail;
     private String title;
     private String content;
     private String templates;
-
-    public List<Integer> getReceiveUserIds() {
-        return receiveUserIds;
-    }
-
-    public void setReceiveUserIds(List<Integer> receiveUserIds) {
-        this.receiveUserIds = receiveUserIds;
-    }
 
     public String getTitle() {
         return title;
@@ -42,5 +36,29 @@ public class StoreMessageDTO {
 
     public void setTemplates(String templates) {
         this.templates = templates;
+    }
+
+    public List<String> getReceiveUsername() {
+        return receiveUsername;
+    }
+
+    public void setReceiveUsername(List<String> receiveUsername) {
+        this.receiveUsername = receiveUsername;
+    }
+
+    public List<String> getReceiveMail() {
+        return receiveMail;
+    }
+
+    public void setReceiveMail(List<String> receiveMail) {
+        this.receiveMail = receiveMail;
+    }
+
+    public List<String> getReceiveUserIds() {
+        return receiveUserIds;
+    }
+
+    public void setReceiveUserIds(List<String> receiveUserIds) {
+        this.receiveUserIds = receiveUserIds;
     }
 }

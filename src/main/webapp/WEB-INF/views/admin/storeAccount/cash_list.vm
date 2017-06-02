@@ -56,11 +56,11 @@
                 },
             },
             "columns": [
-                {"data":"storeId","width":"7%","title":"商家id","orderable": false},
+                {"data":"storeId","width":"7%","title":"商家id","orderable": true},
                 {"data":"name","width": "10%","title":"商铺名称","orderable": false},
-                {"data":"amount","width": "10%","title":"佣金","orderable": false},
-                {"data":"createTime","width": "10%","title":"创建时间","orderable": true},
-                {"data":"outBizNo","width": "10%","title":"订单号","orderable": true}
+                {"data":"amount","width": "10%","title":"佣金","orderable": true},
+                {"data":"createTime","width": "10%","title":"创建时间","orderable": false},
+                {"data":"outBizNo","width": "10%","title":"订单号","orderable": false}
             ],
             "searching": true,
             "ordering":true,

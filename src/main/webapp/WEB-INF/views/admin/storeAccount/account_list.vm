@@ -58,9 +58,9 @@
             "columns": [
                 {"data":"storeId","width":"10%","title":"商家id","orderable": true},
                 {"data":"name","width": "10%","title":"商铺名称","orderable": false},
-                {"data":"availableBalance","width": "10%","title":"可用余额","orderable": false},
+                {"data":"availableBalance","width": "10%","title":"可用余额","orderable": true},
                 {"data":"freezeBalance","width": "10%","title":"冻结金额","orderable": true},
-                {"data":"alipayAccount","width": "10%","title":"支付宝账户","orderable": true},
+                {"data":"alipayAccount","width": "10%","title":"支付宝账户","orderable": false},
             ],
             "searching": true,
             "ordering":true,

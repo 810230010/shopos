@@ -8,4 +8,21 @@
         select * from t_store_account where store_id  = #{sotreId}
     </select>
 
+    <!--获取商家账户管理页面list数据-->
+    <select id="getStoreAccountListDate" resultType="com.wuliangit.shopos.dto.StoreAccountListDTO">
+        select a.store_id,a.available_balance,a.freeze_balance,a.alipay_account,s.name
+        from t_store s,t_store_account a
+        <where>
+            a.store_id=s.store_id
+            <if test="searchKey != null and searchKey != '' ">
+                and ( s.name like '%${searchKey}%')
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        a.store_id desc
+    </select>
+
 </mapper>

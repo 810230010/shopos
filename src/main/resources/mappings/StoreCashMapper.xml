@@ -12,4 +12,21 @@
         create_time desc
     </select>
 
+    <!--获取订单佣金管理-->
+    <select id="getCashListDate" resultType="com.wuliangit.shopos.dto.StoreCashListDTO">
+        select c.store_id,c.amount,c.create_time,c.out_biz_no,s.name
+        from t_store_cash c,t_store s
+        <where>
+            c.store_id = s.store_id
+            <if test="searchKey != null and searchKey != '' ">
+                and ( s.name like '%${searchKey}%')
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        c.store_id desc
+    </select>
+
 </mapper>

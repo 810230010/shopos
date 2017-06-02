@@ -12,6 +12,9 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreAccountLogMapper;
 import com.wuliangit.shopos.dao.StoreAccountMapper;
 import com.wuliangit.shopos.dao.StoreCashMapper;
+import com.wuliangit.shopos.dto.StoreAccountListDTO;
+import com.wuliangit.shopos.dto.StoreCashListDTO;
+import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.entity.StoreAccount;
 import com.wuliangit.shopos.entity.StoreAccountLog;
 import com.wuliangit.shopos.entity.StoreCash;
@@ -138,5 +141,19 @@ public class StoreAccountServiceImpl implements StoreAccountService {
         StoreAccount storeAccount = storeAccountMapper.getByStoreId(currentStore.getStoreId());
         storeAccount.setAlipayAccount(alipayAccount);
         return storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
+    }
+
+    @Override
+    public List<StoreAccountListDTO> getStoreAccountListDate(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
+        PageHelper.startPage(page,pageSize);
+        List<StoreAccountListDTO> result = storeAccountMapper.getStoreAccountListDate(orderColumn,orderType,searchKey);
+        return result;
+    }
+
+    @Override
+    public List<StoreCashListDTO> getCashListDate(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
+        PageHelper.startPage(page,pageSize);
+        List<StoreCashListDTO> result = storeCashMapper.getCashListDate(orderColumn,orderType,searchKey);
+        return result;
     }
 }

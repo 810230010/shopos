@@ -1,6 +1,8 @@
 package com.wuliangit.shopos.service;
 
 import com.alipay.api.AlipayApiException;
+import com.wuliangit.shopos.dto.StoreAccountListDTO;
+import com.wuliangit.shopos.dto.StoreCashListDTO;
 import com.wuliangit.shopos.entity.StoreAccount;
 import com.wuliangit.shopos.entity.StoreAccountLog;
 import com.wuliangit.shopos.entity.StoreCash;
@@ -59,4 +61,22 @@ public interface StoreAccountService {
      * @return
      */
     int settingStoreAlipay(String alipayAccount);
+
+    /**
+     * @Description: 获取商家账户管理页面list数据
+     * @Author: pangweichao
+     * @Date: 10:15 2017/6/2
+     * @Param: [page, pageSize, orderColumn, orderType, searchKey]
+     * @return: java.util.List<com.wuliangit.shopos.dto.StoreAccountListDTO>
+     */
+    List<StoreAccountListDTO> getStoreAccountListDate(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
+
+    /**
+     * @Description: 获取订单佣金管理
+     * @Author: pangweichao
+     * @Date: 10:16 2017/6/2
+     * @Param: [page, pageSize, orderColumn, orderType, searchKey]
+     * @return: java.util.List<com.wuliangit.shopos.dto.StoreCashListDTO>
+     */
+    List<StoreCashListDTO> getCashListDate(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
 }

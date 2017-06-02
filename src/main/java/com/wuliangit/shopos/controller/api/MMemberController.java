@@ -173,6 +173,7 @@ public class MMemberController {
             member.setCreateTime(new Date());
             member.setUpdateTime(new Date());
             member.setUsername(phone);
+            member.setNickname(phone);
             member.setMobile(phone);
             member.setType(POJOConstants.USER_TYPE_DEFAULT);
             member.setAuthState(POJOConstants.NOT_AUTH);

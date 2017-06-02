@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 今日访问量 </span>
-                        <h2 id="todayVistors" class="font-bold">12</h2>
+                        <h2 id="todayVisitors" class="font-bold">12</h2>
                     </div>
                 </div>
             </div>
@@ -146,14 +146,15 @@
         }, 1300);
 
         //设置统计数据
-        $("#todayIncome").text("￥"+$analysis.todayIncome.get("今日收入"));
-        $("#todayOrders").text($analysis.todayOrders.get("今日订单数"));
-        $("#todayComments").text($analysis.todayComments.get("今日评论数"));
-        $("#unsuredOrders").text($analysis.unsuredOrders.get("未确认订单"));
-        $("#waitToPay").text($analysis.waitTOPayOrders.get("待支付订单"));
-        $("#waitTOsend").text($analysis.waitToSendOrders.get("待发货"));
-        $("#finished").text($analysis.alreadyPayedOrders.get("已成交"));
-        $("#withdraw").text($analysis.withdrawGoodsApplyNum.get("退货申请"));
+          $("#todayIncome").text("￥"+$analysis.get("今日收入"));
+          $("#todayVisitors").text($analysis.get("今日访问量"));
+          $("#todayOrders").text($analysis.get("今日订单"));
+          $("#todayComments").text($analysis.get("今日评论数"));
+          $("#unsuredOrders").text($analysis.get("未确认"));
+          $("#waitToPay").text($analysis.get("待付款"));
+          $("#waitTOsend").text($analysis.get("待发货"));
+          $("#finished").text($analysis.get("交易成功"));
+          $("#withdraw").text($analysis.get("退货申请"));
     });
 </script>
 

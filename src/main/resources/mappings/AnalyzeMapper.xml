@@ -4,7 +4,7 @@
 
      <!--商铺今日收入-->
     <select id="getTodayIncome" resultType="java.lang.Double">
-        select SUM(amount) from t_store_account_log
+        select IFNULL(SUM(amount),0) from t_store_account_log
         where type='ORDER' and create_time between DATE_ADD(CURDATE(), INTERVAL 0 HOUR) and NOW() and store_id=#{storeId}
     </select>
     <!--商铺今日订单-->

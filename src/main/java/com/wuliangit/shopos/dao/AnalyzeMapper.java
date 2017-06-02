@@ -11,7 +11,7 @@ public interface AnalyzeMapper {
      * 得到店铺今日总收入
      * @return
      */
-    double getTodayIncome(@Param("storeId") Integer storeId);
+    Double getTodayIncome(@Param("storeId") Integer storeId);
 
     /**
      * 得到店铺今日订单数

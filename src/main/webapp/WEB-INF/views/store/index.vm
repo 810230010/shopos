@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 今日收入 </span>
-                        <h2 id="todayIncome" class="font-bold text-danger">￥ 4,232</h2>
+                        <h2 id="todayIncome" class="font-bold text-danger">$analysis.get("todayIncome")</h2>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 今日订单总数 </span>
-                        <h2 id="todayOrders" class="font-bold">26</h2>
+                        <h2 id="todayOrders" class="font-bold">$analysis.get("todayOrders")</h2>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 今日评论数 </span>
-                        <h2 id="todayComments" class="font-bold">260</h2>
+                        <h2 id="todayComments" class="font-bold">$analysis.get("todayComments")</h2>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 今日访问量 </span>
-                        <h2 id="todayVisitors" class="font-bold">12</h2>
+                        <h2 id="todayVisitors" class="font-bold">$analysis.get("todayVisitors")</h2>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span>未确认订单</span>
-                        <h3 id="unsuredOrders" class="font-bold">26</h3>
+                        <h3 id="unsuredOrders" class="font-bold">$analysis.get("unSured")</h3>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span>待支付订单</span>
-                        <h3 id="waitToPay" class="font-bold">26</h3>
+                        <h3 id="waitToPay" class="font-bold">$analysis.get("waitToPay")</h3>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span>待发货订单</span>
-                        <h3 id="waitTOsend" class="font-bold">26</h3>
+                        <h3 id="waitTOsend" class="font-bold">$analysis.get("waitToSend")</h3>
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span>已成交订单</span>
-                        <h3 id="finished" class="font-bold">26</h3>
+                        <h3 id="finished" class="font-bold">$analysis.get("todayFinished")</h3>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span>退货申请</span>
-                        <h3 id="withdraw" class="font-bold">26</h3>
+                        <h3 id="withdraw" class="font-bold">$analysis.get("withdrawApply")</h3>
                     </div>
                 </div>
             </div>
@@ -145,16 +145,7 @@
             toastr.success('欢迎回来!', '感谢使用SHOPOS系统!');
         }, 1300);
 
-        //设置统计数据
-          $("#todayIncome").text("￥"+$analysis.get("今日收入"));
-          $("#todayVisitors").text($analysis.get("今日访问量"));
-          $("#todayOrders").text($analysis.get("今日订单"));
-          $("#todayComments").text($analysis.get("今日评论数"));
-          $("#unsuredOrders").text($analysis.get("未确认"));
-          $("#waitToPay").text($analysis.get("待付款"));
-          $("#waitTOsend").text($analysis.get("待发货"));
-          $("#finished").text($analysis.get("交易成功"));
-          $("#withdraw").text($analysis.get("退货申请"));
+
     });
 </script>
 

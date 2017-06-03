@@ -60,21 +60,31 @@
             },
             "columns": [
                 {"data":"tBannerId","width":"10%","title":"序号","orderable": false},
+                {"data":"pictureUrl","width": "20%","title":"banner图","orderable": false,"render":function(date, type, row){
+                    return "<div class='pull-left'><img src='" + date + "' style='width: 100px;height: 100px;'></div>";
+                }},
                 {"data":"statusFlag","width": "20%","title":"开启状态","orderable": false, "render":function (data, type, row) {
                     if(data == "1")return"开启";
                     else return "关闭";
                 }},
-                {"data":"pictureUrl","width": "20%","title":"banner图","orderable": false,"render":function(date, type, row){
-                    return "<div class='pull-left'><img src='" + date + "' style='width: 100px;height: 100px;'></div>";
+                {"data":"statusFlag","width": "20%","title":"更改状态","orderable": false,"render": function(data, type, row){
+                    var str;
+                    if(data == "1"){
+                        str = '<a class="btn btn-danger btn-xs table-action status" href="javascript:void(0)">'+
+                                '关闭 <i class="fa fa-lock"></i>'+
+                                '</a>';
+                    }else{
+                        str = '<a class="btn btn-primary btn-xs table-action status" href="javascript:void(0)">'+
+                                '开启 <i class="fa fa-unlock"></i>'+
+                                '</a>';
+                    }
+                    return str;
                 }},
 //                {"data":"externalUrl","width": "30%","title":"外部链接","orderable": false},
                 {"data":"tBannerId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
                     return [
-                        '<a class="btn btn-danger btn-xs table-action status" href="javascript:void(0)">',
-                        '状态更改 <i class="fa fa-trash-o"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action delete" style="margin-left: 4px;" href="javascript:void(0)">',
-                        '删除 <i class="fa fa-edit"></i>',
+                        '<a class="table-button btn btn-danger btn-xs table-action delete" style="margin-left: 4px;" href="javascript:void(0)">',
+                        '删除 <i class="fa fa-trash-o"></i>',
                         '</a>',
                     ].join('');
                 }},

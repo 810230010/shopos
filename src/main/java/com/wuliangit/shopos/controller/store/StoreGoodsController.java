@@ -112,7 +112,7 @@ public class StoreGoodsController {
     }
 
     /**
-     * 删除商品图片，默认sm都没有做
+     * 删除商品图片，默认什么都没有做
      * @return
      */
     @RequestMapping("/deleteImg")

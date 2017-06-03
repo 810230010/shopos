@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.AdminAnalyze;
 import com.wuliangit.shopos.dto.StoreAnalyzeSimpl;
 
 /**
@@ -12,6 +13,6 @@ public interface AnalyzeService {
      */
      StoreAnalyzeSimpl getStoreAnalysis(Integer storeId);
 
-
+     AdminAnalyze adminAnalyzeAllStore();
 
 }

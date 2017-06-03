@@ -165,22 +165,6 @@ $("#wizard").steps({
             table_data.push(oj);
         });
 
-        //商品类型
-        var goods_type = $("input[name='goods_type']:checked").val();
-
-        var goods_type_value ='';
-
-        switch(goods_type)
-        {
-            case 'activity':
-                goods_type_value = 'GOODS_TYPE_ACTIVITY';
-                break;
-            case 'normal':
-                goods_type_value = 'GOODS_TYPE_NORMAL';
-                break;
-            default:
-        }
-
         ////////////////提交/////////////
         $.post("/store/goods/add",
             {
@@ -199,7 +183,7 @@ $("#wizard").steps({
                 sellTimeBegin: $("#datetimepicker-begin").val(),
                 sellTimeEnd: $("#datetimepicker-end").val(),
                 name: $("#name").val(),
-                type: goods_type_value,
+                type: $("input[name='goods_type']:checked").val(),
                 goodsBody: $("#goodsBody").val(),
                 skuStr: JSON.stringify(table_data),
                 attrs: JSON.stringify(attr_data),
@@ -358,11 +342,15 @@ $(document).ready(function() {
 
             switch(goods_type)
             {
-                case 'activity':
+                case 'GOODS_TYPE_ACTIVITY':
                     $(".goods-type-model").addClass("hidden");
                     $("#activity-time").removeClass("hidden");
                     break;
-                case 'normal':
+                case 'GOODS_TYPE_SECKILL':
+                    $(".goods-type-model").addClass("hidden");
+                    $("#activity-time").removeClass("hidden");
+                    break;
+                case 'GOODS_TYPE_NORMAL':
                     $(".goods-type-model").addClass("hidden");
                     break;
                 default:

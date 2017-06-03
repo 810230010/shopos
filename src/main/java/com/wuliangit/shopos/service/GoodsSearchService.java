@@ -30,4 +30,55 @@ public interface GoodsSearchService {
                                               Integer goodsCategoryId,
                                               Integer storeId,
                                               Integer storeGoodsCategoryId, String type);
+
+    /**
+     * 企业直销商品专区
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param orderType
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> directSellingSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+
+    /**
+     * 企业新品商品专区
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param orderType
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> newGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+
+    /**
+     * 企业活动商品专区
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param orderType
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> activityGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+
+    /**
+     * 一口秒价专区
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param orderType
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> seckillGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+
+
+    /**
+     * 普通商品专区
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param orderType
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> normalGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType);
 }

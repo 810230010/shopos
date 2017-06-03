@@ -97,4 +97,104 @@ public class MGoodsController {
         return result;
     }
 
+    /**
+     * 企业直销商品专区
+     *
+     * @param page            页码
+     * @param pageSize        页大小
+     * @param searchKey       搜索值
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @return
+     */
+    @RequestMapping("/directSellingSearch")
+    public Object directSellingSearch(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                              @RequestParam(value = "searchKey", required = false) String searchKey,
+                              @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
+        RestResult result = new RestResult();
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.directSellingSearch(page, pageSize, searchKey, orderType);
+        result.add("goods", goods);
+        return result;
+    }
+
+    /**
+     * 企业新品商品专区
+     *
+     * @param page            页码
+     * @param pageSize        页大小
+     * @param searchKey       搜索值
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @return
+     */
+    @RequestMapping("/newGoodsSearch")
+    public Object newGoodsSearch(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                      @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                      @RequestParam(value = "searchKey", required = false) String searchKey,
+                                      @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
+        RestResult result = new RestResult();
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.newGoodsSearch(page, pageSize, searchKey, orderType);
+        result.add("goods", goods);
+        return result;
+    }
+
+    /**
+     * 企业活动商品专区
+     *
+     * @param page            页码
+     * @param pageSize        页大小
+     * @param searchKey       搜索值
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @return
+     */
+    @RequestMapping("/activityGoodsSearch")
+    public Object activityGoodsSearch(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                      @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                      @RequestParam(value = "searchKey", required = false) String searchKey,
+                                      @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
+        RestResult result = new RestResult();
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.activityGoodsSearch(page, pageSize, searchKey, orderType);
+        result.add("goods", goods);
+        return result;
+    }
+
+    /**
+     * 一口秒价专区
+     *
+     * @param page            页码
+     * @param pageSize        页大小
+     * @param searchKey       搜索值
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @return
+     */
+    @RequestMapping("/seckillGoodsSearch")
+    public Object seckillGoodsSearch(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                     @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                     @RequestParam(value = "searchKey", required = false) String searchKey,
+                                     @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
+        RestResult result = new RestResult();
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.seckillGoodsSearch(page, pageSize, searchKey, orderType);
+        result.add("goods", goods);
+        return result;
+    }
+
+    /**
+     * 普通商品专区
+     *
+     * @param page            页码
+     * @param pageSize        页大小
+     * @param searchKey       搜索值
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @return
+     */
+    @RequestMapping("/normalGoodsSearch")
+    public Object normalGoodsSearch(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                     @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                     @RequestParam(value = "searchKey", required = false) String searchKey,
+                                     @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
+        RestResult result = new RestResult();
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.normalGoodsSearch(page, pageSize, searchKey, orderType);
+        result.add("goods", goods);
+        return result;
+    }
+
 }

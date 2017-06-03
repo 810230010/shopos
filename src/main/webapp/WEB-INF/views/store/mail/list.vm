@@ -1,0 +1,208 @@
+#parse("/store/models/begin.vm")
+<link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+
+<style>
+
+</style>
+
+#parse("/store/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>消息-消息列表</h2>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 id="rank">消息列表</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table id="datatables" class="footable table table-stripped toggle-arrow-tiny" >
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/store/models/footer.vm")
+
+<script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
+
+<script>
+
+    $("#side-menu").metisMenu();
+
+    $(document).ready(function () {
+        var t = $('#datatables').DataTable({
+            "ajax": {
+                'url': '/store/mail/getMailListDate',
+                "data": function(d) {
+                    var param = {};
+                    param.page = d.start/d.length + 1;
+                    param.pageSize = d.length;
+                    param.draw = d.draw;
+                    param.orderColumn = d.columns[d.order[0]['column']]['data'];
+                    param.orderType = d.order[0]['dir'];
+                    param.searchKey = d.search["value"];
+                    return param;
+                },
+            },
+            "columns": [
+                {"data":"readFlag","width": "5%","title":"是否已读","orderable":false,"render":function (data, type, row) {
+                    if(data == false){
+                        return "<span class='glyphicon glyphicon-envelope'></span>";
+                    }else{
+                        return "<i class='fa fa-envelope-open-o'></i>";
+                    }
+                }},
+                {"data":"sendUserName","width": "6%","title":"发送人","orderable":false},
+                {"data":"title","width": "8%","title":"标题","orderable":false,"render": function (data, type, row) {
+                    if(GetLength(data)>12){
+                        return cutstr(data,12);
+                    }else{
+                        return data;
+                    }
+                }},
+                {"data":"content","width": "15%","title":"内容","orderable":false,"render": function (data, type, row) {
+                    if(GetLength(data)>36){
+                        return cutstr(data,36);
+                    }else{
+                        return data;
+                    }
+                }},
+                {"data":"createTime","width": "10%","title":"时间","orderable":false},
+                {"data":"storeMessageId","width": "10%","title":"操作","orderable":false,"render": function (data, type, row) {
+                    return [
+                        '<a class="table-button btn btn-primary btn-xs table-action read" href="javascript:void(0)" style="margin-left: 10px;">',
+                        '阅读 <i class="fa fa-eye"></i>',
+                        '</a>',
+                        '<a class="table-button btn btn-danger btn-xs table-action delete" href="javascript:void(0)" style="margin-left: 10px;">',
+                        '删除 <i class="fa fa-trash-o"></i>',
+                        '</a>'
+                    ].join('');
+                }},
+            ],
+            "searching": true,
+            "ordering":true,
+            "serverSide": true,
+            "deferRender": true,
+            "processing": true,
+            "autoWidth": false,
+            "lengthMenu": [ 10, 15, 20 ],
+            "responsive": true,
+            "dom": '<"html5buttons"B>lTfgitp',
+            "buttons": [
+                {extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
+                {extend: 'print',
+                    customize: function (win){
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+                        $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                    }
+                }
+            ],
+            "language": {
+                "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
+            }
+        });
+        var table = $('#datatables').DataTable();
+
+        table.on( 'click', '.delete', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            swal({  title: "确定要删除吗?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "是的，删除",
+                cancelButtonText: "取消",
+                closeOnConfirm: false,
+                closeOnCancel: true
+            },function(isConfirm){
+                if (isConfirm){
+                    $.get("/store/mail/deleteMessage/"+data.storeMessageId,
+                            function (data, status) {
+                                if(data.code==200){
+                                    swal("删除成功!", "邮件已经删除", "success");
+                                    window.location.href = "/store/mail/mailListPage";
+                                }
+                            });
+                }
+            });
+        });
+
+        table.on( 'click', '.read', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            $.ajax({
+                type: "post",
+                url: "/store/mail/updateReadFlag",
+                dataType: "json",
+                data: {
+                    "storeMessageId": data.storeMessageId,
+                },
+                async: false,
+                success: function (data) {
+                    if (data.code == 200) {
+                    }
+                }
+            });
+            window.location.href = "/store/mail/detailMail?messageId="+data.storeMessageId;
+        });
+
+    });
+
+    var GetLength = function (str) {
+        ///<summary>获得字符串实际长度，中文2，英文1</summary>
+        ///<param name="str">要获得长度的字符串</param>
+        var realLength = 0, len = str.length, charCode = -1;
+        for (var i = 0; i < len; i++) {
+            charCode = str.charCodeAt(i);
+            if (charCode >= 0 && charCode <= 128) realLength += 1;
+            else realLength += 2;
+        }
+        return realLength;
+    };
+
+
+    function cutstr(str, len) {
+        var str_length = 0;
+        var str_len = 0;
+        str_cut = new String();
+        str_len = str.length;
+        for (var i = 0; i < str_len; i++) {
+            a = str.charAt(i);
+            str_length++;
+            if (escape(a).length > 4) {
+                //中文字符的长度经编码之后大于4
+                str_length++;
+            }
+            str_cut = str_cut.concat(a);
+            if (str_length >= len) {
+                str_cut = str_cut.concat("...");
+                return str_cut;
+            }
+        }
+        //如果给定字符串小于指定长度，则返回源字符串；
+        if (str_length < len) {
+            return str;
+        }
+    }
+</script>
+
+#parse("/store/models/end.vm")

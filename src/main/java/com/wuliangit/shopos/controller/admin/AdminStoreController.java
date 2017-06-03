@@ -5,6 +5,7 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dto.StoreDetailDTO;
+import com.wuliangit.shopos.dto.AdminMailToSelectDTO;
 import com.wuliangit.shopos.dto.StorePageListDTO;
 import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.entity.Store;
@@ -228,6 +229,22 @@ public class AdminStoreController {
 
         storeAccountService.createStoreAccount(store.getStoreId());
 
+        return result;
+    }
+
+    /**
+     * @Description: 获取所有的商铺
+     * @Author: pangweichao
+     * @Date: 12:22 2017/6/3
+     * @Param: []
+     * @return: java.lang.Object
+     */
+    @RequestMapping("getAllStore")
+    @ResponseBody
+    public Object getAllStore(){
+        RestResult result = new RestResult();
+        List<AdminMailToSelectDTO> adminMailToSelectDTOS = storeService.getAllStore();
+        result.put("data", adminMailToSelectDTOS);
         return result;
     }
 

@@ -1,0 +1,70 @@
+#parse("/store/models/begin.vm")
+
+<style>
+
+</style>
+
+#parse("/store/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>消息-消息详情</h2>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="mail-box-header">
+                <div class="pull-right tooltip-demo">
+                    <a href="/store/mail/mailListPage" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-reply"></i> 返回</a>
+                    <a onclick="$.delete('$id')" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i> </a>
+                </div>
+                <h2>
+                    $title
+                </h2>
+                <div class="mail-tools tooltip-demo m-t-md">
+                    <h5>
+                        <span class="pull-right font-normal">$time</span>
+                        <span class="font-normal">发送人: </span>$from
+                    </h5>
+                </div>
+            </div>
+            <div class="mail-box">
+                <div class="mail-body">
+                    $content
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/store/models/footer.vm")
+
+<script>
+
+    $("#side-menu").metisMenu();
+
+    $.delete = function (data) {
+        swal({  title: "确定要删除吗?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "是的，删除",
+            cancelButtonText: "取消",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },function(isConfirm){
+            if (isConfirm){
+                $.get("/store/mail/deleteMessage/"+data,
+                        function (data, status) {
+                            if(data.code==200){
+                                swal("删除成功!", "邮件已经删除", "success");
+                                window.location.href = "/store/mail/mailListPage";
+                            }
+                        });
+            }
+        });
+    }
+</script>
+
+#parse("/store/models/end.vm")

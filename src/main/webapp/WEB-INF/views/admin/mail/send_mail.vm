@@ -60,7 +60,7 @@
 
         $.ajax({
             type: "post",
-            url: "/admin/seller/getAllSeller",
+            url: "/admin/store/getAllStore",
             data: {
 
             },
@@ -69,7 +69,7 @@
                 if (data.code == 200) {
                     console.log(data);
                     for(var i=0;i<data.data.length;i++){
-                        $("#example-dropUp").append("<option value='"+ data.data[i].sellerId + "&" + data.data[i].email + "&" + data.data[i].username +"'>"+ data.data[i].username + "&lt"+ data.data[i].email +"&gt" +"</option>")
+                        $("#example-dropUp").append("<option value='"+ data.data[i].storeId + "&" + data.data[i].email + "&" + data.data[i].name +"'>"+ data.data[i].name + "&lt"+ data.data[i].email +"&gt" +"</option>")
                     }
                 }
             }

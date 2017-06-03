@@ -11,4 +11,41 @@
             #{storeMessages.readFlag},#{storeMessages.delFlag},#{storeMessages.title},#{storeMessages.content})
         </foreach>
     </insert>
+    <!--删除指定邮件-->
+    <update id="deleteMessage">
+        UPDATE t_store_message
+        SET del_flag=1,read_flag=1
+        WHERE store_message_id=#{storeMessageId}
+    </update>
+    <!--更新是否阅读的状态-->
+    <update id="updateReadFlag">
+        UPDATE t_store_message
+        SET read_flag=1
+        WHERE store_message_id=#{storeMessageId}
+    </update>
+    <!--获取未读消息条数-->
+    <select id="getMessageCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_store_message
+        WHERE receive_user_id = #{storeId} and read_flag=0
+    </select>
+    <!--获取消息列表页面的数据-->
+    <select id="getMailListDate" resultType="com.wuliangit.shopos.dto.StoreMailDTO">
+        select store_message_id,create_time,send_user_name,read_flag,title,content
+        from t_store_message
+        <where>
+            del_flag=0 AND receive_user_id = #{storeId}
+            <if test="searchKey != null and searchKey != '' ">
+                and ( title like '%${searchKey}%')
+            </if>
+        </where>
+        order by
+        create_time desc
+    </select>
+    <!--获取某条消息的详情-->
+    <select id="detailMail" resultType="com.wuliangit.shopos.dto.StoreMailDTO">
+        SELECT store_message_id,create_time,send_user_name,read_flag,title,content
+        FROM t_store_message
+        WHERE receive_user_id=#{storeId} and store_message_id=#{messageId}
+    </select>
 </mapper>

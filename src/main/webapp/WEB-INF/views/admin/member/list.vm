@@ -79,7 +79,7 @@
                 {"data":"memberId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
                     return [
                         '<a class="btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
-                        '删除 <i class="fa fa-times"></i>',
+                        '删除 <i class="fa fa-trash-o"></i>',
                         '</a>'
                     ].join('');
                 }},

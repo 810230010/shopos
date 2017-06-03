@@ -21,19 +21,6 @@
                             <div class="col-sm-8"><input type="text" class="form-control" name="storeCompanyName" value="$!{store.storeCompanyName}" readonly></div>
                         </div>
                         <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">绑定app会员手机</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" name="bindMemberUsername" value="$!{store.bindMemberUsername}" id="bindMemberUsername" placeholder="请输入会员手机号" required>
-                            </div>
-                            <div class="col-sm-1">
-                                <div class="btn btn-primary" id="getCode">获取验证码</div>
-                            </div>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control" name="checkCode" id="checkCode" placeholder="请输入验证码">
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
                         <div class="form-group"><label class="col-sm-2 control-label">店铺子标题</label>
                             <div class="col-sm-8"><input type="text" class="form-control" id="label" name="label" value="$!{store.label}"></div>
                         </div>
@@ -175,47 +162,6 @@
     });
 
 
-    var wait=60;
-    function time(o) {
-        o = $(o);
-        if (wait == 0) {
-            o.removeAttr("disabled");
-            o.html("获取验证码");
-            wait = 60;
-        } else {
-            o.attr('disabled',"true")
-            o.html("重新发送(" + wait + ")");
-            wait--;
-            setTimeout(function() {
-                time(o)
-            }, 1000)
-        }
-    }
-
-    $("#bindMemberUsername").change(function(){
-        $("#checkCode").attr("required","required");
-    });
-
-
-    //获取短信验证码
-    $("#getCode").on('click', function () {
-        var button = this;
-        $.get("/store/setting/getBindCode?phone="+$("#bindMemberUsername").val(),function (data, status) {
-            if (data.code == 200) {
-                time(button);
-            }else{
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 1500
-                };
-                toastr.error(data.msg);
-            }
-        });
-    });
-
-
     $("#submit").on('click', function () {
         var form = $("#form");
         if(!form.valid()){
@@ -243,7 +189,6 @@
                     storeId: $store.storeId,
                     label: $("#label").val(),
                     checkCode: $("#checkCode").val(),
-                    bindMemberUsername: $("#bindMemberUsername").val(),
                     banner: images,
                     logo: logo_img,
                     keywords: $("#keywords").val(),

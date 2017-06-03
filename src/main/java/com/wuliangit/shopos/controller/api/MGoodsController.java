@@ -201,7 +201,7 @@ public class MGoodsController {
      * 首页商品
      * @return
      */
-    @RequestMapping("/normalGoodsSearch")
+    @RequestMapping("/indexGoods")
     public Object indexGoods() {
         RestResult result = new RestResult();
         ArrayList<ApiGoodsListDTO> goods = goodsSearchService.indexGoods();

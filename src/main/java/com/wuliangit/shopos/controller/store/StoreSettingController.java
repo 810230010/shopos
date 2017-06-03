@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -95,16 +96,46 @@ public class StoreSettingController {
     @ResponseBody
     public Object setting(StoreUpdateDTO storeDto, String checkCode) {
         RestResult result = new RestResult();
-        if (!StringUtils.isEmpty(storeDto.getBindMemberUsername())) {
-            String checkCode1 = smsService.getCheckCode(storeDto.getBindMemberUsername());
-            if (!checkCode1.equals(checkCode)) {
-                result.setCode(RestResult.CODE_SERVERERROR);
-                result.setMsg("验证码不正确");
-                return result;
-            }
-        }
 
         Store store = mapper.map(storeDto, Store.class);
+        int res = storeService.updateStore(store);
+        return result;
+    }
+
+
+    /**
+     * 绑定会员页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/bindMember",method = RequestMethod.GET)
+    public Object bindMemberpage(Model model) {
+       return "/store/setting/bindMember";
+    }
+
+
+    /**
+     * 绑定会员
+     *
+     * @return
+     */
+    @RequestMapping(value = "/bindMember",method = RequestMethod.POST)
+    @ResponseBody
+    public Object bindMember(String phone, String checkCode) {
+        RestResult result = new RestResult();
+
+        String checkCode1 = smsService.getCheckCode(phone);
+        if (!checkCode1.equals(checkCode)) {
+            result.setCode(RestResult.CODE_SERVERERROR);
+            result.setMsg("验证码不正确");
+            return result;
+        }
+
+        Store store = storeService.getStoreByStoreId(WebUtil.getCurrentStore().getStoreId());
+        Member member = memberService.getByUsername(store.getBindMemberUsername());
+        store.setBindMemberId(member.getMemberId());
+        store.setBindMemberUsername(phone);
+
         int res = storeService.updateStore(store);
         return result;
     }

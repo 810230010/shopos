@@ -3,7 +3,7 @@
 #parse("/store/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>设置-收货地址设置</h2>
+        <h2>设置-绑定会员</h2>
     </div>
     <div class="col-lg-2">
 
@@ -14,26 +14,20 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>填写收货地址</h5>
+                    <h5>绑定会员</h5>
                 </div>
                 <div class="ibox-content">
                     <form id="form" class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">详细地址</label>
-                            <div class="col-lg-7">
-                                <textarea class="form-control" rows="3" id="refundAddress">$!{store.refundAddress}</textarea>
+                            <label class="col-sm-2 control-label">绑定app会员手机</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="bindMemberUsername" value="$!{store.bindMemberUsername}" id="bindMemberUsername" placeholder="请输入会员手机号" required>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">收件人</label>
-                            <div class="col-lg-7">
-                                <input type="text" placeholder="请填写收件人" id="refundName" name="refundName" value="$!{store.refundName}" required class="form-control">
+                            <div class="col-sm-1">
+                                <div class="btn btn-primary" id="getCode">获取验证码</div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">手机号</label>
-                            <div class="col-lg-7">
-                                <input type="text" placeholder="请填写手机号" id="refundPhone" name="refundPhone" value="$!{store.refundPhone}" required class="form-control">
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="checkCode" id="checkCode" placeholder="请输入验证码">
                             </div>
                         </div>
                         <div class="form-group">
@@ -55,9 +49,51 @@
 <script>
 
     // MetisMenu
-    $("#店铺设置").addClass("active");
+    $("#绑定会员").addClass("active");
     $("#设置").addClass("active");
     $('#side-menu').metisMenu();
+
+
+
+    var wait=60;
+    function time(o) {
+        o = $(o);
+        if (wait == 0) {
+            o.removeAttr("disabled");
+            o.html("获取验证码");
+            wait = 60;
+        } else {
+            o.attr('disabled',"true")
+            o.html("重新发送(" + wait + ")");
+            wait--;
+            setTimeout(function() {
+                time(o)
+            }, 1000)
+        }
+    }
+
+    $("#bindMemberUsername").change(function(){
+        $("#checkCode").attr("required","required");
+    });
+
+    //获取短信验证码
+    $("#getCode").on('click', function () {
+        var button = this;
+        $.get("/store/setting/getBindCode?phone="+$("#bindMemberUsername").val(),function (data, status) {
+            if (data.code == 200) {
+                time(button);
+            }else{
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 1500
+                };
+                toastr.error(data.msg);
+            }
+        });
+    });
+
 
     $("#form").validate();
     $("#submit").on('click', function () {
@@ -66,17 +102,16 @@
             return ;
         }
 
-        $.post("/store/setting/updateAddress",
+        $.post("/store/setting/bindMember",
                 {
-                    refundAddress: $("#refundAddress").val(),
-                    refundName: $('#refundName').val(),
-                    refundPhone: $('#refundPhone').val(),
+                    phone: $("#bindMemberUsername").val(),
+                    checkCode: $("#checkCode").val(),
                 },
                 function (data, status) {
                     if (data.code == 200) {
                         swal({
                             title: "成功!",
-                            text: "修改成功!",
+                            text: "绑定成功!",
                             type: "success",
                             showConfirmButton: false,
                             timer: 2000,
@@ -84,7 +119,7 @@
                     }else{
                         swal({
                             title: "失败!",
-                            text: "修改失败!",
+                            text: "绑定失败!",
                             type: "error",
                             showConfirmButton: false,
                             timer: 2000,

@@ -68,10 +68,6 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public int updateStore(Store store) {
-        if (!StringUtils.isEmpty(store.getBindMemberUsername())){
-            Member member = memberService.getByUsername(store.getBindMemberUsername());
-            store.setBindMemberId(member.getMemberId());
-        }
         int res = storeMapper.updateByPrimaryKeySelective(store);
         StoreMin storeMin = storeMapper.getStoreMinByStoreId(store.getStoreId());
         SecurityUtils.getSubject().getSession().setAttribute(CoreConstants.SESSION_CURRENT_STORE, storeMin);

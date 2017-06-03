@@ -49,14 +49,14 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     @Transactional
     public int createGoods(Goods goods, String skuStr) {
-        StoreMin store = WebUtil.getCurrentStore();
+        Store store = storeMapper.selectByPrimaryKey(WebUtil.getCurrentStore().getStoreId());
 
         goods.setStoreId(store.getStoreId());
         goods.setCreateTime(new Date());
         goods.setStoreName(store.getName());
         goods.setEditTime(new Date());
 
-        if (store.getStoreId().equals(0)) {
+        if (store.getStoreId().equals(1)) {
             goods.setIsPlatform(true);
         } else {
             goods.setIsPlatform(false);

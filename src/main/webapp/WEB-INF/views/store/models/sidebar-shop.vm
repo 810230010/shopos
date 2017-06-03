@@ -12,8 +12,13 @@
                     </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="/store/index">
                         <span class="clear">
-                            <span class="block m-t-xs"> <strong class="font-bold">$!{storeUser.sellerNickname}</strong></span>
-                            <span class="block m-t-xs"> <strong class="font-bold">$!{storeUser.name}</strong></span>
+                            <span class="block m-t-xs"> <strong class="font-bold">$!{storeUser.name}</strong>
+                                #if($storeUser.type == "STORE")
+                                    <strong class="font-bold">(商家)</strong>
+                                #elseif($storeUser.type == "ENTERPRISE")
+                                    <strong class="font-bold">(企业)</strong>
+                                #end
+                            </span>
                             <span class="text-muted text-xs block">店铺管理员 <b class="caret"></b></span>
                         </span>
                     </a>

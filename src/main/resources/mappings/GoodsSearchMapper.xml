@@ -16,5 +16,10 @@
         order by ${order}
     </select>
 
+    <!--首页商品-->
+    <select id="indexGoods" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
+        select goods_id, name, store_name, price, title_img, salenum, carriage, area, type from t_goods
+        where commend = 1
+    </select>
 
 </mapper>

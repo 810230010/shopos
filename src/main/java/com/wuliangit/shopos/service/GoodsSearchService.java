@@ -81,4 +81,10 @@ public interface GoodsSearchService {
      * @return
      */
     ArrayList<ApiGoodsListDTO> normalGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+
+    /**
+     * 首页商品
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> indexGoods();
 }

@@ -197,4 +197,16 @@ public class MGoodsController {
         return result;
     }
 
+    /**
+     * 首页商品
+     * @return
+     */
+    @RequestMapping("/normalGoodsSearch")
+    public Object indexGoods() {
+        RestResult result = new RestResult();
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.indexGoods();
+        result.add("goods", goods);
+        return result;
+    }
+
 }

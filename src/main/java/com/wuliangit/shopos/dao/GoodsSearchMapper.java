@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -16,5 +17,13 @@ public interface GoodsSearchMapper {
      * @param type
      * @return
      */
-    ArrayList<ApiGoodsListDTO> goodsTypeSearch(String searchKey, String order, String type);
+    ArrayList<ApiGoodsListDTO> goodsTypeSearch(@Param("searchKey") String searchKey,
+                                               @Param("order")String order,
+                                               @Param("type")String type);
+
+    /**
+     * 首页商品
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> indexGoods();
 }

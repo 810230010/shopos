@@ -82,6 +82,12 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
         return goodses;
     }
 
+    @Override
+    public ArrayList<ApiGoodsListDTO> indexGoods() {
+        ArrayList<ApiGoodsListDTO> indexGoods = goodsSearchMapper.indexGoods();
+        return indexGoods;
+    }
+
     /**
      * 拼接排序参数
      * @param primaryOrder 主排序参数

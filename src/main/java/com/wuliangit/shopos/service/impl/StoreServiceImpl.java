@@ -4,10 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
-import com.wuliangit.shopos.dto.ApiStoreDTO;
-import com.wuliangit.shopos.dto.ApiStoreListDTO;
-import com.wuliangit.shopos.dto.StoreDetailDTO;
-import com.wuliangit.shopos.dto.StorePageListDTO;
+import com.wuliangit.shopos.dto.*;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.*;
@@ -137,5 +134,10 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public Store getStoreByBindMemberUsername(String phone) {
         return storeMapper.getStoreByBindMemberUsername(phone);
+    }
+
+    @Override
+    public List<AdminMailToSelectDTO> getAllStore() {
+        return storeMapper.getAllStore();
     }
 }

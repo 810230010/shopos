@@ -1,10 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
-import com.wuliangit.shopos.dto.ApiStoreDTO;
-import com.wuliangit.shopos.dto.ApiStoreListDTO;
-import com.wuliangit.shopos.dto.StoreDetailDTO;
-import com.wuliangit.shopos.dto.StorePageListDTO;
+import com.wuliangit.shopos.dto.*;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreMin;
 import org.apache.ibatis.annotations.Param;
@@ -70,4 +67,13 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return
      */
     Store getStoreByBindMemberUsername(String phone);
+
+    /**
+     * @Description: 获取所有商铺
+     * @Author: pangweichao
+     * @Date: 12:25 2017/6/3
+     * @Param: []
+     * @return: java.util.List<com.wuliangit.shopos.dto.StoreMailToSelectDTO>
+     */
+    List<AdminMailToSelectDTO> getAllStore();
 }

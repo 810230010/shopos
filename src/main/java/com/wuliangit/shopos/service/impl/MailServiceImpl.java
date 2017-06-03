@@ -1,15 +1,14 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.mail.MailSender;
 import com.wuliangit.shopos.common.util.StringArrayUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.dao.SettingMapper;
 import com.wuliangit.shopos.dao.StoreMessageMapper;
-import com.wuliangit.shopos.dto.SettingDTO;
+import com.wuliangit.shopos.dto.StoreMailDTO;
 import com.wuliangit.shopos.dto.StoreMessageDTO;
 import com.wuliangit.shopos.entity.Admin;
-import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreMessage;
 import com.wuliangit.shopos.service.MailService;
 import org.apache.velocity.VelocityContext;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by nilme on 2017/4/29.
@@ -64,5 +62,32 @@ public class MailServiceImpl implements MailService {
             e.printStackTrace();
             return "error";
         }
+    }
+
+    @Override
+    public Integer getMessageCount(Integer storeId) {
+        return storeMessageMapper.getMessageCount(storeId);
+    }
+
+    @Override
+    public List<StoreMailDTO> getMailListDate(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, Integer storeId) {
+        PageHelper.startPage(page,pageSize);
+        List<StoreMailDTO> storeMailDTOS = storeMessageMapper.getMailListDate(searchKey, orderColumn, orderType, storeId);
+        return storeMailDTOS;
+    }
+
+    @Override
+    public Integer deleteMessage(Integer storeMessageId) {
+        return storeMessageMapper.deleteMessage(storeMessageId);
+    }
+
+    @Override
+    public StoreMailDTO detailMail(Integer messageId,Integer storeId) {
+        return storeMessageMapper.detailMail(messageId,storeId);
+    }
+
+    @Override
+    public Integer updateReadFlag(Integer storeMessageId) {
+        return storeMessageMapper.updateReadFlag(storeMessageId);
     }
 }

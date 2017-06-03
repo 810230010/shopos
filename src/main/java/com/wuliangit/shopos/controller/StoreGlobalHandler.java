@@ -4,8 +4,10 @@ import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.MenuDTO;
+import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.service.MailService;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,6 +34,9 @@ public class StoreGlobalHandler {
     @Autowired
     private StoreService storeService;
 
+    @Autowired
+    private MailService mailService;
+
     @ModelAttribute("storeUser")
     public StoreMin newUser() {
         StoreMin storeMin = WebUtil.getCurrentStore();
@@ -44,12 +49,19 @@ public class StoreGlobalHandler {
         return menus;
     }
 
+    /**
+     * @Description: 获取未读消息条数
+     * @Author: pangweichao
+     * @Date: 11:30 2017/6/3
+     * @Param: []
+     * @return: int
+     */
     @ModelAttribute("mailCount")
     public int setMailCount() {
-
-
-
-        return 5;
+        Integer result = 0;
+        Seller seller = WebUtil.getCurrentSeller();
+        if(seller != null) result = mailService.getMessageCount(seller.getStoreId());
+        return result;
     }
 
     @InitBinder

@@ -1,14 +1,10 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiStoreDTO;
-import com.wuliangit.shopos.dto.ApiStoreListDTO;
-import com.wuliangit.shopos.dto.StoreDetailDTO;
-import com.wuliangit.shopos.dto.StorePageListDTO;
+import com.wuliangit.shopos.dto.*;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.model.StoreMin;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -118,4 +114,13 @@ public interface StoreService {
      * @return
      */
     Store getStoreByBindMemberUsername(String phone);
+
+    /**
+     * @Description: 获取所有商铺
+     * @Author: pangweichao
+     * @Date: 12:25 2017/6/3
+     * @Param: []
+     * @return: java.util.List<com.wuliangit.shopos.dto.StoreMailToSelectDTO>
+     */
+    List<AdminMailToSelectDTO> getAllStore();
 }

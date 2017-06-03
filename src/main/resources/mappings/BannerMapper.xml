@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.BannerMapper" >
+    <!--更新状态-->
+    <update id="modifyStatus">
+        UPDATE t_banner
+        SET status_flag=#{statusFlag}
+        where t_banner_id=#{tBannerId}
+    </update>
+    <!--获取banner列表数据-->
+    <select id="getBannerListDate" resultType="com.wuliangit.shopos.dto.BannerDTO">
+        select t_banner_id,picture_url,external_url,status_flag
+        from t_banner
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                and ( external_url like '%${searchKey}%')
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        t_banner_id desc
+    </select>
+    <!--获取已启用的banner图-->
+    <select id="getBannerListWithOpen" resultType="com.wuliangit.shopos.dto.BannerDTO">
+        select t_banner_id,picture_url,external_url,status_flag
+        from t_banner
+        WHERE status_flag=1
+    </select>
+</mapper>

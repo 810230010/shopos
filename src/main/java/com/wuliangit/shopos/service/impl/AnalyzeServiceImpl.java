@@ -22,15 +22,15 @@ public class AnalyzeServiceImpl implements AnalyzeService {
     @Override
     public StoreAnalyzeSimpl getStoreAnalysis(Integer storeId) {
         StoreAnalyzeSimpl analyze = new StoreAnalyzeSimpl();
-          analyze.put("今日收入", analyzeMapper.getTodayIncome(storeId));
-          analyze.put("今日访问量", 200);
-          analyze.put("今日订单", analyzeMapper.getTodayOrders(storeId));
-          analyze.put("今日评论数", analyzeMapper.getTodayComments(storeId));
-          analyze.put("交易成功", analyzeMapper.getDealFinishedOrders(storeId));
-          analyze.put("未确认", analyzeMapper.getUnsuredOrders(storeId));
-          analyze.put("待付款", analyzeMapper.getWatiToPayOrders(storeId));
-          analyze.put("待发货", analyzeMapper.getWaitToSendGoods(storeId));
-          analyze.put("退货申请", analyzeMapper.getWithdrawGoodsNum(storeId));
+          analyze.put("todayIncome", "￥" + analyzeMapper.getTodayIncome(storeId));
+          analyze.put("todayVisitors", 200);
+          analyze.put("todayOrders", analyzeMapper.getTodayOrders(storeId));
+          analyze.put("todayComments", analyzeMapper.getTodayComments(storeId));
+          analyze.put("todayFinished", analyzeMapper.getDealFinishedOrders(storeId));
+          analyze.put("unSured", analyzeMapper.getUnsuredOrders(storeId));
+          analyze.put("waitToPay", analyzeMapper.getWatiToPayOrders(storeId));
+          analyze.put("waitToSend", analyzeMapper.getWaitToSendGoods(storeId));
+          analyze.put("withdrawApply", analyzeMapper.getWithdrawGoodsNum(storeId));
         return analyze;
     }
 }

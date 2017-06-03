@@ -12,7 +12,9 @@ public class Member {
 
     private String truename;
 
-    private String passwd;
+    private String password;
+
+    private String imPassword;
 
     private String paypwd;
 
@@ -122,12 +124,20 @@ public class Member {
         this.truename = truename == null ? null : truename.trim();
     }
 
-    public String getPasswd() {
-        return passwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd == null ? null : passwd.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getImPassword() {
+        return imPassword;
+    }
+
+    public void setImPassword(String imPassword) {
+        this.imPassword = imPassword == null ? null : imPassword.trim();
     }
 
     public String getPaypwd() {

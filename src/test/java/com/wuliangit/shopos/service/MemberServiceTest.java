@@ -36,9 +36,9 @@ public class MemberServiceTest {
         member.setType(POJOConstants.USER_TYPE_DEFAULT);
         member.setAuthState(POJOConstants.NOT_AUTH);
         member.setSalt(PasswordHelper.generateSalt());
-        member.setPasswd(PasswordHelper.generatePassword("11", member.getSalt()));
+        member.setPassword(PasswordHelper.generatePassword("11", member.getSalt()));
 
-        System.out.println(member.getUsername() + "+" + member.getPasswd() + "+" + member.getSalt());
+        System.out.println(member.getUsername() + "+" + member.getPassword() + "+" + member.getSalt());
 
     }
 

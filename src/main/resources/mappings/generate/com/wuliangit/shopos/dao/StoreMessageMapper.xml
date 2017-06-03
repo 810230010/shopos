@@ -35,21 +35,24 @@
     where store_message_id = #{storeMessageId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wuliangit.shopos.entity.StoreMessage" >
-    insert into t_store_message (store_message_id, send_user_id, send_user_name, 
-      create_time, receive_user_id, receive_user_name, 
-      read_flag, del_flag, title, content
+    <selectKey resultType="java.lang.Integer" keyProperty="storeMessageId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_store_message (send_user_id, send_user_name, create_time, 
+      receive_user_id, receive_user_name, read_flag, 
+      del_flag, title, content
       )
-    values (#{storeMessageId,jdbcType=INTEGER}, #{sendUserId,jdbcType=INTEGER}, #{sendUserName,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{receiveUserId,jdbcType=INTEGER}, #{receiveUserName,jdbcType=VARCHAR}, 
-      #{readFlag,jdbcType=BIT}, #{delFlag,jdbcType=BIT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+    values (#{sendUserId,jdbcType=INTEGER}, #{sendUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{receiveUserId,jdbcType=INTEGER}, #{receiveUserName,jdbcType=VARCHAR}, #{readFlag,jdbcType=BIT}, 
+      #{delFlag,jdbcType=BIT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.StoreMessage" >
+    <selectKey resultType="java.lang.Integer" keyProperty="storeMessageId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_store_message
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="storeMessageId != null" >
-        store_message_id,
-      </if>
       <if test="sendUserId != null" >
         send_user_id,
       </if>
@@ -79,9 +82,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="storeMessageId != null" >
-        #{storeMessageId,jdbcType=INTEGER},
-      </if>
       <if test="sendUserId != null" >
         #{sendUserId,jdbcType=INTEGER},
       </if>

@@ -3,6 +3,7 @@ package com.wuliangit.shopos.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSkuMapper;
@@ -143,8 +144,21 @@ public class GoodsServiceImpl implements GoodsService {
 
         //处理图片
         String[] split = images.split("##");
-        goods.setTitleImg(split[0]);
-        goods.setImages(images);
+
+        StringBuilder bs = new StringBuilder();
+        int flag = 0;
+        for (String s : split) {
+            if (flag==0){
+                bs.append(QiNiuUtils.getBaseUrl()).append(s);
+                goods.setTitleImg(QiNiuUtils.getBaseUrl()+s);
+                flag= 1;
+            }else{
+                bs.append("##").append(QiNiuUtils.getBaseUrl()).append(s);
+            }
+
+        }
+
+        goods.setImages(bs.toString());
 
         Member member = WebUtil.getCurrentMember();
 

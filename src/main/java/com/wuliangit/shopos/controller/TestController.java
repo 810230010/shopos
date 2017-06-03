@@ -1,5 +1,10 @@
 package com.wuliangit.shopos.controller;
 
+import cn.jiguang.common.resp.APIConnectionException;
+import cn.jiguang.common.resp.APIRequestException;
+import cn.jmessage.api.JMessageClient;
+import cn.jmessage.api.common.model.RegisterInfo;
+import cn.jmessage.api.user.UserInfoResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.entity.GoodsSku;
@@ -11,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nilme on 2017/3/21.

@@ -1,8 +1,12 @@
 package com.wuliangit.shopos.controller.api;
 
+import cn.jiguang.common.resp.APIConnectionException;
+import cn.jiguang.common.resp.APIRequestException;
+import cn.jmessage.api.common.model.RegisterInfo;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.cache.SpringCacheManager;
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.im.JpushIM;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
@@ -26,7 +30,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 /**
  * 用户相关接口
@@ -66,6 +73,7 @@ public class MMemberController {
 
             restResult.add("token", token);
             restResult.add("userId", user.getMemberId());
+            restResult.add("IMPassword",user.getImPassword());
 
             return restResult;
         } catch (UnknownAccountException e) {
@@ -156,7 +164,7 @@ public class MMemberController {
     @RequestMapping("/register")
     public Object register(@RequestParam(required = true) String phone,
                            @RequestParam(required = true) String password,
-                           @RequestParam(required = true) String code) {
+                           @RequestParam(required = true) String code) throws APIConnectionException, APIRequestException {
         RestResult result = new RestResult();
 
         Member byUsername = memberService.getByUsername(phone);
@@ -168,7 +176,6 @@ public class MMemberController {
 
         String checkCode = smsService.getCheckCode(phone);
         if (code.equals(checkCode)) {
-
             Member member = new Member();
             member.setCreateTime(new Date());
             member.setUpdateTime(new Date());
@@ -178,13 +185,22 @@ public class MMemberController {
             member.setType(POJOConstants.USER_TYPE_DEFAULT);
             member.setAuthState(POJOConstants.NOT_AUTH);
             member.setSalt(PasswordHelper.generateSalt());
-            member.setPasswd(PasswordHelper.generatePassword(password, member.getSalt()));
+            member.setPassword(PasswordHelper.generatePassword(password, member.getSalt()));
+
+            member.setImPassword(this.getRandomCode());
+            //注册极光推送IM
+            List<RegisterInfo> registerInfos = new ArrayList<>();
+            RegisterInfo registerInfo = RegisterInfo.newBuilder().setPassword(member.getImPassword()).setUsername(member.getUsername()).build();
+            registerInfos.add(registerInfo);
+            String s = JpushIM.getClient().registerUsers(registerInfos.toArray(new RegisterInfo[registerInfos.size()]));
+
             memberService.createMember(member);
 
         } else {
             result.setCode(RestResult.CODE_BUSINESS_ERROR);
             result.setMsg("验证码错误");
         }
+
         return result;
     }
 
@@ -203,7 +219,7 @@ public class MMemberController {
         String cacheCode = (String) cache.get(member.getUsername());
         if (cacheCode.equals(code)) {
 //            member.setSalt(PasswordHelper.generateSalt());//salt不更新，后面还有支付密码也会用到这个salt
-            member.setPasswd(PasswordHelper.generatePassword(newpass, member.getSalt()));
+            member.setPassword(PasswordHelper.generatePassword(newpass, member.getSalt()));
             memberService.updateMember(member);
             result.setMsg("密码更新成功");
         } else {
@@ -290,5 +306,15 @@ public class MMemberController {
         return result;
     }
 
+    /**
+     * 获取6位随机密码
+     * @return
+     */
+    private String getRandomCode(){
+        Random rand = new Random();
+        int tmp = Math.abs(rand.nextInt());
+        int code = tmp % (999999 - 100000 + 1) + 100000;
+        return  code+"";
+    }
 
 }

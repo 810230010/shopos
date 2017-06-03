@@ -110,6 +110,8 @@ public class StoreSettingController {
      */
     @RequestMapping(value = "/bindMember",method = RequestMethod.GET)
     public Object bindMemberpage(Model model) {
+        Store store = storeService.getStoreByStoreId(WebUtil.getCurrentStore().getStoreId());
+        model.addAttribute("store",store);
        return "/store/setting/bindMember";
     }
 
@@ -125,6 +127,13 @@ public class StoreSettingController {
         RestResult result = new RestResult();
 
         String checkCode1 = smsService.getCheckCode(phone);
+
+        if (StringUtils.isEmpty(checkCode1)){
+            result.setCode(500);
+            result.setMsg("验证码过期或不存在");
+            return result;
+        }
+
         if (!checkCode1.equals(checkCode)) {
             result.setCode(RestResult.CODE_SERVERERROR);
             result.setMsg("验证码不正确");

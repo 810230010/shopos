@@ -49,6 +49,7 @@ public class AdminLoginController {
 
     @RequestMapping("/index")
     public String viewToIndex(Model model) {
+        model.addAttribute("statistic", analyzeService.adminAnalyzeAllStore());
         return "admin/index";
     }
 

@@ -3,7 +3,7 @@
 #parse("/admin/models/header.vm")
         <div class="wrapper wrapper-content" style="height: 1000px">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3" >
                     <div class="widget style1">
                         <div class="row">
                             <div class="col-xs-4 text-center">
@@ -11,7 +11,7 @@
                             </div>
                             <div class="col-xs-8 text-right">
                                 <span> Today income </span>
-                                <h2 class="font-bold">$ 4,232</h2>
+                                <h2 class="font-bold">$statistic.get("todayIncome")</h2>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-xs-8 text-right">
                                 <span> 今日订单数 </span>
-                                <h2 class="font-bold">1</h2>
+                                <h2 class="font-bold">$statistic.get("todayOrders")</h2>
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-xs-8 text-right">
                                 <span> 今日评论数 </span>
-                                <h2 class="font-bold">1</h2>
+                                <h2 class="font-bold">$statistic.get("todayComments")</h2>
                             </div>
                         </div>
                     </div>
@@ -46,69 +46,39 @@
                     <div class="widget style1 yellow-bg">
                         <div class="row">
                             <div class="col-xs-4">
-                                <i class="fa fa-users fa-5x"></i>
+                                <i class="fa fa-shopping-cart fa-5x"></i>
                             </div>
                             <div class="col-xs-8 text-right">
-                                <span> 今日访问量 </span>
-                                <h2 class="font-bold">1</h2>
+                                <span> 商品总数 </span>
+                                <h2 class="font-bold">$statistic.get("allGoodsCount")</h2>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style="background-color:white;border-right:1px solid silver;width:46%;float:left;margin-left:16px">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5><i class="label-success fa fa-user-circle-o" style="margin-right: 10px;"></i>个人会员信息</h5>
+                <div class="col-lg-12" style="background-color:white;border:1px solid silver; margin-top: 20px; padding-bottom: 20px">
+                        <div class="" style="margin-top: 14px;">
+                            <h5 class="pull-left"><i class="label-success fa fa-user-circle-o" style="margin-right: 10px;"></i>个人会员信息</h5>
                             <label class="pull-right">(单位: 个)</label>
                         </div>
-                        <div class="ibox-content" style="height:100px">
+                        <div class="border" style="clear:both;border-bottom: 2px solid gray"></div>
+                        <div class="text-center" style="margin-top:20px">
                             <div class="col-lg-3">
-                                <h1 class="no-margins">0</h1>
+                                <h1 class="no-margins">$statistic.get("todayNewVipNo")</h1>
                                 <small>今日新增</small>
                             </div>
                             <div class="col-lg-3">
-                                <h1 class="no-margins">0</h1>
+                                <h1 class="no-margins">$statistic.get("yesterdayNewVipNo")</h1>
                                 <small>昨日新增</small>
                             </div>
                             <div class="col-lg-3">
-                                <h1 class="no-margins">0</h1>
+                                <h1 class="no-margins">$statistic.get("thisMonthNewVipNo")</h1>
                                 <small>本月新增</small>
                             </div>
                             <div class="col-lg-3">
-                                <h1 class="no-margins">0</h1>
+                                <h1 class="no-margins">$statistic.get("allVipNo")</h1>
                                 <small>会员人数</small>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div style="background-color:white;border-left:1px solid silver;width:46%;float:right;margin-right:16px">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5><i class="label-info fa fa-shopping-cart" style="margin-right:10px"></i>商品一览</h5>
-                            <label class="pull-right">(单位: 件)</label>
-                        </div>
-                        <div class="ibox-content" style="height:100px">
-                            <div class="col-lg-5" style="background-color: lightgrey;height:100px">
-                                <div class="text-center" style="margin-top:16px; border-bottom: 1px solid gray">
-                                    <label>自营商品</label>
-                                </div>
-                                <div style="margin-top:20px">
-                                    <div class="text-left pull-left" style="width:50%">实体:<label>304</label></div>
-                                    <div class="text-right pull-right" style="width:50%">虚拟:<label>0</label></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 pull-right" style="background-color: silver;height:100px">
-                                <div class="text-center" style="margin-top:16px; border-bottom: 1px solid gray">
-                                    <label>商家商品</label>
-                                </div>
-                                <div style="margin-top:20px">
-                                    <div class="text-left pull-left" style="width:50%">实体:<label>304</label></div>
-                                    <div class="text-right pull-right" style="width:50%">虚拟:<label>0</label></div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
                 <div class="col-lg-12" style="height:40px"></div>
                 <div class="col-lg-12" style="background-color:white">
@@ -117,32 +87,32 @@
                             <div class="col-lg-2 text-center">
                                 <h5 class="widget style1 yellow-bg"><i class="fa fa-file-text fa-3x"></i></h5>
                                 <small>未确认订单</small>
-                                <h1 class="no-margins">0</h1>
+                                <h1 class="no-margins">$statistic.get("unsuredCount")</h1>
                             </div>
                             <div class="col-lg-2 text-center">
                                 <h5 class="widget style1 lazur-bg"><i class="fa fa-cc-paypal fa-3x"></i></h5>
                                 <small>待支付订单</small>
-                                <h1 class="no-margins">0</h1>
+                                <h1 class="no-margins">$statistic.get("waitToPayCount")</h1>
                             </div>
                             <div class="col-lg-2 text-center">
                                 <h5 class="widget style1 red-bg"><i class="fa fa-truck fa-3x"></i></h5>
                                 <small>待发货订单</small>
-                                <h1 class="no-margins">0</h1>
+                                <h1 class="no-margins">$statistic.get("waitToSendCount")</h1>
                             </div>
                             <div class="col-lg-2 text-center">
                                 <h5 class="widget style1 black-bg"><i class="fa fa-check-square fa-3x"></i></h5>
                                 <small>已成交订单</small>
-                                <h1 class="no-margins">0</h1>
+                                <h1 class="no-margins">$statistic.get("finishedCount")</h1>
                             </div>
                             <div class="col-lg-2 text-center">
                                 <h5 class="widget style1 "><i class="fa fa-history fa-3x"></i></h5>
-                                <small>部分发货订单</small>
-                                <h1 class="no-margins">0</h1>
+                                <small>用户退货申请</small>
+                                <h1 class="no-margins">$statistic.get("withdrawGoodsCount")</h1>
                             </div>
                             <div class="col-lg-2 text-center">
                                 <h5 class="widget style1 yellow-bg"><i class="fa fa-frown-o fa-3x"></i></h5>
                                 <small>用户退款申请</small>
-                                <h1 class="no-margins">0</h1>
+                                <h1 class="no-margins">$statistic.get("withdrawMoneyCount")</h1>
                             </div>
                         </div>
                     </div>

@@ -40,7 +40,79 @@
     <!--店铺申请退货数-->
     <select id="getWithdrawGoodsNum" resultType="java.lang.Integer">
         select COUNT(*) from t_refund
-        where store_id=3
+        where store_id=3 and refund_type='CHANGE_GOODS'
     </select>
+
+    <!-- 得到所有店铺总收入 -->
+    <select id="adminGetAllStoreIncome" resultType="java.lang.Double">
+        select IFNULL(SUM(amount),0) from t_store_account_log
+        where type='ORDER' and create_time between DATE_ADD(CURDATE(), INTERVAL 0 HOUR) and NOW()
+    </select>
+    <!-- 管理员得到所有店铺订单数 -->
+    <select id="adminGetAllStoreTodayOrders" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where create_time between DATE_ADD(CURDATE(), INTERVAL 0 HOUR) and NOW()
+    </select>
+    <!-- 所有店铺评论总数 -->
+    <select id="adminGetTodayComments" resultType="java.lang.Integer">
+        select COUNT(*) from t_evaluate_goods
+        where create_time between DATE_ADD(CURDATE(), INTERVAL 0 HOUR) and NOW()
+    </select>
+    <!-- 今日新增会员 -->
+    <select id="adminGetTodayNewVipNo" resultType="java.lang.Integer">
+        select COUNT(*) from t_member
+        where create_time between DATE_ADD(CURDATE(), INTERVAL 0 HOUR) and NOW()
+    </select>
+
+    <!-- 所有店铺商品总数 -->
+    <select id="adminGetAllStoreGoodsCount" resultType="java.lang.Integer">
+            select COUNT(*) from t_goods
+    </select>
+    <!-- 所有商铺未确认订单数 -->
+    <select id="adminGetAllStoreUnsuredOrdersCount" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where order_state='DELIVE'
+    </select>
+    <!-- 所有商铺待支付订单数 -->
+    <select id="adminGetWatiToPayOrdersCount" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where order_state='INIT'
+    </select>
+    <!--所有商铺待发货订单数 -->
+    <select id="adminGetWaitToSendGoodsCount" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where order_state='PAYED'
+    </select>
+    <!-- 所有店铺已成交订单数 -->
+    <select id="adminGetFinishedDealCount" resultType="java.lang.Integer">
+        select COUNT(*) from t_order
+        where order_state='RECEIVE'
+    </select>
+    <!--所有店铺用户退货申请数 -->
+    <select id="adminGetWithdrawGoodsApplyCount" resultType="java.lang.Integer">
+            select COUNT(*) from t_refund
+            where refund_type='CHANGE_GOODS'
+    </select>
+    <!-- 昨日新增会员 -->
+    <select id="adminGetYesterdayNewVipNo" resultType="java.lang.Integer">
+            select count(*) from t_member
+            WHERE create_time between DATE_ADD(CURDATE() - INTERVAL 1 DAY,INTERVAL 0 hour)
+            and DATE_ADD(CURDATE() - INTERVAL 1 DAY,INTERVAL 24 hour)
+    </select>
+
+    <!-- 本月新增会员 -->
+    <select id="adminGetThisMonthNewAddVip" resultType="java.lang.Integer">
+          SELECT COUNT(*) FROM t_member WHERE DATE_FORMAT(create_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+    </select>
+
+    <!-- 所有会员人数 -->
+    <select id="adminGetAllVipCount" resultType="java.lang.Integer">
+        select count(*) from t_member where del_flag = 0
+    </select>
+    <select id="adminGetWithdrawMoneyApplyCount" resultType="java.lang.Integer">
+            select COUNT(*) from t_refund
+            where refund_type='REFUND_MONEY'
+    </select>
+
 
 </mapper>

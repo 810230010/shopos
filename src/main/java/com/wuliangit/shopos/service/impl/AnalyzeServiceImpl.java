@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.wuliangit.shopos.dao.AnalyzeMapper;
+import com.wuliangit.shopos.dto.AdminAnalyze;
 import com.wuliangit.shopos.dto.StoreAnalyzeSimpl;
 import com.wuliangit.shopos.service.AnalyzeService;
 import org.apache.shiro.crypto.hash.Hash;
@@ -32,5 +33,25 @@ public class AnalyzeServiceImpl implements AnalyzeService {
           analyze.put("waitToSend", analyzeMapper.getWaitToSendGoods(storeId));
           analyze.put("withdrawApply", analyzeMapper.getWithdrawGoodsNum(storeId));
         return analyze;
+    }
+
+    @Override
+    public AdminAnalyze adminAnalyzeAllStore() {
+        AdminAnalyze analysis = new AdminAnalyze();
+        analysis.put("todayIncome", analyzeMapper.adminGetAllStoreIncome());
+        analysis.put("todayOrders", analyzeMapper.adminGetAllStoreTodayOrders());
+        analysis.put("todayComments", analyzeMapper.adminGetTodayComments());
+        analysis.put("allGoodsCount", analyzeMapper.adminGetAllStoreGoodsCount());
+        analysis.put("todayNewVipNo", analyzeMapper.adminGetTodayNewVipNo());
+        analysis.put("yesterdayNewVipNo", analyzeMapper.adminGetYesterdayNewVipNo());
+        analysis.put("thisMonthNewVipNo", analyzeMapper.adminGetThisMonthNewAddVip());
+        analysis.put("allVipNo", analyzeMapper.adminGetAllVipCount());
+        analysis.put("unsuredCount", analyzeMapper.adminGetAllStoreUnsuredOrdersCount());
+        analysis.put("waitToPayCount", analyzeMapper.adminGetWatiToPayOrdersCount());
+        analysis.put("waitToSendCount", analyzeMapper.adminGetWaitToSendGoodsCount());
+        analysis.put("finishedCount", analyzeMapper.adminGetFinishedDealCount());
+        analysis.put("withdrawGoodsCount", analyzeMapper.adminGetWithdrawGoodsApplyCount());
+        analysis.put("withdrawMoneyCount", analyzeMapper.adminGetWithdrawMoneyApplyCount());
+        return analysis;
     }
 }

@@ -44,6 +44,14 @@ public class StoreGlobalHandler {
         return menus;
     }
 
+    @ModelAttribute("mailCount")
+    public int setMailCount() {
+
+
+
+        return 5;
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         DateFormat defaultFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");

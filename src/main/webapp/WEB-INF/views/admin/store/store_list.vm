@@ -62,7 +62,10 @@
             "columns": [
                 {"data":"storeId","width":"7%","title":"ID","orderable": false},
                 {"data":"name","width": "10%","title":"商家名称","orderable": false},
-                {"data":"type","width": "10%","title":"商家类型","orderable": false},
+                {"data":"type","width": "10%","title":"商家类型","orderable": false,"render": function(data, type, row){
+                    if(data == "STORE") return "商家";
+                    else if(data == "ENTERPRISE") return "企业";
+                }},
                 {"data":"state","width": "10%","title":"状态","orderable": false,"render": function(data, type, row){
                     if(data == "CLOSE")return "关闭";
                     else return "开启";

@@ -2,6 +2,7 @@ package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiEvaluateGoodsListDTO;
+import com.wuliangit.shopos.dto.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
@@ -77,7 +78,7 @@ public class MGoodsController {
     @RequestMapping("/get")
     public Object getGoods(Integer goodsId) {
         RestResult result = new RestResult();
-        Goods goods = goodsService.getGoodsById(goodsId);
+        ApiGoodsDTO goods = goodsService.apiGetGoodsDTOById(goodsId);
         List<GoodsSku> goodsSku = goodsService.getGoodsSkuByGoodsId(goodsId);
 
         //转化为字典型，方便前段处理

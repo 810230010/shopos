@@ -128,7 +128,7 @@ public class MMemberController {
             return result;
         } else {
             result.setCode(RestResult.CODE_SERVERERROR);
-            result.setMsg("短信获取失败，请重试");
+            result.setMsg("短信获取失败，您的请求可能过于频繁");
             return result;
         }
     }

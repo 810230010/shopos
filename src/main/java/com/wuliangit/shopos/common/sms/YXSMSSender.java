@@ -1,7 +1,10 @@
 package com.wuliangit.shopos.common.sms;
 
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
+import com.wuliangit.shopos.controller.TestController;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.HashMap;
@@ -11,6 +14,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by nilme on 2017/3/22.
  */
 public class YXSMSSender implements SMSSender {
+
+    private static Log logger = LogFactory.getLog(YXSMSSender.class);
 
     private static CCPRestSmsSDK ccpRestSmsSDK;
     private static ReentrantLock lock = new ReentrantLock();
@@ -35,6 +40,7 @@ public class YXSMSSender implements SMSSender {
     @Override
     public boolean send(String phone, String templateId, String[] datas) {
         HashMap<String, Object> result = getSDK().sendTemplateSMS(phone, templateId, datas);
+
         if (SuccessCode.equals(result.get("statusCode"))) {
             return true;
         } else {

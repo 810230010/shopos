@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
@@ -63,4 +64,11 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @return
      */
     Integer getGoodsCountByStoreId(Integer storeId);
+
+    /**
+     * 接口获取商品详情
+     * @param goodsId
+     * @return
+     */
+    ApiGoodsDTO apiGetGoodsDTOById(Integer goodsId);
 }

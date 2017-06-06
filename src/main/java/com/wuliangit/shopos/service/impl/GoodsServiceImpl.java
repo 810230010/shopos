@@ -8,6 +8,7 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
+import com.wuliangit.shopos.dto.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
@@ -140,10 +141,10 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setAdWord("");
         goods.setCommission(new BigDecimal(0));
         goods.setMarketprice(new BigDecimal(0));
-        goods.setAttrs("[]");
+        goods.setAttrs("[{\"name\":\"商品\",\"isImg\":false,\"values\":[{\"name\":\""+goods.getName()+"\"}]}]");
 
         //处理图片
-        String[] split = images.split("##");
+        String[] split = images.split("&&");
 
         StringBuilder bs = new StringBuilder();
         int flag = 0;
@@ -153,7 +154,7 @@ public class GoodsServiceImpl implements GoodsService {
                 goods.setTitleImg(QiNiuUtils.getBaseUrl()+s);
                 flag= 1;
             }else{
-                bs.append("##").append(QiNiuUtils.getBaseUrl()).append(s);
+                bs.append("&&").append(QiNiuUtils.getBaseUrl()).append(s);
             }
 
         }
@@ -185,5 +186,13 @@ public class GoodsServiceImpl implements GoodsService {
         goodsSkuMapper.insertSelective(goodsSku);
 
         return res;
+    }
+
+    @Override
+    public ApiGoodsDTO apiGetGoodsDTOById(Integer goodsId) {
+        ApiGoodsDTO goodsDTO = goodsMapper.apiGetGoodsDTOById(goodsId);
+        Store store = storeMapper.selectByPrimaryKey(goodsDTO.getStoreId());
+        goodsDTO.setStoreLogo(store.getLogo());
+        return goodsDTO;
     }
 }

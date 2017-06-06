@@ -80,4 +80,9 @@
         select count(*) from t_goods where store_id = #{storeId}
     </select>
 
+    <!--接口获取商品详情-->
+    <select id="apiGetGoodsDTOById" resultType="com.wuliangit.shopos.dto.ApiGoodsDTO">
+        select * from t_goods where goods_id = #{goodsId}
+    </select>
+
 </mapper>

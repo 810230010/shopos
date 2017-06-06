@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
@@ -115,4 +116,11 @@ public interface GoodsService {
     int apiCreateGooods(Integer goodsCategory1Id, Integer goodsCategory2Id,
                         Integer goodsCategory3Id, String name, BigDecimal price, BigDecimal carriage,
                         Integer storage, String type, String unit, String goodsBody, String images);
+
+    /**
+     * 接口获取商品详情
+     * @param goodsId
+     * @return
+     */
+    ApiGoodsDTO apiGetGoodsDTOById(Integer goodsId);
 }

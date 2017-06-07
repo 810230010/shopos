@@ -17,6 +17,7 @@ import com.wuliangit.shopos.dto.ApiMemberUpdateDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.SMSService;
+import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -54,6 +55,8 @@ public class MMemberController {
     private Mapper mapper;
     @Autowired
     private TokenManager tokenManager;
+    @Autowired
+    private StoreService storeService;
 
     /**
      * 登录
@@ -74,6 +77,7 @@ public class MMemberController {
             restResult.add("token", token);
             restResult.add("userId", user.getMemberId());
             restResult.add("IMPassword",user.getImPassword());
+            restResult.add("bindStore",storeService.getSellerInfo());
 
             return restResult;
         } catch (UnknownAccountException e) {

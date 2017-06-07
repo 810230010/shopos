@@ -75,8 +75,6 @@ public class GoodsWithoutBody {
 
     private Boolean isPresell;
 
-    private Boolean isOwnShop;
-
     private Boolean vat;
 
     private Boolean commend;
@@ -370,14 +368,6 @@ public class GoodsWithoutBody {
 
     public void setPresell(Boolean presell) {
         isPresell = presell;
-    }
-
-    public Boolean getOwnShop() {
-        return isOwnShop;
-    }
-
-    public void setOwnShop(Boolean ownShop) {
-        isOwnShop = ownShop;
     }
 
     public Boolean getVat() {

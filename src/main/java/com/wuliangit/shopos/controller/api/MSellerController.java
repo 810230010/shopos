@@ -1,7 +1,9 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.dto.ApiSellerInfo;
 import com.wuliangit.shopos.service.GoodsService;
+import com.wuliangit.shopos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +21,9 @@ public class MSellerController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private StoreService storeService;
 
     /**
      *
@@ -51,5 +56,15 @@ public class MSellerController {
                 name,price,carriage,storage,type,unit,goodsBody,images);
         return result;
     }
+
+    @RequestMapping("/info")
+    public Object sellerInfo(){
+        RestResult result = new RestResult();
+
+        ApiSellerInfo apiSellerInfo = storeService.getSellerInfo();
+
+        return result;
+    }
+
 
 }

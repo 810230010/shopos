@@ -13,6 +13,8 @@ public class StoreUpdateDTO {
 
     private String logo;
 
+    private String areaInfo;
+
     private String keywords;
 
     private String description;
@@ -30,6 +32,14 @@ public class StoreUpdateDTO {
     private String liveStoreAddress;
 
     private String liveStoreGps;
+
+    public String getAreaInfo() {
+        return areaInfo;
+    }
+
+    public void setAreaInfo(String areaInfo) {
+        this.areaInfo = areaInfo;
+    }
 
     public Integer getStoreId() {
         return storeId;

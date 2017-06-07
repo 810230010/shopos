@@ -76,4 +76,11 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return: java.util.List<com.wuliangit.shopos.dto.StoreMailToSelectDTO>
      */
     List<AdminMailToSelectDTO> getAllStore();
+
+    /**
+     * 通过用户id获取用户绑定的店铺信息
+     * @param username
+     * @return
+     */
+    ApiSellerInfo getSellerInfoBybindMemberUsername(String username);
 }

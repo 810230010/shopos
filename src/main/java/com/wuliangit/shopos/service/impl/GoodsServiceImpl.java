@@ -17,6 +17,7 @@ import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.GoodsService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -193,6 +194,9 @@ public class GoodsServiceImpl implements GoodsService {
         ApiGoodsDTO goodsDTO = goodsMapper.apiGetGoodsDTOById(goodsId);
         Store store = storeMapper.selectByPrimaryKey(goodsDTO.getStoreId());
         goodsDTO.setStoreLogo(store.getLogo());
+        if (!StringUtils.isEmpty(store.getAreaInfo())){
+            goodsDTO.setArea(store.getAreaInfo());
+        }
         return goodsDTO;
     }
 }

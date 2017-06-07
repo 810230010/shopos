@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.dto.*;
@@ -139,5 +140,12 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<AdminMailToSelectDTO> getAllStore() {
         return storeMapper.getAllStore();
+    }
+
+    @Override
+    public ApiSellerInfo getSellerInfo() {
+        Member member = WebUtil.getCurrentMember();
+        ApiSellerInfo apiSellerInfo = storeMapper.getSellerInfoBybindMemberUsername(member.getUsername());
+        return apiSellerInfo;
     }
 }

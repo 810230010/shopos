@@ -123,4 +123,10 @@ public interface StoreService {
      * @return: java.util.List<com.wuliangit.shopos.dto.StoreMailToSelectDTO>
      */
     List<AdminMailToSelectDTO> getAllStore();
+
+    /**
+     * 移动端获取绑定的店铺信息
+     * @return
+     */
+    ApiSellerInfo getSellerInfo();
 }

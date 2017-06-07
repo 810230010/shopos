@@ -16,7 +16,7 @@ public class JpushIM {
         if (client == null) {
             lock.lock();
             if (client == null) {
-                client = new JMessageClient("2a4c503ab7722d0af84f7bf2", "0b62432b3f499dc53329b041");
+                client = new JMessageClient("a5653b51f1997bc4b715fe64", "5879e6743ba697c4e03d9a22");
             }
             lock.unlock();
         }

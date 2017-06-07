@@ -37,7 +37,6 @@
     <result column="virtual_invalid_refund" property="virtualInvalidRefund" jdbcType="BIT" />
     <result column="is_appoint" property="isAppoint" jdbcType="BIT" />
     <result column="is_presell" property="isPresell" jdbcType="BIT" />
-    <result column="is_own_shop" property="isOwnShop" jdbcType="BIT" />
     <result column="vat" property="vat" jdbcType="BIT" />
     <result column="commend" property="commend" jdbcType="BIT" />
     <result column="evaluation_good_star" property="evaluationGoodStar" jdbcType="INTEGER" />
@@ -58,9 +57,9 @@
     goods_category3_id, brand_id, price, carriage, commission, promotion_price, promotion_type, 
     marketprice, storage_alarm, click, salenum, collect, storage, images, title_img, 
     state, verify, create_time, edit_time, is_new, type, activity_id, activity_type, 
-    is_virtual, virtual_invalid_refund, is_appoint, is_presell, is_own_shop, vat, commend, 
-    evaluation_good_star, evaluation_count, del_flag, attrs, is_platform, area, is_check, 
-    sell_time_begin, sell_time_end
+    is_virtual, virtual_invalid_refund, is_appoint, is_presell, vat, commend, evaluation_good_star, 
+    evaluation_count, del_flag, attrs, is_platform, area, is_check, sell_time_begin, 
+    sell_time_end
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -92,11 +91,11 @@
       create_time, edit_time, is_new, 
       type, activity_id, activity_type, 
       is_virtual, virtual_invalid_refund, is_appoint, 
-      is_presell, is_own_shop, vat, commend, 
-      evaluation_good_star, evaluation_count, del_flag, 
-      attrs, is_platform, area, 
-      is_check, sell_time_begin, sell_time_end, 
-      goods_body)
+      is_presell, vat, commend, evaluation_good_star, 
+      evaluation_count, del_flag, attrs, 
+      is_platform, area, is_check, 
+      sell_time_begin, sell_time_end, goods_body
+      )
     values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{adWord,jdbcType=VARCHAR}, 
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{goodsCategory1Id,jdbcType=INTEGER}, 
       #{goodsCategory2Id,jdbcType=INTEGER}, #{goodsCategory3Id,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, 
@@ -108,11 +107,11 @@
       #{createTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP}, #{isNew,jdbcType=BIT}, 
       #{type,jdbcType=VARCHAR}, #{activityId,jdbcType=INTEGER}, #{activityType,jdbcType=VARCHAR}, 
       #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, #{isAppoint,jdbcType=BIT}, 
-      #{isPresell,jdbcType=BIT}, #{isOwnShop,jdbcType=BIT}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, 
-      #{evaluationGoodStar,jdbcType=INTEGER}, #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, 
-      #{attrs,jdbcType=VARCHAR}, #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, 
-      #{isCheck,jdbcType=BIT}, #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, 
-      #{goodsBody,jdbcType=LONGVARCHAR})
+      #{isPresell,jdbcType=BIT}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
+      #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{attrs,jdbcType=VARCHAR}, 
+      #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{isCheck,jdbcType=BIT}, 
+      #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, #{goodsBody,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     <selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="AFTER" >
@@ -221,9 +220,6 @@
       </if>
       <if test="isPresell != null" >
         is_presell,
-      </if>
-      <if test="isOwnShop != null" >
-        is_own_shop,
       </if>
       <if test="vat != null" >
         vat,
@@ -364,9 +360,6 @@
       </if>
       <if test="isPresell != null" >
         #{isPresell,jdbcType=BIT},
-      </if>
-      <if test="isOwnShop != null" >
-        #{isOwnShop,jdbcType=BIT},
       </if>
       <if test="vat != null" >
         #{vat,jdbcType=BIT},
@@ -511,9 +504,6 @@
       <if test="isPresell != null" >
         is_presell = #{isPresell,jdbcType=BIT},
       </if>
-      <if test="isOwnShop != null" >
-        is_own_shop = #{isOwnShop,jdbcType=BIT},
-      </if>
       <if test="vat != null" >
         vat = #{vat,jdbcType=BIT},
       </if>
@@ -589,7 +579,6 @@
       virtual_invalid_refund = #{virtualInvalidRefund,jdbcType=BIT},
       is_appoint = #{isAppoint,jdbcType=BIT},
       is_presell = #{isPresell,jdbcType=BIT},
-      is_own_shop = #{isOwnShop,jdbcType=BIT},
       vat = #{vat,jdbcType=BIT},
       commend = #{commend,jdbcType=BIT},
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},
@@ -640,7 +629,6 @@
       virtual_invalid_refund = #{virtualInvalidRefund,jdbcType=BIT},
       is_appoint = #{isAppoint,jdbcType=BIT},
       is_presell = #{isPresell,jdbcType=BIT},
-      is_own_shop = #{isOwnShop,jdbcType=BIT},
       vat = #{vat,jdbcType=BIT},
       commend = #{commend,jdbcType=BIT},
       evaluation_good_star = #{evaluationGoodStar,jdbcType=INTEGER},

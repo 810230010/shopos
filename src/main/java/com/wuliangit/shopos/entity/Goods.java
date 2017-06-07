@@ -74,8 +74,6 @@ public class Goods {
 
     private Boolean isPresell;
 
-    private Boolean isOwnShop;
-
     private Boolean vat;
 
     private Boolean commend;
@@ -378,14 +376,6 @@ public class Goods {
 
     public void setIsPresell(Boolean isPresell) {
         this.isPresell = isPresell;
-    }
-
-    public Boolean getIsOwnShop() {
-        return isOwnShop;
-    }
-
-    public void setIsOwnShop(Boolean isOwnShop) {
-        this.isOwnShop = isOwnShop;
     }
 
     public Boolean getVat() {

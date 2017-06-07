@@ -76,12 +76,9 @@ public class MMemberController {
             String token = tokenManager.createToken(user.getMemberId());
             tokenManager.createTokenData(token, user);
 
-            WebUtil.getSession().setAttribute(SESSION_CURRENT_USERID, user.getMemberId());
-
             restResult.add("token", token);
             restResult.add("userId", user.getMemberId());
             restResult.add("IMPassword",user.getImPassword());
-            restResult.add("bindStore",storeService.getSellerInfo());
 
             return restResult;
         } catch (UnknownAccountException e) {
@@ -269,6 +266,7 @@ public class MMemberController {
         Member member = memberService.getByMemberId(WebUtil.getCurrentMember().getMemberId());
         ApiMemberDTO memberDTO = mapper.map(member, ApiMemberDTO.class);
         result.put("memberInfo", memberDTO);
+        result.add("bindStore",storeService.getSellerInfo());
         return result;
     }
 

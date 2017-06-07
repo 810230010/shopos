@@ -36,6 +36,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import static com.wuliangit.shopos.common.CoreConstants.SESSION_CURRENT_USERID;
+
 /**
  * 用户相关接口
  * Created by nilme on 2017/3/15.
@@ -74,6 +76,8 @@ public class MMemberController {
             String token = tokenManager.createToken(user.getMemberId());
             tokenManager.createTokenData(token, user);
 
+            WebUtil.getSession().setAttribute(SESSION_CURRENT_USERID, user.getMemberId());
+
             restResult.add("token", token);
             restResult.add("userId", user.getMemberId());
             restResult.add("IMPassword",user.getImPassword());
@@ -91,6 +95,7 @@ public class MMemberController {
             e.printStackTrace();
             error = "用户名/密码错误";
         } catch (Exception e) {
+            e.printStackTrace();
             error = "其他错误：" + e.getMessage();
         }
         restResult.setCode(RestResult.CODE_SERVERERROR);

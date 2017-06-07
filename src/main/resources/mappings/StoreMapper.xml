@@ -87,7 +87,7 @@
 
     <!--通过用户id获取用户绑定的店铺信息-->
     <select id="getSellerInfoBybindMemberUsername" resultType="com.wuliangit.shopos.dto.ApiSellerInfo">
-        select s.store_id, s.name, s.type
+        select store_id, name, type
         from t_store
         where bind_member_username = #{username}
     </select>

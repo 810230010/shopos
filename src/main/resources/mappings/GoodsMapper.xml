@@ -20,8 +20,7 @@
             </if>
             <if test="searchKey != null and searchKey != '' ">
                 and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
-                or ad_word like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
-                or store_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+                or ad_word like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
             </if>
         </where>
         order by ${order}

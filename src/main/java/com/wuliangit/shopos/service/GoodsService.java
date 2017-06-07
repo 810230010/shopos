@@ -60,7 +60,6 @@ public interface GoodsService {
      * @param searchKey
      * @param orderColumn
      * @param orderType
-     * @param parentId
      * @return
      */
     ArrayList<Goods> search(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType);

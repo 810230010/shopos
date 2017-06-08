@@ -212,7 +212,7 @@ public class StoreGoodsController {
     public Object getSimplGoodsInfo(Integer goodsId){
         RestResult result = new RestResult();
         StoreGoodsDetailDTO info = goodsService.getSimplGoodsInfo(goodsId);
-        result.put("data",info);
+        result.add("data",info);
         return result;
     }
 

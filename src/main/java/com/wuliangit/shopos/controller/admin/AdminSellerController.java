@@ -34,7 +34,7 @@ public class AdminSellerController {
     public Object getAllSeller(){
         RestResult result = new RestResult();
         List<Seller> sellers = sellerService.getAllSeller();
-        result.put("data",sellers);
+        result.add("data",sellers);
         return result;
     }
 

@@ -24,7 +24,7 @@ public class AdminUtilController {
     @ResponseBody
     public Object getUpToken() {
         RestResult result = new RestResult();
-        result.put("uptoken", QiNiuUtils.getToken());
+        result.add("uptoken", QiNiuUtils.getToken());
         return result;
     }
 

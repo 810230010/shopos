@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 /**
  * Created by nilme on 2017/3/21.
  */
@@ -22,8 +24,10 @@ public class MUtilController {
     @RequestMapping(value = "/qiniu/uptoken")
     public @ResponseBody
     Object getUpToken(){
-        RestResult result = new RestResult();
+        HashMap result = new HashMap();
         result.put("uptoken", QiNiuUtils.getToken());
+        result.put("msg","OK");
+        result.put("code","200");
         return result;
     }
 

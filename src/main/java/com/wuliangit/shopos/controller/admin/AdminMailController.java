@@ -52,8 +52,8 @@ public class AdminMailController {
         RestResult result = new RestResult();
         String info = mailService.sendMail(storeMessageDTO);
         if(info.equals("error")){
-            result.put("code",RestResult.CODE_SERVERERROR);
-            result.put("msg",RestResult.MSG_ERROR);
+            result.add("code",RestResult.CODE_SERVERERROR);
+            result.add("msg",RestResult.MSG_ERROR);
         }
         return result;
     }

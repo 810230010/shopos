@@ -128,7 +128,7 @@ public class StoreGoodsAdController {
         RestResult result = new RestResult();
         StoreMin storeMin = WebUtil.getCurrentStore();
         List<StoreGoodsDetailDTO> info = storeGoodsAdService.getStoreGoodsWithoutAd(storeMin.getStoreId());
-        result.put("data",info);
+        result.add("data",info);
         return result;
     }
 

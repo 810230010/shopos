@@ -64,8 +64,8 @@ public class AdminSettingController {
         RestResult result = new RestResult();
         Integer info = settingService.updateMailSetting(mailServiceSite, mailUserName, mailPassword);
         if (info != 1) {
-            result.put("code", RestResult.CODE_SERVERERROR);
-            result.put("msg", RestResult.MSG_ERROR);
+            result.add("code", RestResult.CODE_SERVERERROR);
+            result.add("msg", RestResult.MSG_ERROR);
         }
         return result;
     }
@@ -124,10 +124,10 @@ public class AdminSettingController {
         RestResult result = new RestResult();
         List<SettingDTO> info = settingService.getMailSetting();
         if(info == null){
-            result.put("code",RestResult.CODE_SERVERERROR);
-            result.put("msg",RestResult.MSG_ERROR);
+            result.add("code",RestResult.CODE_SERVERERROR);
+            result.add("msg",RestResult.MSG_ERROR);
         }else{
-            result.put("data",info);
+            result.add("data",info);
         }
         return result;
     }

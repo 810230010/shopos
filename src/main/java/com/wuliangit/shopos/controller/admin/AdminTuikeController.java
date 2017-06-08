@@ -78,8 +78,8 @@ public class AdminTuikeController {
         RestResult result = new RestResult();
         Integer info = tuikeService.checkOperation(memberId,state);
         if(info != 1){
-            result.put("code",RestResult.CODE_SERVERERROR);
-            result.put("msg",RestResult.MSG_ERROR);
+            result.add("code",RestResult.CODE_SERVERERROR);
+            result.add("msg",RestResult.MSG_ERROR);
         }
         return result;
     }
@@ -119,8 +119,8 @@ public class AdminTuikeController {
         RestResult result = new RestResult();
         Integer info = tuikeService.forbiddenTuike(tuikeId,state);
         if(info != 1){
-            result.put("code",RestResult.CODE_SERVERERROR);
-            result.put("msg",RestResult.MSG_ERROR);
+            result.add("code",RestResult.CODE_SERVERERROR);
+            result.add("msg",RestResult.MSG_ERROR);
         }
         return result;
     }

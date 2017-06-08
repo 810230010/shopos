@@ -6,12 +6,7 @@ import java.util.HashMap;
  * restful接口风格返回数据结构对象
  * Created by taoshanchang on 16/8/2.
  */
-public class RestResult extends HashMap<String, Object> {
-
-    public final String KEY_CODE = "code";
-    public final String KEY_MSG = "msg";
-    public final String KEY_DATA = "data";
-
+public class RestResult{
     //请求成功
     public final static int CODE_SUCCESS = 200;
     //业务错误
@@ -23,34 +18,48 @@ public class RestResult extends HashMap<String, Object> {
     public final static String MSG_ERROR = "Internal Server Error";
 
     private HashMap<String, Object> data = null;
+    private String msg = MSG_SUCCESS;
+    private int code = 200;
 
     public RestResult() {
-        this.put(KEY_CODE, CODE_SUCCESS);
-        this.put(KEY_MSG, MSG_SUCCESS);
+        this.setCode(CODE_SUCCESS);
+        this.setMsg(MSG_SUCCESS);
     }
 
     public RestResult(String msg, int code) {
-        this.put(KEY_CODE, code);
-        this.put(KEY_MSG, msg);
+        this.setCode(code);
+        this.setMsg(msg);
     }
 
     public RestResult add(String key, Object value) {
         if (data == null) {
             this.data = new HashMap<String, Object>();
-            this.put(KEY_DATA, this.data);
         }
-
         this.data.put(key, value);
         return this;
     }
 
-    public void setCode(int code) {
-        this.put(KEY_CODE, code);
+    public HashMap<String, Object> getData() {
+        return data;
+    }
+
+    public void setData(HashMap<String, Object> data) {
+        this.data = data;
+    }
+
+    public String getMsg() {
+        return msg;
     }
 
     public void setMsg(String msg) {
-        this.put(KEY_MSG, msg);
+        this.msg = msg;
     }
 
+    public int getCode() {
+        return code;
+    }
 
+    public void setCode(int code) {
+        this.code = code;
+    }
 }

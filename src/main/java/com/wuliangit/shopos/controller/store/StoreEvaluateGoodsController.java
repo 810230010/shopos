@@ -74,7 +74,7 @@ public class StoreEvaluateGoodsController {
     public Object getEvaluateGoodsDetail(Integer evaluateGoodsId){
         RestResult result = new RestResult();
         StoreEvaluateGoodsDetailDTO detail = evaluateGoodsService.getEvaluateGoodsDetail(evaluateGoodsId);
-        result.put("data",detail);
+        result.add("data",detail);
         return result;
     }
 

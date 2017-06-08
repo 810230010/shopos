@@ -35,7 +35,8 @@ public class MSellerController {
      * @param price 价格
      * @param carriage 邮费
      * @param storage 库存
-     * @param type 类型 商品类型 GOODS_TYPE_ACTIVITY(活动商品); GOODS_TYPE_NORMAL(普通商品);SECOND_HAND(二手)
+     * @param type 商品类型 GOODS_TYPE_NORMAL(普通商品)；GOODS_TYPE_SECKILL(一口秒价); GOODS_TYPE_ACTIVITY(企业活动商品);
+     *             GOODS_TYPE_NEWGOODS(企业新品商品); GOODS_TYPE_DIRECTSELLING(企业直销商品)
      * @param unit 单位
      * @param goodsBody 商品描述
      * @return

@@ -59,7 +59,7 @@ public class QiNiuUtils {
     }
 
     public static String resizeImges(String imgs) {
-        String[] strings = imgs.split("##");
+        String[] strings = imgs.split("&&");
         StringBuilder sb = new StringBuilder();
         int flag = 0;
         for (String url : strings) {
@@ -67,7 +67,7 @@ public class QiNiuUtils {
                 sb.append(url + "-apiResize");
                 flag = 1;
             } else {
-                sb.append("##").append(url + "-apiResize");
+                sb.append("&&").append(url + "-apiResize");
             }
 
         }

@@ -4,7 +4,7 @@
 
   <!--删除购物车商品-->
   <delete id="deleteCartGoodsByGoodsId">
-    delete t_cart where member_id = #{memberId} and goods_id = #{goodsId}
+    delete from t_cart where member_id = #{memberId} and goods_id = #{goodsId}
   </delete>
 
     <!--购物车商品列表-->

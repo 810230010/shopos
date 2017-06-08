@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.controller.store;
 
+import com.alipay.api.AlipayApiException;
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.StringUtils;
@@ -8,6 +9,7 @@ import com.wuliangit.shopos.dto.OrderDetailGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.entity.OrderGoods;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -120,5 +122,20 @@ public class StoreOrderController {
         List<StoreOrderListDTO> storeOrderListDTOS = orderService.getStoreOrderList(searchKey, orderColumn, orderType, page, pageSize, state);
         return new PageResult<StoreOrderListDTO>(storeOrderListDTOS, draw);
     }
+
+    /**
+     * 店铺缺货退款
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/refund")
+    @ResponseBody
+    public Object refund(Integer orderId) throws OptionException, AlipayApiException {
+        RestResult result = new RestResult();
+        int res = orderService.storeRefund(orderId);
+        return result;
+    }
+
+
 
 }

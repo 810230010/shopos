@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.domain.AlipayTradeRefundModel;
 import com.alipay.api.request.AlipayTradeRefundRequest;
@@ -55,6 +56,8 @@ public class OrderServiceImpl implements OrderService {
     private StoreAccountMapper storeAccountMapper;
     @Autowired
     private StoreAccountLogMapper storeAccountLogMapper;
+    @Autowired
+    private MemberMapper memberMapper;
 
     @Override
     @Transactional
@@ -284,7 +287,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public int receive(Integer orderId) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
-        order.setOrderState(POJOConstants.ORDER_STATE_RECEIVE);
+        order.setOrderState(POJOConstants.ORDER_STATE_END);
 
         //添加流水日志
         StoreAccountLog storeAccountLog = new StoreAccountLog();
@@ -305,6 +308,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public int refund(Integer orderId, Integer goodsId, String refundType, String goodsState, String buyerMessage, String picsInfo) throws Exception {
         Order order = orderMapper.selectByPrimaryKey(orderId);
         Member member = WebUtil.getCurrentMember();
@@ -344,11 +348,17 @@ public class OrderServiceImpl implements OrderService {
         refund.setBuyerMessage(buyerMessage);
         refund.setPicsInfo(picsInfo);
 
-        //设置退货收货地址
-        Store store = storeMapper.selectByPrimaryKey(order.getStoreId());
-        refund.setRefundAddress(store.getRefundAddress());
-        refund.setRefundName(store.getRefundName());
-        refund.setRefundPhone(store.getRefundPhone());
+        if (!refund.getRefundType().equals(POJOConstants.APPLY_REFUND_MOMEY)){
+            //设置退货收货地址
+            Store store = storeMapper.selectByPrimaryKey(order.getStoreId());
+            refund.setRefundAddress(store.getRefundAddress());
+            refund.setRefundName(store.getRefundName());
+            refund.setRefundPhone(store.getRefundPhone());
+        }
+
+        //更新订单状态
+        order.setOrderState(POJOConstants.ORDER_STATE_REFUND);
+        orderMapper.updateByPrimaryKeySelective(order);
 
         return refundMapper.insertSelective(refund);
     }
@@ -442,5 +452,92 @@ public class OrderServiceImpl implements OrderService {
 
         order.setDeleteState(POJOConstants.ORDER_DELETE_STATE_YES);
         return orderMapper.updateByPrimaryKeySelective(order);
+    }
+
+    @Override
+    @Transactional
+    public int storeRefund(Integer orderId) throws AlipayApiException, OptionException {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+
+        Member member = memberMapper.selectByPrimaryKey(order.getMemberId());
+
+        List<OrderGoods> orderGoodsList = orderGoodsMapper.getByOrderId(orderId);
+
+        OrderGoods orderGoods = orderGoodsList.get(0);
+
+        Refund refund = new Refund();
+        refund.setOrderId(orderId);
+        refund.setOrderOutTradeNo(order.getOutTradeNo());
+        refund.setStoreId(order.getStoreId());
+        refund.setMemberId(member.getMemberId());
+        refund.setMemberUsername(member.getUsername());
+        refund.setGoodsId(orderGoods.getGoodsId());
+        refund.setGoodsName(orderGoods.getGoodsName());
+        refund.setGoodsNum(orderGoods.getGoodsNum());
+        refund.setSkuName(orderGoods.getSkuName());
+        refund.setRefundAmount(order.getOrderAmount());
+        refund.setGoodsImage(orderGoods.getGoodsImage());
+        refund.setOrderGoodsType(orderGoods.getGoodsType());
+        refund.setRefundType(POJOConstants.APPLY_STORE_REFUND);
+        refund.setRefundState(POJOConstants.REFUND_STATE_RECEIVE);
+        refund.setIsLock(false);
+        refund.setGoodsState("NOT_DELIVE");
+        refund.setCreateTime(new Date());
+        refund.setBuyerMessage("");
+        refund.setPicsInfo("");
+
+        //先添加退款记录
+        refundMapper.insertSelective(refund);
+
+        //退款操作
+        AlipayClient alipayClient = AliPay.getAlipayClient();
+        AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();
+
+        AlipayTradeRefundModel model = new AlipayTradeRefundModel();
+
+        String outTradeNo = order.getOutTradeNo();
+
+        boolean isMergeOrder = false;
+
+        if (!StringUtils.isEmpty(order.getOutTradeNoMerge())) {
+            outTradeNo = order.getOutTradeNoMerge();
+            isMergeOrder = true;
+        }
+
+        TradeRefund tradeRefund = new TradeRefund();
+        tradeRefund.setOrderId(order.getOrderId());
+        tradeRefund.setAmount(refund.getRefundAmount());
+        tradeRefund.setPaymentCode(POJOConstants.ORDER_PAYMENT_ALIPAY);
+        tradeRefund.setCreateTime(new Date());
+        tradeRefund.setOutRequestNo(UUID.randomUUID().toString().replace("-", ""));
+        tradeRefundMapper.insertSelective(tradeRefund);
+
+        model.setOutTradeNo(outTradeNo);
+        model.setTradeNo(order.getTradeNo());
+        model.setRefundAmount(refund.getRefundAmount().toString());
+        model.setRefundReason("退货退款");
+        //为支付宝设置退款号
+        model.setOutRequestNo(tradeRefund.getOutRequestNo());
+
+        request.setBizModel(model);
+        AlipayTradeRefundResponse response = alipayClient.execute(request);
+
+        if (response.isSuccess()) {
+            //更新订单退款状态
+            order.setOrderState(POJOConstants.ORDER_STATE_REFUND);
+            if (refund.getRefundAmount().equals(order.getGoodsAmount())){//全部退款
+                order.setRefundState(POJOConstants.ORDER_REFUND_STATE_ALL_REFUND);
+            }else{//部分退款
+                order.setRefundState(POJOConstants.ORDER_REFUND_STATE_PART_REFUND);
+            }
+            orderMapper.updateByPrimaryKeySelective(order);
+
+            //更新退款记录状态
+            refund.setRefundState(POJOConstants.REFUND_STATE_RECEIVE);
+            return refundMapper.updateByPrimaryKeySelective(refund);
+        } else {
+            throw new OptionException("支付宝退款失败");
+        }
+
     }
 }

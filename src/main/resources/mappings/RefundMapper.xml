@@ -26,7 +26,7 @@
         FROM t_refund
         <where>
             store_id = #{storeId} and
-            (refund_state = 'DELIVE' or refund_state = 'CONSENT')
+            (refund_state = 'DELIVE' or refund_state = 'CONSENT' or refund_state = 'END')
             <if test="searchKey != null and searchKey != '' ">
                 and ( member_name like '%${searchKey}%' or goods_name like '%${searchKey}%')
             </if>
@@ -57,7 +57,7 @@
         SELECT *
         FROM t_refund
         <where>
-            store_id = #{storeId} and refund_state = 'RECEIVE'
+            store_id = #{storeId} and refund_state = 'END'
             <if test="searchKey != null and searchKey != '' ">
                 and ( member_name like '%${searchKey}%' or goods_name like '%${searchKey}%')
             </if>

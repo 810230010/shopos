@@ -1,7 +1,9 @@
 package com.wuliangit.shopos.service;
 
+import com.alipay.api.AlipayApiException;
 import com.wuliangit.shopos.dto.*;
 import com.wuliangit.shopos.entity.Order;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.OrderGoodsInfo;
 
@@ -181,4 +183,11 @@ public interface OrderService {
      * @return
      */
     int apiDelete(Integer orderId) throws Exception;
+
+    /**
+     * 店铺缺货退款
+     * @param orderId
+     * @return
+     */
+    int storeRefund(Integer orderId) throws AlipayApiException, OptionException;
 }

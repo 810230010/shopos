@@ -132,6 +132,8 @@
                     if(data == "PAYED") {
                         html += '<div><a class="table-button-vertical btn btn-primary btn-xs table-action deliver" href="javascript:void(0)">'+
                                 '一件发货 <i class="fa fa-send"></i>'+
+                                '</a><a class="table-button-vertical btn btn-info btn-xs table-action refund" href="javascript:void(0)">'+
+                                '缺货退款 <i class="fa fa-send"></i>'+
                                 '</a></div>';
                         return html;
                     }else{
@@ -182,6 +184,37 @@
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
             window.open("/store/order/expressPage?orderId="+data.orderId);
+        });
+
+        //view record
+        table.on( 'click', '.refund', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+
+            $.get("/store/order/refund?orderId="+data.orderId,
+                    function (data, status) {
+                        if (data.code == 200) {
+                            swal({
+                                title: "成功!",
+                                text: "退款成功!",
+                                type: "success",
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                            setTimeout(function () {
+                                $('#datatables').DataTable().ajax.reload();
+                            }, 2000);
+                        }else{
+                            swal({
+                                title: "失败!",
+                                text: "退款失败!",
+                                type: "error",
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                        }
+
+                    });
         });
 
 

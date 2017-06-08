@@ -19,7 +19,7 @@
                             <button type="button" class="btn btn-primary" onclick="getRefundList(this,'')">全部</button>
                             <button type="button" class="btn btn-white" onclick="getRefundList(this,'REFUND_ALL')">退款退货</button>
                             <button type="button" class="btn btn-white" onclick="getRefundList(this,'CHANGE_GOODS')">换货</button>
-                            <button type="button" class="btn btn-white" onclick="getRefundList(this,'RECEIVE')">已完成</button>
+                            <button type="button" class="btn btn-white" onclick="getRefundList(this,'END')">已完成</button>
                         </div>
                     </div>
                 </div>
@@ -49,12 +49,12 @@
     $('#side-menu').metisMenu();
 
     var nowType = '';
-    var nowUrl = '/store/refund/getSuccessRefundList';
+    var nowState = '';
 
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': nowUrl,
+                'url': '/store/refund/getSuccessRefundList',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -64,6 +64,7 @@
                     param.orderType = d.order[0]['dir'];
                     param.searchKey = d.search["value"];
                     param.refundType = nowType;
+                    param.refundState = nowState;
                     return param;
                 },
             },
@@ -80,6 +81,7 @@
                     if(data == "REFUND_MOMEY")return "退款";
                     else if(data == "CHANGE_GOODS")return "换货";
                     else if(data == "REFUND_ALL")return "退款退货";
+                    else if(data == "STORE_REFUND")return "店铺退款";
                 }},
                 {"data":"buyerMessage","width": "8%","title":"申请原因","orderable": false},
                 {"data":"refundState","width": "8%","title":"状态",
@@ -89,7 +91,7 @@
                         else if(data == 'CONSENT') return '同意退款';
                         else if(data == 'NOT_CONSENT') return '拒绝退款';
                         else if(data == 'DELIVE') return '买家已发货';
-                        else if(data == 'RECEIVE') return '已完成';
+                        else if(data == 'END') return '已完成';
                     }
                 },
                 {"data":"refundAmount","width": "7%","title":"退款金额","orderable": false},
@@ -177,16 +179,14 @@
         $(button).removeClass("btn-white");
         $(button).addClass("btn-primary");
 
+        nowType = type;
 
-        if (type == 'RECEIVE'){
+        if(type == 'END'){
+            nowState = 'END';
             nowType = '';
-            nowUrl = '/store/refund/getRefundDoneList'
-            $('#datatables').DataTable().ajax.reload();
-        }else{
-            nowType = type;
-            nowUrl = '/store/refund/getSuccessRefundList'
-            $('#datatables').DataTable().ajax.reload();
         }
+
+        $('#datatables').DataTable().ajax.reload();
 
     }
 

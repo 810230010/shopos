@@ -72,6 +72,10 @@ public class POJOConstants {
     public final static String ORDER_STATE_DELIVE = "DELIVE";
     //已收货
     public final static String ORDER_STATE_RECEIVE = "RECEIVE";
+    //已收货
+    public final static String ORDER_STATE_END = "RECEIVE";
+    //已退款
+    public final static String ORDER_STATE_REFUND = "REFUND";
 
 
     //品牌申请状态
@@ -89,18 +93,22 @@ public class POJOConstants {
     public final static String APPLY_CHANGE_GOODS = "CHANGE_GOODS";
     //退款退货
     public final static String APPLY_REFUND_ALL = "REFUND_ALL";
+    //退款退货
+    public final static String APPLY_STORE_REFUND = "STORE_REFUND";
 
     //退款订单状态
     //等待商家审核
     public final static String REFUND_STATE_CHECKING = "CHECKING";
     //商家同意退款
     public final static String REFUND_STATE_CONSENT = "CONSENT";
+    //商家主动退款
+    public final static String REFUND_STATE_STORE_REFUND = "STORE_REFUND";
     //商家不同意退款
     public final static String REFUND_STATE_NOT_CONSENT = "NOT_CONSENT";
     //买家已发货
     public final static String REFUND_STATE_DELIVE = "DELIVE";
     //卖家已收货
-    public final static String REFUND_STATE_RECEIVE = "RECEIVE";
+    public final static String REFUND_STATE_RECEIVE = "END";
 
     //订单商品物流状态
     //未发货(待发货)

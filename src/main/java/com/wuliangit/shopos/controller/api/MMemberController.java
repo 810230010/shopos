@@ -265,7 +265,7 @@ public class MMemberController {
         RestResult result = new RestResult();
         Member member = memberService.getByMemberId(WebUtil.getCurrentMember().getMemberId());
         ApiMemberDTO memberDTO = mapper.map(member, ApiMemberDTO.class);
-        result.put("memberInfo", memberDTO);
+        result.add("memberInfo", memberDTO);
         result.add("bindStore",storeService.getSellerInfo());
         return result;
     }

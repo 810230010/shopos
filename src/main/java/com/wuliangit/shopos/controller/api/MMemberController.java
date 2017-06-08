@@ -18,6 +18,7 @@ import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.SMSService;
 import com.wuliangit.shopos.service.StoreService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -265,7 +266,9 @@ public class MMemberController {
         RestResult result = new RestResult();
         Member member = memberService.getByMemberId(WebUtil.getCurrentMember().getMemberId());
 
-        member.setPhoto(member.getPhoto()+"-apiPhotoResize");
+        if (!StringUtils.isEmpty(member.getPhoto())) {
+            member.setPhoto(member.getPhoto() + "-apiPhotoResize");
+        }
 
         ApiMemberDTO memberDTO = mapper.map(member, ApiMemberDTO.class);
         result.add("memberInfo", memberDTO);

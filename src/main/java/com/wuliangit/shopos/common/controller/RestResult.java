@@ -24,6 +24,16 @@ public class RestResult extends HashMap<String, Object> {
 
     private HashMap<String, Object> data = null;
 
+    @Override
+    public Object put(String key, Object value) {
+        if (data == null) {
+            this.data = new HashMap<String, Object>();
+            this.put(KEY_DATA, this.data);
+        }
+        this.data.put(key, value);
+        return this;
+    }
+
     public RestResult() {
         this.put(KEY_CODE, CODE_SUCCESS);
         this.put(KEY_MSG, MSG_SUCCESS);

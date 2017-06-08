@@ -2,6 +2,7 @@ package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.dto.ApiSellerInfo;
+import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,20 @@ public class MSellerController {
 
         return result;
     }
+
+
+    /**
+     * 申请成为商家
+     * @return
+     */
+    @RequestMapping("/newStore")
+    public Object applyStore(StoreJoinin storeJoinin){
+        RestResult result = new RestResult();
+        int res = storeService.createStoreJoinin(storeJoinin);
+        return result;
+    }
+
+
 
 
 }

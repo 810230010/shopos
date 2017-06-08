@@ -44,6 +44,10 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public int createStoreJoinin(StoreJoinin storeJoinin) {
+        Member member = WebUtil.getCurrentMember();
+        storeJoinin.setMemberId(member.getMemberId());
+        storeJoinin.setMemberName(member.getUsername());
+        storeJoinin.setCreateTime(new Date());
         return storeJoininMapper.insertSelective(storeJoinin);
     }
 

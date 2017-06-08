@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.dto.ApiEvaluateGoodsListDTO;
 import com.wuliangit.shopos.dto.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
@@ -79,6 +80,9 @@ public class MGoodsController {
     public Object getGoods(Integer goodsId) {
         RestResult result = new RestResult();
         ApiGoodsDTO goods = goodsService.apiGetGoodsDTOById(goodsId);
+
+        goods.setImages(QiNiuUtils.resizeImges(goods.getTitleImg()));
+
         List<GoodsSku> goodsSku = goodsService.getGoodsSkuByGoodsId(goodsId);
 
         //转化为字典型，方便前段处理
@@ -114,6 +118,11 @@ public class MGoodsController {
                               @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
         RestResult result = new RestResult();
         ArrayList<ApiGoodsListDTO> goods = goodsSearchService.directSellingSearch(page, pageSize, searchKey, orderType);
+
+        for (ApiGoodsListDTO good : goods) {
+            good.setTitleImg(QiNiuUtils.resizeImge(good.getTitleImg()));
+        }
+
         result.add("goods", goods);
         return result;
     }
@@ -134,6 +143,11 @@ public class MGoodsController {
                                       @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
         RestResult result = new RestResult();
         ArrayList<ApiGoodsListDTO> goods = goodsSearchService.newGoodsSearch(page, pageSize, searchKey, orderType);
+
+        for (ApiGoodsListDTO good : goods) {
+            good.setTitleImg(QiNiuUtils.resizeImge(good.getTitleImg()));
+        }
+
         result.add("goods", goods);
         return result;
     }
@@ -154,6 +168,11 @@ public class MGoodsController {
                                       @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
         RestResult result = new RestResult();
         ArrayList<ApiGoodsListDTO> goods = goodsSearchService.activityGoodsSearch(page, pageSize, searchKey, orderType);
+
+        for (ApiGoodsListDTO good : goods) {
+            good.setTitleImg(QiNiuUtils.resizeImge(good.getTitleImg()));
+        }
+
         result.add("goods", goods);
         return result;
     }
@@ -174,6 +193,11 @@ public class MGoodsController {
                                      @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
         RestResult result = new RestResult();
         ArrayList<ApiGoodsListDTO> goods = goodsSearchService.seckillGoodsSearch(page, pageSize, searchKey, orderType);
+
+        for (ApiGoodsListDTO good : goods) {
+            good.setTitleImg(QiNiuUtils.resizeImge(good.getTitleImg()));
+        }
+
         result.add("goods", goods);
         return result;
     }
@@ -194,6 +218,11 @@ public class MGoodsController {
                                      @RequestParam(value = "orderType", required = false, defaultValue = "salenum") String orderType) {
         RestResult result = new RestResult();
         ArrayList<ApiGoodsListDTO> goods = goodsSearchService.normalGoodsSearch(page, pageSize, searchKey, orderType);
+
+        for (ApiGoodsListDTO good : goods) {
+            good.setTitleImg(QiNiuUtils.resizeImge(good.getTitleImg()));
+        }
+
         result.add("goods", goods);
         return result;
     }
@@ -206,6 +235,11 @@ public class MGoodsController {
     public Object indexGoods() {
         RestResult result = new RestResult();
         ArrayList<ApiGoodsListDTO> goods = goodsSearchService.indexGoods();
+
+        for (ApiGoodsListDTO good : goods) {
+            good.setTitleImg(QiNiuUtils.resizeImge(good.getTitleImg()));
+        }
+
         result.add("goods", goods);
         return result;
     }

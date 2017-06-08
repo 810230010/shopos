@@ -4,6 +4,7 @@ import com.qiniu.util.Auth;
 import com.wuliangit.shopos.common.util.PropertyPlaceholder;
 import com.wuliangit.shopos.common.util.SpringUtils;
 import com.wuliangit.shopos.service.SettingService;
+
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -45,23 +46,44 @@ public class QiNiuUtils {
         return auth;
     }
 
-    public static Auth updateAuth(){
+    public static Auth updateAuth() {
         auth = null;
         return QiNiuUtils.getAuth();
     }
 
-    public static String getBaseUrl(){
-        if (auth == null){
+    public static String getBaseUrl() {
+        if (auth == null) {
             getAuth();
         }
         return BASE_URL;
     }
 
+    public static String resizeImges(String imgs) {
+        String[] strings = imgs.split("&&");
+        StringBuilder sb = new StringBuilder();
+        int flag = 0;
+        for (String url : strings) {
+            if (flag == 0) {
+                sb.append(url + "-apiResize");
+                flag = 1;
+            } else {
+                sb.append("&&").append(url + "-apiResize");
+            }
+
+        }
+        return sb.toString();
+    }
+
+    public static String resizeImge(String img) {
+        return img + "-resize";
+    }
+
+
     public static String getRealUrl(String url) {
-        if (url.contains("http://")){
+        if (url.contains("http://")) {
             return url;
-        }else{
-            return BASE_URL+url;
+        } else {
+            return BASE_URL + url;
         }
     }
 

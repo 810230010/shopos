@@ -264,6 +264,9 @@ public class MMemberController {
     public Object getUserInfo() {
         RestResult result = new RestResult();
         Member member = memberService.getByMemberId(WebUtil.getCurrentMember().getMemberId());
+
+        member.setPhoto(member.getPhoto()+"-apiPhotoResize");
+
         ApiMemberDTO memberDTO = mapper.map(member, ApiMemberDTO.class);
         result.add("memberInfo", memberDTO);
         result.add("bindStore",storeService.getSellerInfo());

@@ -96,6 +96,8 @@ public class Goods {
 
     private Date sellTimeEnd;
 
+    private Integer needCount;
+
     private String goodsBody;
 
     public Integer getGoodsId() {
@@ -464,6 +466,14 @@ public class Goods {
 
     public void setSellTimeEnd(Date sellTimeEnd) {
         this.sellTimeEnd = sellTimeEnd;
+    }
+
+    public Integer getNeedCount() {
+        return needCount;
+    }
+
+    public void setNeedCount(Integer needCount) {
+        this.needCount = needCount;
     }
 
     public String getGoodsBody() {

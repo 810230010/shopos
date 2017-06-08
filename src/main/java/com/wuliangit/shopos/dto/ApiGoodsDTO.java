@@ -100,6 +100,25 @@ public class ApiGoodsDTO {
 
     private String goodsBody;
 
+    private Integer needCount;
+
+    private Integer orderCount;
+
+    public Integer getOrderCount() {
+        return orderCount;
+    }
+
+    public void setOrderCount(Integer orderCount) {
+        this.orderCount = orderCount;
+    }
+
+    public Integer getNeedCount() {
+        return needCount;
+    }
+
+    public void setNeedCount(Integer needCount) {
+        this.needCount = needCount;
+    }
 
     public Integer getGoodsId() {
         return goodsId;

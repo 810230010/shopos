@@ -48,6 +48,7 @@
     <result column="is_check" property="isCheck" jdbcType="BIT" />
     <result column="sell_time_begin" property="sellTimeBegin" jdbcType="TIMESTAMP" />
     <result column="sell_time_end" property="sellTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="need_count" property="needCount" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.Goods" extends="BaseResultMap" >
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
@@ -59,7 +60,7 @@
     state, verify, create_time, edit_time, is_new, type, activity_id, activity_type, 
     is_virtual, virtual_invalid_refund, is_appoint, is_presell, vat, commend, evaluation_good_star, 
     evaluation_count, del_flag, attrs, is_platform, area, is_check, sell_time_begin, 
-    sell_time_end
+    sell_time_end, need_count
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -94,8 +95,8 @@
       is_presell, vat, commend, evaluation_good_star, 
       evaluation_count, del_flag, attrs, 
       is_platform, area, is_check, 
-      sell_time_begin, sell_time_end, goods_body
-      )
+      sell_time_begin, sell_time_end, need_count, 
+      goods_body)
     values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{adWord,jdbcType=VARCHAR}, 
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{goodsCategory1Id,jdbcType=INTEGER}, 
       #{goodsCategory2Id,jdbcType=INTEGER}, #{goodsCategory3Id,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, 
@@ -110,8 +111,8 @@
       #{isPresell,jdbcType=BIT}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
       #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{attrs,jdbcType=VARCHAR}, 
       #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{isCheck,jdbcType=BIT}, 
-      #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, #{goodsBody,jdbcType=LONGVARCHAR}
-      )
+      #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, #{needCount,jdbcType=INTEGER}, 
+      #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     <selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="AFTER" >
@@ -254,6 +255,9 @@
       <if test="sellTimeEnd != null" >
         sell_time_end,
       </if>
+      <if test="needCount != null" >
+        need_count,
+      </if>
       <if test="goodsBody != null" >
         goods_body,
       </if>
@@ -393,6 +397,9 @@
       </if>
       <if test="sellTimeEnd != null" >
         #{sellTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="needCount != null" >
+        #{needCount,jdbcType=INTEGER},
       </if>
       <if test="goodsBody != null" >
         #{goodsBody,jdbcType=LONGVARCHAR},
@@ -537,6 +544,9 @@
       <if test="sellTimeEnd != null" >
         sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
       </if>
+      <if test="needCount != null" >
+        need_count = #{needCount,jdbcType=INTEGER},
+      </if>
       <if test="goodsBody != null" >
         goods_body = #{goodsBody,jdbcType=LONGVARCHAR},
       </if>
@@ -590,6 +600,7 @@
       is_check = #{isCheck,jdbcType=BIT},
       sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
       sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
+      need_count = #{needCount,jdbcType=INTEGER},
       goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -639,7 +650,8 @@
       area = #{area,jdbcType=VARCHAR},
       is_check = #{isCheck,jdbcType=BIT},
       sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
-      sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP}
+      sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
+      need_count = #{needCount,jdbcType=INTEGER}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

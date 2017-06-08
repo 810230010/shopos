@@ -288,6 +288,12 @@ public class OrderServiceImpl implements OrderService {
     public int receive(Integer orderId) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
         order.setOrderState(POJOConstants.ORDER_STATE_END);
+        List<OrderGoods> orderGoodss = orderGoodsMapper.getByOrderId(orderId);
+        for (OrderGoods orderGoods : orderGoodss) {
+            Goods goods = goodsMapper.selectByPrimaryKey(orderGoods.getGoodsId());
+            goods.setSalenum(goods.getSalenum()+1);
+            goodsMapper.updateByPrimaryKeySelective(goods);
+        }
 
         //添加流水日志
         StoreAccountLog storeAccountLog = new StoreAccountLog();
@@ -539,5 +545,10 @@ public class OrderServiceImpl implements OrderService {
             throw new OptionException("支付宝退款失败");
         }
 
+    }
+
+    @Override
+    public int getGoodsOrderCount(Integer goodsId) {
+        return orderGoodsMapper.getGoodsOrderCount(goodsId);
     }
 }

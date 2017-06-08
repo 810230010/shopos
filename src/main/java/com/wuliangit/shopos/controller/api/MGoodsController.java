@@ -2,16 +2,14 @@ package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
+import com.wuliangit.shopos.dao.OrderMapper;
 import com.wuliangit.shopos.dto.ApiEvaluateGoodsListDTO;
 import com.wuliangit.shopos.dto.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
 import com.wuliangit.shopos.exception.OptionException;
-import com.wuliangit.shopos.service.CollectService;
-import com.wuliangit.shopos.service.EvaluateGoodsService;
-import com.wuliangit.shopos.service.GoodsService;
-import com.wuliangit.shopos.service.GoodsSearchService;
+import com.wuliangit.shopos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +37,8 @@ public class MGoodsController {
     private CollectService collectService;
     @Autowired
     private EvaluateGoodsService evaluateGoodsService;
+    @Autowired
+    private OrderService orderService;
 
 
     /**
@@ -94,6 +94,11 @@ public class MGoodsController {
         boolean isCollect = collectService.isCollectGoods(goodsId);
 
         List<ApiEvaluateGoodsListDTO> evaluateList = evaluateGoodsService.getEvaluateGoodsList(1, 2, goodsId);
+
+        if(goods.getType().equals("GOODS_TYPE_NEWGOODS")){
+            int res = orderService.getGoodsOrderCount(goods.getGoodsId());
+            goods.setOrderCount(res);
+        }
 
         result.add("isCollect", isCollect);
         result.add("goods", goods);

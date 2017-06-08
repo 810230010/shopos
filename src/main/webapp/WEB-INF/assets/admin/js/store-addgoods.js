@@ -180,6 +180,7 @@ $("#wizard").steps({
                 commission: $("#commission").val(),
                 carriage: $("#carriage").val(),
                 adWord: $("#adWord").val(),
+                needCount: $("#needCount").val(),
                 sellTimeBegin: $("#datetimepicker-begin").val(),
                 sellTimeEnd: $("#datetimepicker-end").val(),
                 name: $("#name").val(),
@@ -343,18 +344,20 @@ $(document).ready(function() {
             switch(goods_type)
             {
                 case 'GOODS_TYPE_ACTIVITY':
-                    $(".goods-type-model").addClass("hidden");
                     $("#activity-time").removeClass("hidden");
+                    $("#need-count").addClass("hidden");
                     break;
                 case 'GOODS_TYPE_SECKILL':
-                    $(".goods-type-model").addClass("hidden");
                     $("#activity-time").removeClass("hidden");
+                    $("#need-count").addClass("hidden");
                     break;
-                case 'GOODS_TYPE_NORMAL':
-                    $(".goods-type-model").addClass("hidden");
+                case 'GOODS_TYPE_NEWGOODS':
+                    $("#activity-time").removeClass("hidden");
+                    $("#need-count").removeClass("hidden");
                     break;
                 default:
-                    $(".goods-type-model").addClass("hidden");
+                    $("#need-count").addClass("hidden");
+                    $("#activity-time").addClass("hidden");
             }
 
         });

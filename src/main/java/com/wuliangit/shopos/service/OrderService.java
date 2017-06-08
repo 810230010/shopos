@@ -190,4 +190,11 @@ public interface OrderService {
      * @return
      */
     int storeRefund(Integer orderId) throws AlipayApiException, OptionException;
+
+    /**
+     * 获取商品有效订单数量
+     * @param goodsId
+     * @return
+     */
+    int getGoodsOrderCount(Integer goodsId);
 }

@@ -98,19 +98,19 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">市场价:</label>
                                     <div class="col-sm-7">
-                                        <input id="marketprice" name="marketprice" type="number" step="0.01" class="form-control">
+                                        <input id="marketprice" name="marketprice" type="number" step="0.01" step="0.01" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">商品佣金:</label>
                                     <div class="col-sm-7">
-                                        <input name="commission" id="commission" type="text" class="form-control">
+                                        <input name="commission" id="commission" type="number" step="0.01" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">运费:</label>
                                     <div class="col-sm-7">
-                                         <input id="carriage" name="carriage" type="text" class="form-control">
+                                         <input id="carriage" name="carriage" type="number" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -166,6 +166,13 @@
                                             <span class="input-group-addon">至</span>
                                             <input type="datetime" id="datetimepicker-end" class="input-sm form-control" name="end"/>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group hidden goods-type-model" id="need-count" >
+                                    <label class="col-sm-3 control-label">发货数量要求:</label>
+                                    <div class="col-sm-7">
+                                        <input id="needCount" name="needCount" type="number" step="0.01" class="form-control">
                                     </div>
                                 </div>
 

@@ -33,4 +33,11 @@ public interface OrderGoodsMapper extends BaseMapper<OrderGoods, Integer> {
      * @return
      */
     OrderGoods getByOrderIdAndGoodsId(@Param("orderId") Integer orderId, @Param("goodsId")Integer goodsId);
+
+    /**
+     * 获取商品有效订单数量
+     * @param goodsId
+     * @return
+     */
+    int getGoodsOrderCount(Integer goodsId);
 }

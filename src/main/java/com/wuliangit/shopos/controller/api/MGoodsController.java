@@ -81,7 +81,7 @@ public class MGoodsController {
         RestResult result = new RestResult();
         ApiGoodsDTO goods = goodsService.apiGetGoodsDTOById(goodsId);
 
-        goods.setImages(QiNiuUtils.resizeImges(goods.getTitleImg()));
+        goods.setImages(QiNiuUtils.resizeImges(goods.getImages()));
 
         List<GoodsSku> goodsSku = goodsService.getGoodsSkuByGoodsId(goodsId);
 

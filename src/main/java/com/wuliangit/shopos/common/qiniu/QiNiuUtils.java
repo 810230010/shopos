@@ -75,7 +75,7 @@ public class QiNiuUtils {
     }
 
     public static String resizeImge(String img) {
-        return img + "-resize";
+        return img + "-apiResize";
     }
 
 

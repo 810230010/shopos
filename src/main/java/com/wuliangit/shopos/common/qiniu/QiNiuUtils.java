@@ -67,7 +67,7 @@ public class QiNiuUtils {
                 sb.append(url + "-apiResize");
                 flag = 1;
             } else {
-                sb.append("&&").append(url + "-apiResize");
+                sb.append("##").append(url + "-apiResize");
             }
 
         }

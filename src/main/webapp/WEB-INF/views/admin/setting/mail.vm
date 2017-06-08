@@ -69,9 +69,9 @@
             async: false,
             success: function (data) {
                 if (data.code == 200) {
-                    $("#password").val(data.data[0].value);
-                    $("#service").val(data.data[1].value);
-                    $("#username").val(data.data[2].value);
+                    $("#password").val(data.data.data[0].value);
+                    $("#service").val(data.data.data[1].value);
+                    $("#username").val(data.data.data[2].value);
                 } else if (data.code == 500) {
                     swal({
                         title: "失败!",

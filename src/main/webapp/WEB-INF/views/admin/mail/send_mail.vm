@@ -52,6 +52,10 @@
 
 <script type="text/javascript">
 
+    $("#邮件管理").addClass("active");
+    $("#发送店铺通知").addClass("active");
+    $('#side-menu').metisMenu();
+
     var editor = new wangEditor('editofrm');
     editor.create();
     editor.$txt.html('<p>请输入邮件内容...</p>');
@@ -67,9 +71,8 @@
             async: false,
             success: function (data) {
                 if (data.code == 200) {
-                    console.log(data);
-                    for(var i=0;i<data.data.length;i++){
-                        $("#example-dropUp").append("<option value='"+ data.data[i].storeId + "&" + data.data[i].email + "&" + data.data[i].name +"'>"+ data.data[i].name + "&lt"+ data.data[i].email +"&gt" +"</option>")
+                    for(var i=0;i<data.data.data.length;i++){
+                        $("#example-dropUp").append("<option value='"+ data.data.data[i].storeId + "&" + data.data.data[i].email + "&" + data.data.data[i].name +"'>"+ data.data.data[i].name + "&lt"+ data.data.data[i].email +"&gt" +"</option>")
                     }
                 }
             }

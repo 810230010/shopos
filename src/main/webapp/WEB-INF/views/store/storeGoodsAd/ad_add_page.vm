@@ -74,8 +74,8 @@
             async: false,
             success: function (data) {
                 if (data.code == 200) {
-                    for(var i=0;i<data.data.length;i++){
-                        $("#goods").append("<option value='"+ data.data[i].goodsId +"'>"+ data.data[i].name +"</option>")
+                    for(var i=0;i<data.data.data.length;i++){
+                        $("#goods").append("<option value='"+ data.data.data[i].goodsId +"'>"+ data.data.data[i].name +"</option>")
                     }
                 }
             }

@@ -152,9 +152,9 @@
                 data: {"evaluateGoodsId": data.evaluateGoodsId},
                 success:function(result) {
                     if(result.code == 200){
-                        var pic = result.data.images;
+                        var pic = result.data.data.images;
                         var b=pic.split(',')
-                        $('#content').html(result.data.content);
+                        $('#content').html(result.data.data.content);
                         var i=0;
                         for(;i<b.length;i++){
                             if(b[i] == "" || b[i] == null){

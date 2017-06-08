@@ -72,4 +72,10 @@ public class CartServiceImpl implements CartService {
         cart.setGoodsNum(goodsNum);
         return cartMapper.updateByPrimaryKeySelective(cart);
     }
+
+    @Override
+    public int deleteCartGoodsByGoodsId(Integer goodsId) {
+        Member currentMember = WebUtil.getCurrentMember();
+        return cartMapper.deleteCartGoodsByGoodsId(goodsId,currentMember.getMemberId());
+    }
 }

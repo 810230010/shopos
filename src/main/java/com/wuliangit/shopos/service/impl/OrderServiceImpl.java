@@ -18,6 +18,7 @@ import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.*;
+import com.wuliangit.shopos.service.CartService;
 import com.wuliangit.shopos.service.OrderService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,8 @@ public class OrderServiceImpl implements OrderService {
     private StoreAccountLogMapper storeAccountLogMapper;
     @Autowired
     private MemberMapper memberMapper;
+    @Autowired
+    private CartService cartService;
 
     @Override
     @Transactional
@@ -115,12 +118,12 @@ public class OrderServiceImpl implements OrderService {
         }
 
         //生成订单
-        for (Integer integer : orderCreateTemp.keySet()) {
-            List<OrderGoods> orderGoodses = orderCreateTemp.get(integer);
-            StoreMin storeMin = storeMapper.getStoreMinByStoreId(integer);
+        for (Map.Entry<Integer, List<OrderGoods>> entry : orderCreateTemp.entrySet()) {
+            List<OrderGoods> orderGoodses = orderCreateTemp.get(entry.getKey());
+            StoreMin storeMin = storeMapper.getStoreMinByStoreId(entry.getKey());
 
             Order order = new Order();
-            order.setStoreId(integer);
+            order.setStoreId(entry.getKey());
             order.setMemberId(member.getMemberId());
             order.setMemberEmail(member.getEmail());
             order.setMemberName(member.getNickname());
@@ -165,8 +168,14 @@ public class OrderServiceImpl implements OrderService {
             for (OrderGoods orderGoods : orderGoodses) {
                 orderGoods.setOrderId(order.getOrderId());
                 orderGoodsMapper.insertSelective(orderGoods);
+
+                //删除购物车商品
+                int res = cartService.deleteCartGoodsByGoodsId(orderGoods.getGoodsId());
+
             }
         }
+
+
 
         return orders;
     }

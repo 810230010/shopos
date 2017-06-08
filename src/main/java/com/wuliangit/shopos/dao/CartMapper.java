@@ -22,4 +22,12 @@ public interface CartMapper extends BaseMapper<Cart, Integer> {
      * @return
      */
     Cart getCartByMemberIdAndGoodsSkuId(@Param("memberId") Integer memberId, @Param("goodsSkuId")Integer goodsSkuId);
+
+    /**
+     * 删除购物车商品
+     * @param goodsId
+     * @param memberId
+     * @return
+     */
+    int deleteCartGoodsByGoodsId(@Param("goodsId") Integer goodsId, @Param("memberId") Integer memberId);
 }

@@ -77,7 +77,7 @@ public class MGoodsController {
      * @return
      */
     @RequestMapping("/get")
-    public Object getGoods(Integer goodsId) {
+    public Object getGoods(@RequestParam(required = true) Integer goodsId) {
         RestResult result = new RestResult();
         ApiGoodsDTO goods = goodsService.apiGetGoodsDTOById(goodsId);
 

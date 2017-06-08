@@ -43,4 +43,11 @@ public interface CartService {
      * @return
      */
     int updateCartGoods(Integer cartId, Integer goodsNum);
+
+    /**
+     * 删除购物车商品
+     * @param goodsId
+     * @return
+     */
+    int deleteCartGoodsByGoodsId(Integer goodsId);
 }

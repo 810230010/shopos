@@ -44,7 +44,7 @@
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': '/store/acount/accountHistoryList',
+                'url': '/store/account/accountHistoryList',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;

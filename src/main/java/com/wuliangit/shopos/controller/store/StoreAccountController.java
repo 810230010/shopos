@@ -68,7 +68,7 @@ public class StoreAccountController {
     }
 
     /**
-     * 店铺资金流水记录
+     * 店铺提现记录
      * @param draw
      * @param searchKey
      * @param orderColumn

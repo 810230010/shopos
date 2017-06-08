@@ -37,7 +37,7 @@
     <!--api接口获取订单-->
     <select id="apiGetOrderByStateAndMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
         select * from t_order
-        where delete_state = 'NO' and order_state = #{orderState} and member_id = #{memberId} and delete_state = 'NO'
+        where delete_state = 'NO' and order_state = #{orderState} and member_id = #{memberId}
         order by create_time desc
     </select>
 
@@ -48,7 +48,9 @@
 
     <!--待评价订单-->
     <select id="apiGetUnEvaluateOrderByMemberId" resultType="com.wuliangit.shopos.dto.ApiOrderDTO">
-        select * from t_order where order_state = 'RECEIVE' and member_id = #{memberId} and delete_state = 'NO' and member_evaluation_state = 'NO' order by create_time desc
+        select * from t_order
+        where order_state = 'RECEIVE' and member_id = #{memberId} and delete_state = 'NO' and member_evaluation_state = 'NO'
+        order by create_time desc
     </select>
 
 </mapper>

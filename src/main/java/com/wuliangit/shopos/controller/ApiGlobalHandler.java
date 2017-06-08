@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * 移动端接口异常捕获
@@ -27,7 +28,17 @@ public class ApiGlobalHandler {
         result.setMsg(exception.getMessage());
         result.setCode(500);
         if (!(exception instanceof OptionException)){
-            logger.error("",exception);
+            Map<String, String[]> parameterMap = request.getParameterMap();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("参数：\n");
+
+            for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+                sb.append("Key = " + entry.getKey() + ", Value = " + entry.getValue()[0]+"\n");
+            }
+
+            logger.error(sb.toString(),exception);
             exception.printStackTrace();
         }
         return result;

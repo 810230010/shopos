@@ -39,4 +39,10 @@
         select * from t_store_joinin
         where member_id=#{memberId}
     </select>
+
+    <!--通过用户id获取-->
+    <select id="getByMemberId" resultType="com.wuliangit.shopos.entity.StoreJoinin">
+        select * from t_store_joinin
+        where member_id=#{memberId}
+    </select>
 </mapper>

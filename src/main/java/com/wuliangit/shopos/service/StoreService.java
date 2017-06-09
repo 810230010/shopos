@@ -3,6 +3,7 @@ package com.wuliangit.shopos.service;
 import com.wuliangit.shopos.dto.*;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.model.StoreMin;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface StoreService {
      * @param storeJoinin
      * @return
      */
-    int createStoreJoinin(StoreJoinin storeJoinin);
+    int createStoreJoinin(StoreJoinin storeJoinin) throws OptionException;
 
     /**
      * 店铺角色

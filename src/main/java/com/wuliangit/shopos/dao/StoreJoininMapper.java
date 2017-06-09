@@ -30,4 +30,11 @@ public interface StoreJoininMapper extends BaseMapper<StoreJoinin, Integer> {
      int passStoreJoininApply(@Param("memberId") Integer memberId);
 
      StoreJoinin queryStoreJoininByMemberId(@Param("memberId") Integer memberId);
+
+     /**
+      * 通过用户id获取
+      * @param memberId
+      * @return
+      */
+    StoreJoinin getByMemberId(Integer memberId);
 }

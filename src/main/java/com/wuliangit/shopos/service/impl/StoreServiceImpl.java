@@ -7,6 +7,7 @@ import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.dto.*;
 import com.wuliangit.shopos.entity.*;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.*;
 import org.apache.commons.lang3.StringUtils;
@@ -43,11 +44,24 @@ public class StoreServiceImpl implements StoreService {
 
 
     @Override
-    public int createStoreJoinin(StoreJoinin storeJoinin) {
+    public int createStoreJoinin(StoreJoinin storeJoinin) throws OptionException {
         Member member = WebUtil.getCurrentMember();
         storeJoinin.setMemberId(member.getMemberId());
         storeJoinin.setMemberName(member.getUsername());
         storeJoinin.setCreateTime(new Date());
+
+        StoreJoinin storeJoinin1 = storeJoininMapper.getByMemberId(member.getMemberId());
+
+        if (storeJoinin1 != null) {
+            throw new OptionException("您已经提交过申请");
+        }
+
+        Store store = storeMapper.getStoreByBindMemberUsername(member.getUsername());
+
+        if (store != null) {
+            throw new OptionException("您已经绑定过店铺");
+        }
+
         return storeJoininMapper.insertSelective(storeJoinin);
     }
 
@@ -123,7 +137,7 @@ public class StoreServiceImpl implements StoreService {
 
         Area area = areaService.getById(apiStore.getProvinceId());
 
-        if (area!=null){
+        if (area != null) {
             apiStore.setProvince(area.getName());
         }
 

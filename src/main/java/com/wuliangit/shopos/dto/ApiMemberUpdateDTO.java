@@ -13,7 +13,7 @@ public class ApiMemberUpdateDTO {
 
     private String photo;
 
-    private Boolean sex;
+    private String sex;
 
     private Date birthday;
 
@@ -69,11 +69,11 @@ public class ApiMemberUpdateDTO {
         this.photo = photo;
     }
 
-    public Boolean getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

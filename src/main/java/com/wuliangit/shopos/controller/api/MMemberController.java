@@ -193,6 +193,8 @@ public class MMemberController {
             member.setAuthState(POJOConstants.NOT_AUTH);
             member.setSalt(PasswordHelper.generateSalt());
             member.setPassword(PasswordHelper.generatePassword(password, member.getSalt()));
+            //设置默认头像
+            member.setPhoto("http://ooa95t7wi.bkt.clouddn.com/default-header.png");
 
             member.setImPassword(this.getRandomCode());
             //注册极光推送IM

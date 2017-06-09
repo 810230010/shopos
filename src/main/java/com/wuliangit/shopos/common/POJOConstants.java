@@ -134,5 +134,11 @@ public class POJOConstants {
     //退款
     public final static String STORE_ACCOUNT_LOG_REFUND = "REFUND";
 
+    //店铺类型
+    //普通商家
+    public final static String STORE_TYPE_ENTERPRISE = "ENTERPRISE";
+    //企业
+    public final static String STORE_TYPE_STORE = "STORE";
+
 
 }

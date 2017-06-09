@@ -108,6 +108,8 @@ public class StoreJoinin {
 
     private Date createTime;
 
+    private String type;
+
     public Integer getStoreJoininId() {
         return storeJoininId;
     }
@@ -522,5 +524,13 @@ public class StoreJoinin {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 }

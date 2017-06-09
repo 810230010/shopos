@@ -29,7 +29,7 @@
     <update id="passStoreJoininApply">
         update t_store_joinin
         set
-        joinin_state="CHECK_PASS",joinin_message=""
+        joinin_state="CHECK_PASS", joinin_message=""
         where
         member_id=#{memberId}
     </update>

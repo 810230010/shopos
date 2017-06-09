@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
+import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
@@ -49,6 +50,7 @@ public class StoreServiceImpl implements StoreService {
         storeJoinin.setMemberId(member.getMemberId());
         storeJoinin.setMemberName(member.getUsername());
         storeJoinin.setCreateTime(new Date());
+        storeJoinin.setType(POJOConstants.STORE_TYPE_STORE);
 
         StoreJoinin storeJoinin1 = storeJoininMapper.getByMemberId(member.getMemberId());
 

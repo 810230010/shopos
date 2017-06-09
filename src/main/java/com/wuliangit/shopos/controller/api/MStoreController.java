@@ -5,6 +5,7 @@ import com.wuliangit.shopos.dto.ApiStoreDTO;
 import com.wuliangit.shopos.dto.ApiStoreListDTO;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
+import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.CollectService;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +34,7 @@ public class MStoreController {
      * @return
      */
     @RequestMapping("/newStore")
-    public Object applyStore(StoreJoinin storeJoinin){
+    public Object applyStore(StoreJoinin storeJoinin) throws OptionException {
         RestResult result = new RestResult();
         int res = storeService.createStoreJoinin(storeJoinin);
         return result;

@@ -1,6 +1,7 @@
 #parse("/admin/models/begin.vm")
 
 <link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+<link href="/assets/admin/css/plugins/layui/layer.css" rel="stylesheet">
 #parse("/admin/models/header.vm")
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -31,7 +32,8 @@
 </div>
 #parse("/admin/models/footer.vm")
 
-<script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
+<script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>>
+<script src="/assets/admin/js/plugins/layUI/layer.js"></script>
 <script>
 
     // MetisMenu
@@ -61,27 +63,53 @@
                 {"data":"memberName","width": "10%","title":"用户名","orderable": false},
                 {"data":"storeName","width": "10%","title":"要申请的店铺名","orderable": false},
                 {"data":"scName","width": "10%","title":"店铺分类","orderable": false},
-                {"data":"payingAmount","width": "10%","title":"申请金额","orderable": false},
+                {"data":"type","width": "6%","title":"商户类型","orderable": false, "render": function (data, type, row) {
+                      if(row.type == "STORE"){
+                          return "普通商户";
+                      }
+                      return "企业";
+                }},
+                {"data":"joininState","width": "7%","title":"申请状态","orderable": false,"render": function (data, type, row) {
+                     switch (row.joininState){
+                         case "CHECK_PASS":
+                             return "审核通过";
+                         case "CHECK_FAILURE":
+                             return "已拒绝";
+                         case "INIT":
+                             return "待审核";
+
+                     }
+                }},
                 {"data":"createTime","width": "10%","title":"申请时间","orderable": false},
-                {"data":"id","width": "15%","title":"操作","orderable": false},
+                {"data":"id","width": "15%","title":"操作","orderable": false, "render": function (data, type, row) {
+                    if(row.joininState == "CHECK_PASS"){
+                        return [
+                            '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
+                            '详细信息 <i class="fa fa-tag"></i>',
+                            '</a>'
+                        ].join('');
+                    }else if(row.joininState == "CHECK_FAILURE"){
+                        return [
+                            '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
+                            '详细信息 <i class="fa fa-tag"></i>',
+                            '</a>'
+                        ].join('');
+                    }else{
+                        return [
+                            '<a class="table-button btn btn-primary btn-xs table-action reject" href="javascript:void(0)">',
+                            '拒绝 <i class="fa fa-trash"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)">',
+                            '通过 <i class="fa fa-thumbs-up"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
+                            '详细信息 <i class="fa fa-tag"></i>',
+                            '</a>'
+                        ].join('');
+                    }
+
+        }},
             ],
-            "columnDefs" : [{
-                "targets": 6,
-                "data": "memberId",
-                "render": function (data, type, row) {
-                    return [
-                        '<a class="btn btn-danger btn-xs table-action reject" href="javascript:void(0)">',
-                        '拒绝 <i class="fa fa-trash-o"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action pass" href="javascript:void(0)">',
-                        '通过申请 <i class="fa fa-edit"></i>',
-                        '</a>',
-                        '<a class="table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
-                        '详细信息 <i class="fa fa-tag"></i>',
-                        '</a>'
-                    ].join('');
-                }
-            } ],
             "searching": true,
             "ordering":true,
             "serverSide": true,
@@ -133,7 +161,14 @@
                     data : {"joininMessage" : joininMessage, "memberId" : data.memberId},
                     success:function(response) {
                         if(response.code == 200) {
-                            layer.alert('操作成功，信息将反馈给用户!', {icon: 6});
+                            swal({
+                                title: "成功!",
+                                text: "状态更改成功!",
+                                type: "success",
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                            $('#brandTable').DataTable().ajax.reload();
                         }
                     },
                     error:function(response) {
@@ -159,6 +194,7 @@
                     success:function(result) {
                         if (result.code == 200) {
                             layer.alert('申请通过，信息将反馈给用户!', {icon: 6});
+                            $('#brandTable').DataTable().ajax.reload();
                         }
                     },
                     error:function(result) {

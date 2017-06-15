@@ -560,4 +560,30 @@ public class OrderServiceImpl implements OrderService {
     public int getGoodsOrderCount(Integer goodsId) {
         return orderGoodsMapper.getGoodsOrderCount(goodsId);
     }
+
+    @Override
+    public List<StoreOrderListDTO> apiGetStoreOrderList(Integer page, Integer pageSize, String state) {
+        PageHelper.startPage(page, pageSize);
+        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.apiGetStoreOrderList(state);
+        return storeOrderListDTOS;
+    }
+
+    @Override
+    public int apiAddExpressInfo(String expressName, String expressCode, String expressNo, Integer orderId) throws OptionException {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+
+        Seller seller = WebUtil.getCurrentSeller();
+
+        if (seller.getStoreId().equals(order.getStoreId())){
+            order.setExpressCode(expressName);
+            order.setExpressName(expressCode);
+            order.setExpressNo(expressNo);
+            order.setOrderState(POJOConstants.ORDER_STATE_DELIVE);
+            order.setDeliverTime(new Date());
+
+            return orderMapper.updateByPrimaryKeySelective(order);
+        }else{
+            throw new OptionException("该订单不属于您！");
+        }
+    }
 }

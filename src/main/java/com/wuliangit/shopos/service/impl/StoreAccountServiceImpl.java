@@ -15,6 +15,7 @@ import com.wuliangit.shopos.dao.StoreCashMapper;
 import com.wuliangit.shopos.dto.StoreAccountListDTO;
 import com.wuliangit.shopos.dto.StoreCashListDTO;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
+import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.entity.StoreAccount;
 import com.wuliangit.shopos.entity.StoreAccountLog;
 import com.wuliangit.shopos.entity.StoreCash;
@@ -155,5 +156,72 @@ public class StoreAccountServiceImpl implements StoreAccountService {
         PageHelper.startPage(page,pageSize);
         List<StoreCashListDTO> result = storeCashMapper.getCashListDate(orderColumn,orderType,searchKey);
         return result;
+    }
+
+    @Override
+    public int apisStoreDoCash(BigDecimal amount) throws OptionException, AlipayApiException{
+        Seller seller = WebUtil.getCurrentSeller();
+        StoreAccount storeAccount = storeAccountMapper.getByStoreId(seller.getStoreId());
+
+        //验证是否设置支付宝提现账户
+        if (StringUtils.isEmpty(storeAccount.getAlipayAccount())) {
+            throw new OptionException("未设置提现支付宝账户！");
+        }
+
+        //验证是否有足够的余额可以提现
+        if (storeAccount.getAvailableBalance().compareTo(amount) < 0) {
+            throw new OptionException("提现金额不足！");
+        }
+
+        StoreCash storeCash = new StoreCash();
+        storeCash.setAmount(amount);
+        storeCash.setCreateTime(new Date());
+        storeCash.setStoreId(seller.getStoreId());
+        storeCash.setOutBizNo(UUID.randomUUID().toString().replace("-",""));
+
+
+        AlipayClient alipayClient = AliPay.getAlipayClient();
+        AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
+
+        AlipayFundTransToaccountTransferModel model = new AlipayFundTransToaccountTransferModel();
+        model.setAmount(amount.toString());
+        model.setPayerShowName("商户提现");
+        model.setPayeeAccount(storeAccount.getAlipayAccount());
+        model.setOutBizNo(storeCash.getOutBizNo());
+        /*
+        收款方账户类型。可取值：
+        1、ALIPAY_USERID：支付宝账号对应的支付宝唯一用户号。以2088开头的16位纯数字组成。
+        2、ALIPAY_LOGONID：支付宝登录号，支持邮箱和手机号格式。*/
+        model.setPayeeType("ALIPAY_LOGONID");
+
+        request.setBizModel(model);
+
+        AlipayFundTransToaccountTransferResponse response = alipayClient.execute(request);
+        if(response.isSuccess()){
+            System.out.println("调用成功");
+            storeAccount.setAvailableBalance(storeAccount.getAvailableBalance().subtract(amount));
+
+            //记录提现记录
+            storeCashMapper.insertSelective(storeCash);
+
+            //记录账户流水记录
+            StoreAccountLog storeAccountLog = new StoreAccountLog();
+            storeAccountLog.setAmount(amount);
+            storeAccountLog.setCreateTime(new Date());
+            storeAccountLog.setStoreId(seller.getStoreId());
+            storeAccountLog.setType(POJOConstants.STORE_ACCOUNT_LOG_ACASH);
+            storeAccountLogMapper.insertSelective(storeAccountLog);
+            return storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
+        } else {
+            throw new OptionException("提现失败,原因："+response.getSubMsg());
+        }
+    }
+
+    @Override
+    public int apiSettingStoreAlipay(String alipayAccount) {
+        Seller seller = WebUtil.getCurrentSeller();
+        StoreAccount storeAccount = storeAccountMapper.getByStoreId(seller.getStoreId());
+        storeAccount.setAlipayAccount(alipayAccount);
+        return storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
     }
 }

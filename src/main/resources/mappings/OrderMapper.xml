@@ -53,4 +53,18 @@
         order by create_time desc
     </select>
 
+    <!--API接口获取订单列表-->
+    <select id="apiGetStoreOrderList" resultType="com.wuliangit.shopos.dto.StoreOrderListDTO">
+        SELECT order_id,out_trade_no,member_name,member_email,order_amount,order_state,
+        express_name,create_time,reciver_phone,reciver_name,reciver_address,order_from,is_lock,
+        carriage_amount,order_amount,goods_amount,payment_time,payment_code
+        FROM t_order
+        <where>
+            order_state != 'REFUND'
+        </where>
+        order by
+        create_time desc
+    </select>
+
+
 </mapper>

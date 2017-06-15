@@ -197,4 +197,23 @@ public interface OrderService {
      * @return
      */
     int getGoodsOrderCount(Integer goodsId);
+
+    /**
+     * API接口获取订单列表
+     * @param page
+     * @param pageSize
+     * @param state
+     * @return
+     */
+    List<StoreOrderListDTO> apiGetStoreOrderList(Integer page, Integer pageSize, String state);
+
+    /**
+     * API接口发货
+     * @param expressName
+     * @param expressCode
+     * @param expressNo
+     * @param orderId
+     * @return
+     */
+    int apiAddExpressInfo(String expressName, String expressCode, String expressNo, Integer orderId) throws OptionException;
 }

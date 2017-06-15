@@ -116,7 +116,7 @@ public class StoreAccountController {
     }
 
     /**
-     * 提现页面
+     * 修改提现支付宝账户
      * @return
      */
     @RequestMapping(value = "/settingAlipay",method = RequestMethod.POST)

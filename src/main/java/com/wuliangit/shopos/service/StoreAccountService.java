@@ -79,4 +79,18 @@ public interface StoreAccountService {
      * @return: java.util.List<com.wuliangit.shopos.dto.StoreCashListDTO>
      */
     List<StoreCashListDTO> getCashListDate(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
+
+    /**
+     * API店铺支付宝提现
+     * @param amount
+     * @return
+     */
+    int apisStoreDoCash(BigDecimal amount) throws OptionException, AlipayApiException;
+
+    /**
+     * API修改提现支付宝账户
+     * @param alipayAccount
+     * @return
+     */
+    int apiSettingStoreAlipay(String alipayAccount);
 }

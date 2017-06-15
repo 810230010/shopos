@@ -1,14 +1,21 @@
 package com.wuliangit.shopos.controller.api;
 
+import com.alipay.api.AlipayApiException;
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.ApiSellerInfo;
+import com.wuliangit.shopos.entity.StoreAccount;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.exception.OptionException;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.GoodsService;
+import com.wuliangit.shopos.service.StoreAccountService;
 import com.wuliangit.shopos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -26,6 +33,9 @@ public class MSellerController {
 
     @Autowired
     private StoreService storeService;
+
+    @Autowired
+    private StoreAccountService storeAccountService;
 
     /**
      *
@@ -60,12 +70,13 @@ public class MSellerController {
         return result;
     }
 
+    /**
+     * 商家信息
+     */
     @RequestMapping("/info")
     public Object sellerInfo(){
         RestResult result = new RestResult();
-
         ApiSellerInfo apiSellerInfo = storeService.getSellerInfo();
-
         return result;
     }
 
@@ -78,6 +89,32 @@ public class MSellerController {
     public Object applyStore(StoreJoinin storeJoinin) throws OptionException {
         RestResult result = new RestResult();
         int res = storeService.createStoreJoinin(storeJoinin);
+        return result;
+    }
+
+
+    /**
+     * 店铺支付宝提现
+     * @param amount
+     * @return
+     * @throws OptionException
+     */
+    @RequestMapping(value = "/cash",method = RequestMethod.POST)
+    public Object doCash(BigDecimal amount) throws OptionException, AlipayApiException {
+        RestResult result = new RestResult();
+        int res = storeAccountService.apisStoreDoCash(amount);
+        return result;
+    }
+
+
+    /**
+     * 修改或设置提现支付宝账户
+     * @return
+     */
+    @RequestMapping(value = "/settingAlipay",method = RequestMethod.POST)
+    public Object settingAlipay(Model model, String alipayAccount){
+        RestResult result = new RestResult();
+        int res = storeAccountService.apiSettingStoreAlipay(alipayAccount);
         return result;
     }
 

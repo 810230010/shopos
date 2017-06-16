@@ -224,4 +224,11 @@ public class StoreAccountServiceImpl implements StoreAccountService {
         storeAccount.setAlipayAccount(alipayAccount);
         return storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
     }
+
+    @Override
+    public String apiGetAlipayCashAccount() {
+        Seller seller = WebUtil.getCurrentSeller();
+        StoreAccount storeAccount = storeAccountMapper.getByStoreId(seller.getStoreId());
+        return storeAccount.getAlipayAccount();
+    }
 }

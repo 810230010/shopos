@@ -93,4 +93,10 @@ public interface StoreAccountService {
      * @return
      */
     int apiSettingStoreAlipay(String alipayAccount);
+
+    /**
+     * 获取现有提现支付宝账户
+     * @return
+     */
+    String apiGetAlipayCashAccount();
 }

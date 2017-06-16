@@ -112,9 +112,21 @@ public class MSellerController {
      * @return
      */
     @RequestMapping(value = "/settingAlipay",method = RequestMethod.POST)
-    public Object settingAlipay(Model model, String alipayAccount){
+    public Object settingAlipay(String alipayAccount){
         RestResult result = new RestResult();
         int res = storeAccountService.apiSettingStoreAlipay(alipayAccount);
+        return result;
+    }
+
+    /**
+     * 获取现有提现支付宝账户
+     * @return
+     */
+    @RequestMapping(value = "/getAlipayCashAccount",method = RequestMethod.POST)
+    public Object settingAlipay(){
+        RestResult result = new RestResult();
+        String alipayCashAccount = storeAccountService.apiGetAlipayCashAccount();
+        result.add("AlipayCashAccount", alipayCashAccount);
         return result;
     }
 

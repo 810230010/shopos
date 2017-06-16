@@ -123,7 +123,7 @@ public class MSellerController {
      * @return
      */
     @RequestMapping(value = "/getAlipayCashAccount",method = RequestMethod.POST)
-    public Object settingAlipay(){
+    public Object getAlipayCashAccount() throws OptionException {
         RestResult result = new RestResult();
         String alipayCashAccount = storeAccountService.apiGetAlipayCashAccount();
         result.add("AlipayCashAccount", alipayCashAccount);

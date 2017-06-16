@@ -226,8 +226,13 @@ public class StoreAccountServiceImpl implements StoreAccountService {
     }
 
     @Override
-    public String apiGetAlipayCashAccount() {
+    public String apiGetAlipayCashAccount() throws OptionException {
         Seller seller = WebUtil.getCurrentSeller();
+
+        if (seller == null){
+            throw new OptionException("您没有绑定店铺获取没有成为商家");
+        }
+
         StoreAccount storeAccount = storeAccountMapper.getByStoreId(seller.getStoreId());
         return storeAccount.getAlipayAccount();
     }

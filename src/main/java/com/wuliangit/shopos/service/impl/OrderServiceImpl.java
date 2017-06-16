@@ -13,6 +13,7 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.*;
 import com.wuliangit.shopos.dto.ApiOrderDTO;
 import com.wuliangit.shopos.dto.ApiOrderGoodsDTO;
+import com.wuliangit.shopos.dto.ApiSellerInfo;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OptionException;
@@ -20,6 +21,7 @@ import com.wuliangit.shopos.exception.OrderException;
 import com.wuliangit.shopos.model.*;
 import com.wuliangit.shopos.service.CartService;
 import com.wuliangit.shopos.service.OrderService;
+import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +63,8 @@ public class OrderServiceImpl implements OrderService {
     private MemberMapper memberMapper;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private StoreService storeService;
 
     @Override
     @Transactional
@@ -175,8 +179,6 @@ public class OrderServiceImpl implements OrderService {
             }
         }
 
-
-
         return orders;
     }
 
@@ -203,7 +205,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<StoreOrderListDTO> getStoreOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String state) {
         PageHelper.startPage(page, pageSize);
-        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getStoreOrderList(searchKey, orderColumn, orderType, state);
+
+        StoreMin store = WebUtil.getCurrentStore();
+
+        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getStoreOrderList(searchKey, orderColumn, orderType, state, store.getStoreId());
         return storeOrderListDTOS;
     }
 
@@ -564,7 +569,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<StoreOrderListDTO> apiGetStoreOrderList(Integer page, Integer pageSize, String state) {
         PageHelper.startPage(page, pageSize);
-        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.apiGetStoreOrderList(state);
+
+        ApiSellerInfo sellerInfo = storeService.getSellerInfo();
+
+        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.apiGetStoreOrderList(state, sellerInfo.getStoreId());
         return storeOrderListDTOS;
     }
 
@@ -572,9 +580,9 @@ public class OrderServiceImpl implements OrderService {
     public int apiAddExpressInfo(String expressName, String expressCode, String expressNo, Integer orderId) throws OptionException {
         Order order = orderMapper.selectByPrimaryKey(orderId);
 
-        Seller seller = WebUtil.getCurrentSeller();
+        ApiSellerInfo sellerInfo = storeService.getSellerInfo();
 
-        if (seller.getStoreId().equals(order.getStoreId())){
+        if (sellerInfo.getStoreId().equals(order.getStoreId())){
             order.setExpressCode(expressName);
             order.setExpressName(expressCode);
             order.setExpressNo(expressNo);

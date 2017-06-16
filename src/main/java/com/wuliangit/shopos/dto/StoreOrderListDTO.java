@@ -12,6 +12,8 @@ public class StoreOrderListDTO {
 
     private Integer orderId;
 
+    private Integer storeId;
+
     private Date createTime;
 
     private String outTradeNo;
@@ -41,6 +43,14 @@ public class StoreOrderListDTO {
     private String orderFrom;
 
     private Boolean isLock;
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
 
     public BigDecimal getCarriageAmount() {
         return carriageAmount;

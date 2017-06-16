@@ -12,6 +12,7 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreAccountLogMapper;
 import com.wuliangit.shopos.dao.StoreAccountMapper;
 import com.wuliangit.shopos.dao.StoreCashMapper;
+import com.wuliangit.shopos.dto.ApiSellerInfo;
 import com.wuliangit.shopos.dto.StoreAccountListDTO;
 import com.wuliangit.shopos.dto.StoreCashListDTO;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
@@ -22,6 +23,7 @@ import com.wuliangit.shopos.entity.StoreCash;
 import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreAccountService;
+import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +47,9 @@ public class StoreAccountServiceImpl implements StoreAccountService {
     private StoreCashMapper storeCashMapper;
     @Autowired
     private StoreAccountMapper storeAccountMapper;
+    @Autowired
+    private StoreService storeService;
+
 
     @Override
     public List<StoreAccountLog> getAccountHistoryList(Integer page, Integer pageSize, String orderColumn, String orderType) {
@@ -160,8 +165,8 @@ public class StoreAccountServiceImpl implements StoreAccountService {
 
     @Override
     public int apisStoreDoCash(BigDecimal amount) throws OptionException, AlipayApiException{
-        Seller seller = WebUtil.getCurrentSeller();
-        StoreAccount storeAccount = storeAccountMapper.getByStoreId(seller.getStoreId());
+        ApiSellerInfo sellerInfo = storeService.getSellerInfo();
+        StoreAccount storeAccount = storeAccountMapper.getByStoreId(sellerInfo.getStoreId());
 
         //验证是否设置支付宝提现账户
         if (StringUtils.isEmpty(storeAccount.getAlipayAccount())) {
@@ -176,7 +181,7 @@ public class StoreAccountServiceImpl implements StoreAccountService {
         StoreCash storeCash = new StoreCash();
         storeCash.setAmount(amount);
         storeCash.setCreateTime(new Date());
-        storeCash.setStoreId(seller.getStoreId());
+        storeCash.setStoreId(sellerInfo.getStoreId());
         storeCash.setOutBizNo(UUID.randomUUID().toString().replace("-",""));
 
 
@@ -208,7 +213,7 @@ public class StoreAccountServiceImpl implements StoreAccountService {
             StoreAccountLog storeAccountLog = new StoreAccountLog();
             storeAccountLog.setAmount(amount);
             storeAccountLog.setCreateTime(new Date());
-            storeAccountLog.setStoreId(seller.getStoreId());
+            storeAccountLog.setStoreId(sellerInfo.getStoreId());
             storeAccountLog.setType(POJOConstants.STORE_ACCOUNT_LOG_ACASH);
             storeAccountLogMapper.insertSelective(storeAccountLog);
             return storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
@@ -219,21 +224,21 @@ public class StoreAccountServiceImpl implements StoreAccountService {
 
     @Override
     public int apiSettingStoreAlipay(String alipayAccount) {
-        Seller seller = WebUtil.getCurrentSeller();
-        StoreAccount storeAccount = storeAccountMapper.getByStoreId(seller.getStoreId());
+        ApiSellerInfo sellerInfo = storeService.getSellerInfo();
+        StoreAccount storeAccount = storeAccountMapper.getByStoreId(sellerInfo.getStoreId());
         storeAccount.setAlipayAccount(alipayAccount);
         return storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
     }
 
     @Override
     public String apiGetAlipayCashAccount() throws OptionException {
-        Seller seller = WebUtil.getCurrentSeller();
+        ApiSellerInfo sellerInfo = storeService.getSellerInfo();
 
-        if (seller == null){
+        if (sellerInfo == null){
             throw new OptionException("您没有绑定店铺获取没有成为商家");
         }
 
-        StoreAccount storeAccount = storeAccountMapper.getByStoreId(seller.getStoreId());
+        StoreAccount storeAccount = storeAccountMapper.getByStoreId(sellerInfo.getStoreId());
         return storeAccount.getAlipayAccount();
     }
 }

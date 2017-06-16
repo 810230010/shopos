@@ -34,7 +34,8 @@ public interface OrderMapper extends BaseMapper<Order, Integer> {
     List<StoreOrderListDTO> getStoreOrderList(@Param("searchKey") String searchKey,
                                               @Param("orderColumn") String orderColumn,
                                               @Param("orderType") String orderType,
-                                              @Param("state") String state);
+                                              @Param("state") String state,
+                                              @Param("storeId") Integer storeId);
 
     /**
      * api接口获取订单
@@ -63,7 +64,8 @@ public interface OrderMapper extends BaseMapper<Order, Integer> {
     /**
      * API接口获取订单列表
      * @param state
+     * @param storeId
      * @return
      */
-    List<StoreOrderListDTO> apiGetStoreOrderList(String state);
+    List<StoreOrderListDTO> apiGetStoreOrderList(@Param("state")String state, @Param("storeId")Integer storeId);
 }

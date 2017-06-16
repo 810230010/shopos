@@ -19,7 +19,7 @@
         carriage_amount,order_amount,goods_amount,payment_time,payment_code
         FROM t_order
         <where>
-            order_state != 'REFUND'
+            store_id = #{storeId} and order_state != 'REFUND'
             <if test="state != null and state != '' ">
                 and order_state = #{state}
             </if>
@@ -60,7 +60,7 @@
         carriage_amount,order_amount,goods_amount,payment_time,payment_code
         FROM t_order
         <where>
-            order_state != 'REFUND'
+            store_id = #{storeId} and order_state != 'REFUND'
         </where>
         order by
         create_time desc

@@ -6,6 +6,7 @@ import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 

@@ -122,11 +122,11 @@ public class MSellerController {
      * 获取现有提现支付宝账户
      * @return
      */
-    @RequestMapping(value = "/getAlipayCashAccount",method = RequestMethod.POST)
-    public Object getAlipayCashAccount() throws OptionException {
+    @RequestMapping(value = "/getStoreAccount",method = RequestMethod.POST)
+    public Object getStoreAccount() throws OptionException {
         RestResult result = new RestResult();
-        String alipayCashAccount = storeAccountService.apiGetAlipayCashAccount();
-        result.add("AlipayCashAccount", alipayCashAccount);
+        StoreAccount storeAccount = storeAccountService.apiGetAlipayCashAccount();
+        result.add("AlipayCashAccount", storeAccount);
         return result;
     }
 

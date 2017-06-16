@@ -231,7 +231,7 @@ public class StoreAccountServiceImpl implements StoreAccountService {
     }
 
     @Override
-    public String apiGetAlipayCashAccount() throws OptionException {
+    public StoreAccount apiGetAlipayCashAccount() throws OptionException {
         ApiSellerInfo sellerInfo = storeService.getSellerInfo();
 
         if (sellerInfo == null){
@@ -239,6 +239,6 @@ public class StoreAccountServiceImpl implements StoreAccountService {
         }
 
         StoreAccount storeAccount = storeAccountMapper.getByStoreId(sellerInfo.getStoreId());
-        return storeAccount.getAlipayAccount();
+        return storeAccount;
     }
 }

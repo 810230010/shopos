@@ -98,5 +98,5 @@ public interface StoreAccountService {
      * 获取现有提现支付宝账户
      * @return
      */
-    String apiGetAlipayCashAccount() throws OptionException;
+    StoreAccount apiGetAlipayCashAccount() throws OptionException;
 }

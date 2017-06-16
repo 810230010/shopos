@@ -583,8 +583,8 @@ public class OrderServiceImpl implements OrderService {
         ApiSellerInfo sellerInfo = storeService.getSellerInfo();
 
         if (sellerInfo.getStoreId().equals(order.getStoreId())){
-            order.setExpressCode(expressName);
-            order.setExpressName(expressCode);
+            order.setExpressCode(expressCode);
+            order.setExpressName(expressName);
             order.setExpressNo(expressNo);
             order.setOrderState(POJOConstants.ORDER_STATE_DELIVE);
             order.setDeliverTime(new Date());

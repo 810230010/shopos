@@ -165,6 +165,8 @@
         <property name="tokenManager" ref="tokenManager"/>
     </bean>
 
+    <bean id="corsFilter" class="com.wuliangit.shopos.common.shiro.filter.CORSFilter"/>
+
     <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
         <property name="redirectUrl" value="/admin/login"/>
     </bean>
@@ -185,6 +187,7 @@
                 <entry key="weixin" value-ref="weixinFilter"/>
                 <entry key="api" value-ref="apiFilter"/>
                 <entry key="apiPublic" value-ref="apiPublicFilter"/>
+                <entry key="cors" value-ref="corsFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
@@ -205,7 +208,7 @@
                 /api/v1/member/register/codeCheck = anon
                 /api/v1/member/register = anon
                 /api/v1/public/** = apiPublic
-                /api/** = api
+                /api/** = api,cors
 
 
                 <!--总后台用户-->

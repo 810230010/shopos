@@ -63,15 +63,15 @@
     </bean>
 
     <!--拦截器-->
-    <mvc:interceptors>
-        <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
-        <bean id="sysInterceptor" class="com.wuliangit.shopos.common.filter.SysInterceptor"/>
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/test/number.do"/>-->
-            <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
-            <!--<bean id="sysInterceptor" class="com.alaban.filter.SysInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash; 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 &ndash;&gt;-->
+        <!--<bean id="sysInterceptor" class="com.wuliangit.shopos.common.filter.SysInterceptor"/>-->
+        <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
+            <!--&lt;!&ndash;<mvc:mapping path="/test/number.do"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 &ndash;&gt;-->
+            <!--&lt;!&ndash;<bean id="sysInterceptor" class="com.alaban.filter.SysInterceptor"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</mvc:interceptor>&ndash;&gt;-->
+    <!--</mvc:interceptors>-->
 
 
     <!--文件上传-->

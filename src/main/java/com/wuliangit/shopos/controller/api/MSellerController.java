@@ -2,7 +2,9 @@ package com.wuliangit.shopos.controller.api;
 
 import com.alipay.api.AlipayApiException;
 import com.wuliangit.shopos.common.controller.RestResult;
+import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.dto.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.ApiSellerInfo;
 import com.wuliangit.shopos.entity.StoreAccount;
 import com.wuliangit.shopos.entity.StoreJoinin;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 /**
  * Created by nilme on 2017/5/27.
@@ -38,7 +41,7 @@ public class MSellerController {
     private StoreAccountService storeAccountService;
 
     /**
-     *
+     * 添加商品
      * @param goodsCategory1Id 一级分类
      * @param goodsCategory2Id 二级分类
      * @param goodsCategory3Id 三级分类
@@ -104,10 +107,24 @@ public class MSellerController {
         return result;
     }
 
+    /**
+     * 获取店铺移动端可以编辑的商品
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "/goods/canEdit")
+    public Object getGoodsCanEdit(Integer page, Integer pageSize) {
+        RestResult result = new RestResult();
+        ArrayList<ApiGoodsListDTO> goodses = goodsService.sellerGetGoodsCanEdit(page, pageSize);
 
+        for (ApiGoodsListDTO good : goodses) {
+            good.setTitleImg(QiNiuUtils.resizeImge(good.getTitleImg()));
+        }
 
-
-
+        result.add("goodses", goodses);
+        return result;
+    }
 
     /**
      * 商家信息

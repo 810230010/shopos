@@ -141,4 +141,12 @@ public interface GoodsService {
      * @return
      */
     int apiUpdateGoods(Integer goodsId, Integer goodsCategory1Id, Integer goodsCategory2Id, Integer goodsCategory3Id, String name, BigDecimal price, BigDecimal carriage, Integer storage, String type, String unit, String goodsBody, String images);
+
+    /**
+     * 获取移动端可以编辑的商品
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> sellerGetGoodsCanEdit(Integer page, Integer pageSize);
 }

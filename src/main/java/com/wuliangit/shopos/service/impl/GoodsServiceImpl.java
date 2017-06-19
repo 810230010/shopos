@@ -11,6 +11,7 @@ import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.dto.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.ApiSellerInfo;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
@@ -18,6 +19,7 @@ import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.GoodsService;
+import com.wuliangit.shopos.service.StoreService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +45,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private StoreMapper storeMapper;
+
+    @Autowired
+    private StoreService storeService;
 
     @Override
     public ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page, Integer pageSize, String searchKey, String order) {
@@ -255,5 +260,15 @@ public class GoodsServiceImpl implements GoodsService {
         goodsSkuMapper.updateByPrimaryKeySelective(goodsSku);
 
         return res;
+    }
+
+    @Override
+    public ArrayList<ApiGoodsListDTO> sellerGetGoodsCanEdit(Integer page, Integer pageSize) {
+        ApiSellerInfo sellerInfo = storeService.getSellerInfo();
+        ArrayList<ApiGoodsListDTO> goodses = goodsMapper.sellerGetGoodsCanEdit(sellerInfo.getStoreId());
+
+
+
+        return goodses;
     }
 }

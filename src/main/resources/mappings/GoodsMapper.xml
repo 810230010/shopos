@@ -83,4 +83,9 @@
         select * from t_goods where goods_id = #{goodsId}
     </select>
 
+    <!--获取移动端可以编辑的商品-->
+    <select id="sellerGetGoodsCanEdit" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
+        select * from t_goods where goods_id = #{goodsId} and upload_from = 'PHONE'
+    </select>
+
 </mapper>

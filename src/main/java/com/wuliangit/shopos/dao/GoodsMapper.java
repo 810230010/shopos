@@ -71,4 +71,11 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @return
      */
     ApiGoodsDTO apiGetGoodsDTOById(Integer goodsId);
+
+    /**
+     * 获取移动端可以编辑的商品
+     * @param storeId
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> sellerGetGoodsCanEdit(Integer storeId);
 }

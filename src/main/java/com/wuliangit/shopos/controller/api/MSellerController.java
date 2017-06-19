@@ -63,10 +63,10 @@ public class MSellerController {
                            String type,
                            String unit,
                            String goodsBody,
-                           String images){
+                           String images) {
         RestResult result = new RestResult();
-        int res = goodsService.apiCreateGooods(goodsCategory1Id,goodsCategory2Id,goodsCategory3Id,
-                name,price,carriage,storage,type,unit,goodsBody,images);
+        int res = goodsService.apiCreateGooods(goodsCategory1Id, goodsCategory2Id, goodsCategory3Id,
+                name, price, carriage, storage, type, unit, goodsBody, images);
         return result;
     }
 
@@ -86,7 +86,8 @@ public class MSellerController {
      * @return
      */
     @RequestMapping(value = "/goods/update" ,method = RequestMethod.POST)
-    public Object updateGoods(Integer goodsCategory1Id,
+    public Object updateGoods(Integer goodsId,
+                              Integer goodsCategory1Id,
                            Integer goodsCategory2Id,
                            Integer goodsCategory3Id,
                            String name,
@@ -98,7 +99,7 @@ public class MSellerController {
                            String goodsBody,
                            String images){
         RestResult result = new RestResult();
-        int res = goodsService.apiUpdateGoods(goodsCategory1Id,goodsCategory2Id,goodsCategory3Id,
+        int res = goodsService.apiUpdateGoods(goodsId, goodsCategory1Id,goodsCategory2Id,goodsCategory3Id,
                 name,price,carriage,storage,type,unit,goodsBody,images);
         return result;
     }

@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.print.event.PrintJobAttributeEvent;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -205,9 +204,56 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public int apiUpdateGoods(Integer goodsCategory1Id, Integer goodsCategory2Id, Integer goodsCategory3Id, String name, BigDecimal price, BigDecimal carriage, Integer storage, String type, String unit, String goodsBody, String images) {
+    @Transactional
+    public int apiUpdateGoods(Integer goodsId, Integer goodsCategory1Id, Integer goodsCategory2Id, Integer goodsCategory3Id, String name, BigDecimal price, BigDecimal carriage, Integer storage, String type, String unit, String goodsBody, String images) {
+        Member member = WebUtil.getCurrentMember();
+        Store store = storeMapper.getStoreByBindMemberUsername(member.getUsername());
+        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
 
+        if (!goods.getStoreId().equals(store.getStoreId())){
+            return 0;
+        }
 
-        return 0;
+        goods.setGoodsCategory1Id(goodsCategory1Id);
+        goods.setGoodsCategory2Id(goodsCategory2Id);
+        goods.setGoodsCategory3Id(goodsCategory3Id);
+        goods.setName(name);
+        goods.setPrice(price);
+        goods.setCarriage(carriage);
+        goods.setStorage(storage);
+        goods.setType(type);
+        goods.setUnit(unit);
+        goods.setGoodsBody(goodsBody);
+
+        //处理图片
+        String[] split = images.split("&&");
+
+        StringBuilder bs = new StringBuilder();
+        int flag = 0;
+        for (String s : split) {
+            if (flag==0){
+                bs.append(QiNiuUtils.getBaseUrl()).append(s);
+                goods.setTitleImg(QiNiuUtils.getBaseUrl()+s);
+                flag= 1;
+            }else{
+                bs.append("&&").append(QiNiuUtils.getBaseUrl()).append(s);
+            }
+
+        }
+
+        goods.setImages(bs.toString());
+        goods.setEditTime(new Date());
+
+        int res = goodsMapper.updateByPrimaryKeySelective(goods);
+
+        List<GoodsSku> goodsSkus = goodsSkuMapper.getGoodsSkuByGoodsId(goods.getGoodsId());
+        //移动端上传的坑定只有一个sku
+        GoodsSku goodsSku = goodsSkus.get(0);
+        goodsSku.setSkuPrice(price);
+        goodsSku.setSkuStock(storage);
+        goodsSku.setSkuValue(name);
+        goodsSkuMapper.updateByPrimaryKeySelective(goodsSku);
+
+        return res;
     }
 }

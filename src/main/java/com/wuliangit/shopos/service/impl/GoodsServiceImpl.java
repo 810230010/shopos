@@ -3,6 +3,7 @@ package com.wuliangit.shopos.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.GoodsMapper;
@@ -58,6 +59,8 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setCreateTime(new Date());
         goods.setStoreName(store.getName());
         goods.setEditTime(new Date());
+
+        goods.setUploadFrom(POJOConstants.GOODS_FROM_COMPUTER);
 
         if (store.getStoreId().equals(1)) {
             goods.setIsPlatform(true);
@@ -137,6 +140,7 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setCarriage(carriage);
         goods.setStorage(storage);
         goods.setType(type);
+        goods.setUploadFrom(POJOConstants.GOODS_FROM_PHONE);
         goods.setUnit(unit);
         goods.setGoodsBody(goodsBody);
         goods.setAdWord("");
@@ -198,5 +202,12 @@ public class GoodsServiceImpl implements GoodsService {
             goodsDTO.setArea(store.getAreaInfo());
         }
         return goodsDTO;
+    }
+
+    @Override
+    public int apiUpdateGoods(Integer goodsCategory1Id, Integer goodsCategory2Id, Integer goodsCategory3Id, String name, BigDecimal price, BigDecimal carriage, Integer storage, String type, String unit, String goodsBody, String images) {
+
+
+        return 0;
     }
 }

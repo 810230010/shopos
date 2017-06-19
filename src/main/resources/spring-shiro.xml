@@ -204,6 +204,7 @@
                 <!--接口api-->
                 /api/v1/member/login = anon
                 /api/v1/member/logout = anon
+                /api/v1/member/uploadGPS = anon
                 /api/v1/member/register/getCode = anon
                 /api/v1/member/register/codeCheck = anon
                 /api/v1/member/register = anon

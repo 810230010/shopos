@@ -71,6 +71,44 @@ public class MSellerController {
     }
 
     /**
+     * 更新商品
+     * @param goodsCategory1Id
+     * @param goodsCategory2Id
+     * @param goodsCategory3Id
+     * @param name
+     * @param price
+     * @param carriage
+     * @param storage
+     * @param type
+     * @param unit
+     * @param goodsBody
+     * @param images
+     * @return
+     */
+    @RequestMapping(value = "/goods/update" ,method = RequestMethod.POST)
+    public Object updateGoods(Integer goodsCategory1Id,
+                           Integer goodsCategory2Id,
+                           Integer goodsCategory3Id,
+                           String name,
+                           BigDecimal price,
+                           BigDecimal carriage,
+                           Integer storage,
+                           String type,
+                           String unit,
+                           String goodsBody,
+                           String images){
+        RestResult result = new RestResult();
+        int res = goodsService.apiUpdateGoods(goodsCategory1Id,goodsCategory2Id,goodsCategory3Id,
+                name,price,carriage,storage,type,unit,goodsBody,images);
+        return result;
+    }
+
+
+
+
+
+
+    /**
      * 商家信息
      */
     @RequestMapping("/info")

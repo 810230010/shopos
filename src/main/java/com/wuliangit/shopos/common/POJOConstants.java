@@ -140,5 +140,11 @@ public class POJOConstants {
     //企业
     public final static String STORE_TYPE_STORE = "STORE";
 
+    //商品上传来源
+    //移动端
+    public final static String GOODS_FROM_PHONE = "PHONE";
+    //电脑端
+    public final static String GOODS_FROM_COMPUTER = "COMPUTER";
+
 
 }

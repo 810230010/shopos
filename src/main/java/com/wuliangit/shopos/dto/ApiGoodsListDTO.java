@@ -23,6 +23,16 @@ public class ApiGoodsListDTO {
 
     private String area;
 
+    private String uploadFrom;
+
+    public String getUploadFrom() {
+        return uploadFrom;
+    }
+
+    public void setUploadFrom(String uploadFrom) {
+        this.uploadFrom = uploadFrom;
+    }
+
     public Integer getGoodsId() {
         return goodsId;
     }

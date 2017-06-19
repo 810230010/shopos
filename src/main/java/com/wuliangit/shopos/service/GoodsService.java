@@ -122,4 +122,21 @@ public interface GoodsService {
      * @return
      */
     ApiGoodsDTO apiGetGoodsDTOById(Integer goodsId);
+
+    /**
+     * api更新商品
+     * @param goodsCategory1Id
+     * @param goodsCategory2Id
+     * @param goodsCategory3Id
+     * @param name
+     * @param price
+     * @param carriage
+     * @param storage
+     * @param type
+     * @param unit
+     * @param goodsBody
+     * @param images
+     * @return
+     */
+    int apiUpdateGoods(Integer goodsCategory1Id, Integer goodsCategory2Id, Integer goodsCategory3Id, String name, BigDecimal price, BigDecimal carriage, Integer storage, String type, String unit, String goodsBody, String images);
 }

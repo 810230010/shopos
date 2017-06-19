@@ -97,4 +97,12 @@ public interface MemberService {
      * @return
      */
     List<MemberAuthListDTO> getMemberAuthList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
+
+    /**
+     * 更新用户GPS信息
+     * @param longitude
+     * @param latitude
+     * @return
+     */
+    int uploadGPS(Double longitude, Double latitude);
 }

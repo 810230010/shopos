@@ -98,6 +98,8 @@ public class Goods {
 
     private Integer needCount;
 
+    private String uploadFrom;
+
     private String goodsBody;
 
     public Integer getGoodsId() {
@@ -474,6 +476,14 @@ public class Goods {
 
     public void setNeedCount(Integer needCount) {
         this.needCount = needCount;
+    }
+
+    public String getUploadFrom() {
+        return uploadFrom;
+    }
+
+    public void setUploadFrom(String uploadFrom) {
+        this.uploadFrom = uploadFrom == null ? null : uploadFrom.trim();
     }
 
     public String getGoodsBody() {

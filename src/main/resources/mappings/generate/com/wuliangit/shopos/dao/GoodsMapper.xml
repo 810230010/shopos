@@ -49,6 +49,7 @@
     <result column="sell_time_begin" property="sellTimeBegin" jdbcType="TIMESTAMP" />
     <result column="sell_time_end" property="sellTimeEnd" jdbcType="TIMESTAMP" />
     <result column="need_count" property="needCount" jdbcType="INTEGER" />
+    <result column="upload_from" property="uploadFrom" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.Goods" extends="BaseResultMap" >
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
@@ -60,7 +61,7 @@
     state, verify, create_time, edit_time, is_new, type, activity_id, activity_type, 
     is_virtual, virtual_invalid_refund, is_appoint, is_presell, vat, commend, evaluation_good_star, 
     evaluation_count, del_flag, attrs, is_platform, area, is_check, sell_time_begin, 
-    sell_time_end, need_count
+    sell_time_end, need_count, upload_from
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -96,7 +97,7 @@
       evaluation_count, del_flag, attrs, 
       is_platform, area, is_check, 
       sell_time_begin, sell_time_end, need_count, 
-      goods_body)
+      upload_from, goods_body)
     values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{adWord,jdbcType=VARCHAR}, 
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{goodsCategory1Id,jdbcType=INTEGER}, 
       #{goodsCategory2Id,jdbcType=INTEGER}, #{goodsCategory3Id,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, 
@@ -112,7 +113,7 @@
       #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{attrs,jdbcType=VARCHAR}, 
       #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{isCheck,jdbcType=BIT}, 
       #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, #{needCount,jdbcType=INTEGER}, 
-      #{goodsBody,jdbcType=LONGVARCHAR})
+      #{uploadFrom,jdbcType=VARCHAR}, #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     <selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="AFTER" >
@@ -258,6 +259,9 @@
       <if test="needCount != null" >
         need_count,
       </if>
+      <if test="uploadFrom != null" >
+        upload_from,
+      </if>
       <if test="goodsBody != null" >
         goods_body,
       </if>
@@ -400,6 +404,9 @@
       </if>
       <if test="needCount != null" >
         #{needCount,jdbcType=INTEGER},
+      </if>
+      <if test="uploadFrom != null" >
+        #{uploadFrom,jdbcType=VARCHAR},
       </if>
       <if test="goodsBody != null" >
         #{goodsBody,jdbcType=LONGVARCHAR},
@@ -547,6 +554,9 @@
       <if test="needCount != null" >
         need_count = #{needCount,jdbcType=INTEGER},
       </if>
+      <if test="uploadFrom != null" >
+        upload_from = #{uploadFrom,jdbcType=VARCHAR},
+      </if>
       <if test="goodsBody != null" >
         goods_body = #{goodsBody,jdbcType=LONGVARCHAR},
       </if>
@@ -601,6 +611,7 @@
       sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
       sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
       need_count = #{needCount,jdbcType=INTEGER},
+      upload_from = #{uploadFrom,jdbcType=VARCHAR},
       goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -651,7 +662,8 @@
       is_check = #{isCheck,jdbcType=BIT},
       sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
       sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
-      need_count = #{needCount,jdbcType=INTEGER}
+      need_count = #{needCount,jdbcType=INTEGER},
+      upload_from = #{uploadFrom,jdbcType=VARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

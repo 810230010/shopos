@@ -92,6 +92,8 @@ public class Member {
 
     private String tuikeAuth;
 
+    private String gps;
+
     public Integer getMemberId() {
         return memberId;
     }
@@ -442,5 +444,13 @@ public class Member {
 
     public void setTuikeAuth(String tuikeAuth) {
         this.tuikeAuth = tuikeAuth == null ? null : tuikeAuth.trim();
+    }
+
+    public String getGps() {
+        return gps;
+    }
+
+    public void setGps(String gps) {
+        this.gps = gps == null ? null : gps.trim();
     }
 }

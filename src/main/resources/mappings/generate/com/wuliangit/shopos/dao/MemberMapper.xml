@@ -46,6 +46,7 @@
     <result column="idcard_front" property="idcardFront" jdbcType="VARCHAR" />
     <result column="idcard_back" property="idcardBack" jdbcType="VARCHAR" />
     <result column="tuike_auth" property="tuikeAuth" jdbcType="VARCHAR" />
+    <result column="gps" property="gps" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     member_id, username, nickname, truename, password, im_password, paypwd, salt, photo, 
@@ -53,7 +54,7 @@
     create_time, login_time, login_ip, qqopenid, qqinfo, sinaopenid, sinainfo, points, 
     available_balance, freeze_balance, state, credit, areaid, cityid, provinceid, areainfo, 
     exppoints, inviter_id, del_flag, update_time, auth_state, idcard_num, idcard_front, 
-    idcard_back, tuike_auth
+    idcard_back, tuike_auth, gps
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -82,8 +83,8 @@
       cityid, provinceid, areainfo, 
       exppoints, inviter_id, del_flag, 
       update_time, auth_state, idcard_num, 
-      idcard_front, idcard_back, tuike_auth
-      )
+      idcard_front, idcard_back, tuike_auth, 
+      gps)
     values (#{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{truename,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{imPassword,jdbcType=VARCHAR}, #{paypwd,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
@@ -97,8 +98,8 @@
       #{cityid,jdbcType=INTEGER}, #{provinceid,jdbcType=INTEGER}, #{areainfo,jdbcType=VARCHAR}, 
       #{exppoints,jdbcType=INTEGER}, #{inviterId,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{authState,jdbcType=VARCHAR}, #{idcardNum,jdbcType=VARCHAR}, 
-      #{idcardFront,jdbcType=VARCHAR}, #{idcardBack,jdbcType=VARCHAR}, #{tuikeAuth,jdbcType=VARCHAR}
-      )
+      #{idcardFront,jdbcType=VARCHAR}, #{idcardBack,jdbcType=VARCHAR}, #{tuikeAuth,jdbcType=VARCHAR}, 
+      #{gps,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Member" >
     <selectKey resultType="java.lang.Integer" keyProperty="memberId" order="AFTER" >
@@ -235,6 +236,9 @@
       <if test="tuikeAuth != null" >
         tuike_auth,
       </if>
+      <if test="gps != null" >
+        gps,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="username != null" >
@@ -365,6 +369,9 @@
       </if>
       <if test="tuikeAuth != null" >
         #{tuikeAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="gps != null" >
+        #{gps,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -500,6 +507,9 @@
       <if test="tuikeAuth != null" >
         tuike_auth = #{tuikeAuth,jdbcType=VARCHAR},
       </if>
+      <if test="gps != null" >
+        gps = #{gps,jdbcType=VARCHAR},
+      </if>
     </set>
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
@@ -547,7 +557,8 @@
       idcard_num = #{idcardNum,jdbcType=VARCHAR},
       idcard_front = #{idcardFront,jdbcType=VARCHAR},
       idcard_back = #{idcardBack,jdbcType=VARCHAR},
-      tuike_auth = #{tuikeAuth,jdbcType=VARCHAR}
+      tuike_auth = #{tuikeAuth,jdbcType=VARCHAR},
+      gps = #{gps,jdbcType=VARCHAR}
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
 </mapper>

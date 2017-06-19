@@ -323,6 +323,15 @@ public class MMemberController {
         return result;
     }
 
+    @RequestMapping("uploadGPS")
+    public Object uploadGPS(Double longitude, Double latitude){
+        RestResult result = new RestResult();
+
+        int res = memberService.uploadGPS(longitude,latitude);
+
+        return result;
+    }
+
     /**
      * 获取6位随机密码
      * @return

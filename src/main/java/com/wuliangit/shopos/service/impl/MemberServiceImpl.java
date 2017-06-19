@@ -73,8 +73,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<MemberListDTO> getMemberList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
-        PageHelper.startPage(page,pageSize);
-        List<MemberListDTO> result = memberMapper.getMemberList(orderColumn,orderType,searchKey);
+        PageHelper.startPage(page, pageSize);
+        List<MemberListDTO> result = memberMapper.getMemberList(orderColumn, orderType, searchKey);
         return result;
     }
 
@@ -85,9 +85,9 @@ public class MemberServiceImpl implements MemberService {
 
     public Integer updateMemberAuthState(Integer memberId, boolean isCheck) {
         Member member = memberMapper.selectByPrimaryKey(memberId);
-        if (isCheck){
+        if (isCheck) {
             member.setAuthState(POJOConstants.AUTHED);
-        }else{
+        } else {
             member.setAuthState(POJOConstants.REAUTH);
         }
         return memberMapper.updateByPrimaryKeySelective(member);
@@ -95,8 +95,19 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<MemberAuthListDTO> getMemberAuthList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
-        PageHelper.startPage(page,pageSize);
-        List<MemberAuthListDTO> result = memberMapper.getMemberAuthList(orderColumn,orderType,searchKey);
+        PageHelper.startPage(page, pageSize);
+        List<MemberAuthListDTO> result = memberMapper.getMemberAuthList(orderColumn, orderType, searchKey);
         return result;
+    }
+
+    @Override
+    public int uploadGPS(Double longitude, Double latitude) {
+        Member currentMember = WebUtil.getCurrentMember();
+        if (currentMember != null) {
+            Member member = memberMapper.selectByPrimaryKey(currentMember.getMemberId());
+            member.setGps(longitude + "," + latitude);
+            return memberMapper.updateByPrimaryKey(member);
+        }
+        return 0;
     }
 }

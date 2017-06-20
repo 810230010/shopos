@@ -114,13 +114,13 @@ public class MSellerController {
     public Object getGoodsCanEdit(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
-        ArrayList<ApiGoodsListDTO> goodses = goodsService.sellerGetGoodsCanEdit(page, pageSize);
+        ArrayList<ApiGoodsListDTO> goods = goodsService.sellerGetGoodsCanEdit(page, pageSize);
 
-        for (ApiGoodsListDTO good : goodses) {
+        for (ApiGoodsListDTO good : goods) {
             good.setTitleImg(QiNiuUtils.resizeImge(good.getTitleImg()));
         }
 
-        result.add("goodses", goodses);
+        result.add("goods", goods);
         return result;
     }
 

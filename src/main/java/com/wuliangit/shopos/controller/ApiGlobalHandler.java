@@ -5,6 +5,8 @@ import com.wuliangit.shopos.exception.OptionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -71,6 +73,22 @@ public class ApiGlobalHandler {
         return result;
     }
 
+    /**
+     * 处理Http method使用不正确的错误, 例如: 新增产品应该使用POST, 但实际使用了GET
+     * @param req
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(BindException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Object handleBeanPropertyBindingResult(HttpServletRequest req, BindException ex) {
+        RestResult result = new RestResult();
+        logger.error("",ex);
+        result.setCode(HttpStatus.BAD_REQUEST.value());
+        result.setMsg(ex.getMessage());
+        ex.printStackTrace();
+        return result;
+    }
 
 
 

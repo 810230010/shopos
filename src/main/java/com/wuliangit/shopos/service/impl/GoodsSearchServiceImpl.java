@@ -5,6 +5,7 @@ import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSearchMapper;
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.GoodsSearchDTO;
 import com.wuliangit.shopos.service.GoodsSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     @Autowired
     private GoodsSearchMapper goodsSearchMapper;
 
-    private static String[] orderList = {"salenum", "collect", "evaluationGoodStar", "click", "evaluationCount"};
+    private static String[] orderList = {"g.salenum", "g.collect", "g.evaluationGoodStar", "g.click", "g.evaluationCount"};
 
     @Override
     public ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page,
@@ -43,42 +44,49 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     }
 
     @Override
-    public ArrayList<ApiGoodsListDTO> directSellingSearch(Integer page, Integer pageSize, String searchKey, String orderType) {
-        PageHelper.startPage(page, pageSize);
-        String order = this.createOrder(orderType);
-        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(searchKey, order,  "GOODS_TYPE_DIRECTSELLING");
+    public ArrayList<ApiGoodsListDTO> directSellingSearch(GoodsSearchDTO goodsSearchDTO) {
+        PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
+        String order = this.createOrder(goodsSearchDTO.getOrderType());
+
+        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(),
+                order, "GOODS_TYPE_DIRECTSELLING", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
+
         return goodses;
     }
 
     @Override
-    public ArrayList<ApiGoodsListDTO> newGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType) {
-        PageHelper.startPage(page, pageSize);
-        String order = this.createOrder(orderType);
-        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(searchKey, order,  "GOODS_TYPE_NEWGOODS");
+    public ArrayList<ApiGoodsListDTO> newGoodsSearch(GoodsSearchDTO goodsSearchDTO) {
+        PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
+        String order = this.createOrder(goodsSearchDTO.getOrderType());
+        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
+                "GOODS_TYPE_NEWGOODS", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
         return goodses;
     }
 
     @Override
-    public ArrayList<ApiGoodsListDTO> activityGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType) {
-        PageHelper.startPage(page, pageSize);
-        String order = this.createOrder(orderType);
-        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(searchKey, order,  "GOODS_TYPE_ACTIVITY");
+    public ArrayList<ApiGoodsListDTO> activityGoodsSearch(GoodsSearchDTO goodsSearchDTO) {
+        PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
+        String order = this.createOrder(goodsSearchDTO.getOrderType());
+        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
+                "GOODS_TYPE_ACTIVITY", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
         return goodses;
     }
 
     @Override
-    public ArrayList<ApiGoodsListDTO> seckillGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType) {
-        PageHelper.startPage(page, pageSize);
-        String order = this.createOrder(orderType);
-        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(searchKey, order,  "GOODS_TYPE_SECKILL");
+    public ArrayList<ApiGoodsListDTO> seckillGoodsSearch(GoodsSearchDTO goodsSearchDTO) {
+        PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
+        String order = this.createOrder(goodsSearchDTO.getOrderType());
+        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
+                "GOODS_TYPE_SECKILL", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
         return goodses;
     }
 
     @Override
-    public ArrayList<ApiGoodsListDTO> normalGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType) {
-        PageHelper.startPage(page, pageSize);
-        String order = this.createOrder(orderType);
-        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(searchKey, order,  "GOODS_TYPE_NORMAL");
+    public ArrayList<ApiGoodsListDTO> normalGoodsSearch(GoodsSearchDTO goodsSearchDTO) {
+        PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
+        String order = this.createOrder(goodsSearchDTO.getOrderType());
+        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
+                "GOODS_TYPE_NORMAL", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
         return goodses;
     }
 
@@ -90,22 +98,27 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
 
     /**
      * 拼接排序参数
+     *
      * @param primaryOrder 主排序参数
      * @return
      */
     private String createOrder(String primaryOrder) {
         StringBuilder order = new StringBuilder();
 
-        switch (primaryOrder){
+        if (primaryOrder == null) {
+            primaryOrder = "salenum";
+        }
+
+        switch (primaryOrder) {
             case "priceAsc":
-                order.append("price").append(" asc");
+                order.append("g.price").append(" asc");
                 break;
             case "priceDesc":
-                order.append("price").append(" desc");
+                order.append("g.price").append(" desc");
                 break;
-//            case "distance":
-//                order.append("distance").append(" asc");
-//                break;
+            case "distance":
+                order.append("distance").append(" asc");
+                break;
             default:
                 primaryOrder = StringUtils.camelToUnderline(primaryOrder);
                 order.append(primaryOrder).append(" desc");

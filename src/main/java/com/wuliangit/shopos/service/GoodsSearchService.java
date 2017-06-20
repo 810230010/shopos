@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.GoodsSearchDTO;
 
 import java.util.ArrayList;
 
@@ -33,54 +34,39 @@ public interface GoodsSearchService {
 
     /**
      * 企业直销商品专区
-     * @param page
-     * @param pageSize
-     * @param searchKey
-     * @param orderType
+     * @param goodsSearchDTO
      * @return
      */
-    ArrayList<ApiGoodsListDTO> directSellingSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+    ArrayList<ApiGoodsListDTO> directSellingSearch(GoodsSearchDTO goodsSearchDTO);
 
     /**
      * 企业新品商品专区
-     * @param page
-     * @param pageSize
-     * @param searchKey
-     * @param orderType
+     * @param goodsSearchDTO
      * @return
      */
-    ArrayList<ApiGoodsListDTO> newGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+    ArrayList<ApiGoodsListDTO> newGoodsSearch(GoodsSearchDTO goodsSearchDTO);
 
     /**
      * 企业活动商品专区
-     * @param page
-     * @param pageSize
-     * @param searchKey
-     * @param orderType
+     * @param goodsSearchDTO
      * @return
      */
-    ArrayList<ApiGoodsListDTO> activityGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+    ArrayList<ApiGoodsListDTO> activityGoodsSearch(GoodsSearchDTO goodsSearchDTO);
 
     /**
      * 一口秒价专区
-     * @param page
-     * @param pageSize
-     * @param searchKey
-     * @param orderType
+     * @param goodsSearchDTO
      * @return
      */
-    ArrayList<ApiGoodsListDTO> seckillGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+    ArrayList<ApiGoodsListDTO> seckillGoodsSearch(GoodsSearchDTO goodsSearchDTO);
 
 
     /**
      * 普通商品专区
-     * @param page
-     * @param pageSize
-     * @param searchKey
-     * @param orderType
+     * @param goodsSearchDTO
      * @return
      */
-    ArrayList<ApiGoodsListDTO> normalGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderType);
+    ArrayList<ApiGoodsListDTO> normalGoodsSearch(GoodsSearchDTO goodsSearchDTO);
 
     /**
      * 首页商品

@@ -4,13 +4,17 @@
 
     <!--企业直销商品专区-->
     <select id="goodsTypeSearch" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
-        select goods_id, name, store_name, price, title_img, salenum, carriage, area, type from t_goods
+        select g.goods_id, g.name, g.store_name, g.price, g.title_img, g.salenum, g.carriage, g.area, g.type
+        <if test="lng != null">
+            , (POWER(MOD(ABS(s.live_store_gps_lng - #{lng}),360),2) + POWER(ABS(s.live_store_gps_lat - #{lat}),2)) AS distance
+        </if>
+        from t_goods g inner join t_store s on g.store_id = s.store_id
         <where>
-            type = #{type}
+            g.type = #{type}
             <if test="searchKey != null and searchKey != '' ">
-                and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
-                or ad_word like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
-                or store_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+                and ( g.name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or g.ad_word like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or g.store_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
             </if>
         </where>
         order by ${order}

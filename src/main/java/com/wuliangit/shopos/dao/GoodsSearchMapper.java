@@ -19,7 +19,9 @@ public interface GoodsSearchMapper {
      */
     ArrayList<ApiGoodsListDTO> goodsTypeSearch(@Param("searchKey") String searchKey,
                                                @Param("order")String order,
-                                               @Param("type")String type);
+                                               @Param("type")String type,
+                                               @Param("lng")Double lng,
+                                               @Param("lat")Double lat);
 
     /**
      * 首页商品

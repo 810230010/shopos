@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.model.OrderGoodsInfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,14 +42,6 @@ public class MTestController {
 
     @RequestMapping("/p2")
     public Object api3(@RequestParam("orderIds[]") List<Integer> orderIds) {
-        RestResult result = new RestResult();
-
-
-        return result;
-    }
-
-    @RequestMapping("/test3")
-    public Object test3() {
         RestResult result = new RestResult();
 
 

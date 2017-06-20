@@ -24,7 +24,7 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     @Autowired
     private GoodsSearchMapper goodsSearchMapper;
 
-    private static String[] orderList = {"salenum", "collect", "evaluationGoodStar", "click", "evaluationCount", "distance"};
+    private static String[] orderList = {"salenum", "collect", "evaluationGoodStar", "click", "evaluationCount"};
 
     @Override
     public ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page,

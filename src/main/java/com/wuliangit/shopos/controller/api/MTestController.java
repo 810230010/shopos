@@ -47,4 +47,12 @@ public class MTestController {
         return result;
     }
 
+    @RequestMapping("/test3")
+    public Object test3() {
+        RestResult result = new RestResult();
+
+
+        return result;
+    }
+
 }

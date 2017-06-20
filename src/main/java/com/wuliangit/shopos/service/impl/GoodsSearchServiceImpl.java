@@ -103,9 +103,9 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
             case "priceDesc":
                 order.append("price").append(" desc");
                 break;
-            case "distance":
-                order.append("price").append(" desc");
-                break;
+//            case "distance":
+//                order.append("distance").append(" asc");
+//                break;
             default:
                 primaryOrder = StringUtils.camelToUnderline(primaryOrder);
                 order.append(primaryOrder).append(" desc");

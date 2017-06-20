@@ -266,9 +266,6 @@ public class GoodsServiceImpl implements GoodsService {
     public ArrayList<ApiGoodsListDTO> sellerGetGoodsCanEdit(Integer page, Integer pageSize) {
         ApiSellerInfo sellerInfo = storeService.getSellerInfo();
         ArrayList<ApiGoodsListDTO> goodses = goodsMapper.sellerGetGoodsCanEdit(sellerInfo.getStoreId());
-
-
-
         return goodses;
     }
 }

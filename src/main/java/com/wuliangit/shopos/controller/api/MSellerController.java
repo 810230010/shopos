@@ -15,10 +15,7 @@ import com.wuliangit.shopos.service.StoreAccountService;
 import com.wuliangit.shopos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -114,7 +111,8 @@ public class MSellerController {
      * @return
      */
     @RequestMapping(value = "/goods/canEdit")
-    public Object getGoodsCanEdit(Integer page, Integer pageSize) {
+    public Object getGoodsCanEdit(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         RestResult result = new RestResult();
         ArrayList<ApiGoodsListDTO> goodses = goodsService.sellerGetGoodsCanEdit(page, pageSize);
 

@@ -4,7 +4,7 @@
 
     <!--api商品搜索-->
     <select id="apiGoodsSearch" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
-        select goods_id, name, store_name, price, title_img, salenum, carriage, area from t_goods
+        select goods_id, name, store_name, price, title_img, salenum, carriage, area, upload_from from t_goods
         <where>
             <if test="brandId != null and brandId !=''">
                 brand_id = #{brandId}
@@ -85,7 +85,7 @@
 
     <!--获取移动端可以编辑的商品-->
     <select id="sellerGetGoodsCanEdit" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
-        select * from t_goods where goods_id = #{goodsId} and upload_from = 'PHONE'
+        select * from t_goods where store_id = #{storeId} and upload_from = 'PHONE'
     </select>
 
 </mapper>

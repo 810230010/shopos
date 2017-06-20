@@ -105,7 +105,8 @@ public class MemberServiceImpl implements MemberService {
         Member currentMember = WebUtil.getCurrentMember();
         if (currentMember != null) {
             Member member = memberMapper.selectByPrimaryKey(currentMember.getMemberId());
-            member.setGps(longitude + "," + latitude);
+            member.setGpsLat(longitude);
+            member.setGpsLng(latitude);
             return memberMapper.updateByPrimaryKey(member);
         }
         return 0;

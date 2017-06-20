@@ -31,7 +31,9 @@ public class StoreUpdateDTO {
 
     private String liveStoreAddress;
 
-    private String liveStoreGps;
+    private Double liveStoreGpsLng;
+
+    private Double liveStoreGpsLat;
 
     public String getAreaInfo() {
         return areaInfo;
@@ -137,11 +139,19 @@ public class StoreUpdateDTO {
         this.liveStoreAddress = liveStoreAddress;
     }
 
-    public String getLiveStoreGps() {
-        return liveStoreGps;
+    public Double getLiveStoreGpsLng() {
+        return liveStoreGpsLng;
     }
 
-    public void setLiveStoreGps(String liveStoreGps) {
-        this.liveStoreGps = liveStoreGps;
+    public void setLiveStoreGpsLng(Double liveStoreGpsLng) {
+        this.liveStoreGpsLng = liveStoreGpsLng;
+    }
+
+    public Double getLiveStoreGpsLat() {
+        return liveStoreGpsLat;
+    }
+
+    public void setLiveStoreGpsLat(Double liveStoreGpsLat) {
+        this.liveStoreGpsLat = liveStoreGpsLat;
     }
 }

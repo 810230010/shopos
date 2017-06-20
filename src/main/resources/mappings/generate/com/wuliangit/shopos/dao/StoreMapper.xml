@@ -56,7 +56,8 @@
     <result column="live_store_name" property="liveStoreName" jdbcType="VARCHAR" />
     <result column="live_store_address" property="liveStoreAddress" jdbcType="VARCHAR" />
     <result column="live_store_tel" property="liveStoreTel" jdbcType="VARCHAR" />
-    <result column="live_store_gps" property="liveStoreGps" jdbcType="VARCHAR" />
+    <result column="live_store_gps_lng" property="liveStoreGpsLng" jdbcType="DOUBLE" />
+    <result column="live_store_gps_lat" property="liveStoreGpsLat" jdbcType="DOUBLE" />
     <result column="live_store_bus" property="liveStoreBus" jdbcType="VARCHAR" />
     <result column="refund_address" property="refundAddress" jdbcType="VARCHAR" />
     <result column="refund_name" property="refundName" jdbcType="VARCHAR" />
@@ -70,7 +71,8 @@
     deliverycredit, collect, slide_url, stamp, printdesc, sales, presales, aftersales, 
     workingtime, free_price, decoration_switch, decoration_only, seven_day_return, real_goods, 
     sales_return, live, pay_after, store_free_time, live_store_name, live_store_address, 
-    live_store_tel, live_store_gps, live_store_bus, refund_address, refund_name, refund_phone
+    live_store_tel, live_store_gps_lng, live_store_gps_lat, live_store_bus, refund_address, 
+    refund_name, refund_phone
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -103,9 +105,9 @@
       decoration_switch, decoration_only, seven_day_return, 
       real_goods, sales_return, live, pay_after, 
       store_free_time, live_store_name, live_store_address, 
-      live_store_tel, live_store_gps, live_store_bus, 
-      refund_address, refund_name, refund_phone
-      )
+      live_store_tel, live_store_gps_lng, live_store_gps_lat, 
+      live_store_bus, refund_address, refund_name, 
+      refund_phone)
     values (#{sellerAdminId,jdbcType=VARCHAR}, #{bindMemberId,jdbcType=INTEGER}, #{bindMemberUsername,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{gradeId,jdbcType=INTEGER}, #{scId,jdbcType=INTEGER}, 
       #{type,jdbcType=VARCHAR}, #{storeCompanyName,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, 
@@ -123,9 +125,9 @@
       #{decorationSwitch,jdbcType=BIT}, #{decorationOnly,jdbcType=BIT}, #{sevenDayReturn,jdbcType=BIT}, 
       #{realGoods,jdbcType=BIT}, #{salesReturn,jdbcType=BIT}, #{live,jdbcType=BIT}, #{payAfter,jdbcType=BIT}, 
       #{storeFreeTime,jdbcType=VARCHAR}, #{liveStoreName,jdbcType=VARCHAR}, #{liveStoreAddress,jdbcType=VARCHAR}, 
-      #{liveStoreTel,jdbcType=VARCHAR}, #{liveStoreGps,jdbcType=VARCHAR}, #{liveStoreBus,jdbcType=VARCHAR}, 
-      #{refundAddress,jdbcType=VARCHAR}, #{refundName,jdbcType=VARCHAR}, #{refundPhone,jdbcType=VARCHAR}
-      )
+      #{liveStoreTel,jdbcType=VARCHAR}, #{liveStoreGpsLng,jdbcType=DOUBLE}, #{liveStoreGpsLat,jdbcType=DOUBLE}, 
+      #{liveStoreBus,jdbcType=VARCHAR}, #{refundAddress,jdbcType=VARCHAR}, #{refundName,jdbcType=VARCHAR}, 
+      #{refundPhone,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Store" >
     <selectKey resultType="java.lang.Integer" keyProperty="storeId" order="AFTER" >
@@ -292,8 +294,11 @@
       <if test="liveStoreTel != null" >
         live_store_tel,
       </if>
-      <if test="liveStoreGps != null" >
-        live_store_gps,
+      <if test="liveStoreGpsLng != null" >
+        live_store_gps_lng,
+      </if>
+      <if test="liveStoreGpsLat != null" >
+        live_store_gps_lat,
       </if>
       <if test="liveStoreBus != null" >
         live_store_bus,
@@ -468,8 +473,11 @@
       <if test="liveStoreTel != null" >
         #{liveStoreTel,jdbcType=VARCHAR},
       </if>
-      <if test="liveStoreGps != null" >
-        #{liveStoreGps,jdbcType=VARCHAR},
+      <if test="liveStoreGpsLng != null" >
+        #{liveStoreGpsLng,jdbcType=DOUBLE},
+      </if>
+      <if test="liveStoreGpsLat != null" >
+        #{liveStoreGpsLat,jdbcType=DOUBLE},
       </if>
       <if test="liveStoreBus != null" >
         #{liveStoreBus,jdbcType=VARCHAR},
@@ -647,8 +655,11 @@
       <if test="liveStoreTel != null" >
         live_store_tel = #{liveStoreTel,jdbcType=VARCHAR},
       </if>
-      <if test="liveStoreGps != null" >
-        live_store_gps = #{liveStoreGps,jdbcType=VARCHAR},
+      <if test="liveStoreGpsLng != null" >
+        live_store_gps_lng = #{liveStoreGpsLng,jdbcType=DOUBLE},
+      </if>
+      <if test="liveStoreGpsLat != null" >
+        live_store_gps_lat = #{liveStoreGpsLat,jdbcType=DOUBLE},
       </if>
       <if test="liveStoreBus != null" >
         live_store_bus = #{liveStoreBus,jdbcType=VARCHAR},
@@ -720,7 +731,8 @@
       live_store_name = #{liveStoreName,jdbcType=VARCHAR},
       live_store_address = #{liveStoreAddress,jdbcType=VARCHAR},
       live_store_tel = #{liveStoreTel,jdbcType=VARCHAR},
-      live_store_gps = #{liveStoreGps,jdbcType=VARCHAR},
+      live_store_gps_lng = #{liveStoreGpsLng,jdbcType=DOUBLE},
+      live_store_gps_lat = #{liveStoreGpsLat,jdbcType=DOUBLE},
       live_store_bus = #{liveStoreBus,jdbcType=VARCHAR},
       refund_address = #{refundAddress,jdbcType=VARCHAR},
       refund_name = #{refundName,jdbcType=VARCHAR},

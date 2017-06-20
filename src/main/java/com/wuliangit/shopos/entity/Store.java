@@ -112,7 +112,9 @@ public class Store {
 
     private String liveStoreTel;
 
-    private String liveStoreGps;
+    private Double liveStoreGpsLng;
+
+    private Double liveStoreGpsLat;
 
     private String liveStoreBus;
 
@@ -554,12 +556,20 @@ public class Store {
         this.liveStoreTel = liveStoreTel == null ? null : liveStoreTel.trim();
     }
 
-    public String getLiveStoreGps() {
-        return liveStoreGps;
+    public Double getLiveStoreGpsLng() {
+        return liveStoreGpsLng;
     }
 
-    public void setLiveStoreGps(String liveStoreGps) {
-        this.liveStoreGps = liveStoreGps == null ? null : liveStoreGps.trim();
+    public void setLiveStoreGpsLng(Double liveStoreGpsLng) {
+        this.liveStoreGpsLng = liveStoreGpsLng;
+    }
+
+    public Double getLiveStoreGpsLat() {
+        return liveStoreGpsLat;
+    }
+
+    public void setLiveStoreGpsLat(Double liveStoreGpsLat) {
+        this.liveStoreGpsLat = liveStoreGpsLat;
     }
 
     public String getLiveStoreBus() {

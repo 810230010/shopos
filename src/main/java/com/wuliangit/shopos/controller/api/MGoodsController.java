@@ -47,7 +47,7 @@ public class MGoodsController {
      * @param page            页码
      * @param pageSize        页大小
      * @param searchKey       搜索值
-     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数，distance:距离
      * @param brandId         品牌类型id
      * @param goodsCategoryId 商品分类id
      * @param storeId         店铺id
@@ -113,7 +113,7 @@ public class MGoodsController {
      * @param page            页码
      * @param pageSize        页大小
      * @param searchKey       搜索值
-     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数，distance:距离
      * @return
      */
     @RequestMapping("/directSellingSearch")
@@ -138,7 +138,7 @@ public class MGoodsController {
      * @param page            页码
      * @param pageSize        页大小
      * @param searchKey       搜索值
-     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数，distance:距离
      * @return
      */
     @RequestMapping("/newGoodsSearch")
@@ -163,7 +163,7 @@ public class MGoodsController {
      * @param page            页码
      * @param pageSize        页大小
      * @param searchKey       搜索值
-     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数，distance:距离
      * @return
      */
     @RequestMapping("/activityGoodsSearch")
@@ -188,7 +188,7 @@ public class MGoodsController {
      * @param page            页码
      * @param pageSize        页大小
      * @param searchKey       搜索值
-     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数，distance:距离
      * @return
      */
     @RequestMapping("/seckillGoodsSearch")
@@ -213,7 +213,7 @@ public class MGoodsController {
      * @param page            页码
      * @param pageSize        页大小
      * @param searchKey       搜索值
-     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数
+     * @param orderType       排序类型 默认综合 salenum:销量, collect:搜藏数量, evaluationGoodStar:评价, click:点击量, evaluationCount:评价数，distance:距离
      * @return
      */
     @RequestMapping("/normalGoodsSearch")

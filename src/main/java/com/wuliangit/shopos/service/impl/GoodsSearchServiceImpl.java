@@ -24,7 +24,7 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     @Autowired
     private GoodsSearchMapper goodsSearchMapper;
 
-    private static String[] orderList = {"salenum", "collect", "evaluationGoodStar", "click", "evaluationCount"};
+    private static String[] orderList = {"salenum", "collect", "evaluationGoodStar", "click", "evaluationCount", "distance"};
 
     @Override
     public ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page,
@@ -96,13 +96,19 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     private String createOrder(String primaryOrder) {
         StringBuilder order = new StringBuilder();
 
-        if (primaryOrder.endsWith("priceAsc")) {
-            order.append("price").append(" asc");
-        } else if (primaryOrder.endsWith("priceDesc")) {
-            order.append("price").append(" desc");
-        } else {
-            primaryOrder = StringUtils.camelToUnderline(primaryOrder);
-            order.append(primaryOrder).append(" desc");
+        switch (primaryOrder){
+            case "priceAsc":
+                order.append("price").append(" asc");
+                break;
+            case "priceDesc":
+                order.append("price").append(" desc");
+                break;
+            case "distance":
+                order.append("price").append(" desc");
+                break;
+            default:
+                primaryOrder = StringUtils.camelToUnderline(primaryOrder);
+                order.append(primaryOrder).append(" desc");
         }
 
         for (String orderKey : orderList) {

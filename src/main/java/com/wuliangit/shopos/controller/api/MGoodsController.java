@@ -42,7 +42,6 @@ public class MGoodsController {
     @Autowired
     private OrderService orderService;
 
-
     /**
      * 商品搜索
      *

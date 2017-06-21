@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.dao.GoodsCategoryMapper;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
@@ -48,6 +49,8 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private StoreService storeService;
+    @Autowired
+    private GoodsCategoryMapper goodsCategoryMapper;
 
     @Override
     public ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page, Integer pageSize, String searchKey, String order) {
@@ -200,6 +203,12 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public ApiGoodsDTO apiGetGoodsDTOById(Integer goodsId) {
         ApiGoodsDTO goodsDTO = goodsMapper.apiGetGoodsDTOById(goodsId);
+
+        //设置商品类别
+        goodsDTO.setGoodsCategory1(goodsCategoryMapper.selectByPrimaryKey(goodsDTO.getGoodsCategory1Id()).getName());
+        goodsDTO.setGoodsCategory2(goodsCategoryMapper.selectByPrimaryKey(goodsDTO.getGoodsCategory2Id()).getName());
+        goodsDTO.setGoodsCategory3(goodsCategoryMapper.selectByPrimaryKey(goodsDTO.getGoodsCategory3Id()).getName());
+
         Store store = storeMapper.selectByPrimaryKey(goodsDTO.getStoreId());
         goodsDTO.setStoreLogo(store.getLogo());
         if (!StringUtils.isEmpty(store.getAreaInfo())){

@@ -28,6 +28,12 @@ public class ApiGoodsDTO {
 
     private Integer goodsCategory3Id;
 
+    private String goodsCategory1;
+
+    private String goodsCategory2;
+
+    private String goodsCategory3;
+
     private Integer brandId;
 
     private BigDecimal price;
@@ -103,6 +109,31 @@ public class ApiGoodsDTO {
     private Integer needCount;
 
     private Integer orderCount;
+
+
+    public String getGoodsCategory1() {
+        return goodsCategory1;
+    }
+
+    public void setGoodsCategory1(String goodsCategory1) {
+        this.goodsCategory1 = goodsCategory1;
+    }
+
+    public String getGoodsCategory2() {
+        return goodsCategory2;
+    }
+
+    public void setGoodsCategory2(String goodsCategory2) {
+        this.goodsCategory2 = goodsCategory2;
+    }
+
+    public String getGoodsCategory3() {
+        return goodsCategory3;
+    }
+
+    public void setGoodsCategory3(String goodsCategory3) {
+        this.goodsCategory3 = goodsCategory3;
+    }
 
     public Integer getOrderCount() {
         return orderCount;

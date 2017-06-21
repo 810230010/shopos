@@ -13,24 +13,7 @@ import java.util.List;
 
 public interface GoodsMapper extends BaseMapper<Goods, Integer> {
 
-    /**
-     * 商品搜索
-     * @param searchKey
-     * @param order
-     * @param brandId
-     * @param goodsCategoryId
-     * @param storeId
-     * @param storeGoodsCategoryId
-     * @param type
-     * @return
-     */
-    ArrayList<ApiGoodsListDTO> apiGoodsSearch(@Param("searchKey") String searchKey,
-                                              @Param("order") String order,
-                                              @Param("brandId") Integer brandId,
-                                              @Param("goodsCategoryId") Integer goodsCategoryId,
-                                              @Param("storeId") Integer storeId,
-                                              @Param("storeGoodsCategoryId") Integer storeGoodsCategoryId,
-                                              @Param("type") String type);
+
 
     /**
      * 后台商品搜索

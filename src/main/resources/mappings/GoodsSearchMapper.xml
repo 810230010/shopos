@@ -2,9 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.GoodsSearchMapper" >
 
+    <!--api商品搜索-->
+    <select id="apiGoodsSearch" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
+        select g.goods_id, g.name, g.store_name, g.price, g.title_img, g.salenum, g.carriage, g.area, g.type, g.upload_from
+        <if test="lng != null">
+            , (POWER(MOD(ABS(s.live_store_gps_lng - #{lng}),360),2) + POWER(ABS(s.live_store_gps_lat - #{lat}),2)) AS distance
+        </if>
+        from t_goods g inner join t_store s on g.store_id = s.store_id
+        <where>
+            <if test="brandId != null and brandId !=''">
+                g.brand_id = #{brandId}
+            </if>
+            <if test="goodsCategoryId != null and goodsCategoryId !=''">
+                and g.goods_category3_id = #{goodsCategoryId}
+            </if>
+            <if test="storeId != null and storeId !=''">
+                and g.store_id = #{storeId}
+            </if>
+            <if test="type != null and type !=''">
+                and g.type = #{type}
+            </if>
+            <if test="searchKey != null and searchKey != '' ">
+                and ( g.name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+        </where>
+        order by ${order}
+    </select>
+
+
     <!--企业直销商品专区-->
     <select id="goodsTypeSearch" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
-        select g.goods_id, g.name, g.store_name, g.price, g.title_img, g.salenum, g.carriage, g.area, g.type
+        select g.goods_id, g.name, g.store_name, g.price, g.title_img, g.salenum, g.carriage, g.area, g.type, g.upload_from
         <if test="lng != null">
             , (POWER(MOD(ABS(s.live_store_gps_lng - #{lng}),360),2) + POWER(ABS(s.live_store_gps_lat - #{lat}),2)) AS distance
         </if>
@@ -12,9 +40,7 @@
         <where>
             g.type = #{type}
             <if test="searchKey != null and searchKey != '' ">
-                and ( g.name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
-                or g.ad_word like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
-                or g.store_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+                and ( g.name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
             </if>
         </where>
         order by ${order}

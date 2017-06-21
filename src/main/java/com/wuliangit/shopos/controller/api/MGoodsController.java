@@ -65,9 +65,10 @@ public class MGoodsController {
                               @RequestParam(value = "goodsCategoryId", required = false) Integer goodsCategoryId,
                               @RequestParam(value = "storeId", required = false) Integer storeId,
                               @RequestParam(value = "type", required = false) String type,
-                              @RequestParam(value = "storeGoodsCategoryId", required = false) Integer storeGoodsCategoryId) {
+                              @RequestParam(value = "storeGoodsCategoryId", required = false) Integer storeGoodsCategoryId,
+                              Double lng, Double lat) {
         RestResult result = new RestResult();
-        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.apiGoodsSearch(page, pageSize, searchKey, orderType, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type);
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.apiGoodsSearch(page, pageSize, searchKey, orderType, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type,lng,lat);
         result.add("goods", goods);
         return result;
     }
@@ -97,7 +98,7 @@ public class MGoodsController {
 
         List<ApiEvaluateGoodsListDTO> evaluateList = evaluateGoodsService.getEvaluateGoodsList(1, 2, goodsId);
 
-        if(goods.getType().equals("GOODS_TYPE_NEWGOODS")){
+        if (goods.getType().equals("GOODS_TYPE_NEWGOODS")) {
             int res = orderService.getGoodsOrderCount(goods.getGoodsId());
             goods.setOrderCount(res);
         }
@@ -105,12 +106,13 @@ public class MGoodsController {
         result.add("isCollect", isCollect);
         result.add("goods", goods);
         result.add("goodsSku", goodsSkuMap);
-        result.add("evaluates",evaluateList);
+        result.add("evaluates", evaluateList);
         return result;
     }
 
     /**
      * 企业直销商品专区
+     *
      * @param goodsSearchDTO 搜索对象
      * @return
      */
@@ -200,7 +202,26 @@ public class MGoodsController {
     }
 
     /**
+     * 普通商品专区
+     *
+     * @return
+     */
+    @RequestMapping("/secondHandSearch")
+    public Object secondHandSearch(@Validated GoodsSearchDTO goodsSearchDTO) {
+        RestResult result = new RestResult();
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.secondHandSearch(goodsSearchDTO);
+
+        for (ApiGoodsListDTO good : goods) {
+            good.setTitleImg(QiNiuUtils.resizeImge(good.getTitleImg()));
+        }
+
+        result.add("goods", goods);
+        return result;
+    }
+
+    /**
      * 首页商品
+     *
      * @return
      */
     @RequestMapping("/indexGoods")

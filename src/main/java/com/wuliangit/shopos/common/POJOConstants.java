@@ -147,4 +147,6 @@ public class POJOConstants {
     public final static String GOODS_FROM_COMPUTER = "COMPUTER";
 
 
+
+
 }

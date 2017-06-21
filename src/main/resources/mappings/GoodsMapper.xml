@@ -2,28 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.GoodsMapper" >
 
-    <!--api商品搜索-->
-    <select id="apiGoodsSearch" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
-        select goods_id, name, store_name, price, title_img, salenum, carriage, area, upload_from from t_goods
-        <where>
-            <if test="brandId != null and brandId !=''">
-                brand_id = #{brandId}
-            </if>
-            <if test="goodsCategoryId != null and goodsCategoryId !=''">
-                and goods_category3_id = #{goodsCategoryId}
-            </if>
-            <if test="storeId != null and storeId !=''">
-                and store_id = #{storeId}
-            </if>
-            <if test="type != null and type !=''">
-                and type = #{type}
-            </if>
-            <if test="searchKey != null and searchKey != '' ">
-                and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
-            </if>
-        </where>
-        order by ${order}
-    </select>
+
 
     <!--管理员商品搜索-->
     <select id="search" resultType="com.wuliangit.shopos.entity.Goods">

@@ -2,8 +2,6 @@ package com.wuliangit.shopos.dto;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
 /**
  * Created by nilme on 2017/6/20.

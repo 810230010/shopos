@@ -21,7 +21,8 @@ public interface GoodsSearchService {
      * @param storeId              店铺id
      * @param storeGoodsCategoryId 店铺内分类id
      * @param type                 商品类型
-     * @return
+     * @param lng
+     *@param lat @return
      */
     ArrayList<ApiGoodsListDTO> apiGoodsSearch(Integer page,
                                               Integer pageSize,
@@ -30,7 +31,7 @@ public interface GoodsSearchService {
                                               Integer brandId,
                                               Integer goodsCategoryId,
                                               Integer storeId,
-                                              Integer storeGoodsCategoryId, String type);
+                                              Integer storeGoodsCategoryId, String type, Double lng, Double lat);
 
     /**
      * 企业直销商品专区
@@ -73,4 +74,11 @@ public interface GoodsSearchService {
      * @return
      */
     ArrayList<ApiGoodsListDTO> indexGoods();
+
+    /**
+     * 二手商品
+     * @param goodsSearchDTO
+     * @return
+     */
+    ArrayList<ApiGoodsListDTO> secondHandSearch(GoodsSearchDTO goodsSearchDTO);
 }

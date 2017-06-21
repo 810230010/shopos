@@ -36,17 +36,17 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
                                                      Integer goodsCategoryId,
                                                      Integer storeId,
                                                      Integer storeGoodsCategoryId,
-                                                     String type) {
+                                                     String type, Double lng, Double lat) {
         PageHelper.startPage(page, pageSize);
-        String order = this.createOrder(orderType);
-        ArrayList<ApiGoodsListDTO> goodses = goodsMapper.apiGoodsSearch(searchKey, order, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type);
+        String order = this.createOrder(orderType, lng, lat);
+        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.apiGoodsSearch(searchKey, order, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type, lng, lat);
         return goodses;
     }
 
     @Override
     public ArrayList<ApiGoodsListDTO> directSellingSearch(GoodsSearchDTO goodsSearchDTO) {
         PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
-        String order = this.createOrder(goodsSearchDTO.getOrderType());
+        String order = this.createOrder(goodsSearchDTO.getOrderType(), goodsSearchDTO.getLng(), goodsSearchDTO.getLat());
 
         ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(),
                 order, "GOODS_TYPE_DIRECTSELLING", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
@@ -57,7 +57,7 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     @Override
     public ArrayList<ApiGoodsListDTO> newGoodsSearch(GoodsSearchDTO goodsSearchDTO) {
         PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
-        String order = this.createOrder(goodsSearchDTO.getOrderType());
+        String order = this.createOrder(goodsSearchDTO.getOrderType(), goodsSearchDTO.getLng(), goodsSearchDTO.getLat());
         ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
                 "GOODS_TYPE_NEWGOODS", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
         return goodses;
@@ -66,7 +66,7 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     @Override
     public ArrayList<ApiGoodsListDTO> activityGoodsSearch(GoodsSearchDTO goodsSearchDTO) {
         PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
-        String order = this.createOrder(goodsSearchDTO.getOrderType());
+        String order = this.createOrder(goodsSearchDTO.getOrderType(), goodsSearchDTO.getLng(), goodsSearchDTO.getLat());
         ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
                 "GOODS_TYPE_ACTIVITY", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
         return goodses;
@@ -75,7 +75,7 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     @Override
     public ArrayList<ApiGoodsListDTO> seckillGoodsSearch(GoodsSearchDTO goodsSearchDTO) {
         PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
-        String order = this.createOrder(goodsSearchDTO.getOrderType());
+        String order = this.createOrder(goodsSearchDTO.getOrderType(), goodsSearchDTO.getLng(), goodsSearchDTO.getLat());
         ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
                 "GOODS_TYPE_SECKILL", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
         return goodses;
@@ -84,7 +84,7 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
     @Override
     public ArrayList<ApiGoodsListDTO> normalGoodsSearch(GoodsSearchDTO goodsSearchDTO) {
         PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
-        String order = this.createOrder(goodsSearchDTO.getOrderType());
+        String order = this.createOrder(goodsSearchDTO.getOrderType(), goodsSearchDTO.getLng(), goodsSearchDTO.getLat());
         ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
                 "GOODS_TYPE_NORMAL", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
         return goodses;
@@ -96,13 +96,22 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
         return indexGoods;
     }
 
+    @Override
+    public ArrayList<ApiGoodsListDTO> secondHandSearch(GoodsSearchDTO goodsSearchDTO) {
+        PageHelper.startPage(goodsSearchDTO.getPage(), goodsSearchDTO.getPageSize());
+        String order = this.createOrder(goodsSearchDTO.getOrderType(), goodsSearchDTO.getLng(), goodsSearchDTO.getLat());
+        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
+                "SECOND_HAND", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
+        return goodses;
+    }
+
     /**
      * 拼接排序参数
      *
      * @param primaryOrder 主排序参数
      * @return
      */
-    private String createOrder(String primaryOrder) {
+    private String createOrder(String primaryOrder, Double lng, Double lat) {
         StringBuilder order = new StringBuilder();
 
         if (primaryOrder == null) {
@@ -117,7 +126,11 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
                 order.append("g.price").append(" desc");
                 break;
             case "distance":
-                order.append("distance").append(" asc");
+                if (lng != null && lat != null && !lng.equals(0) && !lat.equals(0)) {
+                    order.append("distance").append(" asc");
+                }else{
+                    order.append("g.collect").append(" asc");
+                }
                 break;
             default:
                 primaryOrder = StringUtils.camelToUnderline(primaryOrder);

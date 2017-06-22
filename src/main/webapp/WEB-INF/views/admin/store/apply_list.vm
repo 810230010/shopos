@@ -70,7 +70,7 @@
                       return "企业";
                 }},
                 {"data":"joininState","width": "7%","title":"申请状态","orderable": false,"render": function (data, type, row) {
-                     switch (row.joininState){
+                     switch (data){
                          case "CHECK_PASS":
                              return "审核通过";
                          case "CHECK_FAILURE":
@@ -79,6 +79,7 @@
                              return "待审核";
 
                      }
+
                 }},
                 {"data":"createTime","width": "10%","title":"申请时间","orderable": false},
                 {"data":"id","width": "15%","title":"操作","orderable": false, "render": function (data, type, row) {

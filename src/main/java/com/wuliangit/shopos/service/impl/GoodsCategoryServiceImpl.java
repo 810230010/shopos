@@ -75,4 +75,9 @@ public class GoodsCategoryServiceImpl implements GoodsCategoryService {
 
         return categories;
     }
+
+    @Override
+    public int updateGrade(Integer parentId, Integer goodsCategoryId) {
+        return goodsCategoryMapper.updateGrade(parentId,goodsCategoryId);
+    }
 }

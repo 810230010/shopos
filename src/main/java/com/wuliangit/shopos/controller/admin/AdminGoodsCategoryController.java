@@ -159,4 +159,18 @@ public class AdminGoodsCategoryController {
         ArrayList<GoodsCategory> goodsCategories = goodsCategoryService.AdminSearch(page, pageSize, searchKey, orderColumn, orderType,parentId);
         return new PageResult<GoodsCategory>(goodsCategories, draw);
     }
+
+    /**
+     * 更改商品的分类
+     * @param parentId
+     * @param goodsCategoryId
+     * @return
+     */
+    @RequestMapping("/updateGrade")
+    @ResponseBody
+    public Object updateGrade(Integer parentId, Integer goodsCategoryId){
+        RestResult restResult = new RestResult();
+        int result = goodsCategoryService.updateGrade(parentId,goodsCategoryId);
+        return restResult;
+    }
 }

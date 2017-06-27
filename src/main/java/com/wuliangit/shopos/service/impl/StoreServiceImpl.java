@@ -51,8 +51,6 @@ public class StoreServiceImpl implements StoreService {
         storeJoinin.setMemberName(member.getUsername());
         storeJoinin.setCreateTime(new Date());
         storeJoinin.setType(POJOConstants.STORE_TYPE_STORE);
-        storeJoinin.setJoininState(POJOConstants.STORE_JOIN_INIT);
-        storeJoinin.setStoreName("t_"+member.getNickname());
 
         StoreJoinin storeJoinin1 = storeJoininMapper.getByMemberId(member.getMemberId());
 

@@ -135,9 +135,9 @@ public class POJOConstants {
     public final static String STORE_ACCOUNT_LOG_REFUND = "REFUND";
 
     //店铺类型
-    //企业
-    public final static String STORE_TYPE_ENTERPRISE = "ENTERPRISE";
     //普通商家
+    public final static String STORE_TYPE_ENTERPRISE = "ENTERPRISE";
+    //企业
     public final static String STORE_TYPE_STORE = "STORE";
 
     //商品上传来源
@@ -147,14 +147,6 @@ public class POJOConstants {
     public final static String GOODS_FROM_COMPUTER = "COMPUTER";
 
 
-    //店铺申请状态
-    //已提交申请
-    public final static String STORE_JOIN_INIT = "INIT";
-    //审核成功
-    public final static String STORE_JOIN_CHECK_PASS = "CHECK_PASS";
-    //审核失败
-    public final static String STORE_JOIN_CHECK_FAILURE = "CHECK_FAILURE";
-    //审核通过开店
-    public final static String STORE_JOIN_SUCCESS_OPEN = "SUCCESS_OPEN";
+
 
 }

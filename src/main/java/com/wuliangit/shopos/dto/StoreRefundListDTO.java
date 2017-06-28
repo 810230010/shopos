@@ -58,6 +58,16 @@ public class StoreRefundListDTO {
 
     private String expressNo;
 
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getRefundId() {
         return refundId;
     }

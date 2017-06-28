@@ -1,0 +1,197 @@
+#parse("/admin/models/begin.vm")
+
+#parse("/admin/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>订单-订单详情</h2>
+    </div>
+    <div class="col-lg-2">
+        <h2><a type="button" class="btn btn-primary btn-small" href="/admin/order/orderListPage">返回</a></h2>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-exclamation-circle"></i> 基本信息</h5>
+                </div>
+                <table class="table white-bg table-striped">
+                    <tbody>
+                    <tr>
+                        <td><span class="text-muted">订单号：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{order.outTradeNo}</span></td>
+                        <td><span class="text-muted">购货人：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{order.memberName}</span></td>
+                        <td><span class="text-muted">支付方式：</span></td>
+                        <td class="td_split"><span class="text-primary">
+                            #if($order.paymentCode == "WX")
+                                微信
+                            #elseif($order.paymentCode == "ALIPAY")
+                                支付宝
+                            #elseif($order.paymentCode == "CARD")
+                                银行卡
+                            #elseif($order.paymentCode)
+                                $order.paymentCode
+                            #end
+                        </span></td>
+                        <td><span class="text-muted">下单时间：</span></td>
+                        <td><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{order.createTime})</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="text-muted">订单状态：</span></td>
+                        <td class="td_split"><span class="text-primary">
+                            #if($!{order.orderState} == "CANCEL")
+                                已取消
+                            #elseif($!{order.orderState} == "INIT")
+                                未付款
+                            #elseif($!{order.orderState} == "PAYED")
+                                已付款
+                            #elseif($!{order.orderState} == "DELIVE")
+                                已发货
+                            #elseif($!{order.orderState} == "RECEIVE")
+                                已收货
+                            #end
+                        </span></td>
+                        <td><span class="text-muted">订单来源：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{order.orderFrom}</span></td>
+                        <td><span class="text-muted">付款时间：</span></td>
+                        <td class="td_split"><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{order.paymentTime})</span></td>
+                        <td><span class="text-muted">商铺名称：</span></td>
+                        <td><span class="text-primary">$!order.storeName</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-vcard-o"></i> 物流信息</h5>
+                </div>
+                <table class="table white-bg table-striped">
+                    <tbody>
+                    <tr>
+                        <td><span class="text-muted">收货人：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{order.reciverName}</span></td>
+                        <td><span class="text-muted">手机号码：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{order.reciverPhone}</span></td>
+                        <td><span class="text-muted">收货人地址</span></td>
+                        <td><span class="text-primary">$!{order.reciverAddress}</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="text-muted">快递名称：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{order.expressName}</span></td>
+                        <td><span class="text-muted">物流单号：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{order.expressNo}</span></td>
+                        <td><span class="text-muted">配送时间：</span></td>
+                        <td><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{order.deliverTime})</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-archive"></i> 商品信息</h5>
+                </div>
+                <table class="table white-bg table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th style="width:10%">图片</th>
+                        <th style="width:20%">商品名称</th>
+                        <th style="width:20%">价格</th>
+                        <th style="width:20%">数量</th>
+                        <th style="width:20%">属性</th>
+                        <th style="width:20%">小计</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        #foreach( $goods in $goodses)
+                        <tr>
+                            <td><img src="$!{goods.goodsImage}" class="img-rounded img-md"/></td>
+                            <td><span class="text-primary">$!{goods.goodsName}</span></td>
+                            <td><span class="text-primary">$!{goods.goodsPayPrice}</span></td>
+                            <td><span class="text-primary">$!{goods.goodsNum}</span></td>
+                            <td><span class="text-primary">
+                                #set ($columnArray = $goods.skuName.split("\#\#"))
+                                #foreach($word in $!{columnArray})
+                                    <span class="label label-primary" style="margin-right: 10px;">$word</span>
+                                #end
+                            </span></td>
+                            #set($Amont=$!{goods.goodsNum} * $!{goods.goodsPayPrice})
+                            <td><span class="text-danger">$Amont</span></td>
+                        </tr>
+                        #end
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-money"></i> 费用信息</h5>
+                </div>
+                <table class="table white-bg table-striped table-bordered">
+                    <thead>
+                    <th style="width:20%">订单总金额：</th>
+                    <th style="width:20%">商品总金额：</th>
+                    <th style="width:20%">快递费用：</th>
+                    <th style="width:20%">使用优惠券：</th>
+                    <th style="width:20%">使用余额：</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><span class="text-danger">$!{order.orderAmount}</span></td>
+                        <td><span class="text-primary">$!{order.goodsAmount}</span></td>
+                        <td><span class="text-primary">$!{order.carriageAmount}</span></td>
+                        <td><span class="text-primary">$!{order.voucherPrice}</span></td>
+                        <td><span class="text-primary">$!{order.pdAmount}</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-align-justify"></i> 其他信息</h5>
+                </div>
+                <table class="table white-bg table-striped">
+                    <tbody>
+                    <tr>
+                        <td><span class="text-muted">发票抬头：</span></td>
+                        <td class="td_split"><span class="text-primary"></span></td>
+                        <td><span class="text-muted">缺货处理：</span></td>
+                        <td><span class="text-primary"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="text-muted">发票内容：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{order.invoiceInfo}</span></td>
+                        <td><span class="text-muted">买家留言：</span></td>
+                        <td><span class="text-primary">$!{order.orderMessage}</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+<script>
+    $("#订单").addClass("active");
+    $('#side-menu').metisMenu();
+
+
+</script>
+
+#parse("/admin/models/end.vm")

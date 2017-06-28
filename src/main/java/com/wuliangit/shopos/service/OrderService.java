@@ -216,4 +216,13 @@ public interface OrderService {
      * @return
      */
     int apiAddExpressInfo(String expressName, String expressCode, String expressNo, Integer orderId) throws OptionException;
+
+    /**
+     * @Description: admin获取所有订单列表数据
+     * @Author: pangweichao
+     * @Date: 20:48 2017/5/11
+     * @Param: [searchKey, orderColumn, orderType, page, pageSize, type]
+     * @return: java.lang.Object
+     */
+    List<StoreOrderListDTO> getAdminOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String state);
 }

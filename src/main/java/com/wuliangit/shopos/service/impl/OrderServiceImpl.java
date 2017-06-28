@@ -594,4 +594,12 @@ public class OrderServiceImpl implements OrderService {
             throw new OptionException("该订单不属于您！");
         }
     }
+
+    @Override
+    public List<StoreOrderListDTO> getAdminOrderList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize, String state) {
+        PageHelper.startPage(page, pageSize);
+
+        List<StoreOrderListDTO> storeOrderListDTOS = orderMapper.getAdminOrderList(searchKey, orderColumn, orderType, state);
+        return storeOrderListDTOS;
+    }
 }

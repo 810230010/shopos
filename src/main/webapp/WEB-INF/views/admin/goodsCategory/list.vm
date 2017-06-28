@@ -2,6 +2,30 @@
 
 <link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 
+<style>
+    .category-selete ul li {
+        list-style-type: none;
+        border-bottom: 1px solid gainsboro;
+        width: 100%;
+    }
+
+    .category-selete ul li a {
+        display: block;
+        width: 100%;
+        color: #5f5f5f;
+        cursor: pointer;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .category-selete {
+        height: 400px;
+        overflow-y: scroll;
+        border: 1px solid #E6E6FA;
+    }
+
+</style>
+
 #parse("/admin/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -33,6 +57,42 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">移动商品</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p>一级类型</p>
+                            <div class="category-selete b-r-md">
+                                <ul id="category1">
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <p>二级类型</p>
+                            <div class="category-selete b-r-md">
+                                <ul id="category2">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="sub">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 #parse("/admin/models/footer.vm")
 
 <script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
@@ -46,6 +106,10 @@
     var rank = 1;
     var upParentId = [];
     var parentId = 0;
+
+    var param1 = 0;
+    var param2 = 0;
+    var choose = 0;
 
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
@@ -88,6 +152,7 @@
                             '</a>',
                             rank > 2?"":'<a class="table-button btn btn-primary btn-xs table-action getsub" href="javascript:void(0)">下级 <i class="fa fa-code-fork"></i></a>',
                             rank > 2?"":'<a class="table-button btn btn-primary btn-xs table-action addsub" href="javascript:void(0)">添加下级 <i class="fa fa-code-fork"></i></a>',
+                            rank > 1?'<a class="table-button btn btn-primary btn-xs table-action move" href="javascript:void(0)">移动 <i class="glyphicon glyphicon-move"></i></a>':"",
                         ].join('');
                     }
                 },
@@ -164,6 +229,53 @@
             table = $('#datatables').DataTable().ajax.reload();
         });
 
+        table.on( 'click', '.move', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            choose = data.goodsCategoryId;
+            var categories = [];
+            categories = getCategory(0);
+            var html = "";
+            categories.forEach(function (value, index, array) {
+                html += '<li><a onclick="setCategory2(' + value.goodsCategoryId + ')">' + value.name + '<i id="icon1' + value.goodsCategoryId + '" class="gc-icon1 pull-right fa fa-check hidden"></i></a></li>';
+            });
+            $("#category1").html(html);
+            $("#category2").html("");
+            $('#myModal').modal('show');
+        });
+
+        $('#sub').click(function () {
+            if(param2 == 0){
+                paramet = param1
+            }else{
+                paramet = param2
+            }
+            $.ajax({
+                type: "post",
+                url: "/admin/goodsCategory/updateGrade",
+                data: {
+                    "parentId":paramet,
+                    "goodsCategoryId":choose,
+                },
+                async: false,
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#myModal').modal('hide');
+                        swal({
+                            title: "成功!",
+                            text: "商品更改分类成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(function () {
+                            table = $('#datatables').DataTable().ajax.reload();
+                        }, 2000);
+                    }
+                }
+            });
+        });
+
         table.on( 'click', '.delete', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
@@ -188,6 +300,54 @@
         });
 
     });
+
+    function getCategory(parentId) {
+        var categories = [];
+        $.ajax({
+            type: "post",
+            url: "/admin/goodsCategory/get/grade",
+            data: "parentId=" + parentId,
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    categories = data.data.goodsCategories;
+                }
+            }
+        });
+        return categories;
+    }
+
+    function setCategory2(parentId) {
+        param2 = 0;
+        $(".gc-icon1").addClass("hidden");
+        $("#icon1" + parentId).removeClass("hidden");
+        $("#icon1" + parentId).addClass("show");
+
+        category1 = parentId;
+        param1 = parentId;
+        if(rank > 2){
+            category2 = "";
+            var categories = [];
+            categories = getCategory(parentId);
+
+            var html = "";
+            categories.forEach(function (value, index, array) {
+                html += '<li><a onclick="setCategory3(' + value.goodsCategoryId + ')">' + value.name + '<i id="icon2' + value.goodsCategoryId + '" class="gc-icon2 pull-right fa fa-check hidden"></i></a></li>';
+            });
+            $("#category2").html(html);
+        }
+    }
+
+    function setCategory3(parentId) {
+
+        $(".gc-icon2").addClass("hidden");
+        $("#icon2" + parentId).removeClass("hidden");
+        $("#icon2" + parentId).addClass("show");
+
+        category2 = parentId;
+        param2 = parentId;
+
+    }
 </script>
 
 #parse("/admin/models/end.vm")

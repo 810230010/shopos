@@ -50,4 +50,12 @@ public interface GoodsCategoryMapper extends BaseMapper<GoodsCategory, Integer> 
      * @return
      */
     List<ApiGoodsCategoryWithChildDTO> getGoodsCategoryLevelSecond(Integer parentId);
+
+    /**
+     * 更改商品的分类
+     * @param parentId
+     * @param goodsCategoryId
+     * @return
+     */
+    int updateGrade(@Param("parentId") Integer parentId,@Param("goodsCategoryId") Integer goodsCategoryId);
 }

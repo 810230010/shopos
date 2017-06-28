@@ -68,4 +68,16 @@ public interface OrderMapper extends BaseMapper<Order, Integer> {
      * @return
      */
     List<StoreOrderListDTO> apiGetStoreOrderList(@Param("state")String state, @Param("storeId")Integer storeId);
+
+    /**
+     * @Description: admin获取所有订单列表数据
+     * @Author: pangweichao
+     * @Date: 20:48 2017/5/11
+     * @Param: [searchKey, orderColumn, orderType, page, pageSize, type]
+     * @return: java.lang.Object
+     */
+    List<StoreOrderListDTO> getAdminOrderList(@Param("searchKey") String searchKey,
+                                              @Param("orderColumn") String orderColumn,
+                                              @Param("orderType") String orderType,
+                                              @Param("state") String state);
 }

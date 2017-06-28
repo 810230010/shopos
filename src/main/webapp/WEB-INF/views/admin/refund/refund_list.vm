@@ -1,0 +1,122 @@
+#parse("/admin/models/begin.vm")
+
+<link href="/assets/admin/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+
+#parse("/admin/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>订单-退换货列表</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 id="rank">退换货列表 </h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table id="datatables" class="table table-striped table-bordered table-hover dataTables-example" >
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+<script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/admin/js/plugins/dataTables/datatables.min.js"></script>
+
+<script>
+
+    $("#退换货列表").addClass("active");
+    $("#订单").addClass("active");
+    $('#side-menu').metisMenu();
+
+    var nowType = '';
+    var nowState = '';
+
+    $(document).ready(function () {
+        var t = $('#datatables').DataTable({
+            "ajax": {
+                'url': '/admin/refund/getAdminRefundList',
+                "data": function(d) {
+                    var param = {};
+                    param.page = d.start/d.length + 1;
+                    param.pageSize = d.length;
+                    param.draw = d.draw;
+                    param.orderColumn = d.columns[d.order[0]['column']]['data'];
+                    param.orderType = d.order[0]['dir'];
+                    param.searchKey = d.search["value"];
+                    return param;
+                },
+            },
+            "columns": [
+                {"data":"refundId","width": "6%","title":"退款号","orderable": false},
+                {"data":"memberUsername","width": "7%","title":"买家会员名","orderable": false},
+                {"data":"name","width": "7%","title":"商铺名称","orderable": false},
+                {"data":"goodsName","width": "15%","title":"商品名","orderable": false,"render":function(data, type, row){
+                    if(data.length>25){
+                        return data.substr(0,35)+"...";
+                    }
+                    return data;
+                }},
+                {"data":"refundType","width": "8%","title":"申请类型","orderable": false,"render":function(data, type, row){
+                    if(data == "REFUND_MOMEY")return "退款";
+                    else if(data == "CHANGE_GOODS")return "换货";
+                    else if(data == "REFUND_ALL")return "退款退货";
+                    else if(data == "STORE_REFUND")return "店铺退款";
+                }},
+                {"data":"refundState","width": "8%","title":"状态",
+                    "render":function(data, type, row)
+                    {
+                        if (data == 'CHECKING') return '待审核';
+                        else if(data == 'CONSENT') return '同意退款';
+                        else if(data == 'NOT_CONSENT') return '拒绝退款';
+                        else if(data == 'DELIVE') return '买家已发货';
+                        else if(data == 'END') return '已完成';
+                    }
+                },
+                {"data":"refundAmount","width": "7%","title":"退款金额","orderable": false},
+                {"data":"refundState","width": "20%","title":"操作","orderable": false,
+                    "render":function(data, type, row)
+                    {
+                        var html = '<a class="table-button btn btn-default btn-xs table-action order-info" href="javascript:void(0)">'+
+                                '<i class="fa fa-info-circle"></i>订单详情</a>'
+                        return  html;
+                    }
+                }
+            ],
+            "searching": true,
+            "ordering":true,
+            "serverSide": true,
+            "deferRender": true,
+            "processing": true,
+            "autoWidth": false,
+            "lengthMenu": [ 10, 15, 20 ],
+            "responsive": true,
+            "dom": '<"html5buttons"B>lTfgitp',
+            "buttons": [],
+            "language": {
+                "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
+            }
+        });
+        var table = $('#datatables').DataTable();
+
+        table.on( 'click', '.order-info', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            window.open("/admin/refund/detailPage?refundId="+data.refundId+"&storeName="+data.name);
+        });
+    });
+
+</script>
+
+#parse("/admin/models/end.vm")

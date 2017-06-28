@@ -44,6 +44,16 @@ public class StoreOrderListDTO {
 
     private Boolean isLock;
 
+    private String storeName;
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
     public Integer getStoreId() {
         return storeId;
     }
@@ -135,6 +145,18 @@ public class StoreOrderListDTO {
         this.orderAmount = orderAmount;
         this.orderState = orderState;
         this.carriageName = carriageName;
+    }
+
+    //admin
+    public StoreOrderListDTO(Integer orderId, String outTradeNo, String memberName, String memberEmail, BigDecimal orderAmount, String orderState, String carriageName, String storeName) {
+        this.orderId = orderId;
+        this.outTradeNo = outTradeNo;
+        this.memberName = memberName;
+        this.memberEmail = memberEmail;
+        this.orderAmount = orderAmount;
+        this.orderState = orderState;
+        this.carriageName = carriageName;
+        this.storeName = storeName;
     }
 
     public Integer getOrderId() {

@@ -4,7 +4,9 @@ import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.RefundMapper;
 import com.wuliangit.shopos.dto.ApiRefundDTO;
+import com.wuliangit.shopos.dto.StoreRefundListDTO;
 import com.wuliangit.shopos.entity.Member;
+import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.RefundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +29,12 @@ public class RefundServiceImpl implements RefundService {
         Member currentMember = WebUtil.getCurrentMember();
         List<ApiRefundDTO> refunds = refundMapper.apiGetRefunds(currentMember.getMemberId());
         return refunds;
+    }
+
+    @Override
+    public List<StoreRefundListDTO> getAdminRefundList(String searchKey, String orderColumn, String orderType, Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
+        List<StoreRefundListDTO> storeRefundListDTOS = refundMapper.getAdminRefundList(searchKey,orderColumn,orderType);
+        return storeRefundListDTOS;
     }
 }

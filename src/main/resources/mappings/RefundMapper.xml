@@ -68,4 +68,24 @@
         </if>
         create_time desc
     </select>
+
+    <!--获取退换货列表数据-->
+    <select id="getAdminRefundList" resultType="com.wuliangit.shopos.dto.StoreRefundListDTO">
+        SELECT r.refund_id,r.order_id,r.order_out_trade_no,r.store_id,r.member_id,r.member_username,r.goods_id,
+        r.goods_name,r.goods_num,r.refund_amount,r.goods_image,r.order_goods_type,r.refund_type,r.refund_state,r.is_lock,
+        r.goods_state,r.create_time,r.seller_handle_time,r.admin_time,r.pics_info,r.buyer_message,r.seller_message,
+        r.express_name,r.express_no,s.name
+        FROM t_refund r,t_store s
+        <where>
+            r.store_id = s.store_id
+            <if test="searchKey != null and searchKey != '' ">
+                ( r.member_name like '%${searchKey}%' or r.goods_name like '%${searchKey}%')
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            r.${orderColumn} ${orderType},
+        </if>
+        r.create_time desc, r.refund_state asc
+    </select>
 </mapper>

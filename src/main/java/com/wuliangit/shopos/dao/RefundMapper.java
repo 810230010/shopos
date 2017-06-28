@@ -52,4 +52,15 @@ public interface RefundMapper extends BaseMapper<Refund, Integer> {
      * @return
      */
     List<StoreRefundListDTO> getRefundDoneList(Integer storeId, String searchKey, String orderColumn, String orderType);
+
+    /**
+     * 获取退换货列表数据
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @return
+     */
+    List<StoreRefundListDTO> getAdminRefundList(@Param("searchKey") String searchKey,
+                                                @Param("orderColumn") String orderColumn,
+                                                @Param("orderType") String orderType);
 }

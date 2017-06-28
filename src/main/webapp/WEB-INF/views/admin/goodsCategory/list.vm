@@ -21,6 +21,7 @@
     .category-selete {
         height: 400px;
         overflow-y: scroll;
+        border: 1px solid #E6E6FA;
     }
 
 </style>
@@ -69,14 +70,14 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <p>一级类型</p>
-                            <div class="ibox-content category-selete b-r-md">
+                            <div class="category-selete b-r-md">
                                 <ul id="category1">
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <p>二级类型</p>
-                            <div class="ibox-content category-selete b-r-md">
+                            <div class="category-selete b-r-md">
                                 <ul id="category2">
                                 </ul>
                             </div>

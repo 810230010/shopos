@@ -45,7 +45,7 @@
     <result column="attrs" property="attrs" jdbcType="VARCHAR" />
     <result column="is_platform" property="isPlatform" jdbcType="BIT" />
     <result column="area" property="area" jdbcType="VARCHAR" />
-    <result column="is_check" property="isCheck" jdbcType="BIT" />
+    <result column="check_msg" property="checkMsg" jdbcType="VARCHAR" />
     <result column="sell_time_begin" property="sellTimeBegin" jdbcType="TIMESTAMP" />
     <result column="sell_time_end" property="sellTimeEnd" jdbcType="TIMESTAMP" />
     <result column="need_count" property="needCount" jdbcType="INTEGER" />
@@ -60,7 +60,7 @@
     marketprice, storage_alarm, click, salenum, collect, storage, images, title_img, 
     state, verify, create_time, edit_time, is_new, type, activity_id, activity_type, 
     is_virtual, virtual_invalid_refund, is_appoint, is_presell, vat, commend, evaluation_good_star, 
-    evaluation_count, del_flag, attrs, is_platform, area, is_check, sell_time_begin, 
+    evaluation_count, del_flag, attrs, is_platform, area, check_msg, sell_time_begin, 
     sell_time_end, need_count, upload_from
   </sql>
   <sql id="Blob_Column_List" >
@@ -95,7 +95,7 @@
       is_virtual, virtual_invalid_refund, is_appoint, 
       is_presell, vat, commend, evaluation_good_star, 
       evaluation_count, del_flag, attrs, 
-      is_platform, area, is_check, 
+      is_platform, area, check_msg, 
       sell_time_begin, sell_time_end, need_count, 
       upload_from, goods_body)
     values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{adWord,jdbcType=VARCHAR}, 
@@ -111,7 +111,7 @@
       #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, #{isAppoint,jdbcType=BIT}, 
       #{isPresell,jdbcType=BIT}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
       #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{attrs,jdbcType=VARCHAR}, 
-      #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{isCheck,jdbcType=BIT}, 
+      #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{checkMsg,jdbcType=VARCHAR}, 
       #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, #{needCount,jdbcType=INTEGER}, 
       #{uploadFrom,jdbcType=VARCHAR}, #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
@@ -247,8 +247,8 @@
       <if test="area != null" >
         area,
       </if>
-      <if test="isCheck != null" >
-        is_check,
+      <if test="checkMsg != null" >
+        check_msg,
       </if>
       <if test="sellTimeBegin != null" >
         sell_time_begin,
@@ -393,8 +393,8 @@
       <if test="area != null" >
         #{area,jdbcType=VARCHAR},
       </if>
-      <if test="isCheck != null" >
-        #{isCheck,jdbcType=BIT},
+      <if test="checkMsg != null" >
+        #{checkMsg,jdbcType=VARCHAR},
       </if>
       <if test="sellTimeBegin != null" >
         #{sellTimeBegin,jdbcType=TIMESTAMP},
@@ -542,8 +542,8 @@
       <if test="area != null" >
         area = #{area,jdbcType=VARCHAR},
       </if>
-      <if test="isCheck != null" >
-        is_check = #{isCheck,jdbcType=BIT},
+      <if test="checkMsg != null" >
+        check_msg = #{checkMsg,jdbcType=VARCHAR},
       </if>
       <if test="sellTimeBegin != null" >
         sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
@@ -607,7 +607,7 @@
       attrs = #{attrs,jdbcType=VARCHAR},
       is_platform = #{isPlatform,jdbcType=BIT},
       area = #{area,jdbcType=VARCHAR},
-      is_check = #{isCheck,jdbcType=BIT},
+      check_msg = #{checkMsg,jdbcType=VARCHAR},
       sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
       sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
       need_count = #{needCount,jdbcType=INTEGER},
@@ -659,7 +659,7 @@
       attrs = #{attrs,jdbcType=VARCHAR},
       is_platform = #{isPlatform,jdbcType=BIT},
       area = #{area,jdbcType=VARCHAR},
-      is_check = #{isCheck,jdbcType=BIT},
+      check_msg = #{checkMsg,jdbcType=VARCHAR},
       sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
       sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
       need_count = #{needCount,jdbcType=INTEGER},

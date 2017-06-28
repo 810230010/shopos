@@ -90,7 +90,7 @@ public class Goods {
 
     private String area;
 
-    private Boolean isCheck;
+    private String checkMsg;
 
     private Date sellTimeBegin;
 
@@ -446,12 +446,12 @@ public class Goods {
         this.area = area == null ? null : area.trim();
     }
 
-    public Boolean getIsCheck() {
-        return isCheck;
+    public String getCheckMsg() {
+        return checkMsg;
     }
 
-    public void setIsCheck(Boolean isCheck) {
-        this.isCheck = isCheck;
+    public void setCheckMsg(String checkMsg) {
+        this.checkMsg = checkMsg == null ? null : checkMsg.trim();
     }
 
     public Date getSellTimeBegin() {

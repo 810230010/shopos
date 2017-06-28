@@ -108,6 +108,7 @@
 
     var param1 = 0;
     var param2 = 0;
+    var choose = 0;
 
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
@@ -228,6 +229,9 @@
         });
 
         table.on( 'click', '.move', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            choose = data.goodsCategoryId;
             var categories = [];
             categories = getCategory(0);
             var html = "";
@@ -250,12 +254,22 @@
                 url: "/admin/goodsCategory/updateGrade",
                 data: {
                     "parentId":paramet,
-                    "goodsCategoryId":param2,
+                    "goodsCategoryId":choose,
                 },
                 async: false,
                 success: function (data) {
                     if (data.code == 200) {
                         $('#myModal').modal('hide');
+                        swal({
+                            title: "成功!",
+                            text: "商品更改分类成功!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(function () {
+                            table = $('#datatables').DataTable().ajax.reload();
+                        }, 2000);
                     }
                 }
             });
@@ -310,18 +324,24 @@
 
         category1 = parentId;
         param1 = parentId;
-        category2 = "";
-        var categories = [];
-        categories = getCategory(parentId);
+        if(rank > 2){
+            category2 = "";
+            var categories = [];
+            categories = getCategory(parentId);
 
-        var html = "";
-        categories.forEach(function (value, index, array) {
-            html += '<li><a onclick="setCategory3(' + value.goodsCategoryId + ')">' + value.name + '<i id="icon2' + value.goodsCategoryId + '" class="gc-icon2 pull-right fa fa-check hidden"></i></a></li>';
-        });
-        $("#category2").html(html);
+            var html = "";
+            categories.forEach(function (value, index, array) {
+                html += '<li><a onclick="setCategory3(' + value.goodsCategoryId + ')">' + value.name + '<i id="icon2' + value.goodsCategoryId + '" class="gc-icon2 pull-right fa fa-check hidden"></i></a></li>';
+            });
+            $("#category2").html(html);
+        }
     }
 
     function setCategory3(parentId) {
+
+        $(".gc-icon2").addClass("hidden");
+        $("#icon2" + parentId).removeClass("hidden");
+        $("#icon2" + parentId).addClass("show");
 
         category2 = parentId;
         param2 = parentId;

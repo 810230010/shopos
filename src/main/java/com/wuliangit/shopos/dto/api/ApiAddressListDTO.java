@@ -1,4 +1,4 @@
-package com.wuliangit.shopos.dto;
+package com.wuliangit.shopos.dto.api;
 
 public class ApiAddressListDTO {
     private Integer addressId;

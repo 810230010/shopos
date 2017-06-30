@@ -6,8 +6,8 @@ import com.wuliangit.shopos.dao.FavoritesGoodsMapper;
 import com.wuliangit.shopos.dao.FavoritesStoreMapper;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
-import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
-import com.wuliangit.shopos.dto.ApiCollectStoreDTO;
+import com.wuliangit.shopos.dto.api.ApiCollectGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiCollectStoreDTO;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.CollectService;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by nilme on 2017/3/29.

@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiGoodsDTO;
-import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;

@@ -1,6 +1,6 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiEarningsDTO;
+import com.wuliangit.shopos.dto.api.ApiEarningsDTO;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.dto.TuikePageListDTO;
 

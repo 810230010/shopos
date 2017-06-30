@@ -3,7 +3,7 @@ package com.wuliangit.shopos.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.AddressMapper;
-import com.wuliangit.shopos.dto.ApiAddressListDTO;
+import com.wuliangit.shopos.dto.api.ApiAddressListDTO;
 import com.wuliangit.shopos.entity.Address;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.AddressService;

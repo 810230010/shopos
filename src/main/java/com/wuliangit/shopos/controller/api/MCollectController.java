@@ -1,9 +1,8 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
-import com.wuliangit.shopos.dto.ApiCollectStoreDTO;
-import com.wuliangit.shopos.exception.OptionException;
+import com.wuliangit.shopos.dto.api.ApiCollectGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiCollectStoreDTO;
 import com.wuliangit.shopos.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

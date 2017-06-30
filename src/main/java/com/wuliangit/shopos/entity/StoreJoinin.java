@@ -80,25 +80,15 @@ public class StoreJoinin {
 
     private String storeName;
 
-    private String storeClassIds;
-
-    private String storeClassNames;
-
     private String joininState;
 
     private String joininMessage;
 
     private Integer joininYear;
 
-    private String sgName;
-
-    private Integer sgId;
-
     private String scName;
 
     private Integer scId;
-
-    private String storeClassCommisRates;
 
     private String payingMoneyCertificate;
 
@@ -414,22 +404,6 @@ public class StoreJoinin {
         this.storeName = storeName == null ? null : storeName.trim();
     }
 
-    public String getStoreClassIds() {
-        return storeClassIds;
-    }
-
-    public void setStoreClassIds(String storeClassIds) {
-        this.storeClassIds = storeClassIds == null ? null : storeClassIds.trim();
-    }
-
-    public String getStoreClassNames() {
-        return storeClassNames;
-    }
-
-    public void setStoreClassNames(String storeClassNames) {
-        this.storeClassNames = storeClassNames == null ? null : storeClassNames.trim();
-    }
-
     public String getJoininState() {
         return joininState;
     }
@@ -454,22 +428,6 @@ public class StoreJoinin {
         this.joininYear = joininYear;
     }
 
-    public String getSgName() {
-        return sgName;
-    }
-
-    public void setSgName(String sgName) {
-        this.sgName = sgName == null ? null : sgName.trim();
-    }
-
-    public Integer getSgId() {
-        return sgId;
-    }
-
-    public void setSgId(Integer sgId) {
-        this.sgId = sgId;
-    }
-
     public String getScName() {
         return scName;
     }
@@ -484,14 +442,6 @@ public class StoreJoinin {
 
     public void setScId(Integer scId) {
         this.scId = scId;
-    }
-
-    public String getStoreClassCommisRates() {
-        return storeClassCommisRates;
-    }
-
-    public void setStoreClassCommisRates(String storeClassCommisRates) {
-        this.storeClassCommisRates = storeClassCommisRates == null ? null : storeClassCommisRates.trim();
     }
 
     public String getPayingMoneyCertificate() {

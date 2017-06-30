@@ -1,8 +1,8 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
-import com.wuliangit.shopos.dto.ApiGoodsCategoryDOT;
-import com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsCategoryDOT;
+import com.wuliangit.shopos.dto.api.ApiGoodsCategoryWithChildDTO;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import org.apache.ibatis.annotations.Param;
 

@@ -5,7 +5,7 @@ import com.wuliangit.shopos.common.util.ChineseAnalysis;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSearchMapper;
-import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.GoodsSearchDTO;
 import com.wuliangit.shopos.service.GoodsSearchService;
 import org.springframework.beans.factory.annotation.Autowired;

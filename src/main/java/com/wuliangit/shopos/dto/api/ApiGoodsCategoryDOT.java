@@ -1,11 +1,9 @@
-package com.wuliangit.shopos.dto;
-
-import java.util.List;
+package com.wuliangit.shopos.dto.api;
 
 /**
  * Created by nilme on 2017/5/14.
  */
-public class ApiGoodsCategoryWithChildDTO {
+public class ApiGoodsCategoryDOT {
 
     private Integer goodsCategoryId;
 
@@ -13,7 +11,6 @@ public class ApiGoodsCategoryWithChildDTO {
 
     private String img;
 
-    private List<ApiGoodsCategoryDOT> categories;
 
     public Integer getGoodsCategoryId() {
         return goodsCategoryId;
@@ -37,13 +34,5 @@ public class ApiGoodsCategoryWithChildDTO {
 
     public void setImg(String img) {
         this.img = img;
-    }
-
-    public List<ApiGoodsCategoryDOT> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<ApiGoodsCategoryDOT> categories) {
-        this.categories = categories;
     }
 }

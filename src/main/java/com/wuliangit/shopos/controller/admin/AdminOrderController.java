@@ -2,7 +2,7 @@ package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.util.StringUtils;
-import com.wuliangit.shopos.dto.ApiOrderGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiOrderGoodsDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.service.OrderService;

@@ -2,6 +2,9 @@ package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.dto.*;
+import com.wuliangit.shopos.dto.api.ApiSellerInfo;
+import com.wuliangit.shopos.dto.api.ApiStoreDTO;
+import com.wuliangit.shopos.dto.api.ApiStoreListDTO;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreMin;
 import org.apache.ibatis.annotations.Param;

@@ -1,7 +1,6 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
-import com.wuliangit.shopos.dto.ApiEvaluateGoodsListDTO;
 import com.wuliangit.shopos.dto.EvaluateGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreEvaluateGoodsDetailDTO;
 import com.wuliangit.shopos.entity.EvaluateGoods;

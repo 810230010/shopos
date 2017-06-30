@@ -1,6 +1,6 @@
 package com.wuliangit.shopos.dao;
 
-import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;

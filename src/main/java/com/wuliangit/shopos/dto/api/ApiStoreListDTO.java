@@ -1,4 +1,4 @@
-package com.wuliangit.shopos.dto;
+package com.wuliangit.shopos.dto.api;
 
 /**
  * Created by nilme on 2017/5/16.

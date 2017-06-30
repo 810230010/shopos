@@ -2,8 +2,8 @@ package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.dao.GoodsCategoryMapper;
-import com.wuliangit.shopos.dto.ApiGoodsCategoryDOT;
-import com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsCategoryDOT;
+import com.wuliangit.shopos.dto.api.ApiGoodsCategoryWithChildDTO;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.service.GoodsCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

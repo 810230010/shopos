@@ -45,7 +45,7 @@
     </select>
 
     <!--退款退货订单-->
-    <select id="apiGetRefunds" resultType="com.wuliangit.shopos.dto.ApiRefundDTO">
+    <select id="apiGetRefunds" resultType="com.wuliangit.shopos.dto.api.ApiRefundDTO">
         select
         <include refid="Base_Column_List" />
         from t_refund

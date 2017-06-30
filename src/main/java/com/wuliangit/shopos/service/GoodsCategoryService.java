@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiGoodsCategoryDOT;
-import com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsCategoryDOT;
+import com.wuliangit.shopos.dto.api.ApiGoodsCategoryWithChildDTO;
 import com.wuliangit.shopos.entity.GoodsCategory;
 
 import java.util.ArrayList;

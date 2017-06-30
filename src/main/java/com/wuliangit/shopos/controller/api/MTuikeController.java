@@ -3,7 +3,7 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.dto.ApiEarningsDTO;
+import com.wuliangit.shopos.dto.api.ApiEarningsDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.TuikeService;

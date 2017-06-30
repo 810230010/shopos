@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
-import com.wuliangit.shopos.dto.ApiAddressListDTO;
+import com.wuliangit.shopos.dto.api.ApiAddressListDTO;
 import com.wuliangit.shopos.entity.Address;
 
 import java.util.ArrayList;

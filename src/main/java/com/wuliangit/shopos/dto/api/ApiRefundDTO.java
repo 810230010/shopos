@@ -1,4 +1,4 @@
-package com.wuliangit.shopos.dto;
+package com.wuliangit.shopos.dto.api;
 
 import java.math.BigDecimal;
 import java.util.Date;

@@ -2,14 +2,11 @@ package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
-import com.wuliangit.shopos.dao.OrderMapper;
-import com.wuliangit.shopos.dto.ApiEvaluateGoodsListDTO;
-import com.wuliangit.shopos.dto.ApiGoodsDTO;
-import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.api.ApiEvaluateGoodsListDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.GoodsSearchDTO;
-import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsSku;
-import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

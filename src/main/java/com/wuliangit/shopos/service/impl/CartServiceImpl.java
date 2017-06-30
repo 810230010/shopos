@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.CartMapper;
 import com.wuliangit.shopos.dao.GoodsMapper;
-import com.wuliangit.shopos.dto.ApiCartDTO;
+import com.wuliangit.shopos.dto.api.ApiCartDTO;
 import com.wuliangit.shopos.entity.Cart;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.Member;

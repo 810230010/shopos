@@ -58,12 +58,12 @@
     </select>
 
     <!--接口获取商品详情-->
-    <select id="apiGetGoodsDTOById" resultType="com.wuliangit.shopos.dto.ApiGoodsDTO">
+    <select id="apiGetGoodsDTOById" resultType="com.wuliangit.shopos.dto.api.ApiGoodsDTO">
         select * from t_goods where goods_id = #{goodsId}
     </select>
 
     <!--获取移动端可以编辑的商品-->
-    <select id="sellerGetGoodsCanEdit" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
+    <select id="sellerGetGoodsCanEdit" resultType="com.wuliangit.shopos.dto.api.ApiGoodsListDTO">
         select * from t_goods where store_id = #{storeId} and upload_from = 'PHONE'
     </select>
 

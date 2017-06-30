@@ -3,7 +3,7 @@
 <mapper namespace="com.wuliangit.shopos.dao.FavoritesGoodsMapper" >
 
     <!--用户收藏商品列表-->
-    <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.ApiCollectGoodsDTO">
+    <select id="getCollectGoodsList" resultType="com.wuliangit.shopos.dto.api.ApiCollectGoodsDTO">
         select fg.*, g.price, g.title_img
         from t_favorites_goods fg left join t_goods g on g.goods_id = fg.goods_id
         where fg.member_id = #{memberId}

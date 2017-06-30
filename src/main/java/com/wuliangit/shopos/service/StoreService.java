@@ -1,6 +1,10 @@
 package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.*;
+import com.wuliangit.shopos.dto.api.ApiSellerInfo;
+import com.wuliangit.shopos.dto.api.ApiStoreDTO;
+import com.wuliangit.shopos.dto.api.ApiStoreJoininDTO;
+import com.wuliangit.shopos.dto.api.ApiStoreListDTO;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.exception.OptionException;
@@ -20,7 +24,7 @@ public interface StoreService {
      * @param storeJoinin
      * @return
      */
-    int createStoreJoinin(StoreJoinin storeJoinin) throws OptionException;
+    int createStoreJoinin(ApiStoreJoininDTO storeJoinin) throws OptionException;
 
     /**
      * 店铺角色

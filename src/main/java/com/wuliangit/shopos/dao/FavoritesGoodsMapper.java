@@ -1,12 +1,11 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
-import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiCollectGoodsDTO;
 import com.wuliangit.shopos.entity.FavoritesGoods;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface FavoritesGoodsMapper extends BaseMapper<FavoritesGoods, Integer> {
 

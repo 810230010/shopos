@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
-import com.wuliangit.shopos.dto.ApiCartDTO;
+import com.wuliangit.shopos.dto.api.ApiCartDTO;
 import com.wuliangit.shopos.entity.Cart;
 import org.apache.ibatis.annotations.Param;
 

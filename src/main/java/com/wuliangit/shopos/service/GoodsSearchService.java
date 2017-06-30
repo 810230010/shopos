@@ -1,6 +1,6 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.GoodsSearchDTO;
 
 import java.util.ArrayList;

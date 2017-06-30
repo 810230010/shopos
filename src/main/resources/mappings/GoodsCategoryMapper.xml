@@ -37,12 +37,12 @@
     </select>
 
     <!--移动端接口获取一级分类-->
-    <select id="getGoodsCategoryDTOByParentId" resultType="com.wuliangit.shopos.dto.ApiGoodsCategoryDOT">
+    <select id="getGoodsCategoryDTOByParentId" resultType="com.wuliangit.shopos.dto.api.ApiGoodsCategoryDOT">
         select goods_category_id, name, img from t_goods_category where parent_id = #{parentId} and is_show = 1
     </select>
 
     <!--移动端接口获取二级分类-->
-    <select id="getGoodsCategoryLevelSecond" resultType="com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO">
+    <select id="getGoodsCategoryLevelSecond" resultType="com.wuliangit.shopos.dto.api.ApiGoodsCategoryWithChildDTO">
         select goods_category_id, name, img from t_goods_category where parent_id = #{parentId} and is_show = 1
     </select>
 

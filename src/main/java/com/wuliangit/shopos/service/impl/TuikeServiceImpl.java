@@ -5,7 +5,7 @@ import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.MemberMapper;
 import com.wuliangit.shopos.dao.TuikeMapper;
-import com.wuliangit.shopos.dto.ApiEarningsDTO;
+import com.wuliangit.shopos.dto.api.ApiEarningsDTO;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.dto.TuikePageListDTO;
 import com.wuliangit.shopos.entity.Member;

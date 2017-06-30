@@ -1,6 +1,6 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiRefundDTO;
+import com.wuliangit.shopos.dto.api.ApiRefundDTO;
 import com.wuliangit.shopos.dto.StoreRefundListDTO;
 
 import java.util.List;

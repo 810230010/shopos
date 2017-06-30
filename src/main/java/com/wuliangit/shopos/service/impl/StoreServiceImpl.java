@@ -7,12 +7,17 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.dto.*;
+import com.wuliangit.shopos.dto.api.ApiSellerInfo;
+import com.wuliangit.shopos.dto.api.ApiStoreDTO;
+import com.wuliangit.shopos.dto.api.ApiStoreJoininDTO;
+import com.wuliangit.shopos.dto.api.ApiStoreListDTO;
 import com.wuliangit.shopos.entity.*;
 import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,15 +47,19 @@ public class StoreServiceImpl implements StoreService {
     private AreaService areaService;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private Mapper mapper;
 
 
     @Override
-    public int createStoreJoinin(StoreJoinin storeJoinin) throws OptionException {
+    public int createStoreJoinin(ApiStoreJoininDTO apiStoreJoininDTO) throws OptionException {
         Member member = WebUtil.getCurrentMember();
+
+        StoreJoinin storeJoinin = mapper.map(apiStoreJoininDTO, StoreJoinin.class);
+
         storeJoinin.setMemberId(member.getMemberId());
         storeJoinin.setMemberName(member.getUsername());
         storeJoinin.setCreateTime(new Date());
-        storeJoinin.setType(POJOConstants.STORE_TYPE_STORE);
 
         StoreJoinin storeJoinin1 = storeJoininMapper.getByMemberId(member.getMemberId());
 

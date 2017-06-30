@@ -3,7 +3,7 @@
 <mapper namespace="com.wuliangit.shopos.dao.GoodsSearchMapper" >
 
     <!--api商品搜索-->
-    <select id="apiGoodsSearch" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
+    <select id="apiGoodsSearch" resultType="com.wuliangit.shopos.dto.api.ApiGoodsListDTO">
         select g.goods_id, g.name, g.store_name, g.price, g.title_img, g.salenum, g.carriage, g.area, g.type, g.upload_from
         <if test="lng != null">
             , (POWER(MOD(ABS(s.live_store_gps_lng - #{lng}),360),2) + POWER(ABS(s.live_store_gps_lat - #{lat}),2)) AS distance
@@ -31,7 +31,7 @@
 
 
     <!--企业直销商品专区-->
-    <select id="goodsTypeSearch" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
+    <select id="goodsTypeSearch" resultType="com.wuliangit.shopos.dto.api.ApiGoodsListDTO">
         select g.goods_id, g.name, g.store_name, g.price, g.title_img, g.salenum, g.carriage, g.area, g.type, g.upload_from
         <if test="lng != null">
             , (POWER(MOD(ABS(s.live_store_gps_lng - #{lng}),360),2) + POWER(ABS(s.live_store_gps_lat - #{lat}),2)) AS distance
@@ -47,7 +47,7 @@
     </select>
 
     <!--首页商品-->
-    <select id="indexGoods" resultType="com.wuliangit.shopos.dto.ApiGoodsListDTO">
+    <select id="indexGoods" resultType="com.wuliangit.shopos.dto.api.ApiGoodsListDTO">
         select goods_id, name, store_name, price, title_img, salenum, carriage, area, type from t_goods
         where commend = 1
     </select>

@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.dto.ApiOrderGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiOrderGoodsDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OptionException;

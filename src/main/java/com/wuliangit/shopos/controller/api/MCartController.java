@@ -1,9 +1,8 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.dto.ApiCartDTO;
-import com.wuliangit.shopos.dto.ApiCartListDTO;
-import com.wuliangit.shopos.entity.Cart;
+import com.wuliangit.shopos.dto.api.ApiCartDTO;
+import com.wuliangit.shopos.dto.api.ApiCartListDTO;
 import com.wuliangit.shopos.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

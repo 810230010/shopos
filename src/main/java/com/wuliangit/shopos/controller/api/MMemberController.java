@@ -3,7 +3,6 @@ package com.wuliangit.shopos.controller.api;
 import cn.jiguang.common.resp.APIConnectionException;
 import cn.jiguang.common.resp.APIRequestException;
 import cn.jmessage.api.common.model.RegisterInfo;
-import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.cache.SpringCacheManager;
 import com.wuliangit.shopos.common.controller.RestResult;
@@ -13,10 +12,9 @@ import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
 import com.wuliangit.shopos.common.util.PasswordHelper;
 import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.dto.ApiMemberDTO;
-import com.wuliangit.shopos.dto.ApiMemberUpdateDTO;
+import com.wuliangit.shopos.dto.api.ApiMemberDTO;
+import com.wuliangit.shopos.dto.api.ApiMemberUpdateDTO;
 import com.wuliangit.shopos.entity.Member;
-import com.wuliangit.shopos.entity.Seller;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.SMSService;
 import com.wuliangit.shopos.service.StoreService;
@@ -38,8 +36,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
-import static com.wuliangit.shopos.common.CoreConstants.SESSION_CURRENT_USERID;
 
 /**
  * 用户相关接口

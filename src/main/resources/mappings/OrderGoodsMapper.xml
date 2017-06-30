@@ -3,7 +3,7 @@
 <mapper namespace="com.wuliangit.shopos.dao.OrderGoodsMapper" >
 
     <!--通过订单id获取订单商品信息-->
-    <select id="apiGetByOrderId" resultType="com.wuliangit.shopos.dto.ApiOrderGoodsDTO">
+    <select id="apiGetByOrderId" resultType="com.wuliangit.shopos.dto.api.ApiOrderGoodsDTO">
         select
         <include refid="Base_Column_List" />
         from t_order_goods

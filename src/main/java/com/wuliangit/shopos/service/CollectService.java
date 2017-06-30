@@ -1,8 +1,7 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiCollectGoodsDTO;
-import com.wuliangit.shopos.dto.ApiCollectStoreDTO;
-import com.wuliangit.shopos.exception.OptionException;
+import com.wuliangit.shopos.dto.api.ApiCollectGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiCollectStoreDTO;
 
 import java.util.ArrayList;
 

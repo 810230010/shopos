@@ -41,7 +41,7 @@
     </select>
 
     <!--接口搜索店铺-->
-    <select id="apiStoreSearch" resultType="com.wuliangit.shopos.dto.ApiStoreListDTO">
+    <select id="apiStoreSearch" resultType="com.wuliangit.shopos.dto.api.ApiStoreListDTO">
         select store_id, name, type, logo, sales
         from t_store
         <where>
@@ -65,7 +65,7 @@
     </select>
 
     <!--api获取店铺详情-->
-    <select id="getApiStoreDTOById" resultType="com.wuliangit.shopos.dto.ApiStoreDTO">
+    <select id="getApiStoreDTOById" resultType="com.wuliangit.shopos.dto.api.ApiStoreDTO">
       select store_id, name, type, address, banner, logo, sales, province_id
         from t_store
         where store_id = #{storeId}
@@ -86,7 +86,7 @@
     </select>
 
     <!--通过用户id获取用户绑定的店铺信息-->
-    <select id="getSellerInfoBybindMemberUsername" resultType="com.wuliangit.shopos.dto.ApiSellerInfo">
+    <select id="getSellerInfoBybindMemberUsername" resultType="com.wuliangit.shopos.dto.api.ApiSellerInfo">
         select store_id, name, type
         from t_store
         where bind_member_username = #{username}

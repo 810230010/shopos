@@ -2,6 +2,8 @@ package com.wuliangit.shopos.service;
 
 import com.alipay.api.AlipayApiException;
 import com.wuliangit.shopos.dto.*;
+import com.wuliangit.shopos.dto.api.ApiOrderDTO;
+import com.wuliangit.shopos.dto.api.ApiOrderGoodsDTO;
 import com.wuliangit.shopos.entity.Order;
 import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.exception.OrderException;

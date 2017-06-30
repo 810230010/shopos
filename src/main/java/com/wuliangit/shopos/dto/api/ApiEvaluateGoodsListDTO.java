@@ -1,4 +1,4 @@
-package com.wuliangit.shopos.dto;
+package com.wuliangit.shopos.dto.api;
 
 import java.util.Date;
 

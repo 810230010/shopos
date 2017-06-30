@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
-import com.wuliangit.shopos.dto.ApiRefundDTO;
+import com.wuliangit.shopos.dto.api.ApiRefundDTO;
 import com.wuliangit.shopos.dto.StoreRefundListDTO;
 import com.wuliangit.shopos.entity.Refund;
 import org.apache.ibatis.annotations.Param;

@@ -1,8 +1,8 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.dto.ApiGoodsCategoryDOT;
-import com.wuliangit.shopos.dto.ApiGoodsCategoryWithChildDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsCategoryDOT;
+import com.wuliangit.shopos.dto.api.ApiGoodsCategoryWithChildDTO;
 import com.wuliangit.shopos.entity.GoodsCategory;
 import com.wuliangit.shopos.service.GoodsCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

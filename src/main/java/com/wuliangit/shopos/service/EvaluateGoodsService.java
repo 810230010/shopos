@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.ApiEvaluateGoodsDTO;
-import com.wuliangit.shopos.dto.ApiEvaluateGoodsListDTO;
+import com.wuliangit.shopos.dto.api.ApiEvaluateGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiEvaluateGoodsListDTO;
 import com.wuliangit.shopos.dto.EvaluateGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreEvaluateGoodsDetailDTO;
 import com.wuliangit.shopos.exception.OptionException;

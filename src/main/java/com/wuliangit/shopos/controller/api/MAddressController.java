@@ -1,7 +1,7 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.dto.ApiAddressListDTO;
+import com.wuliangit.shopos.dto.api.ApiAddressListDTO;
 import com.wuliangit.shopos.entity.Address;
 import com.wuliangit.shopos.service.AddressService;
 import org.dozer.Mapper;

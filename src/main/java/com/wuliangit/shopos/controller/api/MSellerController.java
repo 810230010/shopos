@@ -3,18 +3,15 @@ package com.wuliangit.shopos.controller.api;
 import com.alipay.api.AlipayApiException;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
-import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.dto.ApiGoodsListDTO;
-import com.wuliangit.shopos.dto.ApiSellerInfo;
+import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
+import com.wuliangit.shopos.dto.api.ApiSellerInfo;
+import com.wuliangit.shopos.dto.api.ApiStoreJoininDTO;
 import com.wuliangit.shopos.entity.StoreAccount;
-import com.wuliangit.shopos.entity.StoreJoinin;
 import com.wuliangit.shopos.exception.OptionException;
-import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.StoreAccountService;
 import com.wuliangit.shopos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -140,9 +137,9 @@ public class MSellerController {
      * @return
      */
     @RequestMapping("/newStore")
-    public Object applyStore(StoreJoinin storeJoinin) throws OptionException {
+    public Object applyStore(ApiStoreJoininDTO apiStoreJoininDTO) throws OptionException {
         RestResult result = new RestResult();
-        int res = storeService.createStoreJoinin(storeJoinin);
+        int res = storeService.createStoreJoinin(apiStoreJoininDTO);
         return result;
     }
 

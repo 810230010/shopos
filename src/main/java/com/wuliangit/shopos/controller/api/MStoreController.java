@@ -1,14 +1,11 @@
 package com.wuliangit.shopos.controller.api;
 
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.dto.ApiStoreDTO;
-import com.wuliangit.shopos.dto.ApiStoreListDTO;
+import com.wuliangit.shopos.dto.api.ApiStoreDTO;
+import com.wuliangit.shopos.dto.api.ApiStoreListDTO;
 import com.wuliangit.shopos.entity.Store;
-import com.wuliangit.shopos.entity.StoreJoinin;
-import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.CollectService;
 import com.wuliangit.shopos.service.StoreService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,17 +25,6 @@ public class MStoreController {
     private StoreService storeService;
     @Autowired
     private CollectService collectService;
-
-    /**
-     * 申请成为商家
-     * @return
-     */
-    @RequestMapping("/newStore")
-    public Object applyStore(StoreJoinin storeJoinin) throws OptionException {
-        RestResult result = new RestResult();
-        int res = storeService.createStoreJoinin(storeJoinin);
-        return result;
-    }
 
     /**
      * 搜索店铺接口

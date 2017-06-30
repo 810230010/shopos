@@ -88,7 +88,7 @@ public class StoreJoinin {
 
     private String scName;
 
-    private Integer scId;
+    private String scIds;
 
     private String payingMoneyCertificate;
 
@@ -436,12 +436,12 @@ public class StoreJoinin {
         this.scName = scName == null ? null : scName.trim();
     }
 
-    public Integer getScId() {
-        return scId;
+    public String getScIds() {
+        return scIds;
     }
 
-    public void setScId(Integer scId) {
-        this.scId = scId;
+    public void setScIds(String scIds) {
+        this.scIds = scIds == null ? null : scIds.trim();
     }
 
     public String getPayingMoneyCertificate() {

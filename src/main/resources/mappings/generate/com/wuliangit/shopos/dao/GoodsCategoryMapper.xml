@@ -10,9 +10,10 @@
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="is_show" property="isShow" jdbcType="BIT" />
     <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="ad_img" property="adImg" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    goods_category_id, name, parent_id, sort, keywords, description, is_show, img
+    goods_category_id, name, parent_id, sort, keywords, description, is_show, img, ad_img
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,10 +31,10 @@
     </selectKey>
     insert into t_goods_category (name, parent_id, sort, 
       keywords, description, is_show, 
-      img)
+      img, ad_img)
     values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
       #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{isShow,jdbcType=BIT}, 
-      #{img,jdbcType=VARCHAR})
+      #{img,jdbcType=VARCHAR}, #{adImg,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.GoodsCategory" >
     <selectKey resultType="java.lang.Integer" keyProperty="goodsCategoryId" order="AFTER" >
@@ -62,6 +63,9 @@
       <if test="img != null" >
         img,
       </if>
+      <if test="adImg != null" >
+        ad_img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="name != null" >
@@ -84,6 +88,9 @@
       </if>
       <if test="img != null" >
         #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="adImg != null" >
+        #{adImg,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -111,6 +118,9 @@
       <if test="img != null" >
         img = #{img,jdbcType=VARCHAR},
       </if>
+      <if test="adImg != null" >
+        ad_img = #{adImg,jdbcType=VARCHAR},
+      </if>
     </set>
     where goods_category_id = #{goodsCategoryId,jdbcType=INTEGER}
   </update>
@@ -122,7 +132,8 @@
       keywords = #{keywords,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       is_show = #{isShow,jdbcType=BIT},
-      img = #{img,jdbcType=VARCHAR}
+      img = #{img,jdbcType=VARCHAR},
+      ad_img = #{adImg,jdbcType=VARCHAR}
     where goods_category_id = #{goodsCategoryId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -44,7 +44,7 @@
     <result column="joinin_message" property="joininMessage" jdbcType="VARCHAR" />
     <result column="joinin_year" property="joininYear" jdbcType="INTEGER" />
     <result column="sc_name" property="scName" jdbcType="VARCHAR" />
-    <result column="sc_id" property="scId" jdbcType="INTEGER" />
+    <result column="sc_ids" property="scIds" jdbcType="VARCHAR" />
     <result column="paying_money_certificate" property="payingMoneyCertificate" jdbcType="VARCHAR" />
     <result column="paying_money_certificate_explain" property="payingMoneyCertificateExplain" jdbcType="VARCHAR" />
     <result column="paying_amount" property="payingAmount" jdbcType="DECIMAL" />
@@ -61,7 +61,7 @@
     is_settlement_account, settlement_bank_account_name, settlement_bank_account_number, 
     settlement_bank_name, settlement_bank_code, settlement_bank_address, tax_registration_certificate, 
     taxpayer_id, tax_registration_certificate_electronic, store_name, joinin_state, joinin_message, 
-    joinin_year, sc_name, sc_id, paying_money_certificate, paying_money_certificate_explain, 
+    joinin_year, sc_name, sc_ids, paying_money_certificate, paying_money_certificate_explain, 
     paying_amount, create_time, type
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -94,7 +94,7 @@
       tax_registration_certificate, taxpayer_id, 
       tax_registration_certificate_electronic, store_name, 
       joinin_state, joinin_message, joinin_year, 
-      sc_name, sc_id, paying_money_certificate, 
+      sc_name, sc_ids, paying_money_certificate, 
       paying_money_certificate_explain, paying_amount, 
       create_time, type)
     values (#{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
@@ -113,7 +113,7 @@
       #{taxRegistrationCertificate,jdbcType=VARCHAR}, #{taxpayerId,jdbcType=VARCHAR}, 
       #{taxRegistrationCertificateElectronic,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, 
       #{joininState,jdbcType=VARCHAR}, #{joininMessage,jdbcType=VARCHAR}, #{joininYear,jdbcType=INTEGER}, 
-      #{scName,jdbcType=VARCHAR}, #{scId,jdbcType=INTEGER}, #{payingMoneyCertificate,jdbcType=VARCHAR}, 
+      #{scName,jdbcType=VARCHAR}, #{scIds,jdbcType=VARCHAR}, #{payingMoneyCertificate,jdbcType=VARCHAR}, 
       #{payingMoneyCertificateExplain,jdbcType=VARCHAR}, #{payingAmount,jdbcType=DECIMAL}, 
       #{createTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR})
   </insert>
@@ -246,8 +246,8 @@
       <if test="scName != null" >
         sc_name,
       </if>
-      <if test="scId != null" >
-        sc_id,
+      <if test="scIds != null" >
+        sc_ids,
       </if>
       <if test="payingMoneyCertificate != null" >
         paying_money_certificate,
@@ -389,8 +389,8 @@
       <if test="scName != null" >
         #{scName,jdbcType=VARCHAR},
       </if>
-      <if test="scId != null" >
-        #{scId,jdbcType=INTEGER},
+      <if test="scIds != null" >
+        #{scIds,jdbcType=VARCHAR},
       </if>
       <if test="payingMoneyCertificate != null" >
         #{payingMoneyCertificate,jdbcType=VARCHAR},
@@ -535,8 +535,8 @@
       <if test="scName != null" >
         sc_name = #{scName,jdbcType=VARCHAR},
       </if>
-      <if test="scId != null" >
-        sc_id = #{scId,jdbcType=INTEGER},
+      <if test="scIds != null" >
+        sc_ids = #{scIds,jdbcType=VARCHAR},
       </if>
       <if test="payingMoneyCertificate != null" >
         paying_money_certificate = #{payingMoneyCertificate,jdbcType=VARCHAR},
@@ -599,7 +599,7 @@
       joinin_message = #{joininMessage,jdbcType=VARCHAR},
       joinin_year = #{joininYear,jdbcType=INTEGER},
       sc_name = #{scName,jdbcType=VARCHAR},
-      sc_id = #{scId,jdbcType=INTEGER},
+      sc_ids = #{scIds,jdbcType=VARCHAR},
       paying_money_certificate = #{payingMoneyCertificate,jdbcType=VARCHAR},
       paying_money_certificate_explain = #{payingMoneyCertificateExplain,jdbcType=VARCHAR},
       paying_amount = #{payingAmount,jdbcType=DECIMAL},

@@ -5,7 +5,7 @@ package com.wuliangit.shopos.dto.api;
  */
 public class ApiStoreJoininDTO {
 
-    private String  type;   //类型：ENTERPRISE企业，STORE普通商家
+    private String type;   //类型：ENTERPRISE企业，STORE普通商家
 
     private String storeName; //店铺名
 

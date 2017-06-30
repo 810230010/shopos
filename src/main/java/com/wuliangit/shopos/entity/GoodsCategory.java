@@ -17,6 +17,8 @@ public class GoodsCategory {
 
     private String img;
 
+    private String adImg;
+
     public Integer getGoodsCategoryId() {
         return goodsCategoryId;
     }
@@ -79,5 +81,13 @@ public class GoodsCategory {
 
     public void setImg(String img) {
         this.img = img == null ? null : img.trim();
+    }
+
+    public String getAdImg() {
+        return adImg;
+    }
+
+    public void setAdImg(String adImg) {
+        this.adImg = adImg == null ? null : adImg.trim();
     }
 }

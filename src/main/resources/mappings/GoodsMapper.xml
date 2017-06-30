@@ -67,4 +67,28 @@
         select * from t_goods where store_id = #{storeId} and upload_from = 'PHONE'
     </select>
 
+    <!--管理员查询所有商品信息-->
+    <select id="adminGetGoodsSearch" resultType="com.wuliangit.shopos.entity.Goods">
+        select * from t_goods
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or ad_word like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or store_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType}
+        </if>
+    </select>
+
+    <!--更改商品状态-->
+    <update id="updateGoodsApplyStatus">
+      update t_goods set
+        <if test="type == 0">check_msg = #{reason},verify = "NOT_PASS"</if>
+        <if test="type == 1">verify = "PASS"</if>
+        <if test="type == 2">commend = 1</if>
+      where goods_id = #{goodsId}
+    </update>
 </mapper>

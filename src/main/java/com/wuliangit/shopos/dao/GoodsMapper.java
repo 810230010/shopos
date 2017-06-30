@@ -60,4 +60,24 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @return
      */
     ArrayList<ApiGoodsListDTO> sellerGetGoodsCanEdit(Integer storeId);
+
+    /**
+     * 管理员查询所有商品
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @return
+     */
+    ArrayList<Goods> adminGetGoodsSearch(@Param("searchKey")String searchKey,
+                                         @Param("orderColumn")String orderColumn,
+                                         @Param("orderType")String orderType);
+
+    /**
+     * 改变商品申请状态
+     * @param goodsId
+     * @param reason
+     * @param type   0:拒绝   1:通过
+     * @return
+     */
+    int updateGoodsApplyStatus(@Param("goodsId") Integer goodsId, @Param("reason") String reason, @Param("type") Integer type);
 }

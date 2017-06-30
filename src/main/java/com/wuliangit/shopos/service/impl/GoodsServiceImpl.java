@@ -277,4 +277,15 @@ public class GoodsServiceImpl implements GoodsService {
         ArrayList<ApiGoodsListDTO> goodses = goodsMapper.sellerGetGoodsCanEdit(sellerInfo.getStoreId());
         return goodses;
     }
+
+    @Override
+    public List<Goods> adminGetAllGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType) {
+        PageHelper.startPage(page, pageSize);
+        return goodsMapper.adminGetGoodsSearch(searchKey, orderColumn, orderType);
+    }
+
+    @Override
+    public int adminUpdateGoodsApplyStatus(Integer goodsId, String reason, Integer type) {
+        return goodsMapper.updateGoodsApplyStatus(goodsId, reason, type);
+    }
 }

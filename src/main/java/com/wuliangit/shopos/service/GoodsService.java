@@ -149,4 +149,17 @@ public interface GoodsService {
      * @return
      */
     ArrayList<ApiGoodsListDTO> sellerGetGoodsCanEdit(Integer page, Integer pageSize);
+
+    /**
+     * 管理员查询所有商品
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @return
+     */
+    List<Goods> adminGetAllGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType);
+
+    int adminUpdateGoodsApplyStatus(Integer goodsId, String reason, Integer type);
 }

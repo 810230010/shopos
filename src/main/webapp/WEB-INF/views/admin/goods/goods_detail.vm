@@ -57,17 +57,7 @@
                         <td><span class="text-muted">所属店铺：</span></td>
                         <td class="td_split"><span class="text-primary">$!{goods.storeName}</span></td>
                         <td><span class="text-muted">邮费：</span></td>
-                        <td class="td_split"><span class="text-primary">
-                            #if($order.paymentCode == "WX")
-                                微信
-                            #elseif($order.paymentCode == "ALIPAY")
-                                支付宝
-                            #elseif($order.paymentCode == "CARD")
-                                银行卡
-                            #elseif($order.paymentCode)
-                                $order.paymentCode
-                            #end
-                        </span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.carriage}</span></td>
                         <td><span class="text-muted">价格：</span></td>
                         <td><span class="text-primary">
                             #set($temp="/")
@@ -209,6 +199,9 @@
 
 
 <script>
+    $("#商品列表").addClass("active");
+    $("#商品").addClass("active");
+    $('#side-menu').metisMenu();
     var uploadToken = '$uploadToken';
     var domain = '$domain';
 </script>

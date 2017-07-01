@@ -53,9 +53,9 @@
                     <tbody>
                     <tr>
                         <td><span class="text-muted">商品名称：</span></td>
-                        <td class="td_split"><span class="text-primary">$!{order.outTradeNo}</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.name}</span></td>
                         <td><span class="text-muted">所属店铺：</span></td>
-                        <td class="td_split"><span class="text-primary">$!{order.memberName}</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.storeName}</span></td>
                         <td><span class="text-muted">邮费：</span></td>
                         <td class="td_split"><span class="text-primary">
                             #if($order.paymentCode == "WX")
@@ -69,39 +69,48 @@
                             #end
                         </span></td>
                         <td><span class="text-muted">价格：</span></td>
-                        <td><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{order.createTime})</span></td>
+                        <td><span class="text-primary">
+                            #set($temp="/")
+                            $!{goods.price}${goods.unit}
+                        </span></td>
                     </tr>
                     <tr>
                         <td><span class="text-muted">好评星级：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.evaluationGoodStar}</span></td>
+                        <td><span class="text-muted">是否新品：</span></td>
                         <td class="td_split"><span class="text-primary">
-                            #if($!{order.orderState} == "CANCEL")
-                                已取消
-                            #elseif($!{order.orderState} == "INIT")
-                                未付款
-                            #elseif($!{order.orderState} == "PAYED")
-                                已付款
-                            #elseif($!{order.orderState} == "DELIVE")
-                                已发货
-                            #elseif($!{order.orderState} == "RECEIVE")
-                                已收货
+                            #if($goods.isNew == 0)
+                                否
+                            #elseif($goods.isNew == 1)
+                                是
                             #end
                         </span></td>
-                        <td><span class="text-muted">是否新品：</span></td>
-                        <td class="td_split"><span class="text-primary">$!{order.orderFrom}</span></td>
                         <td><span class="text-muted">品牌：</span></td>
-                        <td class="td_split"><span class="text-primary"></span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.brandName}</span></td>
                         <td><span class="text-muted">商品推荐：</span></td>
-                        <td class="td_split"><span class="text-primary"></span></td>
+                        <td class="td_split"><span class="text-primary">
+                            #if($goods.commend == 0)
+                                否
+                            #elseif($goods.commend == 1)
+                                是
+                            #end
+                        </span></td>
                     </tr>
                     <tr>
                         <td><span class="text-muted">评价数：</span></td>
-                        <td class="td_split"><span class="text-primary">$!{order.orderFrom}</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.evaluationCount}</span></td>
                         <td><span class="text-muted">是否自营商品：</span></td>
-                        <td class="td_split"><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{order.paymentTime})</span></td>
+                        <td class="td_split"><span class="text-primary">
+                            #if($goods.isPlatform == 0)
+                                否
+                            #elseif($goods.isPlatform == 1)
+                                是
+                            #end
+                        </span></td>
                         <td><span class="text-muted">起售时间</span></td>
-                        <td class="td_split"><span class="text-primary">$!{order.orderFrom}</span></td>
+                        <td class="td_split"><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{goods.sellTimeBegin})</span></td>
                         <td><span class="text-muted">止售时间</span></td>
-                        <td class="td_split"><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{order.paymentTime})</span></td>
+                        <td class="td_split"><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{goods.sellTimeEnd})</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -118,11 +127,11 @@
                     <tbody>
                     <tr>
                         <td><span class="text-muted">一级分类：</span></td>
-                        <td class="td_split"><span class="text-primary">$!{order.reciverName}</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.goodsCategory1}</span></td>
                         <td><span class="text-muted">二级分类：</span></td>
-                        <td class="td_split"><span class="text-primary">$!{order.reciverPhone}</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.goodsCategory2}</span></td>
                         <td><span class="text-muted">三级分类</span></td>
-                        <td><span class="text-primary">$!{order.reciverAddress}</span></td>
+                        <td><span class="text-primary">$!{goods.goodsCategory3}</span></td>
                     </tr>
 
                     </tbody>
@@ -136,13 +145,13 @@
                     <h5><i class="fa text-info fa-archive"></i> 商品图片信息</h5>
                 </div>
                 <div style="margin-left: 10px;">
-                    <div class="main-image" style="margin-top: 20px">
-                        <img src="" alt="商品主图片" style="width:100px; height: 100px"/>
+                    <div class="main-image" style="margin-top: 20px;margin-left: 20px">
+                        <img src="$!{goods.titleImg}" alt="商品主图片" style="width:100px; height: 100px"/>
                     </div>
                     <div class="images" style="margin-top: 20px">
-                        <img src="" alt="商品附属片" style="width:100px; height: 100px"/>
-                        <img src="" alt="商品附属片" style="width:100px; height: 100px; margin-left: 20px"/>
-                        <img src="" alt="商品附属片" style="width:100px; height: 100px; margin-left: 20px"/>
+                        #foreach($image in $!{goods.imageSet})
+                            <img src="$image" alt="商品附属图片" style="width:100px; height: 100px; margin-left: 20px"/>
+                        #end
                     </div>
                 </div>
             </div>
@@ -156,7 +165,7 @@
                 <table class="table white-bg table-striped table-bordered">
                     <tbody>
                     <tr>
-                        <td><span class="text-danger">阿斯大大</span></td>
+                        <td><span class="text-primary">$!{goods.goodsBody}</span></td>
                     </tr>
                     </tbody>
                 </table>

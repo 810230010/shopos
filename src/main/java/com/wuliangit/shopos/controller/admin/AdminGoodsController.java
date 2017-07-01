@@ -4,6 +4,7 @@ import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.dto.GoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class AdminGoodsController {
      * 管理员更改商品申请状态
      * @param goodsId
      * @param reason
-     * @param type
+     * @param type 0:拒绝   1:通过  2:推荐到首页 3：下架
      * @return
      */
     @RequestMapping("/adminUpdateGoodsApply")
@@ -85,7 +86,8 @@ public class AdminGoodsController {
      * @return
      */
     @RequestMapping("/goodsDetailPage")
-    public String view2GoodsDetail(Integer goodsId){
+    public String view2GoodsDetail(Integer goodsId, Model model){
+        model.addAttribute("goods", goodsService.adminGetGoodsDetail(goodsId));
        return "admin/goods/goods_detail";
     }
 }

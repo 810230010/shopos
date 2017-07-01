@@ -76,7 +76,7 @@ public class Goods {
 
     private Boolean vat;
 
-    private Boolean commend;
+    private Integer commend;
 
     private Integer evaluationGoodStar;
 
@@ -390,11 +390,11 @@ public class Goods {
         this.vat = vat;
     }
 
-    public Boolean getCommend() {
+    public Integer getCommend() {
         return commend;
     }
 
-    public void setCommend(Boolean commend) {
+    public void setCommend(Integer commend) {
         this.commend = commend;
     }
 

@@ -10,6 +10,7 @@ import com.wuliangit.shopos.dao.GoodsCategoryMapper;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
+import com.wuliangit.shopos.dto.GoodsDetailDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.api.ApiSellerInfo;
@@ -287,5 +288,16 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int adminUpdateGoodsApplyStatus(Integer goodsId, String reason, Integer type) {
         return goodsMapper.updateGoodsApplyStatus(goodsId, reason, type);
+    }
+
+    @Override
+    public GoodsDetailDTO adminGetGoodsDetail(Integer goodsId) {
+        GoodsDetailDTO goodsDetailDTO = goodsMapper.adminGetGoodsDetail(goodsId);
+        if(goodsDetailDTO.getImages().contains(",")){
+            goodsDetailDTO.setImageSet(goodsDetailDTO.getImages().split(","));
+        }else{
+            goodsDetailDTO.setImageSet(new String[]{goodsDetailDTO.getImages()});
+        }
+        return goodsDetailDTO;
     }
 }

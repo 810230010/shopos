@@ -69,11 +69,7 @@
                 },
             },
             "columns": [
-                {"data":"commend","width":"5%","title":"推荐状态","visible":false,"orderable":false,
-                    "render": function (data, type, row) {
-                        recommend_flag = data;
-                    }
-                },
+                {"data":"commend","width":"5%","title":"推荐状态","orderable":false,"visible":false},
                 {"data":"goodsId","width":"5%","title":"编号"},
                 {
                     "data":"name",
@@ -130,7 +126,7 @@
                         ].join('');
                     }else if(pass_flag == "PASS"){
                         if(onsale_flag == "ONSELL") {
-                            recommend_flag = row.commend == false? "推荐至首页":"已推荐至首页";
+                            recommend_flag = row.commend == 0? "推荐至首页":"已推荐至首页";
                             return [
                                 '<div><a class="table-button-vertical btn btn-danger btn-xs table-action drop" href="javascript:void(0)">',
                                 '强制下架 <i class="fa fa-trash-o"></i>',
@@ -147,6 +143,7 @@
                                 '<div><a class="table-button-vertical btn btn-primary btn-xs table-action view" href="javascript:void(0)">',
                                 '查看详情 <i class="fa fa-edit"></i>',
                                 '</a></div>',
+
                             ].join('');
                         }
 
@@ -284,6 +281,35 @@
                         swal({
                             title: "成功!",
                             text: "商品已推荐到首页!",
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                },
+                error:function(result) {
+                    alert("系统出错")
+                }
+            });
+
+        })
+
+        //下架
+        table.on( 'click', '.drop', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            var goodsId = data.goodsId;
+            $.ajax({
+                url: "/admin/goods/adminUpdateGoodsApply",
+                data : {"goodsId": goodsId, "type": 3},
+                success:function(result) {
+                    if(result.code == 200){
+                        swal({
+                            title: "成功!",
+                            text: "商品已下架!",
                             type: "success",
                             showConfirmButton: false,
                             timer: 2000,

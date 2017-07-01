@@ -100,6 +100,10 @@ public class Goods {
 
     private String uploadFrom;
 
+    private Double gpsLng;
+
+    private Double gpsLat;
+
     private String goodsBody;
 
     public Integer getGoodsId() {
@@ -484,6 +488,22 @@ public class Goods {
 
     public void setUploadFrom(String uploadFrom) {
         this.uploadFrom = uploadFrom == null ? null : uploadFrom.trim();
+    }
+
+    public Double getGpsLng() {
+        return gpsLng;
+    }
+
+    public void setGpsLng(Double gpsLng) {
+        this.gpsLng = gpsLng;
+    }
+
+    public Double getGpsLat() {
+        return gpsLat;
+    }
+
+    public void setGpsLat(Double gpsLat) {
+        this.gpsLat = gpsLat;
     }
 
     public String getGoodsBody() {

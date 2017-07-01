@@ -180,6 +180,8 @@ $("#wizard").steps({
                 commission: $("#commission").val(),
                 carriage: $("#carriage").val(),
                 adWord: $("#adWord").val(),
+                gpsLng: $("#gpsLng").val(),
+                gpsLat: $("#gpsLat").val(),
                 needCount: $("#needCount").val(),
                 sellTimeBegin: $("#datetimepicker-begin").val(),
                 sellTimeEnd: $("#datetimepicker-end").val(),
@@ -332,7 +334,6 @@ function getCategory(parentId) {
     });
     return categories;
 }
-
 
 ///////////////////输入通用属性//////////////////////
 

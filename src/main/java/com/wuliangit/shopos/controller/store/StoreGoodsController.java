@@ -38,7 +38,6 @@ public class StoreGoodsController {
     @Autowired
     private GoodsSkuService goodsSkuService;
 
-
     /**
      * 商品列表页面
      * @return

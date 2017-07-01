@@ -100,12 +100,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">商品佣金:</label>
-                                    <div class="col-sm-7">
-                                        <input name="commission" id="commission" type="text" class="form-control" value="$goods.commission">
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-sm-3 control-label">运费:</label>
                                     <div class="col-sm-7">
                                          <input id="carriage" name="carriage" type="text" class="form-control" value="$goods.carriage">
@@ -124,6 +118,39 @@
 ##                                        </select>
 ##                                    </div>
 ##                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">商品类型:</label>
+                                    <div class="col-sm-7">
+                                        <div class="radio radio-info radio-inline">
+                                            <input type="radio" id="goods-type" value="GOODS_TYPE_NORMAL" name="goods_type" checked="">
+                                            <label for="inlineRadio1"> 普通商品 </label>
+                                        </div>
+                                        #if($storeUser.type == "STORE")
+                                            <div class="radio radio-inline">
+                                                <input type="radio" id="goods-type" value="GOODS_TYPE_ACTIVITY" name="goods_type">
+                                                <label for="inlineRadio2"> 二手商品 </label>
+                                            </div>
+                                        #end
+                                    </div>
+                                </div>
+
+                                <div class="form-group"><label class="col-lg-3 control-label">商品发货GPS位置</label>
+                                    <div class="col-sm-3"><div class="input-group m-b"><span class="input-group-addon">经度</span> <input type="number" value="$!{store.gpsLng}" id="gpsLng" name="gpsLng" class="form-control"></div></div>
+                                    <div class="col-sm-3"><div class="input-group m-b"><span class="input-group-addon">纬度</span> <input type="number" value="$!{store.gpsLat}" id="gpsLat" name="gpsLat" class="form-control"></div></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">移动地图确定GPS位置</label>
+                                    <div style="width: 600px;height: 300px;" class="col-sm-7">
+                                        <div style="z-index:1;position:absolute;left:46%;top:45%;">
+                                            <img style="width: 50px;height: 50px;" src="/assets/admin/img/map_icon.png">
+                                        </div>
+                                        <div id="baidumap" style="width: 100%;height: 100%;">
+
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group" id="goods-logo-div">
                                     <label class="col-sm-3 control-label">商品logo图片:</label>
                                     <div class="col-sm-4">
@@ -187,6 +214,7 @@
 
 <script src="/assets/admin/js/plugins/jquery.tabletojson.min.js"></script>
 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=F3131c87552cfff8aa4528f05cd43bc8"></script>
 
 <script>
     $("#商品").addClass("active");
@@ -297,7 +325,9 @@
             $.post("/store/goods/edit",
                     {
                         goodsId: $goods.goodsId,
-                        goodsCategoryId: category3,
+                        goodsCategory3Id: category3,
+                        goodsCategory2Id: category2,
+                        goodsCategory1Id: category1,
                         images:images,
                         titleImg:titleImg,
                         name:$("#name").val(),
@@ -307,8 +337,11 @@
                         commission:$("#commission").val(),
                         carriage:$("#carriage").val(),
                         adWord:$("#adWord").val(),
+                        gpsLng: $("#gpsLng").val(),
+                        gpsLat: $("#gpsLat").val(),
                         name:$("#name").val(),
                         goodsBody:$("#goodsBody").val(),
+                        type: $("input[name='goods_type']:checked").val(),
                     },
                     function (data, status) {
                         if (data.code == 200) {
@@ -681,6 +714,23 @@
         editor.config.customUpload = true;  // 设置自定义上传的开关
         editor.config.customUploadInit = uploadInit;  // 配置自定义上传初始化事件，uploadInit方法在上面定义了
         editor.create();
+    });
+
+</script>
+
+
+<script>
+    //百度地图
+    var map = new BMap.Map("baidumap");          // 创建地图实例
+    var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
+    map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别
+
+    map.addEventListener("dragend", function(){
+        var center = map.getCenter();
+//        alert("地图中心点变更为：" + center.lng + ", " + center.lat);
+
+        $("#gpsLng").val(center.lng);
+        $("#gpsLat").val(center.lat);
     });
 
 </script>

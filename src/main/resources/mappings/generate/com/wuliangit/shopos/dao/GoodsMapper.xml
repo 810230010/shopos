@@ -50,6 +50,8 @@
     <result column="sell_time_end" property="sellTimeEnd" jdbcType="TIMESTAMP" />
     <result column="need_count" property="needCount" jdbcType="INTEGER" />
     <result column="upload_from" property="uploadFrom" jdbcType="VARCHAR" />
+    <result column="gps_lng" property="gpsLng" jdbcType="DOUBLE" />
+    <result column="gps_lat" property="gpsLat" jdbcType="DOUBLE" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.Goods" extends="BaseResultMap" >
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
@@ -61,7 +63,7 @@
     state, verify, create_time, edit_time, is_new, type, activity_id, activity_type, 
     is_virtual, virtual_invalid_refund, is_appoint, is_presell, vat, commend, evaluation_good_star, 
     evaluation_count, del_flag, attrs, is_platform, area, check_msg, sell_time_begin, 
-    sell_time_end, need_count, upload_from
+    sell_time_end, need_count, upload_from, gps_lng, gps_lat
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -97,7 +99,8 @@
       evaluation_count, del_flag, attrs, 
       is_platform, area, check_msg, 
       sell_time_begin, sell_time_end, need_count, 
-      upload_from, goods_body)
+      upload_from, gps_lng, gps_lat, 
+      goods_body)
     values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{adWord,jdbcType=VARCHAR}, 
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{goodsCategory1Id,jdbcType=INTEGER}, 
       #{goodsCategory2Id,jdbcType=INTEGER}, #{goodsCategory3Id,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, 
@@ -113,7 +116,8 @@
       #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{attrs,jdbcType=VARCHAR}, 
       #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{checkMsg,jdbcType=VARCHAR}, 
       #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, #{needCount,jdbcType=INTEGER}, 
-      #{uploadFrom,jdbcType=VARCHAR}, #{goodsBody,jdbcType=LONGVARCHAR})
+      #{uploadFrom,jdbcType=VARCHAR}, #{gpsLng,jdbcType=DOUBLE}, #{gpsLat,jdbcType=DOUBLE}, 
+      #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     <selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="AFTER" >
@@ -262,6 +266,12 @@
       <if test="uploadFrom != null" >
         upload_from,
       </if>
+      <if test="gpsLng != null" >
+        gps_lng,
+      </if>
+      <if test="gpsLat != null" >
+        gps_lat,
+      </if>
       <if test="goodsBody != null" >
         goods_body,
       </if>
@@ -407,6 +417,12 @@
       </if>
       <if test="uploadFrom != null" >
         #{uploadFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsLng != null" >
+        #{gpsLng,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsLat != null" >
+        #{gpsLat,jdbcType=DOUBLE},
       </if>
       <if test="goodsBody != null" >
         #{goodsBody,jdbcType=LONGVARCHAR},
@@ -557,6 +573,12 @@
       <if test="uploadFrom != null" >
         upload_from = #{uploadFrom,jdbcType=VARCHAR},
       </if>
+      <if test="gpsLng != null" >
+        gps_lng = #{gpsLng,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsLat != null" >
+        gps_lat = #{gpsLat,jdbcType=DOUBLE},
+      </if>
       <if test="goodsBody != null" >
         goods_body = #{goodsBody,jdbcType=LONGVARCHAR},
       </if>
@@ -612,6 +634,8 @@
       sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
       need_count = #{needCount,jdbcType=INTEGER},
       upload_from = #{uploadFrom,jdbcType=VARCHAR},
+      gps_lng = #{gpsLng,jdbcType=DOUBLE},
+      gps_lat = #{gpsLat,jdbcType=DOUBLE},
       goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -663,7 +687,9 @@
       sell_time_begin = #{sellTimeBegin,jdbcType=TIMESTAMP},
       sell_time_end = #{sellTimeEnd,jdbcType=TIMESTAMP},
       need_count = #{needCount,jdbcType=INTEGER},
-      upload_from = #{uploadFrom,jdbcType=VARCHAR}
+      upload_from = #{uploadFrom,jdbcType=VARCHAR},
+      gps_lng = #{gpsLng,jdbcType=DOUBLE},
+      gps_lat = #{gpsLat,jdbcType=DOUBLE}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

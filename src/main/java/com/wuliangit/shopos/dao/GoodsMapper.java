@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.GoodsDetailDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
@@ -60,4 +61,30 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @return
      */
     ArrayList<ApiGoodsListDTO> sellerGetGoodsCanEdit(Integer storeId);
+
+    /**
+     * 管理员查询所有商品
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @return
+     */
+    ArrayList<Goods> adminGetGoodsSearch(@Param("searchKey")String searchKey,
+                                         @Param("orderColumn")String orderColumn,
+                                         @Param("orderType")String orderType);
+
+    /**
+     * 改变商品申请状态
+     * @param goodsId
+     * @param reason
+     * @param type   0:拒绝   1:通过  2:推荐到首页 3：下架
+     * @return
+     */
+    int updateGoodsApplyStatus(@Param("goodsId") Integer goodsId, @Param("reason") String reason, @Param("type") Integer type);
+
+    /**
+     * 管理员得到商品详细信息
+     * @return
+     */
+    GoodsDetailDTO adminGetGoodsDetail(@Param("goodsId") Integer goodsId);
 }

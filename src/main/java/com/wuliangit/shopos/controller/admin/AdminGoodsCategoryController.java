@@ -47,9 +47,11 @@ public class AdminGoodsCategoryController {
     public String addPage(Integer parentId,Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("juage",true);
         if (parentId != null){
             GoodsCategory goodsCategory = goodsCategoryService.getById(parentId);
             model.addAttribute("goodsCategory",goodsCategory);
+            model.addAttribute("juage",false);
         }
         model.addAttribute("parentId", parentId);
         return "admin/goodsCategory/add";
@@ -67,6 +69,17 @@ public class AdminGoodsCategoryController {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("goodsCategory",goodsCategory);
         model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        if(goodsCategory.getAdImg() == null){
+            goodsCategory.setAdImg("");
+        }
+        if(goodsCategory.getImg() == null){
+            goodsCategory.setImg("");
+        }
+        if(goodsCategory.getParentId() == 0){
+            model.addAttribute("juage",true);
+        }else {
+            model.addAttribute("juage",false);
+        }
         return "admin/goodsCategory/edit";
     }
 

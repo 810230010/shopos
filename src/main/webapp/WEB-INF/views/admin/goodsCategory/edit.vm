@@ -43,6 +43,15 @@
                                 <input id="upload-image" class="file" name="file" type="file" multiple>
                             </div>
                         </div>
+                        #if($juage)
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">一级商品广告图</label>
+                                <div class="col-sm-4" id="add-image-div">
+                                    <input id="add-image" class="file" name="file" type="file" multiple>
+                                </div>
+                            </div>
+                        #end
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">排序</label>
@@ -149,6 +158,37 @@
     }).on("filebatchselected", function(event, files) {
         $(this).fileinput("upload");
     });
+
+    $('#add-image').fileinput({
+        language: 'zh',
+        uploadUrl: "http://up.qiniu.com",
+        uploadExtraData: {
+            token: '$uploadToken'
+        },
+        overwriteInitial: false,
+        autoReplace: true,
+        showUploadedThumbs: true,
+        uploadAsync:true,
+//        browseClass: "btn btn-primary", //按钮样式
+        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{1}！",
+        maxFileCount: 1,
+        layoutTemplates: {actionZoom: ''},
+        initialPreviewShowDelete: false,
+        showUpload: false, //是否显示上传按钮
+        showRemove: false,
+        showClose: false,
+        initialPreviewAsData: true,
+        deleteUrl: "/store/util/donothing",
+        initialPreview: ['$goodsCategory.adImg'],
+        initialPreviewConfig: [{key: '$goodsCategory.adImg'}],
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'],
+    }).on("fileuploaded", function (event, data, previewId, index) {
+        var img_dom = $(".kv-file-content img[title='"+data.filenames[index]+"']");
+        img_dom.attr('src', '$domain'+data.response.key);
+    }).on("filebatchselected", function(event, files) {
+        $(this).fileinput("upload");
+    });
+
     $(".parent_select").select2({
         ajax: {
             url: "/admin/goodsCategory/get/all",
@@ -195,7 +235,9 @@
 
     $("#submit").on('click', function () {
         var logo_dom = $("#logo-icon-div .kv-zoom-cache .kv-file-content img");
+        var logo_dom2 = $("#add-image-div .kv-zoom-cache .kv-file-content img");
         var logo_img = logo_dom.attr("src");
+        var add_img = logo_dom2.attr("src");
 
         $.post("/admin/goodsCategory/edit",
             {
@@ -206,7 +248,8 @@
                 keywords: $("#keywords").val(),
                 description: $("#description").val(),
                 isShow: elem.checked,
-                img: logo_img
+                img: logo_img,
+                adImg: add_img
             },
             function (data, status) {
                 if (data.code == 200) {

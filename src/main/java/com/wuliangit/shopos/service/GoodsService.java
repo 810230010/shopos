@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.GoodsDetailDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
@@ -149,4 +150,27 @@ public interface GoodsService {
      * @return
      */
     ArrayList<ApiGoodsListDTO> sellerGetGoodsCanEdit(Integer page, Integer pageSize);
+
+    /**
+     * 管理员查询所有商品
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @return
+     */
+    List<Goods> adminGetAllGoodsSearch(Integer page, Integer pageSize, String searchKey, String orderColumn, String orderType);
+
+    /**
+     * 管理员更新商品状态
+     * @param goodsId
+     * @param reason
+     * @param type
+     * @return
+     */
+    int adminUpdateGoodsApplyStatus(Integer goodsId, String reason, Integer type);
+
+    GoodsDetailDTO adminGetGoodsDetail(Integer goodsId);
+    
 }

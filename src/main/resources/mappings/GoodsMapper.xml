@@ -67,4 +67,36 @@
         select * from t_goods where store_id = #{storeId} and upload_from = 'PHONE'
     </select>
 
+    <!--管理员查询所有商品信息-->
+    <select id="adminGetGoodsSearch" resultType="com.wuliangit.shopos.entity.Goods">
+        select * from t_goods
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                and ( name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or ad_word like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+                or store_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType}
+        </if>
+    </select>
+    <!--管理员得到商品详细信息-->
+    <select id="adminGetGoodsDetail" resultType="com.wuliangit.shopos.dto.GoodsDetailDTO">
+           select a.name,e.`name` as brandName, a.unit,a.carriage,a.commend,a.evaluation_count,a.evaluation_good_star,a.goods_body,a.images,a.type,a.is_new,a.is_platform,a.title_img,a.sell_time_begin,a.sell_time_end,a.price,a.store_name, b.name as goodsCategory1,c.name as goodsCategory2,d.name as goodsCategory3
+             from t_goods a,t_goods_category b,t_goods_category c,t_goods_category d,t_brand e
+          where a.goods_id=#{goodsId} and a.goods_category1_id=b.goods_category_id and a.goods_category2_id=c.goods_category_id and a.goods_category3_id=d.goods_category_id and a.brand_id=e.brand_id;
+
+    </select>
+
+    <!--更改商品状态-->
+    <update id="updateGoodsApplyStatus">
+      update t_goods set
+        <if test="type == 0">check_msg = #{reason},verify = "NOT_PASS"</if>
+        <if test="type == 1">verify = "PASS"</if>
+        <if test="type == 2">commend = 1</if>
+        <if test="type == 3">state = "DOWN"</if>
+      where goods_id = #{goodsId}
+    </update>
 </mapper>

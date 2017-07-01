@@ -1,0 +1,220 @@
+#parse("/admin/models/begin.vm")
+<link href="/assets/admin/css/plugins/steps/jquery.steps.css" rel="stylesheet">
+<link href="/assets/admin/css/plugins/select2/select2.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/assets/admin/css/plugins/wangeditor/wangEditor.min.css">
+
+
+<link rel="stylesheet" type="text/css" href="/assets/admin/css/plugins/webuploader/webuploader.css">
+<link href="/assets/admin/css/plugins/fileinput/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
+
+<link href="/assets/admin/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
+
+<style>
+    .category-selete ul li {
+        list-style-type: none;
+        border-bottom: 1px solid gainsboro;
+        width: 100%;
+    }
+
+    .category-selete ul li a {
+        display: block;
+        width: 100%;
+        color: #5f5f5f;
+        cursor: pointer;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .category-selete {
+        height: 400px;
+        overflow-y: scroll;
+    }
+
+</style>
+
+#parse("/admin/models/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>商品-商品详情</h2>
+    </div>
+    <div class="col-lg-2">
+        <h2><a type="button" class="btn btn-primary btn-small" href="/admin/goods/list">返回</a></h2>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-exclamation-circle"></i> 基本信息</h5>
+                </div>
+                <table class="table white-bg table-striped">
+                    <tbody>
+                    <tr>
+                        <td><span class="text-muted">商品名称：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.name}</span></td>
+                        <td><span class="text-muted">所属店铺：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.storeName}</span></td>
+                        <td><span class="text-muted">邮费：</span></td>
+                        <td class="td_split"><span class="text-primary">
+                            #if($order.paymentCode == "WX")
+                                微信
+                            #elseif($order.paymentCode == "ALIPAY")
+                                支付宝
+                            #elseif($order.paymentCode == "CARD")
+                                银行卡
+                            #elseif($order.paymentCode)
+                                $order.paymentCode
+                            #end
+                        </span></td>
+                        <td><span class="text-muted">价格：</span></td>
+                        <td><span class="text-primary">
+                            #set($temp="/")
+                            $!{goods.price}${goods.unit}
+                        </span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="text-muted">好评星级：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.evaluationGoodStar}</span></td>
+                        <td><span class="text-muted">是否新品：</span></td>
+                        <td class="td_split"><span class="text-primary">
+                            #if($goods.isNew == 0)
+                                否
+                            #elseif($goods.isNew == 1)
+                                是
+                            #end
+                        </span></td>
+                        <td><span class="text-muted">品牌：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.brandName}</span></td>
+                        <td><span class="text-muted">商品推荐：</span></td>
+                        <td class="td_split"><span class="text-primary">
+                            #if($goods.commend == 0)
+                                否
+                            #elseif($goods.commend == 1)
+                                是
+                            #end
+                        </span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="text-muted">评价数：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.evaluationCount}</span></td>
+                        <td><span class="text-muted">是否自营商品：</span></td>
+                        <td class="td_split"><span class="text-primary">
+                            #if($goods.isPlatform == 0)
+                                否
+                            #elseif($goods.isPlatform == 1)
+                                是
+                            #end
+                        </span></td>
+                        <td><span class="text-muted">起售时间</span></td>
+                        <td class="td_split"><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{goods.sellTimeBegin})</span></td>
+                        <td><span class="text-muted">止售时间</span></td>
+                        <td class="td_split"><span class="text-primary">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{goods.sellTimeEnd})</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-vcard-o"></i> 分类信息</h5>
+                </div>
+                <table class="table white-bg table-striped">
+                    <tbody>
+                    <tr>
+                        <td><span class="text-muted">一级分类：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.goodsCategory1}</span></td>
+                        <td><span class="text-muted">二级分类：</span></td>
+                        <td class="td_split"><span class="text-primary">$!{goods.goodsCategory2}</span></td>
+                        <td><span class="text-muted">三级分类</span></td>
+                        <td><span class="text-primary">$!{goods.goodsCategory3}</span></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-archive"></i> 商品图片信息</h5>
+                </div>
+                <div style="margin-left: 10px;">
+                    <div class="main-image" style="margin-top: 20px;margin-left: 20px">
+                        <img src="$!{goods.titleImg}" alt="商品主图片" style="width:100px; height: 100px"/>
+                    </div>
+                    <div class="images" style="margin-top: 20px">
+                        #foreach($image in $!{goods.imageSet})
+                            <img src="$image" alt="商品附属图片" style="width:100px; height: 100px; margin-left: 20px"/>
+                        #end
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><i class="fa text-info fa-money"></i> 图文信息</h5>
+                </div>
+                <table class="table white-bg table-striped table-bordered">
+                    <tbody>
+                    <tr>
+                        <td><span class="text-primary">$!{goods.goodsBody}</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+#parse("/admin/models/footer.vm")
+
+<!-- Tags Input -->
+<script src="/assets/admin/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+
+<!-- Select2 -->
+<script src="/assets/admin/js/plugins/select2/select2.full.min.js"></script>
+<script src="/assets/admin/js/plugins/select2/zh-CN.js"></script>
+
+<!-- Steps -->
+<script src="/assets/admin/js/plugins/steps/jquery.steps.min.js"></script>
+
+<!-- Jquery Validate -->
+<script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
+
+<!--webuploader-->
+<script type="text/javascript" src="/assets/admin/js/plugins/webuploader/webuploader.min.js"></script>
+
+<!-- 文件上传 -->
+<script src="/assets/admin/js/plugins/fileinput/fileinput.min.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/fileinput/zh.js" type="text/javascript"></script>
+<script src="/assets/admin/js/plugins/fileinput/theme.js" type="text/javascript"></script>
+
+<!-- 富文本编辑 -->
+<script type="text/javascript" src="/assets/admin/js/plugins/wangeditor/wangEditor.min.js"></script>
+<script type="text/javascript" src="/assets/admin/js/plugins/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/assets/admin/js/plugins/plupload/zh_CN.js"></script>
+<script type="text/javascript" src="/assets/admin/js/plugins/qiniu/qiniu.js"></script>
+
+<script src="/assets/admin/js/sku.js" type="text/javascript"></script>
+
+<script src="/assets/admin/js/plugins/jquery.tabletojson.min.js"></script>
+
+
+<script>
+    var uploadToken = '$uploadToken';
+    var domain = '$domain';
+</script>
+
+
+<script src="/assets/admin/js/admin-addgoods.js" type="text/javascript"></script>
+
+
+#parse("/admin/models/end.vm")

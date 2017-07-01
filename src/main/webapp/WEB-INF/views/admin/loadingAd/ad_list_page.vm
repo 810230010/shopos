@@ -226,7 +226,9 @@
             "processing": true,
             "autoWidth": false,
             "lengthMenu": [],
+            "bLengthChange":false,
             "responsive": true,
+            "bInfo": false,
             "dom": '<"html5buttons"B>lTfgitp',
             "buttons": [
             ],
@@ -301,7 +303,8 @@
             },
             success:function(result) {
                 if (result.code == 200) {
-                    if(result.data == 4){
+                    console.log(result);
+                    if(result.data.data == 4){
                         swal("禁止添加!", "数据已达4条", "error");
                     }else{
                         window.location.href = "/admin/advertisement/addLoadingAdPage";

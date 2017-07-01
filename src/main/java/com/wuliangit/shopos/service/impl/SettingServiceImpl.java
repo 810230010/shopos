@@ -94,4 +94,15 @@ public class SettingServiceImpl implements SettingService {
         settingMapper.updateSetting(SysSetting.SYS_SETTING_QQ,sysSetting.getQq());
         settingMapper.updateSetting(SysSetting.SYS_SETTING_TITLE,sysSetting.getTitle());
     }
+
+    @Override
+    public String getRegisterRegulation() {
+        return settingMapper.getRegisterRegulation();
+    }
+
+    @Override
+    public int updateRegulationContent(String regulationContent) {
+
+        return settingMapper.updateRegisteryRegulation(regulationContent);
+    }
 }

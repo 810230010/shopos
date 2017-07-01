@@ -11,6 +11,15 @@ public class ApiGoodsCategoryDOT {
 
     private String img;
 
+    private String adImg;
+
+    public String getAdImg() {
+        return adImg;
+    }
+
+    public void setAdImg(String adImg) {
+        this.adImg = adImg;
+    }
 
     public Integer getGoodsCategoryId() {
         return goodsCategoryId;

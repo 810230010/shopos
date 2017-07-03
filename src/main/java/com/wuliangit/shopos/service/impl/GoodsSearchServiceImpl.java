@@ -77,6 +77,7 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
 
         goodsSearchDTO.setSearchKey(ChineseAnalysis.segment(goodsSearchDTO.getSearchKey()));
         String order = this.createOrder(goodsSearchDTO.getOrderType(), goodsSearchDTO.getLng(), goodsSearchDTO.getLat());
+
         ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.goodsTypeSearch(goodsSearchDTO.getSearchKey(), order,
                 "GOODS_TYPE_ACTIVITY", goodsSearchDTO.getLng(), goodsSearchDTO.getLng());
         return goodses;

@@ -21,8 +21,6 @@ public class MTestController {
 
     private static Log logger = LogFactory.getLog(MTestController.class);
 
-    
-
     @RequestMapping("/api")
     public Object api1(@RequestParam(required = true) Integer a) throws Exception {
         RestResult result = new RestResult();

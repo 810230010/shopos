@@ -51,7 +51,7 @@
     </div>
 </div>
 </div>
-#parse("/store/models/footer.vm")
+#parse("/admin/models/footer.vm")
 
 <script src="/assets/admin/js/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
 

@@ -22,7 +22,7 @@
                 <img class="img-rounded" src="/assets/admin/img/logo.jpeg" style="width: 80px;height: 80px;">
             </div>
             <h3>欢迎使用 HOUHUIYAO</h3>
-            <p>意境电子
+            <p>宁波意境电子
             </p>
             <p>商家请登录</p>
             <form class="m-t" role="form" action="/store/login" method="post">

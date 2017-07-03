@@ -21,4 +21,17 @@ public interface SettingMapper extends BaseMapper<Setting, Integer> {
      * @return
      */
     Integer updateSetting(@Param("key")String key, @Param("value") String value);
+
+    /**
+     * 得到注册公约
+     * @return
+     */
+    String getRegisterRegulation();
+
+    /**
+     * 修改注册公约
+     * @param regulationContent
+     * @return
+     */
+    int updateRegisteryRegulation(@Param("regulationContent")String regulationContent);
 }

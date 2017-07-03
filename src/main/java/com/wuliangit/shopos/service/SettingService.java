@@ -64,4 +64,17 @@ public interface SettingService {
      * @param sysSetting
      */
     void updateSysSetting(SysSetting sysSetting);
+
+    /**
+     * 得到注册公约
+     * @return
+     */
+    String getRegisterRegulation();
+
+    /**
+     * 修改注册公约
+     * @param regulationContent
+     * @return
+     */
+    int updateRegulationContent(String regulationContent);
 }

@@ -41,5 +41,7 @@ public class CoreConstants {
 
     public static final String  SESSION_USER= "SESSION_USER";
 
+    //载进广告
+    public static final String LOADING_AD = "ADVERTISEMENT_LOADING";
 
 }

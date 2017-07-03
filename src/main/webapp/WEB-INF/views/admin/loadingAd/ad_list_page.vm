@@ -7,7 +7,7 @@
     <div class="col-lg-10">
         <h2>广告-载进广告列表</h2>
         <p>
-            <a type="button" class="btn btn-w-m btn-primary" href="/admin/advertisement/addAdvertisementPage">添加载进广告</a>
+            <a type="button" class="btn btn-w-m btn-primary" onclick="add()">添加载进广告</a>
         </p>
     </div>
 </div>
@@ -46,7 +46,7 @@
     $(document).ready(function () {
         var t = $('#datatables').DataTable({
             "ajax": {
-                'url': '/admin/advertisement/getAdvertisementListDate',
+                'url': '/admin/advertisement/getLoadingAdListDate',
                 "data": function(d) {
                     var param = {};
                     param.page = d.start/d.length + 1;
@@ -59,17 +59,12 @@
                 },
             },
             "columns": [
-                {"data":"tBannerId","width":"10%","title":"序号","orderable": false},
-                {"data":"pictureUrl","width": "20%","title":"banner图","orderable": false,"render":function(date, type, row){
+                {"data":"img","width": "20%","title":"载进图","orderable": false,"render":function(date, type, row){
                     return "<div class='pull-left'><img src='" + date + "' style='width: 100px;height: 100px;'></div>";
                 }},
-                {"data":"statusFlag","width": "20%","title":"开启状态","orderable": false, "render":function (data, type, row) {
-                    if(data == "1")return"开启";
-                    else return "关闭";
-                }},
-                {"data":"statusFlag","width": "20%","title":"更改状态","orderable": false,"render": function(data, type, row){
+                {"data":"open","width": "20%","title":"更改状态","orderable": false,"render": function(data, type, row){
                     var str;
-                    if(data == "1"){
+                    if(data == true){
                         str = '<a class="btn btn-danger btn-xs table-action status" href="javascript:void(0)">'+
                                 '关闭 <i class="fa fa-lock"></i>'+
                                 '</a>';
@@ -81,7 +76,7 @@
                     return str;
                 }},
 //                {"data":"externalUrl","width": "30%","title":"外部链接","orderable": false},
-                {"data":"tBannerId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
+                {"data":"id","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){
                     return [
                         '<a class="table-button btn btn-danger btn-xs table-action delete" style="margin-left: 4px;" href="javascript:void(0)">',
                         '删除 <i class="fa fa-trash-o"></i>',
@@ -95,19 +90,16 @@
             "deferRender": true,
             "processing": true,
             "autoWidth": false,
-            "lengthMenu": [ 10, 15, 20 ],
+            "lengthMenu": [],
+            "bLengthChange":false,
             "responsive": true,
+            "bInfo": false,
             "dom": '<"html5buttons"B>lTfgitp',
             "buttons": [
             ],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
-            },
-            "fnDrawCallback" : function(){
-                this.api().column(0).nodes().each(function(cell, i) {
-                    cell.innerHTML =  i + 1;
-                });
-            },
+            }
         });
         var table = $('#datatables').DataTable();
 
@@ -123,10 +115,10 @@
                 closeOnCancel: true
             },function(isConfirm){
                 if (isConfirm){
-                    $.get("/admin/banner/deleteBanner/"+data.tBannerId,
+                    $.get("/admin/advertisement/deleteLoadingAd/"+data.id,
                             function (data, status) {
                                 if(data.code==200){
-                                    swal("删除成功!", "banner图已经删除。", "success");
+                                    swal("删除成功!", "载进图已经删除。", "success");
                                     table = $('#datatables').DataTable().ajax.reload();
                                 }
                             });
@@ -147,11 +139,11 @@
             },function(isConfirm){
                 if (isConfirm){
                     $.ajax({
-                        url: "/admin/banner/modifyStatus",
+                        url: "/admin/advertisement/modifyStatus",
                         type: "get",
                         data: {
-                            "tBannerId": data.tBannerId,
-                            "statusFlag": data.statusFlag
+                            "id": data.id,
+                            "open": data.open
                         },
                         success:function(result) {
                             if (result.code == 200) {
@@ -167,6 +159,28 @@
             });
         });
     });
+
+    function add() {
+        $.ajax({
+            url: "/admin/advertisement/getLoadingAdNumber",
+            type: "get",
+            data: {
+            },
+            success:function(result) {
+                if (result.code == 200) {
+                    console.log(result);
+                    if(result.data.data == 4){
+                        swal("禁止添加!", "数据已达4条", "error");
+                    }else{
+                        window.location.href = "/admin/advertisement/addLoadingAdPage";
+                    }
+                }
+            },
+            error:function(result) {
+                alert("系统出错!")
+            }
+        });
+    }
 </script>
 
 #parse("/admin/models/end.vm")

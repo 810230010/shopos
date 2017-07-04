@@ -78,6 +78,8 @@ public class Order {
 
     private String invoiceInfo;
 
+    private String tuikeCode;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -372,5 +374,13 @@ public class Order {
 
     public void setInvoiceInfo(String invoiceInfo) {
         this.invoiceInfo = invoiceInfo == null ? null : invoiceInfo.trim();
+    }
+
+    public String getTuikeCode() {
+        return tuikeCode;
+    }
+
+    public void setTuikeCode(String tuikeCode) {
+        this.tuikeCode = tuikeCode == null ? null : tuikeCode.trim();
     }
 }

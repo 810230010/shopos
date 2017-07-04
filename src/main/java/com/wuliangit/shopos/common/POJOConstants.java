@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.common;
 
+import java.math.BigDecimal;
+
 /**
  * 项目POJO公共枚举类
  * Created by nilme on 2017/2/21.
@@ -146,7 +148,8 @@ public class POJOConstants {
     //电脑端
     public final static String GOODS_FROM_COMPUTER = "COMPUTER";
 
-
+    //保证金金额
+    public static final BigDecimal GUARANTEE_MONEY_AMOUNT = new BigDecimal(0.1);
 
 
 }

@@ -47,7 +47,6 @@
     </div>
 </div>
 <div style="margin-top:40px">
-    <form id="brandForm" class="form-horizontal">
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">缴纳金额</label>
             <div class="col-sm-7">
@@ -55,15 +54,17 @@
             </div>
         </div>
         <div class="hr-line-dashed"></div>
-        <div class="form-group">
+        <div class="form-group" style="margin-top: 60px">
             <div class="col-sm-4 col-sm-offset-3">
                 <input class="btn btn-primary" type="submit" id="submit" value="确认提交">
             </div>
         </div>
-    </form>
+    <div id="qrcode">
+
+    </div>
+
 </div>
 
-<button id="J_btn_scanQR" class="btn btn-default">扫一扫二维码</button>
 #parse("/store/models/footer.vm")
 
 <!-- DataTime picker -->
@@ -75,27 +76,6 @@
 <!-- Tags Input -->
 <script src="/assets/admin/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
-<!-- Select2 -->
-<script src="/assets/admin/js/plugins/select2/select2.full.min.js"></script>
-<script src="/assets/admin/js/plugins/select2/zh-CN.js"></script>
-
-<!-- Steps -->
-<script src="/assets/admin/js/plugins/steps/jquery.steps.min.js"></script>
-
-<!-- Jquery Validate -->
-<script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
-
-<!--webuploader-->
-<script type="text/javascript" src="/assets/admin/js/plugins/webuploader/webuploader.min.js"></script>
-
-
-<!-- 富文本编辑 -->
-<script type="text/javascript" src="/assets/admin/js/plugins/wangeditor/wangEditor.min.js"></script>
-<script type="text/javascript" src="/assets/admin/js/plugins/plupload/plupload.full.min.js"></script>
-<script type="text/javascript" src="/assets/admin/js/plugins/plupload/zh_CN.js"></script>
-<script type="text/javascript" src="/assets/admin/js/plugins/qiniu/qiniu.js"></script>
-
-<script src="/assets/admin/js/sku.js" type="text/javascript"></script>
 
 <script src="https://a.alipayobjects.com/g/h5-lib/alipayjsapi/3.0.3/alipayjsapi.inc.min.js"></script>
 
@@ -105,13 +85,32 @@
     $("#缴纳保证金").addClass("active");
     $("#设置").addClass("active");
     $("#side-menu").metisMenu();
+    $("#submit").click(function () {
+         $.ajax({
+             url: "/store/guarantee/pay/generateOrder",
+             type: "post",
+             success:function (result) {
 
-    var btnScanQR = document.querySelector('#J_btn_scanQR');
-    btnScanQR.addEventListener('click', function(){
-        ap.scan(function(res){
-            ap.alert(res.code);
-        });
-    });
+                 if(result.code == 200){
+                     $.ajax({
+                         url: "/store/guarantee/pay/prepare",
+                         type: "post",
+                         data: {"orderId": result.data.orderId},
+                         success:function (result) {
+                             $("#qrcode").html(result.data.payInfo);
+                         },
+                         error:function(result){
+                             alert("系统出错")
+                         }
+                     })
+                 }
+             },
+             error:function(result){
+                 alert("系统出错")
+             }
+         })
+    })
+
 
 </script>
 

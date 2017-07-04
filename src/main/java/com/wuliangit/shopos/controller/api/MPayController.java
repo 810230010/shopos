@@ -45,6 +45,12 @@ public class MPayController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * 创建预支付订单
+     * @param orderIds
+     * @return
+     * @throws AlipayApiException
+     */
     @RequestMapping(value = "/alipay/prepare", method = RequestMethod.POST)
     @ResponseBody
     public Object alipayPrepare(@RequestParam("orderIds[]") List<Integer> orderIds) throws AlipayApiException {

@@ -22,7 +22,9 @@ public class AliPay {
     public static final String ALIPAY_CHECK = "ALIPAY_CHECK";
 
     //销售产品码，商家和支付宝签约的产品码，为固定值QUICK_MSECURITY_PAY
-    public static final String PRODUCTCODE = "QUICK_MSECURITY_PAY";
+    public static final String PRODUCTCODE_MSECURITY = "QUICK_MSECURITY_PAY";
+
+    public static final String PRODUCTCODE_INSTANT = "FAST_INSTANT_TRADE_PAY";
 
     private static String serviceUrl = "https://openapi.alipay.com/gateway.do";
 

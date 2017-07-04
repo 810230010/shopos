@@ -45,30 +45,20 @@ public class StoreGuaranteeMoneyPayController {
      * 创建支付保证金的订单
      * @return
      */
-    @RequestMapping("/generateOrder")
+    @RequestMapping("")
     @ResponseBody
-    public Object guaranteeOrderGenerate() {
-        RestResult result = null;
+    public void alipayGuaranteePrepare(HttpServletResponse response) {
+
+        //生成保证金订单
         GuaranteeOrder order = new GuaranteeOrder();
         order.setOutTradeNo(OrderUtil.makeOrderId());
         Integer storeId = WebUtil.getCurrentStore().getStoreId();
         order.setStoreId(storeId);
         order.setOrderStatus(POJOConstants.ORDER_STATE_INIT);
         order.setCreateTime(new Date());
-        if(guaranteeService.insertGuaranteeOrder(order) != 1){
-            result = new RestResult("未知错误, 创建订单失败", 405);
-        }else{
-            GuaranteeOrder orderInfo = guaranteeService.getGuaranteeOrderByOutTradeNo(order.getOutTradeNo());
-            result = new RestResult();
-            result.add("orderId", orderInfo.getOrderId());
-        }
-        return result;
-    }
+        order.setOutTradeNo(OrderUtil.makeOrderId());
+        guaranteeService.createGuaranteeOrder(order);
 
-    @RequestMapping("/prepare")
-    @ResponseBody
-    public Object alipayGuaranteePrepare(Integer orderId) {
-        RestResult result = new RestResult();
         AlipayClient client = AliPay.getAlipayClient();
         //初始化支付宝支付页面请求
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
@@ -78,27 +68,39 @@ public class StoreGuaranteeMoneyPayController {
         //支付的金额
         BigDecimal payprice = new BigDecimal(0.01);
 
-        GuaranteeOrder order = guaranteeService.getGuaranteeOrderByOrderID(orderId);
         model.setOutTradeNo(order.getOutTradeNo());
         model.setTotalAmount(payprice.setScale(2,   BigDecimal.ROUND_HALF_UP).toString());
         model.setBody("保证金缴纳订单");
         model.setPassbackParams("single");
         model.setSubject("缴纳金支付");
         model.setTimeoutExpress("30m");
+        model.setProductCode(AliPay.PRODUCTCODE_INSTANT);
 
         request.setBizModel(model);
         request.setNotifyUrl(notifyUrl);
 
         try {
-            AlipayTradePagePayResponse response = client.pageExecute(request);
-            result.add("payInfo", response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
-            logger.debug("payInfo----->"+ response.getBody());
-        } catch (AlipayApiException e) {
+            AlipayTradePagePayResponse alipayTradePagePayResponse = client.pageExecute(request);
+
+            PrintWriter out = response.getWriter();
+            response.setHeader("Content-Type","text/html;charset=UTF-8");
+            out.println( alipayTradePagePayResponse.getBody()); // 请不要修改或删除
+            out.flush();
+
+            logger.debug("payInfo----->"+ alipayTradePagePayResponse.getBody());
+            System.out.println(alipayTradePagePayResponse.getBody());
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
     }
 
+    /**
+     * 保证金缴纳支付宝异步通知
+     * @param request
+     * @param response
+     * @throws AlipayApiException
+     * @throws IOException
+     */
     @RequestMapping("/notify")
     public void alipayNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, IOException {
         //获取支付宝POST过来反馈信息
@@ -133,8 +135,10 @@ public class StoreGuaranteeMoneyPayController {
 
                 GuaranteeOrder order = guaranteeService.getGuaranteeOrderByOutTradeNo(outTradeNo);
                 order.setTradeNo(tradeNo);
-                orderPayed(order);
 
+                order.setOrderStatus(POJOConstants.ORDER_STATE_PAYED);
+                order.setPayTime(new Date());
+                guaranteeService.updateGuaranteeOrder(order);
 
             } else {
                 logger.error("非法请求！");
@@ -144,15 +148,5 @@ public class StoreGuaranteeMoneyPayController {
             out.println("success"); // 请不要修改或删除
             out.flush();
         }
-    }
-
-    /**
-     * 成功支付订单状态修改
-     * @param order
-     */
-    private void orderPayed(GuaranteeOrder order){
-        order.setOrderStatus(POJOConstants.ORDER_STATE_PAYED);
-        order.setPayTime(new Date());
-        guaranteeService.updateGuaranteeOrder(order);
     }
 }

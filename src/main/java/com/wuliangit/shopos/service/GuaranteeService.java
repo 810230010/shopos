@@ -10,7 +10,7 @@ public interface GuaranteeService {
       * 新增支付保证金订单
       * @return
       */
-     int insertGuaranteeOrder(GuaranteeOrder order);
+     int createGuaranteeOrder(GuaranteeOrder order);
 
      /**
       * orderId得到保证金订单

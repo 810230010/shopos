@@ -19,7 +19,7 @@ public class GuaranteeServiceImpl implements GuaranteeService {
     @Autowired
     private GuaranteeOrderMapper guaranteeOrderMapper;
     @Override
-    public int insertGuaranteeOrder(GuaranteeOrder order) {
+    public int createGuaranteeOrder(GuaranteeOrder order) {
         return guaranteeOrderMapper.insertSelective(order);
     }
 

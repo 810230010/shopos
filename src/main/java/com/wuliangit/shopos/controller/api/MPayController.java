@@ -87,7 +87,7 @@ public class MPayController {
         model.setSubject("商品支付");
         model.setTimeoutExpress("30m");
         model.setTotalAmount(totalAmount.toString());
-        model.setProductCode(AliPay.PRODUCTCODE);
+        model.setProductCode(AliPay.PRODUCTCODE_MSECURITY);
 
         request.setBizModel(model);
         request.setNotifyUrl(notifyUrl);

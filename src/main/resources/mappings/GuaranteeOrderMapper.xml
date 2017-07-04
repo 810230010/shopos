@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.GuaranteeOrderMapper" >
+
+    <!--根据out_trade_no查询-->
+    <select id="selectGuaranteeOrderByOutTradeNo" resultType="com.wuliangit.shopos.entity.GuaranteeOrder">
+        select * from t_guarantee_order
+        where out_trade_no = #{outTradeNo}
+    </select>
+</mapper>

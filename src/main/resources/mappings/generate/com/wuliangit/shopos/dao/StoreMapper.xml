@@ -33,7 +33,7 @@
     <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
     <result column="theme" property="theme" jdbcType="VARCHAR" />
     <result column="credit" property="credit" jdbcType="INTEGER" />
-    <result column="desccredit" property="desccredit" jdbcType="DOUBLE" />
+    <result column="desccredit" property="desccredit" jdbcType="DECIMAL" />
     <result column="servicecredit" property="servicecredit" jdbcType="REAL" />
     <result column="deliverycredit" property="deliverycredit" jdbcType="REAL" />
     <result column="collect" property="collect" jdbcType="INTEGER" />
@@ -121,8 +121,9 @@
       #{banner,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{ww,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, #{domainTimes,jdbcType=INTEGER}, 
-      #{isRecommend,jdbcType=BIT}, #{theme,jdbcType=VARCHAR}, #{credit,jdbcType=INTEGER}, 
-      #{desccredit,jdbcType=DOUBLE}, #{servicecredit,jdbcType=REAL}, #{deliverycredit,jdbcType=REAL}, 
+      #{isRecommend,jdbcType=BIT}, #{theme,jdbcType=VARCHAR}, #{credit,jdbcType=INTEGER},
+      #{desccredit,jdbcType=DECIMAL}, #{servicecredit,jdbcType=REAL}, #{deliverycredit,jdbcType=REAL}, 
+
       #{collect,jdbcType=INTEGER}, #{slideUrl,jdbcType=VARCHAR}, #{stamp,jdbcType=VARCHAR}, 
       #{printdesc,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER}, #{presales,jdbcType=VARCHAR}, 
       #{aftersales,jdbcType=VARCHAR}, #{workingtime,jdbcType=VARCHAR}, #{freePrice,jdbcType=DECIMAL}, 
@@ -419,7 +420,8 @@
         #{credit,jdbcType=INTEGER},
       </if>
       <if test="desccredit != null" >
-        #{desccredit,jdbcType=DOUBLE},
+        #{desccredit,jdbcType=DECIMAL},
+
       </if>
       <if test="servicecredit != null" >
         #{servicecredit,jdbcType=REAL},
@@ -610,7 +612,10 @@
         credit = #{credit,jdbcType=INTEGER},
       </if>
       <if test="desccredit != null" >
-        desccredit = #{desccredit,jdbcType=DOUBLE},
+
+
+        desccredit = #{desccredit,jdbcType=DECIMAL},
+
       </if>
       <if test="servicecredit != null" >
         servicecredit = #{servicecredit,jdbcType=REAL},
@@ -740,7 +745,7 @@
       is_recommend = #{isRecommend,jdbcType=BIT},
       theme = #{theme,jdbcType=VARCHAR},
       credit = #{credit,jdbcType=INTEGER},
-      desccredit = #{desccredit,jdbcType=DOUBLE},
+      desccredit = #{desccredit,jdbcType=DECIMAL},
       servicecredit = #{servicecredit,jdbcType=REAL},
       deliverycredit = #{deliverycredit,jdbcType=REAL},
       collect = #{collect,jdbcType=INTEGER},

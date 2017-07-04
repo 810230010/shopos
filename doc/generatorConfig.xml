@@ -193,7 +193,9 @@
         <table tableName="t_banner" domainObjectName="Banner" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="store_account_log_id" sqlStatement="MySql" identity="true"/>
         </table>
-
+        <table tableName="t_guarantee_order" domainObjectName="GuaranteeOrder" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="order_id" sqlStatement="MySql" identity="true"/>
+        </table>
 
     </context>
 </generatorConfiguration>

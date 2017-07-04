@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.CommissionCashLogMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.CommissionCashLog" >
+    <id column="commission_cash_log_id" property="commissionCashLogId" jdbcType="INTEGER" />
+    <result column="take_cash" property="takeCash" jdbcType="DECIMAL" />
+    <result column="take_account" property="takeAccount" jdbcType="VARCHAR" />
+    <result column="take_time" property="takeTime" jdbcType="TIMESTAMP" />
+    <result column="take_name" property="takeName" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commission_cash_log_id, take_cash, take_account, take_time, take_name, member_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_commission_cash_log
+    where commission_cash_log_id = #{commissionCashLogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_commission_cash_log
+    where commission_cash_log_id = #{commissionCashLogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.CommissionCashLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="commissionCashLogId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_commission_cash_log (take_cash, take_account, take_time, 
+      take_name, member_id)
+    values (#{takeCash,jdbcType=DECIMAL}, #{takeAccount,jdbcType=VARCHAR}, #{takeTime,jdbcType=TIMESTAMP}, 
+      #{takeName,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.CommissionCashLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="commissionCashLogId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_commission_cash_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="takeCash != null" >
+        take_cash,
+      </if>
+      <if test="takeAccount != null" >
+        take_account,
+      </if>
+      <if test="takeTime != null" >
+        take_time,
+      </if>
+      <if test="takeName != null" >
+        take_name,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="takeCash != null" >
+        #{takeCash,jdbcType=DECIMAL},
+      </if>
+      <if test="takeAccount != null" >
+        #{takeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="takeTime != null" >
+        #{takeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="takeName != null" >
+        #{takeName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.CommissionCashLog" >
+    update t_commission_cash_log
+    <set >
+      <if test="takeCash != null" >
+        take_cash = #{takeCash,jdbcType=DECIMAL},
+      </if>
+      <if test="takeAccount != null" >
+        take_account = #{takeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="takeTime != null" >
+        take_time = #{takeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="takeName != null" >
+        take_name = #{takeName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where commission_cash_log_id = #{commissionCashLogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.CommissionCashLog" >
+    update t_commission_cash_log
+    set take_cash = #{takeCash,jdbcType=DECIMAL},
+      take_account = #{takeAccount,jdbcType=VARCHAR},
+      take_time = #{takeTime,jdbcType=TIMESTAMP},
+      take_name = #{takeName,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=INTEGER}
+    where commission_cash_log_id = #{commissionCashLogId,jdbcType=INTEGER}
+  </update>
+</mapper>

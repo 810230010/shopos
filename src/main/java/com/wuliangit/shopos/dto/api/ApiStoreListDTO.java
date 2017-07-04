@@ -25,7 +25,7 @@ public class ApiStoreListDTO {
 
     private Integer grade;
 
-    private BigDecimal desccredit;
+    private Double desccredit;
 
     public Boolean getSevenDayReturn() {
         return sevenDayReturn;
@@ -35,11 +35,11 @@ public class ApiStoreListDTO {
         this.sevenDayReturn = sevenDayReturn;
     }
 
-    public BigDecimal getDesccredit() {
+    public Double getDesccredit() {
         return desccredit;
     }
 
-    public void setDesccredit(BigDecimal desccredit) {
+    public void setDesccredit(Double desccredit) {
         this.desccredit = desccredit;
     }
 

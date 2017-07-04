@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.OrderCommissionMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.OrderCommission" >
+    <id column="order_commission_id" property="orderCommissionId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="commission" property="commission" jdbcType="DECIMAL" />
+    <result column="tuike_code" property="tuikeCode" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="creat_time" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_commission_id, order_id, commission, tuike_code, member_id, creat_time, member_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_commission
+    where order_commission_id = #{orderCommissionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_order_commission
+    where order_commission_id = #{orderCommissionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.OrderCommission" >
+    <selectKey resultType="java.lang.Integer" keyProperty="orderCommissionId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_order_commission (order_id, commission, tuike_code, 
+      member_id, creat_time, member_name
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{commission,jdbcType=DECIMAL}, #{tuikeCode,jdbcType=VARCHAR}, 
+      #{memberId,jdbcType=INTEGER}, #{creatTime,jdbcType=TIMESTAMP}, #{memberName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.OrderCommission" >
+    <selectKey resultType="java.lang.Integer" keyProperty="orderCommissionId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_order_commission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="commission != null" >
+        commission,
+      </if>
+      <if test="tuikeCode != null" >
+        tuike_code,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+      <if test="memberName != null" >
+        member_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="commission != null" >
+        #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="tuikeCode != null" >
+        #{tuikeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.OrderCommission" >
+    update t_order_commission
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="commission != null" >
+        commission = #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="tuikeCode != null" >
+        tuike_code = #{tuikeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberName != null" >
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_commission_id = #{orderCommissionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.OrderCommission" >
+    update t_order_commission
+    set order_id = #{orderId,jdbcType=INTEGER},
+      commission = #{commission,jdbcType=DECIMAL},
+      tuike_code = #{tuikeCode,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=INTEGER},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      member_name = #{memberName,jdbcType=VARCHAR}
+    where order_commission_id = #{orderCommissionId,jdbcType=INTEGER}
+  </update>
+</mapper>

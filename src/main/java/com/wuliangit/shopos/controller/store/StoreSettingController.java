@@ -189,9 +189,13 @@ public class StoreSettingController {
         }
     }
 
+    /**
+     * 缴纳保证金页面
+     * @return
+     */
     @RequestMapping("/payGuaranteeMoneyPage")
-    public String view2GuaranteeMoneyPage(Model model){
-        return "store/setting/pay_money_page";
+    public String view2GuaranteeMoneyPage(){
+        return "/store/setting/pay_money_page";
     }
 
 }

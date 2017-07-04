@@ -1,12 +1,13 @@
 package com.wuliangit.shopos.service.impl;
 
+import com.wuliangit.shopos.common.ali.sms.SMSSender;
 import com.wuliangit.shopos.common.cache.SpringCacheManager;
-import com.wuliangit.shopos.common.sms.SMSSender;
 import com.wuliangit.shopos.service.SMSService;
 import org.apache.shiro.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -16,8 +17,8 @@ import java.util.Random;
 @Service
 public class SMSServiceImpl implements SMSService {
 
-    @Autowired
-    private SMSSender smsSender;
+    //超时时间
+    private static final String timeout = "10";
 
     @Autowired
     private SpringCacheManager springCacheManager;
@@ -25,11 +26,13 @@ public class SMSServiceImpl implements SMSService {
     @Override
     public boolean sendRegisterCode(String phone) {
         String code = this.getRandomCode();
-        String timeout = "10";
-        boolean res = smsSender.send(phone, "178889", new String[]{code, timeout});
+        HashMap<String, String> data = new HashMap<>();
+        data.put("code", this.getRandomCode());
+        data.put("time", timeout);
+
+        boolean res = SMSSender.send(phone, SMSSender.CODE_REGISTER, data);
         if (res) {
-            Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
-            cache.put(phone, code);
+            getSmsCache().put(phone, code);
             return true;
         } else {
             return false;
@@ -39,11 +42,14 @@ public class SMSServiceImpl implements SMSService {
     @Override
     public boolean sendtRepassCode(String phone) {
         String code = this.getRandomCode();
-        String timeout = "10";
-        boolean res = smsSender.send(phone, "178889", new String[]{timeout, code});
+
+        HashMap<String, String> data = new HashMap<>();
+        data.put("code", this.getRandomCode());
+        data.put("time", timeout);
+
+        boolean res = SMSSender.send(phone, SMSSender.CODE_REPASS, data);
         if (res) {
-            Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
-            cache.put(phone, code);
+            getSmsCache().put(phone, code);
             return true;
         } else {
             return false;
@@ -52,19 +58,21 @@ public class SMSServiceImpl implements SMSService {
 
     @Override
     public String getCheckCode(String phone) {
-        Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
-        String cacheCode = (String)cache.get(phone);
+        String cacheCode = (String) getSmsCache().get(phone);
         return cacheCode;
     }
 
     @Override
     public boolean sendStoreBindCode(String phone) {
         String code = this.getRandomCode();
-        String timeout = "10";
-        boolean res = smsSender.send(phone, "178889", new String[]{timeout, code});
+
+        HashMap<String, String> data = new HashMap<>();
+        data.put("code", this.getRandomCode());
+        data.put("time", timeout);
+
+        boolean res = SMSSender.send(phone, SMSSender.CODE_STORE_BIND, data);
         if (res) {
-            Cache<Object, Object> cache = springCacheManager.getCache(smsSender.getCacheName());
-            cache.put(phone, code);
+            getSmsCache().put(phone, code);
             return true;
         } else {
             return false;
@@ -74,12 +82,25 @@ public class SMSServiceImpl implements SMSService {
 
     /**
      * 获取6位随机验证码
+     *
      * @return
      */
-    private String getRandomCode(){
+    private String getRandomCode() {
         Random rand = new Random();
         int tmp = Math.abs(rand.nextInt());
         int code = tmp % (999999 - 100000 + 1) + 100000;
-        return  code+"";
+        return code + "";
     }
+
+    /**
+     * 获取短信缓存
+     *
+     * @return
+     */
+    private Cache<Object, Object> getSmsCache() {
+        Cache<Object, Object> cache = springCacheManager.getCache(SMSSender.DEFAULT_CACHE_NAME);
+        return cache;
+    }
+
+
 }

@@ -353,6 +353,14 @@
         </dependency>
         <!--支付宝end-->
 
+        <!--阿里云发送短信接口-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+        <!--阿里云发送短信接口-->
+
 
         <!--邮件发送-->
         <dependency>

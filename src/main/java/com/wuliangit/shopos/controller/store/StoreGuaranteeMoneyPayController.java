@@ -43,6 +43,7 @@ public class StoreGuaranteeMoneyPayController {
 
     /**
      * 创建支付保证金的订单
+     *
      * @return
      */
     @RequestMapping("")
@@ -69,7 +70,7 @@ public class StoreGuaranteeMoneyPayController {
         BigDecimal payprice = new BigDecimal(0.01);
 
         model.setOutTradeNo(order.getOutTradeNo());
-        model.setTotalAmount(payprice.setScale(2,   BigDecimal.ROUND_HALF_UP).toString());
+        model.setTotalAmount(payprice.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
         model.setBody("保证金缴纳订单");
         model.setPassbackParams("single");
         model.setSubject("缴纳金支付");
@@ -83,19 +84,21 @@ public class StoreGuaranteeMoneyPayController {
             AlipayTradePagePayResponse alipayTradePagePayResponse = client.pageExecute(request);
 
             PrintWriter out = response.getWriter();
-            response.setHeader("Content-Type","text/html;charset=UTF-8");
-            out.println( alipayTradePagePayResponse.getBody()); // 请不要修改或删除
+            response.setHeader("Content-Type", "text/html;charset=UTF-8");
+            out.println(alipayTradePagePayResponse.getBody()); // 请不要修改或删除
             out.flush();
 
-            logger.debug("payInfo----->"+ alipayTradePagePayResponse.getBody());
+            logger.debug("payInfo----->" + alipayTradePagePayResponse.getBody());
             System.out.println(alipayTradePagePayResponse.getBody());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    
     /**
      * 保证金缴纳支付宝异步通知
+     *
      * @param request
      * @param response
      * @throws AlipayApiException

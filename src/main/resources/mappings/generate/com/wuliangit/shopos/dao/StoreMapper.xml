@@ -7,7 +7,7 @@
     <result column="bind_member_id" property="bindMemberId" jdbcType="INTEGER" />
     <result column="bind_member_username" property="bindMemberUsername" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="grade_id" property="gradeId" jdbcType="INTEGER" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
     <result column="sc_id" property="scId" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="store_company_name" property="storeCompanyName" jdbcType="VARCHAR" />
@@ -33,7 +33,7 @@
     <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
     <result column="theme" property="theme" jdbcType="VARCHAR" />
     <result column="credit" property="credit" jdbcType="INTEGER" />
-    <result column="desccredit" property="desccredit" jdbcType="REAL" />
+    <result column="desccredit" property="desccredit" jdbcType="DOUBLE" />
     <result column="servicecredit" property="servicecredit" jdbcType="REAL" />
     <result column="deliverycredit" property="deliverycredit" jdbcType="REAL" />
     <result column="collect" property="collect" jdbcType="INTEGER" />
@@ -62,17 +62,20 @@
     <result column="refund_address" property="refundAddress" jdbcType="VARCHAR" />
     <result column="refund_name" property="refundName" jdbcType="VARCHAR" />
     <result column="refund_phone" property="refundPhone" jdbcType="VARCHAR" />
+    <result column="pay_guarantee_money" property="payGuaranteeMoney" jdbcType="BIT" />
+    <result column="order_amount" property="orderAmount" jdbcType="INTEGER" />
+    <result column="trading_volume" property="tradingVolume" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    store_id, seller_admin_id, bind_member_id, bind_member_username, name, grade_id, 
-    sc_id, type, store_company_name, province_id, area_info, address, zip, state, close_info, 
+    store_id, seller_admin_id, bind_member_id, bind_member_username, name, grade, sc_id, 
+    type, store_company_name, province_id, area_info, address, zip, state, close_info, 
     sort, create_time, end_time, label, banner, logo, keywords, description, qq, ww, 
     phone, domain, domain_times, is_recommend, theme, credit, desccredit, servicecredit, 
     deliverycredit, collect, slide_url, stamp, printdesc, sales, presales, aftersales, 
     workingtime, free_price, decoration_switch, decoration_only, seven_day_return, real_goods, 
     sales_return, live, pay_after, store_free_time, live_store_name, live_store_address, 
     live_store_tel, live_store_gps_lng, live_store_gps_lat, live_store_bus, refund_address, 
-    refund_name, refund_phone
+    refund_name, refund_phone, pay_guarantee_money, order_amount, trading_volume
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -89,7 +92,7 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_store (seller_admin_id, bind_member_id, bind_member_username, 
-      name, grade_id, sc_id, 
+      name, grade, sc_id, 
       type, store_company_name, province_id, 
       area_info, address, zip, 
       state, close_info, sort, 
@@ -107,9 +110,10 @@
       store_free_time, live_store_name, live_store_address, 
       live_store_tel, live_store_gps_lng, live_store_gps_lat, 
       live_store_bus, refund_address, refund_name, 
-      refund_phone)
+      refund_phone, pay_guarantee_money, order_amount, 
+      trading_volume)
     values (#{sellerAdminId,jdbcType=VARCHAR}, #{bindMemberId,jdbcType=INTEGER}, #{bindMemberUsername,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{gradeId,jdbcType=INTEGER}, #{scId,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, #{scId,jdbcType=INTEGER}, 
       #{type,jdbcType=VARCHAR}, #{storeCompanyName,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, 
       #{areaInfo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, 
       #{state,jdbcType=VARCHAR}, #{closeInfo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
@@ -118,7 +122,7 @@
       #{description,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{ww,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, #{domainTimes,jdbcType=INTEGER}, 
       #{isRecommend,jdbcType=BIT}, #{theme,jdbcType=VARCHAR}, #{credit,jdbcType=INTEGER}, 
-      #{desccredit,jdbcType=REAL}, #{servicecredit,jdbcType=REAL}, #{deliverycredit,jdbcType=REAL}, 
+      #{desccredit,jdbcType=DOUBLE}, #{servicecredit,jdbcType=REAL}, #{deliverycredit,jdbcType=REAL}, 
       #{collect,jdbcType=INTEGER}, #{slideUrl,jdbcType=VARCHAR}, #{stamp,jdbcType=VARCHAR}, 
       #{printdesc,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER}, #{presales,jdbcType=VARCHAR}, 
       #{aftersales,jdbcType=VARCHAR}, #{workingtime,jdbcType=VARCHAR}, #{freePrice,jdbcType=DECIMAL}, 
@@ -127,7 +131,8 @@
       #{storeFreeTime,jdbcType=VARCHAR}, #{liveStoreName,jdbcType=VARCHAR}, #{liveStoreAddress,jdbcType=VARCHAR}, 
       #{liveStoreTel,jdbcType=VARCHAR}, #{liveStoreGpsLng,jdbcType=DOUBLE}, #{liveStoreGpsLat,jdbcType=DOUBLE}, 
       #{liveStoreBus,jdbcType=VARCHAR}, #{refundAddress,jdbcType=VARCHAR}, #{refundName,jdbcType=VARCHAR}, 
-      #{refundPhone,jdbcType=VARCHAR})
+      #{refundPhone,jdbcType=VARCHAR}, #{payGuaranteeMoney,jdbcType=BIT}, #{orderAmount,jdbcType=INTEGER}, 
+      #{tradingVolume,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Store" >
     <selectKey resultType="java.lang.Integer" keyProperty="storeId" order="AFTER" >
@@ -147,8 +152,8 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="gradeId != null" >
-        grade_id,
+      <if test="grade != null" >
+        grade,
       </if>
       <if test="scId != null" >
         sc_id,
@@ -312,6 +317,15 @@
       <if test="refundPhone != null" >
         refund_phone,
       </if>
+      <if test="payGuaranteeMoney != null" >
+        pay_guarantee_money,
+      </if>
+      <if test="orderAmount != null" >
+        order_amount,
+      </if>
+      <if test="tradingVolume != null" >
+        trading_volume,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="sellerAdminId != null" >
@@ -326,8 +340,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="gradeId != null" >
-        #{gradeId,jdbcType=INTEGER},
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
       </if>
       <if test="scId != null" >
         #{scId,jdbcType=INTEGER},
@@ -405,7 +419,7 @@
         #{credit,jdbcType=INTEGER},
       </if>
       <if test="desccredit != null" >
-        #{desccredit,jdbcType=REAL},
+        #{desccredit,jdbcType=DOUBLE},
       </if>
       <if test="servicecredit != null" >
         #{servicecredit,jdbcType=REAL},
@@ -491,6 +505,15 @@
       <if test="refundPhone != null" >
         #{refundPhone,jdbcType=VARCHAR},
       </if>
+      <if test="payGuaranteeMoney != null" >
+        #{payGuaranteeMoney,jdbcType=BIT},
+      </if>
+      <if test="orderAmount != null" >
+        #{orderAmount,jdbcType=INTEGER},
+      </if>
+      <if test="tradingVolume != null" >
+        #{tradingVolume,jdbcType=DECIMAL},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Store" >
@@ -508,8 +531,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="gradeId != null" >
-        grade_id = #{gradeId,jdbcType=INTEGER},
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
       </if>
       <if test="scId != null" >
         sc_id = #{scId,jdbcType=INTEGER},
@@ -587,7 +610,7 @@
         credit = #{credit,jdbcType=INTEGER},
       </if>
       <if test="desccredit != null" >
-        desccredit = #{desccredit,jdbcType=REAL},
+        desccredit = #{desccredit,jdbcType=DOUBLE},
       </if>
       <if test="servicecredit != null" >
         servicecredit = #{servicecredit,jdbcType=REAL},
@@ -673,6 +696,15 @@
       <if test="refundPhone != null" >
         refund_phone = #{refundPhone,jdbcType=VARCHAR},
       </if>
+      <if test="payGuaranteeMoney != null" >
+        pay_guarantee_money = #{payGuaranteeMoney,jdbcType=BIT},
+      </if>
+      <if test="orderAmount != null" >
+        order_amount = #{orderAmount,jdbcType=INTEGER},
+      </if>
+      <if test="tradingVolume != null" >
+        trading_volume = #{tradingVolume,jdbcType=DECIMAL},
+      </if>
     </set>
     where store_id = #{storeId,jdbcType=INTEGER}
   </update>
@@ -682,7 +714,7 @@
       bind_member_id = #{bindMemberId,jdbcType=INTEGER},
       bind_member_username = #{bindMemberUsername,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      grade_id = #{gradeId,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER},
       sc_id = #{scId,jdbcType=INTEGER},
       type = #{type,jdbcType=VARCHAR},
       store_company_name = #{storeCompanyName,jdbcType=VARCHAR},
@@ -708,7 +740,7 @@
       is_recommend = #{isRecommend,jdbcType=BIT},
       theme = #{theme,jdbcType=VARCHAR},
       credit = #{credit,jdbcType=INTEGER},
-      desccredit = #{desccredit,jdbcType=REAL},
+      desccredit = #{desccredit,jdbcType=DOUBLE},
       servicecredit = #{servicecredit,jdbcType=REAL},
       deliverycredit = #{deliverycredit,jdbcType=REAL},
       collect = #{collect,jdbcType=INTEGER},
@@ -736,7 +768,10 @@
       live_store_bus = #{liveStoreBus,jdbcType=VARCHAR},
       refund_address = #{refundAddress,jdbcType=VARCHAR},
       refund_name = #{refundName,jdbcType=VARCHAR},
-      refund_phone = #{refundPhone,jdbcType=VARCHAR}
+      refund_phone = #{refundPhone,jdbcType=VARCHAR},
+      pay_guarantee_money = #{payGuaranteeMoney,jdbcType=BIT},
+      order_amount = #{orderAmount,jdbcType=INTEGER},
+      trading_volume = #{tradingVolume,jdbcType=DECIMAL}
     where store_id = #{storeId,jdbcType=INTEGER}
   </update>
 </mapper>

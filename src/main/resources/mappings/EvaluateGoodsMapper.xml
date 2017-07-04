@@ -31,4 +31,11 @@
         FROM t_evaluate_goods
         WHERE evaluate_goods_id=#{evaluateGoodsId}
     </select>
+
+    <!--获取具体订单具体商品的星级-->
+    <select id="getOrderGoodsStar" resultType="java.lang.Integer">
+        SELECT star
+        FROM t_evaluate_goods
+        WHERE order_id = #{orderId} and goods_id = #{goodsId}
+    </select>
 </mapper>

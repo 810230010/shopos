@@ -14,7 +14,7 @@ public class Store {
 
     private String name;
 
-    private Integer gradeId;
+    private Integer grade;
 
     private Integer scId;
 
@@ -66,7 +66,7 @@ public class Store {
 
     private Integer credit;
 
-    private Float desccredit;
+    private Double desccredit;
 
     private Float servicecredit;
 
@@ -124,6 +124,12 @@ public class Store {
 
     private String refundPhone;
 
+    private Boolean payGuaranteeMoney;
+
+    private Integer orderAmount;
+
+    private Long tradingVolume;
+
     public Integer getStoreId() {
         return storeId;
     }
@@ -164,12 +170,12 @@ public class Store {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getGradeId() {
-        return gradeId;
+    public Integer getGrade() {
+        return grade;
     }
 
-    public void setGradeId(Integer gradeId) {
-        this.gradeId = gradeId;
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 
     public Integer getScId() {
@@ -372,11 +378,11 @@ public class Store {
         this.credit = credit;
     }
 
-    public Float getDesccredit() {
+    public Double getDesccredit() {
         return desccredit;
     }
 
-    public void setDesccredit(Float desccredit) {
+    public void setDesccredit(Double desccredit) {
         this.desccredit = desccredit;
     }
 
@@ -602,5 +608,29 @@ public class Store {
 
     public void setRefundPhone(String refundPhone) {
         this.refundPhone = refundPhone == null ? null : refundPhone.trim();
+    }
+
+    public Boolean getPayGuaranteeMoney() {
+        return payGuaranteeMoney;
+    }
+
+    public void setPayGuaranteeMoney(Boolean payGuaranteeMoney) {
+        this.payGuaranteeMoney = payGuaranteeMoney;
+    }
+
+    public Integer getOrderAmount() {
+        return orderAmount;
+    }
+
+    public void setOrderAmount(Integer orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
+    public Long getTradingVolume() {
+        return tradingVolume;
+    }
+
+    public void setTradingVolume(Long tradingVolume) {
+        this.tradingVolume = tradingVolume;
     }
 }

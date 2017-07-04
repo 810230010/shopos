@@ -2,6 +2,7 @@ package com.wuliangit.shopos.dto.api;
 
 import com.wuliangit.shopos.entity.StoreGoodsAd;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -29,6 +30,10 @@ public class ApiStoreDTO {
     private Integer goodsCount;
 
     private Boolean sevenDayReturn;
+
+    private Integer grade;
+
+    private BigDecimal desccredit;
 
     private List<StoreGoodsAd> goodsAds;
 
@@ -126,5 +131,21 @@ public class ApiStoreDTO {
 
     public void setSales(Integer sales) {
         this.sales = sales;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public BigDecimal getDesccredit() {
+        return desccredit;
+    }
+
+    public void setDesccredit(BigDecimal desccredit) {
+        this.desccredit = desccredit;
     }
 }

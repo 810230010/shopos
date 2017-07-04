@@ -9,6 +9,7 @@ import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreMin;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface StoreMapper extends BaseMapper<Store, Integer> {
@@ -86,4 +87,51 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @return
      */
     ApiSellerInfo getSellerInfoBybindMemberUsername(String username);
+
+    /**
+     * 更新商户交易总额
+     * @param storeId
+     * @param tradingVolume
+     */
+    void updateTradingVolume(@Param("storeId") Integer storeId,@Param("tradingVolume") BigDecimal tradingVolume);
+
+    /**
+     * 获取商户的总交易额
+     * @param storeId
+     * @return
+     */
+    BigDecimal getTradingVolume(Integer storeId);
+
+    /**
+     * 更新商户等级
+     * @param storeId
+     * @param gradeId
+     */
+    void updateStoreGradeId(@Param("storeId") Integer storeId,@Param("gradeId") int gradeId);
+
+    /**
+     * 更新商户订单数
+     * @param storeId
+     */
+    void updateStoreOrderAmount(@Param("storeId") Integer storeId,@Param("orderAmount")Integer orderAmount);
+
+    /**
+     * 获取商户订单总数
+     * @param storeId
+     * @return
+     */
+    Integer getStoreOrderAmount(Integer storeId);
+
+    /**
+     * 获取商户的现有评分（商品描述相符度）
+     * @param storeId
+     */
+    BigDecimal getDesccredit(Integer storeId);
+
+    /**
+     * 更新商户评分（商品描述相符度）
+     * @param storeId
+     * @param desccredit
+     */
+    void updateStoreDesccredit(@Param("storeId") Integer storeId,@Param("desccredit")BigDecimal desccredit);
 }

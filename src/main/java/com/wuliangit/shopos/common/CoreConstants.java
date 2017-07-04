@@ -44,4 +44,7 @@ public class CoreConstants {
     //载进广告
     public static final String LOADING_AD = "ADVERTISEMENT_LOADING";
 
+    //修改店铺等级的每级单位
+    public static final Integer GRADE = 1000;
+
 }

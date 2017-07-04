@@ -66,7 +66,7 @@ public class Store {
 
     private Integer credit;
 
-    private Float desccredit;
+    private BigDecimal desccredit;
 
     private Float servicecredit;
 
@@ -123,6 +123,12 @@ public class Store {
     private String refundName;
 
     private String refundPhone;
+
+    private Boolean payGuaranteeMoney;
+
+    private Integer orderAmount;
+
+    private BigDecimal tradingVolume;
 
     public Integer getStoreId() {
         return storeId;
@@ -372,11 +378,11 @@ public class Store {
         this.credit = credit;
     }
 
-    public Float getDesccredit() {
+    public BigDecimal getDesccredit() {
         return desccredit;
     }
 
-    public void setDesccredit(Float desccredit) {
+    public void setDesccredit(BigDecimal desccredit) {
         this.desccredit = desccredit;
     }
 
@@ -602,5 +608,29 @@ public class Store {
 
     public void setRefundPhone(String refundPhone) {
         this.refundPhone = refundPhone == null ? null : refundPhone.trim();
+    }
+
+    public Boolean getPayGuaranteeMoney() {
+        return payGuaranteeMoney;
+    }
+
+    public void setPayGuaranteeMoney(Boolean payGuaranteeMoney) {
+        this.payGuaranteeMoney = payGuaranteeMoney;
+    }
+
+    public Integer getOrderAmount() {
+        return orderAmount;
+    }
+
+    public void setOrderAmount(Integer orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
+    public BigDecimal getTradingVolume() {
+        return tradingVolume;
+    }
+
+    public void setTradingVolume(BigDecimal tradingVolume) {
+        this.tradingVolume = tradingVolume;
     }
 }

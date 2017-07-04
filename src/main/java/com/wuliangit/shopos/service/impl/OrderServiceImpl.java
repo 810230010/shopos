@@ -6,6 +6,7 @@ import com.alipay.api.domain.AlipayTradeRefundModel;
 import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.github.pagehelper.PageHelper;
+import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.pay.AliPay;
 import com.wuliangit.shopos.common.util.OrderUtil;
@@ -40,8 +41,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
-    private OrderGoodsMapper orderGoodsMapper;
-    @Autowired
     private GoodsSkuMapper goodsSkuMapper;
     @Autowired
     private GoodsMapper goodsMapper;
@@ -65,6 +64,10 @@ public class OrderServiceImpl implements OrderService {
     private CartService cartService;
     @Autowired
     private StoreService storeService;
+    @Autowired
+    private OrderGoodsMapper orderGoodsMapper;
+    @Autowired
+    private EvaluateGoodsMapper evaluateGoodsMapper;
 
     @Override
     @Transactional
@@ -322,6 +325,23 @@ public class OrderServiceImpl implements OrderService {
         StoreAccount storeAccount = storeAccountMapper.getByStoreId(order.getStoreId());
         storeAccount.setAvailableBalance(storeAccount.getAvailableBalance().add(order.getOrderAmount()));
         storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
+
+        //更新店铺营业额
+        storeMapper.updateTradingVolume(order.getStoreId(),order.getOrderAmount().add(storeMapper.getTradingVolume(order.getStoreId())));
+
+        //修改店铺等级
+        storeMapper.updateStoreGradeId(order.getStoreId(),storeMapper.getTradingVolume(order.getStoreId()).intValue()/CoreConstants.GRADE);
+
+        //更新商户的商品描述度
+        List<OrderGoods> goods = orderGoodsMapper.getByOrderId(order.getOrderId());
+        Integer storeOrderAmount = storeMapper.getStoreOrderAmount(order.getStoreId());
+        storeMapper.updateStoreOrderAmount(order.getStoreId(),goods.size());
+        Integer storeOrderAmountNow = storeMapper.getStoreOrderAmount(order.getStoreId());
+        Integer amount = 0;
+        for(int i=0;i<goods.size();i++){
+            amount += evaluateGoodsMapper.getOrderGoodsStar(orderId,goods.get(i).getGoodsId());
+        }
+        storeMapper.updateStoreDesccredit(order.getStoreId(),storeMapper.getDesccredit(order.getStoreId()).multiply(new BigDecimal(storeOrderAmount)).add(new BigDecimal(amount)).divide(new BigDecimal(storeOrderAmountNow)));
 
         //更新订单状态
         return orderMapper.updateByPrimaryKeySelective(order);

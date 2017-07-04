@@ -35,4 +35,12 @@ public interface EvaluateGoodsMapper extends BaseMapper<EvaluateGoods, Integer> 
      * @return: com.wuliangit.shopos.dto.StoreEvaluateGoodsDetailDTO
      */
     StoreEvaluateGoodsDetailDTO getEvaluateGoodsDetail(Integer evaluateGoodsId);
+
+    /**
+     * 获取具体订单具体商品的星级
+     * @param orderId
+     * @param goodsId
+     * @return
+     */
+    Integer getOrderGoodsStar(@Param("orderId") Integer orderId,@Param("goodsId") Integer goodsId);
 }

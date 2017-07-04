@@ -66,7 +66,7 @@
 
     <!--api获取店铺详情-->
     <select id="getApiStoreDTOById" resultType="com.wuliangit.shopos.dto.api.ApiStoreDTO">
-      select store_id, name, type, address, banner, logo, sales, province_id
+      select store_id, name, type, address, banner, logo, sales, province_id, grade_id, desccredit
         from t_store
         where store_id = #{storeId}
     </select>
@@ -91,5 +91,54 @@
         from t_store
         where bind_member_username = #{username}
     </select>
+
+    <!--更新商户总交易额-->
+    <update id="updateTradingVolume">
+        UPDATE t_store
+        SET trading_volume = #{tradingVolume}
+        WHERE store_id = #{storeId}
+    </update>
+
+    <!--获取商户的总交易额-->
+    <select id="getTradingVolume" resultType="java.math.BigDecimal">
+        SELECT trading_volume
+        FROM t_store
+        WHERE store_id = #{storeId}
+    </select>
+
+    <!--更新商户等级-->
+    <update id="updateStoreGradeId">
+        UPDATE t_store
+        SET grade_id = #{gradeId}
+        WHERE store_id = #{storeId}
+    </update>
+
+    <!--更新商户订单数-->
+    <update id="updateStoreOrderAmount">
+        UPDATE t_store
+        SET order_amount = order_amount + #{orderAmount}
+        WHERE store_id = #{storeId}
+    </update>
+
+    <!--获取订单总数-->
+    <select id="getStoreOrderAmount" resultType="java.lang.Integer">
+        SELECT  order_amount
+        FROM t_store
+        WHERE store_id = #{storeId}
+    </select>
+
+    <!--获取商户的现有评分（商品描述相符度）-->
+    <select id="getDesccredit" resultType="java.math.BigDecimal">
+        SELECT desccredit
+        FROM t_store
+        WHERE store_id = #{storeId}
+    </select>
+
+    <!--更新商户评分（商品描述相符度）-->
+    <update id="updateStoreDesccredit">
+        UPDATE t_store
+        SET desccredit = #{desccredit}
+        FROM store_id = #{storeId}
+    </update>
 
 </mapper>

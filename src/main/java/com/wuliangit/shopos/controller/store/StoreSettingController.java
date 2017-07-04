@@ -108,11 +108,11 @@ public class StoreSettingController {
      *
      * @return
      */
-    @RequestMapping(value = "/bindMember",method = RequestMethod.GET)
+    @RequestMapping(value = "/bindMember", method = RequestMethod.GET)
     public Object bindMemberpage(Model model) {
         Store store = storeService.getStoreByStoreId(WebUtil.getCurrentStore().getStoreId());
-        model.addAttribute("store",store);
-       return "/store/setting/bindMember";
+        model.addAttribute("store", store);
+        return "/store/setting/bindMember";
     }
 
 
@@ -121,14 +121,14 @@ public class StoreSettingController {
      *
      * @return
      */
-    @RequestMapping(value = "/bindMember",method = RequestMethod.POST)
+    @RequestMapping(value = "/bindMember", method = RequestMethod.POST)
     @ResponseBody
     public Object bindMember(String phone, String checkCode) {
         RestResult result = new RestResult();
 
         String checkCode1 = smsService.getCheckCode(phone);
 
-        if (StringUtils.isEmpty(checkCode1)){
+        if (StringUtils.isEmpty(checkCode1)) {
             result.setCode(500);
             result.setMsg("验证码过期或不存在");
             return result;
@@ -191,10 +191,11 @@ public class StoreSettingController {
 
     /**
      * 缴纳保证金页面
+     *
      * @return
      */
     @RequestMapping("/payGuaranteeMoneyPage")
-    public String view2GuaranteeMoneyPage(){
+    public String view2GuaranteeMoneyPage() {
         return "/store/setting/pay_money_page";
     }
 

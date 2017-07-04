@@ -15,6 +15,8 @@ public class StoreUpdateDTO {
 
     private String areaInfo;
 
+    private Boolean sevenDayReturn;
+
     private String keywords;
 
     private String description;
@@ -41,6 +43,14 @@ public class StoreUpdateDTO {
 
     public void setAreaInfo(String areaInfo) {
         this.areaInfo = areaInfo;
+    }
+
+    public Boolean getSevenDayReturn() {
+        return sevenDayReturn;
+    }
+
+    public void setSevenDayReturn(Boolean sevenDayReturn) {
+        this.sevenDayReturn = sevenDayReturn;
     }
 
     public Integer getStoreId() {

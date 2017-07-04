@@ -94,7 +94,7 @@ public class StoreSettingController {
      */
     @RequestMapping("/update")
     @ResponseBody
-    public Object setting(StoreUpdateDTO storeDto, String checkCode) {
+    public Object setting(StoreUpdateDTO storeDto) {
         RestResult result = new RestResult();
 
         Store store = mapper.map(storeDto, Store.class);

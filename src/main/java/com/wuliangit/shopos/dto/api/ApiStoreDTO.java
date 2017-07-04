@@ -28,7 +28,17 @@ public class ApiStoreDTO {
 
     private Integer goodsCount;
 
+    private Boolean sevenDayReturn;
+
     private List<StoreGoodsAd> goodsAds;
+
+    public Boolean getSevenDayReturn() {
+        return sevenDayReturn;
+    }
+
+    public void setSevenDayReturn(Boolean sevenDayReturn) {
+        this.sevenDayReturn = sevenDayReturn;
+    }
 
     public Integer getProvinceId() {
         return provinceId;

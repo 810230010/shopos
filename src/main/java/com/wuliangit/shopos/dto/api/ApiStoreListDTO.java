@@ -1,5 +1,7 @@
 package com.wuliangit.shopos.dto.api;
 
+import java.math.BigDecimal;
+
 /**
  * Created by nilme on 2017/5/16.
  */
@@ -19,7 +21,27 @@ public class ApiStoreListDTO {
 
     private Integer collectCount;
 
+    private Boolean sevenDayReturn;
+
     private Integer grade;
+
+    private BigDecimal desccredit;
+
+    public Boolean getSevenDayReturn() {
+        return sevenDayReturn;
+    }
+
+    public void setSevenDayReturn(Boolean sevenDayReturn) {
+        this.sevenDayReturn = sevenDayReturn;
+    }
+
+    public BigDecimal getDesccredit() {
+        return desccredit;
+    }
+
+    public void setDesccredit(BigDecimal desccredit) {
+        this.desccredit = desccredit;
+    }
 
     public Integer getCollectCount() {
         return collectCount;

@@ -130,7 +130,7 @@ public class POJOConstants {
 
     //店铺资金流水类型
     //提现
-    public final static String STORE_ACCOUNT_LOG_ACASH = "ACASH";
+    public final static String STORE_ACCOUNT_LOG_CASH = "CASH";
     //订单
     public final static String STORE_ACCOUNT_LOG_ORDER = "ORDER";
     //退款

@@ -85,15 +85,12 @@ public class StoreGlobalHandler {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Object errorHandlerOverJson(HttpServletRequest request, Exception exception) {
+    public String errorHandlerOverJson(HttpServletRequest request, Exception exception) {
         if (!(exception instanceof OptionException)){
             logger.error("",exception);
             exception.printStackTrace();
         }
-        RestResult result = new RestResult();
-        result.setCode(500);
-        result.setMsg(exception.getMessage());
-        return result;
+        return "500";
     }
 
 }

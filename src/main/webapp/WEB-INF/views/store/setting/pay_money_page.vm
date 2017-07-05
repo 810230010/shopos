@@ -1,7 +1,15 @@
 #parse("/store/models/begin.vm")
 
-
 #parse("/store/models/header.vm")
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>设置-缴纳保证金</h2>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
 
 <div class="wrapper wrapper-content">
     <div class="row">
@@ -25,10 +33,9 @@
                             <div class="col-sm-4 col-sm-offset-3">
                                 #if($guaranteeStatus == 'PAYED')
                                     <input class="btn btn-primary" disabled="disabled" type="submit" id="submit" value="保证金已缴纳">
-                                    #else
-                                        <input class="btn btn-primary" type="submit" id="submit" value="缴纳保证金">
+                                #else
+                                    <input class="btn btn-primary" type="submit" id="submit" value="缴纳保证金">
                                 #end
-
                             </div>
                         </div>
                     </form>

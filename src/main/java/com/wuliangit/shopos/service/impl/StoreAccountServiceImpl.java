@@ -130,7 +130,7 @@ public class StoreAccountServiceImpl implements StoreAccountService {
             storeAccountLog.setAmount(amount);
             storeAccountLog.setCreateTime(new Date());
             storeAccountLog.setStoreId(currentStore.getStoreId());
-            storeAccountLog.setType(POJOConstants.STORE_ACCOUNT_LOG_ACASH);
+            storeAccountLog.setType(POJOConstants.STORE_ACCOUNT_LOG_CASH);
             storeAccountLogMapper.insertSelective(storeAccountLog);
             return storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
         } else {
@@ -212,7 +212,7 @@ public class StoreAccountServiceImpl implements StoreAccountService {
             storeAccountLog.setAmount(amount);
             storeAccountLog.setCreateTime(new Date());
             storeAccountLog.setStoreId(sellerInfo.getStoreId());
-            storeAccountLog.setType(POJOConstants.STORE_ACCOUNT_LOG_ACASH);
+            storeAccountLog.setType(POJOConstants.STORE_ACCOUNT_LOG_CASH);
             storeAccountLogMapper.insertSelective(storeAccountLog);
             return storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
         } else {

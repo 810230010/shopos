@@ -193,15 +193,24 @@
         <table tableName="t_banner" domainObjectName="Banner" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="store_account_log_id" sqlStatement="MySql" identity="true"/>
         </table>
+
         <table tableName="t_guarantee_order" domainObjectName="GuaranteeOrder" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="order_id" sqlStatement="MySql" identity="true"/>
         </table>
+
         <table tableName="t_commission_cash_log" domainObjectName="CommissionCashLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="commission_cash_log_id" sqlStatement="MySql" identity="true"/>
         </table>
+
         <table tableName="t_order_commission" domainObjectName="OrderCommission" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="order_commission_id" sqlStatement="MySql" identity="true"/>
         </table>
+
+        <table tableName="t_tuike_share" domainObjectName="TuikeShare" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="tuike_share_id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+
 
     </context>
 </generatorConfiguration>

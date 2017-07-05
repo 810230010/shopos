@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.TuikeShareMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.TuikeShare" >
+    <id column="tuike_share_id" property="tuikeShareId" jdbcType="INTEGER" />
+    <result column="tuike_id" property="tuikeId" jdbcType="INTEGER" />
+    <result column="share_time" property="shareTime" jdbcType="TIMESTAMP" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="click" property="click" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tuike_share_id, tuike_id, share_time, goods_id, click
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_tuike_share
+    where tuike_share_id = #{tuikeShareId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_tuike_share
+    where tuike_share_id = #{tuikeShareId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.TuikeShare" >
+    <selectKey resultType="java.lang.Integer" keyProperty="tuikeShareId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_tuike_share (tuike_id, share_time, goods_id, 
+      click)
+    values (#{tuikeId,jdbcType=INTEGER}, #{shareTime,jdbcType=TIMESTAMP}, #{goodsId,jdbcType=INTEGER}, 
+      #{click,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.TuikeShare" >
+    <selectKey resultType="java.lang.Integer" keyProperty="tuikeShareId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_tuike_share
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tuikeId != null" >
+        tuike_id,
+      </if>
+      <if test="shareTime != null" >
+        share_time,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="click != null" >
+        click,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tuikeId != null" >
+        #{tuikeId,jdbcType=INTEGER},
+      </if>
+      <if test="shareTime != null" >
+        #{shareTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="click != null" >
+        #{click,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.TuikeShare" >
+    update t_tuike_share
+    <set >
+      <if test="tuikeId != null" >
+        tuike_id = #{tuikeId,jdbcType=INTEGER},
+      </if>
+      <if test="shareTime != null" >
+        share_time = #{shareTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="click != null" >
+        click = #{click,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tuike_share_id = #{tuikeShareId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.TuikeShare" >
+    update t_tuike_share
+    set tuike_id = #{tuikeId,jdbcType=INTEGER},
+      share_time = #{shareTime,jdbcType=TIMESTAMP},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      click = #{click,jdbcType=INTEGER}
+    where tuike_share_id = #{tuikeShareId,jdbcType=INTEGER}
+  </update>
+</mapper>

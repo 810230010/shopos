@@ -94,14 +94,6 @@ public class Member {
 
     private Double gpsLat;
 
-    private String tuikeAuth;
-
-    private String tuikeCode;
-
-    private Short tuikCommission;
-
-    private String alipayAccount;
-
     public Integer getMemberId() {
         return memberId;
     }
@@ -460,37 +452,5 @@ public class Member {
 
     public void setGpsLat(Double gpsLat) {
         this.gpsLat = gpsLat;
-    }
-
-    public String getTuikeAuth() {
-        return tuikeAuth;
-    }
-
-    public void setTuikeAuth(String tuikeAuth) {
-        this.tuikeAuth = tuikeAuth == null ? null : tuikeAuth.trim();
-    }
-
-    public String getTuikeCode() {
-        return tuikeCode;
-    }
-
-    public void setTuikeCode(String tuikeCode) {
-        this.tuikeCode = tuikeCode == null ? null : tuikeCode.trim();
-    }
-
-    public Short getTuikCommission() {
-        return tuikCommission;
-    }
-
-    public void setTuikCommission(Short tuikCommission) {
-        this.tuikCommission = tuikCommission;
-    }
-
-    public String getAlipayAccount() {
-        return alipayAccount;
-    }
-
-    public void setAlipayAccount(String alipayAccount) {
-        this.alipayAccount = alipayAccount == null ? null : alipayAccount.trim();
     }
 }

@@ -198,7 +198,7 @@ public class MGoodsController {
     }
 
     /**
-     * 普通商品专区
+     * 二手商品专区
      *
      * @return
      */

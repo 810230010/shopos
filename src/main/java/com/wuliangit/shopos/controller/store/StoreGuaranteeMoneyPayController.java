@@ -151,13 +151,14 @@ public class StoreGuaranteeMoneyPayController {
                 order.setPayTime(new Date());
                 guaranteeService.updateGuaranteeOrder(order);
 
+                PrintWriter out = response.getWriter();
+                out.println("success"); // 请不要修改或删除
+                out.flush();
             } else {
                 logger.error("非法请求！");
             }
 
-            PrintWriter out = response.getWriter();
-            out.println("success"); // 请不要修改或删除
-            out.flush();
+
         }
     }
 }

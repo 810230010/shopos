@@ -24,7 +24,7 @@
                         <div class="form-group" style="margin-top: 60px">
                             <div class="col-sm-4 col-sm-offset-3">
                                 #if($guaranteeStatus == 'PAYED')
-                                    <input class="btn btn-primary" type="submit" id="submit" value="保证金已缴纳">
+                                    <input class="btn btn-primary" disabled="disabled" type="submit" id="submit" value="保证金已缴纳">
                                     #else
                                         <input class="btn btn-primary" type="submit" id="submit" value="缴纳保证金">
                                 #end

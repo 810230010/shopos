@@ -15,6 +15,6 @@
     <!--根据storeId得到店铺缴纳保证金状态-->
     <select id="getGuaranteePayedStatus" resultType="java.lang.String">
         select order_status from t_guarantee_order
-        where store_id = #{storeId}
+        where store_id = #{storeId} and order_status = 'PAYED'
     </select>
 </mapper>

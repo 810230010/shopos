@@ -135,6 +135,7 @@ public class StoreGuaranteeMoneyPayController {
             response.setHeader("Content-Type", "text/html;charset=UTF-8");
             out.println("非法请求");
             out.flush();
+            return ;
         }
         //验证通过，处理业务逻辑
         if (flag) {
@@ -145,6 +146,14 @@ public class StoreGuaranteeMoneyPayController {
                 String passbackParams = params.get("passback_params");
 
                 GuaranteeOrder order = guaranteeService.getGuaranteeOrderByOutTradeNo(outTradeNo);
+
+                if (order == null){
+                    PrintWriter out = response.getWriter();
+                    out.println("failure");
+                    out.flush();
+                    return ;
+                }
+
                 order.setTradeNo(tradeNo);
 
                 order.setOrderStatus(POJOConstants.ORDER_STATE_PAYED);
@@ -154,11 +163,10 @@ public class StoreGuaranteeMoneyPayController {
                 PrintWriter out = response.getWriter();
                 out.println("success"); // 请不要修改或删除
                 out.flush();
+                return ;
             } else {
                 logger.error("非法请求！");
             }
-
-
         }
     }
 }

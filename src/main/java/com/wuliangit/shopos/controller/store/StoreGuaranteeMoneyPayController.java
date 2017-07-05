@@ -148,7 +148,8 @@ public class StoreGuaranteeMoneyPayController {
             }
 
             PrintWriter out = response.getWriter();
-            out.println("success"); // 请不要修改或删除
+            out.println("支付成功, 三秒中跳回管理页面"); // 请不要修改或删除
+            response.setHeader("refresh", "3;url=/store/setting/payGuaranteeMoneyPage");
             out.flush();
         }
     }

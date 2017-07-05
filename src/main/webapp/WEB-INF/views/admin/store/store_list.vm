@@ -66,9 +66,14 @@
                     if(data == "STORE") return "商家";
                     else if(data == "ENTERPRISE") return "企业";
                 }},
-                {"data":"state","width": "10%","title":"状态","orderable": false,"render": function(data, type, row){
+                {"data":"state","width": "10%","title":"营业状态","orderable": false,"render": function(data, type, row){
                     if(data == "CLOSE")return "关闭";
                     else return "开启";
+                }},
+                {"data":"payGuaranteeMoney","width": "10%","title":"保证金是否支付","orderable": false,"render": function(data, type, row){
+                    if(data == 0)return "未支付";
+                    else if(data == 1) return "已支付"
+                    else return "个人商家无需缴纳";
                 }},
                 {"data":"createTime","width": "10%","title":"创建时间","orderable": true},
                 {"data":"storeId","width": "20%","title":"操作","orderable": false,"render": function(data, type, row){

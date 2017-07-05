@@ -7,6 +7,7 @@ import com.wuliangit.shopos.dto.StoreUpdateDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreMin;
+import com.wuliangit.shopos.service.GuaranteeService;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.SMSService;
 import com.wuliangit.shopos.service.StoreService;
@@ -35,6 +36,8 @@ public class StoreSettingController {
     private SMSService smsService;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private GuaranteeService guaranteeService;
 
     /**
      * 店铺信息修改页面
@@ -195,7 +198,8 @@ public class StoreSettingController {
      * @return
      */
     @RequestMapping("/payGuaranteeMoneyPage")
-    public String view2GuaranteeMoneyPage() {
+    public String view2GuaranteeMoneyPage(Model model) {
+        model.addAttribute("guaranteeStatus", guaranteeService.getCurrentStoreGuaranteeStatus());
         return "/store/setting/pay_money_page";
     }
 

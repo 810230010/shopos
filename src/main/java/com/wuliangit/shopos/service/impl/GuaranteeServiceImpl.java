@@ -8,6 +8,7 @@ import com.wuliangit.shopos.entity.GuaranteeOrder;
 import com.wuliangit.shopos.service.GuaranteeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -34,7 +35,16 @@ public class GuaranteeServiceImpl implements GuaranteeService {
     }
 
     @Override
-    public int updateGuaranteeOrder(GuaranteeOrder order) {
-        return guaranteeOrderMapper.updateByPrimaryKeySelective(order);
+    @Transactional
+    public void updateGuaranteeOrder(GuaranteeOrder order) {
+        guaranteeOrderMapper.updateByPrimaryKeySelective(order);
+        guaranteeOrderMapper.updataStoreGuaranteePayedStatus(order.getStoreId());
+    }
+
+    @Override
+    public String getCurrentStoreGuaranteeStatus() {
+        Integer storeId = WebUtil.getCurrentStore().getStoreId();
+        String guaranteeStatus = guaranteeOrderMapper.getGuaranteePayedStatus(storeId);
+        return guaranteeStatus;
     }
 }

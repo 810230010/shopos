@@ -30,5 +30,7 @@ public interface GuaranteeService {
       * @param order
       * @return
       */
-     int updateGuaranteeOrder(GuaranteeOrder order);
+     void updateGuaranteeOrder(GuaranteeOrder order);
+
+     String getCurrentStoreGuaranteeStatus();
 }

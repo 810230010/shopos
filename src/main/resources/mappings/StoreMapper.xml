@@ -4,7 +4,7 @@
 
     <!--获取商家列表数据-->
     <select id="getStoreList" resultType="com.wuliangit.shopos.dto.StorePageListDTO">
-        select store_id, name, state, create_time, type
+        select store_id, name, state, create_time, type, pay_guarantee_Money
         from t_store
         <where>
             state = "OPEN" OR state = "CLOSE"

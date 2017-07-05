@@ -17,6 +17,16 @@ public class StorePageListDTO {
 
     private String type;
 
+    private Integer payGuaranteeMoney;
+
+    public Integer getPayGuaranteeMoney() {
+        return payGuaranteeMoney;
+    }
+
+    public void setPayGuaranteeMoney(Integer payGuaranteeMoney) {
+        this.payGuaranteeMoney = payGuaranteeMoney;
+    }
+
     public StorePageListDTO() {
     }
 

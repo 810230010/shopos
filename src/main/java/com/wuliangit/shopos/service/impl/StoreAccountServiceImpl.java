@@ -95,7 +95,9 @@ public class StoreAccountServiceImpl implements StoreAccountService {
         }
 
         StoreCash storeCash = new StoreCash();
-        storeCash.setAmount(amount);
+
+        //提现抽成
+        storeCash.setAmount(amount.multiply(new BigDecimal(Double.toString(0.06))));
         storeCash.setCreateTime(new Date());
         storeCash.setStoreId(currentStore.getStoreId());
         storeCash.setOutBizNo(UUID.randomUUID().toString().replace("-",""));
@@ -105,7 +107,7 @@ public class StoreAccountServiceImpl implements StoreAccountService {
         AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
 
         AlipayFundTransToaccountTransferModel model = new AlipayFundTransToaccountTransferModel();
-        model.setAmount(amount.toString());
+        model.setAmount(storeCash.getAmount().toString());
         model.setPayerShowName("商户提现");
         model.setPayeeAccount(storeAccount.getAlipayAccount());
         model.setOutBizNo(storeCash.getOutBizNo());
@@ -119,13 +121,13 @@ public class StoreAccountServiceImpl implements StoreAccountService {
 
         AlipayFundTransToaccountTransferResponse response = alipayClient.execute(request);
         if(response.isSuccess()){
-            System.out.println("调用成功");
-            storeAccount.setAvailableBalance(storeAccount.getAvailableBalance().subtract(amount));
 
             //记录提现记录
             storeCashMapper.insertSelective(storeCash);
 
             //记录账户流水记录
+            //更新账户余额
+            storeAccount.setAvailableBalance(storeAccount.getAvailableBalance().subtract(amount));
             StoreAccountLog storeAccountLog = new StoreAccountLog();
             storeAccountLog.setAmount(amount);
             storeAccountLog.setCreateTime(new Date());

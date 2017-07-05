@@ -62,6 +62,10 @@ public class StoreAccountController {
     }
 
 
+    /**
+     * 提现历史界面
+     * @return
+     */
     @RequestMapping("/cashHistory")
     public String cashHistoryPage(){
         return "store/account/cash_list";

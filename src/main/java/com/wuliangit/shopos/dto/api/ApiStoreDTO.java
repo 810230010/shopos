@@ -25,6 +25,8 @@ public class ApiStoreDTO {
 
     private Integer sales;
 
+    private String phone;
+
     private Integer collectCount;
 
     private Integer goodsCount;
@@ -36,6 +38,14 @@ public class ApiStoreDTO {
     private BigDecimal desccredit;
 
     private List<StoreGoodsAd> goodsAds;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public Boolean getSevenDayReturn() {
         return sevenDayReturn;

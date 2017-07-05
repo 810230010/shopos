@@ -1,4 +1,4 @@
-package com.wuliangit.shopos.common.im;
+package com.wuliangit.shopos.common.jiguan;
 
 import cn.jmessage.api.JMessageClient;
 
@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by nilme on 2017/6/3.
  */
-public class JpushIM {
+public class JPushIM {
 
     private static JMessageClient client;
     private static ReentrantLock lock = new ReentrantLock();

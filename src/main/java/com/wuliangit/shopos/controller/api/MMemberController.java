@@ -6,7 +6,7 @@ import cn.jmessage.api.common.model.RegisterInfo;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.cache.SpringCacheManager;
 import com.wuliangit.shopos.common.controller.RestResult;
-import com.wuliangit.shopos.common.im.JpushIM;
+import com.wuliangit.shopos.common.jiguan.JPushIM;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.shiro.realm.UserToken;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
@@ -66,7 +66,8 @@ public class MMemberController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Object login(@RequestParam(required = true) String username,
-                        @RequestParam(required = true) String password) {
+                        @RequestParam(required = true) String password,
+                        String registrationId) {
         RestResult restResult = new RestResult();
         String error = null;
         try {
@@ -199,7 +200,7 @@ public class MMemberController {
             List<RegisterInfo> registerInfos = new ArrayList<>();
             RegisterInfo registerInfo = RegisterInfo.newBuilder().setPassword(member.getImPassword()).setUsername(member.getUsername()).build();
             registerInfos.add(registerInfo);
-            String s = JpushIM.getClient().registerUsers(registerInfos.toArray(new RegisterInfo[registerInfos.size()]));
+            String s = JPushIM.getClient().registerUsers(registerInfos.toArray(new RegisterInfo[registerInfos.size()]));
 
             memberService.createMember(member);
 

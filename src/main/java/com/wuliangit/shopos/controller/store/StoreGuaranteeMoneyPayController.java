@@ -126,8 +126,14 @@ public class StoreGuaranteeMoneyPayController {
             params.put(name, valueStr);
         }
         //支付宝异步通知验证
-        boolean flag = AlipaySignature.rsaCheckV1(params, AliPay.getAlipayPublicKey(), AlipayConstants.CHARSET_UTF8, AlipayConstants.SIGN_TYPE_RSA2);
-
+        boolean flag = false;
+        try {
+             flag = AlipaySignature.rsaCheckV1(params, AliPay.getAlipayPublicKey(), AlipayConstants.CHARSET_UTF8, AlipayConstants.SIGN_TYPE_RSA2);
+        }catch (Exception e){
+            PrintWriter out = response.getWriter();
+            out.println("非法请求");
+            out.flush();
+        }
         //验证通过，处理业务逻辑
         if (flag) {
             String tradeStatus = params.get("trade_status");
@@ -148,8 +154,7 @@ public class StoreGuaranteeMoneyPayController {
             }
 
             PrintWriter out = response.getWriter();
-            out.println("支付成功, 三秒中跳回管理页面"); // 请不要修改或删除
-            response.setHeader("refresh", "3;url=/store/setting/payGuaranteeMoneyPage");
+            out.println("success"); // 请不要修改或删除
             out.flush();
         }
     }

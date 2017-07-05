@@ -105,4 +105,14 @@ public class SettingServiceImpl implements SettingService {
 
         return settingMapper.updateRegisteryRegulation(regulationContent);
     }
+
+    @Override
+    public String getBeStoreRegulation() {
+        return settingMapper.getBeStoreRegulation();
+    }
+
+    @Override
+    public int updateBeStoreRegulation(String regulationContent) {
+        return settingMapper.updateBeStoreRegulation(regulationContent);
+    }
 }

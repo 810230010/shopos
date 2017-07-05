@@ -12,6 +12,11 @@
         value = #{regulationContent}
         where setting_id = 18;
     </update>
+    <!--修改成为商家条约-->
+    <update id="updateBeStoreRegulation">
+        update t_setting set value = #{regulationContent}
+        where setting_id = 19;
+    </update>
 
     <select id="getSetting" resultType="java.lang.String">
       SELECT  value
@@ -21,6 +26,10 @@
     <select id="getRegisterRegulation" resultType="java.lang.String">
         select value from t_setting
         where setting_id = 18;
+    </select>
+    <select id="getBeStoreRegulation" resultType="java.lang.String">
+        select value from t_setting
+        where setting_id = 19;
     </select>
 
 </mapper>

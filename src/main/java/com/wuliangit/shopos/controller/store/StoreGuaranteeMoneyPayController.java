@@ -131,6 +131,7 @@ public class StoreGuaranteeMoneyPayController {
              flag = AlipaySignature.rsaCheckV1(params, AliPay.getAlipayPublicKey(), AlipayConstants.CHARSET_UTF8, AlipayConstants.SIGN_TYPE_RSA2);
         }catch (Exception e){
             PrintWriter out = response.getWriter();
+            response.setHeader("Content-Type", "text/html;charset=UTF-8");
             out.println("非法请求");
             out.flush();
         }

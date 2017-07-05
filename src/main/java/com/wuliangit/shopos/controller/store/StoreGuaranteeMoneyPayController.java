@@ -110,6 +110,7 @@ public class StoreGuaranteeMoneyPayController {
         if (logger.isDebugEnabled()) {
             logger.debug("支付宝异步通知");
         }
+        System.out.println("支付宝异步通知");
 
         Map<String, String> params = new HashMap<String, String>();
         Map requestParams = request.getParameterMap();

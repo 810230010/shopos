@@ -46,4 +46,31 @@ public class AdminRegulationController {
         }
         return result;
     }
+
+    /**
+     * 跳转到成为商家公约页面
+     * @return
+     */
+    @RequestMapping("/beStoreRegulationPage")
+    public String tobeStoreRegulationEditPage(Model model){
+        model.addAttribute("regulationContent", settingService.getBeStoreRegulation());
+         return "admin/regulation/regulation_bestore_edit";
+    }
+
+    /**
+     * 修改成为商家公约
+     * @param regulationContent
+     * @return
+     */
+    @RequestMapping("/updateBeStoreRegulation")
+    @ResponseBody
+    public Object updateBeStoreRegulationContent(String regulationContent){
+        RestResult result = null;
+        if(settingService.updateBeStoreRegulation(regulationContent) != 1){
+            result = new RestResult("未知错误", 405);
+        }else{
+            result = new RestResult();
+        }
+        return result;
+    }
 }

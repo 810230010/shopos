@@ -77,4 +77,12 @@ public interface SettingService {
      * @return
      */
     int updateRegulationContent(String regulationContent);
+
+    /**
+     * 得到成为商家条约
+     * @return
+     */
+    String getBeStoreRegulation();
+
+    int updateBeStoreRegulation(String regulationContent);
 }

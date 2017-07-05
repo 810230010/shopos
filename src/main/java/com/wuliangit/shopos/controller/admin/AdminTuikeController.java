@@ -5,9 +5,12 @@ import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.StringUtils;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.dto.TuikePageListDTO;
+import com.wuliangit.shopos.entity.CommissionCashLog;
+import com.wuliangit.shopos.service.CommissionCashLogService;
 import com.wuliangit.shopos.service.TuikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,14 +27,26 @@ public class AdminTuikeController {
 
     @Autowired
     private TuikeService tuikeService;
+    @Autowired
+    private CommissionCashLogService commissionCashLogService;
 
     /**
      * 获取审核列表页面
      * @return
      */
     @RequestMapping("/checkListPage")
-    public String checkListPage() {
+    public String checkListPage(Model model) {
         return "admin/tuike/check_list";
+    }
+
+    /**
+     * 推客提现日志列表页面
+     * @param model
+     * @return
+     */
+    @RequestMapping("/getTuikeCommissionLogPage")
+    public String getTuikeCommissionLogPage(Model model){
+        return "admin/tuike/commission_log_page";
     }
 
     /**
@@ -123,6 +138,29 @@ public class AdminTuikeController {
             result.add("msg",RestResult.MSG_ERROR);
         }
         return result;
+    }
+
+    /**
+     * 获取推客佣金提现记录
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/getCommissionLogList")
+    @ResponseBody
+    public PageResult getCommissionLogList(@RequestParam("draw") int draw,
+                                           @RequestParam(value = "searchKey", required = false) String searchKey,
+                                           @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                                           @RequestParam(value = "orderType", required = false) String orderType,
+                                           @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                           @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
+        List<CommissionCashLog> commissionCashLogs = commissionCashLogService.getCommissionLogList(searchKey,orderColumn,orderType,page,pageSize);
+        return new PageResult<CommissionCashLog>(commissionCashLogs,draw);
     }
 
 }

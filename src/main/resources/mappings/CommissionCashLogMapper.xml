@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.CommissionCashLogMapper" >
 
+    <!--获取推客佣金提现记录-->
+    <select id="getCommissionLogList" resultType="com.wuliangit.shopos.entity.CommissionCashLog">
+        SELECT *
+        FROM t_commission_cash_log
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                take_name like '%${searchKey}%'
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        take_time desc
+    </select>
 </mapper>

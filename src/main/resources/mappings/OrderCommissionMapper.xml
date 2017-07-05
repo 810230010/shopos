@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.OrderCommissionMapper" >
+    <!--推客推广订单列表-->
+    <select id="getTuikeOrderList" resultType="com.wuliangit.shopos.dto.TuikeOrderListDTO">
+        SELECT c.order_commission_id,o.out_trade_no,c.commission,c.tuike_code,c.member_id,c.creat_time,c.member_name
+        FROM t_order_commission c,t_order o
+        <where>
+            o.order_id = c.order_id
+            <if test="searchKey != null and searchKey != '' ">
+                c.member_name like '%${searchKey}%'
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            c.${orderColumn} ${orderType},
+        </if>
+        c.creat_time desc
+    </select>
+</mapper>

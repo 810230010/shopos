@@ -2,9 +2,12 @@ package com.wuliangit.shopos.controller.admin;
 
 import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.dto.TuikeOrderListDTO;
 import com.wuliangit.shopos.dto.api.ApiOrderGoodsDTO;
 import com.wuliangit.shopos.dto.StoreOrderListDTO;
 import com.wuliangit.shopos.entity.Order;
+import com.wuliangit.shopos.service.CommissionCashLogService;
+import com.wuliangit.shopos.service.OrderCommissionService;
 import com.wuliangit.shopos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,12 @@ public class AdminOrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private OrderCommissionService orderCommissionService;
+
+    @Autowired
+    private CommissionCashLogService commissionCashLogService;
+
     @RequestMapping("/orderListPage")
     public String orderListPage(Model model){
         return "admin/order/order_list";
@@ -43,6 +52,11 @@ public class AdminOrderController {
     @RequestMapping("/cancleOrderList")
     public String cancleOrderList(Model model){
         return "admin/order/cancle_order_list";
+    }
+
+    @RequestMapping("/tuikeOrderListPage")
+    public String tuikeOrderListPage(Model model){
+        return "admin/order/tuike_order_list";
     }
 
     /**
@@ -68,6 +82,29 @@ public class AdminOrderController {
         orderColumn = StringUtils.camelToUnderline(orderColumn);
         List<StoreOrderListDTO> storeOrderListDTOS = orderService.getAdminOrderList(searchKey, orderColumn, orderType, page, pageSize, state);
         return new PageResult<StoreOrderListDTO>(storeOrderListDTOS, draw);
+    }
+
+    /**
+     * 推客推广订单列表
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/getTuikeOrderList")
+    @ResponseBody
+    public PageResult getTuikeOrderList(@RequestParam("draw") int draw,
+                               @RequestParam(value = "searchKey", required = false) String searchKey,
+                               @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                               @RequestParam(value = "orderType", required = false) String orderType,
+                               @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
+        List<TuikeOrderListDTO> tuikeOrderListDTOS = orderCommissionService.getTuikeOrderList(searchKey, orderColumn, orderType, page, pageSize);
+        return new PageResult<TuikeOrderListDTO>(tuikeOrderListDTOS, draw);
     }
 
 }

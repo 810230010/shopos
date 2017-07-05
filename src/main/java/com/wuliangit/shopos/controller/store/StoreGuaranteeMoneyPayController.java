@@ -79,14 +79,16 @@ public class StoreGuaranteeMoneyPayController {
 
         request.setBizModel(model);
         request.setNotifyUrl(notifyUrl);
+        request.setReturnUrl("http://shopos.wuliangit.com/store/setting/payGuaranteeMoneyPage");
 
         try {
             AlipayTradePagePayResponse alipayTradePagePayResponse = client.pageExecute(request);
 
             PrintWriter out = response.getWriter();
             response.setHeader("Content-Type", "text/html;charset=UTF-8");
-            out.println(alipayTradePagePayResponse.getBody()); // 请不要修改或删除
+            out.println(alipayTradePagePayResponse.getBody());
             out.flush();
+            out.close();
 
             logger.debug("payInfo----->" + alipayTradePagePayResponse.getBody());
             System.out.println(alipayTradePagePayResponse.getBody());
@@ -119,8 +121,7 @@ public class StoreGuaranteeMoneyPayController {
             String[] values = (String[]) requestParams.get(name);
             String valueStr = "";
             for (int i = 0; i < values.length; i++) {
-                valueStr = (i == values.length - 1) ? valueStr + values[i]
-                        : valueStr + values[i] + ",";
+                valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
             }
             //乱码解决，这段代码在出现乱码时使用。
             //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
@@ -135,6 +136,7 @@ public class StoreGuaranteeMoneyPayController {
             response.setHeader("Content-Type", "text/html;charset=UTF-8");
             out.println("非法请求");
             out.flush();
+            out.close();
             return ;
         }
         //验证通过，处理业务逻辑
@@ -143,7 +145,6 @@ public class StoreGuaranteeMoneyPayController {
             if (tradeStatus != null && tradeStatus.endsWith("TRADE_SUCCESS")) {
                 String tradeNo = params.get("trade_no");
                 String outTradeNo = params.get("out_trade_no");
-                String passbackParams = params.get("passback_params");
 
                 GuaranteeOrder order = guaranteeService.getGuaranteeOrderByOutTradeNo(outTradeNo);
 
@@ -151,6 +152,7 @@ public class StoreGuaranteeMoneyPayController {
                     PrintWriter out = response.getWriter();
                     out.println("failure");
                     out.flush();
+                    out.close();
                     return ;
                 }
 
@@ -163,6 +165,7 @@ public class StoreGuaranteeMoneyPayController {
                 PrintWriter out = response.getWriter();
                 out.println("success"); // 请不要修改或删除
                 out.flush();
+                out.close();
                 return ;
             } else {
                 logger.error("非法请求！");

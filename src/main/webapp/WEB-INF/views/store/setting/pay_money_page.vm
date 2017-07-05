@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form class="form-horizontal" id="form" method="post" action="/store/guarantee/pay" target="_blank">
+                    <form class="form-horizontal" id="form" method="post" action="/store/guarantee/pay">
                         <div class="form-group">
                             <label for="name" class="col-sm-3 control-label">缴纳金额</label>
                             <div class="col-sm-7">

@@ -1,9 +1,9 @@
 package com.wuliangit.shopos.service;
 
-import com.wuliangit.shopos.dto.api.ApiEarningsDTO;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.dto.TuikePageListDTO;
 import com.wuliangit.shopos.entity.Tuike;
+import com.wuliangit.shopos.dto.api.ApiTuikeShareDTO;
 
 import java.util.List;
 
@@ -57,4 +57,27 @@ public interface TuikeService {
      * @return
      */
     Tuike getTuikeByMemberId(Integer userId);
+
+    /**
+     * 获得推客信息
+     * @param memberId
+     * @return
+     */
+    Tuike getTuikeInfo(Integer memberId);
+
+    /**
+     * 推客推广商品的链接
+     * @return
+     */
+    String getTuikeCode(Integer memberId);
+
+    /**
+     * 获取成功分享的数据
+     * @param page
+     * @param pageSize
+     * @param searchKey
+     * @param order
+     * @return
+     */
+    List<ApiTuikeShareDTO> getShareInfo(Integer page, Integer pageSize, String searchKey, String order,Integer tuikeId);
 }

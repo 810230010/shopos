@@ -55,4 +55,25 @@
         WHERE member_id = #{memberId}
     </update>
 
+    <!--更新推客码-->
+    <update id="updateTuikeCode">
+        UPDATE t_tuike
+        SET code = #{code}
+        where member_id = #{memberId}
+    </update>
+
+    <!--获取推客信息-->
+    <select id="getTuikeInfo" resultType="com.wuliangit.shopos.entity.Tuike">
+        SELECT *
+        FROM t_tuike
+        WHERE member_id = #{memberId}
+    </select>
+
+    <!--获取tuikecode-->
+    <select id="getTuikeCode" resultType="java.lang.String">
+        SELECT code
+        FROM t_tuike
+        WHERE member_id = #{memberId}
+    </select>
+
 </mapper>

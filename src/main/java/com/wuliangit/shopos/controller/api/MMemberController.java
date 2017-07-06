@@ -15,9 +15,11 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.api.ApiMemberDTO;
 import com.wuliangit.shopos.dto.api.ApiMemberUpdateDTO;
 import com.wuliangit.shopos.entity.Member;
+import com.wuliangit.shopos.entity.Tuike;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.SMSService;
 import com.wuliangit.shopos.service.StoreService;
+import com.wuliangit.shopos.service.TuikeService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -58,6 +60,8 @@ public class MMemberController {
     private TokenManager tokenManager;
     @Autowired
     private StoreService storeService;
+    @Autowired
+    private TuikeService tuikeService;
 
     /**
      * 登录
@@ -272,7 +276,9 @@ public class MMemberController {
         }
 
         ApiMemberDTO memberDTO = mapper.map(member, ApiMemberDTO.class);
+        Tuike tuike = tuikeService.getTuikeInfo(memberDTO.getMemberId());
         result.add("memberInfo", memberDTO);
+        result.add("tuikeInfo", tuike);
         result.add("bindStore",storeService.getSellerInfo());
         return result;
     }

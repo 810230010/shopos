@@ -50,7 +50,7 @@ public class StoreGoodsAdController {
         StoreGoodsDetailDTO result = new StoreGoodsDetailDTO(goodsId,name,img);
         model.addAttribute("goods",result);
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         return "/store/storeGoodsAd/ad_update_page";
     }
 
@@ -62,7 +62,7 @@ public class StoreGoodsAdController {
     @RequestMapping("/addAdPage")
     public String addadpage(Model model){
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         return "/store/storeGoodsAd/ad_add_page";
     }
 

@@ -48,7 +48,7 @@ public class StoreSettingController {
     @RequestMapping("/info")
     public String infoPage(Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain", QiNiuUtils.BASE_URL);
+        model.addAttribute("domain", QiNiuUtils.getBaseUrl());
 
         StoreMin storeMin = WebUtil.getCurrentStore();
         Store store = storeService.getStoreByStoreId(storeMin.getStoreId());

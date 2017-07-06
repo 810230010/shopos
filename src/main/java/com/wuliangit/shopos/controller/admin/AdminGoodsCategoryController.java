@@ -46,7 +46,7 @@ public class AdminGoodsCategoryController {
     @RequestMapping("/addPage")
     public String addPage(Integer parentId,Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         model.addAttribute("juage",true);
         if (parentId != null){
             GoodsCategory goodsCategory = goodsCategoryService.getById(parentId);
@@ -68,7 +68,7 @@ public class AdminGoodsCategoryController {
         GoodsCategory goodsCategory = goodsCategoryService.getById(goodsCategoryId);
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("goodsCategory",goodsCategory);
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         if(goodsCategory.getAdImg() == null){
             goodsCategory.setAdImg("");
         }

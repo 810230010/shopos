@@ -39,20 +39,21 @@ public class MSellerController {
 
     /**
      * 添加商品
+     *
      * @param goodsCategory1Id 一级分类
      * @param goodsCategory2Id 二级分类
      * @param goodsCategory3Id 三级分类
-     * @param name 商品名称
-     * @param price 价格
-     * @param carriage 邮费
-     * @param storage 库存
-     * @param type 商品类型 GOODS_TYPE_NORMAL(普通商品)；GOODS_TYPE_SECKILL(一口秒价); GOODS_TYPE_ACTIVITY(企业活动商品);
-     *             GOODS_TYPE_NEWGOODS(企业新品商品); GOODS_TYPE_DIRECTSELLING(企业直销商品)
-     * @param unit 单位
-     * @param goodsBody 商品描述
+     * @param name             商品名称
+     * @param price            价格
+     * @param carriage         邮费
+     * @param storage          库存
+     * @param type             商品类型 GOODS_TYPE_NORMAL(普通商品)；GOODS_TYPE_SECKILL(一口秒价); GOODS_TYPE_ACTIVITY(企业活动商品);
+     *                         GOODS_TYPE_NEWGOODS(企业新品商品); GOODS_TYPE_DIRECTSELLING(企业直销商品)
+     * @param unit             单位
+     * @param goodsBody        商品描述
      * @return
      */
-    @RequestMapping(value = "/goods/add" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/goods/add", method = RequestMethod.POST)
     public Object GoodsAdd(Integer goodsCategory1Id,
                            Integer goodsCategory2Id,
                            Integer goodsCategory3Id,
@@ -72,6 +73,7 @@ public class MSellerController {
 
     /**
      * 更新商品
+     *
      * @param goodsCategory1Id
      * @param goodsCategory2Id
      * @param goodsCategory3Id
@@ -85,27 +87,28 @@ public class MSellerController {
      * @param images
      * @return
      */
-    @RequestMapping(value = "/goods/update" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/goods/update", method = RequestMethod.POST)
     public Object updateGoods(Integer goodsId,
                               Integer goodsCategory1Id,
-                           Integer goodsCategory2Id,
-                           Integer goodsCategory3Id,
-                           String name,
-                           BigDecimal price,
-                           BigDecimal carriage,
-                           Integer storage,
-                           String type,
-                           String unit,
-                           String goodsBody,
-                           String images){
+                              Integer goodsCategory2Id,
+                              Integer goodsCategory3Id,
+                              String name,
+                              BigDecimal price,
+                              BigDecimal carriage,
+                              Integer storage,
+                              String type,
+                              String unit,
+                              String goodsBody,
+                              String images) {
         RestResult result = new RestResult();
-        int res = goodsService.apiUpdateGoods(goodsId, goodsCategory1Id,goodsCategory2Id,goodsCategory3Id,
-                name,price,carriage,storage,type,unit,goodsBody,images);
+        int res = goodsService.apiUpdateGoods(goodsId, goodsCategory1Id, goodsCategory2Id, goodsCategory3Id,
+                name, price, carriage, storage, type, unit, goodsBody, images);
         return result;
     }
 
     /**
      * 获取店铺移动端可以编辑的商品
+     *
      * @param page
      * @param pageSize
      * @return
@@ -128,7 +131,7 @@ public class MSellerController {
      * 商家信息
      */
     @RequestMapping("/info")
-    public Object sellerInfo(){
+    public Object sellerInfo() {
         RestResult result = new RestResult();
         ApiSellerInfo apiSellerInfo = storeService.getSellerInfo();
         return result;
@@ -137,6 +140,7 @@ public class MSellerController {
 
     /**
      * 申请成为商家
+     *
      * @return
      */
     @RequestMapping("/newStore")
@@ -149,11 +153,12 @@ public class MSellerController {
 
     /**
      * 店铺支付宝提现
+     *
      * @param amount
      * @return
      * @throws OptionException
      */
-    @RequestMapping(value = "/cash",method = RequestMethod.POST)
+    @RequestMapping(value = "/cash", method = RequestMethod.POST)
     public Object doCash(BigDecimal amount) throws OptionException, AlipayApiException {
         RestResult result = new RestResult();
         int res = storeAccountService.apisStoreDoCash(amount);
@@ -163,10 +168,11 @@ public class MSellerController {
 
     /**
      * 修改或设置提现支付宝账户
+     *
      * @return
      */
-    @RequestMapping(value = "/settingAlipay",method = RequestMethod.POST)
-    public Object settingAlipay(String alipayAccount){
+    @RequestMapping(value = "/settingAlipay", method = RequestMethod.POST)
+    public Object settingAlipay(String alipayAccount) {
         RestResult result = new RestResult();
         int res = storeAccountService.apiSettingStoreAlipay(alipayAccount);
         return result;
@@ -174,9 +180,10 @@ public class MSellerController {
 
     /**
      * 获取现有提现支付宝账户
+     *
      * @return
      */
-    @RequestMapping(value = "/getStoreAccount",method = RequestMethod.POST)
+    @RequestMapping(value = "/getStoreAccount", method = RequestMethod.POST)
     public Object getStoreAccount() throws OptionException {
         RestResult result = new RestResult();
         StoreAccount storeAccount = storeAccountService.apiGetAlipayCashAccount();
@@ -186,14 +193,15 @@ public class MSellerController {
 
     /**
      * 更新店铺信息
+     *
      * @return
      */
-    @RequestMapping(value = "/updateStore",method = RequestMethod.POST)
-    public Object updateStore(String logo, String name, String phone){
+    @RequestMapping(value = "/updateStore", method = RequestMethod.POST)
+    public Object updateStore(String logo, String name, String phone) {
         RestResult result = new RestResult();
 
         Store store = WebUtil.mobileGetCurrentStore();
-        store.setLogo(logo);
+        store.setLogo(QiNiuUtils.getBaseUrl() + logo);
         store.setName(name);
         store.setPhone(phone);
         storeService.updateStore(store);

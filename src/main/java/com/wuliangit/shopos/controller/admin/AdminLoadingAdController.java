@@ -36,7 +36,7 @@ public class AdminLoadingAdController {
     @RequestMapping("/addLoadingAdPage")
     public String addLoadingAdPage(Model model){
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         return "admin/loadingAd/add_loading_ad";
     }
 

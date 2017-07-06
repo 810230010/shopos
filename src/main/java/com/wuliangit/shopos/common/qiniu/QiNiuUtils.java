@@ -24,7 +24,7 @@ public class QiNiuUtils {
     private static String accessKey = PropertyPlaceholder.getProperty("qiniu.accessKey");
     private static String secretKey = PropertyPlaceholder.getProperty("qiniu.secretKey");
     private static String BUCKET = PropertyPlaceholder.getProperty("qiniu.bucket");
-    public static String BASE_URL = PropertyPlaceholder.getProperty("qiniu.baseUrl");
+    private static String BASE_URL = PropertyPlaceholder.getProperty("qiniu.baseUrl");
 
     public static String getToken() {
         return getAuth().uploadToken(BUCKET);

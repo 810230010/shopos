@@ -144,7 +144,7 @@ public class StoreBrandController {
     @RequestMapping("/addPage")
     public String jumpToAddBrandPage(Model model) {
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain", QiNiuUtils.BASE_URL);
+        model.addAttribute("domain", QiNiuUtils.getBaseUrl());
         return "/store/brand/add";
     }
 

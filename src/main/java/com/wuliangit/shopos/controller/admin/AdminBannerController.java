@@ -37,7 +37,7 @@ public class AdminBannerController {
     @RequestMapping("/addBannerPage")
     public String addBannerPage(Model model){
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         return "admin/banner/add_banner";
     }
 

@@ -69,7 +69,7 @@ public class AdminBrandController {
     @ResponseBody
     public Object addBrand(Brand brand) {
         RestResult result = new RestResult();
-        brand.setPic(QiNiuUtils.BASE_URL + brand.getPic());
+        brand.setPic(QiNiuUtils.getBaseUrl() + brand.getPic());
         brandService.addBrand(brand);
         return result;
     }

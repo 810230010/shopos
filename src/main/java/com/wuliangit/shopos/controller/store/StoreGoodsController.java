@@ -55,7 +55,7 @@ public class StoreGoodsController {
     @RequestMapping("/addPage")
     public String addPage(Model model){
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         return "store/goods/add";
     }
 
@@ -69,7 +69,7 @@ public class StoreGoodsController {
     public String editPage(Model model,Integer goodsId){
         Goods goods = goodsService.getGoodsById(goodsId);
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         model.addAttribute("goods",goods);
 
         GoodsCategory category3 = goodsCategoryService.getById(goods.getGoodsCategory3Id());

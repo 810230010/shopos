@@ -33,7 +33,7 @@ public class StoreProfileController {
         Seller currentSeller = WebUtil.getCurrentSeller();
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("seller",currentSeller);
-        model.addAttribute("domain",QiNiuUtils.BASE_URL);
+        model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         return "store/profile";
     }
 

@@ -66,7 +66,7 @@
 
     <!--api获取店铺详情-->
     <select id="getApiStoreDTOById" resultType="com.wuliangit.shopos.dto.api.ApiStoreDTO">
-      select store_id, name, type, address, banner, logo, sales, phone, province_id, seven_day_return, grade, desccredit
+      select store_id, name, type, address, banner, logo, sales, phone, province_id, seven_day_return, grade, desccredit,pay_guarantee_money
         from t_store
         where store_id = #{storeId}
     </select>

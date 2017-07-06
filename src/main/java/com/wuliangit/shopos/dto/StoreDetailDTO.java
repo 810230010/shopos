@@ -33,6 +33,16 @@ public class StoreDetailDTO {
 
     private String liveStoreAddress;
 
+    private Integer payGuaranteeMoney;
+
+    public Integer getPayGuaranteeMoney() {
+        return payGuaranteeMoney;
+    }
+
+    public void setPayGuaranteeMoney(Integer payGuaranteeMoney) {
+        this.payGuaranteeMoney = payGuaranteeMoney;
+    }
+
     public StoreDetailDTO() {
     }
 

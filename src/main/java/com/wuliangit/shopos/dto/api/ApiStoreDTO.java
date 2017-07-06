@@ -39,6 +39,16 @@ public class ApiStoreDTO {
 
     private List<StoreGoodsAd> goodsAds;
 
+    private Integer payGuaranteeMoney;
+
+    public Integer getPayGuaranteeMoney() {
+        return payGuaranteeMoney;
+    }
+
+    public void setPayGuaranteeMoney(Integer payGuaranteeMoney) {
+        this.payGuaranteeMoney = payGuaranteeMoney;
+    }
+
     public String getPhone() {
         return phone;
     }

@@ -248,4 +248,21 @@ public class AdminStoreController {
         return result;
     }
 
+    /**
+     * 发送站内信
+     * @param content
+     * @param storeId
+     * @return
+     */
+    @RequestMapping("/sendStoreMessage")
+    @ResponseBody
+    public Object sendStoreMessage(String content,Integer storeId){
+        RestResult result = new RestResult();
+        Integer info = storeService.sendStoreMessage(content,storeId);
+        if(info !=  1){
+            result.add("code",RestResult.CODE_SERVERERROR);
+        }
+        return result;
+    }
+
 }

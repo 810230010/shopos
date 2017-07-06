@@ -6,6 +6,7 @@ import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
+import com.wuliangit.shopos.dao.StoreMessageMapper;
 import com.wuliangit.shopos.dto.*;
 import com.wuliangit.shopos.dto.api.ApiSellerInfo;
 import com.wuliangit.shopos.dto.api.ApiStoreDTO;
@@ -49,6 +50,8 @@ public class StoreServiceImpl implements StoreService {
     private MemberService memberService;
     @Autowired
     private Mapper mapper;
+    @Autowired
+    private StoreMessageMapper storeMessageMapper;
 
 
     @Override
@@ -176,5 +179,22 @@ public class StoreServiceImpl implements StoreService {
         Member member = WebUtil.getCurrentMember();
         ApiSellerInfo apiSellerInfo = storeMapper.getSellerInfoBybindMemberUsername(member.getUsername());
         return apiSellerInfo;
+    }
+
+    @Override
+    public Integer sendStoreMessage(String content, Integer storeId) {
+        String name = storeMapper.getName(storeId);
+        Admin admin = WebUtil.getCurrentAdmin();
+        StoreMessage storeMessage = new StoreMessage();
+        storeMessage.setContent(content);
+        storeMessage.setCreateTime(new Date());
+        storeMessage.setDelFlag(false);
+        storeMessage.setTitle("违规警告");
+        storeMessage.setReadFlag(false);
+        storeMessage.setSendUserId(admin.getAdminId());
+        storeMessage.setSendUserName(admin.getUsername());
+        storeMessage.setReceiveUserId(storeId);
+        storeMessage.setReceiveUserName(name);
+        return storeMessageMapper.insert(storeMessage);
     }
 }

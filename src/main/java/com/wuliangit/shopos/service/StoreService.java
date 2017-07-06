@@ -134,4 +134,12 @@ public interface StoreService {
      * @return
      */
     ApiSellerInfo getSellerInfo();
+
+    /**
+     * 发送站内信
+     * @param content
+     * @param storeId
+     * @return
+     */
+    Integer sendStoreMessage(String content, Integer storeId);
 }

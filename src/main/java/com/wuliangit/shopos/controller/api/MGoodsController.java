@@ -233,4 +233,18 @@ public class MGoodsController {
         return result;
     }
 
+    /**
+     * 手机管理用户下架商品
+     * @param goodsId
+     * @return
+     */
+    public Object updateOnshelfState(Integer goodsId){
+        RestResult result = null;
+        if(goodsService.updateGoodsOnshelfStatus(goodsId, 1) != 1){
+            result = new RestResult("未知错误", 405);
+            return result;
+        }
+        result = new RestResult();
+        return result;
+    }
 }

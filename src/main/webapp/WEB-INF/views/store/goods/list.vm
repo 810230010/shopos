@@ -96,19 +96,51 @@
                         else if(data == "VIOLATION")return "禁售";
                     }
                 },
-                {"data":null,"width": "10%","title":"操作","render": function (data, type, row) {
-                    return [
-                        '<div><a class="table-button-vertical btn btn-danger btn-xs table-action view" href="javascript:void(0)">',
-                        '删除 <i class="fa fa-trash-o"></i>',
-                        '</a></div>',
-                        '<div><a class="table-button-vertical btn btn-primary btn-xs table-action edit" href="/store/goods/editPage?goodsId='+row.goodsId+'">',
-                        '编辑详情 <i class="fa fa-edit"></i>',
-                        '</a></div>',
-                        '<div><a class="table-button-vertical btn btn-primary btn-xs table-action edit" href="/store/goods/editSkuPage?goodsId='+row.goodsId+'">',
-                        '编辑库存 <i class="fa fa-edit"></i>',
-                        '</a></div>'
+                {"data": "state","width": "10%","title":"操作","orderable": false,"render": function (data, type, row) {
+                    if(row.state == 'DOWN'){
+                        return [
+                            '<a class="table-button btn btn-danger btn-xs table-action view" href="javascript:void(0)">',
+                            '删除 <i class="fa fa-trash-o"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="/store/goods/editPage?goodsId='+row.goodsId+'">',
+                            '编辑详情 <i class="fa fa-edit"></i>',
+                            '</a>',
+                            '<div><a class="table-button btn btn-primary btn-xs table-action edit" href="/store/goods/editSkuPage?goodsId='+row.goodsId+'">',
+                            '编辑库存 <i class="fa fa-edit"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action update" href="#">',
+                            '上架 <i class="fa fa-edit"></i>',
+                            '</a>'
+                        ].join('');
+                    }else if(row.state == 'ONSELL'){
+                        return [
+                            '<a class="table-button btn btn-danger btn-xs table-action view" href="javascript:void(0)">',
+                            '删除 <i class="fa fa-trash-o"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="/store/goods/editPage?goodsId='+row.goodsId+'">',
+                            '编辑详情 <i class="fa fa-edit"></i>',
+                            '</a>',
+                            '<div><a class="table-button btn btn-primary btn-xs table-action edit" href="/store/goods/editSkuPage?goodsId='+row.goodsId+'">',
+                            '编辑库存 <i class="fa fa-edit"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action update" href="#">',
+                            '下架 <i class="fa fa-edit"></i>',
+                            '</a>'
+
+
                     ].join('');
-                }},
+                }else{
+                        return [
+                            '<a class="table-button btn btn-danger btn-xs table-action view" href="javascript:void(0)">',
+                            '删除 <i class="fa fa-trash-o"></i>',
+                            '</a>',
+                            '<a class="table-button btn btn-primary btn-xs table-action edit" href="/store/goods/editPage?goodsId='+row.goodsId+'">',
+                            '编辑详情 <i class="fa fa-edit"></i>',
+                            '</a>',
+                        ].join('');
+                    }
+            }
+            },
             ],
             "searching": true,
             "ordering":true,
@@ -119,21 +151,7 @@
             "lengthMenu": [ 10, 15, 20 ],
             "responsive": true,
             "dom": '<"html5buttons"B>lTfgitp',
-            "buttons": [
-                {extend: 'copy'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
-                {extend: 'print',
-                    customize: function (win){
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-                        $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                    }
-                }
-            ],
+            "buttons": [],
             "language": {
                 "url": "/assets/admin/js/plugins/dataTables/Chinese.json",
             }
@@ -145,7 +163,34 @@
             var data = table.row(tr).data();
             window.location.href = "/store/goods/editPage?goodsId="+data.goodsId;
         });
-
+        //更改商品上下架状态
+        table.on( 'click', '.update', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            var type = data.state == "DOWN"?0:1;
+            var text = type == 0?"商品已上架":"商品已下架";
+            $.ajax({
+                url: "/store/goods/updateOnshelfStatus",
+                data : {"goodsId":data.goodsId, "type": type},
+                success:function(result) {
+                    if(result.code == 200){
+                        swal({
+                            title: "成功!",
+                            text: text,
+                            type: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(function () {
+                            window.location.href = "/store/goods/listPage";
+                        }, 2000);
+                    }
+                },
+                error:function(result) {
+                    alert("系统出错")
+                }
+            });
+        });
 
     });
 </script>

@@ -300,4 +300,9 @@ public class GoodsServiceImpl implements GoodsService {
         }
         return goodsDetailDTO;
     }
+
+    @Override
+    public int updateGoodsOnshelfStatus(Integer goodsId, Integer type) {
+        return goodsMapper.updateGoodsOnshelfStatus(goodsId, type);
+    }
 }

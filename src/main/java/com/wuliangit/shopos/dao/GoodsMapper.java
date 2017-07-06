@@ -87,4 +87,12 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @return
      */
     GoodsDetailDTO adminGetGoodsDetail(@Param("goodsId") Integer goodsId);
+
+    /**
+     * 商家修改商品上下架状态
+     * @param goodsId
+     * @param type 0:上架 1:下架
+     * @return
+     */
+    int updateGoodsOnshelfStatus(@Param("goodsId") Integer goodsId, @Param("type") Integer type);
 }

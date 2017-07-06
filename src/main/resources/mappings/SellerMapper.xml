@@ -14,4 +14,11 @@
       SELECT *
       FROM t_seller
     </select>
+
+  <!--获取邮件地址通过店铺id-->
+    <select id="getMail" resultType="java.lang.String">
+      SELECT email
+      FROM t_seller
+      WHERE store_id = #{storeId}
+    </select>
 </mapper>

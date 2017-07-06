@@ -3,7 +3,9 @@ package com.wuliangit.shopos.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.POJOConstants;
+import com.wuliangit.shopos.common.mail.MailSender;
 import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.dao.SellerMapper;
 import com.wuliangit.shopos.dao.StoreJoininMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.dao.StoreMessageMapper;
@@ -18,14 +20,14 @@ import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.velocity.VelocityContext;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.mail.MessagingException;
+import java.util.*;
 
 /**
  * Created by nilme on 2017/3/27.
@@ -52,6 +54,8 @@ public class StoreServiceImpl implements StoreService {
     private Mapper mapper;
     @Autowired
     private StoreMessageMapper storeMessageMapper;
+    @Autowired
+    private SellerMapper sellerMapper;
 
 
     @Override
@@ -182,7 +186,22 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    @Transactional
     public Integer sendStoreMessage(String content, Integer storeId) {
+        //获取邮件地址通过店铺id
+        String mail = sellerMapper.getMail(storeId);
+        //发送邮件给店铺管理员
+        List<String> mail_localtion = new ArrayList<String>();
+        mail_localtion.add(mail);
+        VelocityContext context = new VelocityContext();
+        context.put("title",CoreConstants.MAIL_TITLE);
+        context.put("content",content);
+        try {
+            MailSender.getSender().send(mail_localtion,context,CoreConstants.MAIL_TEMP_LOCALTION);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        //发送站内信给店铺
         String name = storeMapper.getName(storeId);
         Admin admin = WebUtil.getCurrentAdmin();
         StoreMessage storeMessage = new StoreMessage();

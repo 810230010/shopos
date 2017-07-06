@@ -24,4 +24,11 @@ public interface SellerMapper extends BaseMapper<Seller, Integer> {
      * @return: java.util.List<com.wuliangit.shopos.entity.Seller>
      */
     List<Seller> getAllSeller();
+
+    /**
+     * 获取邮件地址通过店铺id
+     * @param storeId
+     * @return
+     */
+    String getMail(Integer storeId);
 }

@@ -2,9 +2,11 @@ package com.wuliangit.shopos.common.util;
 
 import com.wuliangit.shopos.common.CoreConstants;
 import com.wuliangit.shopos.common.shiro.token.TokenManager;
+import com.wuliangit.shopos.dto.api.ApiSellerInfo;
 import com.wuliangit.shopos.entity.Admin;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.Seller;
+import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.model.StoreMin;
 import com.wuliangit.shopos.service.StoreService;
 import org.apache.shiro.SecurityUtils;
@@ -69,4 +71,12 @@ public class WebUtil {
         return session;
     }
 
+    /**
+     * 移动端店铺操作获取当前店铺信息
+     */
+    public static Store mobileGetCurrentStore() {
+        Member member = WebUtil.getCurrentMember();
+        StoreService storeService = SpringUtils.getBean(StoreService.class);
+        return storeService.getStoreByBindMemberUsername(member.getUsername());
+    }
 }

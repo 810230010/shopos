@@ -3,9 +3,11 @@ package com.wuliangit.shopos.controller.api;
 import com.alipay.api.AlipayApiException;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
+import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.api.ApiSellerInfo;
 import com.wuliangit.shopos.dto.api.ApiStoreJoininDTO;
+import com.wuliangit.shopos.entity.Store;
 import com.wuliangit.shopos.entity.StoreAccount;
 import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.GoodsService;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by nilme on 2017/5/27.
@@ -178,6 +181,22 @@ public class MSellerController {
         RestResult result = new RestResult();
         StoreAccount storeAccount = storeAccountService.apiGetAlipayCashAccount();
         result.add("AlipayCashAccount", storeAccount);
+        return result;
+    }
+
+    /**
+     * 更新店铺信息
+     * @return
+     */
+    public Object updateStore(String logo, String name, String phone){
+        RestResult result = new RestResult();
+
+        Store store = WebUtil.mobileGetCurrentStore();
+        store.setLogo(logo);
+        store.setName(name);
+        store.setPhone(phone);
+        storeService.updateStore(store);
+
         return result;
     }
 

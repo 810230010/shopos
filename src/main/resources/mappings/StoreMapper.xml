@@ -141,4 +141,11 @@
         FROM store_id = #{storeId}
     </update>
 
+    <!--通过id获取店铺名称-->
+    <select id="getName" resultType="java.lang.String">
+        SELECT name
+        FROM t_store
+        WHERE store_id = #{storeId}
+    </select>
+
 </mapper>

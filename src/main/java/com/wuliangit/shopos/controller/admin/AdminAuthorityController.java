@@ -42,7 +42,7 @@ public class AdminAuthorityController {
      */
     @RequestMapping("/addAdminPage")
     public String addAdminPage(){
-        return "/admin/authority/add_admin";
+        return "admin/authority/add_admin";
     }
 
 

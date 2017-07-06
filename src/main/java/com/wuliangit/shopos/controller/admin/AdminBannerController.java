@@ -42,11 +42,14 @@ public class AdminBannerController {
     }
 
     /**
-     * @Description: 获取banner图的列表
-     * @Author: pangweichao
-     * @Date: 14:54 2017/6/2
-     * @Param: [draw, searchKey, orderColumn, orderType, page, pageSize]
-     * @return: java.lang.Object
+     * 获取banner图的列表
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @param pageSize
+     * @return
      */
     @RequestMapping("getBannerListDate")
     @ResponseBody
@@ -92,17 +95,16 @@ public class AdminBannerController {
     }
 
     /**
-     * @Description: 更改状态
-     * @Author: pangweichao
-     * @Date: 16:01 2017/6/2
-     * @Param: [tBannerId, statusFlag]
-     * @return: java.lang.Object
+     * 更改状态
+     * @param tBannerId
+     * @param statusFlag
+     * @return
      */
     @RequestMapping("/modifyStatus")
     @ResponseBody
     public Object modifyStatus(Integer tBannerId,String statusFlag){
         RestResult result = new RestResult();
-        Integer info = bannerService.modifyStatus(tBannerId,statusFlag);
+        Integer info = bannerService.changeStatus(tBannerId,statusFlag);
         return result;
     }
 

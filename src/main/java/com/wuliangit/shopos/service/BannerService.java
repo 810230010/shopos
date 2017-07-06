@@ -46,7 +46,7 @@ public interface BannerService {
      * @Param: [tBannerId, statusFlag]
      * @return: java.lang.Object
      */
-    Integer modifyStatus(Integer tBannerId,String statusFlag);
+    Integer changeStatus(Integer tBannerId,String statusFlag);
 
     /**
      * @Description: 获取已启用的banner图

@@ -188,6 +188,7 @@ public class MSellerController {
      * 更新店铺信息
      * @return
      */
+    @RequestMapping(value = "/updateStore",method = RequestMethod.POST)
     public Object updateStore(String logo, String name, String phone){
         RestResult result = new RestResult();
 

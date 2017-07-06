@@ -37,7 +37,7 @@ public class BannerServiceImpl implements BannerService {
     }
 
     @Override
-    public Integer modifyStatus(Integer tBannerId, String statusFlag) {
+    public Integer changeStatus(Integer tBannerId, String statusFlag) {
         Integer result = 0;
         if(statusFlag.equals("false")){
             result = bannerMapper.modifyStatus(tBannerId,1);

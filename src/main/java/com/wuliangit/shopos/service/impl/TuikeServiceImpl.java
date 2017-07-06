@@ -1,14 +1,11 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.wuliangit.shopos.common.CoreConstants;
-import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dao.MemberMapper;
 import com.wuliangit.shopos.dao.TuikeMapper;
-import com.wuliangit.shopos.dto.api.ApiEarningsDTO;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.dto.TuikePageListDTO;
-import com.wuliangit.shopos.entity.Member;
+import com.wuliangit.shopos.entity.Tuike;
 import com.wuliangit.shopos.service.TuikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,18 +24,6 @@ public class TuikeServiceImpl implements TuikeService {
 
     @Autowired
     private TuikeMapper tuikeMapper;
-
-    @Override
-    public ApiEarningsDTO getEarnings() {
-        Member member = (Member) WebUtil.getSession().getAttribute(CoreConstants.SESSION_CURRENT_USER);
-        Member member2 = memberMapper.selectByPrimaryKey(member.getMemberId());
-
-        ApiEarningsDTO earnings = new ApiEarningsDTO();
-        earnings.setAvailableBalance(member2.getAvailableBalance());
-        earnings.setFreezeBalance(member2.getFreezeBalance());
-
-        return earnings;
-    }
 
     @Override
     public boolean earningsCash() {
@@ -70,5 +55,10 @@ public class TuikeServiceImpl implements TuikeService {
     @Override
     public Integer forbiddenTuike(Integer tuikeId, String state) {
         return tuikeMapper.forbiddenTuike(tuikeId,state);
+    }
+
+    @Override
+    public Tuike getTuikeByMemberId(Integer userId) {
+        return tuikeMapper.getTuikeByMemberId(userId);
     }
 }

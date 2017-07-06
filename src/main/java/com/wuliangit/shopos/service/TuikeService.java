@@ -3,6 +3,7 @@ package com.wuliangit.shopos.service;
 import com.wuliangit.shopos.dto.api.ApiEarningsDTO;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.dto.TuikePageListDTO;
+import com.wuliangit.shopos.entity.Tuike;
 
 import java.util.List;
 
@@ -10,12 +11,6 @@ import java.util.List;
  * Created by nilme on 2017/3/27.
  */
 public interface TuikeService {
-
-    /**
-     * 获取推客收益
-     * @return
-     */
-    ApiEarningsDTO getEarnings();
 
     /**
      * 推客提现
@@ -55,4 +50,11 @@ public interface TuikeService {
      * @return
      */
     Integer forbiddenTuike(Integer tuikeId, String state);
+
+    /**
+     * 通过用户id获取推客信息
+     * @param userId
+     * @return
+     */
+    Tuike getTuikeByMemberId(Integer userId);
 }

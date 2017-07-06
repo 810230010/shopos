@@ -44,4 +44,10 @@ public interface TuikeMapper extends BaseMapper<Tuike, Integer> {
      */
     Integer forbiddenTuike(@Param("tuikeId") Integer tuikeId,@Param("state") String state);
 
+    /**
+     * 通过用户id获取推客信息
+     * @param memberId
+     * @return
+     */
+    Tuike getTuikeByMemberId(Integer memberId);
 }

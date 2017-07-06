@@ -3,8 +3,8 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
-import com.wuliangit.shopos.dto.api.ApiEarningsDTO;
 import com.wuliangit.shopos.entity.Member;
+import com.wuliangit.shopos.entity.Tuike;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.TuikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,23 +40,21 @@ public class MTuikeController {
             memberService.updateMember(member);
         }else{
             result.setCode(500);
-            result.setMsg("请先实名认证，在申请成为推客！");
+            result.setMsg("请先实名认证，再申请成为推客！");
         }
 
         return result;
     }
 
     /**
-     * 获取推客收益
+     * 获取推客信息
      * @return
      */
     @RequestMapping("/tuike/earnings")
     public Object getEarnings() {
         RestResult result = new RestResult();
-        ApiEarningsDTO earnings = tuikeService.getEarnings();
-
-        result.add("earnings",earnings);
-
+        Tuike currentTuike = WebUtil.getCurrentTuike();
+        result.add("tuike",currentTuike);
         return result;
     }
 

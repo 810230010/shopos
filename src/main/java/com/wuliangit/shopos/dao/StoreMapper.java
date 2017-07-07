@@ -134,4 +134,11 @@ public interface StoreMapper extends BaseMapper<Store, Integer> {
      * @param desccredit
      */
     void updateStoreDesccredit(@Param("storeId") Integer storeId,@Param("desccredit")BigDecimal desccredit);
+
+    /**
+     * 通过id获取店铺名称
+     * @param storeId
+     * @return
+     */
+    String getName(Integer storeId);
 }

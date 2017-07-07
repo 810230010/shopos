@@ -215,5 +215,22 @@ public class StoreGoodsController {
         return result;
     }
 
+    /**
+     *
+     * @param goodsId
+     * @param type  0:上架 1:下架
+     * @return
+     */
+    @RequestMapping("/updateOnshelfStatus")
+    @ResponseBody
+    public Object updateGoodsOnshelfStatus(Integer goodsId, Integer type){
+        RestResult result = null;
+        if(goodsService.updateGoodsOnshelfStatus(goodsId, type) != 1){
+            result = new RestResult("未知错误", 405);
+            return result;
+        }
+        result = new RestResult();
+        return result;
+    }
 
 }

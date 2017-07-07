@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.TuikeShareMapper" >
 
+    <!--获取成功分享的数据-->
+    <select id="getShareInfo" resultType="com.wuliangit.shopos.dto.api.ApiTuikeShareDataDTO">
+        select goods_id,share_time
+        from t_tuike_share
+        <where>
+            tuike_id = #{tuikeId}
+        </where>
+        order by share_time desc
+    </select>
 </mapper>

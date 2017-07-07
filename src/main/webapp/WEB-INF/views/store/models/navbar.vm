@@ -13,9 +13,11 @@
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" href="/store/mail/mailListPage">
                     <i class="fa fa-bell"></i>
-                    <span class="label label-primary">
-                        $mailCount
-                    </span>
+                    #if($mailCount != 0)
+                        <span class="label label-primary">
+                            $mailCount
+                        </span>
+                    #end
                 </a>
             </li>
 

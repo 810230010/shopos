@@ -47,4 +47,10 @@ public class CoreConstants {
     //修改店铺等级的每级单位
     public static final Integer GRADE = 1000;
 
+    //违规警告邮件标题
+    public static final String MAIL_TITLE = "违规警告";
+
+    //邮件模板位置
+    public static final String MAIL_TEMP_LOCALTION = "/templates/mail/sign.vm";
+
 }

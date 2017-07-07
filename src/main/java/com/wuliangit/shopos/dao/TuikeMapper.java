@@ -50,4 +50,25 @@ public interface TuikeMapper extends BaseMapper<Tuike, Integer> {
      * @return
      */
     Tuike getTuikeByMemberId(Integer memberId);
+
+    /**
+     * 更新推客码
+     * @param memberId
+     * @param code
+     */
+    void updateTuikeCode(@Param("memberId") Integer memberId,@Param("code") String code);
+
+    /**
+     * 获得推客信息
+     * @param memberId
+     * @return
+     */
+    Tuike getTuikeInfo(Integer memberId);
+
+    /**
+     * 获取tuikecode
+     * @param memberId
+     * @return
+     */
+    String getTuikeCode(Integer memberId);
 }

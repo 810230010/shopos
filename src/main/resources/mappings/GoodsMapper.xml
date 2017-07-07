@@ -99,4 +99,10 @@
         <if test="type == 3">state = "DOWN"</if>
       where goods_id = #{goodsId}
     </update>
+    <update id="updateGoodsOnshelfStatus">
+        update t_goods set
+        <if test="type == 0">state = "ONSELL"</if>
+        <if test="type == 1">state = "DOWN"</if>
+        where goods_id = #{goodsId};
+    </update>
 </mapper>

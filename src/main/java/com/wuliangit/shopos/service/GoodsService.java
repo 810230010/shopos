@@ -171,6 +171,19 @@ public interface GoodsService {
      */
     int adminUpdateGoodsApplyStatus(Integer goodsId, String reason, Integer type);
 
+    /**
+     * 管理员获得商品详情
+     * @param goodsId
+     * @return
+     */
     GoodsDetailDTO adminGetGoodsDetail(Integer goodsId);
+
+    /**
+     * 修改商品上下架状态
+     * @param goodsId
+     * @param type  0: 上架 1:下架
+     * @return
+     */
+    int updateGoodsOnshelfStatus(Integer goodsId, Integer type);
     
 }

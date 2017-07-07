@@ -18,10 +18,11 @@
         if (r != null) return unescape(r[2]); return null;
     }
 
-    var myurl = getQueryString("tuicode");
-    if (myurl != null && myurl.toString().length > 0) {
-        alert(getQueryString("tuicode"));
-        window.location.href = 'wlshop://';
+    var tuicode = getQueryString("tuicode");
+    var goodsId =getQueryString('goodsId');
+    if (goodsId != null && goodsId.toString().length > 0) {
+       alert(getQueryString("goodsId"));
+        window.location.href = 'wlshop://?tuicode='+ tuicode + '&goodsId=' + goodsId;
     }
 
 </script>

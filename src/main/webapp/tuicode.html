@@ -20,11 +20,23 @@
 
     var tuicode = getQueryString("tuicode");
     var goodsId =getQueryString('goodsId');
-    if (goodsId != null && goodsId.toString().length > 0) {
-       alert(getQueryString("goodsId"));
+    var platform = navigator.userAgent.toLowerCase();
+    if(platform.search(/android/) >-1) {
+      if (goodsId != null && goodsId.toString().length > 0) {
+        var aux = location.href;
         window.location.href = 'wlshop://?tuicode='+ tuicode + '&goodsId=' + goodsId;
+       // alert(location.href);
+        if(location.href == aux) {
+            location.href = 'http://www.baidu.com';
+            //console.log('fuck');
+        }
+     }
     }
-
+    else{
+        if (goodsId != null && goodsId.toString().length > 0) {
+             window.location.href = 'wlshop://?tuicode='+ tuicode + '&goodsId=' + goodsId;
+        }
+    }
 </script>
 
 </html>

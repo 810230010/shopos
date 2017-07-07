@@ -59,7 +59,7 @@
 
         function getChromeIntent(url){
 // 根据自己的产品修改吧
-            return  "scheme="+url+";end";
+            return url;
         }
         var appInstall = {
             isChrome:ua.match(/Chrome\/([\d.]+)/) || ua.match(/CriOS\/([\d.]+)/),

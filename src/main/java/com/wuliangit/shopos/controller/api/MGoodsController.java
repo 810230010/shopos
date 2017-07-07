@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -238,6 +239,8 @@ public class MGoodsController {
      * @param goodsId
      * @return
      */
+    @RequestMapping("/takedownGoods")
+    @ResponseBody
     public Object updateOnshelfState(Integer goodsId){
         RestResult result = null;
         if(goodsService.updateGoodsOnshelfStatus(goodsId, 1) != 1){

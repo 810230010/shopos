@@ -24,14 +24,15 @@
     if(platform.search(/android/) >-1) {
       if (goodsId != null && goodsId.toString().length > 0) {
         //var aux = location.href;
-        window.location.href = 'wlshop://?tuicode='+ tuicode + '&goodsId=' + goodsId;
+        location.href = 'wlshop://?tuicode='+ tuicode + '&goodsId=' + goodsId;
        // alert(location.href);
         if(location.href == 'http://houhuiyao.ningboyijing.com/tuicode.html?tuicode='+tuicode+'&goodsId='+goodsId) {
-            location.href = 'http://www.baidu.com';
+            //location.href = 'http://www.baidu.com';
             //console.log('fuck');
+          alert(location.href);
         }
         else{
-           // alert(location.href);
+            alert(location.href);
         }
      }
     }

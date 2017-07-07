@@ -1,13 +1,17 @@
 package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.MemberMapper;
 import com.wuliangit.shopos.dao.TuikeMapper;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.dto.TuikePageListDTO;
+import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
+import com.wuliangit.shopos.dto.api.ApiTuikeShareDataDTO;
 import com.wuliangit.shopos.entity.Tuike;
 import com.wuliangit.shopos.dao.TuikeShareMapper;
 import com.wuliangit.shopos.dto.api.ApiTuikeShareDTO;
+import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.TuikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +35,9 @@ public class TuikeServiceImpl implements TuikeService {
 
     @Autowired
     private TuikeShareMapper tuikeShareMapper;
+
+    @Autowired
+    private GoodsMapper goodsMapper;
 
     @Override
     public boolean earningsCash() {
@@ -85,9 +92,13 @@ public class TuikeServiceImpl implements TuikeService {
     }
 
     @Override
-    public List<ApiTuikeShareDTO> getShareInfo(Integer page, Integer pageSize, String searchKey, String order, Integer tuikeId) {
+    public List<ApiTuikeShareDataDTO> getShareInfo(Integer page, Integer pageSize, Integer tuikeId) {
         PageHelper.startPage(page, pageSize);
-        List<ApiTuikeShareDTO> tuikeShareDTOS = tuikeShareMapper.getShareInfo(searchKey,order,tuikeId);
+        List<ApiTuikeShareDataDTO> tuikeShareDTOS = tuikeShareMapper.getShareInfo(tuikeId);
+        for(int i = 0 ; i<tuikeShareDTOS.size() ; i++){
+            ApiGoodsDTO apiGoodsDTO = goodsMapper.apiGetGoodsDTOById(tuikeShareDTOS.get(i).getGoodsId());
+            tuikeShareDTOS.get(i).setApiGoodsDTO(apiGoodsDTO);
+        }
         return tuikeShareDTOS;
     }
 }

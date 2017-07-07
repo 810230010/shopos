@@ -2,6 +2,7 @@ package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.dto.api.ApiTuikeShareDTO;
+import com.wuliangit.shopos.dto.api.ApiTuikeShareDataDTO;
 import com.wuliangit.shopos.entity.TuikeShare;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,12 +14,8 @@ import java.util.List;
 public interface TuikeShareMapper extends BaseMapper<TuikeShare, Integer>{
     /**
      * 获取成功分享的数据
-     * @param searchKey
-     * @param order
      * @param tuikeId
      * @return
      */
-    List<ApiTuikeShareDTO> getShareInfo(@Param("searchKey") String searchKey,
-                                        @Param("order") String order,
-                                        @Param("tuikeId") Integer tuikeId);
+    List<ApiTuikeShareDataDTO> getShareInfo(@Param("tuikeId") Integer tuikeId);
 }

@@ -3,6 +3,7 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.POJOConstants;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.util.WebUtil;
+import com.wuliangit.shopos.dto.api.ApiTuikeShareDataDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.Tuike;
 import com.wuliangit.shopos.dto.api.ApiTuikeShareDTO;
@@ -91,18 +92,14 @@ public class MTuikeController {
      * 获取成功分享的数据
      * @param page
      * @param pageSize
-     * @param searchKey
-     * @param order
      * @return
      */
     @RequestMapping("/tuike/getShareInfo")
     public Object getShareInfo(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                               @RequestParam(value = "searchKey", required = false) String searchKey,
-                               @RequestParam(value = "order", required = false) String order,
                                Integer tuikeId){
         RestResult result = new RestResult();
-        List<ApiTuikeShareDTO> shareInfo = tuikeService.getShareInfo(page, pageSize, searchKey, order,tuikeId);
+        List<ApiTuikeShareDataDTO> shareInfo = tuikeService.getShareInfo(page, pageSize,tuikeId);
         result.add("shareInfo", shareInfo);
         return result;
     }

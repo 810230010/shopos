@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.dto.TuikePageListDTO;
+import com.wuliangit.shopos.dto.api.ApiTuikeShareDataDTO;
 import com.wuliangit.shopos.entity.Tuike;
 import com.wuliangit.shopos.dto.api.ApiTuikeShareDTO;
 
@@ -75,9 +76,7 @@ public interface TuikeService {
      * 获取成功分享的数据
      * @param page
      * @param pageSize
-     * @param searchKey
-     * @param order
      * @return
      */
-    List<ApiTuikeShareDTO> getShareInfo(Integer page, Integer pageSize, String searchKey, String order,Integer tuikeId);
+    List<ApiTuikeShareDataDTO> getShareInfo(Integer page, Integer pageSize, Integer tuikeId);
 }

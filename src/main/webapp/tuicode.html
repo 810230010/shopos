@@ -20,6 +20,7 @@
 
     var tuicode = getQueryString("tuicode");
     var goodsId =getQueryString('goodsId');
+
     var platform = navigator.userAgent.toLowerCase();
 //    if(platform.search(/android/) >-1) {
 //      if (goodsId != null && goodsId.toString().length > 0) {
@@ -96,8 +97,8 @@
 
         return appInstall;
     })();
+    mobileAppInstall.open('wlshop://?tuicode='+tuicode +'&goodsId='+goodsId,'http://www.baidu.com')
 
-    mobileAppInstall.open('wlshop://','http://www.baidu.com')
 </script>
 
 </html>

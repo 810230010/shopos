@@ -133,6 +133,8 @@ public class MSellerController {
     public Object sellerInfo() {
         RestResult result = new RestResult();
         ApiSellerInfo apiSellerInfo = storeService.getSellerInfo();
+
+
         return result;
     }
 

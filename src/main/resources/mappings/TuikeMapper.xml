@@ -7,7 +7,7 @@
         select m.member_id,m.nickname,m.sex,m.email,m.create_time,m.points
         from t_member m,t_tuike k
         <where>
-            k.is_check = 0 AND k.member_id = m.member_id AND k.state = "INIT"
+            k.member_id = m.member_id AND k.state = "CHECKING"
             <if test="searchKey != null and searchKey != '' ">
                 and ( q.title like '%${searchKey}%')
             </if>
@@ -24,7 +24,7 @@
         select k.tuike_id,m.nickname,k.create_time,k.available_balance,k.freeze_balance,k.code,k.share_count,k.buy_count
         from t_member m,t_tuike k
         <where>
-            k.is_check = 1 AND k.member_id = m.member_id AND k.state = "CHECKED"
+            k.member_id = m.member_id AND k.state = "CHECKED"
             <if test="searchKey != null and searchKey != '' ">
                 and ( q.title like '%${searchKey}%')
             </if>
@@ -51,7 +51,7 @@
     <!--是否审核通过操作-->
     <update id="checkOperation">
         UPDATE t_tuike
-        SET state = #{state},is_check = 1
+        SET state = #{state}
         WHERE member_id = #{memberId}
     </update>
 

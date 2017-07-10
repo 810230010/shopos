@@ -19,20 +19,10 @@ public class TuikePageListDTO {
 
     private String code;
 
-    private String shareCount;
+    private Integer shareCount;
 
-    private String buyCount;
+    private Integer buyCount;
 
-    public TuikePageListDTO(Integer tuikeId, String nickname, Date createTime, Long availableBalance, Long freezeBalance, String code, String shareCount, String buyCount) {
-        this.tuikeId = tuikeId;
-        this.nickname = nickname;
-        this.createTime = createTime;
-        this.availableBalance = availableBalance;
-        this.freezeBalance = freezeBalance;
-        this.code = code;
-        this.shareCount = shareCount;
-        this.buyCount = buyCount;
-    }
 
     public TuikePageListDTO() {
     }
@@ -77,19 +67,19 @@ public class TuikePageListDTO {
         this.code = code;
     }
 
-    public String getShareCount() {
+    public Integer getShareCount() {
         return shareCount;
     }
 
-    public void setShareCount(String shareCount) {
+    public void setShareCount(Integer shareCount) {
         this.shareCount = shareCount;
     }
 
-    public String getBuyCount() {
+    public Integer getBuyCount() {
         return buyCount;
     }
 
-    public void setBuyCount(String buyCount) {
+    public void setBuyCount(Integer buyCount) {
         this.buyCount = buyCount;
     }
 

@@ -60,10 +60,6 @@ public class TuikeServiceImpl implements TuikeService {
     @Override
     @Transactional
     public Integer checkOperation(Integer memberId, String state) {
-        if(state.equals("CHECKED")){
-            String uuid = UUID.randomUUID().toString().replaceAll("_", "").substring(0,7);
-            tuikeMapper.updateTuikeCode(memberId,uuid+memberId);
-        }
         return tuikeMapper.checkOperation(memberId,state);
     }
 

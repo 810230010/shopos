@@ -210,6 +210,10 @@
             <generatedKey column="tuike_share_id" sqlStatement="MySql" identity="true"/>
         </table>
 
+        <table tableName="t_activity" domainObjectName="Activity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="activity_id" sqlStatement="MySql" identity="true"/>
+        </table>
+
 
 
     </context>

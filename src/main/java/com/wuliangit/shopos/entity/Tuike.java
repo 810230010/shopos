@@ -9,8 +9,6 @@ public class Tuike {
 
     private String state;
 
-    private Boolean isCheck;
-
     private Date createTime;
 
     private Date updateTime;
@@ -21,9 +19,9 @@ public class Tuike {
 
     private String code;
 
-    private String shareCount;
+    private Integer shareCount;
 
-    private String buyCount;
+    private Integer buyCount;
 
     private String alipayAccount;
 
@@ -51,14 +49,6 @@ public class Tuike {
 
     public void setState(String state) {
         this.state = state == null ? null : state.trim();
-    }
-
-    public Boolean getIsCheck() {
-        return isCheck;
-    }
-
-    public void setIsCheck(Boolean isCheck) {
-        this.isCheck = isCheck;
     }
 
     public Date getCreateTime() {
@@ -101,20 +91,20 @@ public class Tuike {
         this.code = code == null ? null : code.trim();
     }
 
-    public String getShareCount() {
+    public Integer getShareCount() {
         return shareCount;
     }
 
-    public void setShareCount(String shareCount) {
-        this.shareCount = shareCount == null ? null : shareCount.trim();
+    public void setShareCount(Integer shareCount) {
+        this.shareCount = shareCount;
     }
 
-    public String getBuyCount() {
+    public Integer getBuyCount() {
         return buyCount;
     }
 
-    public void setBuyCount(String buyCount) {
-        this.buyCount = buyCount == null ? null : buyCount.trim();
+    public void setBuyCount(Integer buyCount) {
+        this.buyCount = buyCount;
     }
 
     public String getAlipayAccount() {

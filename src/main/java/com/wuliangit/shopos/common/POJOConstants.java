@@ -152,4 +152,16 @@ public class POJOConstants {
     public static final BigDecimal GUARANTEE_MONEY_AMOUNT = new BigDecimal(0.1);
 
 
+    //审核
+    //审核中
+    public final static String CHECKING = "CHECKING";
+    //审核通过
+    public final static String CHECKED = "CHECKED";
+    //审核未通过
+    public final static String UNCHECK = "UNCHECK";
+    //审核通过后被管理员禁用
+    public final static String FORBIDDEN = "FORBIDDEN";
+    //重新提交审核
+    public final static String RECHECK = "RECHECK";
+
 }

@@ -3,6 +3,7 @@ package com.wuliangit.shopos.service;
 import com.wuliangit.shopos.dto.TuikeCheckListDTO;
 import com.wuliangit.shopos.dto.TuikePageListDTO;
 import com.wuliangit.shopos.dto.api.ApiTuikeShareDataDTO;
+import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.Tuike;
 import com.wuliangit.shopos.dto.api.ApiTuikeShareDTO;
 
@@ -79,4 +80,10 @@ public interface TuikeService {
      * @return
      */
     List<ApiTuikeShareDataDTO> getShareInfo(Integer page, Integer pageSize, Integer tuikeId);
+
+    /**
+     * 申请成为推客，创建腿推客信息
+     * @param member
+     */
+    void createTuike(Member member);
 }

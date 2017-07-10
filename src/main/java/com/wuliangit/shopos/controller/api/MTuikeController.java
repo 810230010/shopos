@@ -6,7 +6,6 @@ import com.wuliangit.shopos.common.util.WebUtil;
 import com.wuliangit.shopos.dto.api.ApiTuikeShareDataDTO;
 import com.wuliangit.shopos.entity.Member;
 import com.wuliangit.shopos.entity.Tuike;
-import com.wuliangit.shopos.dto.api.ApiTuikeShareDTO;
 import com.wuliangit.shopos.service.MemberService;
 import com.wuliangit.shopos.service.TuikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,7 @@ public class MTuikeController {
         RestResult result = new RestResult();
         Member member = WebUtil.getCurrentMember();
 
+        //验证是否实名认证
         if (member.getAuthState().equals(POJOConstants.AUTHED) ){
             member.setType(POJOConstants.USER_TYPE_PRE_TUIKE);
             memberService.updateMember(member);
@@ -47,6 +47,15 @@ public class MTuikeController {
             result.setCode(202);
             result.setMsg("请先实名认证，再申请成为推客！");
         }
+
+        //验证是否已经申请
+        Tuike tuike = tuikeService.getTuikeByMemberId(member.getMemberId());
+        if (tuike != null){
+            result.setCode(203);
+            result.setMsg("您已经提交了申请，请勿重新提交");
+        }
+
+        tuikeService.createTuike(member);
 
         return result;
     }

@@ -138,7 +138,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Transactional
     public int apiCreateGooods(Integer goodsCategory1Id, Integer goodsCategory2Id, Integer goodsCategory3Id,
                                String name, BigDecimal price, BigDecimal carriage, Integer storage,
-                               String type, String unit, String goodsBody, String images) {
+                               String type, String unit, String goodsBody, String images, Double gpsLng, Double gpsLat) {
         Goods goods = new Goods();
         goods.setGoodsCategory1Id(goodsCategory1Id);
         goods.setGoodsCategory2Id(goodsCategory2Id);
@@ -148,6 +148,8 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setCarriage(carriage);
         goods.setStorage(storage);
         goods.setType(type);
+        goods.setGpsLat(gpsLat);
+        goods.setGpsLng(gpsLng);
         goods.setUploadFrom(POJOConstants.GOODS_FROM_PHONE);
         goods.setUnit(unit);
         goods.setGoodsBody(goodsBody);

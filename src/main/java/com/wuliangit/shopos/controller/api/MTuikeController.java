@@ -44,7 +44,7 @@ public class MTuikeController {
             member.setType(POJOConstants.USER_TYPE_PRE_TUIKE);
             memberService.updateMember(member);
         }else{
-            result.setCode(500);
+            result.setCode(202);
             result.setMsg("请先实名认证，再申请成为推客！");
         }
 

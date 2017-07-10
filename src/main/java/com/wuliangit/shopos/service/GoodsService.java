@@ -111,11 +111,12 @@ public interface GoodsService {
      * @param unit
      * @param goodsBody
      * @param images
-     * @return
+     * @param gpsLng
+     *@param gpsLat @return
      */
     int apiCreateGooods(Integer goodsCategory1Id, Integer goodsCategory2Id,
                         Integer goodsCategory3Id, String name, BigDecimal price, BigDecimal carriage,
-                        Integer storage, String type, String unit, String goodsBody, String images);
+                        Integer storage, String type, String unit, String goodsBody, String images, Double gpsLng, Double gpsLat);
 
     /**
      * 接口获取商品详情

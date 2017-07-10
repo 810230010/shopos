@@ -13,6 +13,7 @@ import com.wuliangit.shopos.exception.OptionException;
 import com.wuliangit.shopos.service.GoodsService;
 import com.wuliangit.shopos.service.StoreAccountService;
 import com.wuliangit.shopos.service.StoreService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,10 +64,12 @@ public class MSellerController {
                            String type,
                            String unit,
                            String goodsBody,
-                           String images) {
+                           String images,
+                           Double gpsLng,
+                           Double gpsLat) {
         RestResult result = new RestResult();
         int res = goodsService.apiCreateGooods(goodsCategory1Id, goodsCategory2Id, goodsCategory3Id,
-                name, price, carriage, storage, type, unit, goodsBody, images);
+                name, price, carriage, storage, type, unit, goodsBody, images, gpsLng, gpsLat);
         return result;
     }
 
@@ -202,11 +205,17 @@ public class MSellerController {
         RestResult result = new RestResult();
 
         Store store = WebUtil.mobileGetCurrentStore();
-        store.setLogo(QiNiuUtils.getBaseUrl() + logo);
-        store.setName(name);
-        store.setPhone(phone);
-        storeService.updateStore(store);
 
+        if (!StringUtils.isEmpty(logo)){
+            store.setLogo(QiNiuUtils.getBaseUrl() + logo);
+        }
+        if (!StringUtils.isEmpty(name)){
+            store.setName(name);
+        }
+        if (!StringUtils.isEmpty(phone)){
+            store.setPhone(phone);
+        }
+        storeService.updateStore(store);
         return result;
     }
 

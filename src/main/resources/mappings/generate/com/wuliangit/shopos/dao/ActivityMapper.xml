@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuliangit.shopos.dao.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.wuliangit.shopos.entity.Activity" >
+    <id column="activity_id" property="activityId" jdbcType="INTEGER" />
+    <result column="activity_title" property="activityTitle" jdbcType="VARCHAR" />
+    <result column="activity_type" property="activityType" jdbcType="VARCHAR" />
+    <result column="activity_banner" property="activityBanner" jdbcType="VARCHAR" />
+    <result column="activity_desc" property="activityDesc" jdbcType="VARCHAR" />
+    <result column="activity_start_time" property="activityStartTime" jdbcType="TIMESTAMP" />
+    <result column="activity_end_time" property="activityEndTime" jdbcType="TIMESTAMP" />
+    <result column="activity_sort" property="activitySort" jdbcType="VARCHAR" />
+    <result column="activity_state" property="activityState" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    activity_id, activity_title, activity_type, activity_banner, activity_desc, activity_start_time, 
+    activity_end_time, activity_sort, activity_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wuliangit.shopos.entity.Activity" >
+    <selectKey resultType="java.lang.Integer" keyProperty="activityId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_activity (activity_title, activity_type, activity_banner, 
+      activity_desc, activity_start_time, activity_end_time, 
+      activity_sort, activity_state)
+    values (#{activityTitle,jdbcType=VARCHAR}, #{activityType,jdbcType=VARCHAR}, #{activityBanner,jdbcType=VARCHAR}, 
+      #{activityDesc,jdbcType=VARCHAR}, #{activityStartTime,jdbcType=TIMESTAMP}, #{activityEndTime,jdbcType=TIMESTAMP}, 
+      #{activitySort,jdbcType=VARCHAR}, #{activityState,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Activity" >
+    <selectKey resultType="java.lang.Integer" keyProperty="activityId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="activityTitle != null" >
+        activity_title,
+      </if>
+      <if test="activityType != null" >
+        activity_type,
+      </if>
+      <if test="activityBanner != null" >
+        activity_banner,
+      </if>
+      <if test="activityDesc != null" >
+        activity_desc,
+      </if>
+      <if test="activityStartTime != null" >
+        activity_start_time,
+      </if>
+      <if test="activityEndTime != null" >
+        activity_end_time,
+      </if>
+      <if test="activitySort != null" >
+        activity_sort,
+      </if>
+      <if test="activityState != null" >
+        activity_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="activityTitle != null" >
+        #{activityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="activityType != null" >
+        #{activityType,jdbcType=VARCHAR},
+      </if>
+      <if test="activityBanner != null" >
+        #{activityBanner,jdbcType=VARCHAR},
+      </if>
+      <if test="activityDesc != null" >
+        #{activityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="activityStartTime != null" >
+        #{activityStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityEndTime != null" >
+        #{activityEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activitySort != null" >
+        #{activitySort,jdbcType=VARCHAR},
+      </if>
+      <if test="activityState != null" >
+        #{activityState,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuliangit.shopos.entity.Activity" >
+    update t_activity
+    <set >
+      <if test="activityTitle != null" >
+        activity_title = #{activityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="activityType != null" >
+        activity_type = #{activityType,jdbcType=VARCHAR},
+      </if>
+      <if test="activityBanner != null" >
+        activity_banner = #{activityBanner,jdbcType=VARCHAR},
+      </if>
+      <if test="activityDesc != null" >
+        activity_desc = #{activityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="activityStartTime != null" >
+        activity_start_time = #{activityStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityEndTime != null" >
+        activity_end_time = #{activityEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activitySort != null" >
+        activity_sort = #{activitySort,jdbcType=VARCHAR},
+      </if>
+      <if test="activityState != null" >
+        activity_state = #{activityState,jdbcType=BIT},
+      </if>
+    </set>
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuliangit.shopos.entity.Activity" >
+    update t_activity
+    set activity_title = #{activityTitle,jdbcType=VARCHAR},
+      activity_type = #{activityType,jdbcType=VARCHAR},
+      activity_banner = #{activityBanner,jdbcType=VARCHAR},
+      activity_desc = #{activityDesc,jdbcType=VARCHAR},
+      activity_start_time = #{activityStartTime,jdbcType=TIMESTAMP},
+      activity_end_time = #{activityEndTime,jdbcType=TIMESTAMP},
+      activity_sort = #{activitySort,jdbcType=VARCHAR},
+      activity_state = #{activityState,jdbcType=BIT}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+</mapper>

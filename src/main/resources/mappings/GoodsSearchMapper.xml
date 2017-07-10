@@ -25,6 +25,7 @@
             <if test="searchKey != null and searchKey != '' ">
                 and MATCH(g.name) against(#{searchKey} IN BOOLEAN MODE)
             </if>
+                and g.state = 'ONSELL'
         </where>
         order by ${order}
     </select>

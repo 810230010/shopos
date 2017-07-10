@@ -26,8 +26,7 @@ public class CommonController {
     private ExpressService expressService;
     @Autowired
     private AreaService areaService;
-    @Autowired
-    private LoadingAdService loadingAdService;
+
 
     /**
      * 图片删除什么都不做
@@ -67,16 +66,5 @@ public class CommonController {
         return result;
     }
 
-    /**
-     * 获取启用的载进图
-     * @return
-     */
-    @RequestMapping("/getLoadingPic")
-    @ResponseBody
-    public Object getLoadingPic(){
-        RestResult result = new RestResult();
-        String img = loadingAdService.getLoadingPic();
-        result.add("img",img);
-        return result;
-    }
+
 }

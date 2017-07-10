@@ -3,6 +3,7 @@ package com.wuliangit.shopos.controller.api;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.entity.Area;
 import com.wuliangit.shopos.service.AreaService;
+import com.wuliangit.shopos.service.LoadingAdService;
 import com.wuliangit.shopos.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,8 @@ public class MCommonController {
     private AreaService areaService;
     @Autowired
     private SettingService settingService;
+    @Autowired
+    private LoadingAdService loadingAdService;
 
 
     /**
@@ -53,6 +56,7 @@ public class MCommonController {
         result.add("registeryRegulation", settingService.getRegisterRegulation());
         return result;
     }
+
     /**
      * app得到成为商家公约
      * @return
@@ -62,6 +66,20 @@ public class MCommonController {
     public Object getBeStoreRegulation(){
         RestResult result = new RestResult();
         result.add("beStoreRegulation", settingService.getBeStoreRegulation());
+        return result;
+    }
+
+
+    /**
+     * 获取启用的载进图
+     * @return
+     */
+    @RequestMapping("/getLoadingPic")
+    @ResponseBody
+    public Object getLoadingPic(){
+        RestResult result = new RestResult();
+        String img = loadingAdService.getLoadingPic();
+        result.add("img",img);
         return result;
     }
 

@@ -31,8 +31,6 @@
     <result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
     <result column="is_new" property="isNew" jdbcType="BIT" />
     <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="activity_id" property="activityId" jdbcType="INTEGER" />
-    <result column="activity_type" property="activityType" jdbcType="VARCHAR" />
     <result column="is_virtual" property="isVirtual" jdbcType="BIT" />
     <result column="virtual_invalid_refund" property="virtualInvalidRefund" jdbcType="BIT" />
     <result column="is_appoint" property="isAppoint" jdbcType="BIT" />
@@ -52,6 +50,9 @@
     <result column="upload_from" property="uploadFrom" jdbcType="VARCHAR" />
     <result column="gps_lng" property="gpsLng" jdbcType="DOUBLE" />
     <result column="gps_lat" property="gpsLat" jdbcType="DOUBLE" />
+    <result column="activity_id" property="activityId" jdbcType="INTEGER" />
+    <result column="activity_price" property="activityPrice" jdbcType="DECIMAL" />
+    <result column="activity_join_state" property="activityJoinState" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.wuliangit.shopos.entity.Goods" extends="BaseResultMap" >
     <result column="goods_body" property="goodsBody" jdbcType="LONGVARCHAR" />
@@ -60,10 +61,10 @@
     goods_id, name, unit, ad_word, store_id, store_name, goods_category1_id, goods_category2_id, 
     goods_category3_id, brand_id, price, carriage, commission, promotion_price, promotion_type, 
     marketprice, storage_alarm, click, salenum, collect, storage, images, title_img, 
-    state, verify, create_time, edit_time, is_new, type, activity_id, activity_type, 
-    is_virtual, virtual_invalid_refund, is_appoint, is_presell, vat, commend, evaluation_good_star, 
-    evaluation_count, del_flag, attrs, is_platform, area, check_msg, sell_time_begin, 
-    sell_time_end, need_count, upload_from, gps_lng, gps_lat
+    state, verify, create_time, edit_time, is_new, type, is_virtual, virtual_invalid_refund, 
+    is_appoint, is_presell, vat, commend, evaluation_good_star, evaluation_count, del_flag, 
+    attrs, is_platform, area, check_msg, sell_time_begin, sell_time_end, need_count, 
+    upload_from, gps_lng, gps_lat, activity_id, activity_price, activity_join_state
   </sql>
   <sql id="Blob_Column_List" >
     goods_body
@@ -93,14 +94,14 @@
       collect, storage, images, 
       title_img, state, verify, 
       create_time, edit_time, is_new, 
-      type, activity_id, activity_type, 
-      is_virtual, virtual_invalid_refund, is_appoint, 
-      is_presell, vat, commend, evaluation_good_star, 
-      evaluation_count, del_flag, attrs, 
-      is_platform, area, check_msg, 
-      sell_time_begin, sell_time_end, need_count, 
-      upload_from, gps_lng, gps_lat, 
-      goods_body)
+      type, is_virtual, virtual_invalid_refund, 
+      is_appoint, is_presell, vat, commend, 
+      evaluation_good_star, evaluation_count, del_flag, 
+      attrs, is_platform, area, 
+      check_msg, sell_time_begin, sell_time_end, 
+      need_count, upload_from, gps_lng, 
+      gps_lat, activity_id, activity_price, 
+      activity_join_state, goods_body)
     values (#{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{adWord,jdbcType=VARCHAR}, 
       #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{goodsCategory1Id,jdbcType=INTEGER}, 
       #{goodsCategory2Id,jdbcType=INTEGER}, #{goodsCategory3Id,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, 
@@ -110,14 +111,14 @@
       #{collect,jdbcType=INTEGER}, #{storage,jdbcType=INTEGER}, #{images,jdbcType=VARCHAR}, 
       #{titleImg,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{verify,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP}, #{isNew,jdbcType=BIT}, 
-      #{type,jdbcType=VARCHAR}, #{activityId,jdbcType=INTEGER}, #{activityType,jdbcType=VARCHAR}, 
-      #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, #{isAppoint,jdbcType=BIT}, 
-      #{isPresell,jdbcType=BIT}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, #{evaluationGoodStar,jdbcType=INTEGER}, 
-      #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, #{attrs,jdbcType=VARCHAR}, 
-      #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{checkMsg,jdbcType=VARCHAR}, 
-      #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, #{needCount,jdbcType=INTEGER}, 
-      #{uploadFrom,jdbcType=VARCHAR}, #{gpsLng,jdbcType=DOUBLE}, #{gpsLat,jdbcType=DOUBLE}, 
-      #{goodsBody,jdbcType=LONGVARCHAR})
+      #{type,jdbcType=VARCHAR}, #{isVirtual,jdbcType=BIT}, #{virtualInvalidRefund,jdbcType=BIT}, 
+      #{isAppoint,jdbcType=BIT}, #{isPresell,jdbcType=BIT}, #{vat,jdbcType=BIT}, #{commend,jdbcType=BIT}, 
+      #{evaluationGoodStar,jdbcType=INTEGER}, #{evaluationCount,jdbcType=INTEGER}, #{delFlag,jdbcType=BIT}, 
+      #{attrs,jdbcType=VARCHAR}, #{isPlatform,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, 
+      #{checkMsg,jdbcType=VARCHAR}, #{sellTimeBegin,jdbcType=TIMESTAMP}, #{sellTimeEnd,jdbcType=TIMESTAMP}, 
+      #{needCount,jdbcType=INTEGER}, #{uploadFrom,jdbcType=VARCHAR}, #{gpsLng,jdbcType=DOUBLE}, 
+      #{gpsLat,jdbcType=DOUBLE}, #{activityId,jdbcType=INTEGER}, #{activityPrice,jdbcType=DECIMAL}, 
+      #{activityJoinState,jdbcType=VARCHAR}, #{goodsBody,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Goods" >
     <selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="AFTER" >
@@ -209,12 +210,6 @@
       <if test="type != null" >
         type,
       </if>
-      <if test="activityId != null" >
-        activity_id,
-      </if>
-      <if test="activityType != null" >
-        activity_type,
-      </if>
       <if test="isVirtual != null" >
         is_virtual,
       </if>
@@ -271,6 +266,15 @@
       </if>
       <if test="gpsLat != null" >
         gps_lat,
+      </if>
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="activityPrice != null" >
+        activity_price,
+      </if>
+      <if test="activityJoinState != null" >
+        activity_join_state,
       </if>
       <if test="goodsBody != null" >
         goods_body,
@@ -361,12 +365,6 @@
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
       </if>
-      <if test="activityId != null" >
-        #{activityId,jdbcType=INTEGER},
-      </if>
-      <if test="activityType != null" >
-        #{activityType,jdbcType=VARCHAR},
-      </if>
       <if test="isVirtual != null" >
         #{isVirtual,jdbcType=BIT},
       </if>
@@ -423,6 +421,15 @@
       </if>
       <if test="gpsLat != null" >
         #{gpsLat,jdbcType=DOUBLE},
+      </if>
+      <if test="activityId != null" >
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityPrice != null" >
+        #{activityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="activityJoinState != null" >
+        #{activityJoinState,jdbcType=VARCHAR},
       </if>
       <if test="goodsBody != null" >
         #{goodsBody,jdbcType=LONGVARCHAR},
@@ -516,12 +523,6 @@
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
       </if>
-      <if test="activityId != null" >
-        activity_id = #{activityId,jdbcType=INTEGER},
-      </if>
-      <if test="activityType != null" >
-        activity_type = #{activityType,jdbcType=VARCHAR},
-      </if>
       <if test="isVirtual != null" >
         is_virtual = #{isVirtual,jdbcType=BIT},
       </if>
@@ -579,6 +580,15 @@
       <if test="gpsLat != null" >
         gps_lat = #{gpsLat,jdbcType=DOUBLE},
       </if>
+      <if test="activityId != null" >
+        activity_id = #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityPrice != null" >
+        activity_price = #{activityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="activityJoinState != null" >
+        activity_join_state = #{activityJoinState,jdbcType=VARCHAR},
+      </if>
       <if test="goodsBody != null" >
         goods_body = #{goodsBody,jdbcType=LONGVARCHAR},
       </if>
@@ -615,8 +625,6 @@
       edit_time = #{editTime,jdbcType=TIMESTAMP},
       is_new = #{isNew,jdbcType=BIT},
       type = #{type,jdbcType=VARCHAR},
-      activity_id = #{activityId,jdbcType=INTEGER},
-      activity_type = #{activityType,jdbcType=VARCHAR},
       is_virtual = #{isVirtual,jdbcType=BIT},
       virtual_invalid_refund = #{virtualInvalidRefund,jdbcType=BIT},
       is_appoint = #{isAppoint,jdbcType=BIT},
@@ -636,6 +644,9 @@
       upload_from = #{uploadFrom,jdbcType=VARCHAR},
       gps_lng = #{gpsLng,jdbcType=DOUBLE},
       gps_lat = #{gpsLat,jdbcType=DOUBLE},
+      activity_id = #{activityId,jdbcType=INTEGER},
+      activity_price = #{activityPrice,jdbcType=DECIMAL},
+      activity_join_state = #{activityJoinState,jdbcType=VARCHAR},
       goods_body = #{goodsBody,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -669,8 +680,6 @@
       edit_time = #{editTime,jdbcType=TIMESTAMP},
       is_new = #{isNew,jdbcType=BIT},
       type = #{type,jdbcType=VARCHAR},
-      activity_id = #{activityId,jdbcType=INTEGER},
-      activity_type = #{activityType,jdbcType=VARCHAR},
       is_virtual = #{isVirtual,jdbcType=BIT},
       virtual_invalid_refund = #{virtualInvalidRefund,jdbcType=BIT},
       is_appoint = #{isAppoint,jdbcType=BIT},
@@ -689,7 +698,10 @@
       need_count = #{needCount,jdbcType=INTEGER},
       upload_from = #{uploadFrom,jdbcType=VARCHAR},
       gps_lng = #{gpsLng,jdbcType=DOUBLE},
-      gps_lat = #{gpsLat,jdbcType=DOUBLE}
+      gps_lat = #{gpsLat,jdbcType=DOUBLE},
+      activity_id = #{activityId,jdbcType=INTEGER},
+      activity_price = #{activityPrice,jdbcType=DECIMAL},
+      activity_join_state = #{activityJoinState,jdbcType=VARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

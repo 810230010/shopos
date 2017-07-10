@@ -62,10 +62,6 @@ public class Goods {
 
     private String type;
 
-    private Integer activityId;
-
-    private String activityType;
-
     private Boolean isVirtual;
 
     private Boolean virtualInvalidRefund;
@@ -103,6 +99,12 @@ public class Goods {
     private Double gpsLng;
 
     private Double gpsLat;
+
+    private Integer activityId;
+
+    private Long activityPrice;
+
+    private String activityJoinState;
 
     private String goodsBody;
 
@@ -338,22 +340,6 @@ public class Goods {
         this.type = type == null ? null : type.trim();
     }
 
-    public Integer getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(Integer activityId) {
-        this.activityId = activityId;
-    }
-
-    public String getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(String activityType) {
-        this.activityType = activityType == null ? null : activityType.trim();
-    }
-
     public Boolean getIsVirtual() {
         return isVirtual;
     }
@@ -504,6 +490,30 @@ public class Goods {
 
     public void setGpsLat(Double gpsLat) {
         this.gpsLat = gpsLat;
+    }
+
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
+    }
+
+    public Long getActivityPrice() {
+        return activityPrice;
+    }
+
+    public void setActivityPrice(Long activityPrice) {
+        this.activityPrice = activityPrice;
+    }
+
+    public String getActivityJoinState() {
+        return activityJoinState;
+    }
+
+    public void setActivityJoinState(String activityJoinState) {
+        this.activityJoinState = activityJoinState == null ? null : activityJoinState.trim();
     }
 
     public String getGoodsBody() {

@@ -39,14 +39,14 @@ public class ApiStoreDTO {
 
     private List<StoreGoodsAd> goodsAds;
 
-    private Integer payGuaranteeMoney;
+    private Boolean guaranteeMoney;
 
-    public Integer getPayGuaranteeMoney() {
-        return payGuaranteeMoney;
+    public Boolean getGuaranteeMoney() {
+        return guaranteeMoney;
     }
 
-    public void setPayGuaranteeMoney(Integer payGuaranteeMoney) {
-        this.payGuaranteeMoney = payGuaranteeMoney;
+    public void setGuaranteeMoney(Boolean guaranteeMoney) {
+        this.guaranteeMoney = guaranteeMoney;
     }
 
     public String getPhone() {

@@ -124,7 +124,7 @@ public class Store {
 
     private String refundPhone;
 
-    private Boolean payGuaranteeMoney;
+    private Boolean guaranteeMoney;
 
     private Integer orderAmount;
 
@@ -610,12 +610,12 @@ public class Store {
         this.refundPhone = refundPhone == null ? null : refundPhone.trim();
     }
 
-    public Boolean getPayGuaranteeMoney() {
-        return payGuaranteeMoney;
+    public Boolean getGuaranteeMoney() {
+        return guaranteeMoney;
     }
 
-    public void setPayGuaranteeMoney(Boolean payGuaranteeMoney) {
-        this.payGuaranteeMoney = payGuaranteeMoney;
+    public void setGuaranteeMoney(Boolean guaranteeMoney) {
+        this.guaranteeMoney = guaranteeMoney;
     }
 
     public Integer getOrderAmount() {

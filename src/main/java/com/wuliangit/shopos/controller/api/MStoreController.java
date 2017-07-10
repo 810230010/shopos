@@ -62,7 +62,6 @@ public class MStoreController {
         boolean isCollect = collectService.isCollectStore(storeId);
         result.add("store",store);
         result.add("isCollect", isCollect);
-        result.add("hint","0:未缴纳, 1:已缴纳, 2:个人商家不需缴纳");
         return result;
     }
 

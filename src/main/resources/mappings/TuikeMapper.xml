@@ -66,7 +66,7 @@
     <select id="getTuikeInfo" resultType="com.wuliangit.shopos.entity.Tuike">
         SELECT *
         FROM t_tuike
-        WHERE member_id = #{memberId}
+        WHERE member_id = #{memberId} and state = "CHECKED"
     </select>
 
     <!--获取tuikecode-->

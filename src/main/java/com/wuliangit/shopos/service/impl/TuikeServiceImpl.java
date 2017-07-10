@@ -112,8 +112,9 @@ public class TuikeServiceImpl implements TuikeService {
         tuike.setState(POJOConstants.CHECKING);
         tuike.setMemberId(member.getMemberId());
         tuike.setUpdateTime(new Date());
-        tuike.setCode(UUID.randomUUID().toString().substring(6)+member.getMemberId());
+        tuike.setCode(UUID.randomUUID().toString().substring(0,7)+member.getMemberId());
 
         tuikeMapper.insertSelective(tuike);
     }
+
 }

@@ -3,6 +3,7 @@ package com.wuliangit.shopos.dao;
 import com.wuliangit.shopos.common.dao.BaseMapper;
 import com.wuliangit.shopos.dto.ActivityCheckGoodsDTO;
 import com.wuliangit.shopos.dto.GoodsDetailDTO;
+import com.wuliangit.shopos.dto.GoodsIncludeActivityDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
@@ -117,4 +118,6 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      */
     Integer activityGoodsCheck(@Param("goodsId") Integer goodsId,
                                @Param("activityJoinState") String activityJoinState);
+
+    GoodsIncludeActivityDTO getGoodsDetailIncludeActivity(@Param("goodsId") Integer goodsId);
 }

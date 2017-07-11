@@ -190,6 +190,9 @@ $("#wizard").steps({
                 goodsBody: $("#goodsBody").val(),
                 skuStr: JSON.stringify(table_data),
                 attrs: JSON.stringify(attr_data),
+                activityId: $("#activity").select2('data')[0].id,
+                activityTitle: $("#activity").select2('data')[0].name,
+                activityPrice: $("#activityPrice").val(),
             },
             function (data, status) {
                 if (data.code == 200) {

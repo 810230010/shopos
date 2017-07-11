@@ -12,6 +12,7 @@ import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
 import com.wuliangit.shopos.dto.ActivityCheckGoodsDTO;
 import com.wuliangit.shopos.dto.GoodsDetailDTO;
+import com.wuliangit.shopos.dto.GoodsIncludeActivityDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.api.ApiSellerInfo;
@@ -93,8 +94,8 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public Goods getGoodsById(Integer goodsId) {
-        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+    public GoodsIncludeActivityDTO getGoodsById(Integer goodsId) {
+        GoodsIncludeActivityDTO goods = goodsMapper.getGoodsDetailIncludeActivity(goodsId);
         return goods;
     }
 

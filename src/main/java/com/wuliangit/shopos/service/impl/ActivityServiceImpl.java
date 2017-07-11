@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.wuliangit.shopos.dao.ActivityMapper;
+import com.wuliangit.shopos.dto.SimpleActivityDTO;
 import com.wuliangit.shopos.entity.Activity;
 import com.wuliangit.shopos.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public Integer addActivity(Activity activity) {
         return activityMapper.insert(activity);
+    }
+
+    @Override
+    public List<SimpleActivityDTO> getAllValidActivities() {
+        return activityMapper.getAllValidActivities();
     }
 }

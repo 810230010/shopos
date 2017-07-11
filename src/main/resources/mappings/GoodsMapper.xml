@@ -122,6 +122,10 @@
         </if>
         a.activity_start_time desc
     </select>
+    <select id="getGoodsDetailIncludeActivity" resultType="com.wuliangit.shopos.dto.GoodsIncludeActivityDTO">
+        select a.*,b.activity_title from t_goods a left join t_activity b on
+        a.activity_id = b.activity_id where a.goods_id = #{goodsId};
+    </select>
 
     <!--活动商品审核结果-->
     <update id="activityGoodsCheck">

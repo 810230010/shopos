@@ -9,6 +9,7 @@
 <link href="/assets/admin/css/plugins/fileinput/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
 
 <link href="/assets/admin/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
+<link href="/assets/admin/css/plugins/switchery/switchery.css" rel="stylesheet">
 
 <style>
     .category-selete ul li {
@@ -36,7 +37,7 @@
 #parse("/store/models/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>商品-添加商品</h2>
+        <h2>商品-修改商品</h2>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -111,13 +112,6 @@
                                         <input id="adWord" name="adWord" type="text" class="form-control" value="$goods.adWord">
                                     </div>
                                 </div>
-##                                <div class="form-group">
-##                                    <label class="col-sm-3 control-label">品牌:</label>
-##                                    <div class="col-sm-7">
-##                                        <select id="" name="" class="brand-select form-control">
-##                                        </select>
-##                                    </div>
-##                                </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">商品类型:</label>
@@ -134,10 +128,36 @@
                                         #end
                                     </div>
                                 </div>
+                                <div class="form-group"><label class="col-lg-3 control-label">是否参加活动</label>
+                                    <div class="col-lg-1">
+                                        #if($goods.activityId != 0)
+                                            <div class="input-group m-b"><input type="checkbox" id="activated" class="js-switch" checked/></div>
+                                        #else
+                                            <div class="input-group m-b"><input type="checkbox" id="activated" class="js-switch" /></div>
+                                        #end
 
+                                    </div>
+                                    <div style="display:none" id="activityBlock">
+                                        <div class="col-lg-3">
+                                            <div class="input-group m-b">
+                                                <span class="input-group-addon">选择活动</span>
+                                                <select id="activity" style="width:60%">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="input-group m-b">
+                                                <span class="input-group-addon">活动价</span>
+                                                <input type="text" id="activityPrice" class="form-control" value="$!goods.activityPrice"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
                                 <div class="form-group"><label class="col-lg-3 control-label">商品发货GPS位置</label>
-                                    <div class="col-sm-3"><div class="input-group m-b"><span class="input-group-addon">经度</span> <input type="number" value="$!{store.gpsLng}" id="gpsLng" name="gpsLng" class="form-control"></div></div>
-                                    <div class="col-sm-3"><div class="input-group m-b"><span class="input-group-addon">纬度</span> <input type="number" value="$!{store.gpsLat}" id="gpsLat" name="gpsLat" class="form-control"></div></div>
+                                    <div class="col-sm-3"><div class="input-group m-b"><span class="input-group-addon">经度</span> <input type="number" value="$!{goods.gpsLng}" id="gpsLng" name="gpsLng" class="form-control"></div></div>
+                                    <div class="col-sm-3"><div class="input-group m-b"><span class="input-group-addon">纬度</span> <input type="number" value="$!{goods.gpsLat}" id="gpsLat" name="gpsLat" class="form-control"></div></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">移动地图确定GPS位置</label>
@@ -216,6 +236,9 @@
 
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=F3131c87552cfff8aa4528f05cd43bc8"></script>
 
+<!--switchery-->
+<script src="/assets/admin/js/plugins/switchery/switchery.js"></script>
+
 <script>
     $("#商品").addClass("active");
     $("#side-menu").metisMenu();
@@ -227,6 +250,8 @@
     /**
      * Created by nilme on 2017/4/19.
      */
+
+
     var category1 = $category1, category2 = $category2, category3 = $category3;//分类定义
 
     $("#wizard").steps({
@@ -322,6 +347,15 @@
             var titleImg = logo_dom.attr("src");
 
             ////////////////提交/////////////
+            var activityid = 0;
+            var activityprice = 0;
+            if(elem.checked == true){
+                activityid = $("#activity").select2('data')[0].id;
+                activityprice = $("#activityPrice").val();
+            }else{
+                activityid = 0;
+                activityprice = 0;
+            }
             $.post("/store/goods/edit",
                     {
                         goodsId: $goods.goodsId,
@@ -342,9 +376,12 @@
                         name:$("#name").val(),
                         goodsBody:$("#goodsBody").val(),
                         type: $("input[name='goods_type']:checked").val(),
+                        activityId: $("#activity").select2('data')[0].id,
+                        activityPrice: $("#activityPrice").val(),
                     },
                     function (data, status) {
                         if (data.code == 200) {
+                            alert(data.code)
                             swal({
                                 title: "成功!",
                                 text: "商品添加成功!",
@@ -591,54 +628,79 @@
         $(this).fileinput("upload");
     });
 
-    $(".brand-select").select2({
-        ajax: {
-            url: "/admin/goodsCategory/get/all",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                    page: params.page
-                };
-            },
-            processResults: function (data, params) {
-                var results = [];
-                $.each(data.data.goodsCategories, function (i, v) {
-                    var o = {};
-                    o.id = v.goodsCategoryId;
-                    o.name = v.name;
-                    results.push(o);
-                })
-                return {
-                    results: results
-                };
-            },
-            cache: true
-        },
-        formatSelection: function (item) {
-            return item.name;
-        },  // 选择结果中的显示
-        formatResult: function (item) {
-            return item.name;
-        },  // 搜索列表中的显示
-        escapeMarkup: function (markup) {
-            return markup;
-        }, // let our custom formatter work
-        minimumInputLength: 1,
-        templateResult: function formatRepo(repo) {
-            return repo.name
-        },
-        templateSelection: function formatRepo(repo) {
-            return repo.name
-        },
-        language: "zh-CN",
-    });
 
     ///////////////////////////////商品详情编辑//////////////////////
 
 
     $(document).ready(function () {
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+        var changeCheckbox = document.querySelector('.js-switch');
+        if(elem.checked == true){
+            $("#activityBlock").show();
+        }else{
+            $("#activityBlock").hide();
+        }
+
+        changeCheckbox.onchange = function() {
+            elem.checked = changeCheckbox.checked;
+            if(elem.checked == true){
+                $("#activityBlock").show();
+            }else{
+                $("#activityBlock").hide();
+            }
+        };
+
+
+        //下拉框配置
+        $("#activity").select2({
+            allowClear:true,
+            minimumResultsForSearch: -1,
+            minimumInputLength: 0,
+            language: "zh-CN",
+            ajax: {
+                url: "/store/activity/getValidActivities",
+                dataType: 'json',
+                async:false,
+                delay: 200,
+                processResults: function (data, params) {
+                    var results = [];
+                    $.each(data.data.activities, function (i, v) {
+                        console.log(data.data.activities);
+                        var o = {};
+                        o.id = v.activityId;
+                        o.name = v.activityTitle;
+                        results.push(o);
+
+                    })
+
+                    return {
+                        results: results
+                    };
+                },
+                cache: true
+            },
+            formatSelection: function (item) {
+                return item.name;
+            },  // 选择结果中的显示
+            formatResult: function (item) {
+                return item.name;
+            },  // 搜索列表中的显示
+            escapeMarkup: function (markup) {
+                return markup;
+            }, // let our custom formatter work
+            templateResult: function formatRepo(repo) {
+                return repo.name
+            },
+            templateSelection: function formatRepo(repo) {
+                return repo.name
+            },
+            initSelection: function (element, callback) {
+                var data = { id: $goods.goodsId, name: '$!goods.activityTitle' };
+                callback(data);
+            },
+        });
+
         // 封装 console.log 函数
         function printLog(title, info) {
             window.console && console.log(title, info);
@@ -710,6 +772,7 @@
             });
         }
 
+
         var editor = new wangEditor('goodsBody');
         editor.config.customUpload = true;  // 设置自定义上传的开关
         editor.config.customUploadInit = uploadInit;  // 配置自定义上传初始化事件，uploadInit方法在上面定义了
@@ -720,6 +783,7 @@
 
 
 <script>
+
     //百度地图
     var map = new BMap.Map("baidumap");          // 创建地图实例
     var point = new BMap.Point(116.404, 39.915);  // 创建点坐标

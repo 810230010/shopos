@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.SimpleActivityDTO;
 import com.wuliangit.shopos.entity.Activity;
 
 import java.util.List;
@@ -34,4 +35,10 @@ public interface ActivityService {
      * @return
      */
     Integer addActivity(Activity activity);
+
+    /**
+     * 商家添加商品得到所有有效的活动
+     * @return
+     */
+    List<SimpleActivityDTO> getAllValidActivities();
 }

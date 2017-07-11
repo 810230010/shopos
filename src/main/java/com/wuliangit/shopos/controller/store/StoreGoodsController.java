@@ -6,6 +6,7 @@ import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.dto.GoodsIncludeActivityDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.entity.GoodsCategory;
@@ -67,7 +68,7 @@ public class StoreGoodsController {
      */
     @RequestMapping("/editPage")
     public String editPage(Model model,Integer goodsId){
-        Goods goods = goodsService.getGoodsById(goodsId);
+        GoodsIncludeActivityDTO goods = goodsService.getGoodsById(goodsId);
         model.addAttribute("uploadToken", QiNiuUtils.getToken());
         model.addAttribute("domain",QiNiuUtils.getBaseUrl());
         model.addAttribute("goods",goods);
@@ -90,7 +91,7 @@ public class StoreGoodsController {
      */
     @RequestMapping("/editSkuPage")
     public String editSkuPage(Model model,Integer goodsId){
-        Goods goods = goodsService.getGoodsById(goodsId);
+        GoodsIncludeActivityDTO goods = goodsService.getGoodsById(goodsId);
         model.addAttribute("goods",goods);
 
         return "store/goods/sku-edit";
@@ -232,5 +233,6 @@ public class StoreGoodsController {
         result = new RestResult();
         return result;
     }
+
 
 }

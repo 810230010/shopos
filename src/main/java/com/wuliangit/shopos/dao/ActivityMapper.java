@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.SimpleActivityDTO;
 import com.wuliangit.shopos.entity.Activity;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,4 +31,10 @@ public interface ActivityMapper extends BaseMapper<Activity , Integer> {
      */
     Integer updateActivityState(@Param("activityId") Integer activityId,
                                 @Param("activityState") Boolean activityState);
+
+    /**
+     * 查询所有有效的活动
+     * @return
+     */
+    List<SimpleActivityDTO> getAllValidActivities();
 }

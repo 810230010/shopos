@@ -2,6 +2,7 @@ package com.wuliangit.shopos.service;
 
 import com.wuliangit.shopos.dto.ActivityCheckGoodsDTO;
 import com.wuliangit.shopos.dto.GoodsDetailDTO;
+import com.wuliangit.shopos.dto.GoodsIncludeActivityDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
 import com.wuliangit.shopos.dto.StoreGoodsDetailDTO;
@@ -43,7 +44,7 @@ public interface GoodsService {
      * @param goodsId
      * @return
      */
-    Goods getGoodsById(Integer goodsId);
+    GoodsIncludeActivityDTO getGoodsById(Integer goodsId);
 
     /**
      * 获取商品sku信息

@@ -18,10 +18,17 @@
         activity_start_time desc
     </select>
 
+
     <!--更改活动状态-->
     <update id="updateActivityState">
         UPDATE t_activity
         SET activity_state = #{activityState}
         WHERE activity_id = #{activityId}
     </update>
+
+    <!--查询所有有效的活动-->
+    <select id="getAllValidActivities" resultType="com.wuliangit.shopos.dto.SimpleActivityDTO">
+        select activity_id, activity_title from t_activity
+        where activity_state = 1;
+    </select>
 </mapper>

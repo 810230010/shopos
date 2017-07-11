@@ -106,7 +106,7 @@ public class AdminActivityController {
         activity.setActivityBanner(img);
         activity.setActivityType("todo");
         activity.setActivityDesc(desc);
-        activity.setActivitySort(sort);
+        activity.setActivitySort(Integer.parseInt(sort));
         activity.setActivityTitle(name);
         activity.setActivityEndTime(sdf.parse(datetimeEnd));
         activity.setActivityStartTime(sdf.parse(datetimeStart));

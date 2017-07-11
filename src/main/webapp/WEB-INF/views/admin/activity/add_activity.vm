@@ -158,7 +158,7 @@
                     sort: $("#sort").val(),
                     datetimeStart:$("#datetimeStart").val(),
                     datetimeEnd:$("#datetimeEnd").val(),
-                    state:$("#isRec").val()
+                    state:$("input[type='radio']:checked").val()
                 },
                 function (data, status) {
                     if (data.code == 200) {
@@ -179,7 +179,7 @@
     $("#submit").on('click', function () {
         if($("#name").val() == "" || $("#name").val() == null || $("#desc").val() == "" || $("#desc").val() == null
         || $("#sort").val() == "" || $("#sort").val() == null || $("#datetimeStart").val() == "" ||$("#datetimeStart").val() == null
-        || $("#datetimeEnd").val() == "" || $("#datetimeEnd").val() == null || $("#isRec").val() == "" || $("#isRec").val() == null){
+        || $("#datetimeEnd").val() == "" || $("#datetimeEnd").val() == null || $("input[type='radio']:checked").val() == "" || $("input[type='radio']:checked").val() == null){
             swal({
                 title: "失败!",
                 text: "请完善内容!",

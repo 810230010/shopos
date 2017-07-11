@@ -105,4 +105,28 @@
         <if test="type == 1">state = "DOWN"</if>
         where goods_id = #{goodsId};
     </update>
+
+    <!--获取活动审核商品列表-->
+    <select id="getActivityCheckGoodsList" resultType="com.wuliangit.shopos.dto.ActivityCheckGoodsDTO">
+        SELECT g.goods_id,g.name,g.store_name,g.activity_price,a.activity_title
+        FROM t_activity AS a , t_goods AS g
+        <where>
+            a.activity_id = g.activity_id AND g.activity_join_state = "CHECKING"
+            <if test="searchKey != null and searchKey != '' ">
+                AND a.activity_title like '%${searchKey}%'
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            g.${orderColumn} ${orderType},
+        </if>
+        a.activity_start_time desc
+    </select>
+
+    <!--活动商品审核结果-->
+    <update id="activityGoodsCheck">
+        UPDATE t_goods
+        SET activity_join_state = #{activityJoinState}
+        WHERE goods_id = #{goodsId}
+    </update>
 </mapper>

@@ -10,6 +10,7 @@ import com.wuliangit.shopos.dao.GoodsCategoryMapper;
 import com.wuliangit.shopos.dao.GoodsMapper;
 import com.wuliangit.shopos.dao.GoodsSkuMapper;
 import com.wuliangit.shopos.dao.StoreMapper;
+import com.wuliangit.shopos.dto.ActivityCheckGoodsDTO;
 import com.wuliangit.shopos.dto.GoodsDetailDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
@@ -306,5 +307,17 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int updateGoodsOnshelfStatus(Integer goodsId, Integer type) {
         return goodsMapper.updateGoodsOnshelfStatus(goodsId, type);
+    }
+
+    @Override
+    public List<ActivityCheckGoodsDTO> getActivityCheckGoodsList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey) {
+        PageHelper.startPage(page,pageSize);
+        List<ActivityCheckGoodsDTO> activityCheckGoodsDTOS = goodsMapper.getActivityCheckGoodsList(orderColumn,orderType,searchKey);
+        return activityCheckGoodsDTOS;
+    }
+
+    @Override
+    public Integer activityGoodsCheck(Integer goodsId, String activityJoinState) {
+        return goodsMapper.activityGoodsCheck(goodsId,activityJoinState);
     }
 }

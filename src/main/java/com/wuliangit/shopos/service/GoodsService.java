@@ -1,5 +1,6 @@
 package com.wuliangit.shopos.service;
 
+import com.wuliangit.shopos.dto.ActivityCheckGoodsDTO;
 import com.wuliangit.shopos.dto.GoodsDetailDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
@@ -186,5 +187,23 @@ public interface GoodsService {
      * @return
      */
     int updateGoodsOnshelfStatus(Integer goodsId, Integer type);
-    
+
+    /**
+     * 获取活动审核商品列表
+     * @param page
+     * @param pageSize
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    List<ActivityCheckGoodsDTO> getActivityCheckGoodsList(Integer page, Integer pageSize, String orderColumn, String orderType, String searchKey);
+
+    /**
+     * 审核商品结果
+     * @param goodsId
+     * @param activityJoinState
+     * @return
+     */
+    Integer activityGoodsCheck(Integer goodsId, String activityJoinState);
 }

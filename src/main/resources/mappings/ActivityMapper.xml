@@ -2,4 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuliangit.shopos.dao.ActivityMapper" >
 
+    <!--获取活动列表数据-->
+    <select id="getActivityList" resultType="com.wuliangit.shopos.entity.Activity">
+        SELECT *
+        FROM t_activity
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                activity_title like '%${searchKey}%'
+            </if>
+        </where>
+        order by
+        <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+            ${orderColumn} ${orderType},
+        </if>
+        activity_start_time desc
+    </select>
+
+    <!--更改活动状态-->
+    <update id="updateActivityState">
+        UPDATE t_activity
+        SET activity_state = #{activityState}
+        WHERE activity_id = #{activityId}
+    </update>
 </mapper>

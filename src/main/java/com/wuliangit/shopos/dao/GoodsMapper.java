@@ -1,6 +1,7 @@
 package com.wuliangit.shopos.dao;
 
 import com.wuliangit.shopos.common.dao.BaseMapper;
+import com.wuliangit.shopos.dto.ActivityCheckGoodsDTO;
 import com.wuliangit.shopos.dto.GoodsDetailDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsDTO;
 import com.wuliangit.shopos.dto.api.ApiGoodsListDTO;
@@ -10,6 +11,7 @@ import com.wuliangit.shopos.model.GoodsWithoutBody;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface GoodsMapper extends BaseMapper<Goods, Integer> {
 
@@ -95,4 +97,24 @@ public interface GoodsMapper extends BaseMapper<Goods, Integer> {
      * @return
      */
     int updateGoodsOnshelfStatus(@Param("goodsId") Integer goodsId, @Param("type") Integer type);
+
+    /**
+     * 获取活动审核商品列表
+     * @param orderColumn
+     * @param orderType
+     * @param searchKey
+     * @return
+     */
+    List<ActivityCheckGoodsDTO> getActivityCheckGoodsList(@Param("orderColumn") String orderColumn,
+                                                          @Param("orderType") String orderType,
+                                                          @Param("searchKey") String searchKey);
+
+    /**
+     * 活动商品审核结果
+     * @param goodsId
+     * @param activityJoinState
+     * @return
+     */
+    Integer activityGoodsCheck(@Param("goodsId") Integer goodsId,
+                               @Param("activityJoinState") String activityJoinState);
 }

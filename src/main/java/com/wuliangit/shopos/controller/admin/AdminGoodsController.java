@@ -4,7 +4,9 @@ import com.wuliangit.shopos.common.controller.PageResult;
 import com.wuliangit.shopos.common.controller.RestResult;
 import com.wuliangit.shopos.common.qiniu.QiNiuUtils;
 import com.wuliangit.shopos.common.util.StringUtils;
+import com.wuliangit.shopos.dto.ActivityCheckGoodsDTO;
 import com.wuliangit.shopos.dto.GoodsDetailDTO;
+import com.wuliangit.shopos.entity.Activity;
 import com.wuliangit.shopos.entity.Goods;
 import com.wuliangit.shopos.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,5 +91,44 @@ public class AdminGoodsController {
     public String view2GoodsDetail(Integer goodsId, Model model){
         model.addAttribute("goods", goodsService.adminGetGoodsDetail(goodsId));
        return "admin/goods/goods_detail";
+    }
+
+    /**
+     * 获取活动审核商品列表
+     * @param draw
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param page
+     * @return
+     */
+    @RequestMapping("/getActivityCheckGoodsList")
+    @ResponseBody
+    public Object getActivityCheckGoodsList(@RequestParam("draw") int draw,
+                                            @RequestParam(value = "searchKey", required = false) String searchKey,
+                                            @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                                            @RequestParam(value = "orderType", required = false) String orderType,
+                                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                            @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+        orderColumn = StringUtils.camelToUnderline(orderColumn);
+        List<ActivityCheckGoodsDTO> info = goodsService.getActivityCheckGoodsList(page, pageSize, orderColumn, orderType, searchKey);
+        return new PageResult<ActivityCheckGoodsDTO>(info,draw);
+    }
+
+    /**
+     * 审核具体结果
+     * @param goodsId
+     * @param activityJoinState
+     * @return
+     */
+    @RequestMapping("/activityGoodsCheck")
+    @ResponseBody
+    public Object activityGoodsCheck(Integer goodsId,String activityJoinState){
+        RestResult result = new RestResult();
+        Integer updateNum = goodsService.activityGoodsCheck(goodsId,activityJoinState);
+        if(updateNum != 1){
+            result.add("code",RestResult.CODE_SERVERERROR);
+        }
+        return result;
     }
 }

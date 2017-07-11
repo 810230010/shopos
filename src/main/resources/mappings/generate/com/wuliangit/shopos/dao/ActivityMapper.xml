@@ -9,7 +9,7 @@
     <result column="activity_desc" property="activityDesc" jdbcType="VARCHAR" />
     <result column="activity_start_time" property="activityStartTime" jdbcType="TIMESTAMP" />
     <result column="activity_end_time" property="activityEndTime" jdbcType="TIMESTAMP" />
-    <result column="activity_sort" property="activitySort" jdbcType="VARCHAR" />
+    <result column="activity_sort" property="activitySort" jdbcType="INTEGER" />
     <result column="activity_state" property="activityState" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -35,7 +35,7 @@
       activity_sort, activity_state)
     values (#{activityTitle,jdbcType=VARCHAR}, #{activityType,jdbcType=VARCHAR}, #{activityBanner,jdbcType=VARCHAR}, 
       #{activityDesc,jdbcType=VARCHAR}, #{activityStartTime,jdbcType=TIMESTAMP}, #{activityEndTime,jdbcType=TIMESTAMP}, 
-      #{activitySort,jdbcType=VARCHAR}, #{activityState,jdbcType=BIT})
+      #{activitySort,jdbcType=INTEGER}, #{activityState,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.wuliangit.shopos.entity.Activity" >
     <selectKey resultType="java.lang.Integer" keyProperty="activityId" order="AFTER" >
@@ -88,7 +88,7 @@
         #{activityEndTime,jdbcType=TIMESTAMP},
       </if>
       <if test="activitySort != null" >
-        #{activitySort,jdbcType=VARCHAR},
+        #{activitySort,jdbcType=INTEGER},
       </if>
       <if test="activityState != null" >
         #{activityState,jdbcType=BIT},
@@ -117,7 +117,7 @@
         activity_end_time = #{activityEndTime,jdbcType=TIMESTAMP},
       </if>
       <if test="activitySort != null" >
-        activity_sort = #{activitySort,jdbcType=VARCHAR},
+        activity_sort = #{activitySort,jdbcType=INTEGER},
       </if>
       <if test="activityState != null" >
         activity_state = #{activityState,jdbcType=BIT},
@@ -133,7 +133,7 @@
       activity_desc = #{activityDesc,jdbcType=VARCHAR},
       activity_start_time = #{activityStartTime,jdbcType=TIMESTAMP},
       activity_end_time = #{activityEndTime,jdbcType=TIMESTAMP},
-      activity_sort = #{activitySort,jdbcType=VARCHAR},
+      activity_sort = #{activitySort,jdbcType=INTEGER},
       activity_state = #{activityState,jdbcType=BIT}
     where activity_id = #{activityId,jdbcType=INTEGER}
   </update>

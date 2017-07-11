@@ -17,7 +17,7 @@ public class Activity {
 
     private Date activityEndTime;
 
-    private String activitySort;
+    private Integer activitySort;
 
     private Boolean activityState;
 
@@ -77,12 +77,12 @@ public class Activity {
         this.activityEndTime = activityEndTime;
     }
 
-    public String getActivitySort() {
+    public Integer getActivitySort() {
         return activitySort;
     }
 
-    public void setActivitySort(String activitySort) {
-        this.activitySort = activitySort == null ? null : activitySort.trim();
+    public void setActivitySort(Integer activitySort) {
+        this.activitySort = activitySort;
     }
 
     public Boolean getActivityState() {

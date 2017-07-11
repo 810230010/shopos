@@ -49,6 +49,7 @@ public class MGoodsController {
      * @param brandId         品牌类型id
      * @param goodsCategoryId 商品分类id
      * @param storeId         店铺id
+     * @param activityId      活动id
      * @param type            商品类型 GOODS_TYPE_ACTIVITY(活动商品); GOODS_TYPE_NORMAL(普通商品);SECOND_HAND(二手)
      * @return
      */
@@ -62,9 +63,10 @@ public class MGoodsController {
                               @RequestParam(value = "storeId", required = false) Integer storeId,
                               @RequestParam(value = "type", required = false) String type,
                               @RequestParam(value = "storeGoodsCategoryId", required = false) Integer storeGoodsCategoryId,
+                              @RequestParam(value = "activityId", required = false) Integer activityId,
                               Double lng, Double lat) {
         RestResult result = new RestResult();
-        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.apiGoodsSearch(page, pageSize, searchKey, orderType, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type,lng,lat);
+        ArrayList<ApiGoodsListDTO> goods = goodsSearchService.apiGoodsSearch(page, pageSize, searchKey, orderType, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type,lng,lat,activityId);
         result.add("goods", goods);
         return result;
     }

@@ -25,6 +25,9 @@
             <if test="searchKey != null and searchKey != '' ">
                 and MATCH(g.name) against(#{searchKey} IN BOOLEAN MODE)
             </if>
+            <if test="activityId != null and activityId !=''">
+                and g.activity_id = #{activityId}
+            </if>
                 and g.state = 'ONSELL'
         </where>
         order by ${order}

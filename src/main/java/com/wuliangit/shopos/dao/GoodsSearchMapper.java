@@ -31,7 +31,8 @@ public interface GoodsSearchMapper {
                                               @Param("storeGoodsCategoryId") Integer storeGoodsCategoryId,
                                               @Param("type") String type,
                                               @Param("lng")Double lng,
-                                              @Param("lat")Double lat);
+                                              @Param("lat")Double lat,
+                                              @Param("activityId")Integer activityId);
 
     /**
      * 商品类型专区

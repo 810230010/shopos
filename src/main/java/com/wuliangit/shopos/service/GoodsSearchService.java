@@ -31,7 +31,8 @@ public interface GoodsSearchService {
                                               Integer brandId,
                                               Integer goodsCategoryId,
                                               Integer storeId,
-                                              Integer storeGoodsCategoryId, String type, Double lng, Double lat);
+                                              Integer storeGoodsCategoryId, String type, Double lng, Double lat,
+                                              Integer activityId);
 
     /**
      * 企业直销商品专区

@@ -37,13 +37,14 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
                                                      Integer goodsCategoryId,
                                                      Integer storeId,
                                                      Integer storeGoodsCategoryId,
-                                                     String type, Double lng, Double lat) {
+                                                     String type, Double lng, Double lat,
+                                                     Integer activityId) {
         PageHelper.startPage(page, pageSize);
 
         searchKey = ChineseAnalysis.segment(searchKey);
         String order = this.createOrder(orderType, lng, lat);
 
-        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.apiGoodsSearch(searchKey, order, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type, lng, lat);
+        ArrayList<ApiGoodsListDTO> goodses = goodsSearchMapper.apiGoodsSearch(searchKey, order, brandId, goodsCategoryId, storeId, storeGoodsCategoryId, type, lng, lat, activityId);
         return goodses;
     }
 

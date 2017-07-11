@@ -18,26 +18,6 @@
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
 
-    <!--配置参数-->
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <package.environment>dev</package.environment>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>product</id>
-            <properties>
-                <package.environment>product</package.environment>
-            </properties>
-        </profile>
-    </profiles>
-
-
     <dependencies>
         <!--test-->
         <dependency>
@@ -416,17 +396,60 @@
 
     </dependencies>
 
+
+    <!--配置参数-->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <package.environment>dev</package.environment>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>product</id>
+            <properties>
+                <package.environment>product</package.environment>
+            </properties>
+        </profile>
+    </profiles>
+
+
     <build>
         <finalName>shopos</finalName>
+
+        <!--确认在打包时不打包对应三个文件夹以及里面的文件-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>product/*</exclude>
+                    <exclude>dev/*</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
         <plugins>
             <!--打包-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.2</version>
+                <version>2.3</version>
                 <configuration>
                     <warName>shopos</warName>
+                    <warSourceExcludes>*/lib/jsp-api-2.2.jar</warSourceExcludes>
                     <archiveClasses>false</archiveClasses>
+                    <webResources>
+                        <!--动态指定文件-->
+                        <resource>
+                            <directory>src/main/resources/${package.environment}</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                            <filtering>true</filtering>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
             <!--打包不测试-->

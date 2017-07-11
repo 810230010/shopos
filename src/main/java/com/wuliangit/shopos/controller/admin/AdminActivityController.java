@@ -99,18 +99,18 @@ public class AdminActivityController {
      */
     @RequestMapping("/addActivity")
     @ResponseBody
-    public Object addActivity(String name, String img, String desc, String sort, String datetimeStart,String datetimeEnd,String state) throws ParseException {
+    public Object addActivity(String name, String img, String desc, Integer sort, String datetimeStart,String datetimeEnd,Boolean state) throws ParseException {
         RestResult result = new RestResult();
         SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
         Activity activity = new Activity();
         activity.setActivityBanner(img);
         activity.setActivityType("todo");
         activity.setActivityDesc(desc);
-        activity.setActivitySort(Integer.parseInt(sort));
+        activity.setActivitySort(sort);
         activity.setActivityTitle(name);
         activity.setActivityEndTime(sdf.parse(datetimeEnd));
         activity.setActivityStartTime(sdf.parse(datetimeStart));
-        activity.setActivityState(Boolean.valueOf(state));
+        activity.setActivityState(state);
         Integer updateNum = activityService.addActivity(activity);
         if(updateNum != 1){
             result.add("code",RestResult.CODE_SERVERERROR);

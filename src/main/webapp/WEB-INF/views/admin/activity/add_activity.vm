@@ -21,7 +21,7 @@
                     <h5>添加活动</small></h5>
                 </div>
                 <div class="ibox-content">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" id="signupForm">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">活动名称</label>
                             <div class="col-sm-7">
@@ -103,6 +103,7 @@
 
 <!-- Jquery Validate -->
 <script src="/assets/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/admin/js/plugins/validate/messages_zh.js"></script>
 
 <script src="/assets/admin/js/plugins/bootstrap-datetimepicker-master/bootstrap-datetimepicker.min.js"></script>
 <script src="/assets/admin/js/plugins/bootstrap-datetimepicker-master/bootstrap-datetimepicker.zh-CN.js"></script>
@@ -112,6 +113,21 @@
     $("#活动").addClass("active");
     $("#活动列表").addClass("active");
     $('#side-menu').metisMenu();
+
+    $("#signupForm").validate({
+        rules: {
+            sort: {
+                required: true,
+                digits: true
+            }
+        },
+        messages: {
+            username: {
+                required: "请输入序号",
+                digits: "请输入整数"
+            },
+        }
+    });
 
     $("#datetimeStart").datetimepicker({
         format: 'yyyy-mm-dd hh:ii:ss',
@@ -141,7 +157,7 @@
         uploadExtraData: {
             token: '$uploadToken'
         },
-        maxFileCount: 6,
+        maxFileCount: 1,
         deleteUrl: "/utils/donothing",
         initialPreviewAsData: true,
         initialPreview: [],
@@ -196,7 +212,11 @@
                 timer: 2000,
             });
         }else {
-            $('#upload-image').fileinput('upload');
+            if(isNaN($("#sort").val())){
+
+            }else{
+                $('#upload-image').fileinput('upload');
+            }
         }
 
     });
